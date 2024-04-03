@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rv_light_scene"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    tools:itemCount="6"
+    tools:listitem="@layout/item_light_scene"
+    tools:spanCount="3"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    tools:context=".ui.light.LightSceneFragment">
+</androidx.recyclerview.widget.RecyclerView>

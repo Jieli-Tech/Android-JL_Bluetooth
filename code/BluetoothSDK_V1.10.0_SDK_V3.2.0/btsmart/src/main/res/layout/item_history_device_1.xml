@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jieli.btsmart.ui.widget.color_cardview.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="7dp"
+    app:cardMaxElevation="7dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_history_device_white_shape">
+
+        <ImageView
+            android:id="@+id/iv_history_device_1_img"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_below="@+id/rl_history_device_1_status"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/ic_tws_headset" />
+
+        <RelativeLayout
+            android:id="@+id/rl_history_device_1_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_history_device_1_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="3dp"
+                android:src="@drawable/ic_close_red"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_search_device_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/dbg_connect_state_text_shape"
+                android:drawableStart="@drawable/ic_dot_green_shape"
+                android:drawablePadding="4dp"
+                android:paddingStart="7dp"
+                android:paddingTop="5.5dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="4dp"
+                android:textColor="@color/green_text_1BC017"
+                android:textSize="@dimen/text_14sp"
+                tools:text="蓝牙耳机"
+                tools:visibility="gone" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_history_device_1_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:padding="3dp"
+            android:src="@drawable/ic_my_location" />
+
+        <TextView
+            android:id="@+id/tv_history_device_1_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_history_device_1_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/black_text_151515"
+            android:textSize="@dimen/text_14sp"
+            tools:text="蓝牙耳机" />
+
+
+    </RelativeLayout>
+</com.jieli.btsmart.ui.widget.color_cardview.CardView>

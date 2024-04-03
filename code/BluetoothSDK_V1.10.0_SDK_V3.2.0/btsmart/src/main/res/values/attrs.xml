@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--ArcView 弧形的界面属性-->
+    <declare-styleable name="ArcView">
+        <attr name="arcHeight" format="dimension" />
+        <attr name="lgColor" format="color" />
+        <attr name="bgColor" format="color" />
+    </declare-styleable>
+    <!--    ColorCardView-->
+    <attr name="cardViewStyle" format="reference" tools:ignore="PrivateResource" />
+
+    <declare-styleable name="CardView">
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="cardCornerRadius" format="dimension" />
+        <attr name="cardElevation" format="dimension" />
+        <attr name="cardMaxElevation" format="dimension" />
+        <attr name="cardUseCompatPadding" format="boolean" />
+        <attr name="cardPreventCornerOverlap" format="boolean" />
+        <attr name="contentPadding" format="dimension" />
+        <attr name="contentPaddingLeft" format="dimension" />
+        <attr name="contentPaddingRight" format="dimension" />
+        <attr name="contentPaddingTop" format="dimension" />
+        <attr name="contentPaddingBottom" format="dimension" />
+
+        <attr name="cardShadowColorStart" format="color" />
+        <attr name="cardShadowColorEnd" format="color" />
+
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+    </declare-styleable>
+    <!--    RulerView-->
+    <attr name="textSize" format="dimension" />
+    <declare-styleable name="fmRulerView">
+        <attr name="existColor" format="color|reference" />
+        <attr name="bigScaleColor" format="color|reference" />
+        <attr name="smallScaleColor" format="color|reference" />
+        <attr name="textColor" format="color|reference" />
+        <attr name="intervalDistance" format="dimension" />
+        <attr name="intervalValue" format="integer" />
+        <attr name="maxValue" format="integer" />
+        <attr name="minValue" format="integer" />
+        <attr name="textSize" />
+        <attr name="bigScaleLineWidth" format="dimension" />
+        <attr name="smallScaleLineWidth" format="dimension" />
+        <attr name="retainLength" format="integer" />
+        <attr name="selectedSrcImages" format="reference" />
+        <attr name="rulerViewWidth" format="dimension" />
+        <attr name="bigScaleHeight" format="dimension" />
+        <attr name="smallScaleHeight" format="dimension" />
+        <attr name="textAndScaleMargin" format="dimension" />
+        <attr name="allScaleHeight" format="dimension" />
+        <attr name="bigScaleMarginTop" format="dimension" />
+        <attr name="smallScaleMarginTop" format="dimension" />
+    </declare-styleable>
+<!--    <attr name="contentStartColor" format="color|reference" />-->
+<!--    <attr name="contentEndColor" format="color|reference" />-->
+    <declare-styleable name="EqWaveView">
+        <attr name="topLineColor" format="color|reference" />
+        <attr name="contentStartColor" format="color|reference" />
+        <attr name="contentEndColor" format="color|reference" />
+        <attr name="topLineDisableColor" format="color|reference" />
+        <attr name="contentStartDisableColor" format="color|reference" />
+        <attr name="contentEndDisableColor" format="color|reference" />
+    </declare-styleable>
+    <declare-styleable name="RotatingView">
+        <attr name="contentStartColor" />
+        <attr name="contentEndColor" />
+        <attr name="contentTextColor" format="color|reference" />
+        <attr name="indicatorImage" format="reference" />
+        <attr name="contentLineWidth" format="dimension" />
+        <attr name="backgroundLineWidth" format="dimension" />
+        <attr name="paddingWidth" format="dimension" />
+        <attr name="rTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="wheelview">
+        <attr name="gravity">
+            <enum name="center" value="17" />
+            <enum name="left" value="3" />
+            <enum name="right" value="5" />
+        </attr>
+        <attr name="textColorOut" format="color" />
+        <attr name="wTextSize" format="dimension" />
+        <attr name="textColorCenter" format="color" />
+        <attr name="dividerColor" format="color" />
+        <attr name="wDividerWidth" format="dimension" />
+        <attr name="lineSpacingMultiplier" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="RulerView">
+        <attr name="rulerHeight" format="dimension" />               <!--尺子的高度-->
+        <attr name="rulerToResultgap" format="dimension" />          <!--尺子距离结果的高度-->
+        <attr name="scaleGap" format="dimension" />                  <!--刻度间距-->
+        <attr name="scaleCount" format="integer" />                  <!--刻度数-->
+        <attr name="firstScale" format="float" />                    <!--默认选中的刻度-->
+        <attr name="maxScale" format="float" />                    <!--最大刻度-->
+        <attr name="minScale" format="integer" />                    <!--最小刻度-->
+        <attr name="rulerBgColor" format="color" />                  <!--背景色-->
+        <attr name="rulerSmallScaleColor" format="color" />          <!--小刻度的颜色-->
+        <attr name="midScaleColor" format="color" />                 <!--中刻度的颜色-->
+        <attr name="largeScaleColor" format="color" />               <!--大刻度的颜色-->
+        <attr name="scaleNumColor" format="color" />                 <!--刻度数的颜色-->
+        <attr name="resultNumColor" format="color" />                <!--结果字体的颜色-->
+        <attr name="unit" format="string" />                         <!--单位-->
+        <attr name="unitColor" format="color" />                     <!--单位颜色-->
+        <attr name="smallScaleStroke" format="dimension" />          <!--小刻度的宽度-->
+        <attr name="midScaleStroke" format="dimension" />            <!--中刻度的宽度-->
+        <attr name="largeScaleStroke" format="dimension" />          <!--大刻度的宽度-->
+        <attr name="resultNumTextSize" format="dimension" />         <!--结果字体大小-->
+        <attr name="scaleNumTextSize" format="dimension" />          <!--刻度字体大小-->
+        <attr name="unitTextSize" format="dimension" />              <!--单位字体大小-->
+        <attr name="showScaleResult" format="boolean" />             <!--是否显示结果值-->
+        <attr name="isBgRoundRect" format="boolean" />               <!--背景是否圆角-->
+        <attr name="scaleLimit" format="integer" />                <!--相邻2个刻度之间的数量-->
+    </declare-styleable>
+</resources>

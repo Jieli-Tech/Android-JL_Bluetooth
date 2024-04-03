@@ -1,0 +1,377 @@
+/* 
+   字段说明：id:区分分类
+		   tiltle:标题
+		   icon_url：项目图标链接
+		   type：子项的控件类型：目前支持：img_select(可以设置图片)，select，slider
+		   column：控件列数，type==slider无效
+		   row：控件行数，需要结合colume使用且paging==true有效
+		   paging：是否分页：false：不分页，true：分页
+		   index：控件的唯一表示码，全局唯一，group为true时，index无效
+		   max：最大值，type==slider时有效
+		   group:是否组类型，true则没有index字段,当type为select有效
+		   enable：slider类型有效，true：app可以调节，false：app不可已调节
+ */
+{
+  "hasEq": "true",
+  "function": [
+    {
+      "id": 0,
+      "title": {
+        "zh": "变声",
+        "en": "Voice"
+      },
+      "type": "select",
+      "icon_url": "icon_voice_nol.png",
+      "column": 3,
+      "paging": false,
+      "list": [
+        {
+          "title": {
+            "zh": "正常",
+            "en": "Normal"
+          },
+          "index": 0
+        },
+        {
+          "title": {
+            "zh": "男声",
+            "en": "Boy"
+          },
+          "index": 1
+        },
+        {
+          "title": {
+            "zh": "女声",
+            "en": "Girl"
+          },
+          "index": 2
+        },
+        {
+          "title": {
+            "zh": "童音",
+            "en": "Children"
+          },
+          "index": 3
+        },
+        {
+          "title": {
+            "zh": "魔音",
+            "en": "Magic"
+          },
+          "index": 4
+        },
+        {
+          "title": {
+            "zh": "电音",
+            "en": "EM"
+          },
+          "group": true,
+          "list": [
+            {
+              "title": {
+                "zh": "A大调",
+                "en": "A major"
+              },
+              "index": 5
+            },
+            {
+              "title": {
+                "zh": "升A大调",
+                "en": "L A major"
+              },
+              "index": 6
+            },
+            {
+              "title": {
+                "zh": "B大调",
+                "en": "B major"
+              },
+              "index": 7
+            },
+            {
+              "title": {
+                "zh": "C大调",
+                "en": "C major"
+              },
+              "index": 8
+            },
+            {
+              "title": {
+                "zh": "升C大调",
+                "en": "L C major"
+              },
+              "index": 9
+            },
+            {
+              "title": {
+                "zh": "D大调",
+                "en": "D major"
+              },
+              "index": 10
+            },
+            {
+              "title": {
+                "zh": "升D大调",
+                "en": "L D major"
+              },
+              "index": 11
+            },
+            {
+              "title": {
+                "zh": "E大调",
+                "en": "E major"
+              },
+              "index": 12
+            },
+            {
+              "title": {
+                "zh": "F大调",
+                "en": "F major"
+              },
+              "index": 13
+            },
+            {
+              "title": {
+                "zh": "升F大调",
+                "en": "L F major"
+              },
+              "index": 14
+            },
+            {
+              "title": {
+                "zh": "G大调",
+                "en": "G major"
+              },
+              "index": 15
+            },
+            {
+              "title": {
+                "zh": "升G大调",
+                "en": "L G major"
+              },
+              "index": 16
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "其他",
+        "en": "Other"
+      },
+      "id": 3,
+      "icon_url": "icon_others_nol.png",
+      "type": "select",
+      "column": 3,
+      "paging": false,
+      "list": [
+        {
+          "title": {
+            "zh": "爆音",
+            "en": "Popping"
+          },
+          "index": 36
+        },
+        {
+          "title": {
+            "zh": "喊麦",
+            "en": "Shout"
+          },
+          "index": 37
+        },
+        {
+          "title": {
+            "zh": "闪避",
+            "en": "Dodge"
+          },
+          "index": 38
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "气氛",
+        "en": "AtmosPhere"
+      },
+      "id": "1",
+      "icon_url": "icon_effect_nol.png",
+      "type": "img_select",
+      "column": 4,
+      "paging": true,
+      "row": 2,
+      "list": [
+        {
+          "title": {
+            "zh": "欢呼",
+            "en": "Cheers"
+          },
+          "index": 17,
+          "icon_url": "img_cheer.png"
+        },
+        {
+          "title": {
+            "zh": "尴尬",
+            "en": "Awkward"
+          },
+          "index": 18,
+          "icon_url": "img_awkward.png"
+        },
+        {
+          "title": {
+            "zh": "枪声",
+            "en": "Gunfire"
+          },
+          "index": 19,
+          "icon_url": "img_gun.png"
+        },
+        {
+          "title": {
+            "zh": "鄙视",
+            "en": "Despise"
+          },
+          "index": 20,
+          "icon_url": "img_despise.png"
+        },
+        {
+          "title": {
+            "zh": "开场",
+            "en": "Stage"
+          },
+          "index": 21,
+          "icon_url": "img_stage.png"
+        },
+        {
+          "title": {
+            "zh": "飞吻",
+            "en": "Kiss"
+          },
+          "index": 22,
+          "icon_url": "img_kiss.png"
+        },
+        {
+          "title": {
+            "zh": "笑声",
+            "en": "Laugh"
+          },
+          "index": 23,
+          "icon_url": "img_laugh.png"
+        },
+        {
+          "title": {
+            "zh": "掌声",
+            "en": "Applause"
+          },
+          "index": 24,
+          "icon_url": "img_applause.png"
+        },
+        {
+          "title": {
+            "zh": "请关注",
+            "en": "Attention"
+          },
+          "index": 25,
+          "icon_url": "img_follow.png"
+        },
+        {
+          "title": {
+            "zh": "么么哒",
+            "en": "Mua"
+          },
+          "index": 26,
+          "icon_url": "img_memeda.png"
+        },
+        {
+          "title": {
+            "zh": "贼啦啦",
+            "en": "Song01"
+          },
+          "index": 27,
+          "icon_url": "img_song_01.png"
+        },
+        {
+          "title": {
+            "zh": "非诚勿扰",
+            "en": "Song02"
+          },
+          "index": 28,
+          "icon_url": "img_song_02.png"
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "Mic参数",
+        "en": "Mic Args"
+      },
+      "id": 2,
+      "icon_url": "icon_settle_nol.png",
+      "type": "slider",
+      "list": [
+        {
+          "title": {
+            "zh": "麦音量",
+            "en": "Mic Vol"
+          },
+          "index": 29,
+          "max": 30,
+          "enable": true
+        },
+        {
+          "title": {
+            "zh": "录音音量",
+            "en": "Record Vol"
+          },
+          "index": 30,
+          "enable": true,
+          "max": 30
+        },
+        {
+          "title": {
+            "zh": "混响",
+            "en": "Reverberation"
+          },
+          "index": 31,
+          "enable": true,
+          "max": 30
+        },
+        {
+          "title": {
+            "zh": "高音",
+            "en": "High"
+          },
+          "index": 32,
+          "enable": true,
+          "max": 10
+        },
+        {
+          "title": {
+            "zh": "低音",
+            "en": "Bass"
+          },
+          "index": 33,
+          "enable": true,
+          "max": 10
+        },
+        {
+          "title": {
+            "zh": "伴奏音量",
+            "en": "Accomp Vol"
+          },
+          "index": 34,
+          "enable": true,
+          "max": 30
+        },
+        {
+          "title": {
+            "zh": "监听音量",
+            "en": "Monitor Vol"
+          },
+          "index": 35,
+          "enable": true,
+          "max": 30
+        }
+      ]
+    }
+  ]
+}

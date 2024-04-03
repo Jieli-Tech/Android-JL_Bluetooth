@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     android:background="@drawable/dbg_dialog_shape">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sound_card_group"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/btn_sound_card_group_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry"
+        tools:listitem="@layout/item_alarm_bell" />
+
+
+    <View
+        android:id="@+id/view_mic_group_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_DEDEDE"
+        app:layout_constraintBottom_toTopOf="@id/btn_sound_card_group_close" />
+
+    <Button
+        android:id="@+id/btn_sound_card_group_close"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_btn_sound_card_atmosphere_selector"
+        android:text="@string/close"
+        android:textColor="@color/black_464646"
+        android:textSize="@dimen/text_15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

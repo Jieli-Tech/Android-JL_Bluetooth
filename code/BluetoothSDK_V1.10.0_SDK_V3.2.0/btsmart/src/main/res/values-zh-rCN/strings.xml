@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+    <!--Common-->
+    <string name="app_name">杰理之家</string>
+    <string name="more">更多</string>
+    <string name="allow">允许</string>
+    <string name="ban">不再提示</string>
+    <string name="finish">完成</string>
+    <string name="it_is_ok">好的</string>
+    <string name="i_known">我知道了</string>
+    <string name="app_is_running">正在运行</string>
+    <string name="none_data">无内容</string>
+    <string name="close">关闭</string>
+    <string name="no_data">没有内容</string>
+    <!--<string name="start_using">开始使用</string>-->
+
+    <!--Network-->
+    <string name="no_network">无网络连接，请检查你的网络设置</string>
+    <string name="network_exception">网络异常</string>
+    <string name="network_exception_tips">请检查您的网络连接并稍后再试</string>
+
+    <!--Permission-->
+    <string name="open_gpg_tip">应用需要GPS功能，请打开定位服务才可继续</string>
+    <string name="permissions_tips_01">为了能正常的使用软件，请</string>
+    <string name="permission_contacts">允许读写联系人</string>
+    <string name="permission_mic">允许使用麦克风</string>
+    <string name="permission_read_phone_state">允许读取手机信息</string>
+    <string name="permission_location">允许获取定位信息</string>
+    <string name="permission_storage">允许文件读写</string>
+    <string name="permission_bluetooth">允许使用蓝牙</string>
+    <string name="permission_phone_settings">允许使用修改手机设置</string>
+    <string name="permissions_tips_02">请到系统设置授予应用</string>
+    <string name="permission">权限</string>
+
+    <!--Device state-->
+    <string name="first_connect_device">请先连接设备</string>
+    <string name="unconnected_device">未连接设备</string>
+    <string name="unconnected_device_tips">暂无设备，请先连接设备</string>
+    <string name="connectable_devies">可连接设备</string>
+    <string name="disconnect_device">断开连接</string>
+
+    <string name="msg_read_file_err_reading">设备忙,请稍后重试!</string>
+    <string name="msg_read_file_err_offline">设备不在线!</string>
+    <string name="msg_call_tip">正在通话中&#8230;</string>
+    <string name="no_support_reverberation">当前设备不支持混响</string>
+
+    <string name="bt_connecting">连接中</string>
+    <string name="device_status_unconnected">未连接</string>
+    <string name="device_status_connected">已连接</string>
+    <string name="device_status_using">正在使用</string>
+    <string name="device_status_mandatory_upgrade">需要升级</string>
+    <string name="connect_device">连接设备</string>
+    <string name="connect_tip">连接</string>
+    <string name="device_connecting">正在连接中&#8230;</string>
+    <string name="bt_connect_failed">连接失败</string>
+    <string name="device_status_reconnect">正在回连</string>
+
+    <!--LauncherActivity-->
+    <string name="privacy_policy">隐私政策</string>
+    <string name="user_agreement">用户服务协议</string>
+    <string name="agree_with">我同意</string>
+    <string name="dialog_tips">温馨提示</string>
+    <string name="user_service_tips">\t\t欢迎使用%1$sAPP。在您使用时，需要连接数据网络或者WLAN运营商，产生的流量费用请咨询当地运营商。我们非常重视您的隐私保护和个人信息保护。</string>
+    <string name="user_service_tips2">在您使用%1$sAPP前，请认真阅读《用户服务协议》及《隐私政策》全部条款，您同意并接受全部条款后再开始使用我们的服务。</string>
+    <string name="privacy_policy_name">《隐私政策》</string>
+    <string name="user_service_name">《用户服务协议》</string>
+    <string name="and">和</string>
+    <string name="agree_and_use">同意并继续</string>
+    <string name="not_agree_and_exit">不同意并退出</string>
+
+    <!--HomeActivity-->
+    <string name="tab_multimedia">多媒体</string>
+    <string name="tab_eq">音效</string>
+    <string name="tab_device">设备</string>
+    <string name="switch_classic_device_tips">当前音源输出设备[%1$s]与正在使用设备[%2$s]不一致，请到系统切换输出音源设备为设备[%3$s]以保障用户体验</string>
+    <string name="add_device">添加设备</string>
+
+    <!--DeviceFragment-->
+    <string name="my_devices">我的设备</string>
+    <string name="pack_up">收起</string>
+    <string name="device_connecting_tips">连接设备中，请勿操作其他设备</string>
+    <string name="bluetooth_not_enable">蓝牙未打开</string>
+    <string name="connect_device_over_limit">系统蓝牙连接已达到上限,请到系统蓝牙设置-->断开不需要的设备</string>
+    <string name="background_show_activity_failed_tips">应用未获得后台弹出界面权限，请手动授权</string>
+    <string name="switch_device_tips">切换设备成功</string>
+    <string name="device_not_using">此设备不是当前使用设备</string>
+    <string name="device_charging_bin">%1$s充电仓</string>
+    <string name="connect_history_failed_tips">未发现设备[%1$s]</string>
+
+    <!--Multi media-->
+    <string name="multi_media_local">本地</string>
+    <string name="multi_media_usb_drive">U盘</string>
+    <string name="multi_media_sd_card">SD卡</string>
+    <string name="multi_media_fm_launch">FM发射</string>
+    <string name="multi_media_fm_receive">FM接收</string>
+    <string name="multi_media_line_in">外部音源</string>
+    <string name="multi_media_light_settings">灯效设置</string>
+    <string name="multi_media_alarm">闹钟</string>
+    <string name="multi_media_search_device">设备查找</string>
+    <string name="multi_media_net_radio">网络电台</string>
+    <string name="multi_media_sound_card">卡拉OK</string>
+
+    <!--Local music-->
+    <string name="none_music_data">暂无音乐数据，请先下载歌曲</string>
+    <string name="song_list_top_all_song">全部歌曲</string>
+    <string name="song_list_top_song_num">(共%1$d首)</string>
+    <string name="current_version">当前版本</string>
+    <string name="local_music_none">暂无本地音乐</string>
+
+    <!--Device Music-->
+    <string name="back_to_root">已经是根目录</string>
+    <string name="device_music">设备音乐</string>
+    <string name="switch_mode_success">切换%1$s模式</string>
+    <string name="msg_read_file_err_beyond_max_depth">超出可读层级！</string>
+    <string name="sd_card">SD卡</string>
+    <string name="udisk">U盘</string>
+
+    <!--ID3 Music-->
+    <string name="none_id3_music_data">获取ID3信息失败(暂不支持快应用)</string>
+    <string name="other_music_player">（来自其他播放器）</string>
+
+    <!--FM Feature-->
+    <string name="search_forward">向前搜索</string>
+    <string name="search_all">搜索全部</string>
+    <string name="search_backward">向后搜索</string>
+    <string name="freq_point_collect">频点收藏</string>
+    <string name="freq_point_manage">管理</string>
+    <string name="net_radio">网络电台</string>
+    <string name="freq_point_collect_success">收藏成功</string>
+    <string name="freq_point_collect_existed">已收藏!</string>
+    <string name="freq_point">频点</string>
+    <string name="searching">正在搜台中&#8230;</string>
+    <string name="fm_value_no_change">FM值没有改动</string>
+    <string name="fm_range">FM范围在87.5~108.0</string>
+    <string name="fm_only_one_decimal">只能有一位小数</string>
+    <string name="fm_no_decimal">小数点后没有数字</string>
+
+    <!--Device Setting-->
+    <string name="setting">设置</string>
+    <string name="named">名称</string>
+    <string name="device_name_over_limit">设备名字过长，请限制在%1$d个字符内</string>
+    <string name="not_support_tips">暂不支持该功能</string>
+    <string name="tip_empty_device_name">名字不能设置为空</string>
+    <string name="tip_same_device_name">设备名称未改变</string>
+    <string name="require_tws_info_error">获取设备信息失败，点击重新获取</string>
+    <string name="retrieved">已重新获取</string>
+
+    <!--OTA function-->
+    <string name="firmware_current_version">当前版本</string>
+    <string name="found_new_version">发现新版本%1$s</string>
+    <string name="new_version">新版本%1$s</string>
+    <string name="download_tips">下载</string>
+    <string name="upgrade_tips">升级</string>
+    <string name="upgrading_tips">升级中</string>
+    <string name="upgrade_progress_prepare">升级准备 %1$s</string>
+    <string name="upgrade_progress_update">正在升级 %1$s</string>
+    <string name="upgrade_warning">升级过程中，请保持蓝牙和网络处于打开状态\n请勿关闭设备和锁屏手机</string>
+    <string name="upgrade_success">升级完成</string>
+    <string name="upgrade_failed">升级失败</string>
+    <string name="upgrade_cancel">升级已取消</string>
+    <string name="device_must_mandatory_upgrade">\t\t\t\t当前[%1$s]设备需要OTA升级才可以正常使用</string>
+    <string name="network_err_tips">访问服务器异常，请检查网络</string>
+    <string name="double_click_to_disconnect">双击返回将断开设备</string>
+    <string name="upgrade_immediately">立即升级</string>
+
+    <!--OTA升级错误提示-->
+    <string name="ota_error_msg_receive_cmd_timeout">接收命令超时</string>
+    <string name="ota_error_msg_device_disconnected">蓝牙连接已断开</string>
+    <string name="ota_error_msg_error_param">参数错误</string>
+    <string name="ota_error_msg_param_null">参数为空</string>
+    <string name="ota_error_msg_file_not_found">文件不存在</string>
+    <string name="ota_error_msg_file_read_fail">文件读取失败</string>
+    <string name="ota_error_msg_file_not_exist">文件不存在</string>
+    <string name="ota_error_msg_bluetooth_not_connected">蓝牙未连接</string>
+    <string name="ota_error_msg_no_update_version">没有可升级版本</string>
+    <string name="ota_error_msg_ota_is_continuing">正在OTA升级，请先停止操作</string>
+    <string name="ota_error_msg_device_not_connected">设备未连接</string>
+    <string name="ota_error_msg_response_empty">回复内容为空</string>
+    <string name="ota_error_msg_data_length_error">数据长度错误</string>
+    <string name="ota_error_msg_response_status_error">回复状态错误</string>
+    <string name="ota_error_msg_low_equipmeent">设备电量过低</string>
+    <string name="ota_error_msg_check_upgrade_file_failed">升级文件检测错误</string>
+    <string name="ota_error_msg_upgrade_file_version_no_change">升级版本没有改变</string>
+    <string name="ota_error_msg_tws_is_not_connected">TWS耳机没有连接</string>
+    <string name="ota_error_msg_headset_not_in_charging">耳机不在充电仓</string>
+    <string name="ota_error_msg_enter_update_mode_failed">设备进入升级模式失败</string>
+    <string name="ota_error_msg_offest_over_limit">数据偏移超出限制</string>
+    <string name="ota_error_msg_receive_error_data">数据校验失败</string>
+    <string name="ota_error_msg_upgrade_failed">升级失败</string>
+    <string name="ota_error_msg_key_not_match">升级key不匹配</string>
+    <string name="ota_error_msg_check_file_error">数据校验失败</string>
+    <string name="ota_error_msg_type_not_match">升级类型不匹配</string>
+    <string name="ota_error_msg_flash_read_error">设备闪存读写失败</string>
+    <string name="ota_error_msg_handler_cmd_timeout">设备命令处理超时</string>
+    <string name="ota_error_msg_error_unkonwn">未知错误</string>
+    <string name="ota_error_msg_download_ota_file_failed">升级文件下载失败,提示:</string>
+    <string name="ota_error_msg_request_ota_file_failed">升级文件信息请求失败,提示:</string>
+    <string name="ota_error_msg_disconnect_tip">升级正在进行，请勿断开连接！</string>
+
+    <!--Product Design Dialog-->
+ <!--   <string name="device_paired_finish">完成</string>-->
+    <string name="device_auto_connecting">设备正在自动回连</string>
+    <string name="device_connectionless_tips">请操作设备进入配对模式</string>
+    <string name="request_floating_window_permission_tips">为了您更好的体验,建议授予"置于应用之上"的权限</string>
+    <string name="scanning_ble_device">正在搜索设备</string>
+    <string name="device_review">查看</string>
+    <string name="disconnect_device_tips">确定断开设备连接吗？</string>
+    <string name="bt_connected_error_tip">[%1$s]已被占用</string>
+    <string name="device_not_owner">不是您的设备</string>
+    <string name="long_click_cancel_pair">请长按充电仓按键进行连接</string>
+    <string name="make_sure_headset_paired">请确保耳机处于可配对状态</string>
+    <string name="long_click_cancel_pair_soundbox">请长按电源键进行配对连接</string>
+    <string name="make_sure_soundbox_paired">请确保设备处于可配对状态</string>
+
+    <!--History Device-->
+    <string name="remove_history_device_failed">忽略设备失败</string>
+
+
+    <!--EQ function-->
+    <string name="eq_normal">自然</string>
+    <string name="eq_rock">摇滚</string>
+    <string name="eq_pop">流行</string>
+    <string name="eq_classical">经典</string>
+    <string name="eq_jazz">爵士</string>
+    <string name="eq_country">乡村</string>
+    <string name="eq_user">自定义</string>
+    <string name="eq_advanced_setting">高级设置</string>
+    <string name="eq_advanced_reverberation">混响</string>
+    <string name="eq_advanced_dynamic">动态限幅器</string>
+    <string name="eq_advanced_depth">深度</string>
+    <string name="eq_advanced_strength">强度</string>
+    <string name="current_volume">当前音量：</string>
+
+    <string name="eq_freq_16k">16k</string>
+    <string name="eq_freq_8k">8k</string>
+    <string name="eq_freq_4k">4k</string>
+    <string name="eq_freq_2k">2k</string>
+    <string name="eq_freq_1k">1k</string>
+    <string name="eq_freq_500">500</string>
+    <string name="eq_freq_250">250</string>
+    <string name="eq_freq_125">125</string>
+    <string name="eq_freq_63">63</string>
+    <string name="eq_freq_31">31</string>
+    <string name="eq_freq_12db">+8db</string>
+    <string name="eq_freq_0db">0db</string>
+    <string name="eq_freq_negative_12db">-8db</string>
+    <string name="music_time_default">00:00</string>
+    <string name="product_default_quantity">100%</string>
+    <string name="volume_bass">低音</string>
+    <string name="volume_main">主音量</string>
+    <string name="volume_height">高音</string>
+    <string name="eq_reset">重置</string>
+    <string name="eq_preset">预设</string>
+
+    <!--App Settings-->
+    <string name="shake_cut_song">摇一摇切歌</string>
+    <string name="shake_change_light_color">摇一摇切换灯光颜色</string>
+    <string name="shake_change_light_color_note">仅在设备支持灯光设置时生效</string>
+    <string name="about">关于</string>
+    <string name="feedback">用户反馈</string>
+    <string name="device_instructions">设备使用说明</string>
+    <string name="multilingual">多语言</string>
+    <string name="simplified_chinese">简体中文</string>
+    <string name="follow_system">跟随系统</string>
+    <string name="english">English</string>
+    <string name="japanese">日本語</string>
+    <string name="set_language">设置语言</string>
+
+    <!--About-->
+    <string name="app_version_name">软件版本:%1$s</string>
+    <string name="app_version">APP版本:%1$s</string>
+    <string name="firmware_version_name">设备版本:%1$s</string>
+    <string name="check_update">检查更新</string>
+    <string name="firmware_update">固件更新</string>
+    <string name="laster_version">已是最新版本</string>
+
+
+    <!--Device Function Settings-->
+    <string name="boot_up">开机</string>
+    <string name="shut_down">关机</string>
+    <string name="music_pp">音乐播放/暂停</string>
+    <string name="previous_song">上一曲</string>
+    <string name="next_song">下一曲</string>
+    <string name="voice_inc">音量加</string>
+    <string name="voice_dec">音量减</string>
+    <string name="call_back">回拨电话</string>
+    <string name="hang_up">挂断电话</string>
+    <string name="answer_call">接听电话</string>
+    <string name="ai_speech">打开语音控制</string>
+    <string name="take_photo">拍照</string>
+    <string name="none">无作用</string>
+    <string name="bluetooth_name">名称</string>
+    <string name="work_mode">工作模式</string>
+    <string name="mic_channel">麦克风</string>
+    <string name="led_settings">闪灯设置</string>
+    <string name="in_ear_check">入耳检测</string>
+    <string name="settings_failed">设置失败</string>
+    <string name="settings_failed_by_game_mode">游戏模式下，不能操作麦克风</string>
+    <string name="settings_failed_dev_name_len_over_limit">设置设备名超出限制</string>
+    <string name="settings_failed_led_settings">非蓝牙模式不允许设置闪灯</string>
+    <string name="device_name_change_tips">\t\t\t\t该操作需要重启设备才能生效，是否立即生效？</string>
+    <string name="device_name_failure">设置设备名失败</string>
+    <string name="not_immediately_effective">下次开机生效</string>
+    <string name="immediately_effective">立即生效</string>
+    <string name="not_allow_settings_tip">设备不允许设置，请确认是否配对连接</string>
+    <string name="remove_history_device_tips">是否要忽略此设备？</string>
+    <string name="remove_history_device">忽略此设备</string>
+    <string name="modify_dev_name_tips">（若未能正确显示设备名称，请重新配对连接）</string>
+
+    <string name="noise_control">噪声控制</string>
+    <string name="noise_mode_denoise">降噪</string>
+    <string name="noise_mode_close">关闭</string>
+    <string name="noise_mode_transparent">通透模式</string>
+    <string name="save">保存</string>
+    <string name="noise_mode_desc_close">关闭噪声处理</string>
+    <string name="noise_mode_desc_denoise">阻隔外部声音</string>
+    <string name="noise_mode_desc_transparent">允许外部声音</string>
+    <string name="enable">已启用</string>
+    <string name="input_valid_value_tips">请输入有效数值，范围[%1$d,%2$d]</string>
+    <string name="left_dev_denoise_value">左耳降噪增益值</string>
+    <string name="right_dev_denoise_value">右耳降噪增益值</string>
+    <string name="left_dev_transparent_value">左耳通透增益值</string>
+    <string name="right_dev_transparent_value">右耳通透增益值</string>
+    <string name="invalid_mode">无效模式</string>
+    <string name="unknown_mode">未知模式</string>
+    <string name="denoise_value">降噪增益值</string>
+    <string name="transparent_value">通透增益值</string>
+    <string name="maximum_tips">已是最大值</string>
+
+    <!--Adaptive ANC-->
+    <string name="adaptive_anc">自适应降噪</string>
+    <string name="adaptive_anc_desc">开启ANC自适应算法，补偿耳道、佩戴等差异，提升降噪性能</string>
+    <string name="enable_adaptive_anc_tips">是否使用已有的自适应降噪方案</string>
+    <string name="redetect">重新自适应</string>
+    <string name="enable_now">直接使用</string>
+    <string name="monitoring">正在重新自适应</string>
+    <string name="adaptive_anc_failure">自适应失败</string>
+    <string name="adaptive_anc_failure_tips">请避免吞咽、说话、走路、摇头等动作</string>
+    <string name="give_up">放弃</string>
+    <string name="retry">重试</string>
+
+    <!--Voice Function-->
+    <string name="smart_no_pick">智能免摘</string>
+    <string name="smart_no_pick_tips">耳机侦测到您在说话，则自动构建对话条件，无需摘下耳机</string>
+    <string name="voice_check_sensitivity">语音检测灵敏度</string>
+    <string name="close_time">启动后关闭时间</string>
+    <string name="high_sensitivity">高灵敏度</string>
+    <string name="low_sensitivity">低灵敏度</string>
+    <string name="high_level">高</string>
+    <string name="low_level">低</string>
+    <string name="short_close_time">短(5秒)</string>
+    <string name="standard_close_time">标准(15秒)</string>
+    <string name="long_close_time">长(30秒)</string>
+    <string name="none_close_time">不自动关闭</string>
+    <string name="close_time_tips">如果耳机在指定时间未检测到您的声音，则关闭智能免摘返回正常状态</string>
+    <string name="short_time">短</string>
+    <string name="standard_time">标准</string>
+    <string name="long_time">长</string>
+    <string name="none_time">无</string>
+    <string name="scene_denoising">场景降噪</string>
+    <string name="scene_denoising_auto">智能</string>
+    <string name="scene_denoising_auto_tips">自适应根据噪声环境控制</string>
+    <string name="scene_denoising_mild">轻度</string>
+    <string name="scene_denoising_mild_tips">适合安静办公环境</string>
+    <string name="scene_denoising_balance">均衡</string>
+    <string name="scene_denoising_balance_tips">适合较嘈杂环境</string>
+    <string name="scene_denoising_depth">深度</string>
+    <string name="scene_denoising_depth_tips">适合很嘈杂的环境</string>
+    <string name="wind_noise_detection">风噪检测</string>
+    <string name="wind_noise_detection_tips">大风噪下，降低风噪对ANC的影响</string>
+    <string name="vocal_booster">人声增强</string>
+
+    <!--Double Connection-->
+    <string name="double_connection">设备双连接</string>
+    <string name="function_open">开</string>
+    <string name="function_close">关</string>
+    <string name="double_connection_open_tips">开启后，耳机可同时支持连接两台设备，并可轻松在设备间切换音频输出。</string>
+    <string name="connected_devices">已连接的设备</string>
+    <string name="native_dev">本机</string>
+    <string name="close_double_connection_tips">您是否确定关闭双设备连接？</string>
+    <string name="close_double_connection_content">关闭后，耳机将会断开与%1$s的连接。</string>
+
+    <!--Feedback-->
+    <string name="tips_input_right_phone">请输入正确的手机号码</string>
+    <string name="tips_input_phone">请输入手机号码</string>
+    <string name="tips_input_feedback">请输入反馈内容</string>
+    <string name="feedback_type">反馈类型</string>
+    <string name="problem_feedback">问题反馈</string>
+    <string name="please_input_feedback">请输入您的详细问题，我们将尽快为你解决</string>
+    <string name="please_input_phone">请输入手机号码方便联系</string>
+    <string name="commit">提交</string>
+
+
+    <!--闹钟-->
+    <string name="alarm_open_success">打开闹钟成功</string>
+    <string name="alarm_open_failure">打开闹钟失败</string>
+    <string name="alarm_close_success">关闭闹钟成功</string>
+    <string name="alarm_close_failure">关闭闹钟失败</string>
+    <string name="operate_alarm_failure">操作闹钟失败</string>
+    <string name="alarm_list_read_failed">闹钟列表读取失败</string>
+    <string name="delete">删除</string>
+    <string name="alarm_set_num_is_full">闹钟数量已经满了</string>
+    <string name="alarm_delete_failure">闹钟删除失败</string>
+    <string name="alarm_delete_success">闹钟删除成功</string>
+
+    <string name="alarm_stop_success">闹钟停止成功</string>
+    <string name="alarm_stop_failed">闹钟停止失败</string>
+    <string name="alarm_delete">删除闹钟</string>
+    <string name="sync_time">设备时间同步</string>
+    <string name="sync_time_success">同步时间成功</string>
+    <string name="sync_time_failed">同步时间失败</string>
+
+    <string name="save_alarm_failed_no_modify">闹钟没有修改</string>
+    <string name="save_alarm_failed">闹钟保存失败</string>
+    <string name="save_alarm_success">闹钟保存成功</string>
+    <string name="choose_repeat_mode_tip">请选择模式</string>
+    <string name="alarm_name_can_not_be_empty">闹钟名称不能为空</string>
+    <string name="alarm_name_length_too_long">闹钟名称过长</string>
+    <string name="alarm_name_format_error">闹钟名称输入格式错误</string>
+    <string name="default_alarm_name">闹钟</string>
+    <string name="default_alarm_custom">自定义</string>
+    <string name="alarm_edit_title">编辑闹钟</string>
+    <string name="alarm_create_title">新建闹钟</string>
+    <string name="alarm_repeat_on_workday">周一到周五</string>
+    <string name="alarm_repeat_every_day">每天</string>
+    <string name="alarm_repeat_single">单次</string>
+    <string name="alarm_repeat_week">周</string>
+    <string name="alarm_repeat_mon">周一</string>
+    <string name="alarm_repeat_tue">周二</string>
+    <string name="alarm_repeat_wed">周三</string>
+    <string name="alarm_repeat_thu">周四</string>
+    <string name="alarm_repeat_fri">周五</string>
+    <string name="alarm_repeat_sat">周六</string>
+    <string name="alarm_repeat_sun">周日</string>
+    <string name="alarm_repeat_simple_mon">一</string>
+    <string name="alarm_repeat_simple_tue">二</string>
+    <string name="alarm_repeat_simple_wed">三</string>
+    <string name="alarm_repeat_simple_thu">四</string>
+    <string name="alarm_repeat_simple_fri">五</string>
+    <string name="alarm_repeat_simple_sat">六</string>
+    <string name="alarm_repeat_simple_sun">日</string>
+
+    <!--AlarmSettings-->
+    <string name="alarm_settings">闹钟管理</string>
+    <string name="bell">铃声</string>
+    <string name="repeat">重复</string>
+    <string name="light">灯光</string>
+    <string name="alarm_state">状态</string>
+    <string name="delete_alarm_tip">是否要删除该闹钟</string>
+    <string name="stop_alarm">停止</string>
+    <string name="alarm_running">闹钟正在响</string>
+    <string name="unnamed">未命名</string>
+
+    <string name="alarm_bell_1">铃声1</string>
+    <string name="alarm_bell_2">铃声2</string>
+    <string name="alarm_bell_3">铃声3</string>
+    <string name="alarm_bell_4">铃声4</string>
+    <string name="alarm_bell_5">铃声5</string>
+    <string name="alarm_default_bell">默认</string>
+
+    <string name="alarm_bell_time">闹钟时长</string>
+    <string name="min_format">%1$d分钟</string>
+    <string name="alarm_bell_interval">再响间隔</string>
+    <string name="bell_repeat_count_title">重复响铃次数</string>
+    <string name="bell_interal_time_title">重复间隔时间(分钟）</string>
+    <string name="interval_format">%1$d分钟,%2$d次</string>
+    <string name="count_format">%1$d次数</string>
+
+
+    <!--灯光 -->
+    <string name="light_control">灯光控制</string>
+    <string name="light_scene_mode">情景模式</string>
+    <string name="light_color_temperature">色温</string>
+    <string name="light_coloured_lights">彩灯</string>
+    <string name="light_twinkle">闪烁</string>
+    <string name="light_scene">情景</string>
+    <string name="light_tip_open_switch">请打开总开关</string>
+    <string name="light_scene_mode_1">彩虹</string>
+    <string name="light_scene_mode_2">心跳</string>
+    <string name="light_scene_mode_3">烛火</string>
+    <string name="light_scene_mode_4">夜灯</string>
+    <string name="light_scene_mode_5">舞台</string>
+    <string name="light_scene_mode_6">漫彩呼吸</string>
+    <string name="light_scene_mode_7">漫红呼吸</string>
+    <string name="light_scene_mode_8">漫绿呼吸</string>
+    <string name="light_scene_mode_9">漫蓝呼吸</string>
+    <string name="light_scene_mode_10">绿色心情</string>
+    <string name="light_scene_mode_11">夕阳美景</string>
+    <string name="light_scene_mode_12">音乐律动</string>
+
+    <string name="color">颜色</string>
+    <string name="light_flash_quick">快闪</string>
+    <string name="light_flash_slow">慢闪</string>
+    <string name="light_flash_slower">缓闪</string>
+    <string name="light_flash_music">音乐闪烁</string>
+    <string name="light_color_collect">颜色收藏</string>
+    <string name="light_flash">彩灯闪烁</string>
+    <string name="light_flash_freq">闪灯频率</string>
+
+    <string name="light_model_1">七彩闪烁</string>
+    <string name="light_model_2">红色闪烁</string>
+    <string name="light_model_3">橙色闪烁</string>
+    <string name="light_model_4">黄色闪烁</string>
+    <string name="light_model_5">绿色闪烁</string>
+    <string name="light_model_6">青色闪烁</string>
+    <string name="light_model_7">蓝色闪烁</string>
+    <string name="light_model_8">紫色闪烁</string>
+    <string name="light_color_temperature_cold">冷</string>
+    <string name="light_color_temperature_warm">暖</string>
+    <string name="light_color_temperature_gray">灰</string>
+    <string name="light_color_temperature_colorful">鲜艳</string>
+    <string name="light_color_temperature_dark">暗</string>
+    <string name="light_color_temperature_sun">阳光</string>
+    <string name="light_color_temperature_cold_white">冷白</string>
+    <string name="light_color_temperature_natural_light">自然光</string>
+    <string name="light_color_temperature_bright">亮</string>
+    <string name="light_color_temperature_sunset">夕阳</string>
+    <string name="light_color_temperature_candlelight">烛光</string>
+
+    <!--Search Device-->
+    <string name="play_sound">播放声音</string>
+    <string name="close_play">关闭声音</string>
+    <string name="connected_device_time_tips">最后一次使用时间：现在</string>
+    <string name="last_time_tips">最后一次使用时间：%1$s</string>
+    <string name="distance_m">%1$s 米</string>
+    <string name="distance_km">%1$s 公里</string>
+    <string name="my_location">我的位置</string>
+    <string name="search_phone">设备查找手机中&#8230;</string>
+    <string name="search_device_tips">\t\t查找设备时，耳机将持续播放一段时间响铃，请确保它们均已从双耳摘下再继续。继续佩戴可能会因强音量感到不适。</string>
+    <string name="device_no_location_info">未获取到位置信息</string>
+    <string name="today">今天</string>
+    <string name="tomorrow">明天</string>
+    <string name="yesterday">昨天</string>
+    <string name="play_way_all">全部播放</string>
+    <string name="play_way_left">左侧播放</string>
+    <string name="play_way_right">右侧播放</string>
+
+    <!--    网络电台-->
+    <string name="fm_type_local">本地电台</string>
+    <string name="fm_type_country">国家电台</string>
+    <string name="fm_type_province">省市电台</string>
+    <string name="fm_type_mycollect">我的收藏</string>
+    <string name="loading">加载中</string>
+    <string name="loading_failed">加载失败</string>
+    <string name="manage">管理</string>
+    <string name="msg_error_switch_mode">模式切换失败</string>
+    <string name="empty_folder">空文件夹</string>
+    <string name="empty_list_change_to_local">当前播放列表为空，为你切换到本地电台列表</string>
+    <string name="resource_not_available">当前资源暂不可用</string>
+    <string name="resource_not_available_next">当前资源暂不可用，为你切换下一频道</string>
+    <string name="resource_not_available_prev">当前资源暂不可用，为你切换上一频道</string>
+
+    <!--Test-->
+    <string name="test_configuration">测试配置</string>
+    <string name="save_configuration">保存配置</string>
+    <string name="use_device_auth">是否启用设备认证？</string>
+    <string name="support_show_product_dialog">是否启用弹窗功能？</string>
+    <string name="support_local_ota">是否开启本地OTA？</string>
+    <string name="show_dialog_rssi_tips">弹窗灵敏度:</string>
+    <string name="rssi_unit">dbm</string>
+    <string name="input_rssi_hint">请输入(-100~0)的RSSI</string>
+    <string name="local_ota_desc">本地OTA测试说明:\n1.升级文件名固定为update.ufw\n2.升级文件存放位置:\n\t2.1 Android 10.0+, 存放在\'手机根目录/Android/data/%1$s/files/%2$s/upgrade/\'\n\t2.2 Android 10.0以下，存放在\'手机根目录/%3$s/upgrade/\'\n3.升级文件格式：app_log_[时间戳].txt</string>
+    <string name="test_custom_cmd">测试自定义命令</string>
+    <string name="rssi_over_limit">Rssi不符合规定范围</string>
+    <string name="click_again_to_test_configuration">再按一次进入测试配置界面</string>
+    <string name="save_configuration_success">保存配置成功，即将退出应用</string>
+    <string name="sound_card_eq_title">话筒音效</string>
+    <string name="fitting_results">验配结果</string>
+    <string name="left_ear_threshold_mean">左耳听阈均值</string>
+    <string name="right_ear_threshold_mean">右耳听阈均值</string>
+    <string name="written_to_the_device">写入设备</string>
+    <string name="make_sure_write_fitting">确定写入助听器？</string>
+    <string name="keep_fitting_record">保存到验配记录</string>
+    <string name="write_saved_successfuly">写入保存成功</string>
+    <string name="write_saved_failed">写入保存失败</string>
+    <string name="db_hl">听阈/dB HL</string>
+    <string name="freq_hz">频率/Hz</string>
+    <string name="left_ear">左耳</string>
+    <string name="right_ear">右耳</string>
+    <string name="go_for_fitting">去验配</string>
+    <string name="detect_hearing_impairment">检测听力受损</string>
+    <string name="fitting_records">验配记录</string>
+    <string name="back_last_step">上一步</string>
+    <string name="can_not_hear">听不见</string>
+    <string name="hear">听得见</string>
+    <string name="restart">重新开始</string>
+    <string name="continue_str">继续</string>
+    <string name="check_no_finish_record">检测有未完成的记录，是否继续？</string>
+    <string name="save_operation">保存</string>
+    <string name="no_save_operation">不保存</string>
+    <string name="check_exitt_fitting">检测到中途退出，是否缓存当前记录，以便下次继续测试？</string>
+    <string name="please_prepare_for_the_following_tests">请做好以下测试准备</string>
+    <string name="fitting_prepare_step_1">请戴好助听器\n选择一个安静的场合开始验配</string>
+    <string name="fitting_prepare_step_2">当您听见耳机内发出“滴”声时，点击“听得见”；\n如果听不到任何声音，点击“听不见”</string>
+    <string name="i_know_it_2">我知道了</string>
+    <string name="fitting">验配</string>
+    <string name="hearing_aid_fitting">辅听验配</string>
+    <string name="select_fitting_gain_type">请选择需要验配的助听器</string>
+    <string name="left_ear_single">左耳</string>
+    <string name="right_ear_single">右耳</string>
+    <string name="both_ear_single">双耳</string>
+    <string name="both_ear">双耳</string>
+    <string name="both_ear_fitting">双耳验配</string>
+    <string name="left_ear_fitting">左耳验配</string>
+    <string name="right_ear_fitting">右耳验配</string>
+    <string name="left_ear_fitting_result">左耳验配结果</string>
+    <string name="right_ear_fitting_result">右耳验配结果</string>
+    <string name="both_ear_fitting_result">双耳验配结果</string>
+    <string name="is_save_to_fitting_record">是否保存到验配记录？</string>
+    <string name="fitting_record_too_long">名字过长，请限制在20个字符内</string>
+
+
+    <!--TestExtFlashActivity-->
+    <!--<string name="test_ext_flash">FAT文件系统测试</string>
+    <string name="add_file_path_err">文件路径异常，请重新选择</string>
+    <string name="create_file_progress">正在添加[%1$s]文件,进度: %2$d</string>
+    <string name="create_fat_file_success">添加文件[%1$s]成功！用时：%2$s, 速率: %3$.1f kb/s</string>
+    <string name="create_fat_file_failed">插入文件[%1$s]失败, 原因 = %2$d</string>
+    <string name="delete_fat_file_tips">是否删除文件[%1$s]</string>
+    <string name="deleting_fat_file">正在删除文件&#8230;</string>
+    <string name="delete_fat_file_success">删除[%1$s]文件成功！用时: %2$s</string>
+    <string name="delete_fat_file_failed">删除文件[%1$s]失败, 原因 = %2$d</string>
+    <string name="log_message">打印信息</string>
+    <string name="recovery_fat_system">正在恢复&#8230;</string>
+    <string name="recovery_system_success">恢复系统成功</string>
+    <string name="recovery_system_failed">恢复系统失败, 原因 = %1$d</string>
+    <string name="write_protect_begin">写保护开始</string>
+    <string name="delete_fat_file_warning">表盘文件不能少于2个</string>
+    <string name="updating_fat_resource">更新资源中&#8230;</string>-->
+
+</resources>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_adaptive_anc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adaptive_anc"
+        android:textColor="@color/black_242424"
+        android:textSize="@dimen/text_15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_adaptive_anc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/switch_adaptive_anc"/>
+
+    <TextView
+        android:id="@+id/tv_adaptive_anc_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/adaptive_anc_desc"
+        android:textColor="@color/gray_8B8B8B"
+        android:textSize="@dimen/text_13sp"
+        android:drawablePadding="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adaptive_anc"
+        app:drawableEndCompat="@drawable/ic_middle_right_arrow" />
+
+    <TextView
+        android:id="@+id/tv_scene_denoising"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/scene_denoising"
+        android:textColor="@color/black_242424"
+        android:textSize="@dimen/text_15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adaptive_anc_tips" />
+
+    <TextView
+        android:id="@+id/tv_scene_denoising_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:paddingTop="4dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:textColor="@color/gray_4d000000"
+        android:textSize="@dimen/text_14sp"
+        app:drawableEndCompat="@drawable/ic_middle_right_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_scene_denoising"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_scene_denoising"
+        tools:text="@string/scene_denoising_auto" />
+
+    <TextView
+        android:id="@+id/tv_wind_noise_detection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wind_noise_detection"
+        android:textColor="@color/black_242424"
+        android:textSize="@dimen/text_15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_wind_noise_detection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/switch_wind_noise_detection" />
+
+    <TextView
+        android:id="@+id/tv_wind_noise_detection_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/gray_8B8B8B"
+        android:textSize="@dimen/text_13sp"
+        android:text="@string/wind_noise_detection_tips"
+        app:layout_constraintEnd_toStartOf="@+id/switch_wind_noise_detection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wind_noise_detection" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_adaptive_anc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_adaptive_anc, tv_adaptive_anc_tips, switch_adaptive_anc"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_scene_denoising"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tv_scene_denoising, tv_scene_denoising_mode"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_wind_noise_detection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="switch_wind_noise_detection, tv_wind_noise_detection, tv_wind_noise_detection_tips"
+        tools:visibility="visible" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switch_adaptive_anc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:padding="4dp"
+        app:kswBackDrawable="@drawable/bg_alarm_switch_btn_selector"
+        app:kswThumbColor="@color/white_ffffff"
+        app:kswThumbHeight="22dp"
+        app:kswThumbRangeRatio="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switch_wind_noise_detection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="4dp"
+        app:kswBackDrawable="@drawable/bg_alarm_switch_btn_selector"
+        app:kswThumbColor="@color/white_ffffff"
+        app:kswThumbHeight="22dp"
+        app:kswThumbRangeRatio="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_scene_denoising" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

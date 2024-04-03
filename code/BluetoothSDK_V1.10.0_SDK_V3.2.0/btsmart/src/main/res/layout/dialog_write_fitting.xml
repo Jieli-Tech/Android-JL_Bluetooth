@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white_ffffff"
+    app:cardCornerRadius="11dp"
+    app:cardElevation="6dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:id="@+id/dialog_input_text_main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/dialog_input_text_container_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_input_text_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="3dp"
+                android:text="@string/make_sure_write_fitting"
+                android:textColor="@color/black_242424"
+                android:textSize="@dimen/text_18sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dialog_input_text_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/dialog_input_text_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:inputType="text"
+                    android:paddingStart="8.5dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:theme="@style/GrayLineEditText"
+                    android:textColor="@color/black_242424"
+                    android:textSize="@dimen/text_15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="2022-06-21 13:20" />
+
+                <TextView
+                    android:id="@+id/tv_save_fitting_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:drawableStart="@drawable/ic_choose_sel"
+                    android:drawablePadding="8dp"
+                    android:text="@string/keep_fitting_record"
+                    android:textColor="@color/black_242424"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintStart_toStartOf="@id/dialog_input_text_edit"
+                    app:layout_constraintTop_toBottomOf="@id/dialog_input_text_edit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/dialog_input_text_horizontal_divide"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#DDDDDD" />
+
+        <LinearLayout
+            android:id="@+id/dialog_input_text_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_gravity="bottom"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dialog_input_text_left_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                tools:text="TEST"
+                android:gravity="center"
+                android:textSize="@dimen/text_18sp" />
+
+            <View
+                android:id="@+id/dialog_input_text_vertical_divide"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#DDDDDD" />
+
+            <TextView
+                android:id="@+id/dialog_input_text_right_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                tools:text="TEST"
+                android:gravity="center"
+                android:textSize="@dimen/text_18sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

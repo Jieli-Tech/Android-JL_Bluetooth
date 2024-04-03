@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_message_main_layout"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_transparent"
+    >
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6.5dp"
+        android:background="@drawable/bg_edr_dialog_shape"
+        android:paddingStart="34dp"
+        android:paddingTop="35dp"
+        android:paddingEnd="34dp"
+        android:paddingBottom="27dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            android:id="@+id/product_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="48dp"
+            android:gravity="center"
+            android:textColor="@color/gray_text_444444"
+            android:textSize="@dimen/text_22sp"
+            app:layout_constraintBottom_toTopOf="@id/product_message_content_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/setting" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_message_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/product_message_title"
+            android:layout_marginBottom="68dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:itemCount="1"
+            tools:layoutManager="GridLayoutManager"
+            tools:listitem="@layout/item_product_single1" />
+
+
+        <TextView
+            android:id="@+id/product_message_tips_tv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textColor="@color/blue_text_color"
+            android:textSize="@dimen/text_16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/tips"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/product_message_connect_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/product_message_content_layout"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/dbg_button_common"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/connect_tip"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/product_message_check_tv"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/dbg_button_line_white"
+            android:gravity="center"
+            android:text="@string/device_review"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/product_message_finish_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/product_message_finish_tv"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/dbg_button_common"
+            android:gravity="center"
+            android:text="@string/finish"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/product_message_check_tv"
+            tools:visibility="gone" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/product_message_finish_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="product_message_check_tv,product_message_finish_tv"
+/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/product_message_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@null"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_close"
+        app:layout_constraintTop_toTopOf="@id/cl_container"
+        android:layout_marginEnd="6.5dp"
+        android:layout_marginTop="6.5dp"
+        app:layout_constraintEnd_toEndOf="@id/cl_container" />
+</androidx.constraintlayout.widget.ConstraintLayout>

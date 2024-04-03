@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal|bottom"
+    android:layout_gravity="center_horizontal|bottom">
+
+    <ImageView
+        android:id="@+id/iv_product_1"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:contentDescription="@null"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:padding="8dp"
+        tools:src="@drawable/ic_default_product_design"/>
+
+    <TextView
+        android:id="@+id/item_product_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_quantity_100"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:padding="5dp"
+        tools:text="100%"
+        android:textSize="@dimen/text_13sp"
+        android:textColor="@color/black_242424"/>
+
+</LinearLayout>

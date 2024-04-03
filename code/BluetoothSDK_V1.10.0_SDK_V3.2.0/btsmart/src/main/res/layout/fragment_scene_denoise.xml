@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray_F8FAFC"
+    tools:context=".ui.settings.device.voice.SceneDenoiseFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_scene_denoise_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:background="@color/white_ffffff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_voice_setting"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

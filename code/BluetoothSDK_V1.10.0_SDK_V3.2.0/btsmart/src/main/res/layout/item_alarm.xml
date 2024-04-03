@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sml_alarm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@color/white_ffffff">
+
+    <RelativeLayout
+        android:id="@+id/ll_alarm_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="11dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/iv_alarm_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_btsmart_logo"
+            android:visibility="gone" />
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sw_default_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="12dp"
+            android:minWidth="36dp"
+            app:kswBackDrawable="@drawable/bg_alarm_switch_btn_selector"
+            app:kswThumbColor="@color/white_ffffff"
+            app:kswThumbHeight="22dp"
+            app:kswThumbRangeRatio="2"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/tv_alarm_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iv_alarm_logo"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:minWidth="64dp"
+            android:paddingTop="3dp"
+            android:scrollHorizontally="true"
+            android:text="06:30"
+            android:textColor="@color/black_242424"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/tv_alarm_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_alarm_time"
+            android:layout_toEndOf="@id/iv_alarm_logo"
+            android:ellipsize="marquee"
+            android:gravity="top"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingEnd="12dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/named"
+            android:textColor="@color/gray_6f6f6f"
+            android:textSize="@dimen/text_14sp" />
+
+        <TextView
+            android:id="@+id/tv_alarm_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_alarm_time"
+            android:layout_alignTop="@id/tv_alarm_name"
+            android:layout_toEndOf="@id/tv_alarm_name"
+            android:ellipsize="marquee"
+            android:gravity="top"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:minWidth="64dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="@string/alarm_repeat_single"
+            android:textColor="@color/gray_6f6f6f"
+            android:textSize="@dimen/text_14sp" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn_del_alarm"
+        android:layout_width="65dp"
+        android:layout_height="match_parent"
+        android:background="@color/red_EA4F4F"
+        android:text="@string/delete"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_15sp" />
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>

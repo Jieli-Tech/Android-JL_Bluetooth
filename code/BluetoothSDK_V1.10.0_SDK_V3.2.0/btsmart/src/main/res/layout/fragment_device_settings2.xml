@@ -1,0 +1,477 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:background="@color/gray_F8FAFC"
+        tools:context="com.jieli.btsmart.ui.settings.device.DeviceSettingsFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/tv_device_settings_disconnect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_device_setting_no_network"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/red_FFDEDE"
+                    android:drawablePadding="10dp"
+                    android:paddingStart="24dp"
+                    android:paddingTop="13dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="13dp"
+                    android:text="@string/no_network"
+                    android:textColor="@color/black_242424"
+                    android:textSize="@dimen/text_13sp"
+                    android:visibility="gone"
+                    app:drawableStartCompat="@drawable/ic_no_network" />
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_device_settings_func_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_device_settings_key_settings"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_device_settings_func_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:overScrollMode="never"
+                        android:scrollbars="none" />
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_device_settings_other_func"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_device_settings_func_settings"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true"
+                    tools:visibility="visible">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_device_settings_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_key_settings_two"/>
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_device_settings_key_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_device_settings_assistive_listening_settings"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true"
+                    tools:visibility="visible">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_device_settings_key_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:overScrollMode="never"
+                        android:scrollbars="none"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_key_settings_two"/>
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_device_settings_assistive_listening_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_device_settings_dual_dev_connect"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true"
+                    tools:visibility="visible">
+
+                    <include
+                        android:id="@+id/view_assistive_listening_settings"
+                        layout="@layout/item_key_settings_two" />
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_device_settings_dual_dev_connect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cv_smart_no_pick"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true"
+                    tools:visibility="visible">
+
+                    <include
+                        android:id="@+id/view_device_settings_dual_dev_connect"
+                        layout="@layout/item_key_settings_two" />
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_device_settings_noise_control"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_device_setting_no_network"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true"
+                    tools:visibility="visible">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_noise_control_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_device_settings_noise_ctrl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/noise_control"
+                            android:textColor="@color/black_242424"
+                            android:textSize="@dimen/text_13sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_device_settings_voice_adjust"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/ic_more_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_device_settings_noise_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="21dp"
+                            android:layout_marginEnd="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_device_settings_noise_ctrl">
+
+                            <View
+                                android:id="@+id/view_noise_mode_bg"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:background="@drawable/bg_gray_20_shape"
+                                android:paddingStart="4dp"
+                                android:paddingTop="2dp"
+                                android:paddingEnd="4dp"
+                                android:paddingBottom="4dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_noise_mode_start"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/iv_noise_mode_start"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginEnd="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:padding="8dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:background="@drawable/bg_round_blue_shape"
+                                tools:src="@drawable/ic_denoise_white"
+                                tools:ignore="ContentDescription" />
+
+                            <ImageView
+                                android:id="@+id/iv_noise_mode_end"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginEnd="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:padding="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:background="@color/text_transparent"
+                                tools:src="@drawable/ic_transparent_gray"
+                                tools:ignore="ContentDescription" />
+
+                            <ImageView
+                                android:id="@+id/iv_noise_mode_mid"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginEnd="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:padding="8dp"
+                                app:layout_constraintEnd_toStartOf="@+id/iv_noise_mode_end"
+                                app:layout_constraintStart_toEndOf="@+id/iv_noise_mode_start"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:background="@color/text_transparent"
+                                tools:src="@drawable/ic_noise_close_gray"
+                                tools:ignore="ContentDescription" />
+
+                            <TextView
+                                android:id="@+id/tv_noise_mode_start"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/black_242424"
+                                android:textSize="@dimen/text_13sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/iv_noise_mode_start"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_noise_mode_start"
+                                tools:text="@string/noise_mode_denoise" />
+
+                            <TextView
+                                android:id="@+id/tv_noise_mode_end"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/black_242424"
+                                android:textSize="@dimen/text_13sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/iv_noise_mode_end"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_noise_mode_end"
+                                tools:text="@string/noise_mode_transparent" />
+
+                            <TextView
+                                android:id="@+id/tv_noise_mode_mid"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/black_242424"
+                                android:textSize="@dimen/text_13sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/iv_noise_mode_mid"
+                                app:layout_constraintStart_toStartOf="@+id/iv_noise_mode_mid"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_noise_mode_mid"
+                                tools:text="@string/noise_mode_close" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <include
+                            android:id="@+id/view_anc_func"
+                            layout="@layout/view_anc_func"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toBottomOf="@+id/cl_device_settings_noise_mode"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:visibility="gone"/>
+
+                        <include
+                            android:id="@+id/view_transparent_func"
+                            layout="@layout/view_transparent_func"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toBottomOf="@+id/cl_device_settings_noise_mode"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:visibility="gone"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+                <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                    android:id="@+id/cv_smart_no_pick"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_below="@id/cv_device_settings_noise_control"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white_ffffff"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:cardMaxElevation="5dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                    app:cardUseCompatPadding="true"
+                    tools:visibility="visible">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_smart_no_pick"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <com.kyleduo.switchbutton.SwitchButton
+                            android:id="@+id/switch_smart_no_pick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:layout_marginTop="10dp"
+                            app:kswBackDrawable="@drawable/bg_alarm_switch_btn_selector"
+                            app:kswThumbColor="@color/white_ffffff"
+                            app:kswThumbHeight="22dp"
+                            app:kswThumbRangeRatio="2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_smart_no_pick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/smart_no_pick"
+                            android:textColor="@color/black_242424"
+                            android:textSize="@dimen/text_15sp"
+                            android:textStyle="bold"
+                            app:layout_constraintTop_toTopOf="@+id/switch_smart_no_pick"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/switch_smart_no_pick" />
+
+                        <TextView
+                            android:id="@+id/tv_smart_no_pick_tips"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/gray_8B8B8B"
+                            android:textSize="@dimen/text_13sp"
+                            android:text="@string/smart_no_pick_tips"
+                            android:drawablePadding="48dp"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_smart_no_pick"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:drawableEndCompat="@drawable/ic_middle_right_arrow" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/blue_448eff"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/tv_device_settings_disconnect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/require_tws_info_error"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_device_settings_disconnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_btn_red_gray_selector"
+            android:gravity="center"
+            android:padding="13dp"
+            android:text="@string/disconnect_device"
+            android:textColor="@color/red_E15858"
+            android:textSize="@dimen/text_18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="12dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

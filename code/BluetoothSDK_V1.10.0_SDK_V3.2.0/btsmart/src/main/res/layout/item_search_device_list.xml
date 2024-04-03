@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jieli.btsmart.ui.widget.color_cardview.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="7dp"
+    app:cardMaxElevation="7dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardShadowColorEnd="@color/white_translate_01ffffff"
+    app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_history_device_white_shape"
+        android:paddingStart="6dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp">
+
+        <ImageView
+            android:id="@+id/iv_search_device_list_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ll_search_device_status"
+            android:layout_alignBottom="@id/tv_search_device_list_location"
+            android:scaleType="center"
+            tools:src="@drawable/ic_search_device_tws_headset" />
+
+        <TextView
+            android:id="@+id/tv_search_device_list_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_search_device_status"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="30dp"
+            android:layout_toStartOf="@id/iv_search_device_next"
+            android:layout_toEndOf="@id/iv_search_device_list_logo"
+            android:textColor="@color/gray_text_989898"
+            android:textSize="@dimen/text_14sp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:text="中国广东省珠海市香洲区海珠大厦" />
+
+        <LinearLayout
+            android:id="@+id/ll_search_device_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/iv_search_device_next"
+            android:layout_toEndOf="@+id/iv_search_device_list_logo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_search_device_list_device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:maxWidth="165dp"
+                android:singleLine="true"
+                android:textColor="@color/black_242424"
+                android:textSize="@dimen/text_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_search_device_status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="音箱音箱设备1音箱音箱设备1音箱设备1音箱设备1音箱设备1设备1" />
+            <!--音箱音箱设备1音箱设备1音箱设备1音箱设备1设备1-->
+
+            <TextView
+                android:id="@+id/tv_search_device_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/dbg_connect_state_text_shape"
+                android:drawableStart="@drawable/ic_dot_green_shape"
+                android:drawablePadding="4dp"
+                android:gravity="start|center_vertical"
+                android:minWidth="50dp"
+                android:paddingStart="7dp"
+                android:paddingTop="5.5dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="4dp"
+                android:singleLine="true"
+                android:textColor="@color/green_text_1BC017"
+                android:textSize="@dimen/text_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_search_device_list_device_name"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="蓝牙耳机" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_search_device_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ll_search_device_status"
+            android:layout_alignBottom="@id/tv_search_device_list_location"
+            android:layout_alignParentEnd="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_middle_right_arrow" />
+    </RelativeLayout>
+</com.jieli.btsmart.ui.widget.color_cardview.CardView>

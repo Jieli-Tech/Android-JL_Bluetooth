@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--UI size-->
+    <dimen name="top_view_height">40dp</dimen>
+    <dimen name="top_view_padding">6dp</dimen>
+    <dimen name="top_view_margin">8dp</dimen>
+    <dimen name="home_top_height">155dp</dimen>
+    <dimen name="eq_top_bottom_margin">40dp</dimen>
+    <dimen name="unconnected_device_padding">3dp</dimen>
+    <dimen name="view_line_height">0.5dp</dimen>
+    <dimen name="search_device_bottom_height">260dp</dimen>
+    <dimen name="search_device_dialog_height">270dp</dimen>
+
+
+    <!--text size-->
+    <dimen name="text_10sp">10sp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
+    <dimen name="text_13sp">13sp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="text_15sp">15sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_20sp">20sp</dimen>
+    <dimen name="text_22sp">22sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="text_26sp">26sp</dimen>
+
+    <!--ColorCardView-->
+    <dimen name="cardview_compat_inset_shadow" tools:ignore="PrivateResource">1dp</dimen>
+    <dimen name="cardview_default_elevation" tools:ignore="PrivateResource">2dp</dimen>
+    <dimen name="cardview_default_radius" tools:ignore="PrivateResource">2dp</dimen>
+</resources>
