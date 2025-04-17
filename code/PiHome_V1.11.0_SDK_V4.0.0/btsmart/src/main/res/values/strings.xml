@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+    <!--Common-->
+    <string name="app_name">PiHome</string>
+    <string name="more">More</string>
+    <string name="allow">Allow</string>
+    <string name="ban">Do not show again</string>
+    <string name="finish">Finish</string>
+    <string name="it_is_ok">OK!</string>
+    <string name="i_known">Roger!</string>
+    <string name="app_is_running">Application is running.</string>
+    <string name="none_data">No data</string>
+    <string name="close">Close</string>
+    <string name="no_data">No content found</string>
+    <!-- <string name="start_using">Start using</string>-->
+
+    <!--Network-->
+    <string name="no_network">No network connection, please check your network</string>
+    <string name="network_exception">Network Error</string>
+    <string name="network_exception_tips">Please check your network connection and try again</string>
+
+    <!--Permission-->
+    <string name="open_gpg_tip">GPS permission required, please allow access to location service</string>
+    <string name="permissions_tips_01">In order to use this app normally, please</string>
+    <string name="permission_contacts">Allow read and write contacts</string>
+    <string name="permission_mic">Allow access to microphone</string>
+    <string name="permission_read_phone_state">Allow access to phone information</string>
+    <string name="permission_location">Allow access to location</string>
+    <string name="permission_storage">Allow read and write files</string>
+    <string name="permission_bluetooth">Allow access to Bluetooth</string>
+    <string name="permission_phone_settings">Allow changing phone settings</string>
+    <string name="permission_camera">Allow use camera</string>
+    <string name="permissions_tips_02">Please open system settings and grant this app</string>
+    <string name="permission">permission</string>
+
+    <!--Device state-->
+    <string name="first_connect_device">Please connect the device first</string>
+    <string name="unconnected_device">No Device Connected</string>
+    <string name="unconnected_device_tips">No device connected, please connect or add device first</string>
+    <string name="connectable_devies">Devices for connect</string>
+    <string name="disconnect_device">Disconnect the device</string>
+
+    <string name="msg_read_file_err_reading">Device busy, please try again</string>
+    <string name="msg_read_file_err_offline">Device offline</string>
+    <string name="msg_call_tip">Calling in progress&#8230;</string>
+    <string name="no_support_reverberation">Reverb is not support on current device</string>
+
+    <string name="bt_connecting">Connecting</string>
+    <string name="device_status_unconnected">Disconnected</string>
+    <string name="device_status_connected">Connected</string>
+    <string name="device_status_using">Current in use</string>
+    <string name="device_status_mandatory_upgrade">Update required</string>
+    <string name="connect_device">Connect a device</string>
+    <string name="connect_tip">Connection</string>
+    <string name="device_connecting">Connecting&#8230;</string>
+    <string name="bt_connect_failed">Failed to connect</string>
+    <string name="device_status_reconnect">Reconnecting</string>
+
+    <!--LauncherActivity-->
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="user_agreement">User agreement</string>
+    <string name="agree_with">I agree with</string>
+    <string name="dialog_tips">Reminder</string>
+    <string name="user_service_tips">\t\tWelcome to use %1$s APP.When you use it, you need to connect to the data network or WLAN operator. Please consult the local operator for the traffic cost.We attach great importance to your privacy protection and personal information protection.</string>
+    <string name="user_service_tips2">Please read “User agreement” and “Privacy policy” carefully before you use %1$s APP. You can use our service after you agree and accept all the terms.</string>
+    <string name="privacy_policy_name">“Privacy policy”</string>
+    <string name="user_service_name">“User agreement”</string>
+    <string name="and">and</string>
+    <string name="agree_and_use">Agree and continue</string>
+    <string name="not_agree_and_exit">Disagree and exit</string>
+
+    <!--HomeActivity-->
+    <string name="tab_multimedia">Media</string>
+    <string name="tab_eq">Equalizer</string>
+    <string name="tab_device">Devices</string>
+    <string name="switch_classic_device_tips">The current audio source output device [%1$s] is inconsistent with the device [%2$s] in use. Please switch the output  [%3$s] to ensure the user experience</string>
+    <string name="add_device">Add New Deivce</string>
+
+
+    <!--DeviceFragment-->
+    <string name="my_devices">My Devices</string>
+    <string name="pack_up">Less Info</string>
+    <string name="device_connecting_tips">Connecting, please wait&#8230;</string>
+    <string name="bluetooth_not_enable">Bluetooth is OFF</string>
+    <string name="connect_device_over_limit">Reach maximum Bluetooth devices, please disconnect unwanted devices at system setting</string>
+    <string name="background_show_activity_failed_tips">BBackground activity (pop-up window) permission denied, please grant permission</string>
+    <string name="switch_device_tips">CDevice switch successful.</string>
+    <string name="device_not_using">This device is currently not in use</string>
+    <string name="device_charging_bin">%1$sCharging case</string>
+    <string name="connect_history_failed_tips">Device not found:[%1$s]</string>
+
+    <!--Multi media-->
+    <string name="multi_media_local">Local Media</string>
+    <string name="multi_media_usb_drive">USB Drive</string>
+    <string name="multi_media_sd_card">SD Card</string>
+    <string name="multi_media_fm_launch">FM Transmitter</string>
+    <string name="multi_media_fm_receive">FM Receiver</string>
+    <string name="multi_media_line_in">AUX</string>
+    <string name="multi_media_light_settings">Light Effects</string>
+    <string name="multi_media_alarm">Alarm</string>
+    <string name="multi_media_search_device">Find My Devices</string>
+    <string name="multi_media_net_radio">Online Radio</string>
+    <string name="multi_media_sound_card">Karaoke</string>
+    <string name="multi_media_spdif">SPDIF</string>
+    <string name="multi_media_pc_slave">PC Slave</string>
+
+    <!--Local music-->
+    <string name="none_music_data">No music file found, please add music</string>
+    <string name="song_list_top_all_song">All Music</string>
+    <string name="song_list_top_song_num">(Total %1$d Songs)</string>
+    <string name="current_version">Current version</string>
+    <string name="local_music_none">No local music file found</string>
+
+    <!--Device Music-->
+    <string name="back_to_root">Now in root directory</string>
+    <string name="device_music">Music in device</string>
+    <string name="switch_mode_success">Switched to %1$s Mode </string>
+    <string name="msg_read_file_err_beyond_max_depth">Beyond readable depth</string>
+    <string name="sd_card">SD Card</string>
+    <string name="udisk">USB Drive</string>
+
+    <!--ID3 Music-->
+    <string name="none_id3_music_data">Fail to obtain ID3 information</string>
+    <string name="other_music_player">(from other music player app)</string>
+
+    <!--SPDIF-->
+    <string name="hdmi">HDMI</string>
+    <string name="optical_fiber">Optical</string>
+    <string name="coaxial">Coaxial</string>
+
+    <!--FM Feature-->
+    <string name="search_forward">search forward</string>
+    <string name="search_all">search all</string>
+    <string name="search_backward">search backward</string>
+    <string name="freq_point_collect">Save channel</string>
+    <string name="freq_point_manage">Manage channel</string>
+    <string name="net_radio">Online Radio</string>
+    <string name="freq_point_collect_success">Channel Saved</string>
+    <string name="freq_point_collect_existed">Saved</string>
+    <string name="freq_point">Frequency</string>
+    <string name="searching">Searching for channels&#8230;</string>
+    <string name="fm_value_no_change">FM Frequency unchanged</string>
+    <string name="fm_range">Frequency range 87.5~108.0MHz</string>
+    <string name="fm_only_one_decimal">Frequency is accurate to one decimal place</string>
+    <string name="fm_no_decimal">Null on decimal place</string>
+
+    <!--Device Setting-->
+    <string name="setting">Setting</string>
+    <string name="named">Name</string>
+    <string name="device_name_over_limit">Device name too long, limit is %1$d characters</string>
+    <string name="not_support_tips">Feature not yet supported</string>
+    <string name="tip_empty_device_name">Name should not be empty</string>
+    <string name="tip_same_device_name">Device name unchanged</string>
+    <string name="require_tws_info_error">Failed to obtain device information, click to obtain again</string>
+    <string name="retrieved">Retrieved</string>
+
+    <!--OTA function-->
+    <string name="firmware_current_version">Current version</string>
+    <string name="found_new_version">Firmware update found: %1$s</string>
+    <string name="new_version">New firmware update: %1$s</string>
+    <string name="download_tips">downloading</string>
+    <string name="upgrade_tips">Firmware updating</string>
+    <string name="upgrading_tips">Updating</string>
+    <string name="upgrade_progress_prepare">Update ready %1$s</string>
+    <string name="upgrade_progress_update">Updating %1$s</string>
+    <string name="upgrade_warning">Firmware updating, please keep Bluetooth and networking connection, DO NOT power-off Bluetooth device or lock screen</string>
+    <string name="upgrade_success">Update completed</string>
+    <string name="upgrade_failed">Update failed</string>
+    <string name="upgrade_cancel">Update cancelled</string>
+    <string name="device_must_mandatory_upgrade">\t\t\t\tDevice (%1$s) requires a full OTA for properly use.</string>
+    <string name="network_err_tips">Failed to connect server, please check network.</string>
+    <string name="double_click_to_disconnect">Double tap Back button will disconnect device.</string>
+    <string name="upgrade_immediately">Update now</string>
+
+    <!--OTA error tips-->
+    <string name="ota_error_msg_receive_cmd_timeout">Command receive timeout</string>
+    <string name="ota_error_msg_device_disconnected">Bluetooth disconnected</string>
+    <string name="ota_error_msg_error_param">Parameter error</string>
+    <string name="ota_error_msg_param_null">Parameter null</string>
+    <string name="ota_error_msg_file_not_found">File not found</string>
+    <string name="ota_error_msg_file_read_fail">Failed to read file</string>
+    <string name="ota_error_msg_file_not_exist">File not exist</string>
+    <string name="ota_error_msg_bluetooth_not_connected">Bluetooth disconnected</string>
+    <string name="ota_error_msg_no_update_version">No update found</string>
+    <string name="ota_error_msg_ota_is_continuing">OTA in progress, please do not operate</string>
+    <string name="ota_error_msg_device_not_connected">Device disconnected</string>
+    <string name="ota_error_msg_response_empty">Reply is empty</string>
+    <string name="ota_error_msg_data_length_error">Error: data length</string>
+    <string name="ota_error_msg_response_status_error">Device reply an bad status : </string>
+    <string name="ota_error_msg_low_equipmeent">Device battery too low</string>
+    <string name="ota_error_msg_check_upgrade_file_failed">Error: OTA file validation failed</string>
+    <string name="ota_error_msg_upgrade_file_version_no_change">Version unchanged</string>
+    <string name="ota_error_msg_tws_is_not_connected">TWS earbuds disconnected</string>
+    <string name="ota_error_msg_headset_not_in_charging">Earbuds not in case</string>
+    <string name="ota_error_msg_enter_update_mode_failed">Error: Device failed to enter update mode</string>
+    <string name="ota_error_msg_offest_over_limit">Offset over limit</string>
+    <string name="ota_error_msg_receive_error_data">Data validation failed</string>
+    <string name="ota_error_msg_upgrade_failed">Update failed</string>
+    <string name="ota_error_msg_key_not_match">Error: Key verification failed</string>
+    <string name="ota_error_msg_check_file_error">Error: Data verification failed</string>
+    <string name="ota_error_msg_type_not_match">Error: Update type not match</string>
+    <string name="ota_error_msg_flash_read_error">Error: Read/write device\'s memory failed</string>
+    <string name="ota_error_msg_handler_cmd_timeout">Error: Device handle command timeout</string>
+    <string name="ota_error_msg_error_unkonwn">Error: Unknown error</string>
+    <string name="ota_error_msg_download_ota_file_failed">Error: Failed to download update firmware, message:</string>
+    <string name="ota_error_msg_request_ota_file_failed">Error: Failed to request update firmware file info, message:</string>
+    <string name="ota_error_msg_disconnect_tip">Update in progress, please DO NOT interrupt bluetooth connection</string>
+
+    <!--Product Design Dialog-->
+    <!--   <string name="device_paired_finish">Completed</string>-->
+    <string name="device_auto_connecting">Device is auto-reconnecting</string>
+    <string name="device_connectionless_tips">Please set the device into pairing mode</string>
+    <string name="request_floating_window_permission_tips">For better user experience, please grant the "screen overlay"permission</string>
+    <string name="scanning_ble_device">Searching devices&#8230;</string>
+    <string name="device_review">View devices</string>
+    <string name="disconnect_device_tips">Please confirm to disconnect device?</string>
+    <string name="bt_connected_error_tip">[%1$s] is connecting to another device</string>
+    <string name="device_not_owner">This is not your device</string>
+    <string name="long_click_cancel_pair">Please long press the charging case button for connecting</string>
+    <string name="make_sure_headset_paired">Please confirm the earbuds/headphone is at its pairing mode</string>
+    <string name="long_click_cancel_pair_soundbox">Please long press the power button for connecting</string>
+    <string name="make_sure_soundbox_paired">Please confirm the device is at its pairing mode</string>
+
+    <!--History Device-->
+    <string name="remove_history_device_failed">Failed to ignore device</string>
+
+    <!--EQ function-->
+    <string name="eq_normal">Normal</string>
+    <string name="eq_rock">Rock</string>
+    <string name="eq_pop">Pop</string>
+    <string name="eq_classical">Classical</string>
+    <string name="eq_jazz">Jazz</string>
+    <string name="eq_country">Country</string>
+    <string name="eq_user">Customize</string>
+    <string name="eq_advanced_setting">Advance setting</string>
+    <string name="eq_advanced_reverberation">Reverb</string>
+    <string name="eq_advanced_dynamic">DRC</string>
+    <string name="eq_advanced_depth">Depth</string>
+    <string name="eq_advanced_strength">Gain</string>
+    <string name="current_volume">Current volume:</string>
+
+    <string name="eq_freq_16k">16k</string>
+    <string name="eq_freq_8k">8k</string>
+    <string name="eq_freq_4k">4k</string>
+    <string name="eq_freq_2k">2k</string>
+    <string name="eq_freq_1k">1k</string>
+    <string name="eq_freq_500">500</string>
+    <string name="eq_freq_250">250</string>
+    <string name="eq_freq_125">125</string>
+    <string name="eq_freq_63">63</string>
+    <string name="eq_freq_31">31</string>
+    <string name="eq_freq_12db">+8dB</string>
+    <string name="eq_freq_0db">0dB</string>
+    <string name="eq_freq_negative_12db">-8dB</string>
+    <string name="music_time_default">00:00</string>
+    <string name="product_default_quantity">100%</string>
+
+    <string name="volume_bass">Bass</string>
+    <string name="volume_main">Main volume</string>
+    <string name="volume_height">Treble</string>
+    <string name="eq_reset">Reset</string>
+    <string name="eq_preset">Preset</string>
+
+    <!--App Settings-->
+    <string name="shake_cut_song">shake to next song</string>
+    <string name="shake_change_light_color">shake to change light color</string>
+    <string name="shake_change_light_color_note">Device need to support light setting</string>
+    <string name="about">About</string>
+    <string name="feedback">Feedback</string>
+    <string name="device_instructions">Device user instruction</string>
+    <string name="multilingual">Languages</string>
+    <string name="simplified_chinese">简体中文</string>
+    <string name="follow_system">Use system default language</string>
+    <string name="english">English</string>
+    <string name="japanese">日本語</string>
+    <string name="set_language">Language setting</string>
+
+    <!--About-->
+    <string name="app_version_name">Software version:%1$s</string>
+    <string name="app_version">APP version:%1$s</string>
+    <string name="firmware_version_name">Firmware version:%1$s</string>
+    <string name="check_update">Check update</string>
+    <string name="firmware_update">Firmware update</string>
+    <string name="laster_version">Latest version in use</string>
+
+    <!--Device Function Settings-->
+    <string name="boot_up">Power on</string>
+    <string name="shut_down">Power off</string>
+    <string name="music_pp">Play/Pause</string>
+    <string name="previous_song">Previous</string>
+    <string name="next_song">Next</string>
+    <string name="voice_inc">Volume+</string>
+    <string name="voice_dec">Volume-</string>
+    <string name="call_back">Dial latest in call</string>
+    <string name="hang_up">Hangup phone</string>
+    <string name="answer_call">Pickup phone</string>
+    <string name="ai_speech">Active voice command</string>
+    <string name="take_photo">Take picture</string>
+    <string name="none">None</string>
+    <string name="bluetooth_name">Bluetooth name</string>
+    <string name="work_mode">Working mode</string>
+    <string name="mic_channel">Microphone</string>
+    <string name="led_settings">LED Setting</string>
+    <string name="in_ear_check">Wear detection</string>
+    <string name="settings_failed">Failed to change setting</string>
+    <string name="settings_failed_by_game_mode">Microphone control disabled in gaming mode</string>
+    <string name="settings_failed_dev_name_len_over_limit">Illegal name or length reaches limit</string>
+    <string name="settings_failed_led_settings">LED Flickering is disabled in non-Bluetooth mode</string>
+    <string name="device_name_change_tips">This modify need to reboot the device, reboot now?</string>
+    <string name="device_name_failure">Failed to change device name</string>
+    <string name="not_immediately_effective">Changes will apply after reboot</string>
+    <string name="immediately_effective">Apply now</string>
+    <string name="not_allow_settings_tip">The device is not allowed to be set. Please confirm whether the connection is paired or not.</string>
+    <string name="remove_history_device_tips">Confirm to ignore this device?</string>
+    <string name="remove_history_device">Ignore this device</string>
+    <string name="modify_dev_name_tips">(Please reconnect the device if device name shown is incorrect)</string>
+
+    <string name="noise_control">ANC Setting</string>
+    <string name="noise_mode_denoise">ANC ON</string>
+    <string name="noise_mode_close">ANC OFF</string>
+    <string name="noise_mode_transparent">Transparent mode</string>
+    <string name="save">Save</string>
+    <string name="noise_mode_desc_close">Disable noise cancellation</string>
+    <string name="noise_mode_desc_denoise">Ambient sound compression</string>
+    <string name="noise_mode_desc_transparent">Ambient sound pass through</string>
+    <string name="enable">Enable</string>
+    <string name="input_valid_value_tips">Please input a valid value between [%1$d,%2$d]</string>
+    <string name="left_dev_denoise_value">Left side ANC gain</string>
+    <string name="right_dev_denoise_value">Right side ANC gain</string>
+    <string name="left_dev_transparent_value">Left side Transparent gain</string>
+    <string name="right_dev_transparent_value">Right side Transparent level/gain</string>
+    <string name="invalid_mode">Invalid mode</string>
+    <string name="unknown_mode">Unknow mode</string>
+    <string name="denoise_value">ANC gain</string>
+    <string name="transparent_value">Transparent gain</string>
+    <string name="maximum_tips">Reaches maximum</string>
+
+    <!--Adaptive ANC-->
+    <string name="adaptive_anc">Adaptive ANC</string>
+    <string name="adaptive_anc_desc">Turn on the ANC adaptive algorithm to compensate for differences in ear canal and wearing, and improve noise reduction performance</string>
+    <string name="enable_adaptive_anc_tips">Whether to use an existing adaptive noise reduction scheme</string>
+    <string name="redetect">Re-adaptive</string>
+    <string name="enable_now">Use</string>
+    <string name="monitoring">Re-adapting</string>
+    <string name="adaptive_anc_failure">Adaptive failure</string>
+    <string name="adaptive_anc_failure_tips">Please avoid swallowing, talking, walking, shaking your head, etc.</string>
+    <string name="give_up">abandon</string>
+    <string name="retry">retry</string>
+
+    <!--Voice Function-->
+    <string name="smart_no_pick">Smart No Pick</string>
+    <string name="smart_no_pick_tips">When the headset detects that you are speaking, it automatically builds conversation conditions without taking off the headset.</string>
+    <string name="voice_check_sensitivity">Voice Detection Sensitivity</string>
+    <string name="close_time">Shutdown Time After Startup</string>
+    <string name="high_sensitivity">High Sensitivity</string>
+    <string name="low_sensitivity">Low Sensitivity</string>
+    <string name="high_level">High</string>
+    <string name="low_level">Low</string>
+    <string name="short_close_time">Short(5 Sec)</string>
+    <string name="standard_close_time">Standard(15 Sec)</string>
+    <string name="long_close_time">Long(30 Sec)</string>
+    <string name="none_close_time">None</string>
+    <string name="close_time_tips">If your headphones don\'t detect your voice at the specified time, turn off Smart Pass-off to return to normal.</string>
+    <string name="short_time">Short</string>
+    <string name="standard_time">Standard</string>
+    <string name="long_time">Long</string>
+    <string name="none_time">None</string>
+    <string name="scene_denoising">Scene Noise Reduction</string>
+    <string name="scene_denoising_auto">Auto</string>
+    <string name="scene_denoising_auto_tips">Adaptive control based on the noise environment</string>
+    <string name="scene_denoising_mild">Mild</string>
+    <string name="scene_denoising_mild_tips">Ideal for quiet office environments</string>
+    <string name="scene_denoising_balance">Balance</string>
+    <string name="scene_denoising_balance_tips">Suitable for noisy environments</string>
+    <string name="scene_denoising_depth">Depth</string>
+    <string name="scene_denoising_depth_tips">Suitable for very noisy environments</string>
+    <string name="wind_noise_detection">Wind Noise Detection</string>
+    <string name="wind_noise_detection_tips">Under high wind noise, reduce the impact of wind noise on ANC.</string>
+    <string name="vocal_booster">Vocal Enhancement</string>
+
+    <!--Double Connection-->
+    <string name="double_connection">Device dual connection</string>
+    <string name="function_open">Open</string>
+    <string name="function_close">Close</string>
+    <string name="double_connection_open_tips">When turned on, the headphones can support connecting two devices at the same time and easily switch audio output between devices.</string>
+    <string name="connected_devices">Connected devices</string>
+    <string name="native_dev">Native</string>
+    <string name="close_double_connection_tips">Are you sure you want to close the dual device connection?</string>
+    <string name="close_double_connection_content">After turning off, the headphones will be disconnected from %1$s.</string>
+
+    <!--Feedback-->
+    <string name="tips_input_right_phone">Please enter right phone number</string>
+    <string name="tips_input_phone">Please enter phone number</string>
+    <string name="tips_input_feedback">Please enter feedback content</string>
+    <string name="feedback_type">Feedback type</string>
+    <string name="problem_feedback">Problem feedback</string>
+    <string name="please_input_feedback">Please enter your feedback in detail</string>
+    <string name="please_input_phone">Please enter your phone number for contact</string>
+    <string name="commit">Submit</string>
+
+    <!--Alarm-->
+    <string name="alarm_open_success">Alarm enabled</string>
+    <string name="alarm_open_failure">Failed to enable alarm</string>
+    <string name="alarm_close_success">Alarm dismissed</string>
+    <string name="alarm_close_failure">Failed to dismiss alarm</string>
+    <string name="operate_alarm_failure">Failed to operate alarm</string>
+    <string name="alarm_list_read_failed">Failed to load alarm list</string>
+    <string name="delete">Delete</string>
+    <string name="alarm_set_num_is_full">Alarm list reaches limit</string>
+    <string name="alarm_delete_failure">Failed to delete alarm</string>
+    <string name="alarm_delete_success">Alarm deleted</string>
+
+    <string name="alarm_stop_success">Alarm stopped</string>
+    <string name="alarm_stop_failed">Failed to stop alarm</string>
+    <string name="alarm_delete">Delete alarm</string>
+    <string name="sync_time">Time synchronize</string>
+    <string name="sync_time_success">Time synchronized</string>
+    <string name="sync_time_failed">Failed to synchronize time</string>
+
+    <string name="save_alarm_failed_no_modify">Alarm unchanged</string>
+    <string name="save_alarm_failed">Failed to save alarm</string>
+    <string name="save_alarm_success">Alarm saved</string>
+    <string name="choose_repeat_mode_tip">Please choose mode</string>
+    <string name="alarm_name_can_not_be_empty">Alarm name should not be empty</string>
+    <string name="alarm_name_length_too_long">Alarm name too long</string>
+    <string name="alarm_name_format_error">Error: alarm name input format</string>
+    <string name="default_alarm_name">Alarm</string>
+    <string name="default_alarm_custom">Customize</string>
+    <string name="alarm_edit_title">Edit alarm</string>
+    <string name="alarm_create_title">New alarm</string>
+    <string name="alarm_repeat_on_workday">Mon to Fri</string>
+    <string name="alarm_repeat_every_day">Everyday</string>
+    <string name="alarm_repeat_single">One time</string>
+    <string name="alarm_repeat_week">Week</string>
+    <string name="alarm_repeat_mon">Monday </string>
+    <string name="alarm_repeat_tue">Tuesday  </string>
+    <string name="alarm_repeat_wed">Wednesday </string>
+    <string name="alarm_repeat_thu">Thursday </string>
+    <string name="alarm_repeat_fri">Friday </string>
+    <string name="alarm_repeat_sat">Saturday </string>
+    <string name="alarm_repeat_sun">Sunday</string>
+    <string name="alarm_repeat_simple_mon">Mon</string>
+    <string name="alarm_repeat_simple_tue">Tue</string>
+    <string name="alarm_repeat_simple_wed">Wed</string>
+    <string name="alarm_repeat_simple_thu">Thu</string>
+    <string name="alarm_repeat_simple_fri">Fri</string>
+    <string name="alarm_repeat_simple_sat">Sat</string>
+    <string name="alarm_repeat_simple_sun">Sun</string>
+
+    <!--AlarmSettings-->
+    <string name="alarm_settings">Alarm management</string>
+    <string name="bell">Ring</string>
+    <string name="repeat">Repeat</string>
+    <string name="light">Light</string>
+    <string name="alarm_state">Status</string>
+    <string name="delete_alarm_tip">Please confirm to delete this alarm\n</string>
+    <string name="stop_alarm">Stop</string>
+    <string name="alarm_running">Alarm goes off</string>
+    <string name="unnamed">Untitled</string>
+
+    <string name="alarm_bell_1">Ring 1</string>
+    <string name="alarm_bell_2">Ring 2</string>
+    <string name="alarm_bell_3">Ring 3</string>
+    <string name="alarm_bell_4">Ring 4</string>
+    <string name="alarm_bell_5">Ring 5</string>
+    <string name="alarm_default_bell">Default</string>
+
+    <string name="alarm_bell_time">Alarm duration</string>
+    <string name="min_format">%1$d min</string>
+    <string name="alarm_bell_interval">Alarm interval</string>
+    <string name="bell_repeat_count_title">Repeat time</string>
+    <string name="bell_interal_time_title">Repeat interval(min）</string>
+    <string name="interval_format">%1$d min,%2$d time</string>
+    <string name="count_format">%1$d time</string>
+
+
+    <!--    Light-->
+    <string name="light_control">Light setting</string>
+    <string name="light_scene_mode">Profiles</string>
+    <string name="light_color_temperature">Color Tempurature</string>
+    <string name="light_coloured_lights">Light color</string>
+    <string name="light_twinkle">Flicker</string>
+    <string name="light_scene">Profile</string>
+    <string name="light_tip_open_switch">Please set main switch ON</string>
+    <string name="light_scene_mode_1">Rainbow</string>
+    <string name="light_scene_mode_2">Heartbeat</string>
+    <string name="light_scene_mode_3">Candle</string>
+    <string name="light_scene_mode_4">Night light</string>
+    <string name="light_scene_mode_5">Stage</string>
+    <string name="light_scene_mode_6">Breathing light - colors</string>
+    <string name="light_scene_mode_7">Breathing light - red</string>
+    <string name="light_scene_mode_8">Breathing light - green</string>
+    <string name="light_scene_mode_9">Breathing light - blue</string>
+    <string name="light_scene_mode_10">Greening</string>
+    <string name="light_scene_mode_11">Sunset</string>
+    <string name="light_scene_mode_12">Rhythm</string>
+
+    <string name="color">Color</string>
+    <string name="light_flash_quick">Fast flicker</string>
+    <string name="light_flash_slow">Slow flicker</string>
+    <string name="light_flash_slower">Really slow flickering</string>
+    <string name="light_flash_music">Rhythm flicker</string>
+    <string name="light_color_collect">Saved colors</string>
+    <string name="light_flash">Colors flickers</string>
+    <string name="light_flash_freq">Flicker rate</string>
+
+    <string name="light_model_1">Rainbow flicker</string>
+    <string name="light_model_2">Red flicker</string>
+    <string name="light_model_3">Orange flicker</string>
+    <string name="light_model_4">Yellow flicker</string>
+    <string name="light_model_5">Green flicker</string>
+    <string name="light_model_6">Cyan flicker</string>
+    <string name="light_model_7">Blue flicker</string>
+    <string name="light_model_8">Purple flicker</string>
+    <string name="light_color_temperature_cold">Cold</string>
+    <string name="light_color_temperature_warm">Warm</string>
+    <string name="light_color_temperature_gray">Grey</string>
+    <string name="light_color_temperature_colorful">Vivid</string>
+    <string name="light_color_temperature_dark">Dark</string>
+    <string name="light_color_temperature_sun">Sunny</string>
+    <string name="light_color_temperature_cold_white">Cold white</string>
+    <string name="light_color_temperature_natural_light">Natural light</string>
+    <string name="light_color_temperature_bright">Bright</string>
+    <string name="light_color_temperature_sunset">Sunset</string>
+    <string name="light_color_temperature_candlelight">Candle</string>
+
+    <!--Search Device-->
+    <string name="play_sound">Play</string>
+    <string name="close_play">Mute</string>
+    <string name="connected_device_time_tips">Last use: now</string>
+    <string name="last_time_tips">Last use: %1$s</string>
+    <string name="distance_m">%1$s m</string>
+    <string name="distance_km">%1$s km</string>
+    <string name="my_location">My location</string>
+    <string name="search_phone">Searching my phone</string>
+    <string name="search_device_tips">\t\tWhen search for device, earbuds will beep at maximum volume, please make sure you are not wearing them for avoiding hearing damage.</string>
+    <string name="device_no_location_info">Unable to obtain location</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="play_way_all">Play all</string>
+    <string name="play_way_left">Play left-side only</string>
+    <string name="play_way_right">Play right-side only</string>
+
+    <!--    Network Radio-->
+    <string name="fm_type_local">Local FM</string>
+    <string name="fm_type_country">National FM</string>
+    <string name="fm_type_province">Provincial FM</string>
+    <string name="fm_type_mycollect">My favourite</string>
+    <string name="loading">Loading</string>
+    <string name="loading_failed">Failed to load</string>
+    <string name="manage">Manage</string>
+    <string name="msg_error_switch_mode">Failed to switch mode</string>
+    <string name="empty_folder">Empty folder</string>
+    <string name="empty_list_change_to_local">Current playlist is empty, switched to local FM list</string>
+    <string name="resource_not_available">Current resource unavailable.</string>
+    <string name="resource_not_available_next">Current resource unavailable, tune to next channel</string>
+    <string name="resource_not_available_prev">Current resource unavailable, tune to previous channel</string>
+
+
+    <!--Test-->
+    <string name="test_configuration">Test configuration</string>
+    <string name="save_configuration">Save configuration</string>
+    <string name="use_device_auth">Confirm to enable device authorization?</string>
+    <string name="support_show_product_dialog">Confirm to enable pop-up window?</string>
+    <string name="support_local_ota">Confirm to enable local OTA?</string>
+    <string name="show_dialog_rssi_tips">Pop-up window sensitivity:</string>
+    <string name="rssi_unit">dBm</string>
+    <string name="input_rssi_hint">Please input desired RSSI value [-100~0]dBm</string>
+    <string name="local_ota_desc">Local OTA test instructions:\n1. The upgrade file name is fixed as update.ufw\n2. Location of upgrade files:\n\t2.1 Android 10.0+, file storage \'root/Android/data/%1$s/files/%2$s/upgrade/\'\n\t2.2 Android 10.0 below，file storage \'root/%3$s/upgrade/\'\n3.Upgrade file format: app_log_[timestamp].txt</string>
+    <string name="test_custom_cmd">Customized command test</string>
+    <string name="rssi_over_limit">RSSI parameter is not in legal range</string>
+    <string name="click_again_to_test_configuration">Please tap again for entering test configuration</string>
+    <string name="save_configuration_success">Configuration saved, exiting the app</string>
+    <string name="sound_card_eq_title">Microphone sound effect</string>
+    <string name="fitting_results">Fitting results</string>
+    <string name="left_ear_threshold_mean">Left auditory threshold mean</string>
+    <string name="right_ear_threshold_mean">Right ear threshold mean</string>
+    <string name="written_to_the_device">Written to the device</string>
+    <string name="make_sure_write_fitting">Make sure to write the hearing aid ？</string>
+    <string name="keep_fitting_record">Keep the fitting record</string>
+    <string name="write_saved_successfuly">Write saved successfully</string>
+    <string name="write_saved_failed">Write saved failed</string>
+    <string name="db_hl">Auditory threshold/dB HL</string>
+    <string name="freq_hz">Frequency/Hz</string>
+    <string name="left_ear">Left ear</string>
+    <string name="right_ear">Right ear</string>
+    <string name="go_for_fitting">Go for fitting</string>
+    <string name="detect_hearing_impairment">Detect hearing impairment</string>
+    <string name="fitting_records">Fitting records</string>
+    <string name="back_last_step">Back</string>
+    <string name="can_not_hear">Can\'t hear</string>
+    <string name="hear">Hear</string>
+    <string name="restart">Restart</string>
+    <string name="continue_str">Continue</string>
+    <string name="check_no_finish_record">There is a record of incomplete test. Do you want to continue?</string>
+    <string name="save_operation">Yes</string>
+    <string name="no_save_operation">No</string>
+    <string name="check_exitt_fitting">An exit was detected, Do you want to cache the current record to continue the test next time?</string>
+    <string name="please_prepare_for_the_following_tests">Please prepare for the following tests</string>
+    <string name="fitting_prepare_step_1">Please wear your hearing aid \nChoose a quiet place to start.</string>
+    <string name="fitting_prepare_step_2">When you hear the \“Di \”sound in the headset, click \"hear\";\n If you can\'t hear anything, click \"Can\'t hear\" </string>
+    <string name="i_know_it_2">I know it.</string>
+    <string name="fitting">Fitting</string>
+    <string name="hearing_aid_fitting">Hearing aid fitting</string>
+    <string name="select_fitting_gain_type">Please select the hearing aid to be tested.</string>
+    <string name="left_ear_single">Left</string>
+    <string name="right_ear_single">Right</string>
+    <string name="both_ear_single">Both</string>
+    <string name="both_ear">Both ear</string>
+    <string name="both_ear_fitting">The both ears fitting</string>
+    <string name="left_ear_fitting">The left ear fitting</string>
+    <string name="right_ear_fitting">The right ear fitting</string>
+    <string name="left_ear_fitting_result">Fitting results of left ear</string>
+    <string name="right_ear_fitting_result">Fitting results of right ear</string>
+    <string name="both_ear_fitting_result">Fitting results of both ears</string>
+    <string name="is_save_to_fitting_record">Whether to save to the fitting record？</string>
+    <string name="fitting_record_too_long">The name is too long. Please limit it to 20 characters</string>
+
+    <!--便携式智能充电保护盒-->
+    <string name="charging_case_setting">Charging Case Setting</string>
+    <string name="brightness">Brightness</string>
+    <string name="screen_savers">Screen Savers</string>
+    <string name="boot_animation">Boot Animation</string>
+    <string name="display_unlock_indicator">Display Unlock Indicator</string>
+    <string name="upload">Upload</string>
+    <string name="charging_case_update">Charging Case Update</string>
+    <string name="uploading">Uploading...</string>
+    <string name="uploading_tips">Please keep Bluetooth and network on during the upload process. \n This process takes about 2 minutes.</string>
+    <string name="upload_success">Update Successfully</string>
+    <string name="custom">Custom</string>
+    <string name="select_previous_image">Select Previous Image</string>
+    <string name="cancel_upload_image">Uploading has been cancelled.</string>
+    <string name="upload_failed">Upload Failed</string>
+    <string name="select_all">Select All</string>
+    <string name="unselect_all">Deselect All</string>
+    <string name="select_tips">Select at least one item</string>
+    <string name="upload_failure">Failed to upload file</string>
+    <string name="transferring_file_tips">Please cancel or wait for the upload to complete.</string>
+
+    <!--SelectPhotoDialog-->
+    <string name="choose_from_mobile_album">Choose From Album</string>
+    <string name="next_step">Next Step</string>
+
+    <!--Replace Tone-->
+    <string name="replace_tone_test">Replace Tone Test</string>
+    <string name="replacing_tips">Replacing file, please do not leave the interface</string>
+    <string name="initializing">Initializing</string>
+    <string name="init_failed">initialization failed</string>
+    <string name="sync_resources">Syncing resources</string>
+    <string name="sync_res_success">Successfully synchronized resources</string>
+    <string name="sync_res_failure">Failed to synchronize resources</string>
+    <string name="request_block_info_failure">Request for prompt sound area information failed</string>
+    <string name="tone_block_info">Tone Block Information</string>
+    <string name="not_support_function">Function not supported</string>
+    <string name="file_name">Filename</string>
+    <string name="block_size">Block Size</string>
+    <string name="tone_max_num">Maximum number of tones</string>
+    <string name="nickname">Nickname</string>
+    <string name="file_path">File Path</string>
+    <string name="select_tone">Select Tone</string>
+    <string name="missing_block_info">Missing tone block information</string>
+    <string name="select_tone_not_enough_tips">The number of currently selected prompt sounds [%1$d] is insufficient [%2$d]</string>
+    <string name="replacing">Replacing...</string>
+    <string name="replace_tone_success">Replace tone successfully</string>
+    <string name="replace_tone_failure">Replace tone failed</string>
+    <string name="use_save_log">Do you want to enable saving log files?</string>
+
+    <!--TestExtFlashActivity-->
+    <!--<string name="test_ext_flash">FAT File System Test</string>
+    <string name="add_file_path_err">File path exception, please select again</string>
+    <string name="create_file_progress">Adding file[%1$s],progress:%2$d</string>
+    <string name="create_fat_file_success">File[%1$s] added successfully.Used Time : %2$s, Rate:%3$.1f kb/s</string>
+    <string name="create_fat_file_failed">Failed to add file[%1$s],reason:%2$d</string>
+    <string name="delete_fat_file_tips">Delete file[%1$s] or not?</string>
+    <string name="deleting_fat_file">Deleting…</string>
+    <string name="delete_fat_file_success">File[%1$s] deletion successfully.Used Time : %2$s</string>
+    <string name="delete_fat_file_failed">File[%1$s] deletion failed, reason:%2$d</string>
+    <string name="log_message">Logcat Message</string>
+    <string name="recovery_fat_system">Recovering…</string>
+    <string name="recovery_system_success">Recovery system successful</string>
+    <string name="recovery_system_failed">Recovery system failure, reason : %1$d</string>
+    <string name="write_protect_begin">Write protection begin</string>
+    <string name="delete_fat_file_warning">No less than 2 fat files</string>
+    <string name="updating_fat_resource">Updating…</string>-->
+
+</resources>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
+    tools:context=".ui.search.SearchDeviceFragment">
+
+    <com.amap.api.maps.TextureMapView
+        android:id="@+id/map_search_device"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_search_device_bottom" />
+
+    <RelativeLayout
+        android:id="@+id/rl_search_device_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/ll_search_device_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cl_search_device_message"
+            android:background="@color/gray_F8FAFC"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_search_device_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="58dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_search_device_play_selector"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="@string/play_sound"
+                android:textColor="@color/white_ffffff"
+                android:textSize="@dimen/text_16sp" />
+
+            <TextView
+                android:id="@+id/tv_search_device_stop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="58dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/bg_search_device_stop_selector"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="@string/close_play"
+                android:textColor="@color/color_main"
+                android:textSize="@dimen/text_16sp" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_device_headset_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cl_search_device_message"
+            android:background="@color/gray_F8FAFC"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="50dp"
+            android:visibility="visible">
+
+            <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                android:id="@+id/cv_search_device_headset_left_ctrl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/white_ffffff"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="10dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardShadowColorEnd="@drawable/ic_function_list_shadow_end_selector"
+                app:cardShadowColorStart="@drawable/ic_function_list_shadow_selector"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cv_search_device_headset_right_ctrl"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_search_device_headset_left_dev"
+                        android:layout_width="48dp"
+                        android:layout_height="88dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_headset_left"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_search_device_headset_left_connection"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/black_242424"
+                        android:textSize="@dimen/text_16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_search_device_headset_left_dev"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="已连接" />
+
+                    <TextView
+                        android:id="@+id/tv_search_device_headset_left_play"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/color_main"
+                        android:textSize="@dimen/text_16sp"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_search_device_headset_left_dev"
+                        app:layout_constraintStart_toStartOf="@id/tv_search_device_headset_left_connection"
+                        app:layout_constraintTop_toTopOf="@+id/guideline8"
+                        tools:text="播放声音播放声音" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+            <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                android:id="@+id/cv_search_device_headset_right_ctrl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/white_ffffff"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="10dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardShadowColorEnd="@drawable/ic_function_list_shadow_end_selector"
+                app:cardShadowColorStart="@drawable/ic_function_list_shadow_selector"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/cv_search_device_headset_left_ctrl"
+                tools:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_search_device_headset_right_dev"
+                        android:layout_width="48dp"
+                        android:layout_height="88dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_headset_right"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_search_device_headset_right_connection"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/black_242424"
+                        android:textSize="@dimen/text_16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_search_device_headset_right_dev"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="已连接" />
+
+                    <TextView
+                        android:id="@+id/tv_search_device_headset_right_play"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/color_main"
+                        android:textSize="@dimen/text_16sp"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_search_device_headset_right_dev"
+                        app:layout_constraintStart_toStartOf="@+id/tv_search_device_headset_right_connection"
+                        app:layout_constraintTop_toTopOf="@+id/guideline5"
+                        tools:text="播放声音" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.5" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_device_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_F8FAFC"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/tv_search_device_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/gray_6E6E6E"
+                android:textSize="@dimen/text_14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_device_location"
+                tools:text="2公里" />
+
+            <TextView
+                android:id="@+id/tv_search_device_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_242424"
+                android:textSize="@dimen/text_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="中国广东省珠海市香洲区海珠大厦" />
+
+            <TextView
+                android:id="@+id/tv_search_device_location_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/gray_969696"
+                android:textSize="@dimen/text_14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_device_location"
+                tools:text="今天08:10分" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_search_device_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="3dp"
+        android:alpha="0.7"
+        android:src="@drawable/bg_search_device_location_selector"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

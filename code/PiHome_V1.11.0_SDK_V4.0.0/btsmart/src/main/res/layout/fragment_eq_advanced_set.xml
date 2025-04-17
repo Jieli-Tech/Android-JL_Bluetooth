@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_eq_advanced_set"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_eq_advanced_reverberation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/eq_advanced_reverberation"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="混响" />
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sw_eq_advanced_reverberation"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginEnd="12dp"
+            app:kswBackDrawable="@drawable/bg_alarm_switch_btn_selector"
+            app:kswThumbColor="@color/white_ffffff"
+            app:kswThumbHeight="22dp"
+            app:kswThumbRangeRatio="2"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_eq_advanced_reverberation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_eq_advanced_reverberation" />
+
+        <com.jieli.btsmart.ui.widget.RotatingView
+            android:id="@+id/rotate_depth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="false"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            app:backgroundLineWidth="4dp"
+            app:textSize="@dimen/text_26sp"
+            app:contentEndColor="@color/gray_CECECE"
+            app:contentLineWidth="7dp"
+            app:contentStartColor="@color/gray_CECECE"
+            app:contentTextColor="@color/gray_CECECE"
+            app:indicatorImage="@drawable/ic_rotatview_indicator_big_nol"
+            app:paddingWidth="5dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintHorizontal_weight="100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_eq_advanced_reverberation" />
+
+        <com.jieli.btsmart.ui.widget.RotatingView
+            android:id="@+id/rotate_strength"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="25dp"
+            app:backgroundLineWidth="4dp"
+            app:textSize="@dimen/text_26sp"
+            app:contentEndColor="@color/gray_CECECE"
+            app:contentLineWidth="7dp"
+            app:contentStartColor="@color/gray_CECECE"
+            app:contentTextColor="@color/gray_CECECE"
+            app:indicatorImage="@drawable/ic_rotatview_indicator_big_nol"
+            app:paddingWidth="5dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="100"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv_eq_advanced_reverberation" />
+
+        <TextView
+            android:id="@+id/tv_depth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/eq_advanced_depth"
+            app:layout_constraintEnd_toEndOf="@+id/rotate_depth"
+            app:layout_constraintStart_toStartOf="@+id/rotate_depth"
+            app:layout_constraintTop_toBottomOf="@+id/rotate_depth"
+            tools:text="深度" />
+
+        <TextView
+            android:id="@+id/tv_strength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/eq_advanced_strength"
+            app:layout_constraintEnd_toEndOf="@+id/rotate_strength"
+            app:layout_constraintStart_toStartOf="@+id/rotate_strength"
+            app:layout_constraintTop_toBottomOf="@+id/rotate_strength"
+            tools:text="强度" />
+
+        <TextView
+            android:id="@+id/tv_eq_dynamic_limiter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="37dp"
+            android:text="@string/eq_advanced_dynamic"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_depth"
+            app:layout_goneMarginTop="20dp"
+            tools:text="动态限幅器" />
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sw_eq_dynamic_limiter"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginEnd="12dp"
+            android:visibility="gone"
+            app:kswBackDrawable="@drawable/bg_alarm_switch_btn_selector"
+            app:kswThumbColor="@color/white_ffffff"
+            app:kswThumbHeight="22dp"
+            app:kswThumbRangeRatio="2"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_eq_dynamic_limiter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_eq_dynamic_limiter" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.jieli.btsmart.ui.widget.RotatingView
+            android:id="@+id/rotate_dynamic_limiter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:clickable="false"
+            app:backgroundLineWidth="4dp"
+            app:textSize="@dimen/text_26sp"
+            app:contentEndColor="@color/gray_CECECE"
+            app:contentLineWidth="7dp"
+            app:contentStartColor="@color/gray_CECECE"
+            app:contentTextColor="@color/gray_CECECE"
+            app:indicatorImage="@drawable/ic_rotatview_indicator_big_nol"
+            app:paddingWidth="5dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintHorizontal_weight="100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_eq_dynamic_limiter" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_reverberation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_dynamic_limiter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

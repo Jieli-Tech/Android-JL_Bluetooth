@@ -1,0 +1,4 @@
+//主工程
+include ':btsmart'
+//引用库
+include ':jl_bluetooth_rcsp', ':jl_dialog', ':jl-component-lib'

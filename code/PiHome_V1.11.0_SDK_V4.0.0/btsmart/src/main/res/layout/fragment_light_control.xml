@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff">
+
+    <com.jieli.btsmart.ui.widget.CircleBgImageView
+        android:id="@+id/ibtn_color_add"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@color/text_transparent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <com.jieli.btsmart.ui.widget.ColorPicker2View
+        android:id="@+id/color_picker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        app:layout_constraintBottom_toTopOf="@id/rv_light_color_collect"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/guideline2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_light_color_collect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/sb_coloured_lights_hsl_warm_and_cold"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        tools:itemCount="12"
+        tools:listitem="@layout/item_light_color_collect"
+        tools:spanCount="6" />
+
+    <TextView
+        android:id="@+id/tv_coloured_lights_hsl_cold"
+        style="@style/TextStyle_14sp_black_242424"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/light_color_temperature_cold"
+        app:layout_constraintBottom_toBottomOf="@id/sb_coloured_lights_hsl_warm_and_cold"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/sb_coloured_lights_hsl_warm_and_cold" />
+
+    <TextView
+        android:id="@+id/tv_coloured_lights_hsl_warm"
+        style="@style/TextStyle_14sp_black_242424"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/light_color_temperature_warm"
+        app:layout_constraintBottom_toBottomOf="@id/sb_coloured_lights_hsl_warm_and_cold"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toTopOf="@id/sb_coloured_lights_hsl_warm_and_cold" />
+
+
+    <SeekBar
+        android:id="@+id/sb_coloured_lights_hsl_warm_and_cold"
+        style="@style/common_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="30dp"
+        android:max="360"
+        android:min="0"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
+        app:layout_constraintBottom_toTopOf="@id/sb_coloured_lights_hsl_gray_and_colorful"
+        app:layout_constraintEnd_toStartOf="@id/barrier_right"
+        app:layout_constraintStart_toEndOf="@id/barrier_left" />
+
+
+    <TextView
+        android:id="@+id/tv_coloured_lights_hsl_gray"
+        style="@style/TextStyle_14sp_black_242424"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/light_color_temperature_gray"
+        app:layout_constraintBottom_toBottomOf="@id/sb_coloured_lights_hsl_gray_and_colorful"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/sb_coloured_lights_hsl_gray_and_colorful"
+        tools:text="灰" />
+
+    <TextView
+        android:id="@+id/tv_coloured_lights_hsl_colorful"
+        style="@style/TextStyle_14sp_black_242424"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/light_color_temperature_colorful"
+        app:layout_constraintBottom_toBottomOf="@id/sb_coloured_lights_hsl_gray_and_colorful"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toTopOf="@id/sb_coloured_lights_hsl_gray_and_colorful"
+        tools:text="鲜艳" />
+
+
+    <SeekBar
+        android:id="@+id/sb_coloured_lights_hsl_gray_and_colorful"
+        style="@style/common_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="30dp"
+        android:max="100"
+        android:min="0"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
+        app:layout_constraintBottom_toTopOf="@id/sb_coloured_lights_hsl_dark_and_sun"
+        app:layout_constraintEnd_toStartOf="@id/barrier_right"
+        app:layout_constraintStart_toEndOf="@id/barrier_left" />
+
+    <TextView
+        android:id="@+id/tv_coloured_lights_hsl_dark"
+        style="@style/TextStyle_14sp_black_242424"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/light_color_temperature_dark"
+        app:layout_constraintBottom_toBottomOf="@id/sb_coloured_lights_hsl_dark_and_sun"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="@id/sb_coloured_lights_hsl_dark_and_sun" />
+
+
+    <TextView
+        android:id="@+id/tv_coloured_lights_hsl_sun"
+        style="@style/TextStyle_14sp_black_242424"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/light_color_temperature_sun"
+        app:layout_constraintBottom_toBottomOf="@id/sb_coloured_lights_hsl_dark_and_sun"
+        app:layout_constraintEnd_toEndOf="@id/guideline4"
+        app:layout_constraintTop_toTopOf="@id/sb_coloured_lights_hsl_dark_and_sun"
+        tools:text="灰的" />
+
+    <SeekBar
+        android:id="@+id/sb_coloured_lights_hsl_dark_and_sun"
+        style="@style/common_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="18dp"
+        android:max="100"
+        android:min="0"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/barrier_right"
+        app:layout_constraintStart_toEndOf="@id/barrier_left" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tv_coloured_lights_hsl_cold,tv_coloured_lights_hsl_gray,tv_coloured_lights_hsl_dark"
+        tools:layout_editor_absoluteX="397dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="tv_coloured_lights_hsl_warm,tv_coloured_lights_hsl_colorful,tv_coloured_lights_hsl_sun"
+        tools:layout_editor_absoluteX="397dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="37dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="22dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="22dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

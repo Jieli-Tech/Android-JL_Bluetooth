@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white_ffffff">
+
+    <TextView
+        android:id="@+id/tv_item_settings_three_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="@color/black_242424"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="@dimen/text_14sp"
+        tools:text="title" />
+
+    <TextView
+        android:id="@+id/tv_item_settings_three_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/iv_item_settings_three_next_logo"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:maxWidth="120dp"
+        android:singleLine="true"
+        tools:text="红蓝灯交替快闪"
+        android:textColor="@color/gray_text_989898"
+        android:textSize="@dimen/text_14sp" />
+    <ImageView
+        android:id="@+id/iv_item_settings_three_next_logo"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="11dp"
+        android:src="@drawable/ic_little_right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

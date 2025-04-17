@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView_fitting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
+    tools:background="@color/gray_F8FAFC"
+    tools:context=".ui.settings.device.assistivelistening.FittingFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_fitting_prepare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_fitting_bg"
+                android:layout_width="251dp"
+                android:layout_height="258dp"
+                android:layout_marginTop="69dp"
+                android:src="@drawable/ic_fitting_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_fitting_prepare_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:text="请做好以下测试准备"
+                android:textColor="@color/black_242424"
+                android:textSize="@dimen/text_15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_fitting_bg" />
+
+            <TextView
+                android:id="@+id/tv_fitting_prepare_step_1"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="58dp"
+                android:background="@drawable/bg_gray_circle"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/purple_805BEB"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fitting_prepare_tip" />
+
+            <TextView
+                android:id="@+id/tv_fitting_prepare_step_1_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="请戴好助听器\n选择一个安静的场合开始验配"
+                android:textColor="@color/black_464646"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_fitting_prepare_step_1"
+                app:layout_constraintTop_toTopOf="@+id/tv_fitting_prepare_step_1" />
+
+            <TextView
+                android:id="@+id/tv_fitting_prepare_step_2"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="37dp"
+                android:background="@drawable/bg_gray_circle"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/purple_805BEB"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fitting_prepare_step_1" />
+
+            <TextView
+                android:id="@+id/tv_fitting_prepare_step_2_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="当您听见耳机内发出“滴”声时，点击“听得见”；\n如果听不到任何声音，点击“听不见”"
+                android:textColor="@color/black_464646"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_fitting_prepare_step_2"
+                app:layout_constraintTop_toTopOf="@+id/tv_fitting_prepare_step_2" />
+
+            <TextView
+                android:id="@+id/tv_i_know"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="93dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="37dp"
+                android:background="@drawable/bg_search_device_play_selector"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="@string/i_known"
+                android:textColor="@color/white_ffffff"
+                android:textSize="@dimen/text_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_fitting_prepare_step_2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cv_fitting_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <com.jieli.btsmart.ui.widget.color_cardview.CardView
+                android:id="@+id/cv_device_settings_noise_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="11dp"
+                app:cardBackgroundColor="@color/white_ffffff"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardMaxElevation="5dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardShadowColorEnd="@color/white_translate_01ffffff"
+                app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bg_gray_tab_shape"
+                        app:tabIndicator="@drawable/bg_white_circle_indicator"
+                        app:tabIndicatorColor="@color/white_ffffff"
+                        app:tabIndicatorHeight="38dp"
+                        app:tabRippleColor="#00000000">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white_ffffff"
+                            android:text="左耳" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="右耳" />
+                    </com.google.android.material.tabs.TabLayout>
+
+                    <include
+                        android:id="@+id/fl_charts_parent"
+                        layout="@layout/layout_fitting"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="317dp" />
+
+                    <TextView
+                        android:id="@+id/tv_back_last_step"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:drawableStart="@drawable/ic_back_last_step"
+                        android:drawablePadding="8dp"
+                        android:text="上一步"
+                        android:textColor="@color/purple_805BEB"
+                        android:textSize="@dimen/text_14sp" />
+                </LinearLayout>
+
+            </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+            <LinearLayout
+                android:id="@+id/ll_inaudibility"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_btn_red_shape"
+                android:gravity="center"
+                app:layout_constraintEnd_toStartOf="@id/ll_hear"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_device_settings_noise_control">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_assistive_no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="听不见"
+                    android:textColor="@color/white_ffffff"
+                    android:textSize="@dimen/text_15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_hear"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_btn_purple_gray_selector"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ll_inaudibility"
+                app:layout_constraintTop_toBottomOf="@id/cv_device_settings_noise_control">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_assistive_yes" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="听得见"
+                    android:textColor="@color/white_ffffff"
+                    android:textSize="@dimen/text_15sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</ScrollView>

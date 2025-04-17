@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_song_info_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/tv_song_info_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/anim_song_playing"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tv_song_info_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        style="@style/TextStyle_16sp_gray_9A9A9A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_song_info_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+        tools:text="2" />
+
+    <TextView
+        android:id="@+id/tv_song_info_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:maxEms="18"
+        android:marqueeRepeatLimit="marquee_forever"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/TextStyle_16sp_black_242424"
+        android:textColor="@drawable/color_local_music_name_selected"
+        tools:text="像我这样的人" />
+
+    <TextView
+        android:id="@+id/tv_song_info_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        style="@style/TextStyle_12sp_gray_8B8B8B"
+        app:layout_constraintStart_toStartOf="@id/tv_song_info_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_song_info_name"
+        tools:text="毛不易-平凡的一天" />
+</androidx.constraintlayout.widget.ConstraintLayout>

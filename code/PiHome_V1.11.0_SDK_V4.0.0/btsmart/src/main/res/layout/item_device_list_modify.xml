@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jieli.btsmart.ui.widget.color_cardview.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="13dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="13dp"
+    android:layout_marginBottom="1dp"
+    android:paddingStart="9dp"
+    android:paddingEnd="9dp"
+    app:cardBackgroundColor="@drawable/ic_selector_card_bg_selector"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:cardMaxElevation="4dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardShadowColorEnd="@drawable/ic_function_list_shadow_end_selector"
+    app:cardShadowColorStart="@drawable/ic_function_list_shadow_selector"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_device_list_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="84dp"
+        android:paddingStart="5dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/tv_device_list_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_device_status"
+            android:drawableStart="@drawable/ic_dot_blue_shape"
+            android:drawablePadding="4dp"
+            android:paddingStart="7dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="4dp"
+            android:text="@string/device_status_using"
+            android:textColor="@color/blue_448eff"
+            android:textSize="@dimen/text_14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+
+        <ImageView
+            android:id="@+id/iv_device_list_remove_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_close_red"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/iv_device_list_location"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:padding="3dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="5dp"
+            android:src="@drawable/ic_device_list_location"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_device_list_status"
+            app:layout_goneMarginTop="18dp"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/iv_device_list_left"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_device_list_status"
+            app:layout_goneMarginTop="18dp"
+            tools:src="@drawable/ic_headset_left_no_flag" />
+
+
+        <TextView
+            android:id="@+id/tv_device_list_left_name"
+            style="@style/TextDeviceListName"
+            app:layout_constraintBottom_toBottomOf="@id/iv_device_list_left"
+            app:layout_constraintStart_toEndOf="@id/iv_device_list_left"
+            app:layout_constraintTop_toTopOf="@id/iv_device_list_left"
+            tools:drawableEnd="@drawable/ic_headset_left_flag"
+            tools:text="蓝牙耳机" />
+
+        <TextView
+            android:id="@+id/tv_device_list_left_quantity"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_device_list_left_name"
+            app:layout_constraintEnd_toStartOf="@id/iv_device_list_location"
+            app:layout_constraintTop_toTopOf="@+id/tv_device_list_left_name"
+            tools:drawableStart="@drawable/ic_quantity_100"
+            tools:ignore="RtlCompat"
+            tools:text="    1%"
+            tools:visibility="visible" />
+
+        <Space
+            android:id="@+id/line_space_device_list_right"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_device_list_left" />
+
+        <ImageView
+            android:id="@+id/iv_device_list_right"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_space_device_list_right"
+            app:layout_goneMarginTop="18dp"
+            tools:src="@drawable/ic_headset_right_no_flag" />
+
+        <TextView
+            android:id="@+id/tv_device_list_right_name"
+            style="@style/TextDeviceListName"
+            app:layout_constraintBottom_toBottomOf="@id/iv_device_list_right"
+            app:layout_constraintStart_toEndOf="@+id/iv_device_list_right"
+            app:layout_constraintTop_toTopOf="@id/iv_device_list_right"
+            tools:drawableEnd="@drawable/ic_headset_right_flag"
+            tools:text="蓝牙耳机"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_device_list_right_quantity"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_device_list_right_name"
+            app:layout_constraintEnd_toStartOf="@id/iv_device_list_location"
+            app:layout_constraintTop_toTopOf="@+id/tv_device_list_right_name"
+            tools:drawableStart="@drawable/ic_charging"
+            tools:ignore="RtlCompat"
+            tools:text="100%"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/iv_device_list_charging_bin"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_device_list_right"
+            tools:src="@drawable/ic_charging_bin" />
+
+        <TextView
+            android:id="@+id/tv_device_list_charging_bin_name"
+            style="@style/TextDeviceListName"
+            app:layout_constraintBottom_toBottomOf="@id/iv_device_list_charging_bin"
+            app:layout_constraintStart_toEndOf="@+id/iv_device_list_charging_bin"
+            app:layout_constraintTop_toTopOf="@id/iv_device_list_charging_bin"
+            tools:text="蓝牙耳机充电仓"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_device_list_charging_bin_quantity"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_device_list_charging_bin"
+            app:layout_constraintEnd_toStartOf="@id/iv_device_list_location"
+            app:layout_constraintTop_toTopOf="@+id/iv_device_list_charging_bin"
+            tools:drawableStart="@drawable/ic_quantity_50"
+            tools:ignore="RtlCompat"
+            tools:text="  50%"
+            tools:visibility="visible" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.jieli.btsmart.ui.widget.color_cardview.CardView>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/tab_multimedia"
+        android:title="@string/tab_multimedia"
+        android:icon="@drawable/bg_tab_multimedia_selector"
+        />
+
+
+    <item
+        android:id="@+id/tab_eq"
+        android:title="@string/tab_eq"
+        android:icon="@drawable/bg_tab_eq_selector"
+        />
+
+    <item
+        android:id="@+id/tab_device"
+        android:title="@string/tab_device"
+         android:icon="@drawable/bg_tab_device_selector"
+        />
+
+
+
+
+</menu>

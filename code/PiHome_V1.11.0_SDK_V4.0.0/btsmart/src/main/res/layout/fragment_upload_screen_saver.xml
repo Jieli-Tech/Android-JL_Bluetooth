@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.chargingCase.UploadScreenSaverFragment">
+
+    <ImageView
+        android:id="@+id/iv_charging_case_bg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="68dp"
+        android:src="@drawable/bg_charging_case_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_uploading"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_screen_savers_effect"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintVertical_bias="0.67"
+        app:layout_constraintDimensionRatio="w, 172:320"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_charging_case_bg"
+        app:layout_constraintEnd_toEndOf="@+id/iv_charging_case_bg"
+        app:layout_constraintStart_toStartOf="@+id/iv_charging_case_bg"
+        app:layout_constraintTop_toTopOf="@+id/iv_charging_case_bg"
+        tools:src="@drawable/bg_screen_01"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_uploading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/uploading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:textColor="@color/color_text"
+        android:textSize="@dimen/text_18sp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.23"
+        app:layout_constraintTop_toBottomOf="@+id/iv_charging_case_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_operation"
+        tools:text="更新成功"/>
+
+    <TextView
+        android:id="@+id/tv_uploading_tips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
+        android:text="@string/uploading_tips"
+        android:textSize="@dimen/text_14sp"
+        android:textColor="@color/black_242424"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintTop_toBottomOf="@+id/iv_charging_case_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_operation"/>
+
+    <ProgressBar
+        android:id="@+id/pb_transfer_progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:maxHeight="3dp"
+        android:minHeight="3dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="100"
+        android:progressDrawable="@drawable/bg_seek_bar_common_list"
+        app:layout_constraintTop_toBottomOf="@+id/tv_uploading_tips"
+        app:layout_constraintStart_toStartOf="@+id/tv_uploading_tips"
+        app:layout_constraintEnd_toEndOf="@+id/tv_uploading_tips"
+        tools:progress="20"/>
+    
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black_242424"
+        android:textSize="@dimen/text_18sp"
+        app:layout_constraintTop_toBottomOf="@+id/pb_transfer_progress"
+        app:layout_constraintStart_toStartOf="@+id/pb_transfer_progress"
+        app:layout_constraintEnd_toEndOf="@+id/pb_transfer_progress"
+        tools:text="20%"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_operation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:stateListAnimator="@null"
+        android:textColor="@color/color_text"
+        android:textSize="@dimen/text_15sp"
+        android:textStyle="bold"
+        android:background="@drawable/bg_btn_gray_24_shape"
+        android:visibility="invisible"
+        app:layout_constraintVertical_bias="0.77"
+        app:layout_constraintTop_toBottomOf="@+id/iv_charging_case_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible"
+        tools:text="@string/cancel"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_uploading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="tv_uploading, tv_uploading_tips, pb_transfer_progress, tv_progress"
+        tools:visibility="visible"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

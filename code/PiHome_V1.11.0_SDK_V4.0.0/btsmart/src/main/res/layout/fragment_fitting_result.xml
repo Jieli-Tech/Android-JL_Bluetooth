@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView_fitting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_F8FAFC"
+    tools:context=".ui.settings.device.assistivelistening.FittingResultFragment">
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.jieli.btsmart.ui.widget.color_cardview.CardView
+            android:id="@+id/cv_threshold_mean_both"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="11dp"
+            app:cardBackgroundColor="@color/white_ffffff"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardMaxElevation="5dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardShadowColorEnd="@color/white_translate_01ffffff"
+            app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_left_ear_threshold_mean"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/left_ear_threshold_mean"
+                    android:textColor="@color/black_242424"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_left_ear_threshold_mean_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:textColor="#ff4e89f4"
+                    android:textSize="36sp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_left_ear_threshold_mean_unit"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_left_ear_threshold_mean"
+                    tools:text="26" />
+
+                <TextView
+                    android:id="@+id/tv_left_ear_threshold_mean_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:baselineAlignBottom="true"
+                    android:textColor="@color/gray_AAAAAA"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_left_ear_threshold_mean_value"
+                    app:layout_constraintEnd_toStartOf="@id/view"
+                    app:layout_constraintStart_toEndOf="@id/tv_left_ear_threshold_mean_value"
+                    android:text="dB" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="83dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/gray_ECECEC"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_right_ear_threshold_mean"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/right_ear_threshold_mean"
+                    android:textColor="@color/black_242424"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_right_ear_threshold_mean_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:textColor="#E7933B"
+                    android:textSize="36sp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_right_ear_threshold_mean_unit"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@id/view"
+                    app:layout_constraintTop_toBottomOf="@id/tv_right_ear_threshold_mean"
+                    tools:text="32" />
+
+                <TextView
+                    android:id="@+id/tv_right_ear_threshold_mean_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:baselineAlignBottom="true"
+                    android:textColor="@color/gray_AAAAAA"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_right_ear_threshold_mean_value"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_right_ear_threshold_mean_value"
+                    android:text="dB" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+        <com.jieli.btsmart.ui.widget.color_cardview.CardView
+            android:id="@+id/cv_threshold_mean_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="11dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/white_ffffff"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardMaxElevation="5dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardShadowColorEnd="@color/white_translate_01ffffff"
+            app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_single_threshold_mean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:singleLine="true"
+                    android:text="@string/left_ear_threshold_mean"
+                    android:textColor="@color/black_242424"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_single_threshold_mean_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="11dp"
+                    android:textColor="#ff4e89f4"
+                    android:textSize="36sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_single_threshold_mean_unit"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="26" />
+
+                <TextView
+                    android:id="@+id/tv_single_threshold_mean_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="22dp"
+                    android:baselineAlignBottom="true"
+                    android:textColor="@color/gray_AAAAAA"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_single_threshold_mean_value"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="dB" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+        <com.jieli.btsmart.ui.widget.color_cardview.CardView
+            android:id="@+id/cv_fitting_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="11dp"
+            app:cardBackgroundColor="@color/white_ffffff"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardMaxElevation="5dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardShadowColorEnd="@color/white_translate_01ffffff"
+            app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/fl_charts_parent"
+                layout="@layout/layout_fitting"
+                android:layout_width="match_parent"
+                android:layout_height="345dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp"/>
+        </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+        <TextView
+            android:id="@+id/tv_write_device"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_btn_purple_shape"
+            android:gravity="center"
+            android:text="@string/written_to_the_device"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/text_15sp" />
+    </LinearLayout>
+
+</ScrollView>

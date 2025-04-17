@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/cl_product_2"
+        app:layout_constraintEnd_toStartOf="@id/cl_product_2"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/color_main"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_product_1"
+            android:layout_width="65dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="11dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toStartOf="@id/iv_product_2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/gray_DEDEDE"
+            tools:src="@drawable/ic_headset_left"
+            tools:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/iv_product_2"
+            android:layout_width="65dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="11dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_product_1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_headset_right"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/item_product_quantity_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_default_quantity"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_13sp"
+            app:drawableTopCompat="@drawable/ic_quantity_100"
+            app:layout_constraintEnd_toEndOf="@id/iv_product_1"
+            app:layout_constraintStart_toStartOf="@id/iv_product_1"
+            app:layout_constraintTop_toBottomOf="@id/iv_product_1" />
+
+
+        <TextView
+            android:id="@+id/item_product_quantity_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_default_quantity"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_13sp"
+            app:drawableTopCompat="@drawable/ic_quantity_100"
+            app:layout_constraintEnd_toEndOf="@id/iv_product_2"
+            app:layout_constraintStart_toStartOf="@id/iv_product_2"
+            app:layout_constraintTop_toBottomOf="@id/iv_product_2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_product_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/cl_product"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_product_3"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_tws_headset"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:id="@+id/item_product_quantity_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_default_quantity"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_13sp"
+            app:drawableTopCompat="@drawable/ic_quantity_100"
+            app:layout_constraintEnd_toEndOf="@id/iv_product_3"
+            app:layout_constraintStart_toStartOf="@id/iv_product_3"
+            app:layout_constraintTop_toBottomOf="@id/iv_product_3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

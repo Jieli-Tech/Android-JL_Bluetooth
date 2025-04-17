@@ -1,0 +1,380 @@
+/*
+   字段说明：
+
+           id:区分分类
+		   tiltle:标题
+		   icon_url：项目图标链接
+		   type：子项的控件类型：目前支持：img_select(可以设置图片)，select，slider（不支持分页）
+		   column：控件列数，type==slider无效
+		   row：控件行数，需要结合colume使用且paging==true有效
+		   paging：是否分页：false：不分页，true：分页
+		   index：控件的唯一表示码，全局唯一，group为true时，index无效
+		   max：最大值，type==slider时有效
+		   group:是否组类型，true则没有index字段，当type为select有效
+		   enable：slider类型有效，true：app可以调节，false：app不可已调节
+		   hasEq：是否支持eq（如支持，右上角显示eq入口）
+ */
+{
+  "hasEq": "true",
+  "function": [
+    {
+      "id": 0,
+      "title": {
+        "zh": "变声",
+        "en": "Voice"
+      },
+      "type": "select",
+      "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/f432032f-f61c-43f2-a889-e54667aff06e",
+      "column": 3,
+      "paging": false,
+      "list": [
+        {
+          "title": {
+            "zh": "正常",
+            "en": "Normal"
+          },
+          "index": 0
+        },
+        {
+          "title": {
+            "zh": "男声",
+            "en": "Boy"
+          },
+          "index": 1
+        },
+        {
+          "title": {
+            "zh": "女声",
+            "en": "Girl"
+          },
+          "index": 2
+        },
+        {
+          "title": {
+            "zh": "童音",
+            "en": "Children"
+          },
+          "index": 3
+        },
+        {
+          "title": {
+            "zh": "魔音",
+            "en": "Magic"
+          },
+          "index": 4
+        },
+        {
+          "title": {
+            "zh": "电音",
+            "en": "EM"
+          },
+          "group": true,
+          "list": [
+            {
+              "title": {
+                "zh": "A大调",
+                "en": "A major"
+              },
+              "index": 5
+            },
+            {
+              "title": {
+                "zh": "升A大调",
+                "en": "L A major"
+              },
+              "index": 6
+            },
+            {
+              "title": {
+                "zh": "B大调",
+                "en": "B A major"
+              },
+              "index": 7
+            },
+            {
+              "title": {
+                "zh": "C大调",
+                "en": "C major"
+              },
+              "index": 8
+            },
+            {
+              "title": {
+                "zh": "升C大调",
+                "en": "L C major"
+              },
+              "index": 9
+            },
+            {
+              "title": {
+                "zh": "D大调",
+                "en": "D major"
+              },
+              "index": 10
+            },
+            {
+              "title": {
+                "zh": "升D大调",
+                "en": "L D major"
+              },
+              "index": 11
+            },
+            {
+              "title": {
+                "zh": "E大调",
+                "en": "E major"
+              },
+              "index": 12
+            },
+            {
+              "title": {
+                "zh": "F大调",
+                "en": "F major"
+              },
+              "index": 13
+            },
+            {
+              "title": {
+                "zh": "升F大调",
+                "en": "L F major"
+              },
+              "index": 14
+            },
+            {
+              "title": {
+                "zh": "G大调",
+                "en": "G major"
+              },
+              "index": 15
+            },
+            {
+              "title": {
+                "zh": "升G大调",
+                "en": "L G major"
+              },
+              "index": 16
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "其他",
+        "en": "Other"
+      },
+      "id": 3,
+      "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/f3045168-99f7-4d03-835c-317286e272c6",
+      "type": "select",
+      "column": 3,
+      "paging": false,
+      "list": [
+        {
+          "title": {
+            "zh": "爆音",
+            "en": "Popping"
+          },
+          "index": 36
+        },
+        {
+          "title": {
+            "zh": "喊麦",
+            "en": "Shout"
+          },
+          "index": 37
+        },
+        {
+          "title": {
+            "zh": "闪避",
+            "en": "Dodge"
+          },
+          "index": 38
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "气氛",
+        "en": "Atmosphere"
+      },
+      "id": "1",
+      "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/892ad6b6-b908-44d5-b1ca-bbae70fbafda",
+      "type": "img_select",
+      "column": 4,
+      "paging": true,
+      "row": 2,
+      "list": [
+        {
+          "title": {
+            "zh": "欢呼",
+            "en": "Cheers"
+          },
+          "index": 17,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/7b2db107-303e-4d63-afa1-56816326a504"
+        },
+        {
+          "title": {
+            "zh": "尴尬",
+            "en": "Awkward"
+          },
+          "index": 18,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/2141136e-0351-4463-aff7-b58dc13605b4"
+        },
+        {
+          "title": {
+            "zh": "枪声",
+            "en": "Gunfire"
+          },
+          "index": 19,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/f6413e0b-2154-4638-8a82-eee5f9bb3f43"
+        },
+        {
+          "title": {
+            "zh": "鄙视",
+            "en": "Despise"
+          },
+          "index": 20,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/f5327968-920f-4966-a986-fad31c10aa77"
+        },
+        {
+          "title": {
+            "zh": "开场",
+            "en": "Stage"
+          },
+          "index": 21,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/76d91f55-4f28-4b3c-90f4-3359b6b95731"
+        },
+        {
+          "title": {
+            "zh": "飞吻",
+            "en": "Kiss"
+          },
+          "index": 22,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/134a79fc-6d94-4386-9cb2-5777b97b8168"
+        },
+        {
+          "title": {
+            "zh": "笑声",
+            "en": "Laugh"
+          },
+          "index": 23,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/28cdbcb3-878f-4c14-b726-f3615205abeb"
+        },
+        {
+          "title": {
+            "zh": "掌声",
+            "en": "Applause"
+          },
+          "index": 24,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/3a5048b7-767e-4827-bc75-1f31eff39abe"
+        },
+        {
+          "title": {
+            "zh": "请关注",
+            "en": "Attention"
+          },
+          "index": 25,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/b674718e-ebe3-46eb-a907-9bd8fc85d37d"
+        },
+        {
+          "title": {
+            "zh": "么么哒",
+            "en": "Mua"
+          },
+          "index": 26,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/69e3ab5b-6257-4a17-857c-ca87310da09d"
+        },
+        {
+          "title": {
+            "zh": "贼啦啦",
+            "en": "Song01"
+          },
+          "index": 27,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/1328b548-45f7-44b9-beee-2f3a66663627"
+        },
+        {
+          "title": {
+            "zh": "非诚勿扰",
+            "en": "Song02"
+          },
+          "index": 28,
+          "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/3014f49a-42ba-4074-af45-27793fbdbe9f"
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "Mic参数",
+        "en": "Mic Args"
+      },
+      "id": 2,
+      "icon_url": "https://profile.jieliapp.com/license/v1/fileupdate/download/1b02c2f9-efec-4eab-b401-a87dc6ea4cc7",
+      "type": "slider",
+      "list": [
+        {
+          "title": {
+            "zh": "麦音量",
+            "en": "Mic Vol"
+          },
+          "index": 29,
+          "max": 30,
+          "enable": false
+        },
+        {
+          "title": {
+            "zh": "录音音量",
+            "en": "Record Vol"
+          },
+          "index": 30,
+          "enable": false,
+          "max": 30
+        },
+        {
+          "title": {
+            "zh": "混响",
+            "en": "Reverberation"
+          },
+          "index": 31,
+          "enable": false,
+          "max": 30
+        },
+        {
+          "title": {
+            "zh": "高音",
+            "en": "High"
+          },
+          "index": 32,
+          "enable": false,
+          "max": 10
+        },
+        {
+          "title": {
+            "zh": "低音",
+            "en": "Bass"
+          },
+          "index": 33,
+          "enable": false,
+          "max": 10
+        },
+        {
+          "title": {
+            "zh": "伴奏音量",
+            "en": "Accomp Vol"
+          },
+          "index": 34,
+          "enable": false,
+          "max": 30
+        },
+        {
+          "title": {
+            "zh": "监听音量",
+            "en": "Monitor Vol"
+          },
+          "index": 35,
+          "enable": false,
+          "max": 30
+        }
+      ]
+    }
+  ]
+}

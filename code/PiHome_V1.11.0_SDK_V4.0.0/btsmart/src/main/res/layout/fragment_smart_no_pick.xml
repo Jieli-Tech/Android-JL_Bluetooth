@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_F8FAFC"
+    tools:context=".ui.settings.device.voice.SmartNoPickFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white_ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_voice_check_sensitivity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:padding="4dp"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black_4d000000"
+            android:textSize="@dimen/text_14sp"
+            app:drawableEndCompat="@drawable/ic_middle_right_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_voice_check_sensitivity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_voice_check_sensitivity"
+            tools:text="高" />
+
+        <TextView
+            android:id="@+id/tv_voice_check_sensitivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/voice_check_sensitivity"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_voice_check_sensitivity_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_close_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/close_time"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintBottom_toTopOf="@+id/view_line_1"
+            app:layout_constraintEnd_toStartOf="@+id/tv_close_time_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line" />
+
+        <TextView
+            android:id="@+id/tv_close_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:padding="4dp"
+            android:drawablePadding="8dp"
+            android:textColor="@color/black_4d000000"
+            android:textSize="@dimen/text_14sp"
+            app:drawableEndCompat="@drawable/ic_middle_right_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_close_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_close_time"
+            tools:text="短" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_voice_check_sensitivity"
+            app:layout_constraintTop_toBottomOf="@+id/tv_voice_check_sensitivity" />
+
+        <View
+            android:id="@+id/view_line_1"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_close_time" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_voice_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_voice_check_sensitivity, tv_voice_check_sensitivity_value, view_line" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_close_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_close_time, tv_close_time_value, view_line_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

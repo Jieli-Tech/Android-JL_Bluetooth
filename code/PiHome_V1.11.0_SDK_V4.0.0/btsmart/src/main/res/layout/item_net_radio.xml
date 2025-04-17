@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.jieli.jl_http.bean.NetRadioListInfo" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.jieli.btsmart.viewmodel.NetRadioDetailsViewModel" />
+
+        <variable
+            name="radioInfo"
+            type="NetRadioListInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_device_connect_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <com.jieli.btsmart.ui.widget.color_cardview.CardView
+            android:id="@+id/cv_net_radio"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5.5dp"
+            app:cardBackgroundColor="@color/white_ffffff"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="4.5dp"
+            app:cardMaxElevation="4.5dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardShadowColorEnd="@color/white_translate_01ffffff"
+            app:cardShadowColorStart="@color/gray_translate_33cde6fb"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="0dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_item_net_radio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.jieli.btsmart.ui.widget.color_cardview.CardView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4.5dp"
+            android:loadFilletSrc="@{radioInfo.icon}"
+            android:scaleType="centerInside"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_item_net_radio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:lines="2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@{radioInfo.name}"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_14sp"
+            app:layout_constraintEnd_toEndOf="@id/imageView"
+            app:layout_constraintStart_toStartOf="@id/imageView"
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            tools:text="广州汽车音乐电台" />
+
+        <ImageButton
+            android:id="@+id/ib_item_freq_collect"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:onClick="@{()->viewModel.deleteCollectedRadio(radioInfo)}"
+            android:paddingEnd="7dp"
+            android:paddingBottom="7dp"
+            android:src="@drawable/ic_fm_collect_freq_delete"
+            android:visibility="@{viewModel.collectedManageStateLiveData?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

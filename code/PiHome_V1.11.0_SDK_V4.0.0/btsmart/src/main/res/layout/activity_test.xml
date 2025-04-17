@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <TextView
+        android:id="@+id/tv_custom_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        android:text="输入自定义数据(16进制)"
+        android:textColor="@color/black_000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:id="@+id/et_custom_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:gravity="top"
+        android:padding="5dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@android:drawable/edit_text"
+        android:digits="0123456789ABCDEFabcdef"
+        android:hint="010203ABCD"
+        app:layout_constraintTop_toBottomOf="@+id/tv_custom_data"
+        tools:ignore="Autofill,LabelFor" />
+
+
+    <Button
+        android:id="@+id/btn_send_custom_cmd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="发送自定义命令"
+        android:textColor="@color/black_000000"
+        android:textSize="@dimen/text_14sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_custom_data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/tv_recv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="收到的自定义命令："
+        android:textColor="@color/black_000000"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_send_custom_cmd" />
+
+
+
+    <TextView
+        android:id="@+id/tv_recv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="20dp"
+        android:padding="12dp"
+        android:textColor="@color/black_000000"
+        android:textSize="@dimen/text_13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_recv_tip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="123456789"/>
+
+    <ImageView
+        android:id="@+id/iv_clear_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_fm_collect_freq_delete"
+        app:layout_constraintTop_toTopOf="@+id/tv_recv"
+        app:layout_constraintEnd_toEndOf="@+id/tv_recv"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

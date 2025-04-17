@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="13.5dp"
+
+        android:layout_marginEnd="13.5dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="8dp"
+        android:background="@drawable/bg_eq_shape">
+
+        <com.jieli.btsmart.ui.widget.RotatingView
+            android:id="@+id/rotat_bass"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:clickable="false"
+            app:contentEndColor="@color/gray_CECECE"
+            app:contentStartColor="@color/gray_CECECE"
+            app:contentTextColor="@color/gray_CECECE"
+            app:indicatorImage="@drawable/ic_rotatview_indicator_nol"
+            app:layout_constraintBottom_toBottomOf="@id/rotat_main"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toStartOf="@id/rotat_main"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="84"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.jieli.btsmart.ui.widget.RotatingView
+            android:id="@+id/rotat_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:contentEndColor="@color/color_rotating_view_end"
+            app:contentStartColor="@color/color_rotating_view_start"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toStartOf="@id/rotat_height"
+            app:layout_constraintHorizontal_weight="100"
+            app:layout_constraintStart_toEndOf="@id/rotat_bass"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.jieli.btsmart.ui.widget.RotatingView
+            android:id="@+id/rotat_height"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
+            app:contentEndColor="@color/gray_CECECE"
+            app:contentStartColor="@color/gray_CECECE"
+            app:contentTextColor="@color/gray_CECECE"
+            app:indicatorImage="@drawable/ic_rotatview_indicator_nol"
+            app:layout_constraintBottom_toBottomOf="@id/rotat_main"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="84"
+            app:layout_constraintStart_toEndOf="@id/rotat_main"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            style="@style/TextStyle_14sp_black_242424"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/volume_bass"
+            app:layout_constraintEnd_toEndOf="@id/rotat_bass"
+            app:layout_constraintStart_toStartOf="@id/rotat_bass"
+            app:layout_constraintTop_toBottomOf="@id/rotat_main" />
+
+        <TextView
+            android:id="@+id/tv_main_volume"
+            style="@style/TextStyle_14sp_black_242424"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/volume_main"
+            app:layout_constraintEnd_toEndOf="@id/rotat_main"
+            app:layout_constraintStart_toStartOf="@id/rotat_main"
+            app:layout_constraintTop_toBottomOf="@id/rotat_main" />
+
+
+        <TextView
+            style="@style/TextStyle_14sp_black_242424"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/volume_height"
+            app:layout_constraintEnd_toEndOf="@id/rotat_height"
+            app:layout_constraintStart_toStartOf="@id/rotat_height"
+            app:layout_constraintTop_toBottomOf="@id/rotat_main" />
+
+
+        <Button
+            android:id="@+id/btn_eq_mode"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="7.5dp"
+            android:layout_marginBottom="7.5dp"
+            android:background="@drawable/bg_btn_eq_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_eq_reset"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_eq_mode_select_name"
+            style="@style/TextStyle_14sp_black_242424"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_eq_icon_up"
+            android:drawablePadding="5dp"
+            android:text="@string/eq_reset"
+            app:layout_constraintBottom_toBottomOf="@id/btn_eq_mode"
+            app:layout_constraintEnd_toEndOf="@id/btn_eq_mode"
+            app:layout_constraintStart_toStartOf="@id/btn_eq_mode"
+            app:layout_constraintTop_toTopOf="@id/btn_eq_mode" />
+
+        <Button
+            android:id="@+id/btn_eq_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="7.5dp"
+            android:layout_marginBottom="7.5dp"
+            android:background="@drawable/bg_btn_eq_selector"
+            android:text="@string/eq_reset"
+            android:textAllCaps="false"
+            android:textColor="@drawable/eq_reset_btn_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_eq_advanced_setting"
+            app:layout_constraintStart_toEndOf="@id/btn_eq_mode" />
+
+        <Button
+            android:id="@+id/btn_eq_advanced_setting"
+            style="@style/TextStyle_14sp_black_242424"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="7.5dp"
+            android:background="@drawable/bg_btn_eq_selector"
+            android:singleLine="true"
+            android:stateListAnimator="@null"
+            android:text="@string/eq_advanced_setting"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_eq_reset" />
+
+        <com.jieli.btsmart.ui.widget.EqWaveView
+            android:id="@+id/wv_freq"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8.5dp"
+            app:contentEndColor="@color/color_eq_wave_end"
+            app:contentStartColor="@color/color_eq_wave_start"
+            app:contentEndDisableColor="@color/gray_d4d4d4"
+            app:contentStartDisableColor="@color/gray_bbbbbb"
+            app:layout_constraintBottom_toTopOf="@id/btn_eq_mode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:topLineColor="@color/color_eq_wave_top"
+            app:topLineDisableColor="@color/gray_bbbbbb"
+            />
+
+
+        <com.jieli.btsmart.ui.widget.ViewPager2RecycleView
+            android:id="@+id/rv_vsbs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toTopOf="@id/wv_freq"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/tv_gain_12"
+            app:layout_constraintTop_toBottomOf="@id/tv_main_volume"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:layout_height="320dp"
+            tools:listitem="@layout/item_eq_seekbar"
+            tools:spanCount="10" />
+
+
+        <TextView
+            android:id="@+id/tv_gain_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="34dp"
+            android:text="@string/eq_freq_12db"
+            android:textColor="@color/gray_8B8B8B"
+            android:textSize="@dimen/text_10sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_gain_0"
+            app:layout_constraintEnd_toStartOf="@id/rv_vsbs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_vsbs"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+
+        <TextView
+            android:id="@+id/tv_gain_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eq_freq_0db"
+            android:textColor="@color/gray_8B8B8B"
+            android:textSize="@dimen/text_10sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_gain_negative_12"
+            app:layout_constraintEnd_toEndOf="@id/tv_gain_12"
+            app:layout_constraintStart_toStartOf="@id/tv_gain_12"
+            app:layout_constraintTop_toBottomOf="@id/tv_gain_12" />
+
+        <TextView
+            android:id="@+id/tv_gain_negative_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:text="@string/eq_freq_negative_12db"
+            android:textColor="@color/gray_8B8B8B"
+            android:textSize="@dimen/text_10sp"
+            app:layout_constraintBottom_toBottomOf="@id/rv_vsbs"
+            app:layout_constraintEnd_toEndOf="@id/tv_gain_12"
+            app:layout_constraintStart_toStartOf="@id/tv_gain_12"
+            app:layout_constraintTop_toBottomOf="@id/tv_gain_0" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray_eeeeee"
+            app:layout_constraintTop_toBottomOf="@id/rv_vsbs" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

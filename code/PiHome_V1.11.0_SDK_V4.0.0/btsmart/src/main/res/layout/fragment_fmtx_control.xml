@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ruler="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.jieli.btsmart.viewmodel.FMTXControlViewModel" />
+
+
+        <variable
+            name="fmTXControlViewModel"
+            type="FMTXControlViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_fm_current_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="17dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_fm_current_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(((float) fmTXControlViewModel.realTimeFMTxFreqLiveData) / ((float) 10))}"
+                android:textColor="@color/color_main"
+                android:textSize="@dimen/text_26sp"
+                tools:text="98.3" />
+
+            <TextView
+                android:id="@+id/tv_fm_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="MHz"
+                android:textColor="@color/gray_text_5A5A5A"
+                android:textSize="@dimen/text_16sp" />
+        </LinearLayout>
+
+        <com.jieli.btsmart.ui.widget.rulerview.RulerView
+            android:id="@+id/rv_fm"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            ruler:allScaleHeight="47dp"
+            ruler:bigScaleHeight="28dp"
+            ruler:bigScaleMarginTop="10dp"
+            ruler:rulerViewWidth="314dp"
+            ruler:smallScaleColor="@color/gray_8B8B8B"
+            ruler:smallScaleHeight="16.4dp"
+            ruler:smallScaleMarginTop="15.5dp"
+            ruler:textAndScaleMargin="5dp"
+            ruler:textSize="12sp"
+            tools:visibility="visible" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
+    android:fitsSystemWindows="true"
+    tools:context="com.jieli.btsmart.ui.launcher.LauncherActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_launcher_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_launcher_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_launcher_app_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_launcher_logo"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_launcher_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:letterSpacing="0.5"
+            android:text="@string/app_name"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_24sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+
+
+

@@ -1,0 +1,91 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.jieli.btsmart.ui.multimedia.control.MusicControlFragment">
+
+        <ImageButton
+            android:id="@+id/ib_play_or_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_spdif_play_status_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_optical" />
+
+        <ImageButton
+            android:id="@+id/btn_hdmi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_optical"
+            app:layout_constraintEnd_toStartOf="@+id/btn_optical"
+            app:layout_constraintHorizontal_bias="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_optical"
+            app:srcCompat="@drawable/ic_spdif_hdmi_selector" />
+
+        <ImageButton
+            android:id="@+id/btn_optical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/ib_play_or_pause"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_spdif_optical_selector" />
+
+        <ImageButton
+            android:id="@+id/btn_coaxial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_optical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toEndOf="@+id/btn_optical"
+            app:layout_constraintTop_toTopOf="@+id/btn_optical"
+            app:srcCompat="@drawable/ic_spdif_coaxial_selector" />
+
+        <TextView
+            android:id="@+id/tv_hdmi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hdmi"
+            app:layout_constraintEnd_toEndOf="@+id/btn_hdmi"
+            app:layout_constraintStart_toStartOf="@+id/btn_hdmi"
+            app:layout_constraintTop_toBottomOf="@+id/btn_hdmi" />
+
+        <TextView
+            android:id="@+id/tv_optical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/optical_fiber"
+            app:layout_constraintEnd_toEndOf="@+id/btn_optical"
+            app:layout_constraintStart_toStartOf="@+id/btn_optical"
+            app:layout_constraintTop_toBottomOf="@+id/btn_optical" />
+
+        <TextView
+            android:id="@+id/tv_coaxials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/coaxial"
+            app:layout_constraintEnd_toEndOf="@+id/btn_coaxial"
+            app:layout_constraintStart_toStartOf="@+id/btn_coaxial"
+            app:layout_constraintTop_toBottomOf="@+id/btn_coaxial" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

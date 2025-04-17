@@ -1,0 +1,50 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.jieli.btsmart.ui.multimedia.control.MusicControlFragment">
+
+
+        <ImageButton
+            android:id="@+id/ib_play_or_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_pc_slave_play_status_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ib_play_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_pc_last"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_play_or_pause"
+            app:layout_constraintEnd_toStartOf="@+id/ib_play_or_pause"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ib_play_or_pause" />
+
+        <ImageButton
+            android:id="@+id/ib_play_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_pc_next"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_play_or_pause"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ib_play_or_pause"
+            app:layout_constraintTop_toTopOf="@+id/ib_play_or_pause" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

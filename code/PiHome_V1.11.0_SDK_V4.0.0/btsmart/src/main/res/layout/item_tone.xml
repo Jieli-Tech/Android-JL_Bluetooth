@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_state"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_fm_collect_freq_added"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_seq"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:padding="4dp"
+        android:gravity="center"
+        android:textColor="@color/color_main"
+        android:textSize="@dimen/text_14sp"
+        android:textStyle="bold"
+        android:background="@drawable/bg_purple_round_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1"/>
+
+    <TextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_9A9A9A"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:text="昵称: pairing"/>
+
+    <TextView
+        android:id="@+id/tv_file_path"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/gray_9A9A9A"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_nickname"
+        app:layout_constraintEnd_toEndOf="@+id/tv_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="文件路径：/Android/data/com.jieli.btsmart/files/tone/o.pcm"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black_242424"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/iv_state"
+        app:layout_constraintStart_toEndOf="@+id/tv_seq"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="0.wts"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

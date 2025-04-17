@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_000000"
+    tools:context=".ui.CropPhotoActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_crop_photo_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="65dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_crop_photo_rotate"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back">
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/text_transparent"
+        android:padding="6dp"
+        android:src="@drawable/ic_back_white"
+        android:stateListAnimator="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_crop_photo_rotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="14dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_rotate_white"
+        app:layout_constraintBottom_toTopOf="@+id/rl_crop_photo_bottom_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <RelativeLayout
+        android:id="@+id/rl_crop_photo_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_131313"
+        android:paddingStart="14dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_crop_photo_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="6dp"
+            android:text="@string/cancel"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/text_18sp" />
+
+        <TextView
+            android:id="@+id/tv_crop_photo_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="6dp"
+            android:text="@string/next_step"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/text_18sp"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

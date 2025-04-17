@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="multi_media_function_name_arr">
+        <item>@string/multi_media_local</item>
+        <item>@string/multi_media_usb_drive</item>
+        <item>@string/multi_media_sd_card</item>
+        <item>@string/multi_media_fm_launch</item>
+        <item>@string/multi_media_fm_receive</item>
+        <item>@string/multi_media_line_in</item>
+        <item>@string/multi_media_light_settings</item>
+        <item>@string/multi_media_alarm</item>
+        <item>@string/multi_media_search_device</item>
+        <item>@string/multi_media_net_radio</item>
+        <item>@string/multi_media_sound_card</item>
+<!--        <item>@string/multi_media_spdif</item>-->
+<!--        <item>@string/multi_media_pc_slave</item>-->
+    </array>
+
+    <array name="app_settings_list_shake">
+        <item>@string/shake_cut_song</item>
+        <item>@string/shake_change_light_color</item>
+    </array>
+    <array name="app_settings_list">
+        <item>@string/multilingual</item>
+        <item>@string/about</item>
+        <item>@string/device_instructions</item>
+        <!--        <item>@string/feedback</item>-->
+    </array>
+    <integer-array name="app_settings_list_src">
+        <item>@string/shake_cut_song</item>
+        <item>@string/shake_change_light_color</item>
+        <item>@string/about</item>
+        <item>@string/device_instructions</item>
+    </integer-array>
+    <array name="firmware_upgrade">
+        <item>@string/firmware_current_version</item>
+        <item>@string/firmware_update</item>
+    </array>
+
+    <array name="eq_mode_list">
+        <item>@string/eq_normal</item>
+        <item>@string/eq_rock</item>
+        <item>@string/eq_pop</item>
+        <item>@string/eq_classical</item>
+        <item>@string/eq_jazz</item>
+        <item>@string/eq_country</item>
+        <item>@string/eq_user</item>
+    </array>
+
+    <array name="eq_freq_list">
+        <item>@string/eq_freq_31</item>
+        <item>@string/eq_freq_63</item>
+        <item>@string/eq_freq_125</item>
+        <item>@string/eq_freq_250</item>
+        <item>@string/eq_freq_500</item>
+        <item>@string/eq_freq_1k</item>
+        <item>@string/eq_freq_2k</item>
+        <item>@string/eq_freq_4k</item>
+        <item>@string/eq_freq_8k</item>
+        <item>@string/eq_freq_16k</item>
+    </array>
+
+    <array name="alarm_weeks_workday">
+        <item>@string/alarm_repeat_simple_mon</item>
+        <item>@string/alarm_repeat_simple_tue</item>
+        <item>@string/alarm_repeat_simple_wed</item>
+        <item>@string/alarm_repeat_simple_thu</item>
+        <item>@string/alarm_repeat_simple_fri</item>
+    </array>
+    <array name="alarm_weeks">
+        <item>@string/alarm_repeat_simple_mon</item>
+        <item>@string/alarm_repeat_simple_tue</item>
+        <item>@string/alarm_repeat_simple_wed</item>
+        <item>@string/alarm_repeat_simple_thu</item>
+        <item>@string/alarm_repeat_simple_fri</item>
+        <item>@string/alarm_repeat_simple_sat</item>
+        <item>@string/alarm_repeat_simple_sun</item>
+    </array>
+    <array name="alarm_weeks_simple">
+        <item>@string/alarm_repeat_simple_mon</item>
+        <item>@string/alarm_repeat_simple_tue</item>
+        <item>@string/alarm_repeat_simple_wed</item>
+        <item>@string/alarm_repeat_simple_thu</item>
+        <item>@string/alarm_repeat_simple_fri</item>
+        <item>@string/alarm_repeat_simple_sat</item>
+        <item>@string/alarm_repeat_simple_sun</item>
+    </array>
+    <array name="light_scene_name">
+        <item>@string/light_scene_mode_1</item>
+        <item>@string/light_scene_mode_2</item>
+        <item>@string/light_scene_mode_3</item>
+        <item>@string/light_scene_mode_4</item>
+        <item>@string/light_scene_mode_5</item>
+        <item>@string/light_scene_mode_6</item>
+        <item>@string/light_scene_mode_7</item>
+        <item>@string/light_scene_mode_8</item>
+        <item>@string/light_scene_mode_9</item>
+        <item>@string/light_scene_mode_10</item>
+        <item>@string/light_scene_mode_11</item>
+        <item>@string/light_scene_mode_12</item>
+    </array>
+
+    <array name="light_scene_res">
+        <item>@drawable/ic_scene_01</item>
+        <item>@drawable/ic_scene_02</item>
+        <item>@drawable/ic_scene_03</item>
+        <item>@drawable/ic_scene_04</item>
+        <item>@drawable/ic_scene_05</item>
+        <item>@drawable/ic_scene_06</item>
+        <item>@drawable/ic_scene_07</item>
+        <item>@drawable/ic_scene_08</item>
+        <item>@drawable/ic_scene_09</item>
+        <item>@drawable/ic_scene_10</item>
+        <item>@drawable/ic_scene_11</item>
+        <item>@drawable/ic_scene_12</item>
+    </array>
+
+    <array name="light_mode_name">
+        <item>@string/light_model_1</item>
+        <item>@string/light_model_2</item>
+        <item>@string/light_model_3</item>
+        <item>@string/light_model_4</item>
+        <item>@string/light_model_5</item>
+        <item>@string/light_model_6</item>
+        <item>@string/light_model_7</item>
+        <item>@string/light_model_8</item>
+
+    </array>
+    <array name="light_mode_res">
+        <item>@drawable/icon_colorful</item>
+        <item>@drawable/icon_red</item>
+        <item>@drawable/icon_orange</item>
+        <item>@drawable/icon_yellow</item>
+        <item>@drawable/icon_green</item>
+        <item>@drawable/icon_cyan</item>
+        <item>@drawable/icon_blue</item>
+        <item>@drawable/icon_purple</item>
+    </array>
+
+    <integer-array name="multi_media_function_sel_icon_arr">
+        <item>@drawable/ic_local_music_blue</item>
+        <item>@drawable/ic_usb_red</item>
+        <item>@drawable/ic_sd_card_green</item>
+        <item>@drawable/ic_fm_tx_purple</item>
+        <item>@drawable/ic_radio_orange</item>
+        <item>@drawable/ic_linein_nol</item>
+        <item>@drawable/ic_light_settings_yellow</item>
+        <item>@drawable/ic_alarm_green</item>
+        <item>@drawable/ic_search_device_blue</item>
+        <item>@drawable/ic_net_radio_blue</item>
+        <item>@drawable/ic_sound_card</item>
+<!--        <item>@drawable/ic_spdif_green</item>-->
+<!--        <item>@drawable/ic_pc_slave_blue</item>-->
+    </integer-array>
+
+    <integer-array name="multi_media_function_un_sel_icon_arr">
+        <item>@drawable/ic_local_music_gray</item>
+        <item>@drawable/ic_usb_gray</item>
+        <item>@drawable/ic_sd_card_gray</item>
+        <item>@drawable/ic_fm_tx_gray</item>
+        <item>@drawable/ic_radio_gray</item>
+        <item>@drawable/ic_linein_dis</item>
+        <item>@drawable/ic_light_settings_yellow</item>
+        <item>@drawable/ic_alarm_green</item>
+        <item>@drawable/ic_search_device_blue</item>
+        <item>@drawable/ic_net_radio_blue</item>
+        <item>@drawable/ic_sound_card</item>
+<!--        <item>@drawable/ic_spdif_green</item>-->
+<!--        <item>@drawable/ic_pc_slave_blue</item>-->
+    </integer-array>
+
+    <string-array name="app_about_settings_list">
+        <item>@string/current_version</item>
+        <item>@string/user_agreement</item>
+        <item>@string/privacy_policy</item>
+    </string-array>
+
+
+    <string-array name="alarm_default_bell_list">
+        <item>@string/alarm_bell_1</item>
+        <item>@string/alarm_bell_2</item>
+        <item>@string/alarm_bell_3</item>
+        <item>@string/alarm_bell_4</item>
+        <item>@string/alarm_bell_5</item>
+
+    </string-array>
+
+    <string-array name="voice_check_sensitivity_list">
+        <item>@string/high_sensitivity</item>
+        <item>@string/low_sensitivity</item>
+    </string-array>
+
+    <string-array name="close_time_list">
+        <item>@string/none_close_time</item>
+        <item>@string/short_close_time</item>
+        <item>@string/standard_close_time</item>
+        <item>@string/long_close_time</item>
+    </string-array>
+
+    <string-array name="scene_denoise_list">
+        <item>@string/scene_denoising_auto</item>
+        <item>@string/scene_denoising_mild</item>
+        <item>@string/scene_denoising_balance</item>
+        <item>@string/scene_denoising_depth</item>
+    </string-array>
+
+    <string-array name="scene_denoise_desc_list">
+        <item>@string/scene_denoising_auto_tips</item>
+        <item>@string/scene_denoising_mild_tips</item>
+        <item>@string/scene_denoising_balance_tips</item>
+        <item>@string/scene_denoising_depth_tips</item>
+    </string-array>
+</resources>

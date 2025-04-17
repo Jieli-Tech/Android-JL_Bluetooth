@@ -4,9 +4,10 @@ The bluetooth SDK for Android
 
 # 一、概述
 
-```
-杰理蓝牙音箱SDK是珠海市杰理科技股份有限公司(以下简称“本公司”)开发，专门为本公司音箱耳机类产品提供蓝牙控制开发平台。
-```
+**杰理蓝牙音箱SDK**是``珠海市杰理科技股份有限公司``(以下简称“本公司”)开发，专门为本公司音箱耳机类产品提供蓝牙控制开发平台。
+
+
+
 ## 1.1 运行环境
 
 | 类别 | 兼容范围 | 备注 |
@@ -15,9 +16,11 @@ The bluetooth SDK for Android
 | 硬件要求 | 支持RCSP协议的固件 | AC693X， AC697X， AC695X等等SDK |
 | 开发平台 | Android Studio | 建议使用最新版本开发 |
 
+
+
 ## 1.2 快速接入
 
-为了帮助开发者快速接入杰理之家SDK，请开发前详细阅读SDK接入文档: [杰理之家SDK开发文档(Android)](https://doc.zh-jieli.com/Apps/Android/jielihome/zh-cn/master/index.html)
+为了帮助开发者快速接入杰理之家SDK，请开发前详细阅读: [杰理之家SDK开发文档(Android)](https://doc.zh-jieli.com/Apps/Android/jielihome/zh-cn/master/index.html)
 
 
 
@@ -30,7 +33,7 @@ The bluetooth SDK for Android
 |- doc -- 开发文档
     |- 杰理OTA外接库(Android)开发文档  --- 在线开发文档
     |- 杰理之家SDK(Android)开发文档    --- 在线开发文档
-|- libs -- 核心库<br
+|- libs -- 核心库
 ```
 
 
@@ -41,6 +44,7 @@ The bluetooth SDK for Android
 
 | 版本  | 日期       | 修改者 | 修改记录                                                     |
 | ----- | ---------- | ------ | ------------------------------------------------------------ |
+| 4.0.0 | 2025/04/15 | 钟卓成 | 1、分离蓝牙实现和RCSP功能实现<br/>2、优化SDK日志输出<br/>3、优化文件浏览功能<br/>4、增加Android 14的兼容处理 |
 | 3.2.0 | 2023/11/23 | 钟卓成 | 1、新增 TWS 耳机一拖二功能和接口  <br />2、修复已知问题      |
 | 3.0.8 | 2022/08/12 | 张焕明 | 1、新增辅听耳机的验配功能                                    |
 | 3.0.7 | 2022/07/20 | 张焕明 | 1、增加支持挂脖耳机 UI                                       |

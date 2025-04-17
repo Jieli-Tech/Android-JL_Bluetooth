@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_marginStart="13dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_song_list_top_rise_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_song_list_rise_logo"
+        />
+    <TextView
+        android:id="@+id/tv_song_list_top_rise_all_song"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/song_list_top_all_song"
+        android:gravity="bottom"
+        android:layout_marginEnd="9dp"
+        style="@style/TextStyle_18sp_black_242424"
+        tools:text="全部歌曲"
+        />
+    <TextView
+        android:id="@+id/tv_song_list_top_rise_all_num"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        style="@style/TextStyle_14sp_gray_8B8B8B"
+        tools:text="(共20首)"
+        />
+</LinearLayout>

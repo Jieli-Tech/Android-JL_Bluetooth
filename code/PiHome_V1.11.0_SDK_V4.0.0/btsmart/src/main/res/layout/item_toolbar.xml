@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:contentInsetEnd="0dp"
+    app:contentInsetStart="0dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:title=""
+    app:titleMargin="0dp"
+    app:titleTextColor="@color/white_ffffff"
+    tools:context=".ui.home.HomeActivity">
+
+
+    <TextView
+        android:id="@+id/tv_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/top_view_margin"
+        android:drawableEnd="@drawable/ic_down_arrows_white"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:padding="@dimen/top_view_padding"
+        android:text="@string/unconnected_device"
+        android:textColor="@color/white_ffffff"
+        android:textSize="@dimen/text_14sp"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/tv_toolbar_add_device"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/top_view_margin"
+        android:drawableStart="@drawable/ic_add_device"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:padding="@dimen/top_view_padding"
+        android:text="@string/add_device"
+        android:textColor="@color/white_ffffff"
+        android:textSize="@dimen/text_14sp"
+        android:visibility="gone"
+        tools:ignore="SpUsage" />
+
+</androidx.appcompat.widget.Toolbar>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">@color/color_gradients_bg1_start</color>
+    <color name="colorPrimaryDark">@color/white_ffffff</color>
+    <color name="colorAccent">@color/color_gradients_bg1_start</color>
+    <color name="colorAccent1">#D81B60</color>
+    <color name="half_transparent">#80000000</color>
+    <color name="half_transparent_1">#60000000</color>
+    <!--    公用颜色-->
+    <color name="color_main">@color/purple_805BEB</color>
+    <color name="color_gradients_bg1_start">@color/purple_9776F5</color>
+    <color name="color_gradients_bg1_end">@color/blue_deep_5538E3</color>
+    <color name="color_eq_wave_top">@color/purple_6F48DF</color>
+    <color name="color_eq_wave_start">@color/purple_805BEB</color>
+    <color name="color_eq_wave_end">@color/gray_translate_7f5e41eb</color>
+    <color name="color_rotating_view_start">@color/blue_deep_5232E3</color>
+    <color name="color_rotating_view_end">@color/pink_DE96FF</color>
+    <color name="color_bg">@color/gray_F8FAFC</color>
+    <color name="color_text">@color/black_E6000000</color>
+    <!--  white  -->
+    <color name="white_ffffff">#FFFFFF</color>
+    <!--  gray  -->
+    <color name="gray_F8FAFC">#F8FAFC</color>
+    <color name="gray_deep_8C8C96">#8C8C96</color>
+    <color name="gray_A3A3A3">#A3A3A3</color>
+    <color name="gray_8B8B8B">#8B8B8B</color>
+    <color name="gray_9A9A9A">#9A9A9A</color>
+    <color name="gray_text_5A5A5A">#5A5A5A</color>
+    <color name="gray_575757">#575757</color>
+    <color name="gray_eeeeee">#EEEEEE</color>
+    <color name="gray_light_F7FAFC">#F7FAFC</color>
+    <color name="gray_text_989898">#989898</color>
+    <color name="gray_text_444444">#444444</color>
+    <color name="gray_text_A7A7A7">#A7A7A7</color>
+    <color name="gray_text_767676">#767676</color>
+    <color name="gray_DEDEDE">#DEDEDE</color>
+    <color name="gray_CECECE">#CECECE</color>
+    <color name="gray_E5E5E5">#E5E5E5</color>
+    <color name="gray_EBEDEF">#EBEDEF</color>
+    <color name="gray_ECECEC">#ECECEC</color>
+    <color name="gray_translate_33cde6fb">#33cde6fb</color>
+    <color name="gray_translate_1d002644">#1d002644</color>
+    <color name="gray_d4d4d4">#D4D4D4</color>
+    <color name="gray_a5a5a5">#A5A5A5</color>
+    <color name="gray_6E6E6E">#6E6E6E</color>
+    <color name="gray_959595">#959595</color>
+    <color name="gray_969696">#969696</color>
+    <color name="gray_8D8D8D">#8D8D8D</color>
+    <color name="gray_translate_7f5e41eb">#7f5e41eb</color>
+    <color name="gray_5F5F5F">#5F5F5F</color>
+    <color name="gray_E5E8EA">#E5E8EA</color>
+    <color name="gray_AAAAAA">#AAAAAA</color>
+    <color name="gray_919191">#919191</color>
+    <color name="gray_EAEAEA">#FFEAEAEA</color>
+    <color name="gray_CACACA">#CACACA</color>
+    <color name="gray_333333">#333333</color>
+    <color name="gray_12000000">#12000000</color>
+    <color name="gray_F4F4F4">#FFF4F4F4</color>
+    <color name="gray_838383">#838383</color>
+    <color name="gray_F0F0F0">#F0F0F0</color>
+    <color name="gray_4D000000">#4D000000</color>
+    <color name="gray_66000000">#66000000</color>
+    <color name="gray_F7F7F7">#F7F7F7</color>
+    <!--  purple  -->
+    <color name="purple_9776F5">#9776F5</color>
+    <color name="purple_805BEB">#805BEB</color>
+    <color name="purple_6F48DF">#6F48DF</color>
+    <!--  blue  -->
+    <color name="blue_deep_5232E3">#5232E3</color>
+    <color name="blue_deep_5538E3">#5538E3</color>
+    <color name="blue_light_F4F7FF">#F4F7FF</color>
+    <color name="blue_49A7FF">#49A7FF</color>
+    <color name="blue_D4D3DA">#D4D3DA</color>
+    <color name="blue_4FB5FF">#4FB5FF</color>
+    <color name="blue_text_color">#448eff</color>
+    <color name="blue_448eff">#448eff</color>
+    <color name="blue_D3DCED_half">#33D3DCED</color>
+    <color name="blue_406ac0_half">#33406ac0</color>
+    <color name="blue_4A68CC">#4A68CC</color>
+    <!--  black  -->
+    <color name="black_3C3B3B">#3C3B3B</color>
+    <color name="black_242424">#242424</color>
+    <color name="black_000000">#000000</color>
+    <color name="black_464646">#464646</color>
+    <color name="black_text_151515">#151515</color>
+    <color name="black_646464">#646464</color>
+    <color name="black_E6000000">#E6000000</color>
+    <color name="black_4d000000">#4d000000</color>
+    <color name="black_131313">#131313</color>
+    <!-- green  -->
+    <color name="green_text_1BC017">#1BC017</color>
+    <color name="green_1BC017">#1BC017</color>
+    <color name="green_6FCE7C">#6FCE7C</color>
+    <!--red-->
+    <color name="red_E15858">#E15858</color>
+    <color name="red_EB5B5B">#EB5B5B</color>
+    <color name="red_ED7D7D">#ED7D7D</color>
+    <color name="red_FF688C">#FF688C</color>
+    <color name="red_FFDEDE">#FFDEDE</color>
+    <color name="pink_DE96FF">#DE96FF</color>
+    <color name="red_FA5252">#FA5252</color>
+    <!--yellow-->
+    <color name="yellow_CA8014">#CA8014</color>
+
+    <color name="white_translate_01ffffff">#01ffffff</color>
+
+    <!--    ColorCardView-->
+    <color name="cardview_dark_background" tools:ignore="PrivateResource">#FF424242</color>
+    <color name="cardview_light_background" tools:ignore="PrivateResource">#FFFFFFFF</color>
+    <color name="cardview_shadow_end_color" tools:ignore="PrivateResource">#03000000</color>
+    <color name="cardview_shadow_start_color" tools:ignore="PrivateResource">#37000000</color>
+
+    <color name="bg_fast_connect_dialog">#ffffff</color>
+    <color name="red_EA4F4F">#EA4F4F</color>
+    <color name="gray_6f6f6f">#6f6f6f</color>
+
+    <color name="gray_bbbbbb">#BBBBBB</color>
+
+</resources>
