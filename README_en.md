@@ -2,21 +2,29 @@
 
 The Bluetooth SDK for Android 
 
-![Android](https://img.shields.io/badge/Android-5.1+-blue.svg)![Android Studio](https://img.shields.io/badge/Android Studio-Latest-orange.svg)![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)                                                                                                             [中文](https://github.com/Jieli-Tech/Android-JL_Bluetooth/blob/main/README.md) | English
 
+[中文](https://github.com/Jieli-Tech/Android-JL_Bluetooth/blob/main/README.md) | **English**
 
+<br/>
 
-<h1 style="text-align:left;font:24px;color:#000000">JieLi Home SDK(Android)</h>
+<div align="center">
+
+![Android](https://img.shields.io/badge/Android-5.1+-blue.svg)
+![Android Studio](https://img.shields.io/badge/Android_Studio-Latest-orange.svg)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)       
+
+<strong style="font:24px;color:#000000">JieLi Home SDK(Android)</strong>
 
 The **JieLi Home SDK** is developed by **Zhuhai JieLi Technology Co., Ltd.** ("the Company") to provide a dedicated Bluetooth control development platform for the Company's speaker and headphone products.
 
+</div>
 
 
 # 1 Quick Integration
 
-To help developers quickly integrate the <strong style="color:red">JieLi Home SDK</strong>, please carefully read the following before development:
+To help developers quickly integrate the <strong style="color:#ee2233">JieLi Home SDK</strong>, please carefully read the following before development:
 
-- [JieLi Home SDK Documentation (Android)](https://doc.zh-jieli.com/Apps/Android/jielihome/en-us/master/index.htmll)
+- [JieLi Home SDK Documentation (Android)](https://doc.zh-jieli.com/Apps/Android/jielihome/en-us/master/index.html)
 - [Development Guide](./doc/)
 
 
