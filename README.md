@@ -2,16 +2,21 @@
 
 The bluetooth SDK for Android
 
+**中文** | [English](https://github.com/Jieli-Tech/Android-JL_Bluetooth/blob/main/README_en.md)
 
+<br/>
 
-![Android](https://img.shields.io/badge/Android-5.1+-blue.svg)![Android Studio](https://img.shields.io/badge/Android Studio-Latest-orange.svg)![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)                                                                                                                                          **中文** | [English](https://github.com/Jieli-Tech/Android-JL_Bluetooth/blob/main/README_en.md)
+<div align="center">
 
+![Android](https://img.shields.io/badge/Android-5.1+-blue.svg)
+![Android Studio](https://img.shields.io/badge/Android_Studio-Latest-orange.svg)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)       
 
+<strong style="font:24px;color:#000000">杰理之家SDK(Android)</strong>
 
-<h1 style="text-align:left;font:24px;color:#000000">杰理之家SDK(Android)</h>
+**杰理之家SDK**是<strong style="color:#ee2233">珠海市杰理科技股份有限公司</strong>(以下简称“本公司”)开发，专门为本公司音箱耳机类产品提供蓝牙控制开发平台。
 
-**杰理之家SDK**是<strong style="color:red">珠海市杰理科技股份有限公司</strong>(以下简称“本公司”)开发，专门为本公司音箱耳机类产品提供蓝牙控制开发平台。
-
+</div>
 
 
 # 一、 快速接入
