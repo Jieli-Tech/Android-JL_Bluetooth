@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. 设备音乐控制功能 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. 均衡器调试功能" href="eq_ctrl.html" />
+    <link rel="prev" title="3. 音量控制功能" href="voice_ctrl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 功能模块</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. 基础功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4. 设备音乐控制功能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">4.1. 获取设备音乐信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">4.2. 获取设备音乐播放状态</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">4.3. 获取支持的播放格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">4.4. 音乐播放或者暂停</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">4.5. 播放上一曲</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">4.6. 播放下一曲</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">4.7. 切换下一个播放模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">4.8. 跳转到指定时间</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. 彩屏充电仓功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. 图像转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. 翻译功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast助手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 功能模块</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>设备音乐控制功能</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-music-ctrl-func">
+<span id="id1"></span><h1><span class="section-number">4. </span>设备音乐控制功能<a class="headerlink" href="#device-music-ctrl-func" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>接口需要设备处于【音乐模式】才能生效</p></li>
+<li><p>判断设备是否支持【音乐模式】</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportDeviceMusicMode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//获取RCSPController对象</span>
+<span class="w">    </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//获取当前操作设备</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="c1">//设备未初始化</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">isDevMusicEnable</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>判断设备是否处于【音乐模式】</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isDeviceInDeviceMusicMode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//获取RCSPController对象</span>
+<span class="w">    </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//获取当前操作设备</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="c1">//设备未初始化</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getCurFunction</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_MUSIC</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><a class="reference internal" href="basic_func.html#get-device-mode"><span class="std std-ref">查询当前设备模式</span></a></p></li>
+</ol>
+</div>
+<section id="id2">
+<h2><span class="section-number">4.1. </span>获取设备音乐信息<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>         – 设备音乐模式</div>
+<div class="line"><strong>mask :</strong>   – 标识功能码</div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>掩码位</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bit0</p></td>
+<td><p>音乐播放状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bit1</p></td>
+<td><p>音乐名称信息</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit2</p></td>
+<td><p>EQ信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bit3</p></td>
+<td><p>文件类型</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit4</p></td>
+<td><p>播放模式</p></td>
+</tr>
+</tbody>
+</table>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getMusicInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetMusicSysInfoCmd</span><span class="p">(</span><span class="mh">0x07</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">查询设备系统信息</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicNameChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">nameInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将回调音乐名信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">statusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将回调音乐播放状态</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPlayModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将回调播放模式信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//执行获取设备音乐信息功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getDeviceMusicInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onMusicNameChange、</span>
+<span class="w">        </span><span class="c1">// BTRcspEventCallback#onMusicStatusChange、BTRcspEventCallback#onPlayModeChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#music-name-info"><span class="std std-ref">MusicNameInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#music-status-info"><span class="std std-ref">MusicStatusInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#music-mode-info"><span class="std std-ref">PlayModeInfo</span></a></p></li>
+</ol>
+</div>
+<section id="musicnameinfo">
+<span id="music-name-info"></span><h3><span class="section-number">4.1.1. </span>MusicNameInfo<a class="headerlink" href="#musicnameinfo" title="Link to this heading"></a></h3>
+<p>音乐名称信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MusicNameInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cluster</span><span class="p">;</span><span class="w">  </span><span class="c1">//簇号 -- 用于定位文件路径</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">  </span><span class="c1">//音乐名</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="musicstatusinfo">
+<span id="music-status-info"></span><h3><span class="section-number">4.1.2. </span>MusicStatusInfo<a class="headerlink" href="#musicstatusinfo" title="Link to this heading"></a></h3>
+<p>音乐状态信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MusicStatusInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPlay</span><span class="p">;</span><span class="w">  </span><span class="c1">//是否播放</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentTime</span><span class="p">;</span><span class="w"> </span><span class="c1">//当前播放时间(单位: 毫秒)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">totalTime</span><span class="p">;</span><span class="w"> </span><span class="c1">//时间总长(单位: 毫秒)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentDev</span><span class="p">;</span><span class="w"> </span><span class="c1">//设备句柄</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="playmodeinfo">
+<span id="music-mode-info"></span><h3><span class="section-number">4.1.3. </span>PlayModeInfo<a class="headerlink" href="#playmodeinfo" title="Link to this heading"></a></h3>
+<p>播放模式信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PlayModeInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">playMode</span><span class="p">;</span><span class="w"> </span><span class="c1">//播放模式</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#play-mode-tab"><span class="std std-ref">播放模式对照表</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="play-mode-tab">
+<span id="id3"></span><h3><span class="section-number">4.1.4. </span>播放模式对照表<a class="headerlink" href="#play-mode-tab" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>数值</p></th>
+<th class="head"><p>模式名称</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>无效模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>全部循环</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>设备循环</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>单曲循环</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>随机播放</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>文件夹循环</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">4.2. </span>获取设备音乐播放状态<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>              – 设备音乐模式</div>
+<div class="line"><strong>mask :</strong>   <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_MUSIC_STATUS_INFO</span></code> – 标识音乐播放状态</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getMusicPlaybackStatusCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetMusicStatusInfoCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">查询设备系统信息</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">statusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将回调音乐播放状态</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//执行获取设备音乐播放状态功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getDeviceMusicStatusInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onMusicStatusChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>音乐播放状态, <a class="reference internal" href="#music-status-info"><span class="std std-ref">MusicStatusInfo</span></a></p>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">4.3. </span>获取支持的播放格式<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>     – 公共属性</div>
+<div class="line"><strong>mask :</strong>   <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_FILE_TYPE</span></code> – 标识支持的文件格式</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getBrowseFileTypeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetBrowseFileTypeCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">查询设备系统信息</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFileFormatChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileFormat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将回调支持播放文件格式</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//执行获取支持播放格式功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getPlayFileFormat</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onFileFormatChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">4.4. </span>音乐播放或者暂停<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>        – 音乐模式</div>
+<div class="line"><strong>flag :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.FUNCTION_MUSIC_CMD_PLAY_OR_PAUSE</span></code></div>
+<div class="line"><strong>extend :</strong>  NULL</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">musicPlayOrPauseCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildPlayOrPauseCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#set-function"><span class="std std-ref">设置功能</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//执行音乐播放或暂停功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">musicPlayOrPause</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2><span class="section-number">4.5. </span>播放上一曲<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>        – 音乐模式</div>
+<div class="line"><strong>flag :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.FUNCTION_MUSIC_CMD_PLAY_PREV</span></code></div>
+<div class="line"><strong>extend :</strong>  NULL</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">musicPlayPrevCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildPlayPrevCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#set-function"><span class="std std-ref">设置功能</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//执行播放上一曲功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">musicPlayPrev</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">4.6. </span>播放下一曲<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>        – 音乐模式</div>
+<div class="line"><strong>flag :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.FUNCTION_MUSIC_CMD_PLAY_NEXT</span></code></div>
+<div class="line"><strong>extend :</strong>  NULL</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">musicPlayNextCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildPlayNextCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#set-function"><span class="std std-ref">设置功能</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//执行播放下一曲功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">musicPlayNext</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2><span class="section-number">4.7. </span>切换下一个播放模式<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>        – 音乐模式</div>
+<div class="line"><strong>flag :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.FUNCTION_MUSIC_CMD_NEXT_PLAYMODE</span></code></div>
+<div class="line"><strong>extend :</strong>  NULL</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">musicNextPlaymodeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildNextPlaymodeCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#set-function"><span class="std std-ref">设置功能</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//执行切换下一个播放模式功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">musicSwitchNextPlayMode</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2><span class="section-number">4.8. </span>跳转到指定时间<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC</span></code>        – 音乐模式</div>
+<div class="line"><strong>flag :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.FUNCTION_MUSIC_CMD_FAST_FORWARD</span></code> or <code class="docutils literal notranslate"><span class="pre">FUNCTION_MUSIC_CMD_RETREAT_QUICKLY</span></code></div>
+<div class="line"><strong>extend :</strong>  指定时间(2Bytes)</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">SEEK_ORIENTATION_BACK</span><span class="p">;</span><span class="c1">//跳转方向</span>
+<span class="kt">short</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="p">;</span><span class="w"> </span><span class="c1">//跳转时间戳</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">SEEK_ORIENTATION_BACK</span><span class="w"> </span><span class="o">?</span>
+<span class="w">   </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildFastForwardCmd</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildRetreatQuicklyCmd</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="basic_func.html#set-function"><span class="std std-ref">设置功能</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">orientation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">SEEK_ORIENTATION_FORWARD</span><span class="p">;</span>
+<span class="c1">//orientation ： Constants.SEEK_ORIENTATION_FORWARD - 往前，Constants.SEEK_ORIENTATION_BACK - 往后</span>
+<span class="kt">short</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3000</span><span class="p">;</span>
+<span class="c1">//time ： 时间戳</span>
+<span class="c1">//执行跳转到指定时间戳功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">musicSeekToProgress</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">orientation</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="voice_ctrl.html" class="btn btn-neutral float-left" title="3. 音量控制功能" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="eq_ctrl.html" class="btn btn-neutral float-right" title="5. 均衡器调试功能" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 基础功能接口 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. 音量控制接口" href="voice_ctrl_api.html" />
+    <link rel="prev" title="1. RCSP基础接口" href="rcsp_basic_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 接口说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_api.html"><span class="sectnum">1 </span>蓝牙处理接口</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="rcsp_api.html">2. RCSP功能接口</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rcsp_basic_api.html">1. RCSP基础接口</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. 基础功能接口</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rcsp-op-cb">2.1. 操作结果回调</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deviceconfiguration">2.2. DeviceConfiguration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl_api.html">3. 音量控制接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl_api.html">4. 设备音乐控制接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl_api.html">5. 均衡器功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl_api.html">6. 时钟功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl_api.html">7. 外接设备功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl_api.html">8. FM功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl_api.html">9. 灯光控制接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func_api.html">10. TWS功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func_api.html">11. 声卡功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_api.html">12. RCSP控制器接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func_api.html">13. 录音操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_op_api.html">14. 文件操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_op_api.html">15. SPDIF操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func_api.html">16. 彩屏仓功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func_api.html">17. 翻译功能接口</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. 状态码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. 功能码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. 错误码</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 接口说明</a></li>
+          <li class="breadcrumb-item"><a href="rcsp_api.html">2. RCSP功能接口</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>基础功能接口</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rcsp-base">
+<span id="id1"></span><h1><span class="section-number">2. </span>基础功能接口<a class="headerlink" href="#rcsp-base" title="Link to this heading"></a></h1>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBaseOp</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取设备信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param mask     掩码</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">requestDeviceInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">DeviceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取设备系统属性</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param function 功能号</span>
+<span class="cm">     * @param mask     掩码</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getDevSysInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设置设备系统属性</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param function 功能号</span>
+<span class="cm">     * @param list     属性列表</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDevSysInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取当前设备模式信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getCurrentDevModeInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取设备存储器信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getDevStorageInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 切换设备模式</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param mode     模式</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">switchDeviceMode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 重启设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param callback 结果回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">rebootDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 读取设备配置信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   操作设备</span>
+<span class="cm">     * @param callback 结果胡迪</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">readDeviceConfiguration</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">DeviceConfiguration</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 销毁控制类，释放资源</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#rcsp-op-cb"><span class="std std-ref">操作结果回调</span></a></p></li>
+<li><p><a class="reference internal" href="../function/basic_func.html#device-info"><span class="std std-ref">DeviceInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/terminology_note.html#attr-bean"><span class="std std-ref">属性模型</span></a></p></li>
+<li><p><a class="reference internal" href="#device-cfg"><span class="std std-ref">DeviceConfiguration</span></a></p></li>
+</ol>
+</div>
+<section id="rcsp-op-cb">
+<span id="id2"></span><h2><span class="section-number">2.1. </span>操作结果回调<a class="headerlink" href="#rcsp-op-cb" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 成功回调</span>
+<span class="cm">     * @param message 信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 失败回调</span>
+<span class="cm">     * @param error 错误信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="deviceconfiguration">
+<span id="device-cfg"></span><h2><span class="section-number">2.2. </span>DeviceConfiguration<a class="headerlink" href="#deviceconfiguration" title="Link to this heading"></a></h2>
+<p>设备配置信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DeviceConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 手表配置信息</span>
+<span class="cm">      */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_WATCH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * TWS耳机配置信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_TWS_HEADSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 音箱</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_SOUND_BOX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Dongle设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_DONGLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 产品标识</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 版本号</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 配置数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rcsp_basic_api.html" class="btn btn-neutral float-left" title="1. RCSP基础接口" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="voice_ctrl_api.html" class="btn btn-neutral float-right" title="3. 音量控制接口" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

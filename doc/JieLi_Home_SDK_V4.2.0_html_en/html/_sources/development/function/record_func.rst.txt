@@ -1,0 +1,183 @@
+.. _record_func:
+
+Recording Function
+**********************************************
+
+Initialize and Listen to Recording Events
+===============================================
+
+
+.. code-block:: java
+
+    //Get recording function operation object
+    mRecordOp = RecordOpImpl.getInstance(RCSPController.getInstance().getRcspOp());
+    //Recording event callback
+    final OnRecordStateCallback recordStateCallback = (device, state) -> {
+        switch (state.getState()) {
+            case RecordState.RECORD_STATE_IDLE:  //Idle or end
+                int reason = state.getReason();  //End reason
+                if (reason == RecordState.REASON_NORMAL) { //Recording complete
+                    byte[] voiceData = state.getVoiceData(); //All recording data
+                } else { //Recording failed, error code
+
+                }
+                break;
+            case RecordState.RECORD_STATE_START: //Start recording, device side actively starts recording, callback here
+                RecordParam param = state.getRecordParam(); //Recording parameters
+                //param.getVoiceType(); //Data format
+                //param.getSampleRate(); //Sampling rate
+                //param.getVadWay();   //Sentence break method
+                break;
+            case RecordState.RECORD_STATE_WORKING: //Recording in progress
+                RecordParam recordParam = state.getRecordParam(); //Recording parameters
+                byte[] data = state.getVoiceDataBlock(); //Recording data
+                break;
+        }
+    };
+    //Register recording event callback
+    mRecordOp.addOnRecordStateCallback(recordStateCallback);
+
+    //Exit interface, or no need to listen to callback, remember to remove callback.
+    //mRecordOp.removeOnRecordStateCallback(recordStateCallback);
+
+.. note::
+   1. Recording state, :ref:`record_state` 
+   2. When device actively requests to start recording, SDK will callback corresponding state, user needs to handle state properly
+   3. Register and remove callback, associated use. Repeated registration will cause event to callback repeatedly.
+
+
+
+.. _record_state:
+
+RecordState 
+----------------------------------------
+
+Recording state
+
+.. code-block:: java
+
+   public class RecordState {
+        /**
+         * Recording state -- Idle state
+         */
+        public static final int RECORD_STATE_IDLE = 0;
+        /**
+         * Recording state -- Start state
+         */
+        public static final int RECORD_STATE_START = 1;
+        /**
+         * Recording state -- Working state
+         */
+        public static final int RECORD_STATE_WORKING = 2;
+
+        /**
+         * Normal end
+         */
+        public static final int REASON_NORMAL = 0;
+        /**
+         * Active end
+         */
+        public static final int REASON_STOP = 1;
+
+        /**
+         * State
+         */
+        private int state = RECORD_STATE_IDLE;
+        /**
+         * Recording parameters
+         */
+        private RecordParam recordParam;
+        /**
+         * Audio content block
+         */
+        private byte[] voiceDataBlock;
+        /**
+         * End reason
+         */
+        private int reason = REASON_NORMAL;
+        /**
+         * Audio content
+         */
+        private byte[] voiceData;
+        /**
+         * Error description
+         */
+        private String message;
+    }
+
+
+Start Recording
+==================================
+
+User actively starts recording
+
+.. code-block:: java
+
+    if (null == mRecordOp) {
+        System.out.println("Not initialized yet!!!");
+        return;
+    }
+    BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    if(mRecordOp.isRecording(device)){
+        System.out.println("Recording in progress");
+        return;
+    }
+    //Recording parameters
+    //voiceType --- Data format
+    //sampleRate --- Sampling rate
+    //vadWay --- Sentence break method
+    RecordParam param = new RecordParam(RecordParam.VOICE_TYPE_OPUS, RecordParam.SAMPLE_RATE_16K, RecordParam.VAD_WAY_DEVICE);
+    //Execute recording function
+    mRecordOp.startRecord(device, param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation success
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failure
+            //error --- Error information
+        }
+    });
+
+
+Stop Recording
+=========================================
+
+User actively stops recording
+
+.. code-block:: java
+
+    if (null == mRecordOp) {
+        System.out.println("Not initialized yet!!!");
+        return;
+    }
+    mRecordOp.stopRecord(RCSPController.getInstance().getUsingDevice(), RecordState.REASON_NORMAL, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation success
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failure
+            //error --- Error information
+        }
+    });
+
+
+
+Release Resources
+===============================
+
+When no longer in use, need to release object
+
+.. code-block:: java
+
+    if(null == mRecordOp) return;
+    mRecordOp.destroy();
+    mRecordOp = null;
+
+
+

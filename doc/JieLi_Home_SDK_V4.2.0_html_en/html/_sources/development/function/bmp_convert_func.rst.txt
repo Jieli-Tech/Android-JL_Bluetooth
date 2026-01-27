@@ -1,0 +1,208 @@
+.. _bmp_convert:
+
+Image Conversion
+**********************************
+
+Converting regular PNG images (RGB, ARGB) to Jieli encoded files
+
+.. code-block:: java
+
+    String inPath = "Input file path (e.g.: /in.png, /in.jpg)";
+    String outPath = "Output file path (e.g.: out.res, out)";
+    //1. Initialize image conversion object
+    BmpConvert bmpConvert = new BmpConvert();
+    //2. Start image conversion
+    int flag = BmpConvert.TYPE_701N_RGB;         //701N image conversion algorithm - RGB
+    //flag = BmpConvert.TYPE_695N_RBG;           //695N image conversion algorithm - RGB
+    //V1.1.0+ supported
+    //flag = BmpConvert.TYPE_701N_ARGB;          //701N image conversion algorithm - ARGB
+    //V1.2.0+ supported
+    //flag = BmpConvert.TYPE_701N_RGB_NO_PACK;   //701N image conversion algorithm - RGB & no packaging
+    //flag = BmpConvert.TYPE_701N_ARGB_NO_PACK;  //701N image conversion algorithm - ARGB & no packaging
+    //V1.4.0+ supported
+    //flag = BmpConvert.TYPE_707N_RGB;           //707N image conversion algorithm - RGB
+    //flag = BmpConvert.TYPE_707N_ARGB;          //707N image conversion algorithm - ARGB
+    //flag = BmpConvert.TYPE_707N_RGB_NO_PACK;   //707N image conversion algorithm - RGB & no packaging
+    //flag = BmpConvert.TYPE_707N_ARGB_NO_PACK;  //707N image conversion algorithm - ARGB & no packaging
+    //V1.6.0+ supported
+    //flag = BmpConvert.TYPE_701N_JPEG;          //701N image conversion algorithm - JPEG
+    //V1.6.0+ supported
+    //Specify output encoding format, default value: ConvertParam.FORMAT_ARGB_8565
+    int format = ConvertParam.FORMAT_AUTO;  //Automatically select the smallest format after compression, ARGB8565 or ARGB8888
+    //        format = ConvertParam.FORMAT_ARGB_8565; //Specify output ARGB8565 format. If algorithm is RGB algorithm, it becomes specifying output RGB565 format
+    //        format = ConvertParam.FORMAT_ARGB_8888; //Specify output ARGB8888 format. If algorithm is RGB algorithm, it becomes specifying output RGB888 format
+    //Construct conversion parameters
+    ConvertParam param = new ConvertParam().setFormat(format);
+    //Execute image transcoding function
+    bmpConvert.bitmapConvert(flag, inPath, outPath, param, new OnConvertListener() {
+        //Callback when conversion starts
+        //path: input file path
+        @Override
+        public void onStart(String path) {
+
+        }
+
+        //Callback when conversion ends
+        //result: conversion result
+        //output: output file path
+        @Deprecated
+        @Override
+        public void onStop(boolean result, String output) {
+            //3. When image conversion function is no longer needed, release the image conversion object
+            //bmpConvert.release();
+        }
+
+        //Callback when conversion ends
+        //result: conversion result
+        //output: output file path
+        @Override
+        public void onStop(ConvertResult result, String outFilePath) {
+            //result.isConvertSuccess(); //transcoding success
+            //result.getAlgorithm();     //conversion algorithm
+            //result.getBufSize();       //conversion data size
+            //result.getPixelFormat();   //conversion image format
+            //result.getCompressMode();  //compression mode
+
+            //3. When image conversion function is no longer needed, release the image conversion object
+            //bmpConvert.release();
+        }
+    });
+
+.. important::
+    1. Image conversion function requires importing library: ``BmpConvert_Vxxx-release.aar``
+    2. Input image dimensions cannot exceed device screen dimensions
+    3. Input image size should be as small as possible
+    4. Select appropriate algorithm based on firmware SDK
+    5. :ref:`convert_result` 
+    6. :ref:`on_convert_listener` 
+
+
+
+.. _convert_result:
+
+ConvertResult
+=====================================
+
+Image conversion result
+
+.. code-block:: java
+
+    public class ConvertResult implements Parcelable {
+        /**
+         * Result code
+         * <p>
+         * Description:<br/>
+         * 1. Less than or equal to 0, considered as transcoding failure, negative numbers are error codes<br/>
+         * 2. Greater than 0, means transcoding success
+         * </p>
+         */
+        private int result;
+        /**
+         * Algorithm type
+         */
+        private int algorithm;
+        /**
+         * Data size
+         */
+        private int bufSize;
+        /**
+         * Pixel format
+         * <p>
+         * Description: Added from 707N algorithm, used for processing 【non-packaging algorithms】
+         * </p>
+         */
+        private int pixelFormat;
+        /**
+         * Compression mode
+         * <p>
+         * Description: Added from 707N algorithm, used for processing 【non-packaging algorithms】
+         * </p>
+         */
+        private int compressMode;
+    }
+   
+
+.. _on_convert_listener:
+
+OnConvertListener
+======================================
+
+Conversion listener
+
+
+.. code-block:: java
+
+    public interface OnConvertListener {
+
+        /**
+         * Callback when conversion starts
+         *
+         * @param inFilePath String file path
+         */
+        void onStart(String inFilePath);
+
+        /**
+         * Callback when conversion ends
+         *
+         * @param isOk        boolean conversion result
+         * @param outFilePath String output path
+         */
+        @Deprecated
+        void onStop(boolean isOk, String outFilePath);
+
+        /**
+         * Callback when conversion ends
+         *
+         * @param result      ConvertResult conversion result
+         * @param outFilePath String output file path
+         */
+        void onStop(ConvertResult result, String outFilePath);
+    }
+
+
+
+Algorithm Description
+========================================
+
+
++-------------+------------------------+--------------------------+---------------------------------------------------------------------------+
+| Chip Series |   Old Algorithm Name   | New Algorithm Name       |  Algorithm Description                                                    |
++=============+========================+==========================+===========================================================================+
+| AC695N      | TYPE_BR_23             | TYPE_695N_RBG            | AC695N-WATCH-SDK image conversion algorithm - RGB                         |
++-------------+------------------------+--------------------------+---------------------------------------------------------------------------+
+| JL701N      | TYPE_BR_28             | TYPE_701N_RGB            | JL701N-WATCH-SDK image conversion algorithm - RGB                         |
++             +------------------------+--------------------------+---------------------------------------------------------------------------+
+|             | TYPE_BR_28_ALPHA       | TYPE_701N_ARGB           | JL701N-WATCH-SDK image conversion algorithm - ARGB                        |
++             +------------------------+--------------------------+---------------------------------------------------------------------------+
+|             | TYPE_BR_28_RAW         | TYPE_701N_RGB_NO_PACK    | JL701N-WATCH-SDK image conversion algorithm - RGB & no packaging          |
++             +------------------------+--------------------------+---------------------------------------------------------------------------+
+|             | TYPE_BR_28_ALPHA_RAW   | TYPE_701N_ARGB_NO_PACK   | JL701N-WATCH-SDK image conversion algorithm - ARGB & no packaging         |
++-------------+------------------------+--------------------------+---------------------------------------------------------------------------+
+| AC707N      |                        | TYPE_707N_RGB            |  AC707N-WATCH-SDK image conversion algorithm - RGB                        |
+|             +------------------------+--------------------------+---------------------------------------------------------------------------+
+|             |                        | TYPE_707N_ARGB           |  AC707N-WATCH-SDK image conversion algorithm - ARGB                       |
+|             +------------------------+--------------------------+---------------------------------------------------------------------------+
+|             |                        | TYPE_707N_RGB_NO_PACK    |  AC707N-WATCH-SDK image conversion algorithm - RGB & no packaging         |
+|             +------------------------+--------------------------+---------------------------------------------------------------------------+
+|             |                        | TYPE_707N_ARGB_NO_PACK   |  AC707N-WATCH-SDK image conversion algorithm - ARGB & no packaging        |
++-------------+------------------------+--------------------------+---------------------------------------------------------------------------+
+
+
+Algorithm Selection Rules
+==================================
+    
+
+1. First, select according to 【chip type】
+2. Then, select according to 【whether packaging】
+3. Finally, select according to 【resource format】
+
+
+| For example: JL701N series chip, color screen warehouse SDK, push a.png image, packaging format
+| 
+| 1. JL701N series chip 
+| Can filter: ``TYPE_701N_RGB``, ``TYPE_701N_ARGB``, ``TYPE_701N_RGB_NO_PACK``, ``TYPE_701N_ARGB_NO_PACK``
+| 2. Packaging format
+| Can filter: ``TYPE_701N_RGB``, ``TYPE_701N_ARGB``
+| 3. a.png image
+| Since PNG images have alpha values, select ``TYPE_701N_ARGB``
+| Of course, if you want smaller resources, you can choose ``TYPE_701N_RGB``

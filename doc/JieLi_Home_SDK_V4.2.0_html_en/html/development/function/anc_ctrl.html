@@ -1,0 +1,1215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. ANC Settings Function &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13. Sound Card Function" href="sound_card_func.html" />
+    <link rel="prev" title="11. TWS Function" href="tws_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">12. ANC Settings Function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#anc-mode-setting-function">12.1. ANC Mode Setting Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adaptive-anc-algorithm">12.2. Adaptive ANC Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#smart-no-picking">12.3. Smart No-Picking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scene-noise-reduction">12.4. Scene noise reduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wind-noise-monitoring">12.5. Wind noise monitoring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voice-enhancement">12.6. Voice Enhancement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">12. </span>ANC Settings Function</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="anc-settings-function">
+<span id="anc-ctrl-func"></span><h1><span class="section-number">12. </span>ANC Settings Function<a class="headerlink" href="#anc-settings-function" title="Link to this heading"></a></h1>
+<section id="anc-mode-setting-function">
+<span id="anc-mode-setting-func"></span><h2><span class="section-number">12.1. </span>ANC Mode Setting Function<a class="headerlink" href="#anc-mode-setting-function" title="Link to this heading"></a></h2>
+<section id="flow-chart">
+<h3><span class="section-number">12.1.1. </span>Flow Chart<a class="headerlink" href="#flow-chart" title="Link to this heading"></a></h3>
+<figure class="align-center">
+<img alt="../../_images/ANC_setting_flow.png" src="../../_images/ANC_setting_flow.png" />
+</figure>
+</section>
+<section id="get-all-noise-processing-information">
+<h3><span class="section-number">12.1.2. </span>Get all noise processing information<a class="headerlink" href="#get-all-noise-processing-information" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>           – Public attributes</div>
+<div class="line"><strong>mask :</strong>   <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_ALL_NOISE_MODE</span></code>  – All noise processing information</div>
+</div>
+<p>Command Construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getAllVoiceModesCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetAllVoiceModes</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">Query device system information</span></a>
+Response results reference <a class="reference internal" href="#voice-mode"><span class="std std-ref">VoiceMode</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Register Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceModeList</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback noise processing information list</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute the function to retrieve all noise processing information and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getAllVoiceModes</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//The data will be displayed in the BTRcspEventCallback#onVoiceModeList callback.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Voice Mode，<a class="reference internal" href="#voice-mode"><span class="std std-ref">VoiceMode</span></a></p>
+</div>
+<section id="voicemode">
+<span id="voice-mode"></span><h4><span class="section-number">12.1.2.1. </span>VoiceMode<a class="headerlink" href="#voicemode" title="Link to this heading"></a></h4>
+<p>Noise processing mode</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VoiceMode</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w">     </span><span class="c1">//ANC mode</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">leftMax</span><span class="p">;</span><span class="w">       </span><span class="c1">//Left channel maximum value</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">leftCurVal</span><span class="p">;</span><span class="w">    </span><span class="c1">//Left channel current value</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rightMax</span><span class="p">;</span><span class="w">      </span><span class="c1">//Right channel maximum value</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rightCurVal</span><span class="p">;</span><span class="w">   </span><span class="c1">//Right channel current value</span>
+
+<span class="w">    </span><span class="c1">//Standard mode</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VOICE_MODE_CLOSE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Noise Cancellation Mode</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VOICE_MODE_DENOISE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Transparency mode</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">VOICE_MODE_TRANSPARENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="get-the-current-noise-processing-mode">
+<h3><span class="section-number">12.1.3. </span>Get the current noise processing mode<a class="headerlink" href="#get-the-current-noise-processing-mode" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>               – Public attributes</div>
+<div class="line"><strong>mask :</strong>   <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_CURRENT_NOISE_MODE</span></code>  – Current noise processing mode</div>
+</div>
+<p>Command Construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getCurrentVoiceModeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetCurrentVoiceMode</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Register Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCurrentVoiceMode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to current noise processing mode information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute the function to obtain the current noise processing mode information and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getCurrentVoiceMode</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//The data will be displayed in the BTRcspEventCallback#onVoonCurrentVoiceModeiceModeList callback.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Voice Mode, <a class="reference internal" href="#voice-mode"><span class="std std-ref">VoiceMode</span></a></p>
+</div>
+</section>
+<section id="set-the-current-noise-processing-mode">
+<h3><span class="section-number">12.1.4. </span>Set the current noise processing mode<a class="headerlink" href="#set-the-current-noise-processing-mode" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>      – Public attributes</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_CURRENT_NOISE_MODE</span></code>  – Current noise processing mode</div>
+<div class="line"><strong>value :</strong>  VoiceMode(n Bytes)                                  – Voice Mode</div>
+</div>
+<p>Command Construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setCurrentVoiceModeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetCurrentVoiceMode</span><span class="p">(</span><span class="n">voiceMode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">;</span><span class="w"> </span><span class="c1">//voiceMode - Noise processing mode</span>
+<span class="c1">//Execute the function to set the current noise processing mode and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setCurrentVoiceMode</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Voice Mode, <a class="reference internal" href="#voice-mode"><span class="std std-ref">VoiceMode</span></a></p>
+</div>
+</section>
+<section id="set-the-order-of-switching-noise-processing-modes">
+<h3><span class="section-number">12.1.5. </span>Set the order of switching noise processing modes<a class="headerlink" href="#set-the-order-of-switching-noise-processing-modes" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Noise mode switching must be at least 2.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">modes</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">modes</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Set the mode switching order</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">byte</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="p">);</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">bit</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">ADV_TYPE_ANC_MODE_LIST</span><span class="p">;</span><span class="w"> </span><span class="c1">//ANC noise processing function code</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CHexConver</span><span class="p">.</span><span class="na">intToBigBytes</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w">        </span><span class="c1">//Functional data</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="tws_func.html#set-dev-function"><span class="std std-ref">Set Device Function</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Noise mode switching must be at least 2.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">modes</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">modes</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Set the mode switching order</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">byte</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xff</span><span class="p">);</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">bit</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Execute the function to set the mode switching order and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">modifyDeviceSettingsInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">ADV_TYPE_ANC_MODE_LIST</span><span class="p">,</span><span class="w"> </span><span class="n">CHexConver</span><span class="p">.</span><span class="na">intToBigBytes</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//After success, you can get the results.</span>
+<span class="w">        </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceSettingsInfo</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">ADV_TYPE_ANC_MODE_LIST</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ADVInfoResponse</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ADVInfoResponse</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">//              message.getModes();//Noise mode switching sequence</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback operation failed</span>
+<span class="w">                </span><span class="c1">//error - error information</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="tws_func.html#adv-info"><span class="std std-ref">ADVInfoResponse</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="button-settings-for-switching-noise-processing-modes">
+<h3><span class="section-number">12.1.6. </span>Button settings for switching noise processing modes<a class="headerlink" href="#button-settings-for-switching-noise-processing-modes" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">ADVInfoResponse</span><span class="p">.</span><span class="na">KeySettings</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">//Obtain device setting information</span>
+<span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">setFunction</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">KEY_FUNC_ID_SWITCH_ANC_MODE</span><span class="p">);</span><span class="w"> </span><span class="c1">//anc</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">ADV_TYPE_KEY_SETTINGS</span><span class="p">;</span><span class="w"> </span><span class="c1">//Keypad setting function code</span>
+<span class="n">ByteArrayOutputStream</span><span class="w"> </span><span class="n">outputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ByteArrayOutputStream</span><span class="p">();</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ADVInfoResponse</span><span class="p">.</span><span class="na">KeySettings</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">outputStream</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">settings</span><span class="p">.</span><span class="na">toData</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputStream</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">();</span><span class="w">     </span><span class="c1">//Functional data</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="tws_func.html#set-dev-function"><span class="std std-ref">Set Device Function</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">ADVInfoResponse</span><span class="p">.</span><span class="na">KeySettings</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">//Obtain device setting information</span>
+<span class="n">list</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">setFunction</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">KEY_FUNC_ID_SWITCH_ANC_MODE</span><span class="p">);</span><span class="w"> </span><span class="c1">//anc</span>
+<span class="c1">//Set the button function to switch ANC settings and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">configKeySettings</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The button function ID for switching noise processing modes is fixed at <strong>255</strong></p>
+</div>
+</section>
+</section>
+<section id="adaptive-anc-algorithm">
+<h2><span class="section-number">12.2. </span>Adaptive ANC Algorithm<a class="headerlink" href="#adaptive-anc-algorithm" title="Link to this heading"></a></h2>
+<section id="does-the-function-support-this-feature">
+<h3><span class="section-number">12.2.1. </span>Does the function support this feature?<a class="headerlink" href="#does-the-function-support-this-feature" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportAdaptiveANC</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Determine if the device supports the adaptive ANC algorithm</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">isSupportAdaptiveANC</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="obtain-adaptive-anc-information">
+<h3><span class="section-number">12.2.2. </span>Obtain Adaptive ANC Information<a class="headerlink" href="#obtain-adaptive-anc-information" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getAdaptiveANCData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAdaptiveANC</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isForceRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//Is it mandatory to read</span>
+<span class="w">    </span><span class="c1">//Retrieve cached adaptive ANC status information</span>
+<span class="w">    </span><span class="n">AdaptiveData</span><span class="w"> </span><span class="n">adaptiveData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getAdaptiveData</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForceRead</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">adaptiveData</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Already cached information</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">AdaptiveData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback Adaptive ANC Data</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to obtain adaptive ANC data</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">getAdaptiveANCData</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#adaptive-data"><span class="std std-ref">AdaptiveData</span></a></p></li>
+</ol>
+</div>
+<section id="adaptivedata">
+<span id="adaptive-data"></span><h4><span class="section-number">12.2.2.1. </span>AdaptiveData<a class="headerlink" href="#adaptivedata" title="Link to this heading"></a></h4>
+<p>Adaptive ANC data</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AdaptiveData</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * No detection status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">STATE_NO_CHECK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Start testing</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">STATE_START_CHECK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOn</span><span class="p">;</span><span class="w">  </span><span class="c1">//switch</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w">     </span><span class="c1">//state</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">;</span><span class="w">      </span><span class="c1">//result code</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-adaptive-anc-parameters">
+<h3><span class="section-number">12.2.3. </span>Set adaptive ANC parameters<a class="headerlink" href="#set-adaptive-anc-parameters" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAdaptiveANCData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAdaptiveANC</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="c1">//Retrieve cached adaptive ANC status information</span>
+<span class="w">    </span><span class="n">AdaptiveData</span><span class="w"> </span><span class="n">adaptiveData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getAdaptiveData</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">adaptiveData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//You can obtain it through the RCSPController#getAdaptiveANCData interface.</span>
+<span class="w">        </span><span class="n">adaptiveData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdaptiveData</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//Reverse switch state</span>
+<span class="w">    </span><span class="n">adaptiveData</span><span class="p">.</span><span class="na">setOn</span><span class="p">(</span><span class="o">!</span><span class="n">adaptiveData</span><span class="p">.</span><span class="na">isOn</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">//Execute the interface to set adaptive ANC parameters</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">setAdaptiveANCData</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="n">adaptiveData</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#adaptive-data"><span class="std std-ref">AdaptiveData</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="start-adaptive-anc-detection-process">
+<h3><span class="section-number">12.2.4. </span>Start Adaptive ANC Detection Process<a class="headerlink" href="#start-adaptive-anc-detection-process" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startAdaptiveANCCheck</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAdaptiveANC</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Execute the interface to start the adaptive ANC algorithm detection process</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">startAdaptiveANC</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnAdaptiveANCListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback detection process begins</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFinish</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback detection process ends</span>
+<span class="w">            </span><span class="c1">//code --- result code</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="implementation-flowchart">
+<h3><span class="section-number">12.2.5. </span>Implementation flowchart<a class="headerlink" href="#implementation-flowchart" title="Link to this heading"></a></h3>
+<figure class="align-center">
+<img alt="../../_images/adaptive_anc_flow.png" src="../../_images/adaptive_anc_flow.png" />
+</figure>
+</section>
+</section>
+<section id="smart-no-picking">
+<h2><span class="section-number">12.3. </span>Smart No-Picking<a class="headerlink" href="#smart-no-picking" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3><span class="section-number">12.3.1. </span>Does the function support this feature?<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportSmartNoPick</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">isSupportSmartNoPick</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-smart-no-picking-information">
+<h3><span class="section-number">12.3.2. </span>Get Smart No-Picking Information<a class="headerlink" href="#get-smart-no-picking-information" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getSmartNoPick</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportSmartNoPick</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isForceRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//Is it mandatory to read</span>
+<span class="w">    </span><span class="n">SmartNoPick</span><span class="w"> </span><span class="n">smartNoPick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getSmartNoPick</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForceRead</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">smartNoPick</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Already cached information</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">SmartNoPick</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback to intelligent no-removal information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to obtain intelligent no-picking information</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">getSmartNoPick</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#smart-no-pick"><span class="std std-ref">SmartNoPick</span></a></p></li>
+</ol>
+</div>
+<section id="smartnopick">
+<span id="smart-no-pick"></span><h4><span class="section-number">12.3.2.1. </span>SmartNoPick<a class="headerlink" href="#smartnopick" title="Link to this heading"></a></h4>
+<p>Smart no-picking information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SmartNoPick</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * High sensitivity</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SENSITIVITY_HIGH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * low sensitivity</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SENSITIVITY_LOW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * No automatic shutdown time</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CLOSE_TIME_NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * short time(5s)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CLOSE_TIME_SHORT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Standard Time(15s)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CLOSE_TIME_STANDARD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Long time(30s)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CLOSE_TIME_LONG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">op</span><span class="p">;</span><span class="w">           </span><span class="c1">//operate</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOn</span><span class="p">;</span><span class="w">     </span><span class="c1">//switch</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sensitivity</span><span class="p">;</span><span class="w">  </span><span class="c1">//sensitivity</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">closeTime</span><span class="p">;</span><span class="w">    </span><span class="c1">//Automatic shutdown time</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-intelligent-no-picking-parameters">
+<h3><span class="section-number">12.3.3. </span>Set intelligent no-picking parameters<a class="headerlink" href="#set-intelligent-no-picking-parameters" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSmartNoPickParam</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportSmartNoPick</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="c1">//Retrieve cached smart no-picking information</span>
+<span class="w">    </span><span class="n">SmartNoPick</span><span class="w"> </span><span class="n">smartNoPick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getSmartNoPick</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">smartNoPick</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//You can obtain it through the RCSPController#getSmartNoPick interface.</span>
+<span class="w">        </span><span class="n">smartNoPick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SmartNoPick</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//Reverse switch state</span>
+<span class="w">    </span><span class="c1">//More attributes can be found in the documentation.</span>
+<span class="w">    </span><span class="n">smartNoPick</span><span class="p">.</span><span class="na">setOn</span><span class="p">(</span><span class="o">!</span><span class="n">smartNoPick</span><span class="p">.</span><span class="na">isOn</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">SmartNoPick</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback to intelligent no-removal information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to set intelligent no-picking parameters</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">setSmartNoPickParam</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="n">smartNoPick</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#smart-no-pick"><span class="std std-ref">SmartNoPick</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="scene-noise-reduction">
+<h2><span class="section-number">12.4. </span>Scene noise reduction<a class="headerlink" href="#scene-noise-reduction" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3><span class="section-number">12.4.1. </span>Does the function support this feature?<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportSceneDenoising</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">isSupportSceneDenoising</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="obtain-scene-noise-reduction-information">
+<h3><span class="section-number">12.4.2. </span>Obtain scene noise reduction information<a class="headerlink" href="#obtain-scene-noise-reduction-information" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getSceneDenoising</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportSceneDenoising</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isForceRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//Is it mandatory to read</span>
+<span class="w">    </span><span class="n">SceneDenoising</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getSceneDenoising</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForceRead</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Already cached information</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">SceneDenoising</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback scene noise reduction information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to obtain scene noise reduction information</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">getSceneDenoising</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#scence-denoising"><span class="std std-ref">SceneDenoising</span></a></p></li>
+</ol>
+</div>
+<section id="scenedenoising">
+<span id="scence-denoising"></span><h4><span class="section-number">12.4.2.1. </span>SceneDenoising<a class="headerlink" href="#scenedenoising" title="Link to this heading"></a></h4>
+<p>Scene noise reduction information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SceneDenoising</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * intelligent</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MODE_SMART</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Mild</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MODE_MILD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * balanced</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MODE_BALANCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * depth</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MODE_DEPTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span><span class="w">     </span><span class="c1">//mode ID</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-scene-noise-reduction-parameters">
+<h3><span class="section-number">12.4.3. </span>Set scene noise reduction parameters<a class="headerlink" href="#set-scene-noise-reduction-parameters" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSceneDenoising</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportSceneDenoising</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="c1">//Retrieve cached scene noise reduction information</span>
+<span class="w">    </span><span class="n">SceneDenoising</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getSceneDenoising</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//You can obtain it through the RCSPController#getSceneDenoising interface.</span>
+<span class="w">        </span><span class="n">sceneDenoising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SceneDenoising</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//Set Smart Mode</span>
+<span class="w">    </span><span class="n">sceneDenoising</span><span class="p">.</span><span class="na">setMode</span><span class="p">(</span><span class="n">SceneDenoising</span><span class="p">.</span><span class="na">MODE_SMART</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">SceneDenoising</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback scene noise reduction information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to set scene noise reduction parameters</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">setSceneDenoising</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#scence-denoising"><span class="std std-ref">SceneDenoising</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="precautions">
+<h3><span class="section-number">12.4.4. </span>Precautions<a class="headerlink" href="#precautions" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>This feature is only available in <strong>ANC mode</strong>.</p></li>
+</ol>
+</section>
+</section>
+<section id="wind-noise-monitoring">
+<h2><span class="section-number">12.5. </span>Wind noise monitoring<a class="headerlink" href="#wind-noise-monitoring" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3><span class="section-number">12.5.1. </span>Does the function support this feature?<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportWindNoiseDetection</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">isSupportWindNoiseDetection</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="obtain-wind-noise-monitoring-information">
+<h3><span class="section-number">12.5.2. </span>Obtain wind noise monitoring information<a class="headerlink" href="#obtain-wind-noise-monitoring-information" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getWindNoiseDetection</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportWindNoiseDetection</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isForceRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//Is it mandatory to read</span>
+<span class="w">    </span><span class="n">WindNoiseDetection</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getWindNoiseDetection</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForceRead</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Already cached information</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">WindNoiseDetection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback Wind noise monitoring information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to obtain wind noise monitoring information</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">getWindNoiseDetection</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#wind-noise-detection"><span class="std std-ref">WindNoiseDetection</span></a></p></li>
+</ol>
+</div>
+<section id="windnoisedetection">
+<span id="wind-noise-detection"></span><h4><span class="section-number">12.5.2.1. </span>WindNoiseDetection<a class="headerlink" href="#windnoisedetection" title="Link to this heading"></a></h4>
+<p>Wind noise monitoring information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WindNoiseDetection</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOn</span><span class="p">;</span><span class="w">  </span><span class="c1">//switch</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-wind-noise-monitoring-parameters">
+<h3><span class="section-number">12.5.3. </span>Set wind noise monitoring parameters<a class="headerlink" href="#set-wind-noise-monitoring-parameters" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setWindNoiseDetection</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportWindNoiseDetection</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="c1">//Retrieve cached wind noise monitoring information</span>
+<span class="w">    </span><span class="n">WindNoiseDetection</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getWindNoiseDetection</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//You can obtain it through the RCSPController#getWindNoiseDetection interface.</span>
+<span class="w">        </span><span class="n">windNoiseDetection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WindNoiseDetection</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//Reverse switch state</span>
+<span class="w">    </span><span class="n">windNoiseDetection</span><span class="p">.</span><span class="na">setOn</span><span class="p">(</span><span class="o">!</span><span class="n">windNoiseDetection</span><span class="p">.</span><span class="na">isOn</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">WindNoiseDetection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback Wind noise monitoring information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to set wind noise monitoring parameters</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">setWindNoiseDetection</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#wind-noise-detection"><span class="std std-ref">WindNoiseDetection</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id4">
+<h3><span class="section-number">12.5.4. </span>Precautions<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>This feature is only available in <strong>ANC mode</strong>.</p></li>
+</ol>
+</section>
+</section>
+<section id="voice-enhancement">
+<h2><span class="section-number">12.6. </span>Voice Enhancement<a class="headerlink" href="#voice-enhancement" title="Link to this heading"></a></h2>
+<section id="id5">
+<h3><span class="section-number">12.6.1. </span>Does the function support this feature?<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportVocalBooster</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">isSupportVocalBooster</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="acquire-voice-enhancement-information">
+<h3><span class="section-number">12.6.2. </span>Acquire voice enhancement information<a class="headerlink" href="#acquire-voice-enhancement-information" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getVocalBooster</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportVocalBooster</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isForceRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//Is it mandatory to read</span>
+<span class="w">    </span><span class="n">VocalBooster</span><span class="w"> </span><span class="n">vocalBooster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getVocalBooster</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForceRead</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">vocalBooster</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Already cached information</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">VocalBooster</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback voice enhancement information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to obtain voice enhancement information</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">getVocalBooster</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#vocal-booster"><span class="std std-ref">VocalBooster</span></a></p></li>
+</ol>
+</div>
+<section id="vocalbooster">
+<span id="vocal-booster"></span><h4><span class="section-number">12.6.2.1. </span>VocalBooster<a class="headerlink" href="#vocalbooster" title="Link to this heading"></a></h4>
+<p>Voice enhancement information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VocalBooster</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOn</span><span class="p">;</span><span class="w">   </span><span class="c1">//switch</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-vocal-enhancement-parameters">
+<h3><span class="section-number">12.6.3. </span>Set vocal enhancement parameters<a class="headerlink" href="#set-vocal-enhancement-parameters" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setVocalBooster</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportVocalBooster</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get the RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get the currently operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Device not initialized</span>
+<span class="w">    </span><span class="c1">//Retrieve cached voice enhancement information</span>
+<span class="w">    </span><span class="n">VocalBooster</span><span class="w"> </span><span class="n">vocalBooster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deviceInfo</span><span class="p">.</span><span class="na">getVocalBooster</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">vocalBooster</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//You can obtain it through the RCSPController#getVocalBooster interface.</span>
+<span class="w">        </span><span class="n">vocalBooster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VocalBooster</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//Reverse switch state</span>
+<span class="w">    </span><span class="n">vocalBooster</span><span class="p">.</span><span class="na">setOn</span><span class="p">(</span><span class="o">!</span><span class="n">vocalBooster</span><span class="p">.</span><span class="na">isOn</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="w"> </span><span class="n">eventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">voiceFunc</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">VocalBooster</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Callback voice enhancement information</span>
+<span class="w">                </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Add RCSP event listener</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute the interface to set voice enhancement parameters</span>
+<span class="w">    </span><span class="n">controller</span><span class="p">.</span><span class="na">setVocalBooster</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">,</span><span class="w"> </span><span class="n">vocalBooster</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation successful</span>
+<span class="w">            </span><span class="c1">//The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback operation failed</span>
+<span class="w">            </span><span class="c1">//Remove RCSP event listener</span>
+<span class="w">            </span><span class="n">controller</span><span class="p">.</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="n">eventCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#vocal-booster"><span class="std std-ref">VocalBooster</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">12.6.4. </span>Precautions<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>This feature is only available in <strong>Transparency mode</strong>.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tws_func.html" class="btn btn-neutral float-left" title="11. TWS Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sound_card_func.html" class="btn btn-neutral float-right" title="13. Sound Card Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

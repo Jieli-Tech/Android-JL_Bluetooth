@@ -1,0 +1,59 @@
+
+.. _use_sdk_flow: 
+
+1 使用流程
+**********************
+
+.. graphviz::
+    :caption: 杰理之家SDK使用流程
+    :align: center
+
+    digraph flow {
+        
+        start -> init_1 [lhead="cluster_init"];
+        init_2 -> cluster_connect [ltail="cluster_init"];
+        cluster_connect -> connect_ok;
+        connect_ok -> cluster_connect [label="NO"];
+        connect_ok -> cluster_operation [label="YES"];
+        cluster_operation -> reseale -> end;
+
+        start [label="Start", shape="Mdiamond"];
+        subgraph cluster_init {
+            label="初始化流程";
+            init_1 -> init_2;
+
+            init_1 [label="初始化JL_BluetoothManager", shape="record"];
+            init_2 [label="配置JL_BluetoothManager参数", shape="record"];
+        }
+        subgraph cluster_connect {
+            label="连接设备流程";
+            begin -> listen -> scan -> foudn_ok;
+            foudn_ok -> scan [label="NO"];
+            foudn_ok -> connect [label="YES"];
+            connect -> output -> finish;
+
+            begin [label="开始", shape="Mdiamond"];
+            listen [label="添加蓝牙事件监听器", shape="record"];
+            scan [label="扫描BLE设备", shape="record"]
+            foudn_ok [label="是否发现目标设备?", shape="diamond"];
+            connect [label="连接目标设备", shape="record"];
+            output [label="输出结果并移除蓝牙事件监听器", shape="record"];
+            finish [label="结束", shape="Msquare"];
+        }
+
+        subgraph cluster_operation {
+            label="使用接口流程";
+            
+            op_0 -> op_1 -> op_2 -> op_3 -> op_4;
+
+            op_0 [label="获取JL_BluetoothManager对象", shape="record"];
+            op_1 [label="添加蓝牙RCSP事件监听器", shape="record"];
+            op_2 [label="调用接口实现功能", shape="record"];
+            op_3 [label="等待结果回调并处理", shape="record"];
+            op_4 [label="移除蓝牙RCSP事件监听器", shape="record"];
+        }
+
+        connect_ok [label="是否连接成功?", shape="diamond"];
+        reseale [label="销毁JL_BluetoothManager对象", shape="record"];
+        end [label="End", shape="Msquare"];
+    }

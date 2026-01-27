@@ -1,0 +1,311 @@
+ .. sectnum::
+    :start: 1
+    :depth: 4
+
+
+接入流程
+************************
+
+导入说明
+=======================     
+
+运行环境
+------------------------              
+
+=================== ========================================== =================================
+  类别                             兼容范围                                   备注
+=================== ========================================== =================================
+  软件系统          | 目标版本: Android API 36(Android 16)       支持BLE功能
+                    | 最低版本: Android API 21(Android 5.0)
+  硬件要求            支持RCSP协议的固件                           AC692N、AC700N, JL701N等
+  开发平台            Android Studio                              建议使用最新版本开发
+=================== ========================================== =================================
+
+
+配置权限
+------------------------     
+
+接入SDK时应在 ``AndroidManifest.xml`` 申请以下权限:
+
+.. code-block:: xml
+
+    <!--使用蓝牙权限-->
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <!--高版本安卓系统要求-->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+	<!--定位权限，官方要求使用蓝牙或网络开发，需要位置信息-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+.. warning:: 
+    | 1. 在Android 6.0+以上手机系统运行, 请增加 ``动态权限管理`` 
+    | 2. 在Android 12.0+以上安卓系统运行，需要请求 ``蓝牙扫描`` 和 ``蓝牙连接`` 的权限 
+    | 3. 需要确认 ``位置服务`` 已启用, 才能使用蓝牙操作功能
+
+依赖库
+------------------------          
+
+.. warning:: 
+    ``xxx`` 为版本号，请以最新发布版本为准
+
+* **jl_bluetooth_rcsp_Vxxx-release.aar** :  蓝牙控制与RCSP协议处理相关
+* **jldecryption_Vxxx-release.aar** : 编解码相关
+
+
+.. code-block:: text
+
+    //1.将上面的aar文件放入工程目录中的对应moudle的lib文件夹下
+    //2.在moudlu的build.gradle中添加
+    implementation fileTree(include: ['*.aar'], dir: 'libs') 
+
+    implementation 'com.google.code.gson:gson:2.13.1'
+
+
+蓝牙库配置
+=======================          
+
+通过配置蓝牙库参数, 可以开启不同的功能
+
+.. code-block:: java
+
+    BluetoothOption bluetoothOption = BluetoothOption.createDefaultOption();//创建默认配置
+    bluetoothOption.setPriority(BluetoothOption.PREFER_BLE)//通信方式，支持ble和spp
+               .setUseMultiDevice(true) //是否支持多设备管理
+               .setTimeoutMs(2000)//命令超时时间, 默认2000ms
+               .setMtu(509)       //调节蓝牙MTU
+               .setUseDeviceAuth(true);//是否开启设备认证。 与固件工程师确认    
+        /**
+         * 扫描设备策略
+         *  - BluetoothConstant#NONE_FILTER : 不过滤设备
+         *  - BluetoothConstant#ALL_FILTER : 使用所有过滤规则
+         *  - BluetoothConstant#FLAG_FILTER : 仅用标识过滤规则 (音箱)
+         *  - BluetoothConstant#HASH_FILTER : 仅用加密过滤规则 (耳机,音箱,等等)
+         */
+        //bluetoothOption.setBleScanStrategy(BluetoothConstant.ALL_FILTER); 
+
+        //修改BLE的通讯uuid
+        //bluetoothOption.setBleUUID(serviceUUID, writeCharacteristicUUID, notificationCharacteristicUUID);
+
+        //修改SPP的通讯uuid
+        //bluetoothOption.setSppUUID(uuid);
+
+    //配置参数 
+    RCSPController.init(context, bluetoothOption);
+    //JL_BluetoothManager.getInstance(context).configure(bluetoothOption); 
+
+
+.. _bluetooth_option:
+
+BluetoothOption
+---------------------------- 
+
+===================== ======================= ==========================================================================================
+  字段                    描述                   备注
+===================== ======================= ==========================================================================================
+ priority              指定通讯方式            | BluetoothOption.PREFER_BLE - BLE方式, 默认值
+                                               | BluetoothOption.PREFER_SPP - SPP方式
+ reconnect             是否需要重连              异常断开回连设备。 默认值: true 
+ timeoutMs             命令超时时间              BluetoothConstant.DEFAULT_SEND_CMD_TIMEOUT - 2000ms
+ enterLowPowerMode     是否进入低功耗模式        低功耗模式: 仅连接通讯通道。 默认值: false
+ isUseMultiDevice      是否使用多设备管理        多设备管理: 同时能保持多个通讯通道。 默认值: false
+ isUseDeviceAuth       是否开启设备认证          设备认证: 互相认证设备的身份。 默认值: true  注意: 与固件工程师协商
+ isMandatoryUseBLE     是否强制使用BLE           强制连接BLE。默认值: false
+ isSkipNoNameDev       是否跳过没有名称的设备     默认值: true
+ isSupportCTKD         是否支持一键连接功能       若支持一键连接功能，双模设备配对，会强制走经典蓝牙配对
+ scanFilterData        过滤设备标识             标识目标设备的特征值, 用于过滤设备。 默认值: null 
+ bleScanStrategy       搜索设备策略            | BluetoothConstant#NONE_FILTER - 不使用过滤规则 
+                                               | BluetoothConstant#ALL_FILTER  - 使用全部过滤规则, 默认值
+                                               | BluetoothConstant#FLAG_FILTER - 仅使用标识过滤规则
+                                               | BluetoothConstant#HASH_FILTER - 仅使用HASH加密过滤规则
+ bleScanMode           BLE扫描模式             | ScanSettings#SCAN_MODE_LOW_POWER   - 低功耗模式
+                                               | ScanSettings#SCAN_MODE_BALANCED    - 均衡模式， 默认值
+                                               | ScanSettings#SCAN_MODE_LOW_LATENCY - 低延时模式(高功耗, 仅前台有效)
+                                               | 建议前台应用使用【低延时模式】
+ mtu                   BLE通讯MTU              取值范围: [20, 514], 默认值是20
+ isUseBleBondWay       是否使用BLE加密          默认值: false
+ bleUUIDMap            BLE通讯UUID合集         | BluetoothConstant#KEY_BLE_SERVICE_UUID                    - 服务UUID
+                                               | BluetoothConstant#KEY_BLE_WRITE_CHARACTERISTIC_UUID        - 写特征值UUID
+                                               | BluetoothConstant#KEY_BLE_NOTIFICATION_CHARACTERISTIC_UUID - 通知特征值UUID
+ sppUUID               SPP通讯UUID              BluetoothConstant.UUID_SPP
+ cmdSnGenerator        命令序列化生成器          用于多个杰理RCSP库统一命令序列号
+===================== ======================= ==========================================================================================
+
+蓝牙库初始化
+========================        
+
+蓝牙代理有两种实现方式
+
+内置蓝牙代理实现
+-----------------------------------------------        
+
+.. code-block:: java
+
+    if (null == context || RCSPController.isInit()) return; //已初始化
+    BluetoothOption option = BluetoothOption.createDefaultOption()
+            .setUseMultiDevice(true)
+            .setUseDeviceAuth(true)
+            .setPriority(BluetoothOption.PREFER_BLE);
+    //初始化和配置蓝牙库
+    //RCSPController的默认实现为JL_BluetoothManager
+    RCSPController.init(context, option);
+
+    //RCSP库核心操作类
+    RcspOpImpl rcspOp = RCSPController.getInstance().getRcspOp();
+    //SDK内置蓝牙操作类
+    JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+
+
+有两种初始化方式
+
+JL_BluetoothManager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //初始化和配置蓝牙库
+    JL_BluetoothManager.getInstance(context).configure(BluetoothOption.createDefaultOption());
+
+.. note::
+    **不推荐**
+
+
+
+RCSPController
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //是否初始化
+    if (!RCSPController.isInit()) { 
+        BluetoothOption bluetoothOption = BluetoothOption.createDefaultOption()
+            .setUseMultiDevice(true)
+            .setPriority(BluetoothOption.PREFER_BLE)
+            .setUseDeviceAuth(true);
+        //初始化和配置蓝牙库
+        RCSPController.init(this, bluetoothOption);
+    }
+
+
+.. note::
+    ``推荐方式``
+
+
+
+自行实现蓝牙代理
+-----------------------------------------------
+
+.. code-block:: java
+
+    if (null == context || RCSPController.isInit()) return; //已初始化
+    BluetoothOption option = BluetoothOption.createDefaultOption()
+            .setUseMultiDevice(true)
+            .setUseDeviceAuth(true)
+            .setPriority(BluetoothOption.PREFER_BLE);
+    //初始化和配置蓝牙库
+    //可以自行管理蓝牙实现
+    RCSPController.init(new CustomBluetoothManager(context, option));
+
+    //RCSP库核心操作类
+    RcspOpImpl rcspOp = RCSPController.getInstance().getRcspOp();
+
+
+
+自定义蓝牙管理实现
+
+.. code-block:: java
+
+    /**
+     * 自定义蓝牙管理器
+     */
+    private static final class CustomBluetoothManager extends RcspOpImpl {
+
+        //BLE服务UUID
+        private final static UUID UUID_SERVICE = BleManager.BLE_UUID_SERVICE;
+        //BLE的写特征UUID
+        private final static UUID UUID_WRITE = BleManager.BLE_UUID_WRITE;
+        //BLE的通知特征UUID
+        private final static UUID UUID_NOTIFICATION = BleManager.BLE_UUID_NOTIFICATION;
+
+        /**
+         * 第三方蓝牙库实现
+         */
+        //FIXME: 替换成自定义蓝牙库实现
+        private final BleManager bleManager = BleManager.getInstance();
+
+
+        public CustomBluetoothManager(@NonNull Context context, @NonNull BluetoothOption option) {
+            super(context, option);
+            bleManager.registerBleEventCallback(mBleEventCallback);
+        }
+
+        @Override
+        public boolean isDeviceConnected(BluetoothDevice device) {
+            //FIXME: 需要返回设备是否已连接的结果
+            return bleManager.isConnectedDevice(device);
+        }
+
+        @Override
+        public boolean sendDataToDevice(BluetoothDevice device, byte[] data) {
+            //FIXME: 需要实现蓝牙发数功能。
+            //FIXME: 1. 若BLE方式发数，需要注意 MTU分包 和 队列式发数
+            //FIXME: 2. 此处实现可以是阻塞实现，也可以是异步实现
+            if (!isDeviceConnected(device)) {
+                return false;
+            }
+            bleManager.writeDataByBleAsync(device, UUID_SERVICE, UUID_WRITE, data,
+                    (device1, serviceUUID, characteristicUUID, result, data1) -> {
+                        JL_Log.d(TAG, "sendDataToDevice", "send : " + result);
+                    });
+            return true;
+        }
+
+        public boolean connect(BluetoothDevice device) {
+            return bleManager.connectBleDevice(device);
+        }
+
+        public void disconnect(BluetoothDevice device) {
+            bleManager.disconnectBleDevice(device);
+        }
+
+        @Override
+        public void release() {
+            super.release();
+            bleManager.unregisterBleEventCallback(mBleEventCallback);
+        }
+
+        private final BleEventCallback mBleEventCallback = new BleEventCallback() {
+            @Override
+            public void onBleConnection(BluetoothDevice device, int status) {
+                super.onBleConnection(device, status);
+                //转换连接状态
+                int btState = StateCode.CONNECTION_DISCONNECT;
+                switch (status) {
+                    case BluetoothProfile.STATE_CONNECTED:
+                        btState = StateCode.CONNECTION_OK;
+                        break;
+                    case BluetoothProfile.STATE_CONNECTING:
+                        btState = StateCode.CONNECTION_CONNECTING;
+                        break;
+                }
+                JL_Log.d(TAG, "onBleConnection", "device : " + device + ", status : " + status + ", convert state : " + btState);
+                //TODO: 透传设备连接状态。需要避免相同设备的连接状态重复传入
+                notifyBtDeviceConnection(device, btState);
+            }
+
+            @Override
+            public void onBleDataNotification(BluetoothDevice device, UUID serviceUuid, UUID characteristicsUuid, byte[] data) {
+                super.onBleDataNotification(device, serviceUuid, characteristicsUuid, data);
+                if (device != null && UUID_SERVICE.equals(serviceUuid) && UUID_NOTIFICATION.equals(characteristicsUuid)) {
+                    //TODO: 透传接收到的数据
+                    notifyReceiveDeviceData(device, data);
+                }
+            }
+        };
+    }
+
+``BleManager`` 实现参考 ``btsmart\src\test\java\com\jieli\btsmart\demo\bluetooth\ble``

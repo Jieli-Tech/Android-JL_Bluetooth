@@ -1,0 +1,62 @@
+.. _eq_control: 
+
+均衡器功能接口
+**************************************
+
+.. code-block:: java
+
+    public interface IEqOp {
+
+        /**
+         * 获取EQ信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getEqInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置EQ信息
+         *
+         * @param device   操作设备
+         * @param eqInfo   EQ信息
+         * @param callback 结果回调
+         */
+        void configEqInfo(BluetoothDevice device, EqInfo eqInfo, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取拓展数据信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getExpandDataInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置拓展数据
+         *
+         * @param device   操作设备
+         * @param mask     掩码
+         * @param data     拓展数据
+         * @param callback 结果回调
+         */
+        void setExpandDataInfo(BluetoothDevice device, int mask, byte[] data, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置混响参数
+         *
+         * @param device    操作设备
+         * @param param     混响参数
+         * @param callback  结果回调
+         */
+        void setReverberationParameter(BluetoothDevice device, ReverberationParam param, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置动态限幅参数
+         *
+         * @param device    操作设备
+         * @param param     动态限幅参数
+         * @param callback  结果回调
+         */
+        void setDynamicLimiterParameter(BluetoothDevice device, DynamicLimiterParam  param, OnRcspActionCallback<Boolean> callback);
+    }

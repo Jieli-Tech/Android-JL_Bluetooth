@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. Clock Function &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7. External Device Control Function" href="line_in_ctrl.html" />
+    <link rel="prev" title="5. Equalizer Control Function" href="eq_ctrl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">6. Clock Function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#synchronize-time">6.1. Synchronize Time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-alarm-list">6.2. Read Alarm List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-or-modify-alarm">6.3. Add or Modify Alarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-alarm">6.4. Delete Alarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-alarm-default-bell-list">6.5. Read Alarm Default Bell List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-specified-alarm-bell-parameters">6.6. Read Specified Alarm Bell Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-specified-alarm-bell-parameters">6.7. Set Specified Alarm Bell Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preview-alarm-bell">6.8. Preview Alarm Bell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stop-previewing-alarm-bell">6.9. Stop Previewing Alarm Bell</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>Clock Function</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="clock-function">
+<span id="rtc-ctrl-func"></span><h1><span class="section-number">6. </span>Clock Function<a class="headerlink" href="#clock-function" title="Link to this heading"></a></h1>
+<section id="synchronize-time">
+<h2><span class="section-number">6.1. </span>Synchronize Time<a class="headerlink" href="#synchronize-time" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>           – Clock function</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_RTC_TIME</span></code>              – Identify update time</div>
+<div class="line"><strong>value :</strong>  timestamp: year(2Bytes) + month(1Byte) + day(1Byte) + hour(1Byte) + minute(1Byte) + second(1Byte)</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">syncTimeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSyncTimeCmd</span><span class="p">(</span><span class="n">Calendar</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Execute synchronize time function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">syncTime</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="read-alarm-list">
+<h2><span class="section-number">6.2. </span>Read Alarm List<a class="headerlink" href="#read-alarm-list" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>  – Clock function</div>
+<div class="line"><strong>mask :</strong>   – Clock parameters</div>
+<div class="line"><br /></div>
+<div class="line-block">
+<div class="line">* AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM              – Alarm list</div>
+<div class="line">* AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_EXPAND_FLAG  – Alarm expand parameters</div>
+<div class="line">* AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_VER          – Alarm version</div>
+</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getAlarmListCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetAlarmCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Register Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback alarm list information here</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute get alarm list function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">readAlarmList</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">        </span><span class="c1">//Result will be BTRcspEventCallback#onAlarmListChange callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Alarm list information, <a class="reference internal" href="#alarm-list-info"><span class="std std-ref">AlarmListInfo</span></a></p></li>
+</ol>
+</div>
+<section id="alarmlistinfo">
+<span id="alarm-list-info"></span><h3><span class="section-number">6.2.1. </span>AlarmListInfo<a class="headerlink" href="#alarmlistinfo" title="Link to this heading"></a></h3>
+<p>Alarm list information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AlarmListInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w"> </span><span class="c1">//Version number</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AlarmBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alarmBeans</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm list</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="alarmbean">
+<span id="alarm-bean"></span><h3><span class="section-number">6.2.2. </span>AlarmBean<a class="headerlink" href="#alarmbean" title="Link to this heading"></a></h3>
+<p>Alarm information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AlarmBean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Index</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">index</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Name</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Hour</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">hour</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Minute</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">min</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Type</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">repeatMode</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Expand field</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">reserved</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Is open</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">open</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Bell type</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">bellType</span><span class="p">;</span><span class="c1">//0: Default type  1: Device file type</span>
+<span class="w">    </span><span class="c1">//Bell cluster</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bellCluster</span><span class="p">;</span><span class="w"> </span><span class="c1">//When bellType=0, here is bell index When bellType=1, here is file cluster number</span>
+<span class="w">    </span><span class="c1">//Bell name</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">bellName</span><span class="p">;</span><span class="w"> </span><span class="c1">//Valid when bellType=1</span>
+<span class="w">    </span><span class="c1">//Device index where bell is located</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">devIndex</span><span class="p">;</span><span class="c1">//Valid when bellType=1</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="add-or-modify-alarm">
+<h2><span class="section-number">6.3. </span>Add or Modify Alarm<a class="headerlink" href="#add-or-modify-alarm" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>     – Clock function</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM</span></code>       – Identify alarm operation</div>
+<div class="line"><strong>value :</strong>  op(1Byte)+len(1Byte)+payload(n Bytes)</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarm</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm properties, obtained by creating or reading alarm list</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">addAlarmCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetAlarmCmd</span><span class="p">(</span><span class="n">AlarmBean</span><span class="p">.</span><span class="na">toAttrbean</span><span class="p">(</span><span class="n">alarm</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarm</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm properties, obtained by creating or reading alarm list</span>
+<span class="c1">//Execute add or modify alarm function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addOrModifyAlarm</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">alarm</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Alarm object <a class="reference internal" href="#alarm-bean"><span class="std std-ref">AlarmBean</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="delete-alarm">
+<h2><span class="section-number">6.4. </span>Delete Alarm<a class="headerlink" href="#delete-alarm" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>        – Clock function</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM</span></code>          – Identify alarm operation</div>
+<div class="line"><strong>value :</strong>  op(1Byte)+len(1Byte)+payload(n Bytes)</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarm</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm properties, obtained by reading alarm list</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">deleteAlarmCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetAlarmCmd</span><span class="p">(</span><span class="n">AlarmBean</span><span class="p">.</span><span class="na">toAttrbean</span><span class="p">(</span><span class="n">alarm</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarm</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm properties, obtained by reading alarm list</span>
+<span class="c1">//Execute delete alarm function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">deleteAlarm</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">alarm</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Alarm information <a class="reference internal" href="#alarm-bean"><span class="std std-ref">AlarmBean</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="read-alarm-default-bell-list">
+<h2><span class="section-number">6.5. </span>Read Alarm Default Bell List<a class="headerlink" href="#read-alarm-default-bell-list" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>                          – Clock function</div>
+<div class="line"><strong>mask :</strong>   <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_DEFAULT_BELL_LIST</span></code> – Clock parameters</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">readAlarmDefaultBellListCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetDefaultBellList</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Register Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmDefaultBellListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback default alarm bell list information here</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute get default alarm bell list function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">readAlarmDefaultBellList</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">        </span><span class="c1">//Result will be BTRcspEventCallback#onAlarmDefaultBellListChange callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Default alarm bell, <a class="reference internal" href="#default-alarm-bell"><span class="std std-ref">DefaultAlarmBell</span></a></p></li>
+</ol>
+</div>
+<section id="defaultalarmbell">
+<span id="default-alarm-bell"></span><h3><span class="section-number">6.5.1. </span>DefaultAlarmBell<a class="headerlink" href="#defaultalarmbell" title="Link to this heading"></a></h3>
+<p>Default alarm bell</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultAlarmBell</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">//Name</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="c1">//Index</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">selected</span><span class="p">;</span><span class="w"> </span><span class="c1">//Is selected</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="read-specified-alarm-bell-parameters">
+<h2><span class="section-number">6.6. </span>Read Specified Alarm Bell Parameters<a class="headerlink" href="#read-specified-alarm-bell-parameters" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">byte</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm index</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">readAlarmBellArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildReadBellArgsCmd</span><span class="p">(</span><span class="n">mask</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//alarmIndex - Alarm index</span>
+<span class="c1">//Execute get specified alarm bell parameters function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">readAlarmBellArgs</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">alarmIndex</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">AlarmExpandCmd</span><span class="p">.</span><span class="na">BellArg</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AlarmExpandCmd</span><span class="p">.</span><span class="na">BellArg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">        </span><span class="c1">//message - Bell parameters</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="bellarg">
+<span id="bell-arg"></span><h3><span class="section-number">6.6.1. </span>BellArg<a class="headerlink" href="#bellarg" title="Link to this heading"></a></h3>
+<p>Bell parameters</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BellArg</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Alarm index</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to allow setting repeat count</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isCanSetCount</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Repeat count</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to allow setting repeat interval</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isCanSetInterval</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Repeat interval</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">interval</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to allow setting ring duration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isCanSetDuration</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Ring duration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">duration</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-specified-alarm-bell-parameters">
+<h2><span class="section-number">6.7. </span>Set Specified Alarm Bell Parameters<a class="headerlink" href="#set-specified-alarm-bell-parameters" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">AlarmExpandCmd</span><span class="p">.</span><span class="na">BellArg</span><span class="w"> </span><span class="n">arg</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm bell parameters</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setAlarmBellArgCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetBellArgsCmd</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//alarmBellArg - Obtained by reading alarm bell parameters</span>
+<span class="w"> </span><span class="n">AlarmExpandCmd</span><span class="p">.</span><span class="na">BellArg</span><span class="w"> </span><span class="n">alarmBellArg</span><span class="p">;</span><span class="w"> </span><span class="c1">//Alarm bell parameters</span>
+<span class="c1">//Execute set specified alarm bell parameters function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setAlarmBellArg</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">alarmBellArg</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alarm bell parameters, <a class="reference internal" href="#bell-arg"><span class="std std-ref">BellArg</span></a></p>
+</div>
+</section>
+<section id="preview-alarm-bell">
+<h2><span class="section-number">6.8. </span>Preview Alarm Bell<a class="headerlink" href="#preview-alarm-bell" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>         – Clock function</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_AUDITION</span></code>  – Identify preview alarm bell</div>
+<div class="line"><strong>value :</strong>  op(1Byte)+type(1Byte)+dev(1Byte)+cluster(4Bytes)</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">    </span><span class="c1">//Play type</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">     </span><span class="c1">//Device identifier</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">cluster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">//Cluster number</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">auditionAlarmBellCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildAuditionAlarmBellCmd</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">cluster</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="n">AuditionParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">//Preview parameters</span>
+<span class="c1">//Execute preview alarm bell function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">auditionAlarmBell</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="auditionparam">
+<span id="audition-param"></span><h3><span class="section-number">6.8.1. </span>AuditionParam<a class="headerlink" href="#auditionparam" title="Link to this heading"></a></h3>
+<p>Preview bell parameters</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuditionParam</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">op</span><span class="p">;</span><span class="w"> </span><span class="c1">//Operation code, 0 : Stop   1 : Ring</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"> </span><span class="c1">//Bell type, 0 : Default   1 : File</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">dev</span><span class="p">;</span><span class="w">  </span><span class="c1">//Storage index</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cluster</span><span class="p">;</span><span class="w"> </span><span class="c1">//File cluster number</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">//Bell name</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Preview bell parameters, <a class="reference internal" href="#audition-param"><span class="std std-ref">AuditionParam</span></a></p>
+</div>
+</section>
+</section>
+<section id="stop-previewing-alarm-bell">
+<h2><span class="section-number">6.9. </span>Stop Previewing Alarm Bell<a class="headerlink" href="#stop-previewing-alarm-bell" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_RTC</span></code>         – Clock function</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_AUDITION</span></code>  – Identify preview alarm bell</div>
+<div class="line"><strong>value :</strong>  op(1Byte), op = 0x00</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">stopAuditionAlarmBellCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildStopAuditionAlarmBellCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Execute stop previewing alarm bell function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">stopAlarmBell</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="eq_ctrl.html" class="btn btn-neutral float-left" title="5. Equalizer Control Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="line_in_ctrl.html" class="btn btn-neutral float-right" title="7. External Device Control Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

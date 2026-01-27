@@ -1,0 +1,35 @@
+.. _spdif_op_api: 
+
+SPDIF操作
+************************************
+
+.. code-block:: java
+
+    public interface ISPDIFOp {
+        /**
+        * 获取状态信息(播放状态+音源)
+        *
+        * @param device   操作设备
+        * @param callback 结果回调
+        */
+        void getSPDIFInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+        * 设置播放状态
+        *
+        * @param device      操作设备
+        * @param spdifPlayStatusInfo  播放状态信息
+        * @param callback    结果回调
+        */
+        void setSPDIFPlayStatusInfo(BluetoothDevice device, SPDIFPlayStatusInfo spdifPlayStatusInfo, OnRcspActionCallback<Boolean> callback);
+
+        /**
+        * 设置音源
+        *
+        * @param device      操作设备
+        * @param spdifAudioSourceInfo  音源信息
+        * @param callback    结果回调
+        */
+        void setSPDIFSPDIFAudioSourceInfo(BluetoothDevice device, SPDIFAudioSourceInfo spdifAudioSourceInfo, OnRcspActionCallback<Boolean> callback);
+
+    }

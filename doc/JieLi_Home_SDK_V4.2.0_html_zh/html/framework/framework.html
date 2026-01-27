@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK说明 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SDK开发包介绍" href="../resource/sdk_structure.html" />
+    <link rel="prev" title="欢迎使用杰理之家SDK开发文档(Android)" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1. SDK简介</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#framework">2. SDK架构</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDK说明</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk">
+<h1>SDK说明<a class="headerlink" href="#sdk" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>1. SDK简介<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">杰理之家SDK基于杰理RCSP协议实现, 主要支持音箱SDK和耳机SDK, 也支持直播声卡等系列产品。SDK提供了丰富的功能接口:</div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>音乐控制功能  — 手机音乐播放控制、设备音乐播放控制、ID3音乐信息显示</p></li>
+<li><p>设备设置功能  — 音量设置、状态查询、重启设备等</p></li>
+<li><p>文件浏览功能  — 查看SD卡、U盘等音乐文件列表</p></li>
+<li><p>闹钟管理功能  — 闹钟的增删改查, 闹钟铃声设置</p></li>
+<li><p>FM控制功能    — FM收音功能、FM发射功能</p></li>
+<li><p>灯光控制功能  — 灯光闪烁, 频率, 颜色(RGB), 模式等控制, 实现酷炫效果</p></li>
+<li><p>EQ调节功能    — 均衡器音效调节, 轻易打造卓越音质</p></li>
+<li><p>音效调节功能  — 混响、高低音设置</p></li>
+<li><p>按键设置功能  — 耳机按键功能设置, 丰富耳机功能</p></li>
+<li><p>查找设备功能  — 查找设备或查找手机</p></li>
+<li><p>ANC设置功能   — 噪声处理模式设置, 支持正常模式、主动降噪模式、通透模式等</p></li>
+<li><p>自定义命令    — 支持客户拓展功能</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="framework">
+<span id="id2"></span><h2>2. SDK架构<a class="headerlink" href="#framework" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id3">
+<div class="graphviz"><object data="../_images/graphviz-1ab6317ebfd670c33a1fed2e6e0623a680cb795f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph framework {
+    rankdir=BT;
+    compound=true;
+
+    subgraph cluster_bt{
+        label=&quot;蓝牙代理层&quot;;
+        bgcolor=&quot;darkslategray2&quot;;
+        width=10;
+
+        subgraph cluster_io {
+            label=&quot;蓝牙IO&quot;;
+            style=&quot;dashed&quot;;
+            width=10;
+
+            bt_recv [label=&quot;接收数据&quot;, shape=&quot;record&quot;, width=5];
+            bt_send [label=&quot;发送数据&quot;, shape=&quot;record&quot;, width=5];
+        }
+
+        subgraph cluster_bt_fun{
+            label=&quot;功能封装&quot;;
+            style=&quot;dashed&quot;;
+            width=10;
+
+            bt_0 [label=&quot;设备管理&quot;, shape=&quot;record&quot;, width=3];
+            bt_1 [label=&quot;弹窗快连&quot;, shape=&quot;record&quot;, width=3];
+            bt_2 [label=&quot;历史记录&quot;, shape=&quot;record&quot;, width=3];
+        }
+
+        bt_0 -&gt; bt_recv [dir=&quot;both&quot;, style=&quot;invis&quot;, ltail=&quot;cluster_bt_fun&quot;, lhead=&quot;cluster_io&quot;];
+    }
+
+    subgraph cluster_rcsp{
+        label=&quot;RCSP协议层&quot;;
+        bgcolor=&quot;lightgreen&quot;;
+        rankdir=BT;
+        width=10;
+
+        subgraph cluster_rcsp_proxy {
+            label=&quot;代理层&quot;;
+            style=&quot;dashed&quot;;
+            width=10
+
+            rcsp_0 [label=&quot;解析数据&quot;, shape=&quot;record&quot;, width=3];
+            rcsp_1 [label=&quot;组装数据&quot;, shape=&quot;record&quot;, width=3];
+        }
+
+        rcsp_2 [label=&quot;处理数据层&quot;, shape=&quot;record&quot;, width=10];
+        rcsp_1 -&gt; rcsp_2 [dir=&quot;both&quot;, ltail=&quot;cluster_rcsp_proxy&quot;];
+    }
+
+    subgraph cluster_func{
+        label=&quot;功能实现层&quot;;
+        bgcolor=&quot;lightyellow&quot;;
+        width=10;
+
+        fun_0 [label=&quot;音乐控制&quot;, shape=&quot;record&quot;, width=1];
+        fun_1 [label=&quot;FM控制&quot;, shape=&quot;record&quot;, width=1];
+        fun_2 [label=&quot;灯光控制&quot;, shape=&quot;record&quot;, width=1];
+        fun_3 [label=&quot;按键设置&quot;, shape=&quot;record&quot;, width=1];
+        fun_4 [label=&quot;闹钟管理&quot;, shape=&quot;record&quot;, width=1];
+        fun_5 [label=&quot;查找设备&quot;, shape=&quot;record&quot;, width=1];
+        fun_6 [label=&quot;AUX控制&quot;, shape=&quot;record&quot;, width=1];
+        fun_7 [label=&quot;EQ调节&quot;, shape=&quot;record&quot;, width=1];
+        fun_8 [label=&quot;音效调节&quot;, shape=&quot;record&quot;, width=1];
+        fun_9 [label=&quot;声卡功能&quot;, shape=&quot;record&quot;, width=1];
+    }
+
+    bt_recv -&gt; rcsp_0 [dir=&quot;both&quot;, ltail=&quot;cluster_io&quot;, lhead=&quot;cluster_rcsp_proxy&quot;];
+    rcsp_2 -&gt; fun_4 [label=&quot;依赖实现&quot;, ltail=&quot;cluster_rcsp&quot;, lhead=&quot;cluster_func&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-text">杰理之家SDK架构</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="line-block">
+<div class="line">1. <code class="docutils literal notranslate"><span class="pre">RCSP处理层</span></code> 依赖 <code class="docutils literal notranslate"><span class="pre">RCSP协议</span></code> 实现, <code class="docutils literal notranslate"><span class="pre">RCSP协议</span></code> 依赖 <code class="docutils literal notranslate"><span class="pre">蓝牙代理层</span></code> 实现</div>
+<div class="line">2. SDK默认实现了 <code class="docutils literal notranslate"><span class="pre">蓝牙代理层</span></code> 的功能，也支持客户外部实现。</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="欢迎使用杰理之家SDK开发文档(Android)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../resource/sdk_structure.html" class="btn btn-neutral float-right" title="SDK开发包介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

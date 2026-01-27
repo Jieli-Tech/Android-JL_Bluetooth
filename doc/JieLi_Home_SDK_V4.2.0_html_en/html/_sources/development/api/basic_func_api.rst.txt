@@ -1,0 +1,164 @@
+.. _rcsp_base: 
+
+Basic Function Interface
+**********************************************
+
+.. code-block:: java
+
+    public interface IBaseOp {
+
+        /**
+         * Get device info
+         *
+         * @param device   Operation device
+         * @param mask     Mask
+         * @param callback Result callback
+         */
+        void requestDeviceInfo(BluetoothDevice device, int mask, OnRcspActionCallback<DeviceInfo> callback);
+
+
+        /**
+         * Get device system attributes
+         *
+         * @param device   Operation device
+         * @param function Function number
+         * @param mask     Mask
+         * @param callback Result callback
+         */
+        void getDevSysInfo(BluetoothDevice device, int function, int mask, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set device system attributes
+         *
+         * @param device   Operation device
+         * @param function Function number
+         * @param list     Attribute list
+         * @param callback Result callback
+         */
+        void setDevSysInfo(BluetoothDevice device, int function, List<AttrBean> list, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get current device mode info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getCurrentDevModeInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get device storage info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getDevStorageInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Switch device mode
+         *
+         * @param device   Operation device
+         * @param mode     Mode
+         * @param callback Result callback
+         */
+        void switchDeviceMode(BluetoothDevice device, int mode, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Reboot device
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void rebootDevice(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Read device configuration info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void readDeviceConfiguration(BluetoothDevice device, OnRcspActionCallback<DeviceConfiguration> callback);
+
+        /**
+         * Destroy control class, release resources
+         */
+        void destroy();
+    }
+
+
+.. note:: 
+    1. :ref:`rcsp_op_cb` 
+    2. :ref:`device_info` 
+    3. :ref:`attr_bean` 
+    4. :ref:`device_cfg` 
+
+
+
+.. _rcsp_op_cb: 
+
+Operation Result Callback
+======================================
+
+.. code-block:: java
+
+    public interface OnRcspActionCallback<T> {
+
+        /**
+         * Success callback
+         * @param message Information
+         */
+        void onSuccess(BluetoothDevice device, T message);
+
+        /**
+         * Failure callback
+         * @param error Error info
+         */
+        void onError(BluetoothDevice device, BaseError error);
+    }
+
+
+
+.. _device_cfg:
+
+DeviceConfiguration
+===========================================
+
+Device configuration info
+
+
+.. code-block:: java
+
+    public class DeviceConfiguration {
+
+         /**
+          * Watch configuration info
+          */
+        public static final int FLAG_WATCH = 0;
+        /**
+          * TWS headset configuration info
+          */
+        public static final int FLAG_TWS_HEADSET = 1;
+        /**
+          * Speaker
+          */
+        public static final int FLAG_SOUND_BOX = 2;
+        /**
+          * Dongle device
+          */
+        public static final int FLAG_DONGLE = 3;
+
+        /**
+          * Product identifier
+          */
+        private int type;
+        /**
+          * Version number
+          */
+        private int version;
+        /**
+          * Configuration data
+          */
+        private byte[] data;
+    }
+
+
+

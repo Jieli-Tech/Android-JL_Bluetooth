@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>16. Color Screen Case Function Interface &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="17. Translation Function Interface" href="translation_func_api.html" />
+    <link rel="prev" title="15. SPDIF Operation" href="spdif_op_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_api.html"><span class="sectnum">1 </span>Bluetooth Processing Interface</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="rcsp_api.html">2. RCSP Functional API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rcsp_basic_api.html">1. RCSP Basic Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func_api.html">2. Basic Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl_api.html">3. Volume Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl_api.html">4. Device Music Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl_api.html">5. Equalizer Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl_api.html">6. Clock Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl_api.html">7. External Device Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl_api.html">8. FM Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl_api.html">9. Light Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func_api.html">10. TWS Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func_api.html">11. Sound Card Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_api.html">12. RCSP Controller Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func_api.html">13. Recording Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_op_api.html">14. File Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_op_api.html">15. SPDIF Operation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">16. Color Screen Case Function Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#color-screen-case-event-listener">16.1. Color Screen Case Event Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func_api.html">17. Translation Function Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. State Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. Function Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. Error Code</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 Interface Description</a></li>
+          <li class="breadcrumb-item"><a href="rcsp_api.html">2. RCSP Functional API</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">16. </span>Color Screen Case Function Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="color-screen-case-function-interface">
+<span id="charging-case-op-api"></span><h1><span class="section-number">16. </span>Color Screen Case Function Interface<a class="headerlink" href="#color-screen-case-function-interface" title="Link to this heading"></a></h1>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IChargingCaseOp</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether initialization is successful</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Operation device</span>
+<span class="cm">     * @return Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get color screen case info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Operation device</span>
+<span class="cm">     * @return Cached color screen case info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">ChargingCaseInfo</span><span class="w"> </span><span class="nf">getChargingCaseInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Add color screen case event listener</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param listener Color screen case event listener</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">addOnChargingCaseListener</span><span class="p">(</span><span class="n">OnChargingCaseListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Remove color screen case event listener</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param listener Color screen case event listener</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeOnChargingCaseListener</span><span class="p">(</span><span class="n">OnChargingCaseListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get screen brightness</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getBrightness</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Set screen brightness</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     Operation device</span>
+<span class="cm">     * @param brightness Screen brightness</span>
+<span class="cm">     * @param callback   Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setBrightness</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">brightness</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get flashlight state</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getFlashlightState</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Flashlight switch</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param isOn     Whether to turn on</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFlashlightState</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOn</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get bound device state</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getBoundDeviceState</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">BoundDeviceState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Browse screensaver files</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Operation device</span>
+<span class="cm">     * @param devHandle Storage handle</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">browseScreenSavers</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">RegFile</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get current screensaver info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getCurrentScreenSaver</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Set current screensaver</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Operation device</span>
+<span class="cm">     * @param devHandle Storage handle</span>
+<span class="cm">     * @param filePath  File path</span>
+<span class="cm">     * @param callback  Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCurrentScreenSaver</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">   </span><span class="cm">/**</span>
+<span class="cm">    * Get current boot animation info</span>
+<span class="cm">    *</span>
+<span class="cm">    * @param device   Operation device</span>
+<span class="cm">    * @param callback Operation callback</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getCurrentBootAnim</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Set current boot animation</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Operation device</span>
+<span class="cm">     * @param devHandle Storage handle</span>
+<span class="cm">     * @param filePath  File path</span>
+<span class="cm">     * @param callback  Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCurrentBootAnim</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Read device screen info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">readScreenInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ScreenInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sync weather info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param weather  Weather info</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">syncWeatherInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Weather</span><span class="w"> </span><span class="n">weather</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">   </span><span class="cm">/**</span>
+<span class="cm">    * Push message</span>
+<span class="cm">    *</span>
+<span class="cm">    * @param device   Operation object</span>
+<span class="cm">    * @param message  Message</span>
+<span class="cm">    * @param callback Operation callback</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">pushMessageInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MessageInfo</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Remove message</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation object</span>
+<span class="cm">     * @param message  Message&lt;p&gt;</span>
+<span class="cm">     *                 (Only need to fill [package name] and [timestamp])</span>
+<span class="cm">     *                 &lt;/p&gt;</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeMessageInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MessageInfo</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Read SDK info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">readSDKMessage</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">SDKMessage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get online storage list</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Operation device</span>
+<span class="cm">     * @return List\&lt;SDCardBean\&gt; Online storage list</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getOnlineStorages</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Browse wallpaper files</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param devHandle Storage handle</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">browseWallPapers</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">RegFile</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get current wallpaper info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param callback Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">getCurrentWallPaper</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Set current wallpaper</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Operation device</span>
+<span class="cm">     * @param devHandle Storage handle</span>
+<span class="cm">     * @param filePath  File path</span>
+<span class="cm">     * @param callback  Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCurrentWallPaper</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Delete resources</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param infoList List of resources to delete</span>
+<span class="cm">     * @param callback Delete result callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deleteResources</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">infoList</span><span class="p">,</span><span class="w"> </span><span class="n">DeleteCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/charging_case_func.html#charging-case-info"><span class="std std-ref">ChargingCaseInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/charging_case_func.html#screen-info"><span class="std std-ref">ScreenInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/charging_case_func.html#sdk-msg"><span class="std std-ref">SDKMessage</span></a></p></li>
+<li><p><a class="reference internal" href="../function/charging_case_func.html#weather"><span class="std std-ref">Weather</span></a></p></li>
+<li><p><a class="reference internal" href="../function/charging_case_func.html#message-info"><span class="std std-ref">MessageInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/charging_case_func.html#resource-info"><span class="std std-ref">ResourceInfo</span></a></p></li>
+</ol>
+</div>
+<section id="color-screen-case-event-listener">
+<span id="charging-case-listener"></span><h2><span class="section-number">16.1. </span>Color Screen Case Event Listener<a class="headerlink" href="#color-screen-case-event-listener" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OnChargingCaseListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback color screen case initialization state</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Operation device</span>
+<span class="cm">     * @param state  Device state</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback color screen case info change</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Operation device</span>
+<span class="cm">     * @param func   Function code</span>
+<span class="cm">     * @param info   Color screen case info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onChargingCaseInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@ChargingCaseInfo.Function</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="w"> </span><span class="n">info</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback color screen case event</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Operation device</span>
+<span class="cm">     * @param function Color screen case event</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onChargingCaseEvent</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">SettingFunction</span><span class="w"> </span><span class="n">function</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/charging_case_func.html#charging-case-info"><span class="std std-ref">ChargingCaseInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#setting-function"><span class="std std-ref">Setting Function</span></a></p></li>
+</ol>
+</div>
+<section id="setting-function">
+<span id="id1"></span><h3><span class="section-number">16.1.1. </span>Setting Function<a class="headerlink" href="#setting-function" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SettingFunction</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SettingData</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Screen brightness</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_BRIGHTNESS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Flashlight</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_FLASHLIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Bound device state</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_BOUND_DEVICE_STATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x03</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Resources used by current function</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_USING_RESOURCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x04</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device screen info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SCREEN_INFO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x07</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device SDK info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SDK_MESSAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x08</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Read operation</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">OP_READ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Set operation</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">OP_SET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Notify operation</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">OP_NOTIFY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Function</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Function version number</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">funcVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Operation code</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">op</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Valid data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">payload</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spdif_op_api.html" class="btn btn-neutral float-left" title="15. SPDIF Operation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="translation_func_api.html" class="btn btn-neutral float-right" title="17. Translation Function Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>24. Auracast助手 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="25. 目录浏览" href="file_browse_func.html" />
+    <link rel="prev" title="23. 翻译功能" href="translation_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 功能模块</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. 基础功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. 设备音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. 彩屏充电仓功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. 图像转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. 翻译功能</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">24. Auracast助手</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">24.1. 初始化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">24.2. 销毁对象</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auracast-receiver-func">24.3. Auracast接收端功能</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 功能模块</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">24. </span>Auracast助手</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="auracast">
+<span id="auracast-assistant-func"></span><h1><span class="section-number">24. </span>Auracast助手<a class="headerlink" href="#auracast" title="Link to this heading"></a></h1>
+<p>功能实现类名: <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code></p>
+<section id="id1">
+<h2><span class="section-number">24.1. </span>初始化<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>初始化AuracastAssistant对象</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//获取RCSPController对象</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//获取当前操作设备</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//上下文</span>
+<span class="w">    </span><span class="n">Context</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MainApplication</span><span class="p">.</span><span class="na">getApplication</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//初始化AuracastAssistant对象</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastAssistant</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getRcspOp</span><span class="p">(),</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//设备是否支持Auracast功能</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">isSupportAuracast</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>用户可以通过 <strong>指定操作设备对象</strong> 来绑定 <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code></p></li>
+<li><p>用户传入 <code class="docutils literal notranslate"><span class="pre">device</span></code> 字段为 <code class="docutils literal notranslate"><span class="pre">null</span></code>, SDK 会默认用 <code class="docutils literal notranslate"><span class="pre">RcspOpImpl#getConnectedDevice()</span></code> 替代</p></li>
+<li><p>如果 <code class="docutils literal notranslate"><span class="pre">AuracastAssistant#getDevice()</span></code> 为 <code class="docutils literal notranslate"><span class="pre">null</span></code>， 功能无法正常使用</p></li>
+<li><p>如果设备不支持 <strong>Auracast</strong> 功能，无法使用 <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> 的功能</p></li>
+</ol>
+</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">24.2. </span>销毁对象<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>销毁AuracastAssistant对象，释放资源</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//销毁对象</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> 对象销毁后，需要把对象置为 <code class="docutils literal notranslate"><span class="pre">null</span></code>，避免销毁对象后，业务流程还在调用其功能接口</p></li>
+<li><p><strong>设备断开</strong> ， 需要把 <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> 销毁</p></li>
+</ol>
+</div>
+</section>
+<section id="auracast-receiver-func">
+<span id="id3"></span><h2><span class="section-number">24.3. </span>Auracast接收端功能<a class="headerlink" href="#auracast-receiver-func" title="Link to this heading"></a></h2>
+<p>接收端功能: 搜索Auracast广播、收听Auracast广播 、移除Auracast广播等</p>
+<section id="id4">
+<h3><span class="section-number">24.3.1. </span>功能流程图<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<figure class="align-center">
+<img alt="auracast_receiver_flow" src="../../_images/auracast_receiver_flow.png" />
+</figure>
+</section>
+<section id="id5">
+<h3><span class="section-number">24.3.2. </span>是否支持私有Auracast接收端功能<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>通过RCSP协议实现，属于非标准的Auracast协议</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportAuracastReceiver</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">isSupportAuracastReceiver</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">24.3.3. </span>请求收听中的广播源信息<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getListeningSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">requestListeningSource</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">AuracastBroadcast</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作成功</span>
+<span class="w">            </span><span class="c1">//message --- 正在操作的Auracast广播信息。 null表示不存在</span>
+<span class="w">            </span><span class="c1">//广播状态会通过 AuracastReceiverCallback#onBroadcastState 回调</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作失败</span>
+<span class="w">            </span><span class="c1">//error --- 错误信息</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>该功能可能会返回 <code class="docutils literal notranslate"><span class="pre">正在同步中</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">正在收听</span></code> 的广播信息。用户需要根据 <code class="docutils literal notranslate"><span class="pre">同步状态</span></code> 判断。</p></li>
+<li><p>该功能主要用于初始化后的收听状态同步</p></li>
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+<section id="auracastbroadcast">
+<span id="auracast-broadcast"></span><h4><span class="section-number">24.3.3.1. </span>AuracastBroadcast<a class="headerlink" href="#auracastbroadcast" title="Link to this heading"></a></h4>
+<p>Auracast广播信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuracastBroadcast</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播名称</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">broadcastName</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播源ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">broadcastID</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否加密</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isEncrypted</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播同步状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@SyncState</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">syncState</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 错误码</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">errorCode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播密钥</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">broadcastCode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id7">
+<h3><span class="section-number">24.3.4. </span>查询搜索广播状态<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkScanAuracastStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="c1">//执行查询搜索广播状态</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">checkScanStatus</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作成功</span>
+<span class="w">            </span><span class="c1">// message --- 搜索状态</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作失败</span>
+<span class="w">            </span><span class="c1">//error --- 错误信息</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>该功能主要用于初始化后的搜索广播状态同步</p></li>
+</ol>
+</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">24.3.5. </span>是否正在扫描Auracast广播<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isScanningAuracastBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">isScanning</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h3><span class="section-number">24.3.6. </span>开始搜索Auracast广播<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startScanAuracastBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isScanningAuracastBroadcast</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//正在搜索</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchStarted</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调搜索开始</span>
+<span class="w">            </span><span class="c1">//reason --- 原因</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_SDK       --- SDK触发</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_DEVICE    --- 设备触发</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchStopped</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调搜索结束</span>
+<span class="w">            </span><span class="c1">//reason --- 原因</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_SDK       --- SDK触发</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_DEVICE    --- 设备触发</span>
+
+<span class="w">            </span><span class="c1">//获取所有搜索到的广播</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AuracastBroadcast</span><span class="o">&gt;</span><span class="w"> </span><span class="n">broadcasts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">getDiscoveredBroadcast</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">//移除接收器事件监听</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBroadcastFound</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调搜索到的Auaracast广播信息</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//注册接收端事件监听器</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//搜索配置信息</span>
+<span class="w">    </span><span class="c1">//timeout -- 超时时间, 单位是毫秒，默认是 48秒</span>
+<span class="w">    </span><span class="c1">//isFilterBroadcast -- 是否过滤重复广播信息，默认是 true</span>
+<span class="w">    </span><span class="n">ScanOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ScanOption</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//执行搜索Auracast广播</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">startScan</span><span class="p">(</span><span class="n">option</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作成功</span>
+<span class="w">            </span><span class="c1">// message --- 操作结果</span>
+<span class="w">            </span><span class="c1">// - ScanResponse.RESULT_SUCCESS --- 操作成功/不在搜索状态</span>
+<span class="w">            </span><span class="c1">// - ScanResponse.RESULT_SCANNING --- 正在搜索，请勿重复操作</span>
+<span class="w">            </span><span class="c1">// - ScanResponse#RESULT_LISTENING_BROADCAST_BAN_SCAN --- 收听广播过程不允许扫描</span>
+<span class="w">            </span><span class="c1">// - ScanResponse#RESULT_DEVICE_BUSY --- 设备繁忙</span>
+<span class="w">            </span><span class="c1">//搜索状态和搜索设备结果将在 AuracastReceiverCallback#onSearchStarted,</span>
+<span class="w">            </span><span class="c1">// AuracastReceiverCallback#onBroadcastFound 和 AuracastReceiverCallback#onSearchStopped 返回</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作失败</span>
+<span class="w">            </span><span class="c1">//error --- 错误信息</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">24.3.7. </span>停止搜索Auracast广播<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopScanAuracastBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isScanningAuracastBroadcast</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不在搜索状态</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchStopped</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调搜索结束</span>
+<span class="w">            </span><span class="c1">//reason --- 原因</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_SDK       --- SDK触发</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_DEVICE    --- 设备触发</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//注册接收端事件监听器</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//执行停止搜索Auracast广播</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">stopScan</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作成功</span>
+<span class="w">            </span><span class="c1">//搜索状态将在 AuracastReceiverCallback#onSearchStopped 返回</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作失败</span>
+<span class="w">            </span><span class="c1">//error --- 错误信息</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3><span class="section-number">24.3.8. </span>获取正在收听的广播信息<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="nf">getListeningBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//获取正在收听的广播信息</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">getListeningBroadcast</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id12">
+<h3><span class="section-number">24.3.9. </span>添加Auracast广播音源<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="n">stopScanAuracastBroadcast</span><span class="p">();</span><span class="w"> </span><span class="c1">//建议先关闭搜索广播</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">addBroadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="p">();</span><span class="w"> </span><span class="c1">//选择的广播信息</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">addBroadcast</span><span class="p">.</span><span class="na">isEncrypted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//如果广播是解密的, 需要增加广播密钥</span>
+<span class="w">        </span><span class="n">addBroadcast</span><span class="p">.</span><span class="na">setBroadcastCode</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">16</span><span class="o">]</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBroadcastState</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调广播状态变化</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">addBroadcast</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">broadcast</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">broadcast</span><span class="p">.</span><span class="na">getSyncState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATE_SYNCING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//注册接收端事件监听器</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//执行添加音频的功能</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addSource</span><span class="p">(</span><span class="n">addBroadcast</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作成功</span>
+<span class="w">            </span><span class="c1">//音频广播同步状态，将在 AuracastReceiverCallback#onBroadcastState 回调</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作失败</span>
+<span class="w">            </span><span class="c1">//error --- 错误信息</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>添加Auracast广播音源之前，建议停止搜索广播功能</p></li>
+<li><p>若Auracast广播是加密广播，需要配置 <code class="docutils literal notranslate"><span class="pre">广播密钥</span></code> 字段， 长度不得大于 <strong>16个字节</strong>， 超过部分会被SDK裁掉</p></li>
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id13">
+<h3><span class="section-number">24.3.10. </span>移除Auracast广播音源<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getListeningBroadcast</span><span class="p">();</span><span class="w"> </span><span class="c1">//获取正在收听的广播信息</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不在收听音乐状态</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBroadcastState</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调广播状态变化</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">broadcast</span><span class="p">.</span><span class="na">getSyncState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATE_SYNCING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//注册接收端事件监听器</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//执行移除音频的功能</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeSource</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作成功</span>
+<span class="w">            </span><span class="c1">//音频广播同步状态，将在 AuracastReceiverCallback#onBroadcastState 回调</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调操作失败</span>
+<span class="w">            </span><span class="c1">//error --- 错误信息</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>移除Auracast广播音源之前，保证设备当前处于收听Auracast广播状态，否则功能无效</p></li>
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id14">
+<h3><span class="section-number">24.3.11. </span>获取指定设备的所有Auracast广播历史记录<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getAuracastRecords</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//获取RCSPController对象</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//获取当前操作设备</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//获取Auracast广播历史记录</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AuracastRecord</span><span class="o">&gt;</span><span class="w"> </span><span class="n">records</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">getAuracastRecords</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+<li><p>添加成功的广播会被SDK记录</p></li>
+</ol>
+</div>
+<section id="auracastrecord">
+<span id="auracast-record"></span><h4><span class="section-number">24.3.11.1. </span>AuracastRecord<a class="headerlink" href="#auracastrecord" title="Link to this heading"></a></h4>
+<p>Auracast广播记录</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuracastRecord</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mac</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">broadcastJson</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 更新时间戳</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">updateTime</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id15">
+<h3><span class="section-number">24.3.12. </span>删除指定设备的所有Auracast广播记录<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeAuracastRecords</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//获取RCSPController对象</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//获取当前操作设备</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//移除设备对应的所有Auracast广播记录</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastRecords</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h3><span class="section-number">24.3.13. </span>监听历史记录变化<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">observerRecordChange</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//不支持Auracast接收端功能</span>
+<span class="w">    </span><span class="kd">final</span><span class="w">  </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRecordChange</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">AuracastRecord</span><span class="w"> </span><span class="n">record</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调记录改变</span>
+<span class="w">            </span><span class="c1">//op --- 操作码</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_ADD --- 添加操作</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_MODIFY --- 修改操作</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_DELETE --- 删除操作</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_CLEAR --- 清除操作</span>
+<span class="w">            </span><span class="c1">//record --- 历史记录</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//注册接收端事件监听器</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//不再需要监听时，记得移除监听器</span>
+<span class="w">    </span><span class="c1">//        auracastAssistant.removeAuracastRecords(receiverCallback);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id17">
+<h3><span class="section-number">24.3.14. </span>查找指定广播的记录信息<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">findAuracastRecord</span><span class="p">(</span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//获取RCSPController对象</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//获取当前操作设备</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//查找对应的Auracast广播历史记录</span>
+<span class="w">    </span><span class="n">AuracastRecord</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">findAuracastRecord</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">(),</span><span class="w"> </span><span class="n">broadcast</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id18">
+<h3><span class="section-number">24.3.15. </span>删除指定的广播记录<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeAuracastRecord</span><span class="p">(</span><span class="n">AuracastRecord</span><span class="w"> </span><span class="n">record</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//移除对应的Auracast广播历史记录</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastRecord</span><span class="p">(</span><span class="n">record</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="translation_func.html" class="btn btn-neutral float-left" title="23. 翻译功能" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="file_browse_func.html" class="btn btn-neutral float-right" title="25. 目录浏览" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

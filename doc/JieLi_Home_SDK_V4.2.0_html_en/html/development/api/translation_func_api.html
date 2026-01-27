@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>17. Translation Function Interface &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. State Code" href="../constant/state_code.html" />
+    <link rel="prev" title="16. Color Screen Case Function Interface" href="charging_case_func_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_api.html"><span class="sectnum">1 </span>Bluetooth Processing Interface</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="rcsp_api.html">2. RCSP Functional API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rcsp_basic_api.html">1. RCSP Basic Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func_api.html">2. Basic Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl_api.html">3. Volume Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl_api.html">4. Device Music Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl_api.html">5. Equalizer Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl_api.html">6. Clock Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl_api.html">7. External Device Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl_api.html">8. FM Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl_api.html">9. Light Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func_api.html">10. TWS Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func_api.html">11. Sound Card Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_api.html">12. RCSP Controller Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func_api.html">13. Recording Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_op_api.html">14. File Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_op_api.html">15. SPDIF Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func_api.html">16. Color Screen Case Function Interface</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">17. Translation Function Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#translationcallback">17.1. TranslationCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iaitranslationapi">17.2. IAITranslationApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aitranslationcallback">17.3. AITranslationCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#translationresult">17.4. TranslationResult</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. State Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. Function Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. Error Code</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 Interface Description</a></li>
+          <li class="breadcrumb-item"><a href="rcsp_api.html">2. RCSP Functional API</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">17. </span>Translation Function Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="translation-function-interface">
+<span id="translation-op-api"></span><h1><span class="section-number">17. </span>Translation Function Interface<a class="headerlink" href="#translation-function-interface" title="Link to this heading"></a></h1>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ITranslationOp</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Whether initialization is successful</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return boolean Result</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isInit</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Whether 【translation】 function is supported</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return boolean Result</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportTranslation</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Whether 【A2DP broadcast】 function is used</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return boolean Result</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isUseA2DPPlay</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Whether 【call translation + stereo】 function is supported</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return boolean Result</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportCallTranslationWithStereo</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Whether in working mode</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return boolean Result</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isWorking</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Get operation device object</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return BluetoothDevice Operation device object</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getDevice</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Cached mode info</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return TranslationMode Translation mode info</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="n">TranslationMode</span><span class="w"> </span><span class="nf">getTranslationMode</span><span class="p">();</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Add translation function callback</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param callback TranslationCallback Translation function callback</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">addTranslationCallback</span><span class="p">(</span><span class="n">TranslationCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Remove translation function callback</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param callback TranslationCallback Translation function callback</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeTranslationCallback</span><span class="p">(</span><span class="n">TranslationCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Request translation mode info</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param callback OnRcspActionCallback&lt;TranslationMode&gt; Result callback</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">requestTranslationMode</span><span class="p">(</span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">TranslationMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Enter translation mode</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param mode     TranslationMode Translation mode info</span>
+<span class="cm">      * @param callback TranslationCallback Translation function callback</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">enterMode</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Exit translation mode</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param callback OnRcspActionCallback&lt;Integer&gt; Result callback</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">exitMode</span><span class="p">(</span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Write audio data</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param audioData AudioData Audio data</span>
+<span class="cm">      * @param callback OnRcspActionCallback&lt;Boolean&gt; Result callback</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeAudioData</span><span class="p">(</span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">,</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Release resources</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/translation_func.html#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#translation-cb"><span class="std std-ref">TranslationCallback</span></a></p></li>
+<li><p><a class="reference internal" href="../function/translation_func.html#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+<section id="translationcallback">
+<span id="translation-cb"></span><h2><span class="section-number">17.1. </span>TranslationCallback<a class="headerlink" href="#translationcallback" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">TranslationCallback</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback mode change info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BluetoothDevice Operation device</span>
+<span class="cm">     * @param mode   TranslationMode Translation mode info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback received audio data</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    BluetoothDevice Operation device</span>
+<span class="cm">     * @param audioData AudioData Audio data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback translation error</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  BluetoothDevice Operation device</span>
+<span class="cm">     * @param code    int Error code</span>
+<span class="cm">     * @param message String Error description</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/translation_func.html#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="../function/translation_func.html#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="iaitranslationapi">
+<span id="ai-translation-api"></span><h2><span class="section-number">17.2. </span>IAITranslationApi<a class="headerlink" href="#iaitranslationapi" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IAITranslationApi</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether translation is in progress</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isWorking</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Start translation</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param mode     TranslationMode Translation mode info</span>
+<span class="cm">     * @param callback AITranslationCallback Cloud translation event callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">startTranslating</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AITranslationCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * End translation</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopTranslating</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Write audio data</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param audioData AudioData Audio data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeAudio</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/translation_func.html#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#ai-translation-cb"><span class="std std-ref">AITranslationCallback</span></a></p></li>
+<li><p><a class="reference internal" href="../function/translation_func.html#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="aitranslationcallback">
+<span id="ai-translation-cb"></span><h2><span class="section-number">17.3. </span>AITranslationCallback<a class="headerlink" href="#aitranslationcallback" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">AITranslationCallback</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback translation start</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback translation result</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Can callback multiple times</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param result TranslateResult Translation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTranslateResult</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationResult</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback translation failure</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param id      long Translation task ID</span>
+<span class="cm">     * @param code    int Error code</span>
+<span class="cm">     * @param message String Error description</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTranslateError</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback translation end</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param reason  int End reason code</span>
+<span class="cm">     * @param message String Description</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStop</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translation-result"><span class="std std-ref">TranslationResult</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="translationresult">
+<span id="translation-result"></span><h2><span class="section-number">17.4. </span>TranslationResult<a class="headerlink" href="#translationresult" title="Link to this heading"></a></h2>
+<p>Translation result</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TranslationResult</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Translation task number</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">L</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Speech recognition text</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nlpText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Original language</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Follows ISO-6393 standard, lowercase letters, 3 bytes&lt;br/&gt;</span>
+<span class="cm">     * Default is &lt;b&gt;zho&lt;/b&gt;, Chinese</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">srcLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;zho&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Target language</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Follows ISO-6393 standard, lowercase letters, 3 bytes&lt;br/&gt;</span>
+<span class="cm">     * Default is &lt;b&gt;eng&lt;/b&gt;, English</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">destLanguage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;eng&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Translation text</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">translationText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Number of channels in synthesized audio</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Default is mono</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sampling rate of synthesized audio</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Unit: Hz&lt;br/&gt;</span>
+<span class="cm">     * Default is 16KHz</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sampleRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16000</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Encoding format</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Default is PCM_16Bit format</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Encoded data of translation synthesized audio</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Note: Need to convert to corresponding encoded data</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">translationTTSData</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/translation_func.html#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="charging_case_func_api.html" class="btn btn-neutral float-left" title="16. Color Screen Case Function Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../constant/state_code.html" class="btn btn-neutral float-right" title="3. State Code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

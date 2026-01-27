@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="30dp"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        android:background="@drawable/bg_c4_gray_17000000_shape"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        android:textColor="@color/black_E6000000"
+        android:textColorHint="@color/gray_9CA3AF"
+        android:hint="@string/input_translate_text_tips"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send_message"
+        app:layout_constraintStart_toEndOf="@+id/btn_switch_voice_input"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,LabelFor"/>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_EBEBEB"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@color/text_transparent"
+        android:padding="4dp"
+        android:src="@drawable/ic_send_msg_black"
+        app:layout_constraintBottom_toBottomOf="@+id/et_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_message" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_switch_voice_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@color/text_transparent"
+        android:padding="4dp"
+        android:src="@drawable/ic_talk_black"
+        app:layout_constraintBottom_toBottomOf="@+id/et_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_message" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

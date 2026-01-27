@@ -1,0 +1,830 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>23. Translation Function &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="24. Auracast Assistant" href="auracast_assistant_func.html" />
+    <link rel="prev" title="22. GIF Conversion" href="gif_convert_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">23. Translation Function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialize-translation-function">23.1. Initialize Translation Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-a2dp-play-priority">23.2. Is A2DP Play Priority</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enter-mode">23.3. Enter Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exit-mode">23.4. Exit Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#destroy-object">23.5. Destroy Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interface-call-flow-chart">23.6. Interface Call Flow Chart</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">23. </span>Translation Function</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="translation-function">
+<span id="translation-func"></span><h1><span class="section-number">23. </span>Translation Function<a class="headerlink" href="#translation-function" title="Link to this heading"></a></h1>
+<p>Function implementation class name: <code class="docutils literal notranslate"><span class="pre">TranslationImpl</span></code></p>
+<section id="initialize-translation-function">
+<h2><span class="section-number">23.1. </span>Initialize Translation Function<a class="headerlink" href="#initialize-translation-function" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Must wait for initialization result callback to succeed before operating interface</p>
+</div>
+<section id="initialize-through-ai-cloud-translation-agent-implementation">
+<h3><span class="section-number">23.1.1. </span>Initialize through AI Cloud Translation Agent Implementation<a class="headerlink" href="#initialize-through-ai-cloud-translation-agent-implementation" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">TranslationImpl</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">RcspOpImpl</span><span class="w"> </span><span class="n">rcspOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">();</span>
+<span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationImpl</span><span class="p">(</span><span class="n">rcspOp</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CustomAITranslation</span><span class="p">());</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportTranslation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportTranslation</span><span class="p">){</span><span class="w"> </span><span class="c1">//Translation function not supported</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="c1">//Add translation event callback</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">addTranslationCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback translation mode change</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback received audio data</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback error event</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Recommended</span> <span class="pre">implementation</span> <span class="pre">method</span></code></p></li>
+<li><p><a class="reference internal" href="#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+<p><strong>Custom AI Cloud Translation Agent</strong></p>
+<p><a class="reference internal" href="../api/translation_func_api.html#ai-translation-api"><span class="std std-ref">IAITranslationApi</span></a></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomAITranslation</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IAITranslationApi</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AITranslationCallback</span><span class="w"> </span><span class="n">translationCallback</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * OPUS decoder</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * OPUS encoder</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">opusEncoder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Is translating</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isWorking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Current translation mode information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">currentMode</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isWorking</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isWorking</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startTranslating</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AITranslationCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Perform AI cloud translation task according to translation mode information</span>
+<span class="w">        </span><span class="n">currentMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span>
+<span class="w">        </span><span class="n">translationCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">callback</span><span class="p">;</span>
+<span class="w">        </span><span class="n">isWorking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="n">initOpusEncoder</span><span class="p">();</span>
+<span class="w">        </span><span class="n">startOpusDecode</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopTranslating</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Stop translation</span>
+<span class="w">        </span><span class="n">destroyOpusEncoder</span><span class="p">();</span>
+<span class="w">        </span><span class="n">stopOpusDecode</span><span class="p">();</span>
+<span class="w">        </span><span class="n">currentMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">translationCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">isWorking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeAudio</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Need to perform translation task according to audio source</span>
+<span class="w">        </span><span class="c1">//e.g.: call translation, has uplink data and downlink data</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentMode</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audioData</span><span class="p">.</span><span class="na">getSource</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AudioData</span><span class="p">.</span><span class="na">SOURCE_E_SCO_UP_LINK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Uplink data</span>
+<span class="w">                </span><span class="c1">//Decode uplink data</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audioData</span><span class="p">.</span><span class="na">getSource</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AudioData</span><span class="p">.</span><span class="na">SOURCE_E_SCO_DOWN_LINK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Downlink data</span>
+<span class="w">                </span><span class="c1">//Decode downlink data</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Decode data</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startOpusDecode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">opusDecoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpusManager</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OpusException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">decoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decoder</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decoder</span><span class="p">.</span><span class="na">isDecodeStream</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">decoder</span><span class="p">.</span><span class="na">stopDecodeStream</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">decoder</span><span class="p">.</span><span class="na">startDecodeStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnDecodeStreamCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDecodeStream</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//Decode successful (streaming)</span>
+<span class="w">                    </span><span class="c1">//Upload streaming PCN data to AI cloud for semantic analysis and translation</span>
+<span class="w">                    </span><span class="c1">//Encode translation result TTS audio into OPUS data, then callback to SDK via AITranslationCallback#onTranslateResult(result)</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//Decode start</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onComplete</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//Decode end</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//Decode failed</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopOpusDecode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">decoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">decoder</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decoder</span><span class="p">.</span><span class="na">isDecodeStream</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">decoder</span><span class="p">.</span><span class="na">stopDecodeStream</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">opusDecoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initOpusEncoder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">opusEncoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">opusEncoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpusManager</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OpusException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroyOpusEncoder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">opusEncoder</span><span class="p">.</span><span class="na">release</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">opusEncoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pushTranslationResult</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">ttsData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opusEncoder</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">encoder</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//Save TTS data as TTS file, omitted</span>
+<span class="w">        </span><span class="n">encoder</span><span class="p">.</span><span class="na">encodeFile</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Your TTS file save path(xxx.pcm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//Only accepts PCM file</span>
+<span class="w">                </span><span class="s">&quot;Encoding output file path(xxx.opus)&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">OnEncodeStreamCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEncodeStream</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//Callback encoding data (streaming)</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//Callback encoding start</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onComplete</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//Callback encoding successful</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">                        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">opusData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readFileData</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">opusData</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">                        </span><span class="c1">//Construct translation result data</span>
+<span class="w">                        </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AudioData</span><span class="p">(</span>
+<span class="w">                                </span><span class="n">AudioData</span><span class="p">.</span><span class="na">SOURCE_DEVICE_MIC</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">Constants</span><span class="p">.</span><span class="na">AUDIO_TYPE_OPUS</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">opusData</span>
+<span class="w">                        </span><span class="p">);</span>
+<span class="w">                        </span><span class="c1">//Notify SDK to send data</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">translationCallback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">translationCallback</span><span class="p">.</span><span class="na">onTranslateResult</span><span class="p">(</span>
+<span class="w">                                    </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationResult</span><span class="p">()</span>
+<span class="w">                                            </span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">//Translation task number</span>
+<span class="w">                                            </span><span class="p">.</span><span class="na">setTranslationTTSData</span><span class="p">(</span><span class="n">audioData</span><span class="p">)</span>
+<span class="w">                            </span><span class="p">);</span>
+<span class="w">                        </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//Callback encoding failed</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">readFileData</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">InputStream</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
+<span class="w">            </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">input</span><span class="p">.</span><span class="na">available</span><span class="p">()</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+<span class="w">            </span><span class="n">input</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="initialize-through-custom-cloud-translation-process">
+<h3><span class="section-number">23.1.2. </span>Initialize through Custom Cloud Translation Process<a class="headerlink" href="#initialize-through-custom-cloud-translation-process" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">TranslationImpl</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">RcspOpImpl</span><span class="w"> </span><span class="n">rcspOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">();</span>
+<span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationImpl</span><span class="p">(</span><span class="n">rcspOp</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportTranslation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportTranslation</span><span class="p">){</span><span class="w"> </span><span class="c1">//Translation function not supported</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="c1">//Add translation event callback</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">addTranslationCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback translation mode change</span>
+<span class="w">        </span><span class="c1">//Handle various modes yourself</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_IDLE</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Idle mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORD</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Record mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORDING_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Record translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Call translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_AUDIO_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Audio/video translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_FACE_TO_FACE_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Face-to-face translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION_WITH_STEREO</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Call translation stereo mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback received audio data</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">getTranslationMode</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_IDLE</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//Handle various modes yourself</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_IDLE</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Idle mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORD</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Record mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORDING_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Record translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Call translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_AUDIO_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Audio/video translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_FACE_TO_FACE_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Face-to-face translation mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION_WITH_STEREO</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//Call translation stereo mode</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback error event</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+<li><p>Send translation audio data through <code class="docutils literal notranslate"><span class="pre">writeAudioData</span></code></p></li>
+</ol>
+</div>
+<section id="translationmode">
+<span id="translation-mode"></span><h4><span class="section-number">23.1.2.1. </span>TranslationMode<a class="headerlink" href="#translationmode" title="Link to this heading"></a></h4>
+<p>Translation mode</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TranslationMode</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Translation mode</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@Mode</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Audio type</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@AudioType</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">audioType</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Number of channels</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">channel</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Sample rate</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * Unit: Hz</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sampleRate</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Recording strategy</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * Description: Only effective when translation mode is {@link #MODE_RECORD} or {@link #MODE_RECORDING_TRANSLATION}.</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@RecordingStrategy</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">recordingStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STRATEGY_CUSTOM_RECORDING</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translate-mode"><span class="std std-ref">Translation Mode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-type"><span class="std std-ref">Audio Type</span></a></p></li>
+<li><p>Specify recording function execution strategy through <code class="docutils literal notranslate"><span class="pre">recordingStrategy</span></code> field, only applicable when implementing <a class="reference internal" href="../api/translation_func_api.html#ai-translation-api"><span class="std std-ref">IAITranslationApi</span></a> interface</p></li>
+</ol>
+</div>
+</section>
+<section id="audiodata">
+<span id="audio-data"></span><h4><span class="section-number">23.1.2.2. </span>AudioData<a class="headerlink" href="#audiodata" title="Link to this heading"></a></h4>
+<p>Audio data</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AudioData</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Audio source</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@AudioSource</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">source</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Audio type</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@AudioType</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Packet count</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * Reverse order, 0 is end packet</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * CRC of audio data</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="n">crc</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Audio data</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@NonNull</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">audioData</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * Data block MTU</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * Value range: [40, 230]</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@IntRange</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">230</span><span class="p">)</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">blockMtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#audio-source"><span class="std std-ref">Audio Source</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-type"><span class="std std-ref">Audio Type</span></a></p></li>
+<li><p>Adjust send data block size through <code class="docutils literal notranslate"><span class="pre">blockMtu</span></code> field</p></li>
+</ol>
+</div>
+</section>
+<section id="translate-mode">
+<span id="id1"></span><h4><span class="section-number">23.1.2.3. </span>Translation Mode<a class="headerlink" href="#translate-mode" title="Link to this heading"></a></h4>
+<p>Corresponding class name: <code class="docutils literal notranslate"><span class="pre">TranslationMode</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Constant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>MODE_IDLE</p></td>
+<td><p>Idle mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>MODE_RECORD</p></td>
+<td><p>Record only mode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>MODE_RECORDING_TRANSLATION</p></td>
+<td><p>Record translation mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>MODE_CALL_TRANSLATION</p></td>
+<td><p>Call translation mode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>MODE_AUDIO_TRANSLATION</p></td>
+<td><p>Audio/video translation mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x05</p></td>
+<td><p>MODE_FACE_TO_FACE_TRANSLATION</p></td>
+<td><p>Face-to-face translation mode</p></td>
+</tr>
+<tr class="row-even"><td><p>0x06</p></td>
+<td><p>MODE_CALL_TRANSLATION_WITH_STEREO</p></td>
+<td><p>Call translation stereo mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-type">
+<span id="id2"></span><h4><span class="section-number">23.1.2.4. </span>Audio Type<a class="headerlink" href="#audio-type" title="Link to this heading"></a></h4>
+<p>Corresponding class name: <code class="docutils literal notranslate"><span class="pre">Constants</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Constant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>AUDIO_TYPE_PCM</p></td>
+<td><p>PCM audio format</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>AUDIO_TYPE_SPEEX</p></td>
+<td><p>SPEEX audio format</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>AUDIO_TYPE_OPUS</p></td>
+<td><p>OPUS audio format</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>AUDIO_TYPE_M_SBC</p></td>
+<td><p>mSBC audio format</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>AUDIO_TYPE_JLA_V2</p></td>
+<td><p>JLA_V2 audio format</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-source">
+<span id="id3"></span><h4><span class="section-number">23.1.2.5. </span>Audio Source<a class="headerlink" href="#audio-source" title="Link to this heading"></a></h4>
+<p>Corresponding class name: <code class="docutils literal notranslate"><span class="pre">AudioData</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Constant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-1</p></td>
+<td><p>SOURCE_UNKNOWN</p></td>
+<td><p>Source unknown</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00</p></td>
+<td><p>SOURCE_FILE</p></td>
+<td><p>Source audio file</p></td>
+</tr>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>SOURCE_DEVICE_MIC</p></td>
+<td><p>Source device microphone</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>SOURCE_PHONE_MIC</p></td>
+<td><p>Source phone microphone</p></td>
+</tr>
+<tr class="row-even"><td><p>0x03</p></td>
+<td><p>SOURCE_E_SCO_UP_LINK</p></td>
+<td><p>Source eSCO uplink data</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>SOURCE_E_SCO_DOWN_LINK</p></td>
+<td><p>Source eSCO downlink data</p></td>
+</tr>
+<tr class="row-even"><td><p>0x05</p></td>
+<td><p>SOURCE_M_SBC</p></td>
+<td><p>Source mSBC(A2DP)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>SOURCE_E_SCO_MIX</p></td>
+<td><p>Source eSCO mixed data (including uplink and downlink data)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="is-a2dp-play-priority">
+<h2><span class="section-number">23.2. </span>Is A2DP Play Priority<a class="headerlink" href="#is-a2dp-play-priority" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">isInit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;TranslationImpl must be initialized successfully first.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">isUseA2DPPlay</span><span class="p">();</span><span class="w"> </span><span class="c1">//Is A2DP play priority used</span>
+</pre></div>
+</div>
+</section>
+<section id="enter-mode">
+<h2><span class="section-number">23.3. </span>Enter Mode<a class="headerlink" href="#enter-mode" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;TranslationImpl is not initialized or the device does not support translation functionality.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Build translation mode information</span>
+<span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">(</span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORDING_TRANSLATION</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Constants</span><span class="p">.</span><span class="na">AUDIO_TYPE_OPUS</span><span class="p">);</span>
+<span class="c1">//Execute enter mode operation</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">enterMode</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback translation mode change</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback received audio data</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback error event</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="exit-mode">
+<h2><span class="section-number">23.4. </span>Exit Mode<a class="headerlink" href="#exit-mode" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;TranslationImpl is not initialized or the device does not support translation functionality.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Not in translation mode</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isWorking</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Not in translation mode.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//Execute exit mode operation</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">exitMode</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation success</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failure</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="destroy-object">
+<h2><span class="section-number">23.5. </span>Destroy Object<a class="headerlink" href="#destroy-object" title="Link to this heading"></a></h2>
+<p>Destroy object when no longer in use</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="w">    </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="interface-call-flow-chart">
+<h2><span class="section-number">23.6. </span>Interface Call Flow Chart<a class="headerlink" href="#interface-call-flow-chart" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/translation_api_flow.png"><img alt="translation_api_flow" src="../../_images/translation_api_flow.png" style="width: 1047.6px; height: 1330.8px;" />
+</a>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gif_convert_func.html" class="btn btn-neutral float-left" title="22. GIF Conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="auracast_assistant_func.html" class="btn btn-neutral float-right" title="24. Auracast Assistant" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

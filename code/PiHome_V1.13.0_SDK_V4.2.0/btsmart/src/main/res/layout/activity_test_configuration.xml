@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.jieli.btsmart.ui.test.TestConfigurationActivity">
+
+    <include
+        android:id="@+id/view_top_bar"
+        layout="@layout/view_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_top_bar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_log_cfg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_c8_white_shape"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <include
+                    android:id="@+id/view_save_log"
+                    layout="@layout/item_settings_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/view_log_path"
+                    layout="@layout/item_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_save_log"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/view_use_device_auth"
+                layout="@layout/item_settings_switch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/cl_log_cfg"
+                app:layout_constraintStart_toStartOf="@+id/cl_log_cfg"
+                app:layout_constraintTop_toBottomOf="@+id/cl_log_cfg" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_show_dialog_cfg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_c8_white_shape"
+                app:layout_constraintEnd_toEndOf="@+id/view_use_device_auth"
+                app:layout_constraintStart_toStartOf="@+id/view_use_device_auth"
+                app:layout_constraintTop_toBottomOf="@+id/view_use_device_auth">
+
+                <include
+                    android:id="@+id/view_show_dialog"
+                    layout="@layout/item_settings_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/view_input_rssi"
+                    layout="@layout/view_input_rssi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_show_dialog"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_local_ota_cfg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_c8_white_shape"
+                app:layout_constraintEnd_toEndOf="@+id/cl_show_dialog_cfg"
+                app:layout_constraintStart_toStartOf="@+id/cl_show_dialog_cfg"
+                app:layout_constraintTop_toBottomOf="@+id/cl_show_dialog_cfg">
+
+                <include
+                    android:id="@+id/view_local_ota"
+                    layout="@layout/item_settings_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_local_ota_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:padding="8dp"
+                    android:textColor="@color/gray_7D000000"
+                    android:textSize="@dimen/text_12sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_local_ota"
+                    tools:text="@string/local_ota_desc"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/view_custom_command"
+                layout="@layout/item_settings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/cl_local_ota_cfg"
+                app:layout_constraintStart_toStartOf="@+id/cl_local_ota_cfg"
+                app:layout_constraintTop_toBottomOf="@+id/cl_local_ota_cfg" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

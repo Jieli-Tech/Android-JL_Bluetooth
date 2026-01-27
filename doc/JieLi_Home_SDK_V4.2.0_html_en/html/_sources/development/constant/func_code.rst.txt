@@ -1,0 +1,303 @@
+.. _attr_fun_code: 
+
+4. Function Code
+******************************************************************
+
+* Corresponding class name: ``AttrAndFunCode.java``        
+* Property reference: **AttrAndFunCode#** ``xxx``
+
+.. _func_mode:
+
+4.1 Functional Mode
+===================================================================
+
+
+================================================= ====================================== =============================================================================================================== =============================================================
+              Citation Declaration                               Value                                                              Explanation                                                                                        Functional Subset
+================================================= ====================================== =============================================================================================================== =============================================================
+  SYS_INFO_FUNCTION_PUBLIC                                       255(0xFF)                   Public mode. (Not a separate mode; sub-functions are available in all modes.)                                 :ref:`public_mode_sub_func_list` 
+  SYS_INFO_FUNCTION_BT                                            0                          Bluetooth mode. (Basic mode)                                                                                  :ref:`bt_mode_sub_func_list` 
+  SYS_INFO_FUNCTION_MUSIC                                         1                       |  Music Mode                                                                                                    :ref:`device_music_mode_sub_func_list` 
+                                                                                          |  (Supports device music operations, such as music file browsing and music file playback)
+  SYS_INFO_FUNCTION_RTC                                           2                       |  Clock mode. (Merged into [Bluetooth mode], no longer a separate mode)                                         :ref:`rtc_mode_sub_func_list` 
+                                                                                          |  (Supports clock operations, such as time synchronization, alarm clock operation, stopwatch, etc.)
+  SYS_INFO_FUNCTION_AUX                                           3                       |  External device mode                                                                                          :ref:`aux_mode_sub_func_list` 
+                                                                                          |  (Supports operation of external devices, such as music pause and play)
+  SYS_INFO_FUNCTION_FM                                            4                       |  FM receiver mode                                                                                              :ref:`fm_mode_sub_func_list` 
+                                                                                          |  (Supports FM reception operations, such as searching for and playing radio stations.)
+  SYS_INFO_FUNCTION_LIGHT                                         5                       |  Lighting modes                                                            
+                                                                                          |  (Supports setting up lighting effects, such as light color and flashing effects)
+  SYS_INFO_FUNCTION_FMTX                                          6                       |  FM transmission mode. (Merged into [Common Mode], no longer a separate mode)
+                                                                                          |  (Supports FM transmission operations, such as setting the frequency.)
+  SYS_INFO_FUNCTION_EQ                                            7                          EQ mode (merged into the [Common Mode], no longer a separate mode)
+  SYS_INFO_FUNCTION_SPDIF                                         8                          Digital audio mode                                                                                             :ref:`spdif_mode_sub_func_list` 
+  SYS_INFO_FUNCTION_PC_SLAVE                                      9                          PC slave mode                                                                                                  :ref:`pc_slave_mode_sub_func_list` 
+ |
+  SYS_INFO_FUNCTION_LOW_POWER                                    22(0x16)                    Low power mode
+================================================= ====================================== =============================================================================================================== =============================================================
+
+.. _public_mode_sub_func_list:
+
+4.1.1 Public mode feature subset
+-------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_BATTERY                                          0                            Battery
+  SYS_INFO_ATTR_VOLUME                                           1                            Volume
+  SYS_INFO_ATTR_MUSIC_DEV_STATUS                                 2                            Storage device status
+  SYS_INFO_ATTR_ERR                                              3                            error message
+  SYS_INFO_ATTR_EQ                                               4                            Equalizer Information
+  SYS_INFO_ATTR_FILE_TYPE                                        5                            The device supports playing file types
+  SYS_INFO_ATTR_CUR_MODE_TYPE                                    6                            Current mode information
+  SYS_INFO_ATTR_LIGHT                                            7                            Lighting Information
+  SYS_INFO_ATTR_FM_TX                                            8                            FM transmission information
+  SYS_INFO_ATTR_EMITTER_MODE                                     9                            Peripheral mode
+  SYS_INFO_ATTR_EMITTER_CONNECT_STATUS                           10(0x0A)                     Peripheral connection status
+  SYS_INFO_ATTR_HIGH_AND_BASS                                    11(0x0B)                     Treble and bass settings
+  SYS_INFO_ATTR_EQ_PRESET_VALUE                                  12(0x0C)                     Equalizer preset information
+  SYS_INFO_ATTR_CURRENT_NOISE_MODE                               13(0x0D)                     Current noise reduction algorithm information
+  SYS_INFO_ATTR_ALL_NOISE_MODE                                   14(0x0E)                     Information on all noise reduction algorithms
+  SYS_INFO_ATTR_PHONE_STATUS                                     15(0x0F)                     Call status
+  SYS_INFO_ATTR_FIXED_LEN_DATA_FUN                               16(0x10)                     Extended functions
+  SYS_INFO_ATTR_SOUND_CARD_EQ_FREQ                               17(0x11)                     Sound card equalizer frequency information
+  SYS_INFO_ATTR_SOUND_CARD_EQ_GAIN                               18(0x12)                     Sound card equalizer gain information
+  SYS_INFO_ATTR_SOUND_CARD                                       19(0x13)                     Sound card function
+  SYS_INFO_ATTR_HEARING_ASSIST                                   20(0x14)                     Hearing aid fitting
+  SYS_INFO_ATTR_ADAPTIVE_ANC                                     21(0x15)                     Adaptive ANC
+  SYS_INFO_ATTR_SMART_NO_PICK                                    22(0x16)                     Smart No-Picking
+  SYS_INFO_ATTR_SCENE_DENOISE                                    23(0x17)                     Scene noise reduction
+  SYS_INFO_ATTR_WIND_NOISE_DETECTION                             24(0x18)                     Wind noise detection
+  SYS_INFO_ATTR_VOCAL_BOOSTER                                    25(0x19)                     Voice enhancement
+  SYS_INFO_ATTR_AI                                               26(0x1A)                     AI Functions
+  SYS_INFO_ATTR_DOUBLE_CONNECT                                   27(0x1B)                     Dual-connection of equipment
+================================================= ====================================== =========================================================================
+
+.. _bt_mode_sub_func_list:
+
+4.1.2 Bluetooth mode feature subset
+------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_ID3_TITLE                                          0                            Song title based on ID3 information
+  SYS_INFO_ATTR_ID3_ARTIST                                         1                            Author's name in ID3 information
+  SYS_INFO_ATTR_ID3_ALBUM                                          2                            ID3 information album name
+  SYS_INFO_ATTR_ID3_NUMBER                                         3                            ID3 information serial number
+  SYS_INFO_ATTR_ID3_TOTAL                                          4                            Total number of playlists with ID3 information
+  SYS_INFO_ATTR_ID3_GENRE                                          5                            Type of ID3 information
+  SYS_INFO_ATTR_ID3_TOTAL_TIME                                     6                            Total song duration (ID3 information)
+  SYS_INFO_ATTR_ID3_PLAY_STATUS                                    7                            Playback status of ID3 information
+  SYS_INFO_ATTR_ID3_CURRENT_TIME                                   8                            Current time of ID3 information
+================================================= ====================================== =========================================================================
+
+
+.. _device_music_mode_sub_func_list:
+
+4.1.3 Music mode feature subset
+---------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_MUSIC_STATUS_INFO                                  0                            Music playback status
+  SYS_INFO_ATTR_MUSIC_FILE_NAME_INFO                               1                            Play file name
+  SYS_INFO_ATTR_MUSIC_PLAY_MODE                                    2                            Playback mode
+================================================= ====================================== =========================================================================
+
+
+.. _rtc_mode_sub_func_list:
+
+4.1.4 Clock mode feature subset
+---------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_RTC_TIME                                           0                            Time synchronization
+  SYS_INFO_ATTR_RTC_ALARM                                          1                            Alarm message
+  SYS_INFO_ATTR_RTC_CURRENT_ALARM_INDEX                            2                            Current alarm clock number
+  SYS_INFO_ATTR_RTC_STOP_ALARM                                     3                            Stop alarm clock
+  SYS_INFO_ATTR_RTC_ALARM_VER                                      4                            Alarm clock structure version
+  SYS_INFO_ATTR_RTC_ALARM_DEFAULT_BELL_LIST                        5                            Default ringtone list
+  SYS_INFO_ATTR_RTC_ALARM_AUDITION                                 6                            Alarm clock ringtone preview
+  SYS_INFO_ATTR_RTC_ALARM_EXPAND_FLAG                              7                            Alarm clock extended fields support identifiers
+================================================= ====================================== =========================================================================
+
+
+.. _aux_mode_sub_func_list:
+
+4.1.5 External device mode function subset
+----------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_AUX_STATU                                           0                            Music playback status
+================================================= ====================================== =========================================================================
+
+
+.. _fm_mode_sub_func_list:
+
+4.1.6 FM receiver mode function subset
+----------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_FM_STATU                                            0                           Frequency playback status
+  SYS_INFO_ATTR_FM_FRE_INFO                                         1                           Channel Information
+================================================= ====================================== =========================================================================
+
+.. _spdif_mode_sub_func_list:
+
+4.1.7 SPDIF mode feature subset
+----------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_SPDIF_STATUS                                        0                           State Attributes
+  SYS_INFO_ATTR_SPDIF_AUDIO_SOURCE                                  1                           Sound source attributes
+================================================= ====================================== =========================================================================
+
+
+.. _pc_slave_mode_sub_func_list:
+
+4.1.8 PC Slave Mode Function Subset
+----------------------------------------------------------------------
+
+================================================= ====================================== =========================================================================
+                Citation Declaration                               Value                                                 Explanation
+================================================= ====================================== =========================================================================
+  SYS_INFO_ATTR_PC_SLAVE_STATUS                                     0                           State Attributes
+  SYS_INFO_ATTR_PC_SLAVE_PLAY_PREV_OR_NEXT                          1                           Switch between tracks
+================================================= ====================================== =========================================================================
+
+
+
+4.2 Function Operation
+===============================================
+
+================================================= ====================================== ============================================================= =============================================================
+              Citation Declaration                                Value                                              Explanation                                                Functional Subset
+================================================= ====================================== ============================================================= =============================================================
+  SYS_INFO_FUNCTION_PUBLIC                                       255(0xFF)                   Public Mode                                                      :ref:`public_mode_op_table` 
+  SYS_INFO_FUNCTION_BT                                            0                          Bluetooth Mode                                                   :ref:`bt_mode_op_table` 
+  SYS_INFO_FUNCTION_MUSIC                                         1                          Music Mode                                                       :ref:`device_music_mode_op_table` 
+  SYS_INFO_FUNCTION_AUX                                           3                          External Device Mode                                             :ref:`aux_mode_op_table` 
+  SYS_INFO_FUNCTION_FM                                            4                          FM Receiver Mode                                                 :ref:`fm_mode_op_table`                                                          
+================================================= ====================================== ============================================================= =============================================================
+
+.. _public_mode_op_table:
+
+4.2.1 Operation Comparison Table for Public Mode
+--------------------------------------------------------------------
+
+================================================= ====================================== ===================================================================
+                Citation Declaration                                Value                                              Explanation
+================================================= ====================================== ===================================================================
+  FUNCTION_PUBLIC_CMD_SWITCH_BT_MODE                                 0                         Switch to Bluetooth mode
+  FUNCTION_PUBLIC_CMD_SWITCH_MUSIC_MODE                              1                         Switch to music mode
+  FUNCTION_PUBLIC_CMD_SWITCH_RTC_MODE                                2                         Switch to clock mode
+  FUNCTION_PUBLIC_CMD_SWITCH_LINE_IN_MODE                            3                         Switch to external device mode
+  FUNCTION_PUBLIC_CMD_SWITCH_FM_MODE                                 4                         Switch to FM mode
+  FUNCTION_PUBLIC_CMD_SWITCH_SPDIF_MODE                              5                         Switch to SPDIF mode
+  FUNCTION_PUBLIC_CMD_SWITCH_PC_SLAVE_MODE                           6                         Switch to PC slave mode              
+================================================= ====================================== ===================================================================
+
+
+.. _bt_mode_op_table:
+
+4.2.2 Bluetooth mode operation guide
+---------------------------------------------------------------------
+
+================================================= ====================================== ===================================================================
+                Citation Declaration                                Value                                              Explanation
+================================================= ====================================== ===================================================================
+  FUNCTION_BT_CMD_ID3_PLAY_OR_PAUSE                                  1                          Pause/Play
+  FUNCTION_BT_CMD_ID3_PLAY_PREV                                      2                          Previous song
+  FUNCTION_BT_CMD_ID3_PLAY_NEXT                                      3                          Next song
+  FUNCTION_BT_CMD_ID3_DATA_PUSH_SWITCH                               4                          Data push switch      
+================================================= ====================================== ===================================================================
+
+
+.. _device_music_mode_op_table:
+
+4.2.3 Music Mode Operation Comparison Table
+---------------------------------------------------------------------
+
+
+================================================= ====================================== ===================================================================
+                Citation Declaration                                Value                                              Explanation
+================================================= ====================================== ===================================================================
+  FUNCTION_MUSIC_CMD_PLAY_OR_PAUSE                                   1                         Pause/Play
+  FUNCTION_MUSIC_CMD_PLAY_PREV                                       2                         Previous song
+  FUNCTION_MUSIC_CMD_PLAY_NEXT                                       3                         Next song
+  FUNCTION_MUSIC_CMD_NEXT_PLAYMODE                                   4                         Next playback mode
+  FUNCTION_MUSIC_CMD_NEXT_EQ_MODE                                    5                         Next EQ mode
+  FUNCTION_MUSIC_CMD_RETREAT_QUICKLY                                 6                         Rewind  
+  FUNCTION_MUSIC_CMD_FAST_FORWARD                                    7                         Fast forward            
+================================================= ====================================== ===================================================================
+
+
+.. _aux_mode_op_table:
+
+4.2.4 External Device Mode Operation Comparison Table
+-----------------------------------------------------------------------
+
+================================================= ====================================== ===================================================================
+                Citation Declaration                                Value                                              Explanation
+================================================= ====================================== ===================================================================
+  FUNCTION_AUX_CMD_PAUSE_OR_PLAY                                     1                         Pause/Play  
+================================================= ====================================== ===================================================================
+
+
+.. _fm_mode_op_table:
+
+4.2.5 FM Mode Operation Comparison Table
+-----------------------------------------------------------------------
+
+================================================= ====================================== ======================================================================================
+                Citation Declaration                                Value                                              Explanation
+================================================= ====================================== ======================================================================================
+  FUNCTION_FM_CMD_PLAY_OR_PAUSE                                      1                         Pause/Play
+  FUNCTION_FM_CMD_PREV_FREQ                                          2                         Previous frequency
+  FUNCTION_FM_CMD_NEXT_FREQ                                          3                         Next frequency
+  FUNCTION_FM_CMD_PREV_CHANNEL                                       4                         Previous Channel
+  FUNCTION_FM_CMD_NEXT_CHANNEL                                       5                         Next Channel
+  FUNCTION_FM_CMD_FREQ_SCAN                                          6                       | Channel Scan 
+                                                                                             | (Parameters: 0: Full scan, 1: Forward scan, 2: Backward scan, 3: Stop scan)   
+  FUNCTION_FM_CMD_SELECT_CHANNEL                                     7                         Select Channel
+  FUNCTION_FM_CMD_DEL_CHANNEL                                        8                         Delete Channel 
+  FUNCTION_FM_CMD_SELECT_FREQL                                       9                         Select frequency point             
+================================================= ====================================== ======================================================================================
+
+
+.. _tws_device_func_table:
+
+4.3 TWS Device Function Comparison Table
+======================================================================
+
+
+================================================= ====================================== ======================================================================================
+                Citation Declaration                                Value                                              Explanation
+================================================= ====================================== ======================================================================================
+  ADV_TYPE_BATTERY_QUANTITY                                          0                            Battery
+  ADV_TYPE_DEVICE_NAME                                               1                            Device Name
+  ADV_TYPE_KEY_SETTINGS                                              2                            Button settings
+  ADV_TYPE_LED_SETTINGS                                              3                            Lighting settings
+  ADV_TYPE_MIC_CHANNEL_SETTINGS                                      4                            Microphone Channel Settings
+  ADV_TYPE_WORK_MODE                                                 5                            Work mode
+  ADV_TYPE_PRODUCT_MESSAGE                                           6                            Product Information 
+  ADV_TYPE_CONNECTED_TIME                                            7                            Connection time      
+  ADV_TYPE_IN_EAR_CHECK                                              8                            In-ear detection       
+  ADV_TYPE_LANGUAGE                                                  9                            Language type   
+  ADV_TYPE_ANC_MODE_LIST                                             10                           ANC Mode List                    
+================================================= ====================================== ======================================================================================
+
+
+**ANC Switching Mode Function ID:** Fixed as ``KEY_FUNC_ID_SWITCH_ANC_MODE(255(0xFF))``
+

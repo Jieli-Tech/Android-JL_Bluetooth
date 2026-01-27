@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3 功能模块 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. 术语" href="../function/terminology_note.html" />
+    <link rel="prev" title="2 蓝牙代理模块" href="bt_proxy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3 功能模块</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../function/terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/basic_func.html">2. 基础功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/device_music_ctrl.html">4. 设备音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/charging_case_func.html">20. 彩屏充电仓功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/bmp_convert_func.html">21. 图像转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/translation_func.html">23. 翻译功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/auracast_assistant_func.html">24. Auracast助手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+      <li class="breadcrumb-item active">3 功能模块</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>3 功能模块<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../function/terminology_note.html">1. 术语</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/terminology_note.html#ltv">1.1. LTV格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/terminology_note.html#attr-bean">1.2. 属性模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/terminology_note.html#id3">1.3. 命令处理示例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/basic_func.html">2. 基础功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#get-device-info">2.1. 请求设备信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#get-sys-info">2.2. 查询设备系统信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#set-sys-info">2.3. 设置设备系统属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#notify-sys-info">2.4. 监听设备系统属性变化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#set-function">2.5. 设置功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#get-device-mode">2.6. 查询当前设备模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#id8">2.7. 切换设备模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#id9">2.8. 查询存储设备信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#id10">2.9. 重启设备</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/voice_ctrl.html">3. 音量控制功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#id2">3.1. 获取当前设备音量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#id3">3.2. 调节设备音量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#id4">3.3. 获取高低音信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#id5">3.4. 设置高低音</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/device_music_ctrl.html">4. 设备音乐控制功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id2">4.1. 获取设备音乐信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id4">4.2. 获取设备音乐播放状态</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id5">4.3. 获取支持的播放格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id6">4.4. 音乐播放或者暂停</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id7">4.5. 播放上一曲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id8">4.6. 播放下一曲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id9">4.7. 切换下一个播放模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#id10">4.8. 跳转到指定时间</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/eq_ctrl.html">5. 均衡器调试功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#id2">5.1. 获取均衡器参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#id3">5.2. 配置均衡器参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#id4">5.3. 获取拓展参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#id5">5.4. 设置拓展参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#id6">5.5. 设置混响</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#id7">5.6. 设置动态限幅</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/rtc_ctrl.html">6. 时钟功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id2">6.1. 同步时间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id3">6.2. 读取闹钟列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id4">6.3. 添加或者修改闹钟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id5">6.4. 删除闹钟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id6">6.5. 读取闹钟默认铃声列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id7">6.6. 读取指定闹钟铃声参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id8">6.7. 设置指定闹钟铃声参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id9">6.8. 试听闹钟铃声</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#id10">6.9. 停止试听闹钟铃声</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/line_in_ctrl.html">7. 外接设备控制功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/line_in_ctrl.html#id2">7.1. 获取外接设备播放状态</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/line_in_ctrl.html#id3">7.2. 外接设备播放或暂停</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/fm_ctrl.html">8. FM控制功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id1">8.1. 获取FM状态信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id2">8.2. 向前搜索频道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id3">8.3. 向后搜索频道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id4">8.4. 搜索FM频道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id5">8.5. 停止搜索频道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id6">8.6. FM播放或暂停</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id7">8.7. 播放上一个频道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id8">8.8. 播放下一个频道</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id9">8.9. 播放上一个频点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id10">8.10. 播放下一个频点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#id11">8.11. 播放指定频点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#get-fm-tx-info">8.12. 获取发射频点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#set-fm-tx-freq">8.13. 设置发射频点</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/light_ctrl.html">9. 灯光控制功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/light_ctrl.html#id2">9.1. 获取灯光控制信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/light_ctrl.html#id3">9.2. 设置灯光控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/light_ctrl.html#light-ctrl-info">9.3. 灯光控制信息</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/local_music_ctrl.html">10. 本地音乐控制功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id3">10.1. 控制ID3信息流推送</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id2">10.2. 获取ID3所有信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id5">10.3. ID3音乐播放或暂停</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id6">10.4. ID3音乐播放上一曲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id7">10.5. ID3音乐播放下一曲</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/tws_func.html">11. TWS功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id1">11.1. 获取设备设置信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id2">11.2. 设备广播流控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#set-dev-function">11.3. 设置设备功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id4">11.4. 监听设备广播信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id5">11.5. 监听设备请求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id6">11.6. 更新接入时间</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id7">11.7. 设置设备名称</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id8">11.8. 设置按键功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id12">11.9. 设置闪灯效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id16">11.10. 更新指定功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id17">11.11. 区分挂脖耳机</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#id18">11.12. 辅听耳机的验配功能</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/anc_ctrl.html">12. ANC设置功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#anc-mode-setting-func">12.1. ANC模式设置功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#id8">12.2. 自适应ANC算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#id14">12.3. 智能免摘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#id18">12.4. 场景降噪</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#id23">12.5. 风噪监测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#id28">12.6. 人声增强</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/sound_card_func.html">13. 声卡功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#id2">13.1. 获取声卡功能状态</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#id3">13.2. 获取声卡效果参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#id4">13.3. 设置声卡功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#id5">13.4. 设置声卡效果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#id6">13.5. 配置文档</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/search_device_func.html">14. 查找设备功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#id2">14.1. 查找设备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#id3">14.2. 停止查找设备</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#id4">14.3. 查找手机</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#sync-search-state">14.4. 同步查找设备状态</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/custom_cmd_func.html">15. 自定义命令</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/custom_cmd_func.html#send-custom-cmd">15.1. 发送自定义命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/custom_cmd_func.html#receiver-custom-cmd">15.2. 接收自定义命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/custom_cmd_func.html#custom-cmd-note">15.3. 注意事项</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/dual_connection_func.html">16. 设备双连功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#id2">16.1. 查询是否支持设备双连功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#id3">16.2. 获取设备双连状态</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#id4">16.3. 设置设备双连开关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#id5">16.4. 获取已连接设备的设备信息</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/record_func.html">17. 录音功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#id2">17.1. 初始化和监听录音事件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#id3">17.2. 开始录音</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#id4">17.3. 停止录音</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#id5">17.4. 释放资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/spdif_func.html">18. SPDIF功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#id1">18.1. 获取缓存的SPDIF状态信息(播放状态+音源)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#id2">18.2. 监听SPDIF状态信息(播放状态+音源)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#id3">18.3. 实时获取SPDIF状态信息(播放状态+音源)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#id4">18.4. 设置播放状态</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#id5">18.5. 设置音源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/big_file_transfer_func.html">19. 大文件传输功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/big_file_transfer_func.html#id2">19.1. 创建大文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/big_file_transfer_func.html#id3">19.2. 取消大文件传输</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/charging_case_func.html">20. 彩屏充电仓功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#id2">20.1. 监听彩屏充电仓事件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#id4">20.2. 获取设备屏幕信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#sdk">20.3. 获取SDK信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#brightness-ctrl">20.4. 屏幕亮度控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#id8">20.5. 闪光灯控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#screen-saver-ctrl">20.6. 屏幕保护程序控制功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#id15">20.7. 开机动画</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#sync-weather">20.8. 同步天气信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#sync-msg">20.9. 消息推送</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#id23">20.10. 墙纸控制功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#id27">20.11. 传输资源流程图</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/bmp_convert_func.html">21. 图像转换</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#convertresult">21.1. ConvertResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#onconvertlistener">21.2. OnConvertListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#id2">21.3. 算法说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#id3">21.4. 算法的选择规则</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/gif_convert_func.html">22. GIF转换</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/gif_convert_func.html#gifbin">22.1. GifBin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/gif_convert_func.html#resultcallback">22.2. ResultCallback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/gif_convert_func.html#gif-error-code">22.3. 错误码</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/translation_func.html">23. 翻译功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#id2">23.1. 初始化翻译功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#a2dp">23.2. 是否优先A2DP播放</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#id7">23.3. 进入模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#id8">23.4. 退出模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#id9">23.5. 销毁对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#id10">23.6. 接口调用流程图</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/auracast_assistant_func.html">24. Auracast助手</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/auracast_assistant_func.html#id1">24.1. 初始化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/auracast_assistant_func.html#id2">24.2. 销毁对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/auracast_assistant_func.html#auracast-receiver-func">24.3. Auracast接收端功能</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/file_browse_func.html">25. 目录浏览</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#id2">25.1. 数据说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#id5">25.2. 目录浏览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#id6">25.3. 文件删除</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#id7">25.4. 格式化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#id8">25.5. 注意事项</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bt_proxy.html" class="btn btn-neutral float-left" title="2 蓝牙代理模块" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../function/terminology_note.html" class="btn btn-neutral float-right" title="1. 术语" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

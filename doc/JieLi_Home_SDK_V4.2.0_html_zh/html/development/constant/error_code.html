@@ -1,0 +1,510 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 错误码 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="调试说明" href="../../other/debug.html" />
+    <link rel="prev" title="4. 功能码" href="func_code.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 接口说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/bt_api.html"><span class="sectnum">1 </span>蓝牙处理接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/rcsp_api.html">2. RCSP功能接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state_code.html">3. 状态码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="func_code.html">4. 功能码</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. 错误码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#err-common-1">5.1 ERR_COMMON(1 – 通用错误)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#err-status-2">5.2 ERR_STATUS(2 – 状态错误)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#err-communication-3">5.3 ERR_COMMUNICATION(3 – 通讯错误)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#err-ota-4-ota">5.4 ERR_OTA(4 – OTA错误)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#err-other-5">5.5 ERR_OTHER(5 – 其他错误)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#err-file-op-6">5.6 ERR_FILE_OP(6 – 文件操作错误)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#err-auracast-broadcast-7-auracast">5.7 ERR_AURACAST_BROADCAST(7 – Auracast广播错误)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 接口说明</a></li>
+      <li class="breadcrumb-item active">5. 错误码</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="err-code">
+<span id="id1"></span><h1>5. 错误码<a class="headerlink" href="#err-code" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>对应的类名: <code class="docutils literal notranslate"><span class="pre">ErrorCode.java</span></code></p></li>
+<li><p>属性引用: <strong>ErrorCode#</strong> <code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ERR_UNKNOWN</p></td>
+<td><p>-1</p></td>
+<td><p>未知错误</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERR_NONE</p></td>
+<td><p>0</p></td>
+<td><p>没有错误</p></td>
+</tr>
+</tbody>
+</table>
+<section id="err-common-1">
+<h2>5.1 ERR_COMMON(1 – 通用错误)<a class="headerlink" href="#err-common-1" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_PARAMETER</p></td>
+<td><p>0x1001(4097)</p></td>
+<td><p>参数错误。用户必须检查输入参数的正确性</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_BLE_NOT_SUPPORT</p></td>
+<td><p>0x1002(4098)</p></td>
+<td><p>设备不支持BLE</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_BLUETOOTH_NOT_ENABLE</p></td>
+<td><p>0x1003(4099)</p></td>
+<td><p>蓝牙未打开</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_BLUETOOTH_UN_PAIR_FAILED</p></td>
+<td><p>0x1006(4102)</p></td>
+<td><p>设备解绑失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_A2DP_NOT_INIT</p></td>
+<td><p>0x1007(4103)</p></td>
+<td><p>A2DP管理对象未初始化</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_A2DP_CONNECT_FAILED</p></td>
+<td><p>0x1008(4104)</p></td>
+<td><p>A2DP服务连接失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_HFP_NOT_INIT</p></td>
+<td><p>0x1009(4105)</p></td>
+<td><p>HFP管理对象未初始化</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_HFP_CONNECT_FAILED</p></td>
+<td><p>0x100A(4106)</p></td>
+<td><p>HFP服务连接失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_NO_SERVER</p></td>
+<td><p>0x1010(4112)</p></td>
+<td><p>BLE发现服务失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_OP_FAILED</p></td>
+<td><p>0x1011(4113)</p></td>
+<td><p>操作失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_REFLECT_WAY</p></td>
+<td><p>0x1014(4116)</p></td>
+<td><p>调用反射方法失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_NO_PERMISSION</p></td>
+<td><p>0x1015(4117)</p></td>
+<td><p>缺少对应权限</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_UNSUPPORTED_FUNCTION</p></td>
+<td><p>0x1016(4118)</p></td>
+<td><p>不支持功能</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_FUNC_NOT_INIT</p></td>
+<td><p>0x1017(4119)</p></td>
+<td><p>功能模块未初始化</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="err-status-2">
+<h2>5.2 ERR_STATUS(2 – 状态错误)<a class="headerlink" href="#err-status-2" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_BLE_CONNECT_FAILED</p></td>
+<td><p>0x2001(8193)</p></td>
+<td><p>BLE连接失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_CLASSIC_BLUETOOTH_IS_CONNECTED</p></td>
+<td><p>0x2005(8197)</p></td>
+<td><p>断开经典蓝牙失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_REMOTE_DEVICE_DISCONNECT</p></td>
+<td><p>0x2006(8198)</p></td>
+<td><p>远端设备未连接</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_DEVICE_IN_CALL</p></td>
+<td><p>0x2007(8199)</p></td>
+<td><p>设备处于通话状态</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_DEVICE_IN_BUSY</p></td>
+<td><p>0x2008(8200)</p></td>
+<td><p>设备处于繁忙状态</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="err-communication-3">
+<h2>5.3 ERR_COMMUNICATION(3 – 通讯错误)<a class="headerlink" href="#err-communication-3" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_CONNECT_TIMEOUT</p></td>
+<td><p>0x3001(12289)</p></td>
+<td><p>连接超时</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_SEND_FAILED</p></td>
+<td><p>0x3002(12290)</p></td>
+<td><p>发送数据失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_PAIR_TIMEOUT</p></td>
+<td><p>0x3003(12291)</p></td>
+<td><p>配对超时</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_DATA_FORMAT</p></td>
+<td><p>0x3004(12292)</p></td>
+<td><p>数据格式异常</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_PARSE_DATA</p></td>
+<td><p>0x3005(12293)</p></td>
+<td><p>解析数据错误</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_SPP_WRITE_DATA_FAIL</p></td>
+<td><p>0x3006(12294)</p></td>
+<td><p>SPP发送数据失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_SEND_TIMEOUT</p></td>
+<td><p>0x3007(12295)</p></td>
+<td><p>发送数据超时</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_RESPONSE_BAD_STATUS</p></td>
+<td><p>0x3008(12296)</p></td>
+<td><p>设备回复失败状态。参考 “3.4 状态码”</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_NOT_ALLOW_CONNECT</p></td>
+<td><p>0x3009(12297)</p></td>
+<td><p>不允许连接</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_DEVICE_PAIRING</p></td>
+<td><p>0x300A(12298)</p></td>
+<td><p>正在配对中</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_EDR_CONNECTING</p></td>
+<td><p>0x300B(12299)</p></td>
+<td><p>经典蓝牙连接中</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_SPP_CONNECTING</p></td>
+<td><p>0x300C(12300)</p></td>
+<td><p>Spp连接中</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_BLE_CONNECTING</p></td>
+<td><p>0x300D(12301)</p></td>
+<td><p>Ble连接中</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_DEVICE_CONNECTING</p></td>
+<td><p>0x300E(12302)</p></td>
+<td><p>设备连接中</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_RESPONSE_BAD_RESULT</p></td>
+<td><p>0x300F(12303)</p></td>
+<td><p>回复失败原因。具体原因参考“BaseError#getReason()”</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_OPERATION_TIMEOUT</p></td>
+<td><p>0x3010(12304)</p></td>
+<td><p>操作超时</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_OPERATION_IN_PROGRESS</p></td>
+<td><p>0x3011(12305)</p></td>
+<td><p>操作进行中</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_STORAGE_OFFLINE</p></td>
+<td><p>0x3012(12306)</p></td>
+<td><p>存储器下线</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_CRC_CHECK</p></td>
+<td><p>0x3013(12307)</p></td>
+<td><p>CRC校验失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_MISSING_DATA</p></td>
+<td><p>0x3014(12308)</p></td>
+<td><p>丢失数据</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_DATA_OVER_LIMIT</p></td>
+<td><p>0x3015(12309)</p></td>
+<td><p>数据超过限制</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_INSUFFICIENT_SPACE</p></td>
+<td><p>0x3016(12310)</p></td>
+<td><p>空间不足</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_RENAME_FILE</p></td>
+<td><p>0x3017(12311)</p></td>
+<td><p>重命名失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_WRITE_DATA</p></td>
+<td><p>0x3018(12312)</p></td>
+<td><p>写数据失败</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_OPERATION_CANCEL</p></td>
+<td><p>0x3019(12313)</p></td>
+<td><p>操作被取消</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="err-ota-4-ota">
+<h2>5.4 ERR_OTA(4 – OTA错误)<a class="headerlink" href="#err-ota-4-ota" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_OTA_FAILED</p></td>
+<td><p>0x4001(16385)</p></td>
+<td><p>OTA升级失败, 具体错误码参考 <a class="reference external" href="https://doc.zh-jieli.com/Apps/Android/ota/zh-cn/master/development/interface_desc.html#id6">杰理OTA在线文档的错误码</a></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="err-other-5">
+<h2>5.5 ERR_OTHER(5 – 其他错误)<a class="headerlink" href="#err-other-5" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_AUTH_DEVICE</p></td>
+<td><p>0x5001(20481)</p></td>
+<td><p>认证设备失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_IO_EXCEPTION</p></td>
+<td><p>0x5002(20482)</p></td>
+<td><p>IO异常</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_START_AUTH_DEVICE</p></td>
+<td><p>0x5003(20483)</p></td>
+<td><p>开始认证设备失败</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="err-file-op-6">
+<h2>5.6 ERR_FILE_OP(6 – 文件操作错误)<a class="headerlink" href="#err-file-op-6" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_FILE_LOAD_COMPLETE</p></td>
+<td><p>0x6000(24576)</p></td>
+<td><p>文件数据加载完成</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_FOLDER_TOO_DEEP</p></td>
+<td><p>0x6001(24577)</p></td>
+<td><p>文件夹层级过深</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_NOT_FOUND_DATA</p></td>
+<td><p>0x6002(24578)</p></td>
+<td><p>没有找到缓存</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_FILE_STORAGE_NOT_MATCH</p></td>
+<td><p>0x6003(24579)</p></td>
+<td><p>文件与存储器不匹配</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="err-auracast-broadcast-7-auracast">
+<h2>5.7 ERR_AURACAST_BROADCAST(7 – Auracast广播错误)<a class="headerlink" href="#err-auracast-broadcast-7-auracast" title="Link to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>错误定义</p></th>
+<th class="head"><p>错误码</p></th>
+<th class="head"><p>错误描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SUB_ERR_BROADCAST_NAME</p></td>
+<td><p>0x7000(28672)</p></td>
+<td><p>错误的广播名称</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_BROADCAST_ADDRESS</p></td>
+<td><p>0x7001(28673)</p></td>
+<td><p>错误的广播地址</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_BROADCAST_ID</p></td>
+<td><p>0x7002(28674)</p></td>
+<td><p>错误的广播ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_BAD_CODE</p></td>
+<td><p>0x7003(28675)</p></td>
+<td><p>广播密钥错误</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_SYNC_FAILED</p></td>
+<td><p>0x7004(28676)</p></td>
+<td><p>周期性广播同步失败</p></td>
+</tr>
+<tr class="row-odd"><td><p>SUB_ERR_SYNC_TIMEOUT</p></td>
+<td><p>0x7005(28677)</p></td>
+<td><p>周期性广播同步超时</p></td>
+</tr>
+<tr class="row-even"><td><p>SUB_ERR_PA_NOT_SYNC</p></td>
+<td><p>0x7006(28678)</p></td>
+<td><p>周期性广播未同步/已丢失</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="func_code.html" class="btn btn-neutral float-left" title="4. 功能码" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../other/debug.html" class="btn btn-neutral float-right" title="调试说明" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

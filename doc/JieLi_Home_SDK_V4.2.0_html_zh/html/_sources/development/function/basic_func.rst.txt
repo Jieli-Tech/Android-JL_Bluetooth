@@ -1,0 +1,1588 @@
+
+.. _basic_func:
+
+基础功能
+************************
+
+====================== ======================================= ============================== =============================== =============================== =======================================
+  功能描述                          命令原型                        命令模型                        命令参数                       命令回复                             备注
+====================== ======================================= ============================== =============================== =============================== =======================================
+ 获取设备信息            Command.CMD_GET_TARGET_INFO             GetTargetInfoCmd               :ref:`target_info_param`      | :ref:`target_info` or            参考 :ref:`common_cmd_handle` 
+                                                                                                                              | :ref:`device_info` 
+ 查询设备系统信息         Command.CMD_GET_SYS_INFO               GetSysInfoCmd                  :ref:`get_sys_param`             :ref:`sys_info`                   参考 :ref:`common_cmd_handle` 
+ 设置设备系统属性         Command.CMD_SET_SYS_INFO               SetSysInfoCmd                  :ref:`set_sys_param`              CommonResponse                   参考 :ref:`common_cmd_handle` 
+ 监听设备系统属性变化    Command.CMD_SYS_INFO_AUTO_UPDATE        UpdateSysInfoCmd               :ref:`sys_info`                   NULL                            参考 :ref:`receive_cmd_handle` 
+ 设置功能                Command.CMD_FUNCTION                    FunctionCmd                    :ref:`function_param`              CommonResponse                   参考 :ref:`common_cmd_handle`
+ 重启设备                Command.CMD_REBOOT_DEVICE               RebootDeviceCmd                RebootDeviceParam               RebootDeviceResponse              参考 :ref:`common_cmd_handle`
+====================== ======================================= ============================== =============================== =============================== =======================================
+
+.. important::
+    | 1. 表格中的数据模型都可以通过SDK查看
+    | 2. 本文档只展示部分重要数据模型
+
+
+
+.. _get_device_info:
+
+请求设备信息
+=====================================
+
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构造功能命令 - 比如, 获取设备信息
+    //mask = 0xffffffff;  -- 获取所有属性
+    CommandBase getDeviceInfoCmd = CommandBuilder.buildGetDeviceInfoCmd(mask);
+    //Step2: 执行操作命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), getDeviceInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+            //Step4: 判断是否有回复数据
+            //注意 - 如果是没有回复数据的命令，回复数据为null
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            if (isHasResponse) {
+                //Step5: 获取对应的命令数据
+                GetTargetInfoCmd command = (GetTargetInfoCmd) cmd;
+                //Step6: 获取回复数据
+                TargetInfoResponse response = command.getResponse();
+                if (null == response) { //回复数据为空，证明设备回复的数据有问题，进行异常处理
+                    onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Response data is error."));
+                    return;
+                }
+                //处理设备回复数据
+            }
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    }); 
+
+
+2. RCSPController方式
+
+
+.. code-block:: java 
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行请求设备功能并等待结果回调
+    controller.requestDeviceInfo(controller.getUsingDevice(), 0xffffffff, new OnRcspActionCallback<DeviceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, DeviceInfo message) {
+            //成功回调
+            //message - 设备信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+    //第二种方式，获取缓存的设备信息
+    DeviceInfo deviceInfo = controller.getDeviceInfo();
+
+
+.. _target_info_param:
+
+GetTargetInfoParam
+------------------------------------------
+
+获取设备信息参数
+
+.. code-block:: java
+
+    public class GetTargetInfoParam extends BaseParameter {
+        private int mask;//配置信息查询掩码
+        private byte platform;//手机平台 0 : android 1: iOS  2 : web app
+    }
+
+
+.. note::
+    mask需要参考 :ref:`attr_fun_code`
+
+
+.. _device_info: 
+
+DeviceInfo
+-------------------------------------------
+
+设备信息
+
+.. code-block:: java
+
+    public class DeviceInfo extends TargetInfoResponse {
+
+        /*=============================================*
+         * 闹钟信息
+         *=============================================*/
+        //闹钟信息
+        private AlarmListInfo alarmListInfo;
+        //闹钟响铃信息
+        private List<DefaultAlarmBell> alarmDefaultBells;
+        //闹钟数据结构版本
+        private int alarmVersion;
+        //闹钟拓展字段支持标识
+        private byte alarmExpandFlag = 0x00;
+
+        /*=============================================*
+         * 音乐播放信息
+         *=============================================*/
+        //音乐名称
+        private MusicNameInfo musicNameInfo;
+        //音乐状态
+        private MusicStatusInfo musicStatusInfo;
+        //音乐播放模式信息
+        private PlayModeInfo playModeInfo;
+        //Aux播放状态
+        private boolean isAuxPlay;
+        //可以播放的格式
+        private String playFileFormat;
+        //当前播放的文件簇号
+        private int cluster;
+        //当前播放文件的设备序号
+        private byte currentDevIndex;
+
+        /*=============================================*
+         * 均衡器信息
+         *=============================================*/
+        private EqPresetInfo eqPresetInfo;
+        private EqInfo eqInfo;
+
+        /*=============================================*
+         * 设备存储器信息
+         *=============================================*/
+        private DevStorageInfo devStorageInfo;
+
+        /*=============================================*
+         * 灯光控制信息
+         *=============================================*/
+        private LightControlInfo lightControlInfo;
+
+        /*=============================================*
+         * 声卡信息
+         *=============================================*/
+        private EqInfo soundCardEqInfo;
+
+        /*=============================================*
+         * FM/FM_TX信息
+         *=============================================*/
+        private List<ChannelInfo> channelInfos; //频道列表
+        private FmStatusInfo fmStatusInfo; //频道状态
+        private float frequency; //发射频点
+
+        /*=============================================*
+         * ID3信息
+         *=============================================*/
+        private ID3MusicInfo iD3MusicInfo;
+
+        /*=============================================*
+         * 噪声处理(ANC)信息
+         *=============================================*/
+        private VoiceMode currentVoiceMode; //当前噪声处理模式信息
+        private List<VoiceMode> voiceModeList; //所有噪声处理模式信息
+        private AdaptiveData adaptiveData;     //自适应ANC数据
+        private SmartNoPick smartNoPick;       //智能免摘信息
+        /*降噪模式开启有效*/
+        private SceneDenoising sceneDenoising; //场景降噪
+        /*降噪模式开启有效*/
+        private WindNoiseDetection windNoiseDetection; //风噪检测
+        /*通透模式开启有效*/
+        private VocalBooster vocalBooster;   //人声增强模式
+
+        /*=============================================*
+         * 通话信息
+         *=============================================*/
+        private int phoneStatus; //通话状态
+
+        /*=============================================*
+         * 拓展功能信息
+         *=============================================*/
+        private ExpandFunction expandFunction;
+
+        /*=============================================*
+         * 设备双连信息
+         *=============================================*/
+        private DoubleConnectionState doubleConnectionState;
+        private ConnectedBtInfo connectedBtInfo;
+
+        /*=============================================*
+         * SPDIF功能信息
+         *=============================================*/
+        private SPDIFPlayStatusInfo spdifPlayStatusInfo;//播放状态
+        private SPDIFAudioSourceInfo spdifAudioSourceInfo;//音源
+   
+        /*=============================================*
+         * PC从机功能信息
+         *=============================================*/
+        private PCSlavePlayStatusInfo pcSlavePlayStatusInfo;
+
+        /*=============================================*
+         * AI翻译功能
+         *=============================================*/
+        /**
+         * 翻译模式信息
+         */
+        private TranslationMode translationMode;
+
+        /*=============================================*
+         * Auracast功能
+         *=============================================*/
+        /**
+         * 设备状态数据
+         */
+        private DeviceStateData deviceStateData;
+        /**
+         * Auracast发射端配置
+         */
+        private TransmitterSettings transmitterSettings;
+    
+        ...
+    }
+
+
+.. _target_info:
+
+TargetInfoResponse
+--------------------------------------
+
+目标设备信息
+
+.. code-block:: java
+
+    public class TargetInfoResponse extends CommonResponse {
+
+        /**
+         * 协议版本号
+         */
+        private final ProtocolVersion protocolVersion;
+        /**
+         * 系统信息
+         */
+        private final SystemInfo systemInfo;
+        /**
+         * 经典蓝牙相关信息
+         */
+        private final ClassicBtInfo classicBtInfo;
+        /**
+         * AI平台信息
+         */
+        private final AIPlatform aiPlatform;
+        /**
+         * 功能配置信息
+         */
+        private final FunctionConfiguration functionConfiguration;
+        /**
+         * 固件版本信息
+         */
+        private final Version version;
+        /**
+         * SDK类型
+         */
+        private int sdkType;
+        /**
+         * UBoot版本信息
+         */
+        private final Version uBootVersion;
+        /**
+         * 升级配置
+         */
+        private final OTASettings otaSettings;
+        /**
+         * 升级状态
+         */
+        private final OTAState otaState;
+        /**
+         * 产品信息
+         */
+        private final ProductInfo productInfo;
+        //用于服务器校验产品信息
+        /**
+         * 认证秘钥
+         */
+        private String authKey;
+        /**
+         * 项目标识码
+         */
+        private String projectCode;
+        /**
+         * 协议MTU
+         */
+        private final ProtocolMTU protocolMtu;
+        /**
+         * 是否允许连接
+         */
+        private int allowConnectFlag;
+        /**
+         * 设备名
+         */
+        @Deprecated
+        private String name;
+        /**
+         * BLE信息
+         */
+        private final BleInfo bleInfo;
+        /**
+         * 发射器信息
+         */
+        private final TransmitterInfo transmitterInfo;
+        /**
+         * 拓展功能
+         */
+        private final SysExpandFunc sysExpandFunc;
+        /**
+         * 文件操作配置
+         */
+        private final FileOpConfiguration fileOpConfiguration;
+
+        /**
+         * 自定义版本信息
+         */
+        private String customVersionMsg;
+
+    }
+
+
+.. note::
+    1. :ref:`protocol_version` 
+    2. :ref:`system_info` 
+    3. :ref:`classic_bt_info` 
+    4. :ref:`ai_platform` 
+    5. :ref:`function_cfg` 
+    6. :ref:`version_msg`
+    7. :ref:`ota_settings`
+    8. :ref:`ota_state`
+    9. :ref:`product_info`
+    10. :ref:`protocol_mtu` 
+    11. :ref:`ble_info`
+    12. :ref:`transmitter_info`
+    13. :ref:`sys_expand_func`
+    14. :ref:`file_op_cfg`        
+
+
+
+.. _protocol_version: 
+
+ProtocolVersion
+----------------------------------------
+
+
+协议版本信息
+
+.. code-block:: java
+
+    public class ProtocolVersion {
+        /**
+         * 版本号
+         */
+        private int versionCode;
+        /**
+         * 版本名
+         */
+        private String versionName;
+    }
+
+
+.. _system_info:
+
+SystemInfo
+--------------------------------
+
+系统信息
+
+.. code-block:: java
+
+    public class SystemInfo {
+
+        /**
+         * 设备电量
+         */
+        private int quantity;
+        /**
+         * 设备音量
+         */
+        private int volume;
+        /**
+         * 最大音量
+         */
+        private int maxVol;
+        /**
+         * 是否支持音量同步
+         */
+        private boolean supportVolumeSync = false;
+        /**
+         * 升级最小电量限制值(1 ~ 100)
+         */
+        private int lowPowerLimit = 30;
+    }
+
+
+.. _classic_bt_info:
+
+ClassicBtInfo
+-------------------------------------
+
+
+经典蓝牙信息
+
+
+.. code-block:: java
+
+    public class ClassicBtInfo {
+
+        /**
+         * 经典蓝牙地址
+         */
+        private String edrAddr;
+        /**
+         * 经典蓝牙支持的协议
+         */
+        private int edrProfile = 0;
+        /**
+         * 经典蓝牙的连接状态
+         */
+        private int edrStatus = 0;
+    }
+
+
+.. _ai_platform:
+
+AIPlatform
+------------------------------------------
+
+
+AI平台信息
+
+
+.. code-block:: java
+
+    public class AIPlatform {
+        /**
+         * 平台类型
+         */
+        private int platform;
+        /**
+         * 认证码
+         */
+        private String license;
+
+    }
+
+.. _function_cfg:
+
+FunctionConfiguration
+--------------------------------------------
+
+功能配置信息
+
+
+.. code-block:: java
+
+    public class FunctionConfiguration {
+
+        /**
+         * 功能支持掩码
+         */
+        private int functionMask;
+        /**
+         * 当前模式
+         */
+        private int curFunction;
+        /**
+         * 是否支持usb、sd、linein不在线时显示功能图标
+         */
+        private boolean supportOfflineShow;
+        /**
+         * 是否支持usb
+         */
+        private boolean supportUsb = true;
+        /**
+         * 是否支持sd0
+         */
+        private boolean supportSd0 = true;
+        /**
+         * 是否支持sd1
+         */
+        private boolean supportSd1 = true;
+        /**
+         * 是否隐藏网络电台
+         */
+        private boolean hideNetRadio;
+    }
+
+
+.. _version_msg:
+
+Version
+------------------------------------
+
+版本信息
+
+.. code-block:: java
+
+    public class Version {
+
+        /**
+         * 设备版本名称
+         */
+        private String versionName;
+        /**
+         * 设备版本信息
+         */
+        private int versionCode;
+    }
+
+
+.. _ota_settings:
+
+OTASettings
+---------------------------------------
+
+OTA设置
+
+
+.. code-block:: java
+
+    public class OTASettings{
+
+        /**
+         * 是否支持双备份升级
+         * <p>单备份[false]，需要断开回连过程；
+         * <br/>双备份[true]，不需要断开回连过程</p>
+         */
+        private boolean isSupportDoubleBackup;
+        /**
+         * 是否需要下载boot loader
+         */
+        private boolean isNeedBootLoader;
+        /**
+         * 单备份OTA连接方式
+         * <p>
+         * 0 -- 不使能<br/>
+         * 1 -- BLE <br/>
+         * 2 -- SP
+         * </p>
+         */
+        private int singleBackupOtaWay;
+        /**
+         * 是否支持复用空间特殊升级流程
+         */
+        private boolean isSupportReuseSpaceOTA;
+    }
+
+
+.. _ota_state:
+
+OTAState
+---------------------------------------
+
+OTA状态
+
+
+.. code-block:: java
+
+    public class OTAState {
+
+        /**
+         * 强制升级标志
+         */
+        private int mandatoryUpgradeFlag;
+        /**
+         * 请求升级标志
+         * <p>
+         * 取值范围: <br/>
+         * 0 : 正常升级<br/>
+         * 1 : 强制升级
+         * </p>
+         */
+        private int requestOtaFlag;
+        /**
+         * 拓展模式
+         * <p>
+         * 取值范围:<br/>
+         * 0 : 无效模式 <br/>
+         * 1 : 更新资源模式 <br/>
+         * 2 : 复用空间特殊升级模式-仅更新资源 <br/>
+         * 3 : 复用空间特殊升级模式-仅升级固件程序
+         * </p>
+         */
+        private int expandMode;
+    }
+
+
+.. _product_info:
+
+ProductInfo
+---------------------------------------
+
+产品信息
+
+.. code-block:: java
+
+    public class ProductInfo {
+        /**
+         * 厂商ID
+         */
+        private int vid;
+        /**
+         * 产品ID
+         */
+        private int pid;
+        /**
+         * 客户ID
+         */
+        private int uid;
+    }
+
+
+.. _protocol_mtu:
+
+ProtocolMTU
+-------------------------------------
+
+协议MTU
+
+.. code-block:: java
+
+    public class ProtocolMTU {
+        /**
+         * 发数MTU
+         */
+        private int sendMtu = Constants.DEFAULT_PROTOCOL_MTU;
+        /**
+         * 收数MTU
+         */
+        private int receiveMtu = Constants.DEFAULT_PROTOCOL_MTU;
+    }
+
+
+
+.. _ble_info:
+
+BleInfo
+-------------------------------------
+
+BLE信息
+
+
+.. code-block:: java
+    
+    public class BleInfo {
+        /**
+         * BLE地址
+         */
+        private String bleAddr;
+        /**
+         * 是否仅仅连接ble设备
+         */
+        private boolean bleOnly;
+        /**
+         * 是否BLE转SPP方式(连接BLE才打开EDR,才能连接SPP)
+         */
+        private boolean isBLEToSppWay;
+        /**
+         * 是否支持LE Audio功能
+         */
+        private boolean isSupportLeAudio;
+        /**
+         * LE Audio是否已连接
+         */
+        private boolean isLeAudioConnected;
+    }
+
+
+.. _transmitter_info:
+
+TransmitterInfo
+---------------------------------------
+
+发射端信息
+
+.. code-block:: java
+
+    public class TransmitterInfo {
+
+        /**
+         * 是否支持外设模式
+         */
+        private boolean emitterSupport;
+        /**
+         * 0x00:普通模式  0x01:外设模式
+         */
+        private int emitterStatus;
+
+    }
+
+.. _sys_expand_func:
+
+SysExpandFunc
+----------------------------------
+
+系统拓展功能
+
+.. code-block:: java
+
+    public class SysExpandFunc {
+        /**
+         * 是否支持MD5读取
+         */
+        private boolean isSupportMD5;
+        /**
+         * 是否游戏模式
+         */
+        private boolean isGameMode;
+        /**
+         * 是否支持查找设备
+         */
+        private boolean isSupportSearchDevice;
+        /**
+         * 是否支持声卡功能
+         */
+        private boolean supportSoundCard = false;
+        /**
+         * 禁止app调节设备eq
+         */
+        private boolean banEq;
+        /**
+         * 是否支持外挂Flash传输功能
+         */
+        private boolean supportExternalFlashTransfer = false;
+        /**
+         * 是否支持主动降噪功能
+         */
+        private boolean supportAnc = false;
+        /**
+         * 是否支持读取固件异常信息
+         */
+        private boolean supportReadErrorMSg;
+
+        /**
+         * 是否⽀持辅听设置功能
+         */
+        private boolean supportHearingAssist = false;
+        /**
+         * 是否支持自适应ANC算法
+         */
+        private boolean supportAdaptiveANC = false;
+        /**
+         * 是否支持获取设备配置信息
+         */
+        private boolean supportDevConfigure = false;
+        /**
+         * 是否支持智能免摘功能
+         */
+        private boolean supportSmartNoPick = false;
+        /**
+         * 是否支持场景降噪功能
+         */
+        private boolean supportSceneDenoising = false;
+        /**
+         * 是否支持风噪检测
+         */
+        private boolean supportWindNoiseDetection = false;
+        /**
+         * 是否支持人声增强
+         */
+        private boolean supportVocalBooster = false;
+        /**
+         * 是否支持设备双连
+         */
+        private boolean supportDoubleConnection = false;
+    }
+
+
+.. _file_op_cfg:
+
+FileOpConfiguration
+-------------------------------------------------
+
+文件操作配置
+
+
+.. code-block:: java
+
+    public class FileOpConfiguration {
+
+        /**
+         * 大文件传输是否支持分包crc16校验
+         */
+        private boolean supportPackageCrc16 = false;
+        /**
+         * 以新的文件名方式读取固件文件(支持多设备)
+         */
+        private boolean supportFileByNameWithDev = false;
+        /**
+         * 是否支持小文件传输方式
+         */
+        private boolean supportSmallFileTransfer = false;
+    }
+
+
+
+
+.. _get_sys_info: 
+
+查询设备系统信息
+============================================
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构造查询设备系统信息命令
+    //功能码 
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //公共属性
+    //查询当前设备模式和设备存储信息
+    int mask = 0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE | 0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS;
+    CommandBase getSysInfoCmd = CommandBuilder.buildGetSysInfoCmd((byte)function, mask);
+    //Step2: 执行操作命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), getSysInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+            //Step4: 判断是否有回复数据
+            //注意 - 如果是没有回复数据的命令，回复数据为null
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            if (isHasResponse) {
+                //Step5: 获取对应的命令数据
+                GetSysInfoCmd command = (GetSysInfoCmd) cmd;
+                //Step6: 获取回复数据
+                SysInfoResponse response = command.getResponse();
+                if (null == response) { //回复数据为空，证明设备回复的数据有问题，进行异常处理
+                    onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Response data is error."));
+                    return;
+                }
+                //处理设备回复数据
+                //response.getFunction(); //功能码
+                //response.getAttrs();    //功能属性
+            }
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+            //此处将会回调设备存储信息
+        }
+
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //此处将会回调设备模式
+        }
+    });
+    int func = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //公共属性
+    //查询当前设备模式和设备存储信息
+    int mask = 0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE | 0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS;
+    //执行查询设备系统信息并等待结果回调
+    controller.getDevSysInfo(controller.getUsingDevice(), func, mask, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onDeviceModeChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. warning::
+    | 1. function 需要参考 :ref:`attr_fun_code` 
+    | 2. mask 需要参考 :ref:`attr_fun_code` 
+    | 3. 不允许mask为全F
+
+
+.. _get_sys_param: 
+
+GetSysInfoParam
+---------------------------------
+
+
+获取系统信息参数
+
+.. code-block:: java
+
+    public class GetSysInfoParam extends BaseParameter {
+        private byte function; //功能码
+        private int mask; //功能掩码
+    }
+
+
+.. _set_sys_info:
+
+设置设备系统属性
+====================================
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构造设置设备系统属性命令
+    //功能码
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //公共属性
+    //数据列表
+    AttrBean attrBean = new AttrBean();
+    attrBean.setType(AttrAndFunCode.SYS_INFO_ATTR_VOLUME);  //系统音量
+    attrBean.setAttrData(new byte[]{(byte) 0x0E}); //14等级
+    List<AttrBean> data = new ArrayList<>();
+    data.add(attrBean);
+    CommandBase setSysInfoCmd = CommandBuilder.buildSetSysInfoCmd((byte) function, data);
+    //Step2: 执行操作命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), setSysInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+            //等待系统调整成功后，通过更新设备系统信息命令通知
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    int fun = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //公共属性
+    //设置设备音量 - 14
+    AttrBean attrBean = new AttrBean();
+    attrBean.setType(AttrAndFunCode.SYS_INFO_ATTR_VOLUME);
+    attrBean.setAttrData(new byte[]{(byte) 0x0E});
+    List<AttrBean> data = new ArrayList<>();
+    data.add(attrBean);
+    //执行设置设备系统属性并等待结果回调
+    controller.setDevSysInfo(controller.getUsingDevice(), fun, data, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. warning::
+    | 1. data是由多个 :ref:`ltv_format` 组成的
+    | 2. 请通过 ``CommandBuilder`` 构建设置设备系统属性命令 
+
+
+.. _set_sys_param:
+
+SetSysInfoParam 
+---------------------------------------
+
+
+设置系统信息参数
+
+.. code-block:: java
+
+    public class SetSysInfoParam extends BaseParameter {
+
+        private byte function; //功能码
+        private List<AttrBean> attrBeanList; //功能属性
+    }
+
+
+.. _notify_sys_info:
+
+监听设备系统属性变化
+============================================
+
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 添加蓝牙RCSP事件回调器
+    manager.addEventListener(new BTRcspEventCallback() {
+        //回调设备发送的命令
+        @Override
+        public void onDeviceCommand(BluetoothDevice device, CommandBase cmd) {
+            super.onDeviceCommand(device, cmd);
+            //Step2: 处理命令
+            if (cmd.getId() != Command.CMD_SYS_INFO_AUTO_UPDATE) {
+                //过滤命令
+                return;
+            }
+            //只处理目标命令 - 通知设备系统信息
+            UpdateSysInfoCmd updateSysInfoCmd = (UpdateSysInfoCmd) cmd;
+            //Step4: 获取参数
+            UpdateSysInfoParam param = updateSysInfoCmd.getParam();
+            if (null == param) return; //异常处理
+            //Step5: 处理数据
+    //        param.getFunction();  //功能码
+    //        param.getParamData(); //功能属性
+        }
+    });
+
+.. note:: 
+    | 1. 结果解析与 :ref:`get_sys_info` 回复结果解析一致
+    | 2. 解析结果流程, 请参考demo
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //回调设备模式
+        }
+
+        @Override
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+            //回调设备音量信息
+        }
+
+        @Override
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //回调均衡器调节参数
+        }
+
+        @Override
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+            //回调设备存储信息
+        }
+
+        @Override
+        public void onFileFormatChange(BluetoothDevice device, String fileFormat) {
+            //回调支持的播放格式
+        }
+
+        @Override
+        public void onMusicNameChange(BluetoothDevice device, MusicNameInfo nameInfo) {
+            //回调音乐名信息
+        }
+
+        @Override
+        public void onMusicStatusChange(BluetoothDevice device, MusicStatusInfo statusInfo) {
+            //回调音乐状态信息
+        }
+
+        @Override
+        public void onPlayModeChange(BluetoothDevice device, PlayModeInfo playModeInfo) {
+            //回调播放模式信息
+        }
+
+        @Override
+        public void onAuxStatusChange(BluetoothDevice device, boolean isPlay) {
+            //回调外接设备播放状态
+        }
+
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //回调FM频道列表信息
+        }
+
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //回调FM状态信息
+        }
+
+        @Override
+        public void onAlarmListChange(BluetoothDevice device, AlarmListInfo alarmListInfo) {
+            //回调闹钟列表信息
+        }
+
+        @Override
+        public void onAlarmDefaultBellListChange(BluetoothDevice device, List<DefaultAlarmBell> bells) {
+            //回调闹钟默认铃声列表
+        }
+
+        @Override
+        public void onAlarmNotify(BluetoothDevice device, AlarmBean alarmBean) {
+            //回调闹钟提醒
+        }
+
+        @Override
+        public void onAlarmStop(BluetoothDevice device, AlarmBean alarmBean) {
+            //回调闹钟停止
+        }
+
+        @Override
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+            //回调ID3音乐信息
+        }
+
+        @Override
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+            //回调高低音信息
+        }
+
+        @Override
+        public void onEqPresetChange(BluetoothDevice device, EqPresetInfo eqPresetInfo) {
+            //回调均衡器预设值信息
+        }
+
+        @Override
+        public void onPhoneCallStatusChange(BluetoothDevice device, int status) {
+            //回调电话状态
+        }
+
+        @Override
+        public void onExpandFunction(BluetoothDevice device, int type, byte[] data) {
+            //回调拓展功能信息
+        }
+
+        @Override
+        public void onLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo) {
+            //回调灯光控制信息
+        }
+
+        @Override
+        public void onSoundCardEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //回调声卡信息
+        }
+
+        @Override
+        public void onSoundCardStatusChange(BluetoothDevice device, long mask, byte[] values) {
+            //回调声卡的状态信息
+        }
+
+        @Override
+        public void onCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode) {
+            //回调当前噪声处理模式信息
+        }
+
+        @Override
+        public void onVoiceModeList(BluetoothDevice device, List<VoiceMode> voiceModes) {
+            //回调噪声处理列表信息
+        }
+
+        @Override
+        public void onSearchDevice(BluetoothDevice device, SearchDevParam searchDevParam) {
+            //回调查找设备参数
+        }
+            
+        @Override
+        public void onReverberation(BluetoothDevice device, ReverberationParam param) {
+            //回调混响参数
+        }
+
+        @Override
+        public void onDynamicLimiter(BluetoothDevice device, DynamicLimiterParam param) {
+            //回调动态限幅参数
+        }
+    });
+
+
+.. _sys_info: 
+
+SysInfoResponse
+-----------------------------------------
+
+
+系统信息
+
+.. code-block:: java
+
+    public class SysInfoResponse extends CommonResponse {
+        private byte function; //功能码
+        private List<AttrBean> attrs; //功能属性
+    }
+
+
+
+.. note:: 
+    1. :ref:`attr_bean` 
+
+
+
+.. _set_function: 
+
+设置功能
+===================================
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构造设置功能命令
+    //功能码
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //公共属性
+    //标识
+    int flag = 0;
+    // 拓展参数
+    byte[] extend = null;
+    CommandBase setFunctionCmd = CommandBuilder.buildFunctionCmd((byte) function, (byte) flag, extend);
+    //Step2: 执行操作命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), setFunctionCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //Step1: 构造设置功能命令
+    //功能码
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //公共属性
+    //标识
+    int flag = 0;
+    // 拓展参数
+    byte[] extend = null;
+    CommandBase setFunctionCmd = CommandBuilder.buildFunctionCmd((byte) function, (byte) flag, extend);
+    //Step2: 执行操作命令并等待结果回调
+    controller.sendRcspCommand(manager.getConnectedDevice(), setFunctionCmd, BluetoothConstant.DEFAULT_SEND_CMD_TIMEOUT, new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. _function_param:
+
+FunctionParam
+------------------------------------
+
+功能参数
+
+.. code-block:: java
+
+    public class FunctionParam extends BaseParameter {
+
+        private byte function; //功能号
+        private byte cmd; //attr type
+        private byte[] extend; //payload
+    }
+
+
+.. _get_device_mode:
+
+查询当前设备模式
+========================================
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- 公共属性
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE`` -- 标识当前设备模式信息
+
+命令构造
+
+.. code-block:: java
+
+    //构造获取当前设备模式
+    CommandBase getCurrentModeCmd = CommandBuilder.buildGetSysInfoCmd(AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC, 
+                   0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE);
+
+
+代码示例参考 :ref:`get_sys_info` 
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //回调设备模式
+        }
+    });
+    //执行获取设备模式信息并等待结果回调
+    controller.getCurrentDevModeInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onDeviceModeChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    }); 
+
+
+切换设备模式
+====================================
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- 公共属性
+| **flag :**  设备模式, 参考 :ref:`attr_fun_code` 
+| **extend :**  NULL
+
+
+命令构造
+
+.. code-block:: java
+
+    byte mode = AttrAndFunCode.SYS_INFO_FUNCTION_BT;   //-- 蓝牙模式
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC -- 设备音乐模式
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_RTC   -- 时钟模式(闹钟，秒表)
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_AUX   -- 外部输入控制模式
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_FM    -- FM控制模式
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_LIGHT -- 灯光模式
+    CommandBase switchDevModeCmd = CommandBuilder.buildSwitchModeCmd(mode);
+
+代码示例参考 :ref:`set_function` 
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //回调设备模式
+        }
+    });
+    //byte SYS_INFO_FUNCTION_BT :  0 //Bluetooth mode
+    //byte SYS_INFO_FUNCTION_MUSIC : 1 //Music mode
+    //byte SYS_INFO_FUNCTION_RTC : 2   //clock mode
+    //byte SYS_INFO_FUNCTION_AUX : 3   //Linein mode
+    //byte SYS_INFO_FUNCTION_FM  : 4   //FM mode
+    //byte SYS_INFO_FUNCTION_LIGHT : 5 //Light mode
+    //执行切换设备模式功能并等待结果回调
+    controller.switchDeviceMode(controller.getUsingDevice(), mode, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onDeviceModeChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+查询存储设备信息
+==================================
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``           -- 公共属性
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS`` -- 标识存储设备信息(U盘, sd卡, flash等)
+
+命令构造
+
+.. code-block:: java
+
+    //构造查询存储设备信息
+    CommandBase getMusicDevStatusCmd = CommandBuilder.buildGetSysInfoCmd(AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC, 
+                  0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS);
+
+
+代码示例参考 :ref:`get_sys_info` 
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+            //回调设备存储信息
+        }
+    });
+    //执行获取设备存储信息并等待结果回调
+    controller.getDevStorageInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onDevStorageInfoChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. _device_storage_info:
+
+DevStorageInfo
+---------------------------------------
+
+设备存储器信息
+
+.. code-block:: java
+
+    public class DevStorageInfo implements Parcelable {
+        /**
+         * 存储器状态
+         */
+        @NonNull
+        private List<> storageStates = new ArrayList<>();
+        /**
+         * 是否复用
+         */
+        private boolean isDeviceReuse;
+    }
+
+
+.. note::
+   1. 存储器状态, :ref:`sd_card_bean` 
+
+
+
+
+重启设备
+=================================
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构建重启命令
+    CommandBase rebootCmd = CommandBuilder.buildRebootCmd();
+    //Step2: 发送重启命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), rebootCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行重启设备功能并等待结果回调
+    controller.rebootDevice(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });

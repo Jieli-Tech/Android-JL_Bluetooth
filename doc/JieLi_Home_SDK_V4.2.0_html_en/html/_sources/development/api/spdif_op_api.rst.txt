@@ -1,0 +1,38 @@
+.. _spdif_op_api: 
+
+SPDIF Operation
+************************************
+
+.. code-block:: java
+
+    public interface ISPDIFOp {
+        /**
+        * Get status info (play status + audio source)
+        *
+        * @param device   Operation device
+        * @param callback Result callback
+        */
+        void getSPDIFInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+        * Set play status
+        *
+        * @param device      Operation device
+        * @param spdifPlayStatusInfo  Play status info
+        * @param callback    Result callback
+        */
+        void setSPDIFPlayStatusInfo(BluetoothDevice device, SPDIFPlayStatusInfo spdifPlayStatusInfo, OnRcspActionCallback<Boolean> callback);
+
+        /**
+        * Set audio source
+        *
+        * @param device      Operation device
+        * @param spdifAudioSourceInfo  Audio source info
+        * @param callback    Result callback
+        */
+        void setSPDIFSPDIFAudioSourceInfo(BluetoothDevice device, SPDIFAudioSourceInfo spdifAudioSourceInfo, OnRcspActionCallback<Boolean> callback);
+
+    }
+
+
+

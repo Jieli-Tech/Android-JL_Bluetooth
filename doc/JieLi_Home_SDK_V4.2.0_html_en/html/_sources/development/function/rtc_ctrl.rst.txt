@@ -1,0 +1,551 @@
+.. _rtc_ctrl_func:
+
+Clock Function
+**************************
+
+
+Synchronize Time
+============================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``           -- Clock function
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_TIME``              -- Identify update time
+| **value :**  timestamp: year(2Bytes) + month(1Byte) + day(1Byte) + hour(1Byte) + minute(1Byte) + second(1Byte)
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase syncTimeCmd = CommandBuilder.buildSyncTimeCmd(Calendar.getInstance());
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute synchronize time function and wait for result callback
+    controller.syncTime(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Read Alarm List
+===========================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``  -- Clock function
+| **mask :**   -- Clock parameters
+|   
+|    * AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM              -- Alarm list
+|    * AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_EXPAND_FLAG  -- Alarm expand parameters
+|    * AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_VER          -- Alarm version
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getAlarmListCmd = CommandBuilder.buildGetAlarmCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onAlarmListChange(BluetoothDevice device, AlarmListInfo alarmListInfo) {
+            //Callback alarm list information here
+        }
+    });
+    //Execute get alarm list function and wait for result callback
+    controller.readAlarmList(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be BTRcspEventCallback#onAlarmListChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. Alarm list information, :ref:`alarm_list_info` 
+
+
+
+
+.. _alarm_list_info:
+
+AlarmListInfo 
+---------------------------------
+
+Alarm list information
+
+.. code-block:: java
+
+    public class AlarmListInfo {
+
+        private int version; //Version number
+        private List<AlarmBean> alarmBeans; //Alarm list
+
+   }
+
+.. _alarm_bean:
+
+AlarmBean
+-----------------------------------
+
+Alarm information
+
+.. code-block:: java
+
+    public class AlarmBean {
+        //Index
+        private byte index;
+        //Name
+        private String name;
+        //Hour
+        private byte hour;
+        //Minute
+        private byte min;
+        //Type
+        private byte repeatMode;
+        //Expand field
+        private String reserved;
+        //Is open
+        private boolean open;
+        //Bell type
+        private byte bellType;//0: Default type  1: Device file type
+        //Bell cluster
+        private int bellCluster; //When bellType=0, here is bell index When bellType=1, here is file cluster number
+        //Bell name
+        private String bellName; //Valid when bellType=1
+        //Device index where bell is located
+        private byte devIndex;//Valid when bellType=1
+
+        private int version;
+    }
+
+
+
+Add or Modify Alarm
+=====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``     -- Clock function
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM``       -- Identify alarm operation
+| **value :**  op(1Byte)+len(1Byte)+payload(n Bytes)
+
+Command construction
+
+.. code-block:: java
+
+    AlarmBean alarm; //Alarm properties, obtained by creating or reading alarm list
+    CommandBase addAlarmCmd = CommandBuilder.buildSetAlarmCmd(AlarmBean.toAttrbean(alarm, false));
+
+
+Code example reference :ref:`set_sys_info`
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    AlarmBean alarm; //Alarm properties, obtained by creating or reading alarm list
+    //Execute add or modify alarm function and wait for result callback
+    controller.addOrModifyAlarm(controller.getUsingDevice(), alarm, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. Alarm object :ref:`alarm_bean` 
+
+
+
+
+Delete Alarm
+====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``        -- Clock function
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM``          -- Identify alarm operation
+| **value :**  op(1Byte)+len(1Byte)+payload(n Bytes)
+
+Command construction
+
+.. code-block:: java
+
+    AlarmBean alarm; //Alarm properties, obtained by reading alarm list
+    CommandBase deleteAlarmCmd = CommandBuilder.buildSetAlarmCmd(AlarmBean.toAttrbean(alarm, true));
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    AlarmBean alarm ; //Alarm properties, obtained by reading alarm list
+    //Execute delete alarm function and wait for result callback
+    controller.deleteAlarm(controller.getUsingDevice(), alarm, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. Alarm information :ref:`alarm_bean` 
+
+
+Read Alarm Default Bell List
+=====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``                          -- Clock function
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_DEFAULT_BELL_LIST`` -- Clock parameters
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase readAlarmDefaultBellListCmd = CommandBuilder.buildGetDefaultBellList();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onAlarmDefaultBellListChange(BluetoothDevice device, List<DefaultAlarmBell> bells) {
+            //Callback default alarm bell list information here
+        }
+    });
+    //Execute get default alarm bell list function and wait for result callback
+    controller.readAlarmDefaultBellList(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be BTRcspEventCallback#onAlarmDefaultBellListChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. Default alarm bell, :ref:`default_alarm_bell` 
+
+
+
+.. _default_alarm_bell:
+
+DefaultAlarmBell
+---------------------------------------
+
+Default alarm bell
+
+.. code-block:: java
+
+    public class DefaultAlarmBell {
+        private String name; //Name
+        private int index; //Index
+        private boolean selected; //Is selected
+    }
+
+
+Read Specified Alarm Bell Parameters
+=========================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    byte mask = 0; //Alarm index
+    CommandBase readAlarmBellArgs = CommandBuilder.buildReadBellArgsCmd(mask);
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //alarmIndex - Alarm index
+    //Execute get specified alarm bell parameters function and wait for result callback
+    controller.readAlarmBellArgs(controller.getUsingDevice(), alarmIndex, new OnRcspActionCallback<List<AlarmExpandCmd.BellArg>>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, List<AlarmExpandCmd.BellArg> message) {
+            //Success callback
+            //message - Bell parameters
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. _bell_arg:
+
+BellArg
+-----------------------------------
+
+Bell parameters
+
+.. code-block:: java
+
+    public static class BellArg {
+        /**
+         * Alarm index
+         */
+        private int index;
+        /**
+         * Whether to allow setting repeat count
+         */
+        private boolean isCanSetCount;
+        /**
+         * Repeat count
+         */
+        private int count;
+        /**
+         * Whether to allow setting repeat interval
+         */
+        private boolean isCanSetInterval;
+        /**
+         * Repeat interval
+         */
+        private int interval;
+        /**
+         * Whether to allow setting ring duration
+         */
+        private boolean isCanSetDuration;
+        /**
+         * Ring duration
+         */
+        private int duration;
+    }
+
+
+Set Specified Alarm Bell Parameters
+=================================================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    AlarmExpandCmd.BellArg arg; //Alarm bell parameters
+    CommandBase setAlarmBellArgCmd = CommandBuilder.buildSetBellArgsCmd(arg);
+
+
+Code example reference :ref:`common_cmd_handle` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //alarmBellArg - Obtained by reading alarm bell parameters
+     AlarmExpandCmd.BellArg alarmBellArg; //Alarm bell parameters
+    //Execute set specified alarm bell parameters function and wait for result callback
+    controller.setAlarmBellArg(controller.getUsingDevice(), alarmBellArg, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   Alarm bell parameters, :ref:`bell_arg` 
+
+
+
+
+Preview Alarm Bell
+=============================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``         -- Clock function
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_AUDITION``  -- Identify preview alarm bell
+| **value :**  op(1Byte)+type(1Byte)+dev(1Byte)+cluster(4Bytes)  
+
+Command construction
+
+.. code-block:: java
+
+    int type = 0;    //Play type
+    int dev = 0;     //Device identifier
+    int cluster = 0; //Cluster number
+    CommandBase auditionAlarmBellCmd = CommandBuilder.buildAuditionAlarmBellCmd(type, dev, cluster);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    AuditionParam param = null; //Preview parameters
+    //Execute preview alarm bell function and wait for result callback
+    controller.auditionAlarmBell(controller.getUsingDevice(), param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    }); 
+
+
+.. _audition_param:
+
+AuditionParam
+-------------------------------
+
+Preview bell parameters
+
+.. code-block:: java
+
+    public class AuditionParam implements Parcelable {
+        private byte op; //Operation code, 0 : Stop   1 : Ring
+        private byte type; //Bell type, 0 : Default   1 : File
+        private byte dev;  //Storage index
+        private int cluster; //File cluster number
+        private String name; //Bell name
+    }
+
+
+.. note::
+   Preview bell parameters, :ref:`audition_param` 
+
+
+
+
+Stop Previewing Alarm Bell
+===========================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``         -- Clock function
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_AUDITION``  -- Identify preview alarm bell
+| **value :**  op(1Byte), op = 0x00  
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase stopAuditionAlarmBellCmd = CommandBuilder.buildStopAuditionAlarmBellCmd();
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+        //Execute stop previewing alarm bell function and wait for result callback
+    controller.stopAlarmBell(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+

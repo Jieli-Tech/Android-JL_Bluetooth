@@ -1,0 +1,334 @@
+
+.. _charging_case_op_api:
+
+彩屏仓功能接口
+***********************************************
+
+.. code-block:: java
+
+    public interface IChargingCaseOp {
+
+        /**
+         * 是否初始化成功
+         *
+         * @param device 操作设备
+         * @return 结果
+         */
+        boolean isInit(BluetoothDevice device);
+
+        /**
+         * 获取彩屏仓信息
+         *
+         * @param device 操作设备
+         * @return 缓存的彩屏仓信息
+         */
+        ChargingCaseInfo getChargingCaseInfo(BluetoothDevice device);
+
+        /**
+         * 添加彩屏仓事件监听器
+         *
+         * @param listener 彩屏仓事件监听器
+         */
+        void addOnChargingCaseListener(OnChargingCaseListener listener);
+
+        /**
+         * 移除彩屏仓事件监听器
+         *
+         * @param listener 彩屏仓事件监听器
+         */
+        void removeOnChargingCaseListener(OnChargingCaseListener listener);
+
+        /**
+         * 获取屏幕亮度
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void getBrightness(BluetoothDevice device, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 设置屏幕亮度
+         *
+         * @param device     操作设备
+         * @param brightness 屏幕亮度
+         * @param callback   操作回调
+         */
+        void setBrightness(BluetoothDevice device, int brightness, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取手电筒状态
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void getFlashlightState(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 手电筒开关
+         *
+         * @param device   操作设备
+         * @param isOn     是否打开
+         * @param callback 操作回调
+         */
+        void setFlashlightState(BluetoothDevice device, boolean isOn, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取绑定设备的状态
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void getBoundDeviceState(BluetoothDevice device, OnRcspActionCallback<BoundDeviceState> callback);
+
+        /**
+         * 浏览屏保文件
+         *
+         * @param device 操作设备
+         * @param devHandle 存储器句柄
+         * @param callback 操作回调
+         */
+        void browseScreenSavers(BluetoothDevice device, int devHandle, OnRcspActionCallback<List<RegFile>> callback);
+
+        /**
+         * 获取当前屏幕保护程序信息
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void getCurrentScreenSaver(BluetoothDevice device, OnRcspActionCallback<ResourceInfo> callback);
+
+        /**
+         * 设置当前屏幕保护程序
+         *
+         * @param device    操作设备
+         * @param devHandle 存储器句柄
+         * @param filePath  文件路径
+         * @param callback  操作回调
+         */
+        void setCurrentScreenSaver(BluetoothDevice device, int devHandle, @NonNull String filePath, OnRcspActionCallback<Boolean> callback);
+
+       /**
+        * 获取当前开机动画信息
+        *
+        * @param device   操作设备
+        * @param callback 操作回调
+        */
+        void getCurrentBootAnim(BluetoothDevice device, OnRcspActionCallback<ResourceInfo> callback);
+
+        /**
+         * 设置当前开机动画
+         *
+         * @param device    操作设备
+         * @param devHandle 存储器句柄
+         * @param filePath  文件路径
+         * @param callback  操作回调
+         */
+        void setCurrentBootAnim(BluetoothDevice device, int devHandle, @NonNull String filePath, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 读取设备屏幕信息
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void readScreenInfo(BluetoothDevice device, OnRcspActionCallback<ScreenInfo> callback);
+
+        /**
+         * 同步天气信息
+         *
+         * @param device   操作设备
+         * @param weather  天气信息
+         * @param callback 操作回调
+         */
+        void syncWeatherInfo(BluetoothDevice device, Weather weather, OnRcspActionCallback<Boolean> callback);
+
+       /**
+        * 推送消息
+        *
+        * @param device   操作对象
+        * @param message  消息
+        * @param callback 操作回调
+        */
+        void pushMessageInfo(BluetoothDevice device, MessageInfo message, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 移除消息
+         *
+         * @param device   操作对象
+         * @param message  消息<p>
+         *                 (只需要填【包名】和【时间戳】即可)
+         *                 </p>
+         * @param callback 操作回调
+         */
+        void removeMessageInfo(BluetoothDevice device, MessageInfo message, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 读取SDK信息
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void readSDKMessage(BluetoothDevice device, OnRcspActionCallback<SDKMessage> callback);
+
+        /**
+         * 获取在线存储器列表
+         *
+         * @param device 操作设备
+         * @return List\<SDCardBean\> 在线存储器列表
+         */
+        List<SDCardBean> getOnlineStorages(BluetoothDevice device);
+
+        /**
+         * 浏览壁纸文件
+         *
+         * @param device   操作设备
+         * @param devHandle 存储器句柄
+         * @param callback 操作回调
+         */
+        void browseWallPapers(BluetoothDevice device, int devHandle, OnRcspActionCallback<List<RegFile>> callback);
+
+        /**
+         * 获取当前壁纸信息
+         *
+         * @param device   操作设备
+         * @param callback 操作回调
+         */
+        void getCurrentWallPaper(BluetoothDevice device, OnRcspActionCallback<ResourceInfo> callback);
+
+        /**
+         * 设置当前壁纸
+         *
+         * @param device    操作设备
+         * @param devHandle 存储器句柄
+         * @param filePath  文件路径
+         * @param callback  操作回调
+         */
+        void setCurrentWallPaper(BluetoothDevice device, int devHandle, @NonNull String filePath, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 删除资源
+         *
+         * @param device   操作设备
+         * @param infoList 删除的资源列表
+         * @param callback 删除结果回调
+         */
+        void deleteResources(BluetoothDevice device, @NonNull List<ResourceInfo> infoList, DeleteCallback callback); 
+    }
+
+.. note:: 
+    1. :ref:`charging_case_info` 
+    2. :ref:`screen_info` 
+    3. :ref:`sdk_msg` 
+    4. :ref:`weather` 
+    5. :ref:`message_info` 
+    6. :ref:`resource_info` 
+
+
+
+
+.. _charging_case_listener:
+
+彩屏仓事件监听器
+====================================================
+
+.. code-block:: java
+
+    public interface OnChargingCaseListener {
+
+        /**
+         * 回调彩屏仓初始化状态
+         *
+         * @param device 操作设备
+         * @param state  设备状态
+         */
+        void onInit(BluetoothDevice device, int state);
+
+        /**
+         * 回调彩屏仓信息改变
+         *
+         * @param device 操作设备
+         * @param func   功能码
+         * @param info   彩屏仓信息
+         */
+        void onChargingCaseInfoChange(BluetoothDevice device, @ChargingCaseInfo.Function int func, ChargingCaseInfo info);
+
+        /**
+         * 回调彩屏仓事件
+         *
+         * @param device   操作设备
+         * @param function 彩屏仓事件
+         */
+        void onChargingCaseEvent(BluetoothDevice device, SettingFunction function);
+    }
+
+.. note:: 
+    1. :ref:`charging_case_info`
+    2. :ref:`setting_function`
+
+
+.. _setting_function:
+
+设置功能
+-------------------------------------------------------------------
+
+.. code-block:: java
+
+    public class SettingFunction extends SettingData {
+
+        /**
+         * 屏幕亮度
+         */
+        public static final int FUNC_BRIGHTNESS = 0x01;
+        /**
+         * 手电筒
+         */
+        public static final int FUNC_FLASHLIGHT = 0x02;
+        /**
+         * 绑定设备状态
+         */
+        public static final int FUNC_BOUND_DEVICE_STATE = 0x03;
+        /**
+         * 当前功能使用的资源
+         */
+        public static final int FUNC_USING_RESOURCE = 0x04;
+        /**
+         * 设备屏幕信息
+         */
+        public static final int FUNC_SCREEN_INFO = 0x07;
+        /**
+         * 设备SDK信息
+         */
+        public static final int FUNC_SDK_MESSAGE = 0x08;
+
+
+        /**
+         * 读取操作
+         */
+        public static final int OP_READ = 0x00;
+        /**
+         * 设置操作
+         */
+        public static final int OP_SET = 0x01;
+        /**
+         * 通知操作
+         */
+        public static final int OP_NOTIFY = 0x02;
+
+        /**
+         * 功能
+         */
+        private int function;
+        /**
+         * 功能版本号
+         */
+        private int funcVersion;
+        /**
+         * 操作码
+         */
+        private int op;
+        /**
+         * 有效数据
+         */
+        private byte[] payload;
+    }
+

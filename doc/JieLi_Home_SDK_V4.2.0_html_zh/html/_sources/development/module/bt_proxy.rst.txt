@@ -1,0 +1,610 @@
+.. sectnum::
+    :start: 2
+    :depth: 5
+
+蓝牙代理模块
+**************************
+
+
+.. note::
+   | 1. 此模块只使用于 ``内置蓝牙代理实现`` 
+   | 2. ``JL_BluetoothManager`` 是蓝牙接口管理, :ref:`bt_manager_api` 
+   | 3. ``BluetoothOperationImpl`` 是蓝牙功能具体实现, :ref:`bt_op_api` 
+
+
+.. _scan_device:
+
+扫描蓝牙设备
+============================      
+
+开始扫描设备
+---------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //蓝牙事件监听器
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onDiscoveryStatus(boolean bBle, boolean bStart) {
+            //回调发现设备状态
+        }
+
+        @Override
+        public void onDiscovery(BluetoothDevice device, BleScanMessage bleScanMessage) {
+            //回调发现的设备
+        }
+    };
+    //注册蓝牙事件监听器
+    btManager.addEventListener(btEventCallback);
+    int scanType = BluetoothConstant.SCAN_TYPE_BLE; //扫描设备类型 --- BLE设备
+    // BluetoothConstant.SCAN_TYPE_CLASSIC --- 经典蓝牙设备
+    int timeout = 30 * 1000; //搜索超时 --- 30秒
+    //执行扫描设备
+    btManager.scan(scanType, timeout);
+    //注销蓝牙事件监听器
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. important::
+   1. 扫描蓝牙设备，需要确保 ``蓝牙`` 已开启
+   2. 扫描蓝牙设备，需要确保 ``权限`` 
+
+      #. Android 6.0+, ``蓝牙权限`` 和 ``位置权限``
+      #. Android 12.0+, ``蓝牙搜索权限`` 
+   3. 扫描蓝牙设备，需要确保 ``位置服务`` 已启用
+   4. 扫描蓝牙设备配置，参考 :ref:`bluetooth_option` 
+
+
+
+
+停止扫描设备
+-------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //执行停止扫描设备
+    btManager.stopScan();
+
+
+.. _connect_device:
+
+连接设备
+==================================
+
+
+.. important::
+   1. 连接设备操作，需要确保 ``蓝牙`` 已打开
+   2. 连接设备操作，需要确保 ``权限`` 已授予
+
+      * Android 6.0+, 需要 ``蓝牙权限`` 和 ``位置权限``
+      * Android 12.0+, 需要 ``蓝牙连接权限``
+   3. 连接设备操作，不允许并发执行，必须线性进行。
+   4. 连接设备操作，是指连接通讯协议(BLE/SPP), 不包括经典蓝牙服务。
+   
+
+
+连接设备的通讯方式
+-----------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    if (btManager.getBluetoothOperation().isConnecting()) return; //正在连接设备
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //蓝牙事件监听器
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //回调蓝牙连接状态
+        }
+    };
+    //注册蓝牙事件监听器
+    btManager.addEventListener(btEventCallback);
+    //执行连接设备
+    btManager.connect(device);
+    //执行断开设备
+    //        btManager.disconnect(device);
+    //注销蓝牙事件监听器
+    //        btManager.removeEventListener(btEventCallback);
+
+
+
+连接设备的BLE
+----------------------------------
+
+
+* **新版本**
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    if (btManager.getBluetoothOperation().isConnecting()) return; //正在连接设备
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //蓝牙事件监听器
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //回调蓝牙连接状态
+        }
+    };
+    //注册蓝牙事件监听器
+    btManager.addEventListener(btEventCallback);
+    //执行连接设备的BLE
+    btManager.connect(device, BluetoothConstant.PROTOCOL_TYPE_BLE);
+    //执行断开BLE
+    //        btManager.disconnect(device);
+    //注销蓝牙事件监听器
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. note::
+   SDK_V4.0.0以后支持
+
+
+* **旧版本**
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //获取蓝牙功能实现对象
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    //蓝牙事件回调
+    final BluetoothCallbackImpl bluetoothCallback = new BluetoothCallbackImpl() {
+        @Override
+        public void onBleConnection(BluetoothDevice device, int status) {
+            //回调BLE设备连接成功
+        }
+    };
+    //注册蓝牙事件回调
+    btOp.registerBluetoothCallback(bluetoothCallback);
+    //执行连接BLE操作
+    //result --- 操作结果
+    int result = btOp.connectBLEDevice(device);
+    //执行断开BLE
+    //        btOp.disconnectBLEDevice(device);
+    //注销蓝牙事件回调
+    //        btOp.unregisterBluetoothCallback(bluetoothCallback);
+
+
+
+
+连接设备的SPP
+-----------------------------------
+
+
+* **新版本**
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //蓝牙事件监听器
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //回调蓝牙连接状态
+        }
+    };
+    //注册蓝牙事件监听器
+    btManager.addEventListener(btEventCallback);
+    //执行连接设备的SPP
+    btManager.connect(device, BluetoothConstant.PROTOCOL_TYPE_SPP);
+    //执行断开SPP
+    //        btManager.disconnect(device);
+    //注销蓝牙事件监听器
+    //        btManager.removeEventListener(btEventCallback);
+
+.. note::
+   SDK_V4.0.0以后支持
+
+
+* **旧版本**
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //获取蓝牙功能实现对象
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    //蓝牙事件回调
+    final BluetoothCallbackImpl bluetoothCallback = new BluetoothCallbackImpl() {
+        @Override
+        public void onSppStatus(BluetoothDevice device, int status) {
+            //回调SPP设备连接成功
+        }
+    };
+    //注册蓝牙事件回调
+    btOp.registerBluetoothCallback(bluetoothCallback);
+    //执行连接SPP操作
+    //result --- 操作结果
+    int result = btOp.connectSPPDevice(device);
+    //执行断开SPP
+    //        btOp.disconnectSPPDevice(device);
+    //注销蓝牙事件回调
+    //        btOp.unregisterBluetoothCallback(bluetoothCallback);
+
+
+
+
+连接设备的经典蓝牙服务
+---------------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //蓝牙事件监听器
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onA2dpStatus(BluetoothDevice device, int status) {
+            //回调A2DP连接状态
+        }
+
+        @Override
+        public void onHfpStatus(BluetoothDevice device, int status) {
+            //回调HFP连接状态
+        }
+    };
+    //注册蓝牙事件监听器
+    btManager.addEventListener(btEventCallback);
+    //执行连接经典蓝牙设备
+    btManager.startConnectByBreProfiles(device);
+    //执行断开经典蓝牙
+    //        btManager.disconnectByProfiles(device);
+    //注销蓝牙事件监听器
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. _connect_gatt_over_edr:
+
+
+连接设备的Gatt Over BR/EDR
+-----------------------------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    if (btManager.getBluetoothOperation().isConnecting()) return; //正在连接设备
+    //经典蓝牙地址
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //蓝牙事件监听器
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //回调蓝牙连接状态
+        }
+    };
+    //注册蓝牙事件监听器
+    btManager.addEventListener(btEventCallback);
+    //执行连接设备的Gatt Over BR/EDR
+    btManager.connect(device, BluetoothConstant.PROTOCOL_TYPE_GATT_OVER_BR_EDR);
+    //执行断开设备的连接
+    //        btManager.disconnect(device);
+    //注销蓝牙事件监听器
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. note:: 
+    1. V4.2.0+ 版本才支持
+
+
+
+数据读写
+================================               
+
+接收数据
+---------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //获取蓝牙功能实现对象
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    //蓝牙事件回调
+    final BluetoothCallbackImpl bluetoothCallback = new BluetoothCallbackImpl() {
+        @Override
+        public void onBleDataNotification(BluetoothDevice device, UUID serviceUuid, UUID characteristicsUuid, byte[] data) {
+            //回调接收到的BLE数据
+        }
+
+        @Override
+        public void onSppDataNotification(BluetoothDevice device, byte[] data) {
+            //回调接收到的SPP数据
+        }
+    };
+    //注册蓝牙事件回调
+    btOp.registerBluetoothCallback(bluetoothCallback);
+    //注销蓝牙事件回调
+    //        btOp.unregisterBluetoothCallback(bluetoothCallback);
+
+
+.. note:: 
+    1. ``Gatt Over BR/EDR`` 接收数据与 ``BLE`` 接收数据操作相同
+
+
+发送数据
+----------------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //data  --- 发送数据
+    byte[] data = new byte[0];
+    //执行发数操作
+    //ret --- 操作结果
+    boolean ret = btManager.sendDataToDevice(device, data);
+
+
+通过BLE发送数据
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //获取蓝牙功能实现对象
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //data  --- 发送数据
+    byte[] data = new byte[0];
+    //执行发数操作
+    //ret --- 操作结果
+    boolean ret = btOp.writeDataToBLEDevice(device, UUID.fromString("服务UUID"), UUID.fromString("写特征UUID"), data);
+
+
+.. note:: 
+    1. ``Gatt Over BR/EDR`` 发送数据与 ``BLE`` 发送数据操作相同，输入设备地址不同，分别为 ``经典蓝牙地址`` 和 ``BLE地址``
+
+
+
+通过SPP发送数据
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //获取蓝牙功能实现对象
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("目标设备地址");
+    if (null == device) return;
+    //data  --- 发送数据
+    byte[] data = new byte[0];
+    //执行发数操作
+    //ret --- 操作结果
+    boolean ret = btOp.writeDataToSppDevice(device, UUID.fromString("通讯SPP的UUID"), data);
+
+
+
+
+历史记录管理
+==================================
+
+获取历史记录列表
+---------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //获取历史记录列表
+    final List<HistoryBluetoothDevice> historyDevices = btManager.getHistoryBluetoothDeviceList();
+
+
+
+回连历史记录
+---------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    HistoryBluetoothDevice history = null; //历史记录， 不能为空
+    int timeout = 45 * 1000; //回连超时
+    //执行回连历史记录操作
+    btManager.reconnectHistoryBluetoothDevice(history, timeout, new OnReconnectHistoryRecordListener() {
+        @Override
+        public void onSuccess(HistoryBluetoothDevice history) {
+            //回调回连历史记录成功
+        }
+
+        @Override
+        public void onFailed(HistoryBluetoothDevice history, BaseError error) {
+            //回调回连历史记录失败
+            //history --- 历史记录
+            //error   --- 错误信息
+         }
+    });
+
+.. note::
+   历史记录, :ref:`history_device` 
+
+.. _history_device:
+
+HistoryBluetoothDevice
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+历史记录
+
+.. code-block:: java
+
+    public class HistoryBluetoothDevice implements Parcelable {
+        /**
+         * 蓝牙设备名称
+         */
+        private String name;
+        /**
+         * 通讯方式类型
+         * <p>
+         * {@link BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE方式<br/>
+         * {@link BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP方式<br/>
+         * {@link BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- Gatt Over BR/EDR方式
+         * </p>
+         */
+        @ConnectWay
+        private int type;
+        /**
+         * 设备地址
+         */
+        @NonNull
+        private String address;
+        /**
+         * 映射地址
+         */
+        private String mappedAddress;
+        /**
+         * 升级地址
+         */
+        private String otaAddress;
+
+        /**
+         * 芯片类型
+         */
+        private int chipType;
+        /**
+         * 设备类型
+         */
+        private int deviceType;
+        /**
+         * 广播包协议的版本号
+         */
+        private int advVersion;
+        /**
+         * 厂商ID
+         */
+        private int vid;
+        /**
+         * 客户ID
+         */
+        private int uid;
+        /**
+         * 产品ID
+         */
+        private int pid;
+        /**
+         * 是否支持LE Audio
+         */
+        private boolean isSupportLeAudio;
+
+        //left device gps(默认是左侧设备，也默认左侧设备是主机)
+        /**
+         * 左耳纬度
+         */
+        private double leftDevLatitude;
+        /**
+         * 左耳经度
+         */
+        private double leftDevLongitude;
+        /**
+         * 左耳GPS更新时间
+         */
+        private long leftDevUpdateTime;
+
+        //right device gps
+        /**
+         * 右耳纬度
+         */
+        private double rightDevLatitude;
+        /**
+         * 右耳经度
+         */
+        private double rightDevLongitude;
+        /**
+         * 右耳GPS更新时间
+         */
+        private long rightDevUpdateTime;
+    }
+
+
+删除历史记录
+--------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    HistoryBluetoothDevice history = null; //历史记录， 不能为空
+    //执行删除历史记录操作
+    btManager.removeHistoryDevice(history, new IActionCallback<HistoryBluetoothDevice>() {
+        @Override
+        public void onSuccess(HistoryBluetoothDevice message) {
+            //回调删除历史记录成功
+        }
+
+        @Override
+        public void onError(BaseError error) {
+            //回调删除历史记录失败
+            //error   --- 错误信息
+        }
+    });
+
+.. note::
+   历史记录, :ref:`history_device` 
+
+
+
+清除所有历史记录
+----------------------------------------
+
+
+.. code-block:: java
+
+    //获取蓝牙操作对象
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //自定义蓝牙实现，btManager为空
+    //执行清除所有历史记录操作
+    btManager.clearHistoryDeviceRecord();
+    //注意，清除完成后，需要重新更新历史记录列表
+    final List<HistoryBluetoothDevice> historyDevices = btManager.getHistoryBluetoothDeviceList();
+   

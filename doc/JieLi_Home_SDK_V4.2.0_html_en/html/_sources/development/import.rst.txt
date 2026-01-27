@@ -1,0 +1,315 @@
+ .. sectnum::
+    :start: 1
+    :depth: 4
+
+
+Access Process
+********************************************
+
+Import Instructions
+============================================
+
+Operating Environment
+--------------------------------------------
+
+================================ ============================================================ ======================================================================
+           Category                                 Compatibility Range                                                       Remark
+================================ ============================================================ ======================================================================
+  Software System                   | Target Version: Android API 36(Android 16)                 Supports BLE Functionality
+                                    | Minimum Version: Android API 21(Android 5.0)
+  Hardware Requirements               Firmware that supports the RCSP protocol                   AC692N、AC700N, JL701N,etc
+  Development Platform                Android Studio                                             It is recommended to use the latest version for development.
+================================ ============================================================ ======================================================================
+
+
+Configure Permissions
+---------------------------------------------
+
+When integrating the SDK, the following permissions should be requested in ``AndroidManifest.xml`` :
+
+.. code-block:: xml
+
+    <!--Use Bluetooth Permission-->
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <!--Requirements for higher versions of Android-->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+	<!--Location Permission-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+.. warning:: 
+    | 1. For Android 6.0 and above, please add ``dynamic permission management``. 
+    | 2. When running on Android 12.0 and above, it requires permissions for ``Bluetooth scanning`` and ``Bluetooth connection``. 
+    | 3. ``Location services`` must be enabled before Bluetooth operation can be used.
+
+
+Dependency Libraries
+---------------------------------------------
+
+.. warning:: 
+    ``xxx`` is the version number; please refer to the latest release.
+
+* **jl_bluetooth_rcsp_Vxxx-release.aar** :  Bluetooth control and RCSP protocol processing are related
+* **jldecryption_Vxxx-release.aar** : Encoding and decoding related
+
+
+.. code-block:: text
+
+    //1. Place the above AAR file into the lib folder of the corresponding module in the project directory.
+    //2. Add the following to mouselu's build.gradle file
+    implementation fileTree(include: ['*.aar'], dir: 'libs') 
+
+    implementation 'com.google.code.gson:gson:2.13.1'
+
+
+Bluetooth Library Configuration
+====================================================
+
+Different functions can be enabled by configuring Bluetooth library parameters.
+
+.. code-block:: java
+
+    BluetoothOption bluetoothOption = BluetoothOption.createDefaultOption();//Create default configuration
+    bluetoothOption.setPriority(BluetoothOption.PREFER_BLE)//Communication methods, supporting BLE and SPP
+               .setUseMultiDevice(true) //Does it support multi-device management?
+               .setTimeoutMs(2000)//Command timeout, default 2000ms
+               .setMtu(509)       //Adjusting Bluetooth MTU
+               .setUseDeviceAuth(true);//Should device authentication be enabled? Confirm with firmware engineer.    
+        /**
+         * Scanning device strategy
+         *  - BluetoothConstant#NONE_FILTER : Unfiltered equipment
+         *  - BluetoothConstant#ALL_FILTER : Use all filtering rules
+         *  - BluetoothConstant#FLAG_FILTER : Filtering rules based solely on identifiers (speakers)
+         *  - BluetoothConstant#HASH_FILTER : Use only encrypted filtering rules (headphones, speakers, etc.)
+         */
+        //bluetoothOption.setBleScanStrategy(BluetoothConstant.ALL_FILTER); 
+
+        //Modify BLE communication UUID
+        //bluetoothOption.setBleUUID(serviceUUID, writeCharacteristicUUID, notificationCharacteristicUUID);
+
+        //Modify SPP communication UUID
+        //bluetoothOption.setSppUUID(uuid);
+
+    //Configuration parameters 
+    RCSPController.init(context, bluetoothOption);
+    //JL_BluetoothManager.getInstance(context).configure(bluetoothOption); 
+
+
+.. _bluetooth_option:
+
+BluetoothOption
+-----------------------------------------------------------------
+
+===================== ============================================== ============================================================================================================================
+      Field                         Description                                                                             Remark
+===================== ============================================== ============================================================================================================================
+ priority              Specified communication method                 | BluetoothOption.PREFER_BLE - BLE mode, default value
+                                                                      | BluetoothOption.PREFER_SPP - SPP mode
+ reconnect             Does the device need to be reconnected?          Abnormal disconnection and reconnection of the device. Default value: true        
+ timeoutMs             Command timeout                                  BluetoothConstant.DEFAULT_SEND_CMD_TIMEOUT - 2000ms
+ enterLowPowerMode     Is the device in low power mode?                 Low power mode: only connected to communication channels. Default value: false
+ isUseMultiDevice      Should multi-device management be used?        | Multi device management: able to maintain multiple communication channels simultaneously.
+                                                                      | Default value: false
+ isUseDeviceAuth       Enable device authentication?                  | Device Authentication: Mutual authentication of device identities. 
+                                                                      | Default: true. Note: To be discussed with firmware engineers.
+ isMandatoryUseBLE     Should BLE be used as a mandatory feature?       Force BLE connection. Default: false
+ isSkipNoNameDev       Whether to skip devices without names            Default value: true
+ isSupportCTKD         Does it support CTKD functionality               If one-click connection is supported, pairing dual-mode devices will be forced to use classic Bluetooth pairing.
+ scanFilterData        Filter device identification                     Identifies the target device's characteristics and is used in filtration devices. Default value: null 
+ bleScanStrategy       Search Device Strategy                         | BluetoothConstant#NONE_FILTER - Do not use filtering rules 
+                                                                      | BluetoothConstant#ALL_FILTER  - Use all filtering rules, default values.
+                                                                      | BluetoothConstant#FLAG_FILTER - Use only identifier filtering rules
+                                                                      | BluetoothConstant#HASH_FILTER - HASH encryption filtering rules only
+ bleScanMode           BLE scanning mode                              | ScanSettings#SCAN_MODE_LOW_POWER   - Low power mode
+                                                                      | ScanSettings#SCAN_MODE_BALANCED    - Balanced mode, default value
+                                                                      | ScanSettings#SCAN_MODE_LOW_LATENCY - Low latency mode (high power consumption, foreground only)
+                                                                      | We recommend that foreground applications use the **low-latency mode**.
+ mtu                   BLE Communication MTU                            Value range: [20, 514], default value is 20
+ isUseBleBondWay       Should BLE encryption be used?                   Default value: false
+ bleUUIDMap            BLE Communication UUID Collection              | BluetoothConstant#KEY_BLE_SERVICE_UUID                     - Service UUID
+                                                                      | BluetoothConstant#KEY_BLE_WRITE_CHARACTERISTIC_UUID        - Write characteristic UUID
+                                                                      | BluetoothConstant#KEY_BLE_NOTIFICATION_CHARACTERISTIC_UUID - Notification characteristic UUID
+ sppUUID               SPP Communication UUID                           BluetoothConstant.UUID_SPP
+ cmdSnGenerator        Command serialization generator                  Used for unifying command serial numbers across multiple JieLi RCSP libraries
+===================== ============================================== ============================================================================================================================
+
+
+Bluetooth Library Initialization
+================================================================
+
+Bluetooth proxy has two implementation methods
+
+Built-in Bluetooth proxy implementation
+----------------------------------------------------------------
+
+.. code-block:: java
+
+    if (null == context || RCSPController.isInit()) return; //Initialized
+    BluetoothOption option = BluetoothOption.createDefaultOption()
+            .setUseMultiDevice(true)
+            .setUseDeviceAuth(true)
+            .setPriority(BluetoothOption.PREFER_BLE);
+    //Initialize and configure the Bluetooth library
+    //The default implementation of RCSPController is JL_BluetoothManager.
+    RCSPController.init(context, option);
+
+    //RCSP Library Core Operation Classes
+    RcspOpImpl rcspOp = RCSPController.getInstance().getRcspOp();
+    //SDK includes built-in Bluetooth operation class
+    JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+
+
+There are two initialization methods
+
+JL_BluetoothManager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //Initialize and configure the Bluetooth library
+    JL_BluetoothManager.getInstance(context).configure(BluetoothOption.createDefaultOption());
+
+.. note::
+    **Not Recommended**
+
+
+
+RCSPController
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //Initialize?
+    if (!RCSPController.isInit()) { 
+        BluetoothOption bluetoothOption = BluetoothOption.createDefaultOption()
+            .setUseMultiDevice(true)
+            .setPriority(BluetoothOption.PREFER_BLE)
+            .setUseDeviceAuth(true);
+        //Initialize and configure the Bluetooth library
+        RCSPController.init(this, bluetoothOption);
+    }
+
+
+.. note::
+    ``Recommended Method``
+
+
+
+Implement Bluetooth proxy yourself
+------------------------------------------------------------------------
+
+.. code-block:: java
+
+    if (null == context || RCSPController.isInit()) return; //Initialized
+    BluetoothOption option = BluetoothOption.createDefaultOption()
+            .setUseMultiDevice(true)
+            .setUseDeviceAuth(true)
+            .setPriority(BluetoothOption.PREFER_BLE);
+    //Initialize and configure the Bluetooth library
+    //Bluetooth can be managed independently.
+    RCSPController.init(new CustomBluetoothManager(context, option));
+
+    //RCSP Library Core Operation Classes
+    RcspOpImpl rcspOp = RCSPController.getInstance().getRcspOp();
+
+
+
+**Custom Bluetooth management implementation**
+
+.. code-block:: java
+
+    /**
+     * Custom Bluetooth Manager
+     */
+    private static final class CustomBluetoothManager extends RcspOpImpl {
+
+        //BLE service UUID
+        private final static UUID UUID_SERVICE = BleManager.BLE_UUID_SERVICE;
+        //BLE write characteristics UUID
+        private final static UUID UUID_WRITE = BleManager.BLE_UUID_WRITE;
+        //BLE notification characteristics UUID
+        private final static UUID UUID_NOTIFICATION = BleManager.BLE_UUID_NOTIFICATION;
+
+        /**
+         * Third-party Bluetooth library implementation
+         */
+        //FIXME: Replace with a custom Bluetooth library
+        private final BleManager bleManager = BleManager.getInstance();
+
+
+        public CustomBluetoothManager(@NonNull Context context, @NonNull BluetoothOption option) {
+            super(context, option);
+            bleManager.registerBleEventCallback(mBleEventCallback);
+        }
+
+        @Override
+        public boolean isDeviceConnected(BluetoothDevice device) {
+            //FIXME: The system needs to return a result indicating whether the device is connected.
+            return bleManager.isConnectedDevice(device);
+        }
+
+        @Override
+        public boolean sendDataToDevice(BluetoothDevice device, byte[] data) {
+            //FIXME: The function of transmitting data via Bluetooth needs to be implemented.
+            //FIXME: 1. If sending data using BLE (Browser-based Execution Language), attention needs to be paid to MTU packet segmentation and queued data transmission.
+            //FIXME: 2. The implementation here can be either a blocking implementation or an asynchronous implementation.
+            if (!isDeviceConnected(device)) {
+                return false;
+            }
+            bleManager.writeDataByBleAsync(device, UUID_SERVICE, UUID_WRITE, data,
+                    (device1, serviceUUID, characteristicUUID, result, data1) -> {
+                        JL_Log.d(TAG, "sendDataToDevice", "send : " + result);
+                    });
+            return true;
+        }
+
+        public boolean connect(BluetoothDevice device) {
+            return bleManager.connectBleDevice(device);
+        }
+
+        public void disconnect(BluetoothDevice device) {
+            bleManager.disconnectBleDevice(device);
+        }
+
+        @Override
+        public void release() {
+            super.release();
+            bleManager.unregisterBleEventCallback(mBleEventCallback);
+        }
+
+        private final BleEventCallback mBleEventCallback = new BleEventCallback() {
+            @Override
+            public void onBleConnection(BluetoothDevice device, int status) {
+                super.onBleConnection(device, status);
+                //Switching connection states
+                int btState = StateCode.CONNECTION_DISCONNECT;
+                switch (status) {
+                    case BluetoothProfile.STATE_CONNECTED:
+                        btState = StateCode.CONNECTION_OK;
+                        break;
+                    case BluetoothProfile.STATE_CONNECTING:
+                        btState = StateCode.CONNECTION_CONNECTING;
+                        break;
+                }
+                JL_Log.d(TAG, "onBleConnection", "device : " + device + ", status : " + status + ", convert state : " + btState);
+                //TODO: Transmit device connection status. It is necessary to avoid repeatedly transmitting the connection status of the same device.
+                notifyBtDeviceConnection(device, btState);
+            }
+
+            @Override
+            public void onBleDataNotification(BluetoothDevice device, UUID serviceUuid, UUID characteristicsUuid, byte[] data) {
+                super.onBleDataNotification(device, serviceUuid, characteristicsUuid, data);
+                if (device != null && UUID_SERVICE.equals(serviceUuid) && UUID_NOTIFICATION.equals(characteristicsUuid)) {
+                    //TODO: Transmitted received data
+                    notifyReceiveDeviceData(device, data);
+                }
+            }
+        };
+    }
+
+For implementation details of ``BleManager``, please refer to ``btsmart\src\test\java\com\jieli\btsmart\demo\bluetooth\ble``.

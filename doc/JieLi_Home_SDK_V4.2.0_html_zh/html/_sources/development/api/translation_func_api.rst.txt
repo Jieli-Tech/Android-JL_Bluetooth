@@ -1,0 +1,331 @@
+.. _translation_op_api: 
+
+翻译功能接口
+************************************************
+
+.. code-block:: java
+
+   public interface ITranslationOp {
+
+        /**
+         * 是否初始化成功
+         *
+         * @return boolean 结果
+         */
+        boolean isInit();
+
+        /**
+         * 是否支持【翻译】功能
+         *
+         * @return boolean 结果
+         */
+        boolean isSupportTranslation();
+
+        /**
+         * 是否使用【A2DP播报】功能
+         *
+         * @return boolean 结果
+         */
+        boolean isUseA2DPPlay();
+
+        /**
+         * 是否支持【通话翻译+立体声】功能
+         *
+         * @return boolean 结果
+         */
+        boolean isSupportCallTranslationWithStereo();
+        
+        /**
+         * 是否处于工作模式
+         *
+         * @return boolean 结果
+         */
+        boolean isWorking();
+
+        /**
+         * 获取操作设备对象
+         *
+         * @return BluetoothDevice 操作设备对象
+         */
+        BluetoothDevice getDevice();
+
+        /**
+         * 缓存的模式信息
+         *
+         * @return TranslationMode 翻译模式信息
+         */
+        TranslationMode getTranslationMode();
+
+        /**
+         * 添加翻译功能回调
+         *
+         * @param callback TranslationCallback 翻译功能回调
+         */
+        void addTranslationCallback(TranslationCallback callback);
+
+        /**
+         * 移除翻译功能回调
+         *
+         * @param callback TranslationCallback 翻译功能回调
+         */
+        void removeTranslationCallback(TranslationCallback callback);
+
+        /**
+         * 请求翻译模式信息
+         *
+         * @param callback OnRcspActionCallback<TranslationMode> 结果回调
+         */
+        void requestTranslationMode(OnRcspActionCallback<TranslationMode> callback);
+
+        /**
+         * 进入翻译模式
+         *
+         * @param mode     TranslationMode 翻译模式信息
+         * @param callback TranslationCallback 翻译功能回调
+         */
+        void enterMode(@NonNull TranslationMode mode, @NonNull TranslationCallback callback);
+
+        /**
+         * 退出翻译模式
+         *
+         * @param callback OnRcspActionCallback<Integer> 结果回调
+         */
+        void exitMode(OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 写入音频数据
+         *
+         * @param audioData AudioData 音频数据
+         * @param callback OnRcspActionCallback<Boolean> 结果回调
+         */
+        void writeAudioData(AudioData audioData, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 释放资源
+         */
+        void destroy();
+    }
+
+
+.. note::
+   1. :ref:`translation_mode` 
+   2. :ref:`translation_cb` 
+   3. :ref:`audio_data` 
+
+
+
+
+.. _translation_cb:
+
+TranslationCallback
+====================================================
+
+.. code-block:: java
+
+    public interface TranslationCallback {
+
+        /**
+         * 回调模式变换信息
+         *
+         * @param device BluetoothDevice 操作设备
+         * @param mode   TranslationMode 翻译模式信息
+         */
+        void onModeChange(@NonNull BluetoothDevice device, @NonNull TranslationMode mode);
+
+        /**
+         * 回调接收到的音频数据
+         *
+         * @param device    BluetoothDevice 操作设备
+         * @param audioData AudioData 音频数据
+         */
+        void onReceiveAudioData(@NonNull BluetoothDevice device, @NonNull AudioData audioData);
+
+        /**
+         * 回调翻译错误
+         *
+         * @param device  BluetoothDevice 操作设备
+         * @param code    int 错误码
+         * @param message String 错误描述
+         */
+        void onError(BluetoothDevice device, int code, String message);
+    }
+
+
+.. note::
+   1. :ref:`translation_mode`  
+   2. :ref:`audio_data` 
+
+
+
+
+.. _ai_translation_api:
+
+IAITranslationApi
+================================================
+
+.. code-block:: java
+
+    public interface IAITranslationApi {
+
+        /**
+         * 是否正在翻译
+         *
+         * @return boolean 结果
+         */
+        boolean isWorking();
+
+        /**
+         * 开始翻译
+         *
+         * @param mode     TranslationMode 翻译模式信息
+         * @param callback AITranslationCallback 云翻译事件回调
+         */
+        void startTranslating(@NonNull TranslationMode mode, @NonNull AITranslationCallback callback);
+
+        /**
+         * 结束翻译
+         */
+        void stopTranslating();
+
+        /**
+         * 写入音频数据
+         *
+         * @param audioData AudioData 音频数据
+         */
+        void writeAudio(@NonNull AudioData audioData);
+
+    }
+
+.. note::
+   1. :ref:`translation_mode`  
+   2. :ref:`ai_translation_cb` 
+   3. :ref:`audio_data`  
+
+
+
+
+.. _ai_translation_cb:
+
+AITranslationCallback
+============================================
+
+.. code-block:: java
+
+    public interface AITranslationCallback {
+
+        /**
+         * 回调翻译开始
+         */
+        void onStart();
+
+        /**
+         * 回调翻译结果
+         * <p>
+         * 可以多次回调
+         * </p>
+         *
+         * @param result TranslateResult 翻译结果
+         */
+        void onTranslateResult(@NonNull TranslationResult result);
+
+        /**
+         * 回调翻译失败
+         *
+         * @param id      long 翻译任务ID
+         * @param code    int 错误码
+         * @param message String 错误描述
+         */
+        void onTranslateError(long id, int code, String message);
+
+        /**
+         * 回调翻译结束
+         *
+         * @param reason  int 结束原因码
+         * @param message String 描述
+         */
+        void onStop(int reason, String message);
+    }
+
+.. note::
+   1. :ref:`translation_result` 
+
+
+
+
+.. _translation_result:
+
+TranslationResult
+========================================
+
+翻译结果
+
+.. code-block:: java
+
+    public class TranslationResult implements Parcelable {
+        /**
+         * 翻译任务序号
+         */
+        private long id = 0L;
+        /**
+         * 语音识别文本
+         */
+        @NonNull
+        private String nlpText = "";
+        /**
+         * 原始语言
+         * <p>
+         * 遵循ISO-6393标准，小写字母，3字节<br/>
+         * 默认是<b>zho</b>, 中文
+         * </p>
+         */
+        @NonNull
+        private String srcLanguage = "zho";
+        /**
+         * 目标语言
+         * <p>
+         * 遵循ISO-6393标准，小写字母，3字节<br/>
+         * 默认是<b>eng</b>,英语
+         * </p>
+         */
+        @NonNull
+        private String destLanguage = "eng";
+        /**
+         * 翻译文本
+         */
+        @NonNull
+        private String translationText = "";
+        /**
+         * 合成音频的声道数
+         * <p>
+         * 默认是单声道
+         * </p>
+         */
+        private int channel = 1;
+        /**
+         * 合成音频的采样率
+         * <p>
+         * 单位: Hz<br/>
+         * 默认是16KHz
+         * </p>
+         */
+        private int sampleRate = 16000;
+        /**
+         * 编码格式
+         * <p>
+         * 默认是PCM_16Bit格式
+         * </p>
+         */
+        private int format = 2;
+        /**
+         * 翻译合成音频的编码数据
+         * <p>
+         * 注意: 需要转码成对应的编码数据
+         * </p>
+         */
+        private AudioData translationTTSData;
+    }
+
+
+.. note::
+   1. :ref:`audio_data` 
+

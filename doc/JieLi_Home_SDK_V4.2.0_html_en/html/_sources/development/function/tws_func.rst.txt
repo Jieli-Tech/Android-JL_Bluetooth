@@ -1,0 +1,857 @@
+.. _tws_func:
+
+TWS Function
+****************************************
+
+
+=============================================== =============================================================== ======================================= ======================================= ============================================ =======================================================
+         Function Description                                            Command Prototype                                    Command Model                       Command Parameter                      Command Response                                            Notes
+=============================================== =============================================================== ======================================= ======================================= ============================================ =======================================================
+   Get device settings info                        Command.CMD_ADV_GET_INFO                                        GetADVInfoCmd                           GetADVInfoParam                         :ref:`adv_info`                              Refer :ref:`common_cmd_handle` 
+   Device broadcast stream control                 Command.CMD_ADV_NOTIFY_SETTINGS                                 SetDeviceNotifyAdvInfoCmd               SetDeviceNotifyAdvInfoParam             SetDeviceNotifyAdvInfoResponse               Refer :ref:`common_cmd_handle` 
+   Set device function                             Command.CMD_ADV_SETTINGS                                        SetADVInfoCmd                           SetADVInfoParam                         SetADVResponse                               Refer :ref:`common_cmd_handle` 
+   Listen to device broadcast info                 Command.CMD_ADV_DEVICE_NOTIFY                                   NotifyAdvInfoCmd                        :ref:`notify_adv_info`                  NULL                                         Refer :ref:`receive_cmd_handle`
+   Listen to device request                        Command.CMD_ADV_DEV_REQUEST_OPERATION                           RequestAdvOpCmd                         RequestAdvOpParam                       CommonResponse                               Refer :ref:`receive_cmd_handle` 
+=============================================== =============================================================== ======================================= ======================================= ============================================ =======================================================
+
+
+
+Get Device Settings Info
+==================================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    //mask = 0xffffffff;  -- Get all attributes
+    CommandBase getTwsInfoCmd = CommandBuilder.buildGetADVInfoCmd(mask);
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    int mask = 0x01; //Attribute mask, cannot be 0
+    //mask = 0xffffffff; //Get all attributes
+    //Execute get device settings info function and wait for result callback
+    controller.getDeviceSettingsInfo(controller.getUsingDevice(), mask, new OnRcspActionCallback<ADVInfoResponse>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ADVInfoResponse message) {
+            //Success callback
+            //message - Settings info
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+.. important::
+    | 1. mask reference :ref:`attr_fun_code` #ADV_TYPE_xxx 
+    | 2. Result reference :ref:`adv_info` 
+
+
+.. _adv_info:
+
+ADVInfoResponse
+-----------------------------------------------------
+
+Device settings info
+
+.. code-block:: java
+
+    public class ADVInfoResponse {
+        //Manufacturer ID
+        private int pid;
+        //Product ID
+        private int vid;
+        //Customer ID
+        private int uid;
+        //Left device (device 1) battery level
+        private int leftDeviceQuantity;
+        //Left device (device 1) charging indicator
+        private boolean isLeftCharging;
+        //Right device (device 2) battery level
+        private int rightDeviceQuantity;
+        //Right device (device 2) charging indicator
+        private boolean isRightCharging;
+        //Charging bin (device 3) battery level
+        private int chargingBinQuantity;
+        //Charging bin (device 3) charging indicator
+        private boolean isDeviceCharging;
+        //Device name
+        private String deviceName;
+        //Mic channel
+        private int micChannel;
+        //Work mode
+        private int workModel;
+        //Button settings
+        private List<KeySettings> mKeySettingsList;
+        //Light settings
+        private List<LedSettings> mLedSettingsList;
+        //In-ear detection settings
+        private int inEarSettings;
+        //Language
+        private String language;
+        //ANC mode list
+        private byte[] modes;
+
+    }
+
+
+.. _key_settings:
+
+KeySettings
+-----------------------------------------------------
+
+Button settings info
+
+.. code-block:: java
+
+    public static class KeySettings {
+        private int keyNum; //Button number
+        private int action; //Action identifier
+        private int function; //Function identifier
+        ...
+    }
+
+
+.. _led_settings:
+
+LedSettings
+------------------------------------------------------
+
+Light effect settings info
+
+.. code-block:: java
+
+    public static class LedSettings {
+        private int scene; //Scene identifier
+        private int effect; //Effect identifier
+        ...
+    }
+
+
+
+
+Device Broadcast Stream Control
+=====================================================
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    boolean isOpenStream = false; //Stream switch
+    CommandBase command = CommandBuilder.buildGetLightControlInfoCmd();
+    if(isOpenStream){
+        command = CommandBuilder.buildSetDeviceNotifyADVInfoCmd(1);
+    }else{
+        command = CommandBuilder.buildStopDeviceNotifyADVInfoCmd();
+    }
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceBroadcast(BluetoothDevice device, DevBroadcastMsg broadcast) {
+            //Device broadcast info will be callback here
+        }
+    });
+    //enable - Switch
+    //Execute control device broadcast info function and wait for result callback
+    controller.controlAdvBroadcast(controller.getUsingDevice(), enable, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //enable = true, Enable device broadcast info, data will be in BTRcspEventCallback#onDeviceBroadcast callback
+            //enable = false, Disable device broadcast info
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+.. important::
+    | 1. After device connects, broadcast stream is enabled by default for a period of time, for popup
+    | 2. Enable broadcast stream, will cause device to notify device broadcast info
+
+
+
+.. _device_broadcast_msg:
+
+DevBroadcastMsg
+----------------------------------------------------------
+    
+
+Device broadcast info
+
+.. code-block:: java
+
+    public class DevBroadcastMsg {
+        private int pid;                 //Product ID
+        private int vid;                 //Manufacturer ID
+        private int uid;                 //Customer ID
+        private int deviceType;          //Device type
+        private int version;             //Protocol version
+        private boolean showDialog;      //Popup flag
+        private String edrAddr;          //Device's classic Bluetooth address
+        private int seq;                 //Sequence number
+        private int action;              //Action
+        private int leftDeviceQuantity;  //Left device (device 1) battery level
+        private boolean isLeftCharging;  //Left device (device 1) charging indicator
+        private int rightDeviceQuantity; //Right device (device 2) battery level
+        private boolean isRightCharging; //Right device (device 2) charging indicator
+        private int chargingBinQuantity; //Charging bin (device 3) battery level
+        private boolean isDeviceCharging;//Charging bin (device 3) charging indicator
+    }
+
+
+
+.. _set_dev_function:
+
+Set Device Function
+==========================================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    int type = 0; //Function identifier
+    byte[] data = new byte[0]; //Function parameter
+    byte[] payload = ParseDataUtil.packLTVPacket(type, data);   //Parameter follows LTV format
+    CommandBase setADVInfoCmd = CommandBuilder.buildSetADVInfoCmd(payload);
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //type - Type
+    int type = 0;
+    //value - Data
+    byte[] value = new byte[0]; 
+    //Set device function and wait for result callback
+    controller.modifyDeviceSettingsInfo(controller.getUsingDevice(), type, value, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Success callback
+            //message - Result code, 0 for success, others for error code
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+============== ========================= ================================================================================================
+ Function ID          Description                     Data Format
+============== ========================= ================================================================================================
+  0              Battery level            | left(1Byte)+right(1Byte)+charging bin(1Byte), not settable
+                                          | Battery format: Bit7 -- charging status Bit6-0: battery level 
+  1              Device name                name(32Bytes), ends with '\0'
+  2              Button settings          | n * button settings
+                                          | Button setting format: keyID(1Byte)+action(1Byte)+function(1Byte)
+  3              Light settings           | n * light settings
+                                          | Light setting format: scene(1Byte)+effect(1Byte)
+  4              Microphone settings        mic_channel(1Byte)
+  5              Work mode                  work_mode(1Byte)
+  6              Product info               vid(2Bytes)+uid(2Bytes)+pid(2Bytes), not settable
+  7              Access time                time(4Bytes), timestamp, unit is seconds
+  8              In-ear detection           state(1Byte), 0 -- not enabled, 1 -- off, 2 -- on
+  9              Language type              language(n bytes)
+  10             ANC mode list            | modes(4Bytes), 32 bits, indicates mode list number
+                                          | Bit0 -- off mode, Bit1 -- noise reduction mode, Bit2 -- transparency mode 
+============== ========================= ================================================================================================
+
+
+.. important::
+    | 1. Parameters and data are :ref:`ltv_format` format 
+    | 2. type indicates function identifier, explains data structure
+
+
+Listen to Device Broadcast Info
+==========================================================
+
+
+1. JL_BluetoothManager method
+
+Command construction
+
+.. code-block:: java
+
+    NotifyAdvInfoCmd notifyAdvInfoCmd = (NotifyAdvInfoCmd) command;
+    NotifyAdvInfoParam advInfoParam = notifyAdvInfoCmd.getParam();
+
+
+Code example reference :ref:`receive_cmd_handle`
+
+Reply data reference :ref:`notify_adv_info`
+
+
+2. RCSPController method
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceBroadcast(BluetoothDevice device, DevBroadcastMsg broadcast) {
+            //Device broadcast info will be callback here
+        }
+    }); 
+
+
+.. note::
+   1. :ref:`notify_adv_info` 
+   2. :ref:`device_broadcast_msg` 
+
+
+
+.. _notify_adv_info:
+
+NotifyAdvInfoParam
+-----------------------------------------------------
+
+.. code-block:: java
+
+    public class NotifyAdvInfoParam extends BaseParameter {
+        //Product ID
+        private int pid;
+        //Manufacturer ID
+        private int vid;
+        //Customer ID
+        private int uid;
+        //Device type
+        private int deviceType;
+        //Protocol version
+        private int version;
+        //Popup flag
+        private boolean showDialog;
+        //Device's classic Bluetooth address
+        private String edrAddr;
+        //Sequence number
+        private int seq;
+        //Action
+        private int action;
+        //Left device (device 1) battery level
+        private int leftDeviceQuantity;
+        //Left device (device 1) charging indicator
+        private boolean isLeftCharging;
+        //Right device (device 2) battery level
+        private int rightDeviceQuantity;
+        //Right device (device 2) charging indicator
+        private boolean isRightCharging;
+        //Charging bin (device 3) battery level
+        private int chargingBinQuantity;
+        //Charging bin (device 3) charging indicator
+        private boolean isDeviceCharging;
+    }
+
+
+Listen to Device Request
+=====================================================
+
+1. JL_BluetoothManager method
+
+Command construction
+
+.. code-block:: java
+
+    RequestAdvOpCmd requestAdvOpCmd = (RequestAdvOpCmd) command;
+    RequestAdvOpParam opParam = requestAdvOpCmd.getParam();
+    int op = opParam.getOp();
+
+
+Code example reference :ref:`receive_cmd_handle`
+
+2. RCSPController method
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onTwsStatusChange(BluetoothDevice device, boolean isTwsConnected) {
+            //TWS connection status will be callback here
+        }
+
+        @Override
+        public void onDeviceRequestOp(BluetoothDevice device, int op) {
+            //Device request operation will be callback here
+            switch (op) {
+                case Constants.ADV_REQUEST_OP_UPDATE_CONFIGURE: //Actively update configuration info
+    //               controller.getDeviceSettingsInfo(device, 0xffffffff, null);
+                    break;
+                case Constants.ADV_REQUEST_OP_UPDATE_AFTER_REBOOT://Update configuration info, requires reboot to take effect
+    //               controller.getDeviceSettingsInfo(device, 0xffffffff, new OnRcspActionCallback<ADVInfoResponse>() {
+    //                   @Override
+    //                   public void onSuccess(BluetoothDevice device, ADVInfoResponse message) {
+    //                       controller.rebootDevice(device, null);
+    //                   }
+    //
+    //                   @Override
+    //                   public void onError(BluetoothDevice device, BaseError error) {
+    //
+    //                   }
+    //               });
+                    break;
+                case Constants.ADV_REQUEST_OP_SYNC_TIME: //Request sync connection time
+    //              int connectedTime = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+    //              controller.updateConnectedTime(device, connectedTime, null);
+                    break;
+                case Constants.ADV_REQUEST_OP_RECONNECT_DEVICE://Request reconnect device
+                    break;
+                case Constants.ADV_REQUEST_OP_SYNC_DEVICE_INFO: //Request sync device info
+    //              controller.requestDeviceInfo(device, 0xffffffff, null);
+                    break;
+                }
+            }
+    });
+
+================== ===========================================================================
+  Operation Code                                 Description
+================== ===========================================================================
+ 0                  Actively update configuration info
+ 1                  Update configuration info, requires reboot to take effect
+ 2                  Request sync access time
+ 3                  Request reconnect device
+ 4                  Request sync device info
+================== ===========================================================================
+
+
+Update Access Time
+=========================================================
+
+**Only RCSPController has interface**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    int connectedTime = (int) (Calendar.getInstance().getTimeInMillis() / 1000); //Access time
+    //Execute sync access time function and wait for result callback
+    controller.updateConnectedTime(controller.getUsingDevice(), connectedTime, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Success callback
+            //message - Result code, 0 for success, others for error code
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+Set Device Name
+===========================================================
+
+**Only RCSPController has interface**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute set device name function and wait for result callback
+    controller.configDeviceName(controller.getUsingDevice(), name, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Success callback
+            //message - Result code, 0 for success, others for error code
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+Set Button Function
+====================================================
+
+**Only RCSPController has interface**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Button setting list, cannot be empty
+    List<ADVInfoResponse.KeySettings> keySettingsList = new ArrayList();
+    //Execute set button effect function and wait for result callback
+    controller.configKeySettings(controller.getUsingDevice(), keySettingsList, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Success callback
+            //message - Result code, 0 for success, others for error code
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+.. note::
+   Button setting, :ref:`key_settings` 
+
+
+Button Configuration
+--------------------------------------------------
+
+.. important::
+   1. Public version **button info** is obtained through **json configuration document**. (Location: `Jieli Home Open Source Project <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth>`_ /code/project_name/btsmart/src/main/assets/ac697x_headset_json.txt)  
+   2. Customers can dynamically add button functions, as long as they correspond to firmware
+
+
+Following are **public version button info** 
+
+1. Button Definition
+
+   ================= =============================  
+       Code Value               Description
+   ================= =============================
+     1                   Left ear button
+     2                   Right ear button
+   ================= =============================
+2. Action Definition
+
+   ================= =============================  
+       Code Value               Description
+   ================= =============================
+     1                   Short press earphone
+     2                   Double tap earphone
+   ================= ============================= 
+3. Function Definition
+
+   ================= ============================= =============================================================
+       Code Value                 Description                             Notes
+   ================= ============================= =============================================================
+     0                   No effect
+     3                   Previous track
+     4                   Next track
+     5                   Play/Pause
+     6                   Answer call
+     7                   Hang up call
+     8                   Redial call
+     9                   Volume up
+     10                  Volume down
+     11                  Take photo                   Some SDKs support, need to confirm with firmware
+     255                 ANC mode switch list         Some SDKs support, need to confirm with firmware
+   ================= ============================= =============================================================  
+
+Example Explanation
+--------------------------------------
+
+
+| Data: 1, 1, 3, 1, 2, 5, 2, 1, 4, 2, 2, 9
+| Meaning of above data: Left ear short press plays previous track; Left ear double tap plays/pauses music; Right ear short press plays next track; Right ear double tap increases volume;
+
+
+Set Flash Light Effect
+===============================================
+
+
+**Only RCSPController has interface**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Light effect setting list, cannot be empty
+    List<ADVInfoResponse.LedSettings> ledSettingsList = new ArrayList();
+    //Execute set flash light effect function and wait for result callback
+    controller.configLedSettings(controller.getUsingDevice(), ledSettingsList, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Success callback
+            //message - Result code, 0 for success, others for error code
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+.. note::
+   Light effect setting, :ref:`led_settings` 
+
+
+Light Configuration
+-----------------------------------
+
+
+.. important::
+   1. Public version **light info** is obtained through **json configuration document**. (Location: `Jieli Home Open Source Project <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth>`_ /code/project_name/btsmart/src/main/assets/ac697x_headset_json.txt) . 
+   2. Customers can dynamically add button functions, as long as they correspond to firmware
+
+
+Following are **public version light info** 
+
+1. Scene Definition
+
+   ================= =============================  
+       Code Value               Description
+   ================= =============================
+     1                   Not paired
+     2                   Not connected
+     3                   Connected
+   ================= =============================
+
+2. Effect Definition
+
+   ================= ====================================================  
+       Code Value               Description
+   ================= ====================================================
+     0                   All off
+     1                   Red light always on
+     2                   Blue light always on
+     3                   Red light breathing
+     4                   Blue light breathing
+     5                   Red and blue alternating fast flash
+     6                   Red and blue alternating slow flash
+   ================= ==================================================== 
+
+
+Example Explanation
+--------------------------------------------------------
+
+| Data: 1, 0, 2, 6, 3, 2
+| Meaning of above data: When earphone is not paired, light is all off; When earphone is paired but not connected, light alternates red and blue slow flash; When earphone is paired and connected, blue light always on;
+
+
+Update Specified Function
+=========================================================
+
+
+**Only RCSPController has interface**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //type - Specified function
+    int type = 0;
+    //value - Value
+    byte[] value = new byte[0];
+    //Execute update specified function value function and wait for result callback
+    controller.updateFunctionValue(controller.getUsingDevice(), type, value, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Success callback
+            //message - Result code, 0 for success, others for error code
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+Distinguish Neckband Headphones
+========================================================
+
+
+* When not connected, distinguish if TWS device is neckband headphones through broadcast packet
+
+.. code-block:: java
+
+    /** Is device type headset type(0x02,0x03) :
+    0x00 -- Speaker type
+    0x01 -- Charging bin type
+    0x02 -- TWS headset type
+    0x03 -- Headset type
+    0x04--Sound card type
+    0x05--Watch type */
+    boolean isHeadset = UIHelper.isHeadsetByDeviceType(bleScanMessage.getDeviceType());
+    //Is broadcast packet version neckband version
+    boolean isNeck = isHeadset && bleScanMessage.getVersion() == SConstant.ADV_INFO_VERSION_NECK_HEADSET;
+    return isNeck;
+
+* When connected, distinguish if TWS device is neckband headphones through connection history record
+
+.. code-block:: java
+
+    /** Is chip type headset type(2,4):
+    0:AI SDK (692X_AI smart speaker SDK)
+    1:ST SDK (692X_standard speaker SDK)
+    2:693x_TWS SDK
+    3:695xSDK
+    4:697x_TWS SDK
+    5:696x_soundbox
+    6:696x_tws
+    7:695x_sound_card
+    8:695x_sound_watch
+    9:701x_sound_watch */
+    boolean isHeadsetType = history != null && UIHelper.isHeadsetType(history.getChipType());
+    //Is broadcast packet version neckband version
+    boolean isNeck = isHeadsetType && history.getAdvVersion() == SConstant.ADV_INFO_VERSION_NECK_HEADSET;
+    return isNeck;
+
+
+Hearing Aid Headphones Fitting Function
+=========================================================
+
+
+* Fitting info interaction: version, number of channels, channel frequency
+
+.. code-block:: java
+
+        //Get RCSPController object
+        RCSPController controller = RCSPController.getInstance();
+        //Fitting info interaction: version, number of channels, channel frequency
+        controller.getHearingAssistInfo(controller.getUsingDevice(), new OnRcspActionCallback<HearingAssistInfo>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, HearingAssistInfo message) {
+                //Success callback
+                //message - Hearing aid fitting info
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Failure callback
+                //error - Error info
+            }
+        });
+
+* Channel fitting
+
+.. code-block:: java
+
+        //Get RCSPController object
+        RCSPController controller = RCSPController.getInstance();
+        //Channel fitting
+        controller.setHearingAssistFrequency(controller.getUsingDevice(), hearingFrequencyInfo, new OnRcspActionCallback<Boolean>() {
+
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Success callback
+                //message - Execution success or not
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Failure callback
+                //error - Error info
+            }
+        });
+
+* Fitting result save update
+
+.. code-block:: java
+
+        //Get RCSPController object
+        RCSPController controller = RCSPController.getInstance();
+        //Fitting result save update
+        controller.setHearingAssistFrequencies(controller.getUsingDevice(), hearingFrequenciesInfo, new OnRcspActionCallback<Boolean>() {
+
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Success callback
+                //message - Execution success or not
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Failure callback
+                //error - Error info
+            }
+        });
+
+
+* Stop fitting
+
+.. code-block:: java
+
+        //Get RCSPController object
+        RCSPController controller = RCSPController.getInstance();
+        //Stop fitting
+        controller.stopHearingAssistFitting(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Success callback
+                //message - Execution success or not
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Failure callback
+                //error - Error info
+            }
+        });
+
+
+* Listen to hearing aid fitting related info
+
+.. code-block:: java
+
+        //Get RCSPController object
+        RCSPController controller = RCSPController.getInstance();
+        //Listen to hearing aid fitting related info
+        BTRcspEventCallback mBTRcspEventCallback = new BTRcspEventCallback() {
+            //Listen to fitting info interaction: version, number of channels, channel frequency
+            @Override
+            public void onHearingAssistInfo(BluetoothDevice device, HearingAssistInfo hearingAssistInfo) {
+                super.onHearingAssistInfo(device, hearingAssistInfo);
+                //hearingAssistInfo - Fitting info interaction
+            }
+
+            //Listen to device fitting audio switch status
+            @Override
+            public void onHearingChannelsStatus(BluetoothDevice device, HearingChannelsStatus hearingChannelsStatus) {
+                super.onHearingChannelsStatus(device, hearingChannelsStatus);
+                //hearingChannelsStatus - Hearing channel switch status
+            }
+        };
+        controller.addBTRcspEventCallback(mBTRcspEventCallback);
+
+
+

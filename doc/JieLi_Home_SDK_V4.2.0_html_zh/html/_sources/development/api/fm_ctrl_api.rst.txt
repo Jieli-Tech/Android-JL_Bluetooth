@@ -1,0 +1,123 @@
+.. _fm_op: 
+
+FM功能接口
+*******************************
+
+.. code-block:: java
+
+    public interface IFmOp {
+
+        /**
+         * 获取发射频点
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getFmFrequency(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置发射频点
+         *
+         * @param device    操作设备
+         * @param frequency 频点
+         * @param callback  结果回调
+         */
+        void setFmFrequency(BluetoothDevice device, float frequency, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取FM信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getFmInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取FM频道信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getFmChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 向前搜索频道
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmForwardSearchChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 向后搜索频道
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmBackwardSearchChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 搜索全段频道
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmSearchAllChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 停止频道搜索
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmStopSearch(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放指定的频点
+         *
+         * @param device    操作设备
+         * @param frequency 指定的频点
+         * @param callback  结果回调
+         */
+        void fmPlaySelectedFrequency(BluetoothDevice device, float frequency, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放或暂停键
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放上一个频道
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmPlayPrevChannel(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放下一个频道
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmPlayNextChannel(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放上一个频点
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmPlayPrevFrequency(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放下一个频点
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void fmPlayNextFrequency(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+    }

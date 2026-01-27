@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. RCSP基础接口 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. 基础功能接口" href="basic_func_api.html" />
+    <link rel="prev" title="2. RCSP功能接口" href="rcsp_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 接口说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_api.html"><span class="sectnum">1 </span>蓝牙处理接口</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="rcsp_api.html">2. RCSP功能接口</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1. RCSP基础接口</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#onrcspcallback">1.1. OnRcspCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rcsp-event-callback">1.2. RCSP事件监听器</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func_api.html">2. 基础功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl_api.html">3. 音量控制接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl_api.html">4. 设备音乐控制接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl_api.html">5. 均衡器功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl_api.html">6. 时钟功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl_api.html">7. 外接设备功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl_api.html">8. FM功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl_api.html">9. 灯光控制接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func_api.html">10. TWS功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func_api.html">11. 声卡功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_api.html">12. RCSP控制器接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func_api.html">13. 录音操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_op_api.html">14. 文件操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_op_api.html">15. SPDIF操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func_api.html">16. 彩屏仓功能接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func_api.html">17. 翻译功能接口</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. 状态码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. 功能码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. 错误码</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 接口说明</a></li>
+          <li class="breadcrumb-item"><a href="rcsp_api.html">2. RCSP功能接口</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>RCSP基础接口</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rcsp">
+<span id="rcsp-basic-api"></span><h1><span class="section-number">1. </span>RCSP基础接口<a class="headerlink" href="#rcsp" title="Link to this heading"></a></h1>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IRcspOp</span><span class="w"> </span><span class="p">{</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 注册Rcsp事件回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param callback RCSP事件回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerOnRcspCallback</span><span class="p">(</span><span class="n">OnRcspCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 注销RCSP事件回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param callback RCSP事件回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">unregisterOnRcspCallback</span><span class="p">(</span><span class="n">OnRcspCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 注册RCSP事件监听器</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param listener RCSP事件监听器</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerOnRcspEventListener</span><span class="p">(</span><span class="n">OnRcspEventListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 注销RCSP事件监听器</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param listener RCSP事件监听器</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">unregisterOnRcspEventListener</span><span class="p">(</span><span class="n">OnRcspEventListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * RCSP协议是否初始化</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     *     默认是当前使用的设备</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRcspInit</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * RCSP协议是否初始化</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRcspInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取蓝牙库配置</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return 蓝牙库配置</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothOption</span><span class="w"> </span><span class="nf">getBluetoothOption</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取设备信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {@link DeviceInfo} 设备信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="nf">getDeviceInfo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取设备信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return {@link DeviceInfo} 设备信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="nf">getDeviceInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取设备配置信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return DeviceConfiguration 设备配置信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">DeviceConfiguration</span><span class="w"> </span><span class="nf">getDeviceConfiguration</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 配置蓝牙库参数</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param option 参数配置</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发送RCSP命令</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    蓝牙设备对象</span>
+<span class="cm">     * @param cmd       RCSP命令</span>
+<span class="cm">     * @param timeoutMs 超时时间。单位是毫秒</span>
+<span class="cm">     * @param callback  发送回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendCommandAsync</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发送RCSP命令</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 等效于{@link #sendCommandAsync(BluetoothDevice, CommandBase, int, RcspCommandCallback)},&lt;br/&gt;</span>
+<span class="cm">     * 为了保证接口一致</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    蓝牙设备对象</span>
+<span class="cm">     * @param cmd       RCSP命令</span>
+<span class="cm">     * @param timeoutMs 超时时间。单位是毫秒</span>
+<span class="cm">     * @param callback  发送回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRcspCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发送RCSP命令</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   蓝牙设备对象</span>
+<span class="cm">     * @param cmd      RCSP命令</span>
+<span class="cm">     * @param callback 发送回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRcspCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发送RCSP回复命令</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device      蓝牙设备对象</span>
+<span class="cm">     * @param responseCmd RCSP回复命令</span>
+<span class="cm">     * @param callback    发送回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">responseCmd</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发送RCSP回复命令</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 等效于{@link #sendCommandResponse(BluetoothDevice, CommandBase, RcspCommandCallback)},&lt;br/&gt;</span>
+<span class="cm">     * 为了保证接口一致</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备对象</span>
+<span class="cm">     * @param responseCmd RCSP回复命令</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRcspResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">responseCmd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 切换已连接设备为正在使用设备</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 可以通过{@link OnRcspCallback#onSwitchConnectedDevice(BluetoothDevice)} 获取切换情况</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 已连接设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">switchConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 释放资源</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#rcsp-callback"><span class="std std-ref">OnRcspCallback</span></a></p></li>
+<li><p><a class="reference internal" href="#rcsp-event-callback"><span class="std std-ref">RCSP事件监听器</span></a></p></li>
+<li><p><a class="reference internal" href="../import.html#bluetooth-option"><span class="std std-ref">1.2.1   BluetoothOption</span></a></p></li>
+<li><p><a class="reference internal" href="bt_api.html#rcsp-cmd-cb"><span class="std std-ref">1.1   命令回复回调</span></a></p></li>
+</ol>
+</div>
+<section id="onrcspcallback">
+<span id="rcsp-callback"></span><h2><span class="section-number">1.1. </span>OnRcspCallback<a class="headerlink" href="#onrcspcallback" title="Link to this heading"></a></h2>
+<p>RCSP状态回调</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OnRcspCallback</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Rcsp协议初始化回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 已连接设备</span>
+<span class="cm">     * @param code   初始化结果</span>
+<span class="cm">     *               &lt;p&gt;</span>
+<span class="cm">     *               结果如下:&lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 正常状态 &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_START_AUTH_DEVICE} --- 开始设备认证失败&lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_AUTH_DEVICE} --- 设备认证失败&lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_DEVICE_IN_OTA} --- 强制升级状态 &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REMOTE_DEVICE_DISCONNECT} --- 设备断开 &lt;br/&gt;</span>
+<span class="cm">     *               其他错误码</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备发送的rcsp命令回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  已连接设备</span>
+<span class="cm">     * @param command RCSP命令</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备发送的数据命令回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  已连接设备</span>
+<span class="cm">     * @param dataCmd 数据命令</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspDataCmd</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">dataCmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * RCSP错误事件回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 设备对象</span>
+<span class="cm">     * @param error  错误信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备连接状态</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 连接状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectStateChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 切换已连接且正在使用的设备的回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 已连接设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSwitchConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="rcsp-event-callback">
+<span id="id1"></span><h2><span class="section-number">1.2. </span>RCSP事件监听器<a class="headerlink" href="#rcsp-event-callback" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OnRcspEventListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备模式改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param mode   设备当前模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备系统音量改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param volume 设备系统音量</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVolumeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VolumeInfo</span><span class="w"> </span><span class="n">volume</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备EQ信息改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param eqInfo EQ信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备外接存储器改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device      蓝牙设备</span>
+<span class="cm">     * @param storageInfo 设备信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备支持文件格式回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     蓝牙设备</span>
+<span class="cm">     * @param fileFormat 设备支持文件格式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFileFormatChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileFormat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 音乐歌曲改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   蓝牙设备</span>
+<span class="cm">     * @param nameInfo 音乐信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicNameChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">nameInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 音乐播放状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     蓝牙设备</span>
+<span class="cm">     * @param statusInfo 音乐状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">statusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 播放模式改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       蓝牙设备</span>
+<span class="cm">     * @param playModeInfo 播放模式信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPlayModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备电量改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device      蓝牙设备</span>
+<span class="cm">     * @param batteryInfo 电量信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBatteryChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BatteryInfo</span><span class="w"> </span><span class="n">batteryInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 外接设备的状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param isPlay 是否播放</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAuxStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPlay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * FM频道改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   蓝牙设备</span>
+<span class="cm">     * @param channels 频道信息列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmChannelsChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChannelInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">channels</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * FM状态信息改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       蓝牙设备</span>
+<span class="cm">     * @param fmStatusInfo FM状态信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">FmStatusInfo</span><span class="w"> </span><span class="n">fmStatusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 闹钟列表更新回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device        蓝牙设备</span>
+<span class="cm">     * @param alarmListInfo 闹钟列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 默认闹钟铃声列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param bells  默认闹钟铃声列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmDefaultBellListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 闹钟提醒回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    蓝牙设备</span>
+<span class="cm">     * @param alarmBean 闹钟信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmNotify</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 闹钟停止回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    蓝牙设备</span>
+<span class="cm">     * @param alarmBean 闹钟信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmStop</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 频道发射回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    蓝牙设备</span>
+<span class="cm">     * @param frequency 频点</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFrequencyTx</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">frequency</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 外设模式改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param mode   外设模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPeripheralsModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 外设连接状态改变回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  蓝牙设备</span>
+<span class="cm">     * @param connect 是否连接</span>
+<span class="cm">     * @param mac     设备mac地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPeripheralsConnectStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">connect</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mac</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ID3歌曲info回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       蓝牙设备</span>
+<span class="cm">     * @param id3MusicInfo id3歌曲信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onID3MusicInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ID3MusicInfo</span><span class="w"> </span><span class="n">id3MusicInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 高低音变化回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param high   高音</span>
+<span class="cm">     * @param bass   低音</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHighAndBassChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">high</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Eq预设值变化</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       蓝牙设备</span>
+<span class="cm">     * @param eqPresetInfo 预设值</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqPresetChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 通话状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 通话状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPhoneCallStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 拓展功能回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param type   拓展功能</span>
+<span class="cm">     * @param data   拓展有效数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onExpandFunction</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 混响参数回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param param  混响参数</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReverberation</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ReverberationParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 动态限幅参数回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param param  动态限幅参数</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDynamicLimiter</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DynamicLimiterParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 灯光控制回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device           蓝牙设备</span>
+<span class="cm">     * @param lightControlInfo 灯光控制信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLightControlInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">LightControlInfo</span><span class="w"> </span><span class="n">lightControlInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 声卡EQ信息回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param eqInfo EQ信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 声卡状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param mask   掩码</span>
+<span class="cm">     * @param values 数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前噪声处理模式信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    设备对象</span>
+<span class="cm">     * @param voiceMode 噪声处理模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCurrentVoiceMode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备所有噪声处理模式信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     设备对象</span>
+<span class="cm">     * @param voiceModes 噪声处理模式信息列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceModeList</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 辅听验配信息回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device            设备对象</span>
+<span class="cm">     * @param hearingAssistInfo 辅听验配信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHearingAssistInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">HearingAssistInfo</span><span class="w"> </span><span class="n">hearingAssistInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 辅听声道状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device                设备对象</span>
+<span class="cm">     * @param hearingChannelsStatus 辅听声道状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHearingChannelsStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">HearingChannelsStatus</span><span class="w"> </span><span class="n">hearingChannelsStatus</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 声学功能回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    设备对象</span>
+<span class="cm">     * @param voiceFunc 声学功能数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备双连状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 设备对象</span>
+<span class="cm">     * @param state  设备双连状态信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDoubleConnectionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DoubleConnectionState</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备已连接的手机蓝牙信息回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 设备对象</span>
+<span class="cm">     * @param info   设备已连接的手机蓝牙信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectedBtInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ConnectedBtInfo</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/voice_ctrl.html#volume-info"><span class="std std-ref">VolumeInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#eq-info"><span class="std std-ref">EqInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#deviect-storage-info"><span class="std std-ref">DevStorageInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/device_music_ctrl.html#music-name-info"><span class="std std-ref">MusicNameInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/device_music_ctrl.html#music-status-info"><span class="std std-ref">MusicStatusInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/device_music_ctrl.html#music-mode-info"><span class="std std-ref">PlayModeInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/fm_ctrl.html#channel-info"><span class="std std-ref">ChannelInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/fm_ctrl.html#fm-status-info"><span class="std std-ref">FmStatusInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/rtc_ctrl.html#alarm-list-info"><span class="std std-ref">AlarmListInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/rtc_ctrl.html#default-alarm-bell"><span class="std std-ref">DefaultAlarmBell</span></a></p></li>
+<li><p><a class="reference internal" href="../function/rtc_ctrl.html#alarm-bean"><span class="std std-ref">AlarmBean</span></a></p></li>
+<li><p><a class="reference internal" href="../function/local_music_ctrl.html#id3-info"><span class="std std-ref">ID3音乐信息</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#eq-perset-info"><span class="std std-ref">EqPresetInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#reverberation-param"><span class="std std-ref">ReverberationParam</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#dynamic-limiter-param"><span class="std std-ref">DynamicLimiterParam</span></a></p></li>
+<li><p><a class="reference internal" href="../function/light_ctrl.html#light-ctrl-info"><span class="std std-ref">灯光控制信息</span></a></p></li>
+<li><p><a class="reference internal" href="../function/anc_ctrl.html#voice-mode"><span class="std std-ref">VoiceMode</span></a></p></li>
+<li><p><a class="reference internal" href="#voice-func"><span class="std std-ref">VoiceFunc</span></a></p></li>
+<li><p><a class="reference internal" href="../function/dual_connection_func.html#double-connection-state"><span class="std std-ref">DoubleConnectionState</span></a></p></li>
+<li><p><a class="reference internal" href="../function/dual_connection_func.html#connected-bt-info"><span class="std std-ref">ConnectedBtInfo</span></a></p></li>
+</ol>
+</div>
+<section id="devstorageinfo">
+<span id="deviect-storage-info"></span><h3><span class="section-number">1.2.1. </span>DevStorageInfo<a class="headerlink" href="#devstorageinfo" title="Link to this heading"></a></h3>
+<p>设备外接存储信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DevStorageInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 存储器信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_STORAGE_INFO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 存储器复用</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_REUSE_STORAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 存储器状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">storageStates</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否复用</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDeviceReuse</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 版本号</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="voicefunc">
+<span id="voice-func"></span><h3><span class="section-number">1.2.2. </span>VoiceFunc<a class="headerlink" href="#voicefunc" title="Link to this heading"></a></h3>
+<p>声音功能</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_ADAPTIVE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">             </span><span class="c1">//ANC自适应功能</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SMART_NO_PICK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">        </span><span class="c1">//智能免摘功能</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SCENE_DENOISING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">      </span><span class="c1">//场景降噪功能</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_WIND_NOISE_DETECTION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">//风噪检测功能</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_VOCAL_BOOSTER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">        </span><span class="c1">//人声增强功能</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w">   </span><span class="c1">//数据类型</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w">      </span><span class="c1">//版本号</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="id2">
+<h4><span class="section-number">1.2.2.1. </span>对应声学功能<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用常量</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>数据模型</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNC_ADAPTIVE</p></td>
+<td><p>1</p></td>
+<td><p>ANC自适应功能</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#adaptive-data"><span class="std std-ref">AdaptiveData</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNC_SMART_NO_PICK</p></td>
+<td><p>2</p></td>
+<td><p>智能免摘功能</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#smart-no-pick"><span class="std std-ref">SmartNoPick</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>FUNC_SCENE_DENOISING</p></td>
+<td><p>3</p></td>
+<td><p>场景降噪功能</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#scence-denoising"><span class="std std-ref">SceneDenoising</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNC_WIND_NOISE_DETECTION</p></td>
+<td><p>4</p></td>
+<td><p>风噪检测功能</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#wind-noise-detection"><span class="std std-ref">WindNoiseDetection</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>FUNC_VOCAL_BOOSTER</p></td>
+<td><p>5</p></td>
+<td><p>人声增强功能</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#vocal-booster"><span class="std std-ref">VocalBooster</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rcsp_api.html" class="btn btn-neutral float-left" title="2. RCSP功能接口" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basic_func_api.html" class="btn btn-neutral float-right" title="2. 基础功能接口" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

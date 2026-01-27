@@ -1,0 +1,76 @@
+.. _devlopment_debug: 
+
+调试说明
+==================================  
+
+1. 打印文件输出
+---------------
+
+.. code-block:: java
+
+    //log配置
+    //prefix     --- 打印前缀标识，用于快速定位打印
+    JL_Log.setTagPrefix("home");
+    //log文件配置
+    //context    --- 上下文，建议是getApplicationContext()
+    //log        --- 是否输出打印，建议是开发时打开，发布时关闭
+    //isSaveFile --- 是否保存log文件，建议是开发时打开，发布时关闭
+    JL_Log.configureLog(context, BuildConfig.DEBUG, BuildConfig.DEBUG);
+    
+
+.. note:: 
+    | 1. 建议在Application中设置打印输出
+    | 2. debug版本默认开启打印, release版本默认关闭打印
+    | 3. 客户可以在demo工程配置是否开启debug调试
+
+多个杰理库同时使用时, 可以按如下设置: 
+
+.. code-block:: java
+
+    //是否开启杰理连接库的打印
+    com.jieli.jl_bt_ota.util.JL_Log.setLog(JL_Log.isLog());
+    if(JL_Log.isLog()){//如果开启，把杰理OTA库的打印输出到杰理之家的输出文件中
+        com.jieli.jl_bt_ota.util.JL_Log.setLogOutput(new com.jieli.jl_bt_ota.util.JL_Log.ILogOutput() {
+            @Override
+            public void output(String logcat) {
+                //此处回调杰理OTA库的打印信息
+                JL_Log.i("ota", logcat); //添加到杰理之家库的输出文件中
+            }
+         });
+    }
+
+
+2. 打印文件
+-----------------
+
+1. 打印文件格式
+
+   格式: log_app_[timestamp].txt
+
+* timestamp: 时间戳
+
+
+.. code-block:: sh
+
+    例如: log_app_20220330093020.432.txt ==> 杰理之家SDK打印文件, 创建时间: 2022/03/30 09:30:20
+
+
+2. 文件存储路径
+
+    位置: ``手机根目录/Android/data/[包名]/files/logcat/``
+
+* 包名: 应用包名, 比如: com.jieli.btsmart
+
+.. code-block:: sh
+
+    举例: Android/data/com.jieli.btsmart/files/logcat/
+
+
+3. 异常处理步骤
+---------------------
+
+.. important::
+    | 前提: 出现异常情况后, 退出APP
+    | 1. **简单描述问题现象 (必要)**
+    | 2. **提供最接近时间戳的log文件 (必要)**
+    | 3. 提供现象的截图或者视频

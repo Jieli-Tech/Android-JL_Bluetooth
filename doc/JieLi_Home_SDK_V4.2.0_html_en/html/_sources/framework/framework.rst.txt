@@ -1,0 +1,110 @@
+SDK Description
+********************************************
+
+1. SDK Introduction
+============================================
+
+|   The JieLi Home SDK is implemented based on the JieLi RCSP protocol and primarily supports speaker and headphone SDKs, as well as live streaming sound cards and other related products. 
+|   The SDK provides a rich set of functional interfaces:
+
+       * Music Control Function  --- Mobile music playback control, device music playback control, ID3 music information display, etc.
+       * Device Settings Function  --- Volume settings, status check, device restart, etc.
+       * File Browsing Function  --- Browse files on storage devices such as USB drives and SD cards, play music files, delete files, etc.
+       * Alarm Clock Management Function  --- Adding, deleting, modifying, and querying alarms; setting alarm ringtones, etc.
+       * FM Control Function  --- FM radio function, FM transmitter function, etc.
+       * Lighting Control Function  --- Control the light's blinking, frequency, color (RGB), mode, etc., to achieve cool effects.
+       * Equalizer Adjustment Function  --- Equalizer sound effects adjustment, easily create superior sound quality.
+       * Sound Effect Adjustment Function  --- Reverb, treble and bass settings, etc.
+       * Button Settings Function  --- Headphone button function settings to enrich headphone functionality.
+       * Find Device Function  --- Find device or find phone
+       * ANC Settings Function  --- Noise processing mode settings, supporting normal mode, active noise cancellation mode, transparency mode, etc.
+       * Custom Command  --- Supports customer expansion functions
+
+
+.. _framework:
+
+1. SDK Framework
+===========================================
+
+.. graphviz::
+    :caption: JieLi's Home SDK Framework
+    :align: center
+
+    digraph framework {
+        rankdir=BT;
+        compound=true;
+
+        subgraph cluster_bt{
+            label="Bluetooth Proxy Layer";
+            bgcolor="darkslategray2";
+            width=10;
+
+            subgraph cluster_io {
+                label="Bluetooth IO";
+                style="dashed";
+                width=10;
+
+                bt_recv [label="Receive Data", shape="record", width=5];
+                bt_send [label="Send Data", shape="record", width=5];
+            }
+            
+            subgraph cluster_bt_fun{
+                label="Functional Encapsulation";
+                style="dashed";
+                width=10;
+
+                bt_0 [label="Device Management", shape="record", width=3]; 
+                bt_1 [label="Pop-up fast connection", shape="record", width=3]; 
+                bt_2 [label="Historical Record", shape="record", width=3];
+            }
+
+            bt_0 -> bt_recv [dir="both", style="invis", ltail="cluster_bt_fun", lhead="cluster_io"];
+        }
+
+        subgraph cluster_rcsp{
+            label="RCSP Protocol Layer";
+            bgcolor="lightgreen";
+            rankdir=BT;
+            width=10;
+
+            subgraph cluster_rcsp_proxy {
+                label="Proxy Layer";
+                style="dashed";
+                width=10
+
+                rcsp_0 [label="Analyze Data", shape="record", width=3];
+                rcsp_1 [label="Assembly Data", shape="record", width=3]; 
+            }
+
+            rcsp_2 [label="Data Processing Layer", shape="record", width=10];
+            rcsp_1 -> rcsp_2 [dir="both", ltail="cluster_rcsp_proxy"];
+        }
+
+        subgraph cluster_func{
+            label="Functional Implementation Layer";
+            bgcolor="lightyellow";
+            width=10;
+            
+            fun_0 [label="Music Control", shape="record", width=1];
+            fun_1 [label="FM Control", shape="record", width=1];
+            fun_2 [label="Lighting Control", shape="record", width=1];
+            fun_3 [label="Button Settings", shape="record", width=1];
+            fun_4 [label="Alarm Clock Management", shape="record", width=1];
+            fun_5 [label="Search Device", shape="record", width=1];
+            fun_6 [label="AUX Control", shape="record", width=1];
+            fun_7 [label="EQ Adjustment", shape="record", width=1];
+            fun_8 [label="Sound Effect Adjustment", shape="record", width=1];
+            fun_9 [label="Sound Card Function", shape="record", width=1];
+        }
+
+        bt_recv -> rcsp_0 [dir="both", ltail="cluster_io", lhead="cluster_rcsp_proxy"];
+        rcsp_2 -> fun_4 [label="Dependency Implementation", ltail="cluster_rcsp", lhead="cluster_func"];
+    }
+
+
+.. important::
+    | 1. The ``RCSP Protocol Layer`` depends on the ``RCSP Protocol``, ``RCSP Protocol`` relies on the ``Bluetooth Proxy Layer`` for implementation. 
+    | 2. The SDK implements the ``Bluetooth Proxy Layer`` functionality by default, and also supports external implementations by clients. 
+
+    
+

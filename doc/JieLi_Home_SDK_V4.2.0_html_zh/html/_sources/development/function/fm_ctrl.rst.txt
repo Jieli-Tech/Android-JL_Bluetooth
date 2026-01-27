@@ -1,0 +1,743 @@
+
+.. _fm_ctrl_func:
+
+FM控制功能
+********************
+
+.. important:: 
+    1. 除了 :ref:`get_fm_tx_info` 和 :ref:`set_fm_tx_freq` , 其他接口需要设备处于【FM模式】才能生效, 
+    2. 判断设备是否支持【FM模式】
+    
+    .. code-block:: java
+      
+        public boolean isSupportFMMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.isFmEnable();
+        }
+   
+
+    3. 判断设备是否处于【FM模式】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInFMMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_FM;
+        }
+
+    4.  :ref:`get_device_mode` 
+
+
+获取FM状态信息
+============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``         -- FM功能
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FM_STATU``  -- 播放状态
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getFmStatueCmd = CommandBuilder.buildGetFmStatueCmd();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行获取FM状态信息功能并等待结果回调
+    controller.getFmInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    }); 
+
+
+.. note::
+   1. :ref:`fm_status_info` 
+
+
+
+.. _fm_status_info: 
+
+FmStatusInfo
+------------------------------
+
+FM状态信息
+
+.. code-block:: java
+
+    public class FmStatusInfo {
+        private boolean isPlay; //是否正在播放
+        private int channel;    //频点
+        private float freq;     //频率
+        private int mode;       //模式
+    }
+
+
+向前搜索频道
+=================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- 频道搜索
+| **value :**  way(1Byte), 0x01                              -- 向前搜索
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmForwardSearchChannelsCmd = CommandBuilder.buildFmScanCmd((byte) 0x01);
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //此处回调已发现的FM频道列表
+        }
+    });
+    //执行向前搜索FM频道功能并等待结果回调
+    controller.fmForwardSearchChannels(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmChannelsChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. important:: 
+    1. ``不推荐使用``
+    2. :ref:`channel_info` 
+
+
+向后搜索频道
+==================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- 频道搜索
+| **value :**  way(1Byte), 0x02                              -- 向后搜索
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmBackwardSearchChannelsCmd = CommandBuilder.buildFmScanCmd((byte) 0x02);
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //此处回调已发现的FM频道列表
+        }
+    });
+    //执行向后搜索FM频道功能并等待结果回调
+    controller.fmBackwardSearchChannels(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmChannelsChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. important:: 
+    1. ``不推荐使用``
+    2. :ref:`channel_info` 
+
+
+.. _channel_info:
+
+ChannelInfo
+--------------------------------
+
+频道信息
+
+.. code-block:: java
+
+    public class ChannelInfo {
+        /**
+         * 序号
+         */
+        private int index;
+        /**
+         * 频点
+         */
+        private float freq;
+    }
+
+
+搜索FM频道
+================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- 频道搜索
+| **value :**  way(1Byte), 0x00                              -- 全段搜索
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmScanCmd = CommandBuilder.buildFmScanCmd((byte) 0x00);
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //此处回调已发现的FM频道列表
+        }
+    });
+    //执行搜索FM频道功能并等待结果回调
+    controller.fmSearchAllChannels(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmChannelsChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. important:: 
+     1. ``推荐使用``
+     2. :ref:`channel_info`
+
+
+停止搜索频道
+===============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- 频道搜索
+| **value :**  way(1Byte), 0x03                              -- 停止搜索
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmstopScanCmd = CommandBuilder.buildFmScanCmd((byte) 0x03);
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行停止搜索FM频道功能并等待结果回调
+    controller.fmStopSearch(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+FM播放或暂停
+============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_PLAY_OR_PAUSE``   -- 播放或暂停
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmPlayOrPauseCmd = CommandBuilder.buildFmPlayOrPauseCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行FM播放或暂停功能并等待结果回调
+    controller.fmPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`fm_status_info` 
+
+
+
+
+播放上一个频道
+============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_PREV_CHANNEL``    -- 播放上一个频道
+| **value :**  NULL
+
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmPrevChannelCmd = CommandBuilder.buildFmPrevChannelCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行播放上一个频道功能并等待结果回调
+    controller.fmPlayPrevChannel(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+播放下一个频道
+=============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_NEXT_CHANNEL``    -- 播放下一个频道
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmNextChannelCmd = CommandBuilder.buildFmNextChannelCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行播放下一个频道功能并等待结果回调
+    controller.fmPlayNextChannel(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+播放上一个频点
+================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_PREV_FREQ``       -- 播放上一个频点
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmPrevFreqCmd = CommandBuilder.buildFmPrevFreqCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行播放上一个频点功能并等待结果回调
+    controller.fmPlayPrevFrequency(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+播放下一个频点
+============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_NEXT_FREQ``       -- 播放下一个频点
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase fmNextFreqCmd = CommandBuilder.buildFmNextFreqCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行播放下一个频点功能并等待结果回调
+    controller.fmPlayNextFrequency(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+播放指定频点
+================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM功能
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_SELECT_FREQL``    -- 播放指定频点
+| **value :**  freqency(2Bytes), 浮点数转整数, 扩大10倍
+
+命令构造
+
+.. code-block:: java
+
+    float frequency = 87.5f;
+    CommandBase fmSelectFreqCmd = CommandBuilder.buildFmSelectFreqCmd(frequency);
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式 
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //此处回调FM状态信息
+        }
+    });
+    //执行播放指定的频点功能并等待结果回调
+    controller.fmPlaySelectedFrequency(controller.getUsingDevice(), freq, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFmStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+.. _get_fm_tx_info:
+
+获取发射频点
+===============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- 公共属性
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FM_TX``  -- 发射频点
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getFrequencyTxInfoCmd = CommandBuilder.buildGetFrequencyTxInfoCmd();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFrequencyTx(BluetoothDevice device, float frequency) {
+            //此处回调发射频点
+        }
+    });
+    //执行获取发射频点功能并等待结果回调
+    controller.getFmFrequency(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFrequencyTx回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. _set_fm_tx_freq:
+
+设置发射频点
+========================
+      
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``    -- 公共属性
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_FM_TX``             -- 发射频点
+| **value :**  freqency(2Bytes), 浮点数转整数, 扩大10倍  
+
+命令构造
+
+.. code-block:: java
+
+    float frequency = 87.5f;
+    CommandBase setFrequencyTxInfoCmd = CommandBuilder.buildSetFrequencyTxInfoCmd(frequency);
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFrequencyTx(BluetoothDevice device, float frequency) {
+            //此处回调发射频点
+        }
+    });
+    //执行设置指定发送频点并等待结果回调
+    controller.setFmFrequency(controller.getUsingDevice(), frequency, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onFrequencyTx回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });

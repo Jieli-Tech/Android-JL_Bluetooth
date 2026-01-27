@@ -1,0 +1,72 @@
+.. _spdif_function:
+
+SPDIF Function
+********************************************
+
+Control device-side SPDIF function: play status and audio source switching, such as HDMI/optical fiber/coaxial switching.
+
+Get cached SPDIF status information (play status + audio source)
+=========================================================================
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    DeviceInfo deviceInfo = mRCSPController.getDeviceInfo();
+    SPDIFPlayStatusInfo spdifPlayStatusInfo = deviceInfo.getSPDIFPlayStatusInfo();//Play status
+    SPDIFAudioSourceInfo spdifAudioSourceInfo = deviceInfo.getSPDIFAudioSourceInfo();//Audio source
+
+
+Listen to SPDIF status information (play status + audio source)
+==========================================================================
+
+.. code-block:: java
+
+    private final BTRcspEventCallback callback = new BTRcspEventCallback() {
+        @Override
+        public void onSPDIFPlayStatusChange(BluetoothDevice device, SPDIFPlayStatusInfo spdifPlayStatusInfo) {//Play status
+        }
+
+        @Override
+        public void onSPDIFAudioSourceInfoChange(BluetoothDevice device, SPDIFAudioSourceInfo spdifAudioSourceInfo) {//Audio source
+        }
+    };
+    RCSPController mRCSPController = RCSPController.getInstance();
+    mRCSPController.addBTRcspEventCallback(callback);
+
+
+Real-time get SPDIF status information (play status + audio source).
+=============================================================================================
+
+Status information result through listen to SPDIF status information callback.
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    mRCSPController.getSPDIFInfo(mRCSPController.getUsingDevice(), null);
+
+
+Set play status
+============================================
+ 
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    SPDIFPlayStatusInfo spdifPlayStatusInfo = new SPDIFPlayStatusInfo();
+    spdifPlayStatusInfo.setPlayStatus( SPDIFPlayStatusInfo.PLAY_STATUS_PLAY);//Set play status -- Play
+    mRCSPController.setSPDIFPlayStatusInfo(getConnectedDevice(), spdifPlayStatusInfo, null);
+
+
+Set audio source
+============================================
+
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    SPDIFAudioSourceInfo spdifAudioSourceInfo = new SPDIFAudioSourceInfo();
+    spdifAudioSourceInfo.setAudioSource(SPDIFAudioSourceInfo.AUDIO_SOURCE_HDMI);//Set audio source -- HDMI
+    mRCSPController.setSPDIFSPDIFAudioSourceInfo(getConnectedDevice(), spdifAudioSourceInfo, null);
+
+
+

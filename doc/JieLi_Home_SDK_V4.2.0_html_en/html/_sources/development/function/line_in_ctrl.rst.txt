@@ -1,0 +1,133 @@
+.. _line_in_ctrl_func:
+
+External Device Control Function
+*********************************************
+
+
+.. important:: 
+    1. Interface requires device to be in 【External Device Mode】 to take effect
+    2. Determine if device supports 【External Device Mode】
+    
+    .. code-block:: java
+      
+        public boolean isSupportAuxMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.isAuxEnable();
+        }
+   
+
+    3. Determine if device is in 【External Device Mode】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInAuxMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_AUX;
+        }
+
+    4. :ref:`get_device_mode` 
+   
+
+
+
+
+Get External Device Play Status
+======================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_AUX``   -- AUX function
+| **mask :**   ``0x01``                                      -- Play status
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getAuxPlayStatueCmd = CommandBuilder.buildGetAuxPlayStatueCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way 
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onAuxStatusChange(BluetoothDevice device, boolean isPlay) {
+            //Callback external device play status here
+        }
+    });
+    //Execute get external device play status function and wait for result callback
+    controller.getAuxStatusInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onAuxStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+External Device Play or Pause
+===============================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_AUX``        -- AUX function
+| **type :**  ``AttrAndFunCode.FUNCTION_AUX_CMD_PAUSE_OR_PLAY``   -- Play or pause
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase auxPlayOrPauseCmd = CommandBuilder.buildAuxPlayOrPauseCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute external device play or pause function and wait for result callback
+    controller.auxPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+

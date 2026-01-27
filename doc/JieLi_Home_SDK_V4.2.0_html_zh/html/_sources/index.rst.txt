@@ -1,0 +1,52 @@
+.. 杰理之家SDK开发文档(Android) documentation master file, created by
+   sphinx-quickstart on Thu Mar 31 14:51:01 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. figure:: _static/JL_LOGO.png
+    :align: right
+    :figclass: align-right
+    :width: 70%
+
+==========================================================
+欢迎使用杰理之家SDK开发文档(Android)
+==========================================================
+
+**版本: V4.2.0**
+
+.. note:: 
+   本开源项目文档由杰理官方推出，从 ``开发框架`` / ``工程介绍`` / ``开发说明`` / ``其他`` 等一系列文档帮助开发者快速、顺利地使用杰理之家SDK进行音箱SDK方案或耳机SDK方案的开发。
+
+
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 开发框架
+
+   framework/framework
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 工程介绍
+
+   resource/sdk_structure
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 开发说明
+
+   development/import
+   development/development_desc
+   development/interface_desc
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 其他
+
+   other/debug
+   other/question_answer
+   other/publish_record
+   other/feedback
+

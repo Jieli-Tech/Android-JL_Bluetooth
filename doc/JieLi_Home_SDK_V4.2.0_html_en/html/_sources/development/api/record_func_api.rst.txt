@@ -1,0 +1,52 @@
+.. _record_op_api:
+
+Recording Operation
+******************************************
+
+.. code-block:: java
+
+    public interface IRecordOp {
+
+        /**
+         * Add recording state callback
+         *
+         * @param callback OnRecordStateCallback Recording state callback
+         */
+        void addOnRecordStateCallback(OnRecordStateCallback callback);
+
+        /**
+         * Remove recording state callback
+         *
+         * @param callback OnRecordStateCallback Recording state callback
+         */
+        void removeOnRecordStateCallback(OnRecordStateCallback callback);
+
+        /**
+         * Whether recording is in progress
+         *
+         * @param device BluetoothDevice Operation device
+         * @return boolean Result
+         */
+        boolean isRecording(BluetoothDevice device);
+
+        /**
+         * Start recording
+         *
+         * @param device   BluetoothDevice Operation device
+         * @param param    RecordParam Recording parameters
+         * @param callback OnRcspActionCallback<Boolean> Result callback
+         */
+        void startRecord(BluetoothDevice device, RecordParam param, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Stop recording
+         *
+         * @param device   Operation device
+         * @param reason   End reason
+         * @param callback Result callback
+         */
+        void stopRecord(BluetoothDevice device, int reason, OnRcspActionCallback<Boolean> callback);
+    }
+
+
+

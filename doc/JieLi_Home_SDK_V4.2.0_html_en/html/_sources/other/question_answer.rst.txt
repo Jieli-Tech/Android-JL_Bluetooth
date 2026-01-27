@@ -1,0 +1,321 @@
+Frequently Asked Questions
+*************************************************
+
+Record frequently asked questions from customers, summarize and organize them, and create Q&A records to facilitate quick retrieval of answers for customers.
+
+  1. Customers can first search for ``existing questions`` to see if they match their problem; if so, congratulations, you've found the answer.
+  2. If this is a new question, please follow these steps to ask, and we will answer it as soon as possible.
+
+     * Describe the problem and the test environment. Please refer to :ref:`question_format` 
+     * Provide print logs. Please refer to :ref:`devlopment_debug` 
+     * It would be best to provide screenshots or videos of the phenomenon.
+
+
+.. _question_format:
+
+1. Question Format
+==================================================
+
+.. code-block:: tex
+
+   Problem Description: XXXXXX
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Recurrence Probability: Must appear, 1/20, n / m 
+   Can the public version demo be reproduced? YES，NO
+   Time period of problem occurrence: yyyy/MM/dd hh:mm - yyyy/MM/dd hh:mm Such as: 2022/05/28 17:00 - 2022/05/28 17:02
+   Remark: xxxx
+
+.. important::
+   Before development, please read `杰理之家SDK开发文档(Android) <https://doc.zh-jieli.com/Apps/Android/jielihome/zh-cn/master/index.html>`_ 
+
+
+
+1. Frequently Asked Questions
+==================================================
+
+.. _bt_questions:
+
+2.1 Bluetooth Connection Problem
+--------------------------------------------------
+
+.. _question_2_1_1:
+
+2.1.1 How to set up a non-filtering device? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: ow to set up a non-filtering device?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+
+
+**Answer:** 
+The code settings are as follows:
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setBleScanStrategy(BluetoothConstant.NONE_FILTER); //Set no filtering rules
+   //        option.setSkipNoNameDev(false); //Skip unnamed devices?
+   //Configure SDK parameters
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+Please refer to :ref:`scan_device` 
+
+.. _question_2_1_2:
+
+2.1.2 How to modify filter device rules?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: How to modify filter device rules?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+**Answer:** 
+The code settings are as follows:
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption()
+         .setBleScanStrategy(BluetoothConstant.NONE_FILTER) //Set no filtering rules
+         .setSkipNoNameDev(false); //Skip unnamed devices?
+        //Configure SDK parameters
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+   //Add event listener
+   RCSPController.getInstance().addBTRcspEventCallback(new BTRcspEventCallback() {
+      @Override
+      public void onDiscoveryStatus(boolean bBle, boolean bStart) {
+         //Callback search status
+         if (!bStart) {
+            RCSPController.getInstance().removeBTRcspEventCallback(this);
+         }
+      }
+
+      @Override
+      public void onDiscovery(BluetoothDevice device, BleScanMessage bleScanMessage) {
+         if (null == bleScanMessage) return;
+         final byte[] rawData = bleScanMessage.getRawData(); //Broadcast data
+         //TODO: Implement your own filtering rules
+      }
+   });
+   //Perform a scan of the BLE device
+   RCSPController.getInstance().startBleScan(30 * 1000);
+
+Please refer to :ref:`scan_device` 
+
+
+.. _question_2_1_3:
+
+2.1.3 How can I connect only to BLE and not to Classic Bluetooth?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: How can I connect only to BLE and not to Classic Bluetooth?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+
+**Answer:** 
+The code settings are as follows:
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setEnterLowPowerMode(true) //Set no filtering rules
+         .setMandatoryUseBLE(true); //Configure forced connection to BLE
+   //Configure SDK parameters
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+Please refer to :ref:`connect_device` 
+
+
+.. _question_2_1_4:
+
+2.1.4 Why does my phone's Bluetooth interface show that it's connected, but the SDK returns that the device is not connected? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: Why does my phone's Bluetooth interface show that it's connected, but the SDK returns that the device is not connected?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+
+| **Answer:** 
+| The SDK determines device connectivity based on whether the communication service is connected. This communication service specifically refers to BLE and SPP, excluding classic Bluetooth service. Since the phone's system Bluetooth interface connects to classic Bluetooth service, the SDK will not return a connection confirmation.
+|
+| To determine the classic Bluetooth status of a device, use the following code:
+
+.. code-block:: java
+
+   BluetoothDevice device = BluetoothUtil.getRemoteDevice("classic Bluetooth address of the device");
+   if(null == device) return;
+   int state = RCSPController.getInstance().getBtOperation().isConnectedByProfile(device);
+   //state has the following values:
+   //        BluetoothProfile.STATE_DISCONNECTED  --- Disconnected
+   //        BluetoothProfile.STATE_CONNECTING    --- Connecting
+   //        BluetoothProfile.STATE_CONNECTED     --- Connected
+   //        BluetoothProfile.STATE_DISCONNECTING --- Disconnecting
+
+
+.. _question_2_1_5:
+
+2.1.5 How to modify the communication UUID?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: How to modify the communication UUID?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+
+**Answer:** 
+The code settings are as follows:
+
+* Modify the communication UUID for BLE connection
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setBleUUID(UUID.fromString("Your service UUID"),
+         UUID.fromString("Your write characteristic UUID"),
+         UUID.fromString("Your notification characteristic UUID"));
+   //Configure SDK parameters
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+* Modify the communication UUID for connecting to SPP
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setSppUUID(UUID.fromString("Your custom SPP UUID"));
+   //Configure SDK parameters
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+.. _question_2_1_6:
+
+2.1.6 How to communicate using other UUIDs?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: How to communicate using other UUIDs?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+
+**Answer:** 
+Refer to the sample code in the test package of the example project. Location: ``Source code project/btsmart/test/java/com/jieli/btsmart/demo/bluetooth/CustomUuidDemo.java``
+
+
+.. _question_2_1_7:
+
+2.1.7 How do I configure a device to support one-click connection? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: How do I configure a device to support one-click connection?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+
+**Answer:** 
+The code settings are as follows:
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setSupportCTKD(true); //Configure settings to support one-click connection.
+   //Configure SDK parameters
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+.. _file_operation_questions:
+
+2.2 File Operation Problem
+---------------------------------------------------------
+
+.. _question_2_2_1:
+
+2.2.1 How do I set the number of messages requested per page?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   Problem Description: How do I set the number of messages requested per page?
+   Test Environment: Firmware: AC693N_soundbox_SDK_Vxxx or AC696N_soundbox_SDK_Vxxx or JL700N_soundbox_SDK_Vxxx
+   SDK Version: jl_bluetooth_rcsp_Vxxx
+   Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+   Reproduction Steps: NULL
+   Recurrence Probability: Must appear
+   Can the public version demo be reproduced? YES
+   Time period of problem occurrence: NULL
+
+**Answer:** 
+The code settings are as follows:
+
+.. code-block:: java
+
+   int pageSize = 30; //The recommended number of items per page is no more than 30.
+   //The settings need to be applied before browsing the file for them to take effect.
+   FileBrowseManager.getInstance().setPageSize(pageSize);

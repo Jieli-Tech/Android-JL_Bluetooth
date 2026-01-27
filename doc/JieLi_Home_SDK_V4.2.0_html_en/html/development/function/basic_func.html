@@ -1,0 +1,1655 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Basic Function &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Volume Control Function" href="voice_ctrl.html" />
+    <link rel="prev" title="1. Terminology" href="terminology_note.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. Basic Function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#request-device-information">2.1. Request device information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query-device-system-information">2.2. Query device system information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-device-system-properties">2.3. Configure device system properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#monitoring-device-system-attribute-changes">2.4. Monitoring device system attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#settings-function">2.5. Settings Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query-current-device-mode">2.6. Query current device mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#switch-device-mode">2.7. Switch device mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#query-storage-device-information">2.8. Query storage device information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reboot-device">2.9. Reboot Device</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Basic Function</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-function">
+<span id="basic-func"></span><h1><span class="section-number">2. </span>Basic Function<a class="headerlink" href="#basic-function" title="Link to this heading"></a></h1>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function Description</p></th>
+<th class="head"><p>Command Prototype</p></th>
+<th class="head"><p>Command Model</p></th>
+<th class="head"><p>Command Parameters</p></th>
+<th class="head"><p>Command reply</p></th>
+<th class="head"><p>Remark</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Obtain device information</p></td>
+<td><p>Command.CMD_GET_TARGET_INFO</p></td>
+<td><p>GetTargetInfoCmd</p></td>
+<td><p><a class="reference internal" href="#target-info-param"><span class="std std-ref">GetTargetInfoParam</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="#target-info"><span class="std std-ref">TargetInfoResponse</span></a> or</div>
+<div class="line"><a class="reference internal" href="#device-info"><span class="std std-ref">DeviceInfo</span></a></div>
+</div>
+</td>
+<td><p>refer to <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Query device system information</p></td>
+<td><p>Command.CMD_GET_SYS_INFO</p></td>
+<td><p>GetSysInfoCmd</p></td>
+<td><p><a class="reference internal" href="#get-sys-param"><span class="std std-ref">GetSysInfoParam</span></a></p></td>
+<td><p><a class="reference internal" href="#sys-info"><span class="std std-ref">SysInfoResponse</span></a></p></td>
+<td><p>refer to <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Configure device system properties</p></td>
+<td><p>Command.CMD_SET_SYS_INFO</p></td>
+<td><p>SetSysInfoCmd</p></td>
+<td><p><a class="reference internal" href="#set-sys-param"><span class="std std-ref">SetSysInfoParam</span></a></p></td>
+<td><p>CommonResponse</p></td>
+<td><p>refer to <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Monitoring device system attribute changes</p></td>
+<td><p>Command.CMD_SYS_INFO_AUTO_UPDATE</p></td>
+<td><p>UpdateSysInfoCmd</p></td>
+<td><p><a class="reference internal" href="#sys-info"><span class="std std-ref">SysInfoResponse</span></a></p></td>
+<td><p>NULL</p></td>
+<td><p>refer to <a class="reference internal" href="terminology_note.html#receive-cmd-handle"><span class="std std-ref">Receive Command Processing Example</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Settings Function</p></td>
+<td><p>Command.CMD_FUNCTION</p></td>
+<td><p>FunctionCmd</p></td>
+<td><p><a class="reference internal" href="#function-param"><span class="std std-ref">FunctionParam</span></a></p></td>
+<td><p>CommonResponse</p></td>
+<td><p>refer to <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Reboot Device</p></td>
+<td><p>Command.CMD_REBOOT_DEVICE</p></td>
+<td><p>RebootDeviceCmd</p></td>
+<td><p>RebootDeviceParam</p></td>
+<td><p>RebootDeviceResponse</p></td>
+<td><p>refer to <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="line-block">
+<div class="line">1. The data models in the table can all be viewed through the SDK.</div>
+<div class="line">2. This document only shows some of the important data models.</div>
+</div>
+</div>
+<section id="request-device-information">
+<span id="get-device-info"></span><h2><span class="section-number">2.1. </span>Request device information<a class="headerlink" href="#request-device-information" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get the JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Construct function commands - for example, get device information</span>
+<span class="c1">//mask = 0xffffffff;  -- Get all attributes</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getDeviceInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetDeviceInfoCmd</span><span class="p">(</span><span class="n">mask</span><span class="p">);</span>
+<span class="c1">//Step2: Execute the operation command and wait for the result callback.</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">getDeviceInfoCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: When there is no reply command, the reply command itself</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//The response status is abnormal; exception handling is required.</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//Step4: Determine if there is any reply data</span>
+<span class="w">        </span><span class="c1">//Note - If the command does not provide a response, the response data will be null.</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isHasResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isHasResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Step5: Retrieve the corresponding command data</span>
+<span class="w">            </span><span class="n">GetTargetInfoCmd</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GetTargetInfoCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">//Step6: Get reply data</span>
+<span class="w">            </span><span class="n">TargetInfoResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">command</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//An empty response indicates a problem with the data returned by the device, requiring exception handling.</span>
+<span class="w">                </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_DATA_FORMAT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Response data is error.&quot;</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">//Processing equipment reply data</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Request device function and wait for result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">requestDeviceInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="mh">0xffffffff</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">DeviceInfo</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//message - Device Information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//The second method involves retrieving cached device information.</span>
+<span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">();</span>
+</pre></div>
+</div>
+<section id="gettargetinfoparam">
+<span id="target-info-param"></span><h3><span class="section-number">2.1.1. </span>GetTargetInfoParam<a class="headerlink" href="#gettargetinfoparam" title="Link to this heading"></a></h3>
+<p>Obtain device information parameter</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GetTargetInfoParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">;</span><span class="w">     </span><span class="c1">//Configuration information query mask</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">platform</span><span class="p">;</span><span class="c1">//mobile platform 0 : android 1: iOS  2 : web app</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The mask needs to be referenced <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. Function Code</span></a></p>
+</div>
+</section>
+<section id="deviceinfo">
+<span id="device-info"></span><h3><span class="section-number">2.1.2. </span>DeviceInfo<a class="headerlink" href="#deviceinfo" title="Link to this heading"></a></h3>
+<p>Device Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DeviceInfo</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">TargetInfoResponse</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Alarm message</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="c1">//Alarm message</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Alarm clock ringing message</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alarmDefaultBells</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Alarm clock data structure version</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alarmVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Alarm clock extended fields support identifiers</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">alarmExpandFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Music playback information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="c1">//Music Title</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">musicNameInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Music Status</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">musicStatusInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Music playback mode information</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Aux playback status</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isAuxPlay</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Playable formats</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">playFileFormat</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//The cluster number of the file currently being played</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cluster</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//The device serial number of the file currently being played.</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">currentDevIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Equalizer Information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Device memory information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">devStorageInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Lighting control information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LightControlInfo</span><span class="w"> </span><span class="n">lightControlInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Sound card information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">soundCardEqInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * FM/FM_TX Information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChannelInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">channelInfos</span><span class="p">;</span><span class="w"> </span><span class="c1">//Channel List</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">FmStatusInfo</span><span class="w"> </span><span class="n">fmStatusInfo</span><span class="p">;</span><span class="w"> </span><span class="c1">//Channel Status</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">frequency</span><span class="p">;</span><span class="w"> </span><span class="c1">//Radio frequency point</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * ID3 information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ID3MusicInfo</span><span class="w"> </span><span class="n">iD3MusicInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Noise processing (ANC) information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">currentVoiceMode</span><span class="p">;</span><span class="w">    </span><span class="c1">//Current noise processing mode information</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModeList</span><span class="p">;</span><span class="w"> </span><span class="c1">//Information on all noise processing modes</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AdaptiveData</span><span class="w"> </span><span class="n">adaptiveData</span><span class="p">;</span><span class="w">     </span><span class="c1">//Adaptive ANC data</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SmartNoPick</span><span class="w"> </span><span class="n">smartNoPick</span><span class="p">;</span><span class="w">       </span><span class="c1">//Smart no-picking information</span>
+<span class="w">    </span><span class="cm">/*Noise cancellation mode is enabled.*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SceneDenoising</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="p">;</span><span class="w"> </span><span class="c1">//Scene noise reduction</span>
+<span class="w">    </span><span class="cm">/*Noise cancellation mode is enabled.*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">WindNoiseDetection</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="p">;</span><span class="w"> </span><span class="c1">//Wind noise detection</span>
+<span class="w">    </span><span class="cm">/*Transparency mode enabled*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">VocalBooster</span><span class="w"> </span><span class="n">vocalBooster</span><span class="p">;</span><span class="w">   </span><span class="c1">//Voice enhancement mode</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Call information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">phoneStatus</span><span class="p">;</span><span class="w"> </span><span class="c1">//Call status</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Extended Function Information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ExpandFunction</span><span class="w"> </span><span class="n">expandFunction</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Device Dual Connection Information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DoubleConnectionState</span><span class="w"> </span><span class="n">doubleConnectionState</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ConnectedBtInfo</span><span class="w"> </span><span class="n">connectedBtInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * SPDIF Function Information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SPDIFPlayStatusInfo</span><span class="w"> </span><span class="n">spdifPlayStatusInfo</span><span class="p">;</span><span class="c1">//Playback status</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SPDIFAudioSourceInfo</span><span class="w"> </span><span class="n">spdifAudioSourceInfo</span><span class="p">;</span><span class="c1">//sound source</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * PC Slave Function Information</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PCSlavePlayStatusInfo</span><span class="w"> </span><span class="n">pcSlavePlayStatusInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * AI translation function</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Translation mode information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">translationMode</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Auracast function</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device status data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DeviceStateData</span><span class="w"> </span><span class="n">deviceStateData</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Auracast transmitter configuration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TransmitterSettings</span><span class="w"> </span><span class="n">transmitterSettings</span><span class="p">;</span>
+
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="targetinforesponse">
+<span id="target-info"></span><h3><span class="section-number">2.1.3. </span>TargetInfoResponse<a class="headerlink" href="#targetinforesponse" title="Link to this heading"></a></h3>
+<p>Target device information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TargetInfoResponse</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CommonResponse</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Protocol version Information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProtocolVersion</span><span class="w"> </span><span class="n">protocolVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * System Information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SystemInfo</span><span class="w"> </span><span class="n">systemInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Classic Bluetooth information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClassicBtInfo</span><span class="w"> </span><span class="n">classicBtInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * AI Platform Information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AIPlatform</span><span class="w"> </span><span class="n">aiPlatform</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Functional configuration information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FunctionConfiguration</span><span class="w"> </span><span class="n">functionConfiguration</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Firmware version information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * SDK type</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sdkType</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * UBoot version information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">uBootVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Upgrade configuration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OTASettings</span><span class="w"> </span><span class="n">otaSettings</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Upgrade status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OTAState</span><span class="w"> </span><span class="n">otaState</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Product Information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProductInfo</span><span class="w"> </span><span class="n">productInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Used for server verification of product information</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Authentication Key</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">authKey</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Project Identifier Code</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">projectCode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Protocol MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProtocolMTU</span><span class="w"> </span><span class="n">protocolMtu</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Allow connection?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">allowConnectFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device Name</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE Information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BleInfo</span><span class="w"> </span><span class="n">bleInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Transmitter Information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TransmitterInfo</span><span class="w"> </span><span class="n">transmitterInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extended functions</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SysExpandFunc</span><span class="w"> </span><span class="n">sysExpandFunc</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * File operation configuration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileOpConfiguration</span><span class="w"> </span><span class="n">fileOpConfiguration</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Custom version information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">customVersionMsg</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#protocol-version"><span class="std std-ref">ProtocolVersion</span></a></p></li>
+<li><p><a class="reference internal" href="#system-info"><span class="std std-ref">SystemInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#classic-bt-info"><span class="std std-ref">ClassicBtInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#ai-platform"><span class="std std-ref">AIPlatform</span></a></p></li>
+<li><p><a class="reference internal" href="#function-cfg"><span class="std std-ref">FunctionConfiguration</span></a></p></li>
+<li><p><a class="reference internal" href="#version-msg"><span class="std std-ref">Version</span></a></p></li>
+<li><p><a class="reference internal" href="#ota-settings"><span class="std std-ref">OTASettings</span></a></p></li>
+<li><p><a class="reference internal" href="#ota-state"><span class="std std-ref">OTAState</span></a></p></li>
+<li><p><a class="reference internal" href="#product-info"><span class="std std-ref">ProductInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#protocol-mtu"><span class="std std-ref">ProtocolMTU</span></a></p></li>
+<li><p><a class="reference internal" href="#ble-info"><span class="std std-ref">BleInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#transmitter-info"><span class="std std-ref">TransmitterInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#sys-expand-func"><span class="std std-ref">SysExpandFunc</span></a></p></li>
+<li><p><a class="reference internal" href="#file-op-cfg"><span class="std std-ref">FileOpConfiguration</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="protocolversion">
+<span id="protocol-version"></span><h3><span class="section-number">2.1.4. </span>ProtocolVersion<a class="headerlink" href="#protocolversion" title="Link to this heading"></a></h3>
+<p>Protocol version information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtocolVersion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Version Code</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">versionCode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Version Name</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">versionName</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="systeminfo">
+<span id="system-info"></span><h3><span class="section-number">2.1.5. </span>SystemInfo<a class="headerlink" href="#systeminfo" title="Link to this heading"></a></h3>
+<p>System Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SystemInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device power</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">quantity</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device volume</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">volume</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * maximum volume</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxVol</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support volume synchronization?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportVolumeSync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Upgrade minimum battery limit(1 ~ 100)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">lowPowerLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="classicbtinfo">
+<span id="classic-bt-info"></span><h3><span class="section-number">2.1.6. </span>ClassicBtInfo<a class="headerlink" href="#classicbtinfo" title="Link to this heading"></a></h3>
+<p>Classic Bluetooth Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassicBtInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Classic Bluetooth address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">edrAddr</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Classic Bluetooth supported protocols</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">edrProfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Classic Bluetooth connection status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">edrStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="aiplatform">
+<span id="ai-platform"></span><h3><span class="section-number">2.1.7. </span>AIPlatform<a class="headerlink" href="#aiplatform" title="Link to this heading"></a></h3>
+<p>AI Platform Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AIPlatform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Platform type</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">platform</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Authentication code</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">license</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="functionconfiguration">
+<span id="function-cfg"></span><h3><span class="section-number">2.1.8. </span>FunctionConfiguration<a class="headerlink" href="#functionconfiguration" title="Link to this heading"></a></h3>
+<p>Functional configuration information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FunctionConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Function support mask</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">functionMask</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Current mode</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">curFunction</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support displaying function icons when USB, SD, or Linein are offline?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportOfflineShow</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support USB?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportUsb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support sd0?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSd0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support SD1?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSd1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Should internet radio be hidden?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">hideNetRadio</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="version">
+<span id="version-msg"></span><h3><span class="section-number">2.1.9. </span>Version<a class="headerlink" href="#version" title="Link to this heading"></a></h3>
+<p>Version information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Version</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device version name</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">versionName</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device version information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">versionCode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="otasettings">
+<span id="ota-settings"></span><h3><span class="section-number">2.1.10. </span>OTASettings<a class="headerlink" href="#otasettings" title="Link to this heading"></a></h3>
+<p>OTA settings</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OTASettings</span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support dual backup upgrade?</span>
+<span class="cm">     * &lt;p&gt;Single backup [false], requires disconnection and reconnection process.</span>
+<span class="cm">     * &lt;br/&gt;Dual backup [true], no need for disconnection and reconnection process.&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportDoubleBackup</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Do I need to download the boot loader?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNeedBootLoader</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Single backup OTA connection method</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 0 -- Disable&lt;br/&gt;</span>
+<span class="cm">     * 1 -- BLE &lt;br/&gt;</span>
+<span class="cm">     * 2 -- SPP</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">singleBackupOtaWay</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support a special upgrade process for reused space?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportReuseSpaceOTA</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="otastate">
+<span id="ota-state"></span><h3><span class="section-number">2.1.11. </span>OTAState<a class="headerlink" href="#otastate" title="Link to this heading"></a></h3>
+<p>OTA status</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OTAState</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Forced upgrade sign</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mandatoryUpgradeFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Upgrade request flag</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Range of values: &lt;br/&gt;</span>
+<span class="cm">     * 0 : Normal upgrade&lt;br/&gt;</span>
+<span class="cm">     * 1 : Forced upgrade</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">requestOtaFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extended Mode</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Range of values:&lt;br/&gt;</span>
+<span class="cm">     * 0 : Invalid mode &lt;br/&gt;</span>
+<span class="cm">     * 1 : Update resource mode &lt;br/&gt;</span>
+<span class="cm">     * 2 : Reuse Space Special Upgrade Mode - Update Resources Only &lt;br/&gt;</span>
+<span class="cm">     * 3 : Reuse Space Special Upgrade Mode - Upgrade Firmware Only</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">expandMode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="productinfo">
+<span id="product-info"></span><h3><span class="section-number">2.1.12. </span>ProductInfo<a class="headerlink" href="#productinfo" title="Link to this heading"></a></h3>
+<p>Product Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Manufacturer ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Product ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Customer ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="protocolmtu">
+<span id="protocol-mtu"></span><h3><span class="section-number">2.1.13. </span>ProtocolMTU<a class="headerlink" href="#protocolmtu" title="Link to this heading"></a></h3>
+<p>Protocol MTU</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtocolMTU</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send Data MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sendMtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">DEFAULT_PROTOCOL_MTU</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive Data MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">receiveMtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">DEFAULT_PROTOCOL_MTU</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bleinfo">
+<span id="ble-info"></span><h3><span class="section-number">2.1.14. </span>BleInfo<a class="headerlink" href="#bleinfo" title="Link to this heading"></a></h3>
+<p>BLE Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BleInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">bleAddr</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Is it only connected to BLE device?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bleOnly</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Is it BLE to SPP conversion mode (EDR must be enabled before connecting to SPP after connecting to BLE)?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isBLEToSppWay</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support LE Audio?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportLeAudio</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Is LE Audio connected?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isLeAudioConnected</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="transmitterinfo">
+<span id="transmitter-info"></span><h3><span class="section-number">2.1.15. </span>TransmitterInfo<a class="headerlink" href="#transmitterinfo" title="Link to this heading"></a></h3>
+<p>Transmitter information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TransmitterInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support peripheral mode?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">emitterSupport</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 0x00:Normal mode  0x01:Peripheral mode</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">emitterStatus</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sysexpandfunc">
+<span id="sys-expand-func"></span><h3><span class="section-number">2.1.16. </span>SysExpandFunc<a class="headerlink" href="#sysexpandfunc" title="Link to this heading"></a></h3>
+<p>System expansion functions</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SysExpandFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support MD5 reading?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportMD5</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Is it game mode?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isGameMode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support device search?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportSearchDevice</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support sound card functionality?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSoundCard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Disallow app to adjust device eq</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">banEq</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support external Flash transfer function?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportExternalFlashTransfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support active noise cancellation?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportAnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support reading firmware error information?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportReadErrorMSg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support hearing aid settings?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportHearingAssist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support adaptive ANC algorithm?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportAdaptiveANC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support obtaining device configuration information?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportDevConfigure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support intelligent no-picking function?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSmartNoPick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support scene noise reduction?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSceneDenoising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support wind noise detection?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportWindNoiseDetection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support voice enhancement?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportVocalBooster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support dual device connection?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportDoubleConnection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="fileopconfiguration">
+<span id="file-op-cfg"></span><h3><span class="section-number">2.1.17. </span>FileOpConfiguration<a class="headerlink" href="#fileopconfiguration" title="Link to this heading"></a></h3>
+<p>File operation configuration</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileOpConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does large file transfer support packet splitting and CRC16 verification?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportPackageCrc16</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Read firmware files using the new filename format (supports multiple devices).</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportFileByNameWithDev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support small file transfer?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSmallFileTransfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="query-device-system-information">
+<span id="get-sys-info"></span><h2><span class="section-number">2.2. </span>Query device system information<a class="headerlink" href="#query-device-system-information" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get the JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Construct a command to query device system information</span>
+<span class="c1">//Function code</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//Public attribute</span>
+<span class="c1">//Query current device mode and device storage information</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_CUR_MODE_TYPE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_MUSIC_DEV_STATUS</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getSysInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetSysInfoCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">);</span>
+<span class="c1">//Step2: Execute the operation command and wait for the result callback.</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">getSysInfoCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: When there is no reply command, the reply command itself.</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//The response status is abnormal; exception handling is required.</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//Step4: Determine if there is any reply data</span>
+<span class="w">        </span><span class="c1">//Note - If the command does not provide a response, the response data will be null.</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isHasResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isHasResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Step5: Retrieve the corresponding command data</span>
+<span class="w">            </span><span class="n">GetSysInfoCmd</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GetSysInfoCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">//Step6: Get reply data</span>
+<span class="w">            </span><span class="n">SysInfoResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">command</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//An empty response indicates a problem with the data returned by the device, requiring exception handling.</span>
+<span class="w">                </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_DATA_FORMAT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Response data is error.&quot;</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">//Processing equipment reply data</span>
+<span class="w">            </span><span class="c1">//response.getFunction(); //function code</span>
+<span class="w">            </span><span class="c1">//response.getAttrs();    //Functional attribute</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device storage information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device mode</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//Public attribute</span>
+<span class="c1">//Query current device mode and device storage information</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_CUR_MODE_TYPE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_MUSIC_DEV_STATUS</span><span class="p">;</span>
+<span class="c1">//Execute a query for device system information and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getDevSysInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//The result will be shown in the BTRcspEventCallback#onDeviceModeChange callback.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">1. <strong>function</strong> needs to be referenced <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. Function Code</span></a></div>
+<div class="line">2. mask needs to be referenced <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. Function Code</span></a></div>
+<div class="line">3. Masks are not allowed to be all F.</div>
+</div>
+</div>
+<section id="getsysinfoparam">
+<span id="get-sys-param"></span><h3><span class="section-number">2.2.1. </span>GetSysInfoParam<a class="headerlink" href="#getsysinfoparam" title="Link to this heading"></a></h3>
+<p>Obtain system information parameter</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GetSysInfoParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//Function code</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">;</span><span class="w"> </span><span class="c1">//Function mask</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configure-device-system-properties">
+<span id="set-sys-info"></span><h2><span class="section-number">2.3. </span>Configure device system properties<a class="headerlink" href="#configure-device-system-properties" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get the JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Construct and set device system properties command</span>
+<span class="c1">//Function code</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//Public attribute</span>
+<span class="c1">//Data list</span>
+<span class="n">AttrBean</span><span class="w"> </span><span class="n">attrBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AttrBean</span><span class="p">();</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_VOLUME</span><span class="p">);</span><span class="w">  </span><span class="c1">//System volume</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setAttrData</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="p">{(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="mh">0x0E</span><span class="p">});</span><span class="w"> </span><span class="c1">//Level 14</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">data</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">attrBean</span><span class="p">);</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setSysInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetSysInfoCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+<span class="c1">//Step2: Execute the operation command and wait for the result callback.</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">setSysInfoCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: When there is no reply command, the reply command itself.</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//The response status is abnormal; exception handling is required.</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//After the system adjustment is successful, notify the user via the &quot;Update Device System Information&quot; command.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//Public attribute</span>
+<span class="c1">//Adjust device volume - 14</span>
+<span class="n">AttrBean</span><span class="w"> </span><span class="n">attrBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AttrBean</span><span class="p">();</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_VOLUME</span><span class="p">);</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setAttrData</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="p">{(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="mh">0x0E</span><span class="p">});</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">data</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">attrBean</span><span class="p">);</span>
+<span class="c1">//Execute the device system properties settings and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setDevSysInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">1. The data is composed of multiple <a class="reference internal" href="terminology_note.html#ltv-format"><span class="std std-ref">LTV Format</span></a></div>
+<div class="line">2. Please use <code class="docutils literal notranslate"><span class="pre">CommandBuilder</span></code> to build the command to set device system properties.</div>
+</div>
+</div>
+<section id="setsysinfoparam">
+<span id="set-sys-param"></span><h3><span class="section-number">2.3.1. </span>SetSysInfoParam<a class="headerlink" href="#setsysinfoparam" title="Link to this heading"></a></h3>
+<p>Configure system information parameters</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SetSysInfoParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//Function code</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">attrBeanList</span><span class="p">;</span><span class="w"> </span><span class="c1">//Functional attributes</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="monitoring-device-system-attribute-changes">
+<span id="notify-sys-info"></span><h2><span class="section-number">2.4. </span>Monitoring device system attribute changes<a class="headerlink" href="#monitoring-device-system-attribute-changes" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get the JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Add Bluetooth RCSP event callback</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback device sent command</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">onDeviceCommand</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">cmd</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//Step2: Processing command</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Command</span><span class="p">.</span><span class="na">CMD_SYS_INFO_AUTO_UPDATE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Filtering command</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Process only target commands - notify device system information</span>
+<span class="w">        </span><span class="n">UpdateSysInfoCmd</span><span class="w"> </span><span class="n">updateSysInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">UpdateSysInfoCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//Step4: Get parameters</span>
+<span class="w">        </span><span class="n">UpdateSysInfoParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updateSysInfoCmd</span><span class="p">.</span><span class="na">getParam</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Exception handling</span>
+<span class="w">        </span><span class="c1">//Step5: Processing data</span>
+<span class="c1">//        param.getFunction();  //Function code</span>
+<span class="c1">//        param.getParamData(); //Functional attribute</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">1. The result parsing is consistent with the response result parsing of <a class="reference internal" href="#get-sys-info"><span class="std std-ref">Query device system information</span></a>.</div>
+<div class="line">2. For the parsing process, please refer to the demo.</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device mode</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVolumeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VolumeInfo</span><span class="w"> </span><span class="n">volume</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device volume information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback equalizer adjustment parameters</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device storage information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFileFormatChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileFormat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Playback formats supported by callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicNameChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">nameInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback music name information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">statusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback music status information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPlayModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback playback mode information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAuxStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPlay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to external device playback status</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmChannelsChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChannelInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">channels</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback FM channel list information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">FmStatusInfo</span><span class="w"> </span><span class="n">fmStatusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback FM status information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback alarm list information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmDefaultBellListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback Alarm Default Ringtone List</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmNotify</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback alarm reminder</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmStop</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback alarm stopped</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onID3MusicInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ID3MusicInfo</span><span class="w"> </span><span class="n">id3MusicInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback ID3 music information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHighAndBassChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">high</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback high and low frequency information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqPresetChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback equalizer preset information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPhoneCallStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to phone status</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onExpandFunction</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback extension function information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLightControlInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">LightControlInfo</span><span class="w"> </span><span class="n">lightControlInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback lighting control information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback sound card information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback sound card status information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCurrentVoiceMode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to current noise processing mode information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceModeList</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback noise processing list information</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">SearchDevParam</span><span class="w"> </span><span class="n">searchDevParam</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to find device parameters</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReverberation</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ReverberationParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback reverb parameters</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDynamicLimiter</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DynamicLimiterParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback dynamic limit parameter</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="sysinforesponse">
+<span id="sys-info"></span><h3><span class="section-number">2.4.1. </span>SysInfoResponse<a class="headerlink" href="#sysinforesponse" title="Link to this heading"></a></h3>
+<p>System Information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SysInfoResponse</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CommonResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//Function code</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">attrs</span><span class="p">;</span><span class="w"> </span><span class="c1">//Functional attributes</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="terminology_note.html#attr-bean"><span class="std std-ref">Attribute Model</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="settings-function">
+<span id="set-function"></span><h2><span class="section-number">2.5. </span>Settings Function<a class="headerlink" href="#settings-function" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get the JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Construct settings function command</span>
+<span class="c1">//Function code</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//Public attribute</span>
+<span class="c1">//flag</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// Extended parameters</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">extend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildFunctionCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">flag</span><span class="p">,</span><span class="w"> </span><span class="n">extend</span><span class="p">);</span>
+<span class="c1">//Step2: Execute the operation command and wait for the result callback.</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: When there is no reply command, the reply command itself.</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//The response status is abnormal; exception handling is required.</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Step1: Construct settings function command</span>
+<span class="c1">//Function code</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//Public attribute</span>
+<span class="c1">//flag</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// Extended parameters</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">extend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildFunctionCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">flag</span><span class="p">,</span><span class="w"> </span><span class="n">extend</span><span class="p">);</span>
+<span class="c1">//Step2: Execute the operation command and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">sendRcspCommand</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">DEFAULT_SEND_CMD_TIMEOUT</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: When there is no reply command, the reply command itself.</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//The response status is abnormal; exception handling is required.</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="functionparam">
+<span id="function-param"></span><h3><span class="section-number">2.5.1. </span>FunctionParam<a class="headerlink" href="#functionparam" title="Link to this heading"></a></h3>
+<p>Functional parameter</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FunctionParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//function number</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span><span class="w"> </span><span class="c1">//attr type</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">extend</span><span class="p">;</span><span class="w"> </span><span class="c1">//payload</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="query-current-device-mode">
+<span id="get-device-mode"></span><h2><span class="section-number">2.6. </span>Query current device mode<a class="headerlink" href="#query-current-device-mode" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>        – Public attribute</div>
+<div class="line"><strong>mask :</strong>  <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE</span></code> – Identify current device mode information</div>
+</div>
+<p>Command Construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Construct to obtain the current device mode</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getCurrentModeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetSysInfoCmd</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">,</span>
+<span class="w">               </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_CUR_MODE_TYPE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device mode</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute the process to obtain device mode information and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getCurrentDevModeInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//The result will be shown in the BTRcspEventCallback#onDeviceModeChange callback.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="switch-device-mode">
+<h2><span class="section-number">2.7. </span>Switch device mode<a class="headerlink" href="#switch-device-mode" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>        – Public attribute</div>
+<div class="line"><strong>flag :</strong>  Device mode, see reference <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. Function Code</span></a></div>
+<div class="line"><strong>extend :</strong>  NULL</div>
+</div>
+<p>Command Construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">byte</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_BT</span><span class="p">;</span><span class="w">   </span><span class="c1">//-- Bluetooth mode</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC -- Device Music Mode</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_RTC   -- Clock mode (alarm clock, stopwatch)</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_AUX   -- External input control mode</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_FM    -- FM control mode</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_LIGHT -- Lighting modes</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">switchDevModeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSwitchModeCmd</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="#set-function"><span class="std std-ref">Settings Function</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device mode</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_BT :  0 //Bluetooth mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_MUSIC : 1 //Music mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_RTC : 2   //clock mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_AUX : 3   //Linein mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_FM  : 4   //FM mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_LIGHT : 5 //Light mode</span>
+<span class="c1">//Execute the device mode switching function and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">switchDeviceMode</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//The result will be shown in the BTRcspEventCallback#onDeviceModeChange callback.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="query-storage-device-information">
+<h2><span class="section-number">2.8. </span>Query storage device information<a class="headerlink" href="#query-storage-device-information" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>           – Public attribute</div>
+<div class="line"><strong>mask :</strong>  <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS</span></code> – Identify storage device information (USB flash drive, SD card, flash memory, etc.)</div>
+</div>
+<p>Command Construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Construct a query for storage device information</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getMusicDevStatusCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetSysInfoCmd</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">,</span>
+<span class="w">              </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_MUSIC_DEV_STATUS</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback device storage information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute the process to retrieve device storage information and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getDevStorageInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">        </span><span class="c1">//The result will be shown in the BTRcspEventCallback#onDevStorageInfoChange callback.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="devstorageinfo">
+<span id="device-storage-info"></span><h3><span class="section-number">2.8.1. </span>DevStorageInfo<a class="headerlink" href="#devstorageinfo" title="Link to this heading"></a></h3>
+<p>Device memory information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DevStorageInfo</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Memory status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">storageStates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to reuse</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDeviceReuse</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Memory status, <a class="reference internal" href="file_browse_func.html#sd-card-bean"><span class="std std-ref">SDCardBean</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="reboot-device">
+<h2><span class="section-number">2.9. </span>Reboot Device<a class="headerlink" href="#reboot-device" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get the JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Build restart command</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">rebootCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildRebootCmd</span><span class="p">();</span>
+<span class="c1">//Step2: Send restart command and wait for result callback</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">rebootCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//The response status is abnormal; exception handling is required.</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get the RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Execute the device restart function and wait for the result callback.</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">rebootDevice</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback operation failed</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="terminology_note.html" class="btn btn-neutral float-left" title="1. Terminology" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="voice_ctrl.html" class="btn btn-neutral float-right" title="3. Volume Control Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

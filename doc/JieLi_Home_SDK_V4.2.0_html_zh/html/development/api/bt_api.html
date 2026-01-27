@@ -1,0 +1,1617 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1 蓝牙处理接口 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. RCSP功能接口" href="rcsp_api.html" />
+    <link rel="prev" title="3 接口说明" href="../interface_desc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 接口说明</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><span class="sectnum">1 </span>蓝牙处理接口</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rcsp-cmd-cb"><span class="sectnum">1.1 </span>命令回复回调</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bt-op-api"><span class="sectnum">1.2 </span>蓝牙操作接口</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bleconnectparam"><span class="sectnum">1.2.1 </span>BleConnectParam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blecharacteristic"><span class="sectnum">1.2.2 </span>BleCharacteristic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bt-event-listener"><span class="sectnum">1.3 </span>蓝牙事件监听器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ibluetoothcallback"><span class="sectnum">1.4 </span>IBluetoothCallback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rcsp_api.html">2. RCSP功能接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. 状态码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. 功能码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. 错误码</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 接口说明</a></li>
+      <li class="breadcrumb-item active"><span class="sectnum">1 </span>蓝牙处理接口</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bt-manager-api">
+<span id="id1"></span><h1><span class="sectnum">1 </span>蓝牙处理接口<a class="headerlink" href="#bt-manager-api" title="Link to this heading"></a></h1>
+<p>可以通过 <code class="docutils literal notranslate"><span class="pre">JL_BluetoothManager</span></code> 使用下面接口</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>方法名</p></th>
+<th class="head"><p>参数</p></th>
+<th class="head"><p>结果</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>addEventListener</p></td>
+<td><p><a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   蓝牙事件监听器</span></a></p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>添加蓝牙事件监听器, 推荐使用 <code class="docutils literal notranslate"><span class="pre">BTEventCallback</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>removeEventListener</p></td>
+<td><p><a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   蓝牙事件监听器</span></a></p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>移除蓝牙事件监听器</p></td>
+</tr>
+<tr class="row-even"><td><p>configure</p></td>
+<td><p>BluetoothOption:  蓝牙参数</p></td>
+<td><p>void</p></td>
+<td><p>配置蓝牙库参数</p></td>
+</tr>
+<tr class="row-odd"><td><p>isBluetoothEnabled</p></td>
+<td><p>NULL</p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>蓝牙是否开启, 推荐使用 <code class="docutils literal notranslate"><span class="pre">BluetoothUtil</span></code> 的方法</p></td>
+</tr>
+<tr class="row-even"><td><p>openOrCloseBluetooth</p></td>
+<td><p>isEnable: 是否使能</p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>打开或关闭蓝牙, 推荐使用 <code class="docutils literal notranslate"><span class="pre">BluetoothUtil</span></code> 的方法</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>scan</p></td>
+<td><p>timeout: 扫描超时时间(单位: 毫秒)</p></td>
+<td><p>int: 结果码</p></td>
+<td><p>扫描BLE设备</p></td>
+</tr>
+<tr class="row-odd"><td><p>scan</p></td>
+<td><div class="line-block">
+<div class="line">type: 扫描类型</div>
+<div class="line-block">
+<div class="line">* BluetoothConstant#SCAN_TYPE_BLE</div>
+<div class="line">* BluetoothConstant#SCAN_TYPE_CLASSIC</div>
+</div>
+<div class="line">timeout: 扫描超时时间(单位: 毫秒)</div>
+</div>
+</td>
+<td><p>int: 结果码</p></td>
+<td><p>扫描蓝牙设备</p></td>
+</tr>
+<tr class="row-even"><td><p>stopScan</p></td>
+<td><p>NULL</p></td>
+<td><p>int ：结果码</p></td>
+<td><p>停止蓝牙扫描</p></td>
+</tr>
+<tr class="row-odd"><td><p>getFoundedBluetoothDevices</p></td>
+<td><p>NULL</p></td>
+<td><div class="line-block">
+<div class="line">ArrayList&lt;BluetoothDevice&gt;:</div>
+<div class="line">已发现的蓝牙设备列表</div>
+</div>
+</td>
+<td><p>获得已发现的蓝牙设备列表</p></td>
+</tr>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>isConnectedByProfile</p></td>
+<td><p>device: 经典蓝牙设备</p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>是否连接经典蓝牙服务</p></td>
+</tr>
+<tr class="row-even"><td><p>startConnectByBreProfiles</p></td>
+<td><p>device: 经典蓝牙设备</p></td>
+<td><p>void</p></td>
+<td><p>连接指定的经典蓝牙, 连接状态在 <a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   蓝牙事件监听器</span></a> 回调</p></td>
+</tr>
+<tr class="row-odd"><td><p>disconnectByProfiles</p></td>
+<td><p>device: 经典蓝牙设备</p></td>
+<td><p>boolean: 操作结果</p></td>
+<td><p>断开指定的经典蓝牙</p></td>
+</tr>
+<tr class="row-even"><td><p>unpair</p></td>
+<td><p>device: 经典蓝牙设备</p></td>
+<td><p>int ：结果码</p></td>
+<td><p>解除经典蓝牙的配对, 配对状态在 <a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   蓝牙事件监听器</span></a> 回调</p></td>
+</tr>
+<tr class="row-odd"><td><p>synchronizationBtDeviceStatus</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>同步系统蓝牙状态</p></td>
+</tr>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>getConnectedDevice</p></td>
+<td><p>NULL</p></td>
+<td><p>BluetoothDevice: 正在使用的设备</p></td>
+<td><p>获取已连接且正在使用的设备</p></td>
+</tr>
+<tr class="row-even"><td><p>connect</p></td>
+<td><p>device: 蓝牙设备</p></td>
+<td><p>void</p></td>
+<td><p>连接蓝牙设备</p></td>
+</tr>
+<tr class="row-odd"><td><p>connect</p></td>
+<td><div class="line-block">
+<div class="line">device: 蓝牙设备</div>
+<div class="line">int: 连接方式</div>
+<div class="line-block">
+<div class="line">* BluetoothConstant.PROTOCOL_TYPE_BLE</div>
+<div class="line">* BluetoothConstant.PROTOCOL_TYPE_SPP</div>
+<div class="line">* BluetoothConstant.PROTOCOL_TYPE_GATT_OVER_BR_EDR</div>
+</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>使用指定通讯方式连接设备</p></td>
+</tr>
+<tr class="row-even"><td><p>disconnect</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>断开已连接的正在使用的蓝牙设备</p></td>
+</tr>
+<tr class="row-odd"><td><p>disconnect</p></td>
+<td><p>device: 蓝牙设备</p></td>
+<td><p>void</p></td>
+<td><p>断开指定的蓝牙设备</p></td>
+</tr>
+<tr class="row-even"><td><p>fastConnect</p></td>
+<td><p>NULL</p></td>
+<td><p>boolean: 操作结果</p></td>
+<td><p>快速回连</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>getMappedDeviceAddress</p></td>
+<td><p>address: 蓝牙设备地址</p></td>
+<td><p>String: 映射设备地址</p></td>
+<td><p>获取指定地址的映射地址</p></td>
+</tr>
+<tr class="row-odd"><td><p>getHistoryBluetoothDeviceList</p></td>
+<td><p>NULL</p></td>
+<td><div class="line-block">
+<div class="line">List&lt;HistoryBluetoothDevice&gt;:</div>
+<div class="line">连接历史列表</div>
+</div>
+</td>
+<td><p>获得连接历史列表</p></td>
+</tr>
+<tr class="row-even"><td><p>removeHistoryDevice</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../module/bt_proxy.html#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a> : 连接历史</div>
+<div class="line">IActionCallback: 操作结果回调</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>删除指定的连接历史</p></td>
+</tr>
+<tr class="row-odd"><td><p>reconnectHistoryBluetoothDevice</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../module/bt_proxy.html#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a> :  连接历史</div>
+<div class="line">timeout : 回连超时，单位是毫秒</div>
+<div class="line">IActionCallback: 操作结果回调</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>回连指定的连接历史</p></td>
+</tr>
+<tr class="row-even"><td><p>clearHistoryDeviceRecord</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>清除连接历史缓存</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sendCommandAsync</p></td>
+<td><div class="line-block">
+<div class="line">device: 已连接的设备</div>
+<div class="line">CommandBase: Rcsp命令</div>
+<div class="line">timeout: 发送命令超时时间 (单位: 毫秒)</div>
+<div class="line"><a class="reference internal" href="#rcsp-cmd-cb"><span class="std std-ref">1.1   命令回复回调</span></a></div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>发送RCSP命令</p></td>
+</tr>
+<tr class="row-odd"><td><p>sendData</p></td>
+<td><div class="line-block">
+<div class="line">device: 已连接的设备</div>
+<div class="line">CommandBase: 被响应命令</div>
+<div class="line">data: 需要发送的数据</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>发送数据命令</p></td>
+</tr>
+<tr class="row-even"><td><p>sendCommandResponse</p></td>
+<td><div class="line-block">
+<div class="line">device: 已连接的设备</div>
+<div class="line">CommandBase : 回复命令</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>发送回复命令</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>getConnectedDeviceList</p></td>
+<td><p>NULL</p></td>
+<td><div class="line-block">
+<div class="line">List&lt;BluetoothDevice&gt;:</div>
+<div class="line">已连接设备列表</div>
+</div>
+</td>
+<td><p>获取已连接设备列表</p></td>
+</tr>
+<tr class="row-odd"><td><p>isConnectedBtDevice</p></td>
+<td><p>device: 蓝牙设备</p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>设备是否已连接</p></td>
+</tr>
+<tr class="row-even"><td><p>isUseBtDevice</p></td>
+<td><p>device: 蓝牙设备</p></td>
+<td><p>boolean: 结果</p></td>
+<td><p>设备是否正在使用</p></td>
+</tr>
+<tr class="row-odd"><td><p>switchConnectedDevice</p></td>
+<td><p>device: 已连接的设备</p></td>
+<td><p>void</p></td>
+<td><p>切换正在使用的设备</p></td>
+</tr>
+<tr class="row-even"><td><p>destroy</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>释放资源</p></td>
+</tr>
+</tbody>
+</table>
+<section id="rcsp-cmd-cb">
+<span id="id2"></span><h2><span class="sectnum">1.1 </span>命令回复回调<a class="headerlink" href="#rcsp-cmd-cb" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">RcspCommandCallback</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回调回复命令</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 已连接设备</span>
+<span class="cm">     * @param cmd  回复命令</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回调错误事件</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 已连接设备</span>
+<span class="cm">     * @param error  错误信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bt-op-api">
+<span id="id3"></span><h2><span class="sectnum">1.2 </span>蓝牙操作接口<a class="headerlink" href="#bt-op-api" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBluetoothOperation</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/*-------------------------------- BluetoothAdapter Op ------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙模块是否使能</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 结果。若为true，蓝牙模块打开; 若为false，蓝牙模块关闭</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isBluetoothEnabled</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 打开蓝牙模块</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;需要用户动态授权&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">enableBluetooth</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 关闭蓝牙模块</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disableBluetooth</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 注册蓝牙回调监听器</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bluetoothCallback 蓝牙回调监听器。建议使用{@link BluetoothCallbackImpl}</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">registerBluetoothCallback</span><span class="p">(</span><span class="n">IBluetoothCallback</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 注销蓝牙回调监听器</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bluetoothCallback 蓝牙回调监听器。建议使用{@link BluetoothCallbackImpl}</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">unregisterBluetoothCallback</span><span class="p">(</span><span class="n">IBluetoothCallback</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 已连接蓝牙设备对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;在BLE方式时，返回BLE设备对象。&lt;br/&gt;</span>
+<span class="cm">     * 在SPP方式时，需要注意，会通过BLE连接转换成Spp连接，</span>
+<span class="cm">     * 所以会先返回BLE的对象，再返回Spp的对象（经典蓝牙的对象）&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return 返回通讯通道的对象, 若通讯通道为建立, 返回null。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getConnectedDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设置已连接且正在使用的蓝牙设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取正在使用的BluetoothGatt对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothGatt 正在使用的BluetoothGatt对象</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="nf">getConnectedBluetoothGatt</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获得指定设备的BluetoothGatt对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE设备</span>
+<span class="cm">     * @return BluetoothGatt 已连接的BluetoothGatt对象</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="nf">getDeviceGatt</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取已连接设备列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; 已连接设备列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getConnectedDeviceList</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 判断设备是否已连接</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设置蓝牙配置信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bluetoothOption 蓝牙配置信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setBluetoothOption</span><span class="p">(</span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">bluetoothOption</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取蓝牙配置信息</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothOption 蓝牙配置信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothOption</span><span class="w"> </span><span class="nf">getBluetoothOption</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取远端蓝牙设备对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param address 蓝牙设备地址</span>
+<span class="cm">     * @return BluetoothDevice 蓝牙设备对象。若蓝牙设备存在，返回设备对象；反之，返回 null.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getRemoteDevice</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取缓存的经典蓝牙对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return BluetoothDevice 缓存的经典蓝牙对象</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getCacheEdrDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*-----------------------------------scan device op--------------------------*/</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否正在扫描设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isScanning</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取发现蓝牙设备列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;列表，只会返回要扫描的类型; scan的操作会清空缓存列表;&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return ArrayList&lt;BluetoothDevice&gt; 发现蓝牙设备列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDiscoveredBluetoothDevices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前扫描类型</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return int 扫描类型</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_BLE} --- BLE设备 &lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_CLASSIC} --- 经典蓝牙设备</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getScanType</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开始蓝牙设备扫描</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;该方法会扫描所有蓝牙设备,SDK只回调经典蓝牙设备&lt;/p&gt;</span>
+<span class="cm">     * &lt;p&gt;达到超时值且没扫描到蓝牙设备，会通过{@link IBluetoothCallback#onError(BaseError)}返回扫描超时错误&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param timeout 超时值</span>
+<span class="cm">     * @return int 操作结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，搜索状态将在{@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)}回调&lt;br/&gt;</span>
+<span class="cm">     * 搜索到的设备也将在{@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)}回调&lt;br/&gt;</span>
+<span class="cm">     * 弹窗产品将在{@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)}回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">startDeviceScan</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 停止蓝牙设备扫描</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return int 操作结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">stopDeviceScan</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开始BLE设备扫描</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;达到超时值且没扫描到蓝牙设备，会通过{@link IBluetoothCallback#onError(BaseError)}返回扫描超时错误&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param timeout 超时时间。单位是毫秒</span>
+<span class="cm">     * @return int 操作结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败 &lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，搜索状态将在{@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)} 回调&lt;br/&gt;</span>
+<span class="cm">     * 搜索到的设备也将在{@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)} 回调&lt;br/&gt;</span>
+<span class="cm">     * 弹窗产品将在{@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">startBLEScan</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 停止BLE设备扫描</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return int 操作结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">stopBLEScan</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/*-----------------------------------pair op--------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 指定设备是否正在配对</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isPairing</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 指定设备是否已配对</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isPaired</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取已配对的设备列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; 已配对的设备列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getPairedDevices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开始指定设备的配对流程</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return int 结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用发射接口失败&lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，状态将在{@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">pair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开始指定设备的配对流程</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  蓝牙设备</span>
+<span class="cm">     * @param pairWay 配对方式，取值范围:[0, 2]</span>
+<span class="cm">     * @return int 结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用发射接口失败&lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，状态将在{@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">pair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@IntRange</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pairWay</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 取消与蓝牙设备的配对</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return int 操作码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败&lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，状态将在{@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">unPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 尝试开始指定设备的配对流程</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;队列式执行配对过程,避免过度操作导致蓝牙系统异常。推荐使用该方法进行配对&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryToPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 尝试开始指定设备的配对流程</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;队列式执行配对过程,避免过度操作导致蓝牙系统异常。推荐使用该方法进行配对&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  蓝牙设备</span>
+<span class="cm">     * @param pairWay 配对方式，取值范围:[0, 2]</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryToPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@IntRange</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pairWay</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 尝试开始指定设备的解除配对流程</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;队列式执行配对过程,避免过度操作导致蓝牙系统异常。推荐使用该方法进行配对&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryToUnPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*-----------------------------------br/edr op--------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备是否包含hfp服务</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">deviceHasHfp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备是否包含a2dp服务</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">deviceHasA2dp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备是否已建立hfp服务</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return int 设备连接状态&lt;p&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 未连接 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">isConnectedByHfp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备是否已建立a2dp服务</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return int 设备连接状态&lt;p&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 未连接 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">isConnectedByA2dp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备是否已建立经典蓝牙服务(a2dp、hfp)</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return int 设备连接状态&lt;p&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 未连接 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">isConnectedByProfile</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 判断经典蓝牙是否连接中</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isBrEdrConnecting</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取连接中的经典蓝牙设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothDevice 经典蓝牙设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getConnectingBrEdrDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接经典蓝牙</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return boolean 操作结果 &lt;p&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在{@link IBluetoothCallback#onBrEdrConnection(BluetoothDevice, int)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">connectByProfiles</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 断开经典蓝牙</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disconnectByProfiles</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设置指定的设备为音频输出设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 指定的已连接设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">setActivityBluetoothDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取当前音频输出设备对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothDevice 当前音频输出设备对象</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getActivityBluetoothDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取已连接SPP列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; 已连接SPP列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getConnectedSppList</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 判断设备是否已连接SPP</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnectedSppDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接Spp通道</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return int 操作结果</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败&lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在{@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)} 回调。</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectSPPDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 断开Spp通道</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 调用成功，连接状态将在{@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)}回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disconnectSPPDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 通过Spp通道发送数据包</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备</span>
+<span class="cm">     * @param data   数据包</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">writeDataToSppDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取已连接经典蓝牙设备列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; 已连接经典蓝牙设备列表</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDevicesConnectedByProfile</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/*----------------------------------ble op----------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取已配对的BLE设备列表</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; 已配对的BLE设备列表，若没有，则为null</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getPairedBLEDevices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取已连接BLE设备的MTU</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 已连接BLE设备</span>
+<span class="cm">     * @return int 协商后的BLE MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getBleMtu</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 判断是否为已连接的BLE设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnectedBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 请求调节BLE的MTU</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param mtu    请求调节的MTU</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">requestBleMtu</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mtu</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开关BLE特征值属性</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param gatt              蓝牙设备</span>
+<span class="cm">     * @param bleCharacteristic BLE特征值</span>
+<span class="cm">     * @return boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">enableBLEDeviceNotification</span><span class="p">(</span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="n">gatt</span><span class="p">,</span><span class="w"> </span><span class="n">BleCharacteristic</span><span class="w"> </span><span class="n">bleCharacteristic</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接指定设备的BLE</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return int 操作码&lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在 {@link OnBtBleListener#onBleConnection(BluetoothDevice, int)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接指定设备的BLE</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param param  连接参数</span>
+<span class="cm">     * @return int 操作码&lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败&lt;br/&gt;</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将会在{@link OnBtBleListener#onBleConnection(BluetoothDevice, int)}回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BleConnectParam</span><span class="w"> </span><span class="n">param</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 断开BLE设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE设备</span>
+<span class="cm">     * @return boolean 操作结果&lt;p&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在 {@link IBluetoothCallback#onBleConnection(BluetoothDevice, int)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disconnectBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 通过BLE写服务发送数据包</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device             BLE设备</span>
+<span class="cm">     * @param serviceUUID        服务UUID</span>
+<span class="cm">     * @param characteristicUUID 属性UUID</span>
+<span class="cm">     * @param writeData          数据包</span>
+<span class="cm">     * @return boolean 发送结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">writeDataToBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUUID</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicUUID</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">writeData</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*---------------------------------- special op ----------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 同步连接历史记录</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">syncHistoryBtDeviceRecord</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 获取当前连接中设备对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothDevice 连接中设备对象</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getConnectingDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接蓝牙设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;根据蓝牙设备类型进行连接，BLE设备进行BLE连接，经典蓝牙设备进行经典蓝牙连接&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return int 结果码&lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP连接中&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- 设备连接中 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- 设备已连接&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在 {@link IBluetoothCallback#onConnection(BluetoothDevice, int)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBtDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接蓝牙设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;根据蓝牙设备类型进行连接，BLE设备进行BLE连接，经典蓝牙设备进行经典蓝牙连接&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     蓝牙设备</span>
+<span class="cm">     * @param connectWay 连接方式</span>
+<span class="cm">     *                   &lt;p&gt;</span>
+<span class="cm">     *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE方式 &lt;br/&gt;</span>
+<span class="cm">     *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP方式&lt;br/&gt;</span>
+<span class="cm">     *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- Gatt Over BR/EDR方式</span>
+<span class="cm">     *                   &lt;/p&gt;</span>
+<span class="cm">     * @return int 结果码&lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP连接中&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- 设备连接中 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- 设备已连接&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在 {@link IBluetoothCallback#onConnection(BluetoothDevice, int)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBtDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">connectWay</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 断开蓝牙设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;连接状态将在 {@link IBluetoothCallback#onConnection(BluetoothDevice, int)} 回调&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">disconnectBtDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 连接经典蓝牙设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param breDevice 蓝牙设备</span>
+<span class="cm">     * @return int 结果码 &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- 操作成功 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_PARAMETER} --- 参数错误 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_EDR_CONNECTING} --- 正在连接经典蓝牙 &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用发射接口失败&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * 若操作成功，连接状态将在 {@link IBluetoothCallback#onBtDeviceConnectStatus(BluetoothDevice, int)} 回调</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">startConnectByBreProfiles</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">breDevice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否正在连接设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnecting</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 检查蓝牙设备是否已过认证</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">checkDeviceIsCertify</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 快速连接</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;连接结果通过{@link IBluetoothCallback} 回调。需要通过 {@link #registerBluetoothCallback(IBluetoothCallback)} 注册回调。&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return 若false, 表示没有缓存BLE地址，无法回连。若true，说明开始回连过程</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">fastConnect</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 检查BLE设备是否连接</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;通过同步系统BLE设备连接列表，尝试确认连接BLE是否为本方案认可的设备&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkBleIsConnected</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 同步蓝牙设备状态</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;确认蓝牙设备是否正常连接&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">synchronizationBtDeviceStatus</span><span class="p">();</span><span class="w"> </span><span class="c1">//同步蓝牙设备状态</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 查询连接历史记录</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param address 设备地址</span>
+<span class="cm">     * @return HistoryBluetoothDevice 连接历史记录</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="nf">findHistoryBluetoothDevice</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 删除历史记录设备</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;同步清除BLE和经典蓝牙的配对，清除映射关系&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param historyBtDevice 历史记录设备</span>
+<span class="cm">     * @param callback        操作回调</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeHistoryDevice</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">historyBtDevice</span><span class="p">,</span><span class="w"> </span><span class="n">IActionCallback</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否正在回连</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean 结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isReconnecting</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回连历史记录</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param historyBtDevice 历史记录设备</span>
+<span class="cm">     * @param timeoutMs       超时时间</span>
+<span class="cm">     * @param listener        回连监听器</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reconnectHistoryBluetoothDevice</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">historyBtDevice</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">,</span><span class="w"> </span><span class="n">OnReconnectHistoryRecordListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 停止回连设备</span>
+<span class="cm">     * @return  boolean 操作结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">stopReconnect</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 释放资源</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#bt-callback"><span class="std std-ref">1.4   IBluetoothCallback</span></a></p></li>
+<li><p><a class="reference internal" href="#ble-connect-param"><span class="std std-ref">1.2.1   BleConnectParam</span></a></p></li>
+<li><p><a class="reference internal" href="#ble-chanacteristic"><span class="std std-ref">1.2.2   BleCharacteristic</span></a></p></li>
+<li><p><a class="reference internal" href="../module/bt_proxy.html#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a></p></li>
+</ol>
+</div>
+<section id="bleconnectparam">
+<span id="ble-connect-param"></span><h3><span class="sectnum">1.2.1 </span>BleConnectParam<a class="headerlink" href="#bleconnectparam" title="Link to this heading"></a></h3>
+<p>BLE连接参数</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BleConnectParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ConnectParam</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否需要重连</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 说明:异常断开重连机制</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">reconnect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否强制使用BLE</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isMandatoryUseBLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE传输MTU</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 说明:Android为了兼容4.0的手机，默认的MTU是23；可用数据长度:20；&lt;br/&gt;</span>
+<span class="cm">     * 随着手机系统的提升，现在的手机的MTU最大为512。建议提升MTU到512。</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">BLE_MTU_MIN</span><span class="p">;</span><span class="w">  </span><span class="c1">//调节蓝牙MTU</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE 通讯UUID列表</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#KEY_BLE_SERVICE_UUID}  服务UUID &lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#KEY_BLE_WRITE_CHARACTERISTIC_UUID} 写特征UUID &lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#KEY_BLE_NOTIFICATION_CHARACTERISTIC_UUID} 通知特征UUID &lt;br/&gt;</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BleCharacteristic</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bleCharacteristics</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否使用BLE配对方式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isUseBleBondWay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否自动连接BLE</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isAutoConnectBle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 首选Phy</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PhyMask</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">preferredPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PHY_LE_1M_MASK</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * GATT连接到双模设备优先传输方式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@BleTransport</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">TRANSPORT_LE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 重连延时时间</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">reconnectDelay</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 重连次数限制</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">retryLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#ble-chanacteristic"><span class="std std-ref">1.2.2   BleCharacteristic</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="blecharacteristic">
+<span id="ble-chanacteristic"></span><h3><span class="sectnum">1.2.2 </span>BleCharacteristic<a class="headerlink" href="#blecharacteristic" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BleCharacteristic</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 服务UUID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUUID</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 特征值UUID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicUUID</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 请求特征值</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">requiredProperty</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否主要属性</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPrimary</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="bt-event-listener">
+<span id="id4"></span><h2><span class="sectnum">1.3 </span>蓝牙事件监听器<a class="headerlink" href="#bt-event-listener" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBluetoothEventListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙适配器状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bEnabled 蓝牙是否打开</span>
+<span class="cm">     * @param bHasBle  是否支持BLE</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAdapterStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bEnabled</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bHasBle</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发现设备状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bBle   是否BLE设备发现</span>
+<span class="cm">     * @param bStart 是否搜索开始</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscoveryStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bBle</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bStart</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发现设备回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发现设备回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device         蓝牙设备</span>
+<span class="cm">     * @param bleScanMessage 广播信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 产品弹窗回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device         蓝牙设备</span>
+<span class="cm">     * @param bleScanMessage 广播信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onShowDialog</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备配对状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 配对状态</span>
+<span class="cm">     *               &lt;p&gt;参考值如下&lt;br&gt;</span>
+<span class="cm">     *               {@link BluetoothDevice#BOND_NONE} or</span>
+<span class="cm">     *               {@link BluetoothDevice#BOND_BONDING} or</span>
+<span class="cm">     *               {@link BluetoothDevice#BOND_BONDED}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBondStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备连接状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 连接状态</span>
+<span class="cm">     *               &lt;p&gt;参考值如下&lt;br&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">   </span><span class="cm">/**</span>
+<span class="cm">    * 切换已连接且正在使用的设备的回调</span>
+<span class="cm">    *</span>
+<span class="cm">    * @param device 已连接设备</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSwitchConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * A2DP服务状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 连接状态</span>
+<span class="cm">     *               &lt;p&gt;参考值如下&lt;br&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onA2dpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * HFP服务状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 连接状态</span>
+<span class="cm">     *               &lt;p&gt;参考值如下&lt;br&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHfpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * SPP连接状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 连接状态</span>
+<span class="cm">     *               &lt;p&gt;参考值如下&lt;br&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 接收到设备的RCSP命令数据</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param cmd    RCSP命令数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 接收到设备的数据包</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param data   数据包</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceData</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 接收到设备的语音数据</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param data   语音数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceVoiceData</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 接收到设备的语音数据包</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param data 语音信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceVoiceData</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceData</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备VAD结束的回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceVadEnd</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 接收到设备的RCSP回复数据</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   蓝牙设备</span>
+<span class="cm">     * @param response  RCSP命令回复数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 错误事件回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param error 错误信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">);</span><span class="w">  </span><span class="c1">//错误事件回调</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>推荐使用 <code class="docutils literal notranslate"><span class="pre">BTEventCallback</span></code> 实现</p></li>
+</ol>
+</div>
+</section>
+<section id="ibluetoothcallback">
+<span id="bt-callback"></span><h2><span class="sectnum">1.4 </span>IBluetoothCallback<a class="headerlink" href="#ibluetoothcallback" title="Link to this heading"></a></h2>
+<p>蓝牙回调</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBluetoothCallback</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">IBluetoothEventListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备UUID获取回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 配对的设备</span>
+<span class="cm">     * @param uuids  设备uuid数组</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceUuidsDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ParcelUuid</span><span class="o">[]</span><span class="w"> </span><span class="n">uuids</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 通过SPP通道接收到数据回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param data   设备发送的数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE查找设备服务回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   BLE设备</span>
+<span class="cm">     * @param status   查找结果，成功为0({@link BluetoothGatt#GATT_SUCCESS}），否则为其他值</span>
+<span class="cm">     * @param services 查找到的服务</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleServiceDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothGattService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">services</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE设备连接状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE设备</span>
+<span class="cm">     * @param status 连接状态&lt;p&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} --- 连接断开 &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} --- 连接成功 &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} --- 连接失败 &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} --- 正在连接 &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED} --- 已连接</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE数据缓冲区送数据设置回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE设备</span>
+<span class="cm">     * @param block  缓冲区大小</span>
+<span class="cm">     * @param status 结果码。 0 - 成功, 其他失败</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleDataBlockChanged</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE特征Notification状态回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device             BLE设备</span>
+<span class="cm">     * @param serviceUuid        主服务UUID</span>
+<span class="cm">     * @param characteristicUuid 特征值UUID</span>
+<span class="cm">     * @param bEnabled           使能结果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleNotificationStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bEnabled</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 接收BLE设备发送数据回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE设备</span>
+<span class="cm">     * @param data   接收的数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicsUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发送数据到BLE设备结果回调</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device              BLE设备</span>
+<span class="cm">     * @param serviceUuid         主服务UUID</span>
+<span class="cm">     * @param characteristicsUuid 特征值UUID</span>
+<span class="cm">     * @param data                发送的数据</span>
+<span class="cm">     * @param status              发送结果    0 - 成功, 其他失败</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleWriteStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicsUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 系统回调蓝牙设备连接状态</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 蓝牙设备</span>
+<span class="cm">     * @param status 连接状态&lt;p&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 已断开 &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBtDeviceConnectStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 系统回调蓝牙连接配置</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param gatt     蓝牙Gatt对象</span>
+<span class="cm">     * @param interval 发送间隔</span>
+<span class="cm">     * @param latency  延时</span>
+<span class="cm">     * @param timeout  超时时间(单位为毫秒)</span>
+<span class="cm">     * @param status   状态码</span>
+<span class="cm">     *                 &lt;p&gt;0 为成功，其他为异常&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectionUpdated</span><span class="p">(</span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="n">gatt</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">interval</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">latency</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回调经典蓝牙连接状态</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device 经典蓝牙设备对象</span>
+<span class="cm">     * @param status 连接状态&lt;p&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 已断开 &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBrEdrConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   蓝牙事件监听器</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../interface_desc.html" class="btn btn-neutral float-left" title="3 接口说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rcsp_api.html" class="btn btn-neutral float-right" title="2. RCSP功能接口" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

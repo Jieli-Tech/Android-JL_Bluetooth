@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Equalizer Control Function &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. Clock Function" href="rtc_ctrl.html" />
+    <link rel="prev" title="4. Device Music Control Function" href="device_music_ctrl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">5. Equalizer Control Function</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-equalizer-parameters">5.1. Get Equalizer Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-equalizer-parameters">5.2. Configure Equalizer Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-extended-parameters">5.3. Get Extended Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-extended-parameters">5.4. Set Extended Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-reverberation">5.5. Set Reverberation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-dynamic-limiter">5.6. Set Dynamic Limiter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Equalizer Control Function</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="equalizer-control-function">
+<span id="eq-ctrl-func"></span><h1><span class="section-number">5. </span>Equalizer Control Function<a class="headerlink" href="#equalizer-control-function" title="Link to this heading"></a></h1>
+<section id="get-equalizer-parameters">
+<h2><span class="section-number">5.1. </span>Get Equalizer Parameters<a class="headerlink" href="#get-equalizer-parameters" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>              – Public attributes</div>
+<div class="line"><strong>mask :</strong>  <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_EQ_PRESET_VALUE</span> <span class="pre">or</span> <span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_EQ</span></code> – EQ preset values and EQ information</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getEqInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetEqPresetAndEqValueCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqPresetChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//This will callback equalizer preset values</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//This will callback equalizer effect information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute get equalizer information function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getEqInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">        </span><span class="c1">//Result will be callback in BTRcspEventCallback#onEqPresetChange、BTRcspEventCallback#onEqChange</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#eq-perset-info"><span class="std std-ref">EqPresetInfo</span></a></p></li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#eq-mode-list"><span class="std std-ref">EQ Mode Comparison Table</span></a></p></li>
+</ol>
+</div>
+<section id="eqpresetinfo">
+<span id="eq-perset-info"></span><h3><span class="section-number">5.1.1. </span>EqPresetInfo<a class="headerlink" href="#eqpresetinfo" title="Link to this heading"></a></h3>
+<p>EQ preset information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EqPresetInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">EqInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eqInfos</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">freqs</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configure-equalizer-parameters">
+<h2><span class="section-number">5.2. </span>Configure Equalizer Parameters<a class="headerlink" href="#configure-equalizer-parameters" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>  – Public attributes</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_EQ</span></code>              – Identify equalizer parameters</div>
+<div class="line"><strong>value :</strong>  Parameters</div>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Whether dynamic</p></th>
+<th class="head"><p>Parameter format</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>false</p></td>
+<td><p>eqMode(1Byte) + eqValue(10 bytes)</p></td>
+<td><p>eqMode highest bit is 0, indicates default parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p>true</p></td>
+<td><p>eqMode(1Byte) + length(1Byte) + eqValue(n Bytes)</p></td>
+<td><p>eqMode highest bit is 1, indicates dynamic adjustment, <code class="docutils literal notranslate"><span class="pre">recommended</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">//Whether supports dynamic change</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">eqMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w">  </span><span class="c1">//EQ mode -- Custom</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">gains</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">10</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//EQ gain array - determined by dynamic segments</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setEqInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetEqValueCmd</span><span class="p">(</span><span class="n">isDynamic</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">eqMode</span><span class="p">,</span><span class="w"> </span><span class="n">gains</span><span class="p">)();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//This will callback equalizer effect information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">//EQ information, cannot be null</span>
+<span class="c1">//Execute configure equalizer effect function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">configEqInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#eq-info"><span class="std std-ref">EqInfo</span></a></p></li>
+</ol>
+</div>
+<section id="eqinfo">
+<span id="eq-info"></span><h3><span class="section-number">5.2.1. </span>EqInfo<a class="headerlink" href="#eqinfo" title="Link to this heading"></a></h3>
+<p>Equalizer information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EqInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * EQ mode</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gain value array</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">10</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Preset value array</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">freqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">DEFAULT_EQ_FREQS</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether dynamic EQ</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">dynamic</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Preset value array length</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="eq-mode-comparison-table">
+<span id="eq-mode-list"></span><h3><span class="section-number">5.2.2. </span>EQ Mode Comparison Table<a class="headerlink" href="#eq-mode-comparison-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Mode Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Standard Music Mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Rock Music Mode</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Popular Music Mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Classical Music Mode</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Jazz Music Mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Country Music Mode</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Custom Music Mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-extended-parameters">
+<h2><span class="section-number">5.3. </span>Get Extended Parameters<a class="headerlink" href="#get-extended-parameters" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>              – Public attributes</div>
+<div class="line"><strong>mask :</strong>   <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_FIXED_LEN_DATA_FUN</span></code> – Extended parameters</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">CommandBase</span><span class="w"> </span><span class="n">getFixedLenDataCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetFixedLenDataCmd</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#get-sys-info"><span class="std std-ref">Query device system information</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Add Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onExpandFunction</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//This will callback additional function information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Execute get additional function information function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getExpandDataInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">        </span><span class="c1">//Result will be callback in BTRcspEventCallback#onExpandFunction</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="set-extended-parameters">
+<h2><span class="section-number">5.4. </span>Set Extended Parameters<a class="headerlink" href="#set-extended-parameters" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>        – Public attributes</div>
+<div class="line"><strong>type :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_ATTR_FIXED_LEN_DATA_FUN</span></code>    – Identify extended parameters</div>
+<div class="line"><strong>value :</strong>  mask(4Bytes) + data(n Bytes)</div>
+</div>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x03</span><span class="p">;</span><span class="w"> </span><span class="c1">//Extended mask  - Bit0 -- Reverberation   Bit1 -- Dynamic Limiter</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//Parameters, format： LTV format, composed of multiple LTV data</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setFixedLenDataCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetFixedLenDataCmd</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="basic_func.html#set-sys-info"><span class="std std-ref">Configure device system properties</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//mask - Function mask</span>
+<span class="c1">//data - Parameter data</span>
+<span class="c1">//Execute set additional function information function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setExpandDataInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">1. Data consists of multiple <a class="reference internal" href="terminology_note.html#ltv-format"><span class="std std-ref">LTV Format</span></a> data</div>
+<div class="line">2. mask is 32Bit value, reverberation function is Bit0, dynamic limiter function is Bit1</div>
+<div class="line">3. Need to determine if device supports this function</div>
+</div>
+</div>
+</section>
+<section id="set-reverberation">
+<h2><span class="section-number">5.5. </span>Set Reverberation<a class="headerlink" href="#set-reverberation" title="Link to this heading"></a></h2>
+<p><strong>Only RCSPController supports interface method</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Reverberation parameters, cannot be null</span>
+<span class="n">ReverberationParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="c1">//Execute set reverberation function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setReverberationParameter</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Need to determine if device supports this function (confirm through get extended parameters, whether corresponding parameters are returned)</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#reverberation-param"><span class="std std-ref">ReverberationParam</span></a></p></li>
+</ol>
+</div>
+<section id="reverberationparam">
+<span id="reverberation-param"></span><h3><span class="section-number">5.5.1. </span>ReverberationParam<a class="headerlink" href="#reverberationparam" title="Link to this heading"></a></h3>
+<p>Reverberation parameters</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReverberationParam</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOn</span><span class="p">;</span><span class="w">      </span><span class="c1">//Switch</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">depthValue</span><span class="p">;</span><span class="w">    </span><span class="c1">//Depth value</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">strengthValue</span><span class="p">;</span><span class="w"> </span><span class="c1">//Strength value</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-dynamic-limiter">
+<h2><span class="section-number">5.6. </span>Set Dynamic Limiter<a class="headerlink" href="#set-dynamic-limiter" title="Link to this heading"></a></h2>
+<p><strong>Only RCSPController supports interface method</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Dynamic limiter parameters, cannot be null</span>
+<span class="n">DynamicLimiterParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="c1">//Execute set dynamic limiter function and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setDynamicLimiterParameter</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Need to determine if device supports this function (confirm through get extended parameters, whether corresponding parameters are returned)</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#dynamic-limiter-param"><span class="std std-ref">DynamicLimiterParam</span></a></p></li>
+</ol>
+</div>
+<section id="dynamiclimiterparam">
+<span id="dynamic-limiter-param"></span><h3><span class="section-number">5.6.1. </span>DynamicLimiterParam<a class="headerlink" href="#dynamiclimiterparam" title="Link to this heading"></a></h3>
+<p>Dynamic limiter parameters</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DynamicLimiterParam</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="c1">//Value</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="device_music_ctrl.html" class="btn btn-neutral float-left" title="4. Device Music Control Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rtc_ctrl.html" class="btn btn-neutral float-right" title="6. Clock Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+.. _rcsp_control: 
+
+RCSP控制器接口
+*****************************
+
+.. code-block:: java
+
+    public interface IRcspControl {
+
+        /**
+         * 查找设备
+         *
+         * @param device     操作设备
+         * @param op         查找方式
+         * @param timeoutSec 查找限制时间
+         * @param playWay    播放方式
+         * @param player     播放源
+         * @param callback   结果回调
+         */
+        void searchDev(BluetoothDevice device, int op, int timeoutSec, int playWay, int player, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 停止查找设备
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void stopSearchDevice(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 同步查找设备状态
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void syncSearchDeviceStatus(BluetoothDevice device, OnRcspActionCallback<SearchDevStatusResponse> callback);
+    }

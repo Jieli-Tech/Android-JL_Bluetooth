@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>15. Custom Commands &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="16. Device Dual Connection Function" href="dual_connection_func.html" />
+    <link rel="prev" title="14. Device Search Function" href="search_device_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">15. Custom Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#send-custom-command">15.1. Send Custom Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#receive-custom-command">15.2. Receive Custom Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">15.3. Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">15. </span>Custom Commands</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="custom-commands">
+<span id="custom-cmd-func"></span><h1><span class="section-number">15. </span>Custom Commands<a class="headerlink" href="#custom-commands" title="Link to this heading"></a></h1>
+<section id="send-custom-command">
+<span id="send-custom-cmd"></span><h2><span class="section-number">15.1. </span>Send Custom Command<a class="headerlink" href="#send-custom-command" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: Get JL_BluetoothManager object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: Construct custom command</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">20</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom data</span>
+<span class="c1">//Create custom command (default creates custom command that requires reply)</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">customCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildCustomCmd</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="c1">//Create custom command that does not require reply</span>
+<span class="c1">//        customCmd = new CustomCmd(CommandBase.FLAG_HAVE_PARAMETER_NO_RESPONSE, new CustomParam(data));</span>
+<span class="c1">//Step2: Execute operation command and wait for result callback</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendRcspCommand</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">customCmd</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: For no-reply command, reply command itself</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: Check device status</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Device status abnormal, perform exception handling</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Success callback</span>
+<span class="w">        </span><span class="c1">//Step4: Get corresponding command data</span>
+<span class="w">        </span><span class="n">CustomCmd</span><span class="w"> </span><span class="n">customCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CustomCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNeedResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">                    </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isNeedResponse</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//No reply data</span>
+<span class="w">        </span><span class="c1">//Step5: Get reply data</span>
+<span class="w">        </span><span class="n">CustomResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customCmd</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;}</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getData</span><span class="p">();</span><span class="w"> </span><span class="c1">//Custom reply data</span>
+<span class="w">        </span><span class="c1">//Process device reply data</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">General Command Processing Example</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Create custom command (default creates custom command that requires reply)</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">customCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildCustomCmd</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="c1">//Create custom command that does not require reply</span>
+<span class="c1">//        customCmd = new CustomCmd(CommandBase.FLAG_HAVE_PARAMETER_NO_RESPONSE, new CustomParam(data));</span>
+<span class="c1">//Send custom command and wait for result callback</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">sendRcspCommand</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">customCmd</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Callback reply command</span>
+<span class="w">    </span><span class="c1">//Note: For no-reply command, reply command itself</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Firmware replies failure status</span>
+<span class="w">            </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device response an bad status : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">());</span>
+<span class="w">            </span><span class="n">error</span><span class="p">.</span><span class="na">setOpCode</span><span class="p">(</span><span class="n">Command</span><span class="p">.</span><span class="na">CMD_EXTRA_CUSTOM</span><span class="p">);</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//Send success callback</span>
+<span class="w">        </span><span class="n">CustomCmd</span><span class="w"> </span><span class="n">customCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CustomCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CustomResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customCmd</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getData</span><span class="p">();</span><span class="w"> </span><span class="c1">//Custom reply data</span>
+<span class="w">        </span><span class="c1">//Process device reply data</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Failure callback</span>
+<span class="w">        </span><span class="c1">//error - error information</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#custom-cmd-note"><span class="std std-ref">Notes</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="receive-custom-command">
+<span id="receiver-custom-cmd"></span><h2><span class="section-number">15.2. </span>Receive Custom Command<a class="headerlink" href="#receive-custom-command" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager Way</p></li>
+</ol>
+<p>Command construction</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">jlManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Register Bluetooth RCSP event listener</span>
+<span class="n">jlManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//This will callback commands sent by device</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Command</span><span class="p">.</span><span class="na">CMD_EXTRA_CUSTOM</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Only handle custom command data</span>
+<span class="w">            </span><span class="n">CustomCmd</span><span class="w"> </span><span class="n">customCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CustomCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">            </span><span class="n">CustomParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customCmd</span><span class="p">.</span><span class="na">getParam</span><span class="p">();</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNeedResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">                    </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isNeedResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Requires reply</span>
+<span class="w">                    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">responseData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//Can set reply data</span>
+<span class="w">                    </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setParam</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CustomParam</span><span class="p">(</span><span class="n">responseData</span><span class="p">));</span>
+<span class="w">                    </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">jlManager</span><span class="p">.</span><span class="na">sendRcspResponse</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">customCmd</span><span class="p">);</span><span class="w"> </span><span class="c1">//Send command reply</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">param</span><span class="p">.</span><span class="na">getData</span><span class="p">();</span><span class="w"> </span><span class="c1">//Custom data</span>
+<span class="w">            </span><span class="c1">//parseCustomData(data); //Parse reply data yourself</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isNeedResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Requires reply</span>
+<span class="w">                </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">responseData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//Can set reply data</span>
+<span class="w">                </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setParam</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CustomParam</span><span class="p">(</span><span class="n">responseData</span><span class="p">));</span>
+<span class="w">                </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">);</span>
+<span class="w">                </span><span class="n">jlManager</span><span class="p">.</span><span class="na">sendRcspResponse</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">customCmd</span><span class="p">);</span><span class="w"> </span><span class="c1">//Send command reply</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Code example reference <a class="reference internal" href="terminology_note.html#receive-cmd-handle"><span class="std std-ref">Receive Command Processing Example</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController Way</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get RCSPController object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Register Bluetooth RCSP event listener</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//This will callback commands sent by device</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Command</span><span class="p">.</span><span class="na">CMD_EXTRA_CUSTOM</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Only handle custom command data</span>
+<span class="w">            </span><span class="n">CustomCmd</span><span class="w"> </span><span class="n">customCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CustomCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">            </span><span class="n">CustomParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customCmd</span><span class="p">.</span><span class="na">getParam</span><span class="p">();</span>
+<span class="w">             </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNeedResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">             </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">param</span><span class="p">){</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">isNeedResponse</span><span class="p">){</span><span class="w"> </span><span class="c1">//Requires reply</span>
+<span class="w">                    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">responseData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//Can set reply data</span>
+<span class="w">                    </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setParam</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CustomParam</span><span class="p">(</span><span class="n">responseData</span><span class="p">));</span>
+<span class="w">                    </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">controller</span><span class="p">.</span><span class="na">sendRcspResponse</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">customCmd</span><span class="p">);</span><span class="w"> </span><span class="c1">//Send command reply</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">param</span><span class="p">.</span><span class="na">getData</span><span class="p">();</span><span class="w"> </span><span class="c1">//Custom data</span>
+<span class="w">            </span><span class="c1">//parseCustomData(data); //Parse reply data yourself</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">isNeedResponse</span><span class="p">){</span><span class="w"> </span><span class="c1">//Requires reply</span>
+<span class="w">                </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">responseData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">//Can set reply data</span>
+<span class="w">                </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setParam</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CustomParam</span><span class="p">(</span><span class="n">responseData</span><span class="p">));</span>
+<span class="w">                </span><span class="n">customCmd</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">);</span>
+<span class="w">                </span><span class="n">controller</span><span class="p">.</span><span class="na">sendRcspResponse</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">customCmd</span><span class="p">);</span><span class="w"> </span><span class="c1">//Send command reply</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#custom-cmd-note"><span class="std std-ref">Notes</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="notes">
+<span id="custom-cmd-note"></span><h2><span class="section-number">15.3. </span>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic">
+<li><p><a class="reference internal" href="#send-custom-cmd"><span class="std std-ref">Send Custom Command</span></a> needs to comply with <strong>RCSP protocol</strong> maximum value rules, custom data length cannot exceed (maximum - 20)</p>
+<blockquote>
+<div><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get current operating device</span>
+<span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="c1">//Get SDK side maximum send value (i.e. device side maximum receive value)</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DeviceStatusManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getMaxReceiveMtu</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//Calculate custom data maximum length</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Both <a class="reference internal" href="#send-custom-cmd"><span class="std std-ref">Send Custom Command</span></a> and <a class="reference internal" href="#receiver-custom-cmd"><span class="std std-ref">Receive Custom Command</span></a> need to follow <strong>RCSP protocol</strong> command mechanism</p>
+<ul class="simple">
+<li><p>Commands with <strong>reply flag</strong> need to perform <code class="docutils literal notranslate"><span class="pre">reply</span> <span class="pre">command</span></code> operation.</p></li>
+<li><p>If command with <strong>reply flag</strong> does not get reply, sender will perform <strong>timeout retry mechanism</strong></p></li>
+<li><p><strong>Retry</strong> exceeds <code class="docutils literal notranslate"><span class="pre">certain</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">times</span></code>, consider <strong>command send failure</strong></p></li>
+</ul>
+</li>
+<li><p>Determine if command needs <code class="docutils literal notranslate"><span class="pre">reply</span></code></p>
+<blockquote>
+<div><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNeedResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">    </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="search_device_func.html" class="btn btn-neutral float-left" title="14. Device Search Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dual_connection_func.html" class="btn btn-neutral float-right" title="16. Device Dual Connection Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

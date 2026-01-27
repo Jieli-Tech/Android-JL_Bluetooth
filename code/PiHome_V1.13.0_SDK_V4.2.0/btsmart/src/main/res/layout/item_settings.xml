@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_item_settings_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="6dp"
+            android:textColor="@color/black_242424"
+            android:textSize="@dimen/text_14sp"
+            tools:text="Title"/>
+
+        <TextView
+            android:id="@+id/tv_item_settings_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical|end"
+            android:paddingEnd="6dp"
+            android:paddingStart="2dp"
+            android:layout_centerVertical="true"
+            android:drawablePadding="3dp"
+            android:textColor="@color/gray_text_989898"
+            android:textSize="@dimen/text_13sp"
+            android:layout_toEndOf="@+id/tv_item_settings_name"
+            app:drawableEndCompat="@drawable/ic_little_right_arrow"
+            tools:text="value"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_item_settings_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="15dp"
+        android:background="@color/gray_eeeeee" />
+</LinearLayout>

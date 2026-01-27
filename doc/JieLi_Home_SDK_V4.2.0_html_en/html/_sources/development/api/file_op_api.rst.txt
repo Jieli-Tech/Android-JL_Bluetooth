@@ -1,0 +1,97 @@
+.. _file_op_api:
+
+File Operation
+*******************************************
+
+.. code-block:: java
+
+   public interface IFileOp {
+
+        /**
+         * Is file operation in progress
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isFileOperating(BluetoothDevice device);
+
+        /**
+         * Get online storage info
+         *
+         * @return Online storage info
+         */
+        List<SDCardBean> getOnlineStorage();
+
+        /**
+         * Get current read folder
+         *
+         * @param storage Storage info
+         * @return Current read folder
+         */
+        Folder getCurrentFolder(@NonNull SDCardBean storage);
+
+        /**
+         * Browse folder
+         *
+         * @param device   Device object
+         * @param folder   Folder
+         * @param offset   Start offset
+         * @param readNum  Read count
+         * @param callback Result callback
+         */
+        void listFiles(@NonNull BluetoothDevice device, @NonNull Folder folder, int offset, @IntRange(from = 1, to = 30) int readNum, OnFlowStateCallback<List<FileStruct>> callback);
+
+        /**
+         * Play device music file
+         *
+         * @param device   Device object
+         * @param file     Music file
+         * @param callback Result callback
+         */
+        void playMusic(@NonNull BluetoothDevice device, @NonNull RegFile file, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Create file
+         *
+         * @param param    Create file parameters
+         * @param listener Status listener
+         */
+        void createBigFile(@NonNull CreateFileParam param, OnTaskStateListener listener);
+
+        /**
+         * Read file
+         *
+         * @param param    Read file parameters
+         * @param listener Status listener
+         */
+        void readBigFile(@NonNull ReadFileParam param, OnTaskStateListener listener);
+
+        /**
+         * Cancel data transfer
+         *
+         * @param device   Device object
+         * @param reason   Cancel reason
+         * @param callback Result callback
+         */
+        void cancelBigFileTransfer(@NonNull BluetoothDevice device, int reason, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Delete file
+         *
+         * @param param    Delete file parameters
+         * @param callback Operation result
+         */
+        void deleteFile(@NonNull DeleteFileParam param, DeleteCallback callback);
+
+        /**
+         * Format storage
+         *
+         * @param sdCardBean Storage info
+         * @param callback   Operation result
+         */
+        void formatStorage(@NonNull SDCardBean sdCardBean, OnFlowStateCallback<Integer> callback);
+
+    }
+
+
+

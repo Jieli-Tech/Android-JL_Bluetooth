@@ -1,0 +1,82 @@
+SDK开发包介绍
+================
+
+1.1 开发资料文件结构
+----------------------------------------         
+
+.. code-block:: sh
+    
+    apk  ---  测试APK文件夹
+     ├── 测试APK 
+    code ---  参考源码工程文件夹
+     ├── 参考Demo源码工程
+    doc ---  开发文档文件夹
+     ├── 杰理OTA外接库(Android)在线开发文档     --- 讲解OTA库的开发使用  
+     ├── 杰理之家SDK(Android)在线开发文档       --- 讲解杰理之家SDK开发使用
+    libs --- 核心库文件夹
+     ├── jl_bt_ota_V1.10.0_10932-release            --- 杰理OTA相关
+     ├── jl_bluetooth_rcsp_V4.2.0_40220-release     --- 杰理之家SDK相关
+     ├── jl_audio_V1.2.0-release                    --- 音频播放器相关
+     ├── jl_eq_V1.0.0-release                       --- 均衡器算法相关
+     ├── jl_http_V1.0.5-release                     --- 服务器相关
+     ├── jl-component-lib_V1.2.3-debug              --- 工具类相关
+     └── jldecryption_v0.4-release                  --- 加密解密相关
+
+
+1.2 示例工程结构
+--------------------------------------           
+
+.. code-block:: sh
+
+    com 
+    └── jieli 
+          └── btsmart     --- 包名
+                ├── constant        --- 常量定义
+                ├── data            --- 数据层
+                      ├── adapter       --- 适配器
+                      ├── listeners     --- 监听器
+                      └── model         --- 数据模型
+                ├── tool            --- 工具层
+                      ├── bluetooth        --- 蓝牙管理
+                      ├── configure        --- 配置缓存
+                      ├── image            --- 图片处理
+                      ├── location         --- 定位服务
+                      ├── network          --- 网络监测
+                      ├── permission       --- 权限管理
+                      ├── playercontroller --- 播放器控制类
+                      ├── product          --- 产品信息管理
+                      ├── room             --- 数据库处理
+                      └── upgrade          --- OTA升级管理
+                ├──  ui              --- UI层
+                      ├── alarm            --- 闹钟功能
+                      ├── base             --- 基类定义
+                      ├── device           --- 设备管理功能
+                      ├── eq               --- 均衡器调节功能
+                      ├── home             --- 主界面
+                      ├── launcher         --- 运行界面
+                      ├── light            --- 灯光控制
+                      ├── multimedia       --- 多媒体界面
+                      ├── music            --- 音乐控制功能
+                            ├── device        --- 设备音乐控制
+                            ├── local         --- 本地音乐控制
+                            └── net_radio     --- 网络电台控制
+                      ├── ota              --- OTA升级功能
+                      ├── qrcode           --- 扫描二维码功能
+                      ├── search           --- 查找设备功能
+                      ├── settings         --- 按键设置功能
+                      ├── soundcard        --- 声卡控制功能
+                      ├── widget           --- 自定义控件
+                      └── Activitys    --- 界面
+                ├── util               --- 工具层
+                ├── viewmodel          --- 界面逻辑实现
+                └── MainApplication    --- 应用层
+
+
+
+
+1.3 功能实现参考
+----------------
+
+.. important::
+    1. 蓝牙连接实现, 可以参考 ``com.jieli.btsmart.tool.bluetooth.rcsp.BTRcspHelper.java``
+    2. OTA功能实现, 可以参考 ``com.jieli.btsmart.tool.upgrade.OTAManager.java``

@@ -1,0 +1,124 @@
+.. _music_control: 
+
+设备音乐控制接口
+*****************************
+
+.. code-block:: java
+
+    public interface IMusicOp {
+
+        /**
+         * 获取设备音乐信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getDeviceMusicInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取设备音乐状态信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getDeviceMusicStatusInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取设备音乐支持的文件格式
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getPlayFileFormat(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设备音乐播放或暂停
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void musicPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放上一曲
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void musicPlayPrev(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放下一曲
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void musicPlayNext(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 切换到下一个播放模式
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void musicSwitchNextPlayMode(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 进度条控制
+         *
+         * @param device      操作设备
+         * @param orientation 方向 (0 -- 快进  1 -- 快退)
+         * @param time        步进
+         * @param callback    结果回调
+         */
+        void musicSeekToProgress(BluetoothDevice device, int orientation, short time, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取完整的ID3信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getID3MusicInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 开启ID3信息通知
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void openID3MusicNotification(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 关闭ID3信息通知
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void closeID3MusicNotification(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * ID3播放或暂停
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void iD3MusicPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * ID3播放上一曲
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void iD3MusicPlayPrev(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * ID3播放下一曲
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void iD3MusicPlayNext(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+    }

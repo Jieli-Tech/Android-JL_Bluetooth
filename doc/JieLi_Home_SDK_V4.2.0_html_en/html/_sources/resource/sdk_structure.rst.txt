@@ -1,0 +1,82 @@
+SDK Development Kit Introduction
+*******************************************
+
+1.1 Development Documentation Structure
+========================================================
+
+.. code-block:: sh
+    
+    apk  ---  Test APK Folder
+     ├── Test APK 
+    code ---  Reference source code project folder
+     ├── Reference source code projec
+    doc ---  Development Documentation Folder
+     ├── JieLi OTA External Library (Android) Online Development Documentation     --- Explaining the development and use of OTA libraries  
+     ├── JieLi Home SDK (Android) Online Development Documentation                 --- Explanation of JieLi Home SDK development and usage
+    libs --- Core Library Folder
+     ├── jl_bt_ota_V1.10.0_10932-release            --- Related to JieLi OTA SDK
+     ├── jl_bluetooth_rcsp_V4.2.0_40220-release     --- Related to JieLi Home SDK
+     ├── jl_audio_V1.2.0-release                    --- Related to Audio Player
+     ├── jl_eq_V1.0.0-release                       --- Related to Equalizer Algorithm
+     ├── jl_http_V1.0.5-release                     --- Related to JieLi Server
+     ├── jl-component-lib_V1.2.3-debug              --- Related to utility class
+     └── jldecryption_v0.4-release                  --- Related to Encryption Algorithm
+
+
+1.2 Example Project Structure
+=========================================================
+
+.. code-block:: sh
+
+    com 
+    └── jieli 
+          └── btsmart     --- Package Name
+                ├── constant        --- Constant Definition
+                ├── data            --- Data Layer
+                      ├── adapter       --- Adapter
+                      ├── listeners     --- Listener
+                      └── model         --- Data Model
+                ├── tool            --- Tool Layer
+                      ├── bluetooth        --- Bluetooth Management
+                      ├── configure        --- Configure Caching
+                      ├── image            --- Image Processing
+                      ├── location         --- Location Service
+                      ├── network          --- Network Monitoring
+                      ├── permission       --- Access Management
+                      ├── playercontroller --- Player Control
+                      ├── product          --- Product Information Management
+                      ├── room             --- Database Processing
+                      └── upgrade          --- OTA Management
+                ├──  ui              --- UI Layer
+                      ├── alarm            --- Alarm Clock Function
+                      ├── base             --- Base class Definition
+                      ├── device           --- Device Management Function
+                      ├── eq               --- Equalizer Adjustment Function
+                      ├── home             --- Main Activity
+                      ├── launcher         --- Launcher Activity
+                      ├── light            --- Lighting Control
+                      ├── multimedia       --- Multimedia Fragment
+                      ├── music            --- Music Control Function
+                            ├── device        --- Device Music Control
+                            ├── local         --- Local Music Control
+                            └── net_radio     --- Internet Radio Control
+                      ├── ota              --- OTA Function
+                      ├── qrcode           --- QR Code Scanning Function
+                      ├── search           --- Find Device Function
+                      ├── settings         --- Button Settings Function
+                      ├── soundcard        --- Sound Card Control Function
+                      ├── widget           --- Custom Widgets
+                      └── Activitys    --- Activity
+                ├── util               --- Tool Layer
+                ├── viewmodel          --- UI Logic Implementation
+                └── MainApplication    --- Application Layer
+
+
+
+
+1.3 Functionality Implementation Reference
+=========================================================
+
+.. important::
+    1. Bluetooth connectivity can be implemented. please refer to ``com.jieli.btsmart.tool.bluetooth.rcsp.BTRcspHelper.java``
+    2. For OTA functionality implementation. please refer to ``com.jieli.btsmart.tool.upgrade.OTAManager.java``

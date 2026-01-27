@@ -1,0 +1,229 @@
+
+.. _voice_ctrl_func:
+
+音量控制功能
+********************
+
+
+获取当前设备音量
+===============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- 公共属性
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_VOLUME``  -- 标识系统音量
+
+命令构造
+
+.. code-block:: java
+
+    //构造获取当前设备音量
+    CommandBase getVolumeCmd = CommandBuilder.buildGetVolumeCmd();
+
+
+代码示例参考 :ref:`get_sys_info` 
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+            //此处将回调设备音量信息
+        }
+    });
+    //执行获取当前音量功能并等待结果回调
+    controller.getCurrentVolume(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onVolumeChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. 音量信息, :ref:`volume_info` 
+
+
+
+
+.. _volume_info:
+
+VolumeInfo
+-----------------------------------
+
+
+音量信息
+
+.. code-block:: java
+
+    public class VolumeInfo {
+        private int maxVol;  //最大音量
+        private int volume; //当前音量
+        private boolean supportVolumeSync=false; //是否支持音量同步
+    }
+
+
+调节设备音量
+====================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- 公共属性
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_VOLUME``          -- 标识系统音量
+| **value :** volume (1Byte) -- 音量
+
+命令构造
+
+.. code-block:: java
+
+    //构造设置当前设备音量
+    int volume = 16; //音量等级, 最大音量等级可以在设备信息中获得
+    CommandBase setVolumeCmd = CommandBuilder.buildSetVolumeCmd(volume);
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+            //此处将回调设备音量信息
+        }
+    });
+    VolumeInfo volume = null; //音量信息，不能为空
+    //执行调节音量功能并等待结果回调
+    controller.adjustVolume(controller.getUsingDevice(), volume, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onVolumeChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. 音量信息, :ref:`volume_info` 
+
+
+获取高低音信息
+========================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- 公共属性
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_HIGH_AND_BASS`` -- 标识高低音功能
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getHighAndBassCmd = CommandBuilder.buildGetHighAndBassCmd();
+
+
+代码示例参考 :ref:`get_sys_info` 
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+            //此处将会回调高低音信息
+        }
+    });
+    //执行获取高低音信息功能并等待结果回调
+    controller.getHighAndBassValue(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onHighAndBassChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+设置高低音
+===========================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- 公共属性
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_HIGH_AND_BASS``   -- 标识高低音功能
+| **value :** bass (4Bytes)  + high(4Bytes) / 低音值 + 高音值
+
+命令构造
+
+.. code-block:: java
+
+    int high = 16; //高音值
+    int bass = 16; //低音值
+    CommandBase setHighAndBassCmd = CommandBuilder.buildSetHighAndBassCmd(high, bass);
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+            //此处将会回调高低音信息
+        }
+    });
+    int high = 16; //高音值
+    int bass = 16; //低音值
+    //执行设置高低音功能并等待结果回调
+    controller.setHighAndBassValue(controller.getUsingDevice(), high, bass, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onHighAndBassChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });

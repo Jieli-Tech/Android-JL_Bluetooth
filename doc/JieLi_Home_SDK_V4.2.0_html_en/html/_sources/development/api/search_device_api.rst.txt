@@ -1,0 +1,40 @@
+.. _rcsp_control: 
+
+RCSP Controller Interface
+***************************************************
+
+.. code-block:: java
+
+    public interface IRcspControl {
+
+        /**
+         * Search device
+         *
+         * @param device     Operation device
+         * @param op         Search method
+         * @param timeoutSec Search time limit
+         * @param playWay    Play method
+         * @param player     Play source
+         * @param callback   Result callback
+         */
+        void searchDev(BluetoothDevice device, int op, int timeoutSec, int playWay, int player, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Stop searching device
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void stopSearchDevice(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Sync search device status
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void syncSearchDeviceStatus(BluetoothDevice device, OnRcspActionCallback<SearchDevStatusResponse> callback);
+    }
+
+
+

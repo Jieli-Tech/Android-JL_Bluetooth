@@ -1,0 +1,166 @@
+.. _gif_convert:
+
+GIF Conversion
+************************************************
+
+Used to encode GIF files into JieLi encoded files
+
+.. code-block:: java
+
+    //Get Gif transcoding object
+    GifConverter converter = GifConverter.getInstance();
+    //inputPath : Input file path (GIF file)
+    String inputPath = "Input file path(GIF file)";
+    //outputPath : Output file path (BIN file)
+    String outputPath = "Output file path(BIN file)";
+    //mode: Encoding mode
+    int mode = GifConverter.MODE_LOW_COMPRESSION_RATE; //Suggested low compression rate
+    // - GifConverter.MODE_LOW_COMPRESSION_RATE: Low compression rate
+    // - GifConverter.MODE_MEDIUM_COMPRESSION_RATE：Medium compression rate
+    // - GifConverter.MODE_HIGH_COMPRESSION_RATE ： High compression rate
+    //V1.2.0+ Added, default value: GifConverter.CHIP_701N
+    int chip = GifConverter.CHIP_707N; //Choose algorithm based on firmware chip
+    // - GifConverter.CHIP_701N : JL701N series chip
+    // - GifConverter.CHIP_707N : JL707N series chip
+    //V1.3.0+ Added, default value: true
+    boolean isPacketJLUI = true; //Whether to pack into JL UI format; false, for raw data
+    //Execute GIF transcoding function
+    converter.gif2BinAsync(inputPath, outputPath, mode, chip, isPacketJLUI, new GifConverter.ResultCallback<GifBin>() {
+        @Override
+        public void onSuccess(GifBin gifBin) {
+            //Transcoding success
+            //gifBin --- GIF information
+        }
+
+        @Override
+        public void onError(int code, String message) {
+            //Transcoding failure
+            //code --- Error code
+            //message --- Description information
+            }
+    });
+
+
+.. important::
+    1. Image conversion function needs to import library: ``GifConvert_Vxxx-release.aar``
+    2. Input image size cannot exceed device screen size
+    3. Input image size should be as small as possible
+    4. :ref:`gif_bin` 
+    5. :ref:`result_callback` 
+    6. :ref:`gif_error_code` 
+
+
+
+.. _gif_bin:
+
+GifBin
+==========================================
+
+Gif transcoding file information
+
+.. code-block:: java
+
+    public class GifBin implements Parcelable {
+        /**
+         * Name
+         */
+        private String name;
+        /**
+         * Width
+         */
+        private int width;
+        /**
+         * Height
+         */
+        private int height;
+        /**
+         * Data
+         */
+        private byte[] data;
+        /**
+         * File path
+         */
+        private String path;
+        /**
+         * Whether to pack JieLi format
+         */
+        private boolean isPacket;
+    }
+
+
+.. _result_callback:
+
+ResultCallback
+=================================
+
+Result callback
+
+.. code-block:: java
+
+    public interface ResultCallback<T> {
+
+        /**
+         * Callback success result
+         *
+         * @param result Result
+         */
+        void onSuccess(T result);
+
+        /**
+         * Callback failure event
+         *
+         * @param code    Error code
+         * @param message Error description
+         */
+        void onError(int code, String message);
+    }
+
+
+.. _gif_error_code:
+
+Error Code
+====================================
+
+* Corresponding class name: ``GifError.java``
+* Reference constant: **GifError#** ``xxx``
+
+
+========================================= ================================== ================================================================================
+                Reference Constant                      Code Value                                               Description                    
+========================================= ================================== ================================================================================
+  ERR_NONE                                               0                         Operation success
+  ERR_OPEN_FILE                                          1                         Cannot open given file
+  ERR_WRITE_FAILED                                       2                         Write data failed
+  ERR_HAS_SCRN_DSCR                                      3                         Has SCRN DSCR
+  ERR_HAS_IMAG_DSCR                                      4                         Has IMAG DSCR
+  ERR_NO_COLOR_MAP                                       5                         Missing color map
+  ERR_DATA_TOO_BIG                                       6                         Data too big
+  ERR_NOT_ENOUGH_MEM                                     7                         Not enough memory
+  ERR_DISK_IS_FULL                                       8                         Disk is full
+  ERR_CLOSE_FAILED                                       9                         Close file failed
+  ERR_NOT_WRITEABLE                                      10                        No write attribute
+ |
+  ERR_D_OPEN_FILE                                        101                       Cannot open given file
+  ERR_READ_FAILED                                        102                       Cannot read file data
+  ERR_NOT_GIF_FILE                                       103                       Not a GIF file
+  ERR_NO_SCRN_DSCR                                       104                       Missing SCRN DSCR
+  ERR_NO_IMAG_DSCR                                       105                       Missing IMAG DSCR
+  ERR_D_NO_COLOR_MAP                                     106                       Missing color map
+  ERR_WRONG_RECORD                                       107                       Wrong record
+  ERR_D_DATA_TOO_BIG                                     108                       Data too big
+  ERR_D_NOT_ENOUGH_MEM                                   109                       Not enough memory
+  ERR_D_CLOSE_FAILED                                     110                       Close file failed
+  ERR_NOT_READABLE                                       111                       File not readable
+  ERR_IMAGE_DEFECT                                       112                       Image detection failed
+  ERR_EOF_TOO_SOON                                       113                       File end too soon
+ |
+  ERR_INVALID_PARAM                                      301                       Invalid parameter
+  ERR_OP_IN_PROGRESS                                     302                       Operation in progress
+  ERR_SAVE_FILE                                          303                       Save file failed
+ |
+  ERR_UNKNOWN_MODE                                       -128                      Unknown compression mode
+  ERR_UNKNOWN_CHIP                                       -129                      Unknown chip type
+========================================= ================================== ================================================================================
+
+
+

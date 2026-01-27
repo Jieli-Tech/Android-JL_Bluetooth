@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2 Bluetooth Proxy Module &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3 Functional Modules" href="function_list.html" />
+    <link rel="prev" title="1 Usage Process" href="use_flow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><span class="sectnum">2 </span>Bluetooth Proxy Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scan-bluetooth-devices"><span class="sectnum">2.1 </span>Scan Bluetooth devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#start-scanning-device"><span class="sectnum">2.1.1 </span>Start scanning device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stop-scanning-devices"><span class="sectnum">2.1.2 </span>Stop scanning devices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-devices"><span class="sectnum">2.2 </span>Connecting devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#communication-methods-for-connecting-devices"><span class="sectnum">2.2.1 </span>Communication methods for connecting devices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ble-connection-device"><span class="sectnum">2.2.2 </span>BLE connection device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#connect-device-spp"><span class="sectnum">2.2.3 </span>Connect device SPP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classic-bluetooth-service-for-connecting-devices"><span class="sectnum">2.2.4 </span>Classic Bluetooth service for connecting devices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gatt-over-br-edr-for-connecting-devices"><span class="sectnum">2.2.5 </span>Gatt Over BR/EDR for Connecting Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-read-and-write"><span class="sectnum">2.3 </span>Data Read and Write</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#receive-data"><span class="sectnum">2.3.1 </span>Receive Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#send-data"><span class="sectnum">2.3.2 </span>Send Data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#historical-record-management"><span class="sectnum">2.4 </span>Historical Record Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-history-list"><span class="sectnum">2.4.1 </span>Get history list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#back-to-history"><span class="sectnum">2.4.2 </span>Back to History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-history"><span class="sectnum">2.4.3 </span>Delete History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clear-all-history"><span class="sectnum">2.4.4 </span>Clear All History</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="function_list.html">3 Functional Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+      <li class="breadcrumb-item active"><span class="sectnum">2 </span>Bluetooth Proxy Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-proxy-module">
+<h1><span class="sectnum">2 </span>Bluetooth Proxy Module<a class="headerlink" href="#bluetooth-proxy-module" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">1. This module is only used for <code class="docutils literal notranslate"><span class="pre">built-in</span> <span class="pre">Bluetooth</span> <span class="pre">proxy</span> <span class="pre">implementation</span></code>.</div>
+<div class="line">2. <code class="docutils literal notranslate"><span class="pre">JL_BluetoothManager</span></code> is for Bluetooth interface management. <a class="reference internal" href="../api/bt_api.html#bt-manager-api"><span class="std std-ref">1   Bluetooth Processing Interface</span></a></div>
+<div class="line">3. <code class="docutils literal notranslate"><span class="pre">BluetoothOperationImpl</span></code> is the specific implementation of the Bluetooth function. <a class="reference internal" href="../api/bt_api.html#bt-op-api"><span class="std std-ref">1.2   Bluetooth Operation Interface</span></a></div>
+</div>
+</div>
+<section id="scan-bluetooth-devices">
+<span id="scan-device"></span><h2><span class="sectnum">2.1 </span>Scan Bluetooth devices<a class="headerlink" href="#scan-bluetooth-devices" title="Link to this heading"></a></h2>
+<section id="start-scanning-device">
+<h3><span class="sectnum">2.1.1 </span>Start scanning device<a class="headerlink" href="#start-scanning-device" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Bluetooth event listener</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscoveryStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bBle</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bStart</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to detect device status</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to discovered Devices</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Add Bluetooth event listener</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">scanType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">SCAN_TYPE_BLE</span><span class="p">;</span><span class="w"> </span><span class="c1">//Scanning device type --- BLE device</span>
+<span class="c1">// BluetoothConstant.SCAN_TYPE_CLASSIC --- Classic Bluetooth devices</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="c1">//Search timed out --- 30 seconds</span>
+<span class="c1">//Perform scanning device</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">scan</span><span class="p">(</span><span class="n">scanType</span><span class="p">,</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span>
+<span class="c1">//Remove Bluetooth event listener</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>To scan for Bluetooth devices, you need to ensure that <code class="docutils literal notranslate"><span class="pre">Bluetooth</span></code> is enabled.</p></li>
+<li><p>Scanning Bluetooth devices requires ensuring <code class="docutils literal notranslate"><span class="pre">permissions</span></code>.</p>
+<ol class="arabic simple">
+<li><p>Android 6.0+, <code class="docutils literal notranslate"><span class="pre">Bluetooth</span> <span class="pre">permissions</span></code> and <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">permissions</span></code></p></li>
+<li><p>Android 12.0+, <code class="docutils literal notranslate"><span class="pre">Bluetooth</span> <span class="pre">search</span> <span class="pre">permission</span></code></p></li>
+</ol>
+</li>
+<li><p>Scanning for Bluetooth devices requires ensuring that <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">services</span></code> are enabled.</p></li>
+<li><p>Scan Bluetooth device configuration, refer to <a class="reference internal" href="../import.html#bluetooth-option"><span class="std std-ref">1.2.1   BluetoothOption</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="stop-scanning-devices">
+<h3><span class="sectnum">2.1.2 </span>Stop scanning devices<a class="headerlink" href="#stop-scanning-devices" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Execute stop scanning device</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">stopScan</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="connecting-devices">
+<span id="connect-device"></span><h2><span class="sectnum">2.2 </span>Connecting devices<a class="headerlink" href="#connecting-devices" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>To connect the device, please ensure that <code class="docutils literal notranslate"><span class="pre">Bluetooth</span></code> is enabled.</p></li>
+<li><p>Connecting to the device requires ensuring that <code class="docutils literal notranslate"><span class="pre">permissions</span></code> have been granted.</p>
+<ul class="simple">
+<li><p>Android 6.0+, <code class="docutils literal notranslate"><span class="pre">Bluetooth</span> <span class="pre">permissions</span></code> and <code class="docutils literal notranslate"><span class="pre">location</span> <span class="pre">permissions</span></code></p></li>
+<li><p>Android 12.0+, <code class="docutils literal notranslate"><span class="pre">Bluetooth</span> <span class="pre">connection</span> <span class="pre">permission</span></code></p></li>
+</ul>
+</li>
+<li><p>Connecting to devices requires that operations be performed linearly, not concurrently.</p></li>
+<li><p>Connecting devices refers to connecting communication protocols (BLE/SPP), excluding classic Bluetooth services.</p></li>
+</ol>
+</div>
+<section id="communication-methods-for-connecting-devices">
+<h3><span class="sectnum">2.2.1 </span>Communication methods for connecting devices<a class="headerlink" href="#communication-methods-for-connecting-devices" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">().</span><span class="na">isConnecting</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Connecting device</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Bluetooth event listener</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback Bluetooth connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Add Bluetooth event listener</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//Execution connection device</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//Execute disconnect device</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//Remove Bluetooth event listener</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="ble-connection-device">
+<h3><span class="sectnum">2.2.2 </span>BLE connection device<a class="headerlink" href="#ble-connection-device" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>4.0.0+Version</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">().</span><span class="na">isConnecting</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Connecting device</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Bluetooth event listener</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback Bluetooth connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Add Bluetooth event listener</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//Execution connection device</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PROTOCOL_TYPE_BLE</span><span class="p">);</span>
+<span class="c1">//Execute disconnect device</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//Remove Bluetooth event listener</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SDK_V4.0.0 and later support</p>
+</div>
+<ul class="simple">
+<li><p><strong>Old version</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Get Bluetooth function implementation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="c1">//Bluetooth event callback</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to BLE device connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Register Bluetooth event callback</span>
+<span class="n">btOp</span><span class="p">.</span><span class="na">registerBluetoothCallback</span><span class="p">(</span><span class="n">bluetoothCallback</span><span class="p">);</span>
+<span class="c1">//Perform a BLE connection operation</span>
+<span class="c1">//result --- Operation results</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">connectBLEDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//Execute BLE disconnection</span>
+<span class="c1">//        btOp.disconnectBLEDevice(device);</span>
+<span class="c1">//Cancel Bluetooth event callbackk</span>
+<span class="c1">//        btOp.unregisterBluetoothCallback(bluetoothCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="connect-device-spp">
+<h3><span class="sectnum">2.2.3 </span>Connect device SPP<a class="headerlink" href="#connect-device-spp" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>4.0.0+Version</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Bluetooth event callback</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback Bluetooth connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Add Bluetooth event listener</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//Execute SPP to connect devices</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PROTOCOL_TYPE_SPP</span><span class="p">);</span>
+<span class="c1">//Execute disconnect device</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//Remove Bluetooth event listener</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SDK_V4.0.0 and later support</p>
+</div>
+<ul class="simple">
+<li><p><strong>Old version</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Get Bluetooth function implementation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="c1">//Bluetooth event callback</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to SPP device connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Register Bluetooth event callback</span>
+<span class="n">btOp</span><span class="p">.</span><span class="na">registerBluetoothCallback</span><span class="p">(</span><span class="n">bluetoothCallback</span><span class="p">);</span>
+<span class="c1">//Execute SPP to connect devices</span>
+<span class="c1">//result --- Operation results</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">connectSPPDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//Execute disconnect device</span>
+<span class="c1">//        btOp.disconnectSPPDevice(device);</span>
+<span class="c1">//Cancel Bluetooth event callback</span>
+<span class="c1">//        btOp.unregisterBluetoothCallback(bluetoothCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="classic-bluetooth-service-for-connecting-devices">
+<h3><span class="sectnum">2.2.4 </span>Classic Bluetooth service for connecting devices<a class="headerlink" href="#classic-bluetooth-service-for-connecting-devices" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Bluetooth event callback</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onA2dpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback A2DP connection status</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHfpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback HFP connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Add Bluetooth event listener</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//Perform connection to classic Bluetooth devices</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">startConnectByBreProfiles</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//Perform disconnection of classic Bluetooth</span>
+<span class="c1">//        btManager.disconnectByProfiles(device);</span>
+<span class="c1">//Remove Bluetooth event listener</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="gatt-over-br-edr-for-connecting-devices">
+<span id="connect-gatt-over-edr"></span><h3><span class="sectnum">2.2.5 </span>Gatt Over BR/EDR for Connecting Devices<a class="headerlink" href="#gatt-over-br-edr-for-connecting-devices" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">().</span><span class="na">isConnecting</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Connecting device</span>
+<span class="c1">//Classic Bluetooth address</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//Bluetooth event listener</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback Bluetooth connection status</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Add Bluetooth event listener</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//Execution connection device</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PROTOCOL_TYPE_GATT_OVER_BR_EDR</span><span class="p">);</span>
+<span class="c1">//Execute disconnect device</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//Remove Bluetooth event listener</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>SDK_V4.2.0 and later support</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="data-read-and-write">
+<h2><span class="sectnum">2.3 </span>Data Read and Write<a class="headerlink" href="#data-read-and-write" title="Link to this heading"></a></h2>
+<section id="receive-data">
+<h3><span class="sectnum">2.3.1 </span>Receive Data<a class="headerlink" href="#receive-data" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Get Bluetooth function implementation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="c1">//Bluetooth event callback</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicsUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//BLE data received via callback</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//SPP data received via callback</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//Register Bluetooth event callback</span>
+<span class="n">btOp</span><span class="p">.</span><span class="na">registerBluetoothCallback</span><span class="p">(</span><span class="n">bluetoothCallback</span><span class="p">);</span>
+<span class="c1">//Cancel Bluetooth event callback</span>
+<span class="c1">//        btOp.unregisterBluetoothCallback(bluetoothCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Gatt</span> <span class="pre">Over</span> <span class="pre">BR/EDR</span></code> data reception operation is the same as the <code class="docutils literal notranslate"><span class="pre">BLE</span></code> data reception operation.</p></li>
+</ol>
+</div>
+</section>
+<section id="send-data">
+<h3><span class="sectnum">2.3.2 </span>Send Data<a class="headerlink" href="#send-data" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//data  --- Data sent</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="c1">//Execute data sending operation</span>
+<span class="c1">//ret --- Operation results</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">sendDataToDevice</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<section id="sending-data-via-ble">
+<h4><span class="sectnum">2.3.2.1 </span>Sending data via BLE<a class="headerlink" href="#sending-data-via-ble" title="Link to this heading"></a></h4>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Get Bluetooth function implementation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//data  --- Data sent</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="c1">//Execute data sending operation</span>
+<span class="c1">//ret --- Operation results</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">writeDataToBLEDevice</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;Service UUID&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;Write characteristics UUID&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Gatt</span> <span class="pre">Over</span> <span class="pre">BR/EDR</span></code> data transmission operation is the same as the <code class="docutils literal notranslate"><span class="pre">BLE</span></code> data transmission operation, but the input device address is different, namely the <code class="docutils literal notranslate"><span class="pre">Classic</span> <span class="pre">Bluetooth</span> <span class="pre">Address</span></code> and the <code class="docutils literal notranslate"><span class="pre">BLE</span> <span class="pre">Address</span></code> respectively.</p></li>
+</ol>
+</div>
+</section>
+<section id="send-data-via-spp">
+<h4><span class="sectnum">2.3.2.2 </span>Send data via SPP<a class="headerlink" href="#send-data-via-spp" title="Link to this heading"></a></h4>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Get Bluetooth function implementation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;Target device address&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//data  --- Data sent</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="c1">//Execute data sending operation</span>
+<span class="c1">//ret --- Operation results</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">writeDataToSppDevice</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;SPP communication UUID&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="historical-record-management">
+<h2><span class="sectnum">2.4 </span>Historical Record Management<a class="headerlink" href="#historical-record-management" title="Link to this heading"></a></h2>
+<section id="get-history-list">
+<h3><span class="sectnum">2.4.1 </span>Get history list<a class="headerlink" href="#get-history-list" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Get history list</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">historyDevices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getHistoryBluetoothDeviceList</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="back-to-history">
+<h3><span class="sectnum">2.4.2 </span>Back to History<a class="headerlink" href="#back-to-history" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">//History records cannot be empty.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">45</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="c1">//Connection timeout</span>
+<span class="c1">//Execute back connection history operation</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">reconnectHistoryBluetoothDevice</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnReconnectHistoryRecordListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to historical records successful</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFailed</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to connect to history failed</span>
+<span class="w">        </span><span class="c1">//history --- Historical record</span>
+<span class="w">        </span><span class="c1">//error   --- error message</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Historical record, <a class="reference internal" href="#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a></p>
+</div>
+<section id="historybluetoothdevice">
+<span id="history-device"></span><h4><span class="sectnum">2.4.2.1 </span>HistoryBluetoothDevice<a class="headerlink" href="#historybluetoothdevice" title="Link to this heading"></a></h4>
+<p>Historical Record</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HistoryBluetoothDevice</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Bluetooth device name</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Communication method type</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE method&lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP method&lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- Gatt Over BR/EDR method</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@ConnectWay</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Mapped address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mappedAddress</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Upgrade address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">otaAddress</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Chip type</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">chipType</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device Type</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">deviceType</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast packet protocol version number</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">advVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Manufacturer ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Customer ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Product ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Does it support LE Audio?</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportLeAudio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//left device gps(The default device is the left-hand device, which is also the default host device.)</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Left ear latitude</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftDevLatitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Left ear longitude</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftDevLongitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Left ear GPS update time</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">leftDevUpdateTime</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//right device gps</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Right ear latitude</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightDevLatitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Right ear longitude</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightDevLongitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Right ear GPS update time</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">rightDevUpdateTime</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="delete-history">
+<h3><span class="sectnum">2.4.3 </span>Delete History<a class="headerlink" href="#delete-history" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">//History records cannot be empty.</span>
+<span class="c1">//Perform the operation to delete history</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">removeHistoryDevice</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IActionCallback</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback successfully deleted history</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Callback to delete history failed</span>
+<span class="w">        </span><span class="c1">//error   --- error message</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Historical record, <a class="reference internal" href="#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a></p>
+</div>
+</section>
+<section id="clear-all-history">
+<h3><span class="sectnum">2.4.4 </span>Clear All History<a class="headerlink" href="#clear-all-history" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Get Bluetooth operation object</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Custom Bluetooth implementation, btManager is empty.</span>
+<span class="c1">//Perform the operation to clear all history.</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">clearHistoryDeviceRecord</span><span class="p">();</span>
+<span class="c1">//Note that you need to update the history list after clearing.</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">historyDevices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getHistoryBluetoothDeviceList</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="use_flow.html" class="btn btn-neutral float-left" title="1 Usage Process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="function_list.html" class="btn btn-neutral float-right" title="3 Functional Modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

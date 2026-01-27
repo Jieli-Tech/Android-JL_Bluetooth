@@ -1,0 +1,65 @@
+.. _eq_control: 
+
+Equalizer Function Interface
+**************************************
+
+.. code-block:: java
+
+    public interface IEqOp {
+
+        /**
+         * Get EQ info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getEqInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set EQ info
+         *
+         * @param device   Operation device
+         * @param eqInfo   EQ info
+         * @param callback Result callback
+         */
+        void configEqInfo(BluetoothDevice device, EqInfo eqInfo, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get expand data info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getExpandDataInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set expand data
+         *
+         * @param device   Operation device
+         * @param mask     Mask
+         * @param data     Expand data
+         * @param callback Result callback
+         */
+        void setExpandDataInfo(BluetoothDevice device, int mask, byte[] data, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set reverb parameters
+         *
+         * @param device    Operation device
+         * @param param     Reverb parameters
+         * @param callback  Result callback
+         */
+        void setReverberationParameter(BluetoothDevice device, ReverberationParam param, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set dynamic limiter parameters
+         *
+         * @param device    Operation device
+         * @param param     Dynamic limiter parameters
+         * @param callback  Result callback
+         */
+        void setDynamicLimiterParameter(BluetoothDevice device, DynamicLimiterParam  param, OnRcspActionCallback<Boolean> callback);
+    }
+
+
+

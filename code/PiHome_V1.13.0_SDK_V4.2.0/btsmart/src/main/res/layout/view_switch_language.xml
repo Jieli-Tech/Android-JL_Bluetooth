@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/color_bg">
+
+    <ImageView
+        android:id="@+id/iv_dest_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/ic_headset_side_gray"
+        app:layout_constraintBottom_toTopOf="@+id/btn_dest_language"
+        app:layout_constraintStart_toStartOf="@+id/btn_dest_language"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_switch_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_switch_black"
+        android:paddingTop="2dp"
+        android:paddingStart="8dp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/bg_c8_white_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_dest_language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_dest_language"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_src_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/ic_translation_side_gray"
+        app:layout_constraintBottom_toTopOf="@+id/btn_src_language"
+        app:layout_constraintStart_toStartOf="@+id/btn_src_language"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_dest_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="@string/our_side"
+        android:textColor="@color/gray_99000000"
+        android:textSize="@dimen/text_11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_dest_language"
+        app:layout_constraintStart_toEndOf="@+id/iv_dest_language"
+        app:layout_constraintTop_toTopOf="@+id/iv_dest_language" />
+
+    <TextView
+        android:id="@+id/tv_src_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="@string/other_side"
+        android:textColor="@color/gray_99000000"
+        android:textSize="@dimen/text_11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_src_language"
+        app:layout_constraintStart_toEndOf="@+id/iv_src_language"
+        app:layout_constraintTop_toTopOf="@+id/iv_src_language" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_dest_language"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/bg_btn_c6_l1_white_selector"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:stateListAnimator="@null"
+        android:textColor="@color/black_E6000000"
+        android:textSize="@dimen/text_15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/iv_switch_language"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dest_language"
+        tools:ignore="UnusedAttribute"
+        tools:text="@string/language_english" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_src_language"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_btn_c6_l1_white_selector"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:stateListAnimator="@null"
+        android:textColor="@color/black_E6000000"
+        android:textSize="@dimen/text_15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_switch_language"
+        app:layout_constraintTop_toBottomOf="@+id/iv_src_language"
+        tools:ignore="UnusedAttribute"
+        tools:text="@string/language_chinese" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,200 @@
+.. _light_ctrl_func:
+
+Light Control Function
+***********************************************
+
+.. important:: 
+    1. Interface requires device to be in 【Light Mode】 to take effect
+    2. Determine if device supports 【Light Mode】
+    
+    .. code-block:: java
+      
+        public boolean isSupportLightMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.isLightEnable();
+        }
+   
+
+    3. Determine if device is in 【Light Mode】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInLightMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_LIGHT;
+        }
+
+    4. :ref:`get_device_mode` 
+   
+
+
+
+Get Light Control Information
+======================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_LIGHT``  -- Light control
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getLightControlInfoCmd = CommandBuilder.buildGetLightControlInfoCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo) {
+            //Callback light control information here
+        }
+    });
+    //Execute get light control information function and wait for result callback
+    controller.getLightControlInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onLightControlInfo
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Set Light Control
+=====================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``    -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_LIGHT``             -- Light control
+| **value :**  data(n Bytes)                                     -- Control data  
+
+Command construction
+
+.. code-block:: java
+
+    LightControlInfo lightControlInfo; 
+    CommandBase setLightControlInfoCmd = CommandBuilder.buildSetLightControlInfoCmd(lightControlInfo.toByteArray());
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute set light control function and wait for result callback
+    controller.setLightControlInfo(controller.getUsingDevice(), lightControlInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`light_ctrl_info` 
+
+
+
+
+.. _light_ctrl_info:
+
+Light Control Information
+===================================================
+
+
+.. code-block:: java
+
+    public class LightControlInfo {
+        /*State*/
+        public final static int STATE_OFF = 0;      //Off
+        public final static int STATE_ON = 1;       //On
+        public final static int STATE_SETTING = 2;  //Setting mode
+
+        /*Light mode*/
+        public final static int LIGHT_MODE_COLOURFUL = 0; //Colorful
+        public final static int LIGHT_MODE_TWINKLE = 1;   //Twinkle
+        public final static int LIGHT_MODE_SCENE = 2;     //Scene
+
+        /*Twinkle mode*/
+        public final static int TWINKLE_MODE_COLORFUL = 0; //Colorful
+        public final static int TWINKLE_MODE_RED = 1;      //Red
+        public final static int TWINKLE_MODE_ORANGE = 2;   //Orange
+        public final static int TWINKLE_MODE_YELLOW = 3;   //Yellow
+        public final static int TWINKLE_MODE_GREEN = 4;    //Green
+        public final static int TWINKLE_MODE_CYAN = 5;     //Cyan
+        public final static int TWINKLE_MODE_BLUE = 6;     //Blue
+        public final static int TWINKLE_MODE_PURPLE = 7;   //Purple
+
+        /*Twinkle frequency*/
+        public final static int TWINKLE_FREQ_FAST = 0;     //Fast flash
+        public final static int TWINKLE_FREQ_SLOW = 1;     //Slow
+        public final static int TWINKLE_FREQ_BREATHE = 2;  //Breathing flash
+        public final static int TWINKLE_FREQ_MUSIC = 3;    //Music flash
+
+        /*Scene mode*/
+        public final static int SCENE_MODE_RAINBOW = 0;              //Rainbow
+        public final static int SCENE_MODE_HEARTBEAT = 1;            //Heartbeat
+        public final static int SCENE_MODE_CANDLELIGHT = 2;          //Candlelight
+        public final static int SCENE_MODE_NIGHT_LIGHT = 3;          //Night light
+        public final static int SCENE_MODE_STAGE = 4;                //Stage
+        public final static int SCENE_MODE_COLORFUL_BREATHING = 5;   //Colorful breathing
+        public final static int SCENE_MODE_RED_BREATHING = 6;        //Red breathing
+        public final static int SCENE_MODE_GREEN_BREATHING = 7;      //Green breathing
+        public final static int SCENE_MODE_BLUE_BREATHING = 8;       //Blue breathing
+        public final static int SCENE_MODE_GREEN_MOOD = 9;           //Green mood
+        public final static int SCENE_MODE_BEAUTIFUL_SUNSET = 10;    //Beautiful sunset
+        public final static int SCENE_MODE_MUSIC_RHYTHM = 11;        //Music rhythm
+
+        private int switchState; //Switch state
+        private int lightMode; //Light mode
+        private int color; //Color value
+        private int twinkleMode; //Twinkle mode
+        private int twinkleFreq; //Twinkle frequency
+        private int sceneMode; //Scene mode
+        private int hue;         //Hue, range: 0-360
+        private int saturation;  //Saturation, range: 0-100
+        private int luminance;   //Luminance, range: 0-100
+    
+    }
+
+
+

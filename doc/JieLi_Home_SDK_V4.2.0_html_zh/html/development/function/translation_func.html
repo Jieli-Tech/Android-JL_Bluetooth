@@ -1,0 +1,830 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>23. 翻译功能 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="24. Auracast助手" href="auracast_assistant_func.html" />
+    <link rel="prev" title="22. GIF转换" href="gif_convert_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 功能模块</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. 基础功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. 设备音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. 彩屏充电仓功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. 图像转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">23. 翻译功能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">23.1. 初始化翻译功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a2dp">23.2. 是否优先A2DP播放</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">23.3. 进入模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">23.4. 退出模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">23.5. 销毁对象</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">23.6. 接口调用流程图</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast助手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 功能模块</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">23. </span>翻译功能</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="translation-func">
+<span id="id1"></span><h1><span class="section-number">23. </span>翻译功能<a class="headerlink" href="#translation-func" title="Link to this heading"></a></h1>
+<p>功能实现类名: <code class="docutils literal notranslate"><span class="pre">TranslationImpl</span></code></p>
+<section id="id2">
+<h2><span class="section-number">23.1. </span>初始化翻译功能<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>必须先等待初始化结果回调成功，才能操作接口</p>
+</div>
+<section id="ai">
+<h3><span class="section-number">23.1.1. </span>通过AI云翻译代理实现初始化<a class="headerlink" href="#ai" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">TranslationImpl</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">RcspOpImpl</span><span class="w"> </span><span class="n">rcspOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">();</span>
+<span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationImpl</span><span class="p">(</span><span class="n">rcspOp</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CustomAITranslation</span><span class="p">());</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportTranslation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportTranslation</span><span class="p">){</span><span class="w"> </span><span class="c1">//不支持翻译功能</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="c1">//添加翻译事件回调</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">addTranslationCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调翻译模式改变</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调接收到的音频数据</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调错误事件</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">推荐实现方式</span></code></p></li>
+<li><p><a class="reference internal" href="#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+<p><strong>自定义AI云翻译代理</strong></p>
+<p><a class="reference internal" href="../api/translation_func_api.html#ai-translation-api"><span class="std std-ref">IAITranslationApi</span></a></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomAITranslation</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IAITranslationApi</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AITranslationCallback</span><span class="w"> </span><span class="n">translationCallback</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * OPUS解码器</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * OPUS编码器</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">opusEncoder</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否正在翻译</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isWorking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前翻译模式信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">currentMode</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isWorking</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isWorking</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startTranslating</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AITranslationCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//根据翻译模式信息，进行AI云翻译任务</span>
+<span class="w">        </span><span class="n">currentMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span>
+<span class="w">        </span><span class="n">translationCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">callback</span><span class="p">;</span>
+<span class="w">        </span><span class="n">isWorking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="n">initOpusEncoder</span><span class="p">();</span>
+<span class="w">        </span><span class="n">startOpusDecode</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopTranslating</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//停止翻译</span>
+<span class="w">        </span><span class="n">destroyOpusEncoder</span><span class="p">();</span>
+<span class="w">        </span><span class="n">stopOpusDecode</span><span class="p">();</span>
+<span class="w">        </span><span class="n">currentMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">translationCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">isWorking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeAudio</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//需要根据音频来源进行翻译任务</span>
+<span class="w">        </span><span class="c1">//比如：通话翻译，有上行数据 和下行数据</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentMode</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audioData</span><span class="p">.</span><span class="na">getSource</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AudioData</span><span class="p">.</span><span class="na">SOURCE_E_SCO_UP_LINK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//上行数据</span>
+<span class="w">                </span><span class="c1">//解码上行数据</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">audioData</span><span class="p">.</span><span class="na">getSource</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">AudioData</span><span class="p">.</span><span class="na">SOURCE_E_SCO_DOWN_LINK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//下行数据</span>
+<span class="w">                </span><span class="c1">//解码下行数据</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//解码数据</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startOpusDecode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">opusDecoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpusManager</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OpusException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">decoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decoder</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decoder</span><span class="p">.</span><span class="na">isDecodeStream</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">decoder</span><span class="p">.</span><span class="na">stopDecodeStream</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">decoder</span><span class="p">.</span><span class="na">startDecodeStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnDecodeStreamCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDecodeStream</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//解码成功(流式)</span>
+<span class="w">                    </span><span class="c1">//把流式的PCN数据上传的AI云端，进行语义分析和翻译</span>
+<span class="w">                    </span><span class="c1">//把翻译结果，TTS音频编码成OPUS数据，再通过 AITranslationCallback#onTranslateResult(result) 回调到SDK</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//解码开始</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onComplete</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//解码结束</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="nd">@Override</span>
+<span class="w">                </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//解码失败</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopOpusDecode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">decoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">decoder</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">decoder</span><span class="p">.</span><span class="na">isDecodeStream</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">decoder</span><span class="p">.</span><span class="na">stopDecodeStream</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">opusDecoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initOpusEncoder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">opusEncoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">opusEncoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OpusManager</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">OpusException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroyOpusEncoder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">opusDecoder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">opusEncoder</span><span class="p">.</span><span class="na">release</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">opusEncoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">pushTranslationResult</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">ttsData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">OpusManager</span><span class="w"> </span><span class="n">encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opusEncoder</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">encoder</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//保存TTS数据为TTS文件，略</span>
+<span class="w">        </span><span class="n">encoder</span><span class="p">.</span><span class="na">encodeFile</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;你的TTS文件保存路径(xxx.pcm)&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">//只接受PCM文件</span>
+<span class="w">                </span><span class="s">&quot;编码输出文件路径(xxx.opus)&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">OnEncodeStreamCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEncodeStream</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//回调编码数据(流式)</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//回调编码开始</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onComplete</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//回调编码成功</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">                        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">opusData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readFileData</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">opusData</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">                        </span><span class="c1">//构造翻译结果数据</span>
+<span class="w">                        </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AudioData</span><span class="p">(</span>
+<span class="w">                                </span><span class="n">AudioData</span><span class="p">.</span><span class="na">SOURCE_DEVICE_MIC</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">Constants</span><span class="p">.</span><span class="na">AUDIO_TYPE_OPUS</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">opusData</span>
+<span class="w">                        </span><span class="p">);</span>
+<span class="w">                        </span><span class="c1">//通知SDK下发数据</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">translationCallback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">translationCallback</span><span class="p">.</span><span class="na">onTranslateResult</span><span class="p">(</span>
+<span class="w">                                    </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationResult</span><span class="p">()</span>
+<span class="w">                                            </span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">//翻译任务序号</span>
+<span class="w">                                            </span><span class="p">.</span><span class="na">setTranslationTTSData</span><span class="p">(</span><span class="n">audioData</span><span class="p">)</span>
+<span class="w">                            </span><span class="p">);</span>
+<span class="w">                        </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                    </span><span class="nd">@Override</span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">//回调编码失败</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">readFileData</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">InputStream</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
+<span class="w">            </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">input</span><span class="p">.</span><span class="na">available</span><span class="p">()</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+<span class="w">            </span><span class="n">input</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3><span class="section-number">23.1.2. </span>通过自定义云翻译流程初始化<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">TranslationImpl</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">RcspOpImpl</span><span class="w"> </span><span class="n">rcspOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">();</span>
+<span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationImpl</span><span class="p">(</span><span class="n">rcspOp</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportTranslation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isSupportTranslation</span><span class="p">){</span><span class="w"> </span><span class="c1">//不支持翻译功能</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="w">        </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="c1">//添加翻译事件回调</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">addTranslationCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调翻译模式改变</span>
+<span class="w">        </span><span class="c1">//自行处理各种模式</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_IDLE</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//空闲模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORD</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//录音模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORDING_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//录音翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//通话翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_AUDIO_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//音视频翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_FACE_TO_FACE_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//面对面翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION_WITH_STEREO</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//通话翻译立体声模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调接收到的音频数据</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">getTranslationMode</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_IDLE</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//自行处理各种模式</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getMode</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_IDLE</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//空闲模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORD</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//录音模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORDING_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//录音翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//通话翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_AUDIO_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//音视频翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_FACE_TO_FACE_TRANSLATION</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//面对面翻译模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_CALL_TRANSLATION_WITH_STEREO</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//通话翻译立体声模式</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调错误事件</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">writeAudioData</span></code> 下发翻译音频数据</p></li>
+</ol>
+</div>
+<section id="translationmode">
+<span id="translation-mode"></span><h4><span class="section-number">23.1.2.1. </span>TranslationMode<a class="headerlink" href="#translationmode" title="Link to this heading"></a></h4>
+<p>翻译模式</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TranslationMode</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 翻译模式</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@Mode</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 音频类型</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@AudioType</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">audioType</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 声道数</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">channel</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 采样率</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * 单位: Hz</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sampleRate</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 录音策略</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * 说明: 仅翻译模式为 {@link #MODE_RECORD} 或 {@link #MODE_RECORDING_TRANSLATION}生效。</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@RecordingStrategy</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">recordingStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STRATEGY_CUSTOM_RECORDING</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translate-mode"><span class="std std-ref">翻译模式</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-type"><span class="std std-ref">音频类型</span></a></p></li>
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">recordingStrategy</span></code> 字段来指定录音功能的执行策略，仅适用于实现 <a class="reference internal" href="../api/translation_func_api.html#ai-translation-api"><span class="std std-ref">IAITranslationApi</span></a> 接口的情况</p></li>
+</ol>
+</div>
+</section>
+<section id="audiodata">
+<span id="audio-data"></span><h4><span class="section-number">23.1.2.2. </span>AudioData<a class="headerlink" href="#audiodata" title="Link to this heading"></a></h4>
+<p>音频数据</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AudioData</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 音频来源</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@AudioSource</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">source</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 音频类型</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@AudioType</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 包计数</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * 倒序，0为结束包</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 音频数据的CRC</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="n">crc</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 音频数据</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@NonNull</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">audioData</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 数据块MTU</span>
+<span class="cm">      * &lt;p&gt;</span>
+<span class="cm">      * 取值范围: [40, 230]</span>
+<span class="cm">      * &lt;/p&gt;</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nd">@IntRange</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">230</span><span class="p">)</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">blockMtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#audio-source"><span class="std std-ref">音频来源</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-type"><span class="std std-ref">音频类型</span></a></p></li>
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">blockMtu</span></code> 字段，调整发送数据块大小</p></li>
+</ol>
+</div>
+</section>
+<section id="translate-mode">
+<span id="id4"></span><h4><span class="section-number">23.1.2.3. </span>翻译模式<a class="headerlink" href="#translate-mode" title="Link to this heading"></a></h4>
+<p>对应的类名: <code class="docutils literal notranslate"><span class="pre">TranslationMode</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>数值</p></th>
+<th class="head"><p>常量</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>MODE_IDLE</p></td>
+<td><p>空闲模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>MODE_RECORD</p></td>
+<td><p>仅录音模式</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>MODE_RECORDING_TRANSLATION</p></td>
+<td><p>录音翻译模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>MODE_CALL_TRANSLATION</p></td>
+<td><p>通话翻译模式</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>MODE_AUDIO_TRANSLATION</p></td>
+<td><p>音视频翻译模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x05</p></td>
+<td><p>MODE_FACE_TO_FACE_TRANSLATION</p></td>
+<td><p>面对面翻译模式</p></td>
+</tr>
+<tr class="row-even"><td><p>0x06</p></td>
+<td><p>MODE_CALL_TRANSLATION_WITH_STEREO</p></td>
+<td><p>通话翻译立体声模式</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-type">
+<span id="id5"></span><h4><span class="section-number">23.1.2.4. </span>音频类型<a class="headerlink" href="#audio-type" title="Link to this heading"></a></h4>
+<p>对应的类名: <code class="docutils literal notranslate"><span class="pre">Constants</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>数值</p></th>
+<th class="head"><p>常量</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>AUDIO_TYPE_PCM</p></td>
+<td><p>PCM音频格式</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>AUDIO_TYPE_SPEEX</p></td>
+<td><p>SPEEX音频格式</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>AUDIO_TYPE_OPUS</p></td>
+<td><p>OPUS音频格式</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>AUDIO_TYPE_M_SBC</p></td>
+<td><p>mSBC音频格式</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>AUDIO_TYPE_JLA_V2</p></td>
+<td><p>JLA_V2音频格式</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-source">
+<span id="id6"></span><h4><span class="section-number">23.1.2.5. </span>音频来源<a class="headerlink" href="#audio-source" title="Link to this heading"></a></h4>
+<p>对应的类名: <code class="docutils literal notranslate"><span class="pre">AudioData</span></code></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>数值</p></th>
+<th class="head"><p>常量</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-1</p></td>
+<td><p>SOURCE_UNKNOWN</p></td>
+<td><p>来源未知</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00</p></td>
+<td><p>SOURCE_FILE</p></td>
+<td><p>来源音频文件</p></td>
+</tr>
+<tr class="row-even"><td><p>0x01</p></td>
+<td><p>SOURCE_DEVICE_MIC</p></td>
+<td><p>来源设备麦克风</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x02</p></td>
+<td><p>SOURCE_PHONE_MIC</p></td>
+<td><p>来源手机麦克风</p></td>
+</tr>
+<tr class="row-even"><td><p>0x03</p></td>
+<td><p>SOURCE_E_SCO_UP_LINK</p></td>
+<td><p>来源eSCO上行数据</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x04</p></td>
+<td><p>SOURCE_E_SCO_DOWN_LINK</p></td>
+<td><p>来源eSCO下行数据</p></td>
+</tr>
+<tr class="row-even"><td><p>0x05</p></td>
+<td><p>SOURCE_M_SBC</p></td>
+<td><p>来源mSBC(A2DP)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x06</p></td>
+<td><p>SOURCE_E_SCO_MIX</p></td>
+<td><p>来源eSCO缓和数据(包含上下行数据)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="a2dp">
+<h2><span class="section-number">23.2. </span>是否优先A2DP播放<a class="headerlink" href="#a2dp" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">isInit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;TranslationImpl must be initialized successfully first.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">isUseA2DPPlay</span><span class="p">();</span><span class="w"> </span><span class="c1">//是否优先使用A2DP播放</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2><span class="section-number">23.3. </span>进入模式<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;TranslationImpl is not initialized or the device does not support translation functionality.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//构建翻译模式信息</span>
+<span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationMode</span><span class="p">(</span><span class="n">TranslationMode</span><span class="p">.</span><span class="na">MODE_RECORDING_TRANSLATION</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Constants</span><span class="p">.</span><span class="na">AUDIO_TYPE_OPUS</span><span class="p">);</span>
+<span class="c1">//执行进入模式操作</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">enterMode</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TranslationCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModeChange</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调翻译模式改变</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReceiveAudioData</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AudioData</span><span class="w"> </span><span class="n">audioData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调接收到的音频数据</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调错误事件</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#translation-mode"><span class="std std-ref">TranslationMode</span></a></p></li>
+<li><p><a class="reference internal" href="#audio-data"><span class="std std-ref">AudioData</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">23.4. </span>退出模式<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isSupportTranslation</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;TranslationImpl is not initialized or the device does not support translation functionality.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//不处于翻译模式</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">translationImpl</span><span class="p">.</span><span class="na">isWorking</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Not in translation mode.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//执行退出模式操作</span>
+<span class="n">translationImpl</span><span class="p">.</span><span class="na">exitMode</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2><span class="section-number">23.5. </span>销毁对象<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>不再使用时，销毁对象</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">translationImpl</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">translationImpl</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="w">    </span><span class="n">translationImpl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2><span class="section-number">23.6. </span>接口调用流程图<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/translation_api_flow.png"><img alt="translation_api_flow" src="../../_images/translation_api_flow.png" style="width: 1047.6px; height: 1330.8px;" />
+</a>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gif_convert_func.html" class="btn btn-neutral float-left" title="22. GIF转换" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="auracast_assistant_func.html" class="btn btn-neutral float-right" title="24. Auracast助手" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

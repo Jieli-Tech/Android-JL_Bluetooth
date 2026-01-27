@@ -1,0 +1,294 @@
+.. _dual_connection:
+
+Device Dual Connection Function
+**********************************************************************
+
+Query Whether Device Dual Connection Function is Supported
+=======================================================================
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Get device information
+    final BluetoothDevice device = manager.getConnectedDevice();
+    DeviceInfo deviceInfo = manager.getDeviceInfo(device);
+    //Step2: Query whether device dual connection function is supported
+    boolean isSupportDoubleConnection = deviceInfo != null && deviceInfo.isSupportDoubleConnection();
+
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Query whether device dual connection function is supported
+    final BluetoothDevice device = controller.getUsingDevice();
+    boolean isSupportDoubleConnection = controller.isSupportDoubleConnection(device);
+
+
+Get Device Dual Connection Status
+====================================================================
+
+.. note::
+   Device must support 【Device Dual Connection】 function to use
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``       -- Public attributes
+| **mask :**     -- Device dual connection status
+    * ``0x00000001 << AttrAndFunCode.SYS_INFO_ATTR_DOUBLE_CONNECT``
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getDoubleConnectionStateCmd = CommandBuilder.buildGetSysInfoCmd(AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC,
+                0x00000001 << AttrAndFunCode.SYS_INFO_ATTR_DOUBLE_CONNECT);
+
+
+Code example reference :ref:`get_sys_info`
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDoubleConnectionChange(BluetoothDevice device, DoubleConnectionState state) {
+            //Callback device dual connection status
+        }
+    });
+    //Execute query device dual connection status function and wait for result callback
+    final BluetoothDevice device = controller.getUsingDevice();
+    controller.queryDoubleConnectionState(device, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Information will be callback in BTRcspEventCallback#onDoubleConnectionChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   Device dual connection status, :ref:`double_connection_state` 
+
+
+
+.. _double_connection_state: 
+
+DoubleConnectionState
+---------------------------------------------------------
+
+Device dual connection status
+
+.. code-block:: java
+
+    public class DoubleConnectionState implements Parcelable {
+        private int version = 0;  //Version number
+        private boolean isOn;     //Whether enabled
+        private String btAddress; //Bluetooth address of connected device
+    }
+
+
+Set Device Dual Connection Switch
+==========================================================
+
+.. note::
+   Device must support 【Device Dual Connection】 function to use
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_DOUBLE_CONNECT``  -- Identify device dual connection function
+| **value :** DoubleConnectionState (n Bytes) -- 
+
+**Command construction**
+
+.. code-block:: java
+
+    //Step0: Get JL_BluetoothManager object
+    final JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    final BluetoothDevice device = manager.getConnectedDevice();
+    //Need to call 【Get Device Dual Connection Status】 function first to get, then get through cached information
+    final DoubleConnectionState state = manager.getDeviceInfo(device).getDoubleConnectionState();
+    state.setOn(true);//Set switch
+    //Build set device dual connection status command
+    List<AttrBean> list = new ArrayList<>();
+    AttrBean attrBean = new AttrBean();
+    attrBean.setType(AttrAndFunCode.SYS_INFO_ATTR_DOUBLE_CONNECT);
+    attrBean.setAttrData(state.toData());
+    list.add(attrBean);
+    CommandBase setDoubleConnectionStateCmd = CommandBuilder.buildSetSysInfoCmd(AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC, list);
+
+
+Code example reference :ref:`set_sys_info`
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDoubleConnectionChange(BluetoothDevice device, DoubleConnectionState state) {
+            //Callback device dual connection status
+        }
+    });
+    //Execute set device dual connection status function and wait for result callback
+    final BluetoothDevice device = controller.getUsingDevice();
+    final DoubleConnectionState state = controller.getDeviceInfo(device).getDoubleConnectionState();
+    state.setOn(true);//Set switch
+    controller.setDoubleConnectionState(device, state, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Can wait for device push information, or actively query
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+
+Get Device Information of Connected Devices
+===================================================================
+
+.. note::
+   Device must support 【Device Dual Connection】 function to use
+
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get JL_BluetoothManager object
+    final JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Get currently used device
+    final BluetoothDevice device = manager.getConnectedDevice();
+    if (null == device) return;
+    //Step2: Execute query device information of connected devices value function and wait for result callback
+    DeviceBtInfo deviceBtInfo = DoubleConnectionSp.getInstance().getDeviceBtInfo(device.getAddress());
+    if (null == deviceBtInfo) {
+        String btName = AppUtil.getBtName(MainApplication.getApplication());
+        deviceBtInfo = new DeviceBtInfo().setBtName(btName);
+    }
+    CommandBase queryConnectedPhoneBtInfoCmd = CommandBuilder.buildQueryConnectedPhoneBtInfoCmd(deviceBtInfo);
+    manager.sendRcspCommand(device, queryConnectedPhoneBtInfoCmd, new RcspCommandCallback() {
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //Device status abnormal, perform exception handling
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            QueryPhoneBtInfoCmd queryPhoneBtInfoCmd = (QueryPhoneBtInfoCmd) cmd;
+            QueryPhoneBtInfoCmd.Response resp = queryPhoneBtInfoCmd.getResponse();
+            if(null == resp){
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Device reply is error."));
+                return;
+            }
+            //Parse data
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onConnectedBtInfo(BluetoothDevice device, ConnectedBtInfo info) {
+            //Callback device information of connected devices
+        }
+    });
+    //Execute query device information of connected devices function and wait for result callback
+    final BluetoothDevice device = controller.getUsingDevice();
+    //Query locally saved information in database
+    DeviceBtInfo deviceBtInfo = DoubleConnectionSp.getInstance().getDeviceBtInfo(device.getAddress());
+    if (null == deviceBtInfo) {
+        String btName = AppUtil.getBtName(MainApplication.getApplication());
+        deviceBtInfo = new DeviceBtInfo().setBtName(btName);
+    }
+    controller.queryConnectedPhoneBtInfo(device, deviceBtInfo, new OnRcspActionCallback<ConnectedBtInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ConnectedBtInfo message) {
+            //Success callback
+            //Information will be callback in BTRcspEventCallback#onConnectedBtInfo
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   Device information of connected mobile phone Bluetooth, :ref:`connected_bt_info` 
+
+
+
+
+.. _connected_bt_info: 
+
+ConnectedBtInfo
+-------------------------------------------------------------
+
+Device information of connected mobile phone Bluetooth
+
+.. code-block:: java
+
+    public class ConnectedBtInfo implements Parcelable {
+        private int connectionNum;  //Number of connected devices
+        private List<DeviceBtInfo> mDeviceBtInfoList; //Bluetooth information of connected devices
+    }
+
+
+.. _device_bt_info: 
+
+DeviceBtInfo
+---------------------------------------------------------
+
+Device Bluetooth information
+
+.. code-block:: java
+
+    public class DeviceBtInfo implements Parcelable {
+        private boolean isBind; //Whether locally bound
+        private String address; //Device Bluetooth address
+        private String btName;  //Device Bluetooth name
+    }
+
+

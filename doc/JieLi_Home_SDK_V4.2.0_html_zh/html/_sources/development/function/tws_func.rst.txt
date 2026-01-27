@@ -1,0 +1,856 @@
+
+.. _tws_func:
+
+TWS功能
+************************
+
+
+====================== ======================================= ============================== =============================== =================================== =======================================
+  功能描述                          命令原型                        命令模型                        命令参数                       命令回复                             备注
+====================== ======================================= ============================== =============================== =================================== =======================================
+ 获取设备设置信息          Command.CMD_ADV_GET_INFO               GetADVInfoCmd                  GetADVInfoParam                  :ref:`adv_info`                    参考 :ref:`common_cmd_handle` 
+ 设备广播流控制            Command.CMD_ADV_NOTIFY_SETTINGS        SetDeviceNotifyAdvInfoCmd      SetDeviceNotifyAdvInfoParam     SetDeviceNotifyAdvInfoResponse      参考 :ref:`common_cmd_handle` 
+ 设置设备功能             Command.CMD_ADV_SETTINGS                SetADVInfoCmd                  SetADVInfoParam                 SetADVResponse                      参考 :ref:`common_cmd_handle` 
+ 监听设备广播信息          Command.CMD_ADV_DEVICE_NOTIFY          NotifyAdvInfoCmd               :ref:`notify_adv_info`              NULL                             参考 :ref:`receive_cmd_handle`
+ 监听设备请求            Command.CMD_ADV_DEV_REQUEST_OPERATION    RequestAdvOpCmd                RequestAdvOpParam               CommonResponse                      参考 :ref:`receive_cmd_handle` 
+====================== ======================================= ============================== =============================== =================================== =======================================
+
+
+
+获取设备设置信息
+======================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    //mask = 0xffffffff;  -- 获取所有属性
+    CommandBase getTwsInfoCmd = CommandBuilder.buildGetADVInfoCmd(mask);
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    int mask = 0x01; //属性掩码， 不能为0
+    //mask = 0xffffffff; //获取所有属性
+    //执行获取设备设置信息功能并等待结果回调
+    controller.getDeviceSettingsInfo(controller.getUsingDevice(), mask, new OnRcspActionCallback<ADVInfoResponse>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ADVInfoResponse message) {
+            //成功回调
+            //message - 设置信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. important::
+    | 1. mask 参考 :ref:`attr_fun_code` #ADV_TYPE_xxx 
+    | 2. 结果参考 :ref:`adv_info` 
+
+
+.. _adv_info:
+
+ADVInfoResponse
+----------------------------------
+
+设备设置信息
+
+.. code-block:: java
+
+    public class ADVInfoResponse {
+        //厂商ID
+        private int pid;
+        //产品ID
+        private int vid;
+        //客户ID
+        private int uid;
+        //左设备（设备1）电量
+        private int leftDeviceQuantity;
+        //左设备（设备1）充电标识
+        private boolean isLeftCharging;
+        //右设备（设备2）电量
+        private int rightDeviceQuantity;
+        //右设备（设备2）充电标识
+        private boolean isRightCharging;
+        //充电仓（设备3）电量
+        private int chargingBinQuantity;
+        //充电仓（设备3）充电标识
+        private boolean isDeviceCharging;
+        //设备名
+        private String deviceName;
+        //麦通道
+        private int micChannel;
+        //工作模式
+        private int workModel;
+        //按键设置
+        private List<KeySettings> mKeySettingsList;
+        //灯光设置
+        private List<LedSettings> mLedSettingsList;
+        //入耳检测设置
+        private int inEarSettings;
+        //语言
+        private String language;
+        //ANC模式列表
+        private byte[] modes;
+
+    }
+
+
+.. _key_settings:
+
+KeySettings
+------------------------------------
+
+按键设置信息
+
+.. code-block:: java
+
+    public static class KeySettings {
+        private int keyNum; //按键序号
+        private int action; //动作标识
+        private int function; //功能标识
+        ...
+    }
+
+
+.. _led_settings:
+
+LedSettings
+--------------------------------------
+
+灯效设置信息
+
+.. code-block:: java
+
+    public static class LedSettings {
+        private int scene; //场景标识
+        private int effect; //效果标识
+        ...
+    }
+
+
+
+
+设备广播流控制
+====================================
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    boolean isOpenStream = false; //流开关
+    CommandBase command = CommandBuilder.buildGetLightControlInfoCmd();
+    if(isOpenStream){
+        command = CommandBuilder.buildSetDeviceNotifyADVInfoCmd(1);
+    }else{
+        command = CommandBuilder.buildStopDeviceNotifyADVInfoCmd();
+    }
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceBroadcast(BluetoothDevice device, DevBroadcastMsg broadcast) {
+            //此处将会回调设备广播信息
+        }
+    });
+    //enable - 开关
+    //执行控制设备广播信息功能并等待结果回调
+    controller.controlAdvBroadcast(controller.getUsingDevice(), enable, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //enable = true, 开启设备广播信息，数据将在BTRcspEventCallback#onDeviceBroadcast回调
+            //enable = false, 关闭设备广播信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. important::
+    | 1. 设备连上后会默认开启一段时间广播流, 用于弹窗
+    | 2. 开启广播流, 会导致设备通知设备广播信息
+
+
+
+.. _device_broadcast_msg:
+
+DevBroadcastMsg
+-------------------------------------
+    
+
+设备广播信息
+
+.. code-block:: java
+
+    public class DevBroadcastMsg {
+        private int pid;                 //产品ID
+        private int vid;                 //厂商ID
+        private int uid;                 //客户ID
+        private int deviceType;          //设备类型
+        private int version;             //协议版本
+        private boolean showDialog;      //弹窗标志
+        private String edrAddr;          //设备的经典蓝牙地址
+        private int seq;                 //序列号
+        private int action;              //行为
+        private int leftDeviceQuantity;  //左设备（设备1）电量
+        private boolean isLeftCharging;  //左设备（设备1）充电标识
+        private int rightDeviceQuantity; //右设备（设备2）电量
+        private boolean isRightCharging; //右设备（设备2）充电标识
+        private int chargingBinQuantity; //充电仓（设备3）电量
+        private boolean isDeviceCharging;//充电仓（设备3）充电标识
+    }
+
+
+
+.. _set_dev_function:
+
+设置设备功能
+=====================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    int type = 0; //功能标识
+    byte[] data = new byte[0]; //功能参数
+    byte[] payload = ParseDataUtil.packLTVPacket(type, data);   //参数遵循LTV格式
+    CommandBase setADVInfoCmd = CommandBuilder.buildSetADVInfoCmd(payload);
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //type - 类型
+    int type = 0;
+    //value - 数据
+    byte[] value = new byte[0]; 
+    //设置设备功能并等待结果回调
+    controller.modifyDeviceSettingsInfo(controller.getUsingDevice(), type, value, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //成功回调
+            //message - 结果码， 0为成功，其他为错误码
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+============== ========================= ==============================================================
+ 功能标识          说明                     数据格式
+============== ========================= ==============================================================
+  0              电量                    | left(1Byte)+right(1Byte)+charging bin(1Byte), 不可设置
+                                         | 电量格式: Bit7 -- 是否充电 Bit6-0: 电量 
+  1              设备名称                  name(32Bytes), 以'\0'结尾
+  2              按键设置                | n * 按键设置
+                                         | 按键设置格式: keyID(1Byte)+action(1Byte)+function(1Byte)
+  3              灯光设置                | n * 灯光设置
+                                         | 灯光设置格式: scene(1Byte)+effect(1Byte)
+  4              麦克风设置                mic_channel(1Byte)
+  5              工作模式                  work_mode(1Byte)
+  6              产品信息                  vid(2Bytes)+uid(2Bytes)+pid(2Bytes), 不可设置
+  7              接入时间                  time(4Bytes), 时间戳, 单位是秒
+  8              入耳检测                   state(1Byte), 0 -- 未启用, 1 -- 关闭, 2 -- 打开
+  9              语言类型                   language(n bytes)
+  10             ANC模式列表             | modes(4Bytes), 32位, 表示模式列表序号
+                                         | Bit0 -- 关闭模式, Bit1 -- 降噪模式, Bit2 -- 通透模式 
+============== ========================= ==============================================================
+
+
+.. important::
+    | 1. 参数和数据都是 :ref:`ltv_format` 格式 
+    | 2. type表示功能标识, 说明数据结构
+
+
+监听设备广播信息
+==================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    NotifyAdvInfoCmd notifyAdvInfoCmd = (NotifyAdvInfoCmd) command;
+    NotifyAdvInfoParam advInfoParam = notifyAdvInfoCmd.getParam();
+
+
+代码示例参考 :ref:`receive_cmd_handle`
+
+回复数据参考 :ref:`notify_adv_info`
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceBroadcast(BluetoothDevice device, DevBroadcastMsg broadcast) {
+            //此处将会回调设备广播信息
+        }
+    }); 
+
+
+.. note::
+   1. :ref:`notify_adv_info` 
+   2. :ref:`device_broadcast_msg` 
+
+
+
+.. _notify_adv_info:
+
+NotifyAdvInfoParam
+---------------------------------
+
+.. code-block:: java
+
+    public class NotifyAdvInfoParam extends BaseParameter {
+        //产品ID
+        private int pid;
+        //厂商ID
+        private int vid;
+        //客户ID
+        private int uid;
+        //设备类型
+        private int deviceType;
+        //协议版本
+        private int version;
+        //弹窗标志
+        private boolean showDialog;
+        //设备的经典蓝牙地址
+        private String edrAddr;
+        //序列号
+        private int seq;
+        //行为
+        private int action;
+        //左设备（设备1）电量
+        private int leftDeviceQuantity;
+        //左设备（设备1）充电标识
+        private boolean isLeftCharging;
+        //右设备（设备2）电量
+        private int rightDeviceQuantity;
+        //右设备（设备2）充电标识
+        private boolean isRightCharging;
+        //充电仓（设备3）电量
+        private int chargingBinQuantity;
+        //充电仓（设备3）充电标识
+        private boolean isDeviceCharging;
+    }
+
+
+监听设备请求
+==================================
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    RequestAdvOpCmd requestAdvOpCmd = (RequestAdvOpCmd) command;
+    RequestAdvOpParam opParam = requestAdvOpCmd.getParam();
+    int op = opParam.getOp();
+
+
+代码示例参考 :ref:`receive_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    final RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onTwsStatusChange(BluetoothDevice device, boolean isTwsConnected) {
+            //此处将会回调TWS连接状态
+        }
+
+        @Override
+        public void onDeviceRequestOp(BluetoothDevice device, int op) {
+            //此处将会回调设备请求操作
+            switch (op) {
+                case Constants.ADV_REQUEST_OP_UPDATE_CONFIGURE: //主动更新配置信息
+    //               controller.getDeviceSettingsInfo(device, 0xffffffff, null);
+                    break;
+                case Constants.ADV_REQUEST_OP_UPDATE_AFTER_REBOOT://更新配置信息，需要重启生效
+    //               controller.getDeviceSettingsInfo(device, 0xffffffff, new OnRcspActionCallback<ADVInfoResponse>() {
+    //                   @Override
+    //                   public void onSuccess(BluetoothDevice device, ADVInfoResponse message) {
+    //                       controller.rebootDevice(device, null);
+    //                   }
+    //
+    //                   @Override
+    //                   public void onError(BluetoothDevice device, BaseError error) {
+    //
+    //                   }
+    //               });
+                    break;
+                case Constants.ADV_REQUEST_OP_SYNC_TIME: //请求同步连接时间
+    //              int connectedTime = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+    //              controller.updateConnectedTime(device, connectedTime, null);
+                    break;
+                case Constants.ADV_REQUEST_OP_RECONNECT_DEVICE://请求回连设备
+                    break;
+                case Constants.ADV_REQUEST_OP_SYNC_DEVICE_INFO: //请求同步设备信息
+    //              controller.requestDeviceInfo(device, 0xffffffff, null);
+                    break;
+                }
+            }
+    });
+
+================== =========================================
+  操作码              说明
+================== =========================================
+ 0                  主动更新配置信息
+ 1                  更新配置信息，需要重启生效
+ 2                  请求同步接入时间
+ 3                  请求回连设备
+ 4                  请求同步设备信息
+================== =========================================
+
+
+更新接入时间
+==============================
+
+**仅RCSPController有接口**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    int connectedTime = (int) (Calendar.getInstance().getTimeInMillis() / 1000); //接入时间
+    //执行同步接入时间功能并等待结果回调
+    controller.updateConnectedTime(controller.getUsingDevice(), connectedTime, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //成功回调
+            //message - 结果码， 0为成功，其他为错误码
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+设置设备名称
+===============================
+
+**仅RCSPController有接口**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行设置设备名称功能并等待结果回调
+    controller.configDeviceName(controller.getUsingDevice(), name, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //成功回调
+            //message - 结果码， 0为成功，其他为错误码
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+设置按键功能
+=========================================
+
+**仅RCSPController有接口**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //按键设置列表，不能为空
+    List<ADVInfoResponse.KeySettings> keySettingsList = new ArrayList();
+    //执行设置按键效果功能并等待结果回调
+    controller.configKeySettings(controller.getUsingDevice(), keySettingsList, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //成功回调
+            //message - 结果码， 0为成功，其他为错误码
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   按键设置， :ref:`key_settings` 
+
+
+按键配置
+-------------------------------
+
+.. important::
+   1. 公版的 **按键信息** 是通过 **json配置文档** 来获取的。( 存放位置: `杰理之家开源项目 <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth>`_ /code/工程名/btsmart/src/main/assets/ac697x_headset_json.txt)  
+   2. 客户可以动态增加按键功能，只要与固件能对应上即可
+
+
+以下是 **公版的按键信息** 
+
+1. 按键定义
+
+   ================= =============================  
+       码值               说明
+   ================= =============================
+     1                   左耳按键
+     2                   右耳按键
+   ================= =============================
+2. 动作定义
+
+   ================= =============================  
+       码值               说明
+   ================= =============================
+     1                   短按耳机
+     2                   轻点两下耳机
+   ================= ============================= 
+3. 功能定义
+
+   ================= ============================= ======================================
+       码值                 说明                             备注
+   ================= ============================= ======================================
+     0                   无作用
+     3                   上一曲
+     4                   下一曲
+     5                   播放/暂停
+     6                   接听电话
+     7                   挂断电话
+     8                   回拨电话
+     9                   音量加
+     10                  音量减
+     11                  拍照                           部分SDK支持，需要与固件确认
+     255                 ANC模式切换列表                 部分SDK支持，需要与固件确认
+   ================= ============================= ======================================  
+
+示例说明
+-------------------------
+
+
+| 数据: 1, 1, 3, 1, 2, 5, 2, 1, 4, 2, 2, 9
+| 上面数据的意思是： 左耳短按时播放上一曲；左耳轻点两下时播放/暂停音乐；右耳短按时播放下一曲；右耳轻点两下时加大音量；
+
+
+设置闪灯效果
+================================
+
+
+**仅RCSPController有接口**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //灯效设置列表，不能为空
+    List<ADVInfoResponse.LedSettings> ledSettingsList = new ArrayList();
+    //执行设置闪灯效果功能并等待结果回调
+    controller.configLedSettings(controller.getUsingDevice(), ledSettingsList, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //成功回调
+            //message - 结果码， 0为成功，其他为错误码
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   灯效设置, :ref:`led_settings` 
+
+
+灯光配置
+-----------------------------------
+
+
+.. important::
+   1. 公版的 **灯光信息** 是通过 **json配置文档** 来获取的。 ( 存放位置: `杰理之家开源项目 <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth>`_ /code/工程名/btsmart/src/main/assets/ac697x_headset_json.txt) 。 
+   2. 客户可以动态增加按键功能，只要与固件能对应上即可
+
+
+以下是 **公版的灯光信息** 
+
+1. 场景定义
+
+   ================= =============================  
+       码值               说明
+   ================= =============================
+     1                   未配对
+     2                   未连接
+     3                   已连接
+   ================= =============================
+
+2. 效果定义
+
+   ================= =============================  
+       码值               说明
+   ================= =============================
+     0                   全灭
+     1                   红灯常亮
+     2                   蓝灯常亮
+     3                   红灯呼吸
+     4                   蓝灯呼吸
+     5                   红蓝交替快闪
+     6                   红蓝交替慢闪
+   ================= ============================= 
+
+
+示例说明
+------------------------
+
+| 数据: 1, 0, 2, 6, 3, 2
+| 上面数据的意思是： 耳机未配对时，灯光全灭；耳机已配对但未连接时，灯光红蓝交替慢闪；耳机已配对且已连接，灯光蓝灯常亮；
+
+
+更新指定功能
+=================================
+
+
+**仅RCSPController有接口**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //type - 指定功能
+    int type = 0;
+    //value - 值
+    byte[] value = new byte[0];
+    //执行更新指定功能的值功能并等待结果回调
+    controller.updateFunctionValue(controller.getUsingDevice(), type, value, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //成功回调
+            //message - 结果码， 0为成功，其他为错误码
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+区分挂脖耳机
+================================
+
+
+* 未连接时, 通过广播包区分该TWS设备是不是挂脖耳机
+
+.. code-block:: java
+
+    /** 设备类型是不是耳机类型(0x02,0x03) :
+    0x00 -- 音箱类型
+    0x01 -- 充电仓类型
+    0x02 -- TWS耳机类型
+    0x03 -- 耳机类型
+    0x04--声卡类型
+    0x05--手表类型 */
+    boolean isHeadset = UIHelper.isHeadsetByDeviceType(bleScanMessage.getDeviceType());
+    //广播包版本是不是挂脖版本
+    boolean isNeck = isHeadset && bleScanMessage.getVersion() == SConstant.ADV_INFO_VERSION_NECK_HEADSET;
+    return isNeck;
+
+* 连接时, 通过连接历史记录区分该TWS设备是不是挂脖耳机
+
+.. code-block:: java
+
+    /** 芯片类型是不是耳机类型(2,4):
+    0:AI SDK (692X_AI智能音箱SDK)
+    1:ST SDK (692X_标准音箱SDK)
+    2:693x_TWS SDK
+    3:695xSDK
+    4:697x_TWS SDK
+    5:696x_soundbox
+    6:696x_tws
+    7:695x_sound_card
+    8:695x_sound_watch
+    9:701x_sound_watch */
+    boolean isHeadsetType = history != null && UIHelper.isHeadsetType(history.getChipType());
+    //广播包版本是不是挂脖版本
+    boolean isNeck = isHeadsetType && history.getAdvVersion() == SConstant.ADV_INFO_VERSION_NECK_HEADSET;
+    return isNeck;
+
+
+辅听耳机的验配功能
+==============================
+
+
+* 验配信息交互：版本、通道数、通道频率
+
+.. code-block:: java
+
+        //获取RCSPController对象
+        RCSPController controller = RCSPController.getInstance();
+        //验配信息交互：版本、通道数、通道频率
+        controller.getHearingAssistInfo(controller.getUsingDevice(), new OnRcspActionCallback<HearingAssistInfo>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, HearingAssistInfo message) {
+                //成功回调
+                //message - 辅听验配信息
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //失败回调
+                //error - 错误信息
+            }
+        });
+
+* 通道验配
+
+.. code-block:: java
+
+        //获取RCSPController对象
+        RCSPController controller = RCSPController.getInstance();
+        //通道验配
+        controller.setHearingAssistFrequency(controller.getUsingDevice(), hearingFrequencyInfo, new OnRcspActionCallback<Boolean>() {
+
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //成功回调
+                //message - 执行是否成功
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //失败回调
+                //error - 错误信息
+            }
+        });
+
+* 验配结果保存更新
+
+.. code-block:: java
+
+        //获取RCSPController对象
+        RCSPController controller = RCSPController.getInstance();
+        //验配结果保存更新
+        controller.setHearingAssistFrequencies(controller.getUsingDevice(), hearingFrequenciesInfo, new OnRcspActionCallback<Boolean>() {
+
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //成功回调
+                //message - 执行是否成功
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //失败回调
+                //error - 错误信息
+            }
+        });
+
+
+* 停止验配
+
+.. code-block:: java
+
+        //获取RCSPController对象
+        RCSPController controller = RCSPController.getInstance();
+        //停止验配
+        controller.stopHearingAssistFitting(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //成功回调
+                //message - 执行是否成功
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //失败回调
+                //error - 错误信息
+            }
+        });
+
+
+* 监听辅听验配相关信息
+
+.. code-block:: java
+
+        //获取RCSPController对象
+        RCSPController controller = RCSPController.getInstance();
+        //监听辅听验配相关信息
+        BTRcspEventCallback mBTRcspEventCallback = new BTRcspEventCallback() {
+            //监听验配信息交互：版本、通道数、通道频率
+            @Override
+            public void onHearingAssistInfo(BluetoothDevice device, HearingAssistInfo hearingAssistInfo) {
+                super.onHearingAssistInfo(device, hearingAssistInfo);
+                //hearingAssistInfo - 验配信息交互
+            }
+
+            //监听设备验配音频开关状态
+            @Override
+            public void onHearingChannelsStatus(BluetoothDevice device, HearingChannelsStatus hearingChannelsStatus) {
+                super.onHearingChannelsStatus(device, hearingChannelsStatus);
+                //hearingChannelsStatus - 辅听声道开关状态
+            }
+        };
+        controller.addBTRcspEventCallback(mBTRcspEventCallback);
+        

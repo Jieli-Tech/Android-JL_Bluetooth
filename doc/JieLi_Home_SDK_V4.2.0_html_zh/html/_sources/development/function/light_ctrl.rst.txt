@@ -1,0 +1,197 @@
+.. _light_ctrl_func:
+
+灯光控制功能
+*********************
+
+.. important:: 
+    1. 接口需要设备处于【灯光模式】才能生效
+    2. 判断设备是否支持【灯光模式】
+    
+    .. code-block:: java
+      
+        public boolean isSupportLightMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.isLightEnable();
+        }
+   
+
+    3. 判断设备是否处于【灯光模式】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInLightMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_LIGHT;
+        }
+
+    4.  :ref:`get_device_mode` 
+   
+
+
+
+获取灯光控制信息
+============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- 公共属性
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_LIGHT``  -- 灯光控制
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getLightControlInfoCmd = CommandBuilder.buildGetLightControlInfoCmd();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo) {
+            //此处将会回调灯光控制信息
+        }
+    });
+    //执行获取灯光控制信息功能并等待结果回调
+    controller.getLightControlInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onLightControlInfo回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+设置灯光控制
+=================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``    -- 公共属性
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_LIGHT``             -- 灯光控制
+| **value :**  data(n Bytes)                                     -- 控制数据  
+
+命令构造
+
+.. code-block:: java
+
+    LightControlInfo lightControlInfo; 
+    CommandBase setLightControlInfoCmd = CommandBuilder.buildSetLightControlInfoCmd(lightControlInfo.toByteArray());
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行设置灯光控制功能并等待结果回调
+    controller.setLightControlInfo(controller.getUsingDevice(), lightControlInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`light_ctrl_info` 
+
+
+
+
+.. _light_ctrl_info:
+
+灯光控制信息
+===============================
+
+
+.. code-block:: java
+
+    public class LightControlInfo {
+        /*状态*/
+        public final static int STATE_OFF = 0;      //关闭
+        public final static int STATE_ON = 1;       //打开
+        public final static int STATE_SETTING = 2;  //设置模式
+
+        /*灯模式*/
+        public final static int LIGHT_MODE_COLOURFUL = 0; //彩色
+        public final static int LIGHT_MODE_TWINKLE = 1;   //闪烁
+        public final static int LIGHT_MODE_SCENE = 2;     //情景
+
+        /*闪烁模式*/
+        public final static int TWINKLE_MODE_COLORFUL = 0; //七彩
+        public final static int TWINKLE_MODE_RED = 1;      //红色
+        public final static int TWINKLE_MODE_ORANGE = 2;   //橙色
+        public final static int TWINKLE_MODE_YELLOW = 3;   //黄色
+        public final static int TWINKLE_MODE_GREEN = 4;    //绿色
+        public final static int TWINKLE_MODE_CYAN = 5;     //青色
+        public final static int TWINKLE_MODE_BLUE = 6;     //蓝色
+        public final static int TWINKLE_MODE_PURPLE = 7;   //紫色
+
+        /*闪烁频率*/
+        public final static int TWINKLE_FREQ_FAST = 0;     //快闪
+        public final static int TWINKLE_FREQ_SLOW = 1;     //慢速
+        public final static int TWINKLE_FREQ_BREATHE = 2;  //呼吸闪灯
+        public final static int TWINKLE_FREQ_MUSIC = 3;    //音乐闪烁
+
+        /*场景模式*/
+        public final static int SCENE_MODE_RAINBOW = 0;              //彩虹
+        public final static int SCENE_MODE_HEARTBEAT = 1;            //心跳
+        public final static int SCENE_MODE_CANDLELIGHT = 2;          //烛火
+        public final static int SCENE_MODE_NIGHT_LIGHT = 3;          //夜灯
+        public final static int SCENE_MODE_STAGE = 4;                //舞台
+        public final static int SCENE_MODE_COLORFUL_BREATHING = 5;   //漫彩呼吸
+        public final static int SCENE_MODE_RED_BREATHING = 6;        //漫红呼吸
+        public final static int SCENE_MODE_GREEN_BREATHING = 7;      //漫绿呼吸
+        public final static int SCENE_MODE_BLUE_BREATHING = 8;       //漫蓝呼吸
+        public final static int SCENE_MODE_GREEN_MOOD = 9;           //绿色心情
+        public final static int SCENE_MODE_BEAUTIFUL_SUNSET = 10;    //夕阳美景
+        public final static int SCENE_MODE_MUSIC_RHYTHM = 11;        //音乐律动
+
+        private int switchState; //开关状态
+        private int lightMode; //灯模式
+        private int color; //颜色值
+        private int twinkleMode; //闪烁模式
+        private int twinkleFreq; //闪烁频率
+        private int sceneMode; //场景模式
+        private int hue;         //色相, 范围：0-360
+        private int saturation;  //饱和度，饱和度：0-100
+        private int luminance;   //亮度，亮度：0-100
+    
+    }

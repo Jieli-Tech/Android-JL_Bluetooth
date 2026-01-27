@@ -1,0 +1,164 @@
+
+.. _gif_convert:
+
+GIF转换
+*******************************
+
+用于GIF文件编码成杰理编码文件
+
+.. code-block:: java
+
+    //获取Gif转码对象
+    GifConverter converter = GifConverter.getInstance();
+    //inputPath : 输入文件路径 (GIF文件)
+    String inputPath = "输入文件路径(GIF文件)";
+    //outputPath : 输出文件路径 (BIN文件)
+    String outputPath = "输出文件路径(BIN文件)";
+    //mode: 编码模式
+    int mode = GifConverter.MODE_LOW_COMPRESSION_RATE; //建议是低压缩率
+    // - GifConverter.MODE_LOW_COMPRESSION_RATE: 低压缩率
+    // - GifConverter.MODE_MEDIUM_COMPRESSION_RATE：中压缩率
+    // - GifConverter.MODE_HIGH_COMPRESSION_RATE ： 高压缩率
+    //V1.2.0+ 增加, 默认值: GifConverter.CHIP_701N
+    int chip = GifConverter.CHIP_707N; //根据固件芯片来选择算法
+    // - GifConverter.CHIP_701N : JL701N系列芯片
+    // - GifConverter.CHIP_707N : JL707N系列芯片
+    //V1.3.0+ 增加，默认值: true
+    boolean isPacketJLUI = true; //是否打包成JL UI格式; false，为裸数据
+    //执行GIF转码功能
+    converter.gif2BinAsync(inputPath, outputPath, mode, chip, isPacketJLUI, new GifConverter.ResultCallback<GifBin>() {
+        @Override
+        public void onSuccess(GifBin gifBin) {
+            //转码成功
+            //gifBin --- GIF信息
+        }
+
+        @Override
+        public void onError(int code, String message) {
+            //转码失败
+            //code --- 错误码
+            //message --- 描述信息
+            }
+    });
+
+
+.. important::
+    1. 图像转换功能需要导入库：``GifConvert_Vxxx-release.aar``
+    2. 输入图像的尺寸不能超过设备的屏幕尺寸
+    3. 输入图像的大小尽量小点
+    4. :ref:`gif_bin` 
+    5. :ref:`result_callback` 
+    6. :ref:`gif_error_code` 
+
+
+
+.. _gif_bin:
+
+GifBin
+==========================================
+
+Gif转码文件信息
+
+.. code-block:: java
+
+    public class GifBin implements Parcelable {
+        /**
+         * 名称
+         */
+        private String name;
+        /**
+         * 宽度
+         */
+        private int width;
+        /**
+         * 高度
+         */
+        private int height;
+        /**
+         * 数据
+         */
+        private byte[] data;
+        /**
+         * 文件路径
+         */
+        private String path;
+        /**
+         * 是否打包杰理格式
+         */
+        private boolean isPacket;
+    }
+
+
+.. _result_callback:
+
+ResultCallback
+=================================
+
+结果回调
+
+.. code-block:: java
+
+    public interface ResultCallback<T> {
+
+        /**
+         * 回调成功结果
+         *
+         * @param result 结果
+         */
+        void onSuccess(T result);
+
+        /**
+         * 回调失败事件
+         *
+         * @param code    错误码
+         * @param message 错误描述
+         */
+        void onError(int code, String message);
+    }
+
+
+.. _gif_error_code:
+
+错误码
+====================================
+
+* 对应类名: ``GifError.java``
+* 引用常量: **GifError#** ``xxx``
+
+
+========================================= ================================== ================================================================================
+                引用常量                                  码值                                                     说明                    
+========================================= ================================== ================================================================================
+  ERR_NONE                                               0                         操作成功
+  ERR_OPEN_FILE                                          1                         无法打开给定的文件
+  ERR_WRITE_FAILED                                       2                         写数据失败
+  ERR_HAS_SCRN_DSCR                                      3                         具有SCRN DSCR
+  ERR_HAS_IMAG_DSCR                                      4                         具有IMAG DSCR
+  ERR_NO_COLOR_MAP                                       5                         缺少颜色表
+  ERR_DATA_TOO_BIG                                       6                         数据太大
+  ERR_NOT_ENOUGH_MEM                                     7                         内存不足
+  ERR_DISK_IS_FULL                                       8                         硬盘已满
+  ERR_CLOSE_FAILED                                       9                         关闭文件失败
+  ERR_NOT_WRITEABLE                                      10                        没有写属性
+ |
+  ERR_D_OPEN_FILE                                        101                       无法打开给定的文件
+  ERR_READ_FAILED                                        102                       无法读取文件数据
+  ERR_NOT_GIF_FILE                                       103                       不是GIF文件
+  ERR_NO_SCRN_DSCR                                       104                       缺少SCRN DSCR
+  ERR_NO_IMAG_DSCR                                       105                       缺少IMAG DSCR
+  ERR_D_NO_COLOR_MAP                                     106                       缺少颜色表
+  ERR_WRONG_RECORD                                       107                       错误记录
+  ERR_D_DATA_TOO_BIG                                     108                       数据太大
+  ERR_D_NOT_ENOUGH_MEM                                   109                       内存不足
+  ERR_D_CLOSE_FAILED                                     110                       关闭文件失败
+  ERR_NOT_READABLE                                       111                       文件不可读
+  ERR_IMAGE_DEFECT                                       112                       图像检测失败
+  ERR_EOF_TOO_SOON                                       113                       文件结束太快
+ |
+  ERR_INVALID_PARAM                                      301                       无效参数
+  ERR_OP_IN_PROGRESS                                     302                       正在操作
+  ERR_SAVE_FILE                                          303                       保存文件失败
+ |
+  ERR_UNKNOWN_MODE                                       -128                      未知的压缩模式
+  ERR_UNKNOWN_CHIP                                       -129                      未知的芯片类型
+========================================= ================================== ================================================================================

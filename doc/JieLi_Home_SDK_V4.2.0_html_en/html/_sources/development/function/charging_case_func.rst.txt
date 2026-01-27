@@ -1,0 +1,1074 @@
+.. _charging_case_func:
+
+Color Screen Charging Case Function
+********************************************************
+
+Monitor Color Screen Charging Case Events
+=========================================================
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Add color screen charging case event listener
+    final OnChargingCaseListener listener = new OnChargingCaseListener() {
+
+        @Override
+        public void onInit(BluetoothDevice device, int state) {
+            //Callback for initialization status
+            //0 --- Success
+            //Other values are error codes, refer to 【Error Codes】 section
+        }
+
+        @Override
+        public void onChargingCaseInfoChange(BluetoothDevice device, @ChargingCaseInfo.Function int func, ChargingCaseInfo info) {
+            //Callback for color screen case function changes
+            switch (func) {
+                case ChargingCaseInfo.FUNC_BRIGHTNESS: //Screen brightness
+                        info.getBrightness(); 
+                        break;
+                    case ChargingCaseInfo.FUNC_FLASHLIGHT: //Flashlight switch
+                        info.isFlashlightOn();
+                        break;
+                    case ChargingCaseInfo.FUNC_SCREEN_SAVERS: //Screen saver resource list
+                        info.getScreenSavers();
+                        break;
+                    case ChargingCaseInfo.FUNC_CURRENT_SCREEN_SAVER: //Current screen saver resource
+                        info.getCurrentScreenSaver();
+                        break;
+                    case ChargingCaseInfo.FUNC_CURRENT_BOOT_ANIM: //Current boot animation
+                        info.getCurrentBootAnim();
+                        break;
+                    case ChargingCaseInfo.FUNC_WALLPAPERS: //Wallpaper resource list
+                        info.getWallpapers();
+                        break;
+                    case ChargingCaseInfo.FUNC_CURRENT_WALLPAPER: //Current wallpaper resource
+                        info.getCurrentWallpaper();
+                        break;
+                }
+            }
+
+            @Override
+            public void onChargingCaseEvent(BluetoothDevice device, SettingFunction function) {
+                //Callback for color screen case function events, also returned via onChargingCaseInfoChange interface, can be ignored
+            }
+        };
+        chargingCaseOp.addOnChargingCaseListener(listener);
+        //Step3. When no longer needed, remember to release the listener
+        //chargingCaseOp.removeListener(listener);
+
+
+.. important::
+   1. Initializing the 【ChargingCaseOpImpl】 object triggers the initialization process;
+   2. If initialization fails, troubleshoot according to 【Error Codes】; :ref:`err_code` 
+   3. If initialization succeeds, the 【ChargingCaseOpImpl】 object has the basic information object 【ChargingCaseInfo】;
+   4. Users can query 【Screen Information】 and 【SDK Information】 in 【ChargingCaseInfo】;
+   5. :ref:`charging_case_info` 
+   6. :ref:`screen_info` 
+   7. :ref:`sdk_msg` 
+
+
+Get Color Screen Case Information
+------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Get color screen case cached information
+    chargingCaseOp.getChargingCaseInfo(RCSPController.getInstance().getUsingDevice());
+
+
+.. note::
+   1. :ref:`charging_case_info` 
+   2. Cached values can only be retrieved after successful color screen case initialization. Values are empty during initialization or if initialization fails.
+
+
+
+
+.. _charging_case_info:
+
+ChargingCaseInfo
+----------------------------------------------------------------------
+
+Color screen case information
+
+.. code-block:: java
+
+    public class ChargingCaseInfo implements Parcelable {
+        /**
+         * Screen savers
+         */
+        public static final int TYPE_SCREEN_SAVER = FunctionResource.FUNC_SCREEN_SAVERS;
+        /**
+         * Boot animations
+         */
+        public static final int TYPE_BOOT_ANIM = FunctionResource.FUNC_BOOT_ANIM;
+        /**
+         * Wallpapers
+         */
+        public static final int TYPE_WALLPAPER = FunctionResource.FUNC_WALL_PAPER;
+
+
+        /**
+         * Screen brightness function
+         */
+        public static final int FUNC_BRIGHTNESS = 1;
+        /**
+         * Flashlight function
+         */
+        public static final int FUNC_FLASHLIGHT = 2;
+        /**
+         * Current screen resource function
+         */
+        public static final int FUNC_CURRENT_SCREEN_SAVER = 3;
+        /**
+         * Current boot animation resource function
+         */
+        public static final int FUNC_CURRENT_BOOT_ANIM = 4;
+        /**
+         * Wallpaper list function
+         */
+        public static final int FUNC_WALLPAPERS = 5;
+        /**
+         * Current wallpaper resource function
+         */
+        public static final int FUNC_CURRENT_WALLPAPER = 6;
+        /**
+         * Screensaver list function
+         */
+        public static final int FUNC_SCREEN_SAVERS = 7;
+
+    
+        /**
+         * Default screen width
+         */
+        public static final int SCREEN_WIDTH = 320;
+        /**
+         * Default screen height
+         */
+        public static final int SCREEN_HEIGHT = 172;
+
+    
+        /**
+         * Device address
+         * <p>
+         * Unique identifier
+         * </p>
+         */
+        private final String address;
+        /**
+         * Screen brightness
+         */
+        private int brightness;
+        /**
+         * Flashlight state
+         */
+        private boolean isFlashlightOn;
+        /**
+         * Screen information
+         */
+        private ScreenInfo screenInfo;
+        /**
+         * SDK information
+         */
+        private SDKMessage sdkMessage;
+        /**
+         * Current screen saver information
+         */
+        private ResourceInfo currentScreenSaver;
+        /**
+         * Current boot animation information
+         */
+        private ResourceInfo currentBootAnim;
+        /**
+         * Current wallpaper information
+         */
+        private ResourceInfo currentWallpaper;
+        /**
+         * Existing wallpapers
+         */
+        @NonNull
+        private final List<ResourceInfo> wallpapers;
+        /**
+         * Existing screensavers
+         */
+        @NonNull
+        private final List<ResourceInfo> screenSavers;
+    }
+
+
+.. note::
+   1. :ref:`screen_info` 
+   2. :ref:`sdk_msg` 
+   3. :ref:`resource_info`
+
+
+
+Get Device Screen Information
+=======================================================================
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get device screen information
+    chargingCaseOp.readScreenInfo(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ScreenInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ScreenInfo message) {
+            //Callback for operation success and result
+            //message -- screen information
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+
+.. note::
+   1. :ref:`screen_info` 
+   2. The color screen case initialization process will actively synchronize 【screen information】. Users can query :ref:`charging_case_info` information to get 【screen information】.
+
+
+
+
+.. _screen_info: 
+
+ScreenInfo
+----------------------------------------------------------------------------
+
+Screen information
+
+.. code-block:: java
+
+   public class ScreenInfo extends SettingFunction {
+        /**
+         * Circular
+         */
+        public static final int SHAPE_CIRCULAR = 1;
+        /**
+         * Rectangular
+         */
+        public static final int SHAPE_RECTANGLE = 2;
+        /**
+         * Rounded rectangular
+         */
+        public static final int SHAPE_ROUNDED_RECTANGLE = 3;
+
+        /**
+         * Shape
+         */
+        private int shape;
+        /**
+         * Corner radius
+         */
+        private int radius;
+        /**
+         * Background color (ARGB)
+         */
+        private int color;
+        /**
+         * Screen width
+         */
+        private int width;
+        /**
+         * Screen height
+         */
+        private int height;
+   }
+
+
+Get SDK Information
+==================================================================
+
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get device screen information
+    chargingCaseOp.readSDKMessage(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<SDKMessage>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, SDKMessage message) {
+            //Callback for operation success and result
+            //message -- SDK information
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+            //error.getSubCode() --- error code
+            //error.getMessage() --- error description
+        }
+    });
+
+.. note::
+   1. :ref:`sdk_msg` 
+   2. The color screen case initialization process will actively synchronize 【SDK information】. Users can query :ref:`charging_case_info` information to get 【SDK information】.
+
+
+
+
+.. _sdk_msg:
+
+SDKMessage
+----------------------------------------------------------------------
+
+SDK information
+
+.. code-block:: java
+
+   public class SDKMessage extends SettingFunction {
+
+        /* ----------------------------------------
+         * Project code
+         * ----------------------------------------- */
+        /**
+         * Charging case
+         */
+        public static final int PROJECT_CHARGING_CASE = 0x0001;
+
+        /* ----------------------------------------
+         * Product code
+         * ----------------------------------------- */
+        /**
+         * Color screen case
+         */
+        public static final int PRODUCT_COLOR_SCREEN = 0x0001;
+
+        /* ----------------------------------------
+         * Chip code
+         * ----------------------------------------- */
+        /**
+         * 701N chip
+         */
+        public static final int CHIP_701N = 0x0001;
+        /**
+         * 707N chip
+         */
+        public static final int CHIP_707N = 0X0002;
+
+
+        /**
+         * Project
+         */
+        private int project;
+        /**
+         * Product
+         */
+        private int product;
+        /**
+         * Chip
+         */
+        private int chip;
+        /**
+         * Configuration information
+         */
+        private SDKConfigure configure;
+    }
+
+
+.. note::
+   1. :ref:`sdk_cfg` 
+
+
+
+
+.. _sdk_cfg:
+
+SDKConfigure
+--------------------------------------------------------------------------
+
+SDK function configuration
+
+.. code-block:: java
+
+    public class SDKConfigure implements Parcelable {
+
+        /**
+         * Whether GIF is supported
+         */
+        private boolean isSupportGif;
+    }
+
+.. _brightness_ctrl:
+
+Screen Brightness Control
+=======================================================================
+
+Get Screen Brightness
+-----------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get screen brightness
+    chargingCaseOp.getBrightness(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Callback for operation success and result
+            //message -- brightness, range: 0 - 100%
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+Set Screen Brightness
+---------------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to set screen brightness
+    //brightness -- brightness, range: 0 - 100%
+    chargingCaseOp.setBrightness(RCSPController.getInstance().getUsingDevice(), brightness, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+
+
+
+Flashlight Control
+======================================================================
+
+Get Flashlight Status
+----------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get flashlight status
+    chargingCaseOp.getFlashlightState(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+Set Flashlight Status
+----------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to set flashlight
+    //isOn -- switch
+    chargingCaseOp.setFlashlightState(RCSPController.getInstance().getUsingDevice(), isOn, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+            //message -- switch status
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+.. _screen_saver_ctrl:
+
+Screen Saver Control Function
+=====================================================================
+
+Browse Screen Saver Resources
+---------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Select storage to browse
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //Get online storage list
+    if (onlineStorages.isEmpty()) return; //No storage. Operation failed
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //Prioritize finding Flash and Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. Call the interface to browse screen savers
+    //Get storage handler
+    int devHandler = target.getDevHandler();
+    chargingCaseOp.browseScreenSavers(device, devHandler, new OnRcspActionCallback<List<RegFile>>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, List<RegFile> message) {
+            //Callback for operation success
+            //message --- resource list
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+            //error.getSubCode() --- error code
+            //error.getMessage() --- error description
+        }
+    });
+
+
+.. note::
+   1. :ref:`resource_file` 
+   2. When the color screen case is initialized, it automatically synchronizes the resource list once. Subsequently, when 【creating screen saver resources】 or 【deleting screen saver resources】 operations occur, manual synchronization can be done.
+
+
+
+
+Get Current Screen Saver Information
+---------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get current screen saver information
+    chargingCaseOp.getCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ResourceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ResourceInfo message) {
+            //Callback for operation success and result
+            //message -- resource information
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+.. note::
+   
+   1. Result is :ref:`resource_info` 
+
+
+Set Current Screen Saver
+-------------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Select storage to browse
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //Get online storage list
+    if (onlineStorages.isEmpty()) return; //No storage. Operation failed
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //Prioritize finding Flash and Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+         }
+     }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. Call the interface to set current screen saver
+    int devHandle = target.getDevHandler(); //Storage handler
+    String filePath = "Device existing screensaver path";
+    chargingCaseOp.setCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), devHandle, filePath, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+.. note::
+   1. :ref:`sd_card_bean` 
+
+
+
+.. _resource_info: 
+
+ResourceInfo
+-------------------------------------------------------------------
+
+Resource information
+
+.. code-block:: java
+
+    public class ResourceInfo implements Parcelable {
+         
+        /**
+         * Screen saver name prefix
+         */
+        public static final String SCREEN_NAME_PREFIX = "VIE";
+        /**
+         * Custom screen saver name
+         */
+        public static final String CUSTOM_SCREEN_NAME = "VIE_CST";
+        /**
+         * Animation name prefix
+         */
+        public static final String ANIM_NAME_PREFIX = "ANI";
+        /**
+         * Wallpaper name prefix
+         */
+        public static final String WALLPAPER_NAME_PREFIX = "csbg";
+        /**
+         * Custom wallpaper name
+         */
+        public static final String CUSTOM_WALLPAPER_NAME = "csbg_x";
+
+        /**
+         * Storage handler
+         */
+        private int devHandle;
+        /**
+         * Cluster number
+         */
+        private int cluster;
+        /**
+         * CRC checksum
+         */
+        private short crc;
+        /**
+         * File path
+         */
+        private String filePath;
+    }
+
+
+Boot Animation
+====================================================================
+
+Get Boot Animation Information
+--------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get current boot animation information
+    chargingCaseOp.getCurrentBootAnim(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ResourceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ResourceInfo message) {
+            //Callback for operation success and result
+            //message -- resource information
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+.. note::
+   
+   1. Result is :ref:`resource_info` 
+
+
+
+
+Set Current Boot Animation
+-----------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Select storage to browse
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //Get online storage list
+    if (onlineStorages.isEmpty()) return; //No storage. Operation failed
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //Prioritize finding Flash and Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. Call the interface to set current boot animation
+    int devHandle = target.getDevHandler(); //Storage handler
+    String filePath = "Device existing boot animation path";
+    chargingCaseOp.setCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), devHandle, filePath, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`sd_card_bean` 
+
+
+.. _sync_weather:
+
+Sync Weather Information
+======================================================================
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to set current screen saver information
+    //weather -- weather information
+    Weather weather = new Weather(new byte[0]);
+    chargingCaseOp.syncWeatherInfo(RCSPController.getInstance().getUsingDevice(), weather, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+.. note::
+   1. :ref:`weather` 
+
+
+
+
+.. _weather:
+
+Weather
+------------------------------------------------------------------------
+
+Weather information
+
+.. code-block:: java
+
+    public class Weather extends BaseInfo {
+
+        /**
+         * Province
+         */
+        private String province;
+        /**
+         * City
+         */
+        private String city;
+        /**
+         * Weather
+         * <p>
+         * Refer to {@link com.jieli.bluetooth.constant.WeatherCode}
+         * </p>
+         */
+        private int weather;
+        /**
+         * Temperature
+         */
+        private int temperature;
+        /**
+         * Humidity. Unit: %
+         */
+        private int humidity;
+        /**
+         * Wind direction
+         * <p>
+         * Refer to {@link com.jieli.bluetooth.constant.DirectionCode}
+         * </p>
+         */
+        private int windDirection;
+        /**
+         * Wind power
+         */
+        private int windPower;
+        /**
+         * Update time
+         */
+        private long time;
+    }
+
+.. _sync_msg:
+
+Message Push
+========================================================================
+
+
+Push Message
+------------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the message push interface
+    //messageInfo -- message information
+    MessageInfo messageInfo = new MessageInfo();
+    chargingCaseOp.pushMessageInfo(RCSPController.getInstance().getUsingDevice(), messageInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+.. note::
+   1. :ref:`message_info` 
+
+
+
+
+Delete Message
+------------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the delete message interface
+    //messageInfo -- message information
+    //When deleting messages, mainly look at 【package name】 + 【timestamp】
+    MessageInfo messageInfo = new MessageInfo();
+    chargingCaseOp.removeMessageInfo(RCSPController.getInstance().getUsingDevice(), messageInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+.. note::
+   1. :ref:`message_info` 
+   2. To delete a message, only carry the 【package name】 and 【timestamp】. The device will delete the corresponding message based on these two fields.
+
+
+
+
+.. _message_info:
+
+MessageInfo
+-------------------------------------------------------------------------
+
+Message information
+
+.. code-block:: java
+
+    public class MessageInfo implements IDataOp {
+
+        /**
+         * Default icon
+         */
+        public static final int FLAG_DEFAULT = 0;
+        /**
+         * SMS icon
+         */
+        public static final int FLAG_SMS = 1;
+        /**
+         * WeChat icon
+         */
+        public static final int FLAG_WECHAT = 2;
+        /**
+         * QQ icon
+         */
+        public static final int FLAG_QQ = 3;
+        /**
+         * DingTalk icon
+         */
+        public static final int FLAG_DING_TALK = 4;
+
+
+        /**
+         * App package name
+         */
+        private String appPackageName;
+        /**
+         * App icon
+         */
+        private int flag;
+        /**
+         * Title
+         */
+        private String title;
+        /**
+         * Content
+         */
+        private String content;
+        /**
+         * Timestamp
+         */
+        private long timestamp;
+    }
+
+
+Wallpaper Control Function
+=====================================================================
+
+Browse Wallpaper Resources
+---------------------------------------------------------------------
+     
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Select storage to browse
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //Get online storage list
+    if (onlineStorages.isEmpty()) return; //No storage. Operation failed
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //Prioritize finding Flash and Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. Call the interface to browse wallpaper resources
+    //Get storage handler
+    int devHandler = target.getDevHandler();
+    chargingCaseOp.browseWallPapers(device, devHandler, new OnRcspActionCallback<List<RegFile>>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, List<RegFile> message) {
+            //Callback for operation success
+            //message --- resource list
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+            //error.getSubCode() --- error code
+            //error.getMessage() --- error description
+        }
+    });
+
+.. note::
+   1. :ref:`resource_file` 
+   2. When the color screen case is initialized, it automatically synchronizes the resource list once. Subsequently, when 【creating wallpaper resources】 or 【deleting wallpaper resources】 operations occur, manual synchronization can be done.
+
+
+Get Current Wallpaper Information
+-------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to get current screen saver information
+    chargingCaseOp.getCurrentWallPaper(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ResourceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ResourceInfo message) {
+            //Callback for operation success and result
+            //message -- resource information
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`resource_info` 
+
+
+Set Current Wallpaper
+-------------------------------------------------------------------
+
+.. code-block:: java
+
+    //Step1. Create color screen charging case implementation class
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Select storage to browse
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //Get online storage list
+    if (onlineStorages.isEmpty()) return; //No storage. Operation failed
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //Prioritize finding Flash and Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. Call the interface to set current screen saver
+    //Get storage handler
+    int devHandler = target.getDevHandler();
+    String filePath = "Device existing screensaver path";
+    chargingCaseOp.setCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), devHandler, filePath, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`resource_info` 
+
+
+Resource Transfer Flow Chart
+============================================================================
+
+.. figure:: ../../_static/transfer_resource_flow.png
+   :scale: 60%
+   :align: center
+
+
+.. important::
+   1. After successful resource transfer, it needs to be set and activated according to resource function to take effect. For example: set current screen saver
+   2. Must ensure resource integrity
+
+
+

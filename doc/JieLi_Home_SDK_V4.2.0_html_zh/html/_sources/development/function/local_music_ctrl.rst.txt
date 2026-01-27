@@ -1,0 +1,304 @@
+
+.. _local_music_ctrl_func:
+
+本地音乐控制功能
+************************
+
+
+原名: **ID3信息控制功能**。 用于控制手机第三方播放器。
+
+
+.. important:: 
+    1. 接口需要设备处于【蓝牙模式】才能生效
+    2. 判断设备是否支持【蓝牙模式】
+    
+    .. code-block:: java
+      
+        public boolean isSupportLightMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.isBtEnable();
+        }
+   
+
+    3. 判断设备是否处于【蓝牙模式】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInLightMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_BT;
+        }
+
+    4.  :ref:`get_device_mode` 
+   
+
+
+
+
+控制ID3信息流推送
+===============================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    boolean isOpenSteam = false;
+    CommandBase command;
+    if(isOpenSteam){ //打开ID3信息流推送
+        command = CommandBuilder.buildSetDeviceNotifyADVInfoCmd(1);
+    }else{ //关闭ID3信息流推送
+        command = CommandBuilder.buildStopDeviceNotifyADVInfoCmd();
+    }
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+.. note:: 
+    1. ID3信息流推送开启后, 如果设备接收到ID3音乐信息, 将会在 :ref:`bt_event_listener` #onDeviceCommand方法回调 
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+            //此处将会回调ID3音乐信息
+        }
+    });
+    //enable - true : 开启, false : 关闭
+    //执行控制ID3信息流推送功能并等待结果回调
+    controller.controlAdvBroadcast(controller.getUsingDevice(), enable, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //enable = true, 开启ID3信息流推送，ID3信息将会在BTRcspEventCallback#onID3MusicInfo回调
+            //enable = false, 关闭ID3信息流推送
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+
+获取ID3所有信息
+====================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getID3MusicInfoCmd = CommandBuilder.buildGetBtSysInfoCmd(0x1ff);
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+            //此处将会回调ID3音乐信息
+        }
+    });
+    //执行获取ID3所有信息功能并等待结果回调
+    controller.getID3MusicInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onID3MusicInfo回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`id3_info` 
+
+
+
+
+.. _id3_info:
+
+ID3音乐信息
+------------------------------------
+
+
+.. code-block:: java
+
+    public class ID3MusicInfo implements Parcelable {
+        //    歌曲名
+        private String title;
+        //    作曲家
+        private String artist;
+        //    专辑
+        private String album;
+        //    序号
+        private int number = -1;
+        //    歌单总长度
+        private int total;
+        //    总时长
+        private int totalTime;
+        //    类型
+        private String genre;
+        //    当前时间
+        private int currentTime = -1;
+        //    播放状态
+        private boolean playStatus;
+    }
+
+
+
+ID3音乐播放或暂停
+==============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_BT``             -- 蓝牙功能功能
+| **type :**  ``AttrAndFunCode.FUNCTION_BT_CMD_ID3_PLAY_OR_PAUSE``    -- ID3音乐播放或暂停
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase ID3PlayOrPauseCmd = CommandBuilder.buildID3PlayOrPauseCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行id3音乐播放或暂停功能并等待结果回调
+    controller.iD3MusicPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+ID3音乐播放上一曲
+===================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_BT``         -- 蓝牙功能功能
+| **type :**  ``AttrAndFunCode.FUNCTION_BT_CMD_ID3_PLAY_PREV``    -- ID3音乐播放上一曲
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase ID3PlayPrevCmd = CommandBuilder.buildID3PlayPrevCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行id3音乐播放上一曲功能并等待结果回调
+    controller.iD3MusicPlayPrev(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+ID3音乐播放下一曲
+=================================
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_BT``         -- 蓝牙功能功能
+| **type :**  ``AttrAndFunCode.FUNCTION_BT_CMD_ID3_PLAY_NEXT``    -- ID3音乐播放下一曲
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase ID3PlayNextCmd = CommandBuilder.buildID3PlayNextCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式 
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行id3音乐播放下一曲功能并等待结果回调
+    controller.iD3MusicPlayNext(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });

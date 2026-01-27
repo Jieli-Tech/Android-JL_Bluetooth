@@ -1,0 +1,44 @@
+.. _sound_card_op: 
+
+声卡功能接口
+***********************************
+
+.. code-block:: java
+
+    public interface ISoundCardOp {
+
+        /**
+         * 获取声卡状态
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getSoundCardStatusInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取声卡信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getSoundCardEqInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置声卡信息
+         *
+         * @param device   操作设备
+         * @param value    数值
+         * @param callback 结果回调
+         */
+        void setSoundCardEqInfo(BluetoothDevice device, byte[] value, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置声卡功能
+         *
+         * @param device   操作设备
+         * @param index    功能索引
+         * @param value    功能值
+         * @param callback 结果回调
+         */
+        void setSoundCardFunction(BluetoothDevice device, byte index, int value, OnRcspActionCallback<Boolean> callback);
+    }

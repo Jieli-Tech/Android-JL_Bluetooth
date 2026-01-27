@@ -1,0 +1,21 @@
+开源社区
+======================================       
+
+
+1. 国外用户可以访问 `GitHub <https://github.com/Jieli-Tech/Android-JL_Bluetooth>`_
+
+   1. 用户可以在 `issues <https://github.com/Jieli-Tech/Android-JL_Bluetooth/issues>`_ 提问, 我司开发者会及时提供回复 
+   2. 用户也可以进入我司的开源群(钉钉: 搜索群号“31691148”), 找到对应负责人进行咨询
+   
+2. 国内用户可以访问 `Gitee <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth>`_
+
+   1. 用户可以在 `gitee-issues <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth/issues>`_ 提问, 我司开发者会及时提供回复
+   2. 用户也可以进入我司的开源群(钉钉: 搜索群号“31691148”), 找到对应负责人进行咨询
+
+3. 用户可以关注我司的官方账号
+
+   1. GitHub账号: `ZhuHai Jieli Technology Co.,Ltd <https://github.com/Jieli-Tech>`_
+   2. Gitee账号: `珠海杰理科技 <https://gitee.com/Jieli-Tech>`_
+
+
+

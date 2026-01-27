@@ -1,0 +1,135 @@
+
+.. _err_code:
+
+5. Error Code 
+**************************************
+
+* Corresponding class name: ``ErrorCode.java``
+* Property reference: **ErrorCode#** ``xxx``
+
+=============================================== ========================================= ==================================================================================== 
+              Error Definition                                Error Code                                                  Error Description
+=============================================== ========================================= ====================================================================================
+ ERR_UNKNOWN                                                      -1                           Unknown error
+ ERR_NONE                                                          0                           No errors
+=============================================== ========================================= ====================================================================================
+
+
+5.1 ERR_COMMON(1 -- General Error)
+====================================================================
+
+   =============================================== ========================================= ==================================================================================== 
+                 Error Definition                                Error Code                                                  Error Description
+   =============================================== ========================================= ====================================================================================
+    SUB_ERR_PARAMETER                                         0x1001(4097)                    | Incorrect parameters. 
+                                                                                              | The user must check the correctness of the input parameters.
+    SUB_ERR_BLE_NOT_SUPPORT                                   0x1002(4098)                      The device does not support BLE.
+    SUB_ERR_BLUETOOTH_NOT_ENABLE                              0x1003(4099)                      Bluetooth is not turned on
+    SUB_ERR_BLUETOOTH_UN_PAIR_FAILED                          0x1006(4102)                      Device unbinding failed
+    SUB_ERR_A2DP_NOT_INIT                                     0x1007(4103)                      A2DP managed object not initialized
+    SUB_ERR_A2DP_CONNECT_FAILED                               0x1008(4104)                      A2DP service connection failed.
+    SUB_ERR_HFP_NOT_INIT                                      0x1009(4105)                      HFP managed object not initialized
+    SUB_ERR_HFP_CONNECT_FAILED                                0x100A(4106)                      HFP service connection failed.
+    SUB_ERR_NO_SERVER                                         0x1010(4112)                      BLE service discovery failed.
+    SUB_ERR_OP_FAILED                                         0x1011(4113)                      Operation Failed
+    SUB_ERR_REFLECT_WAY                                       0x1014(4116)                      Failed to call reflection method
+    SUB_ERR_NO_PERMISSION                                     0x1015(4117)                      Lack of corresponding permissions
+    SUB_ERR_UNSUPPORTED_FUNCTION                              0x1016(4118)                      Unsupported Features
+    SUB_ERR_FUNC_NOT_INIT                                     0x1017(4119)                      Functional module not initialized
+   =============================================== ========================================= ====================================================================================
+
+5.2 ERR_STATUS(2 -- Status Error)
+======================================================================
+
+   =============================================== ========================================= ==================================================================================== 
+                Error Definition                                Error Code                                                  Error Description
+   =============================================== ========================================= ====================================================================================
+    SUB_ERR_BLE_CONNECT_FAILED                                0x2001(8193)                     BLE connection failed.
+    SUB_ERR_CLASSIC_BLUETOOTH_IS_CONNECTED                    0x2005(8197)                     Classic Bluetooth disconnection failed
+    SUB_ERR_REMOTE_DEVICE_DISCONNECT                          0x2006(8198)                     Remote device not connected
+    SUB_ERR_DEVICE_IN_CALL                                    0x2007(8199)                     The device is in call mode
+    SUB_ERR_DEVICE_IN_BUSY                                    0x2008(8200)                     The equipment is busy.
+   =============================================== ========================================= ====================================================================================
+
+5.3 ERR_COMMUNICATION(3 -- Communication Error)
+=======================================================================
+
+   =============================================== ========================================= ==================================================================================== 
+                Error Definition                                Error Code                                                  Error Description
+   =============================================== ========================================= ====================================================================================
+    SUB_ERR_CONNECT_TIMEOUT                                   0x3001(12289)                    Connection timeout
+    SUB_ERR_SEND_FAILED                                       0x3002(12290)                    Data transmission failed
+    SUB_ERR_PAIR_TIMEOUT                                      0x3003(12291)                    Pairing timeout
+    SUB_ERR_DATA_FORMAT                                       0x3004(12292)                    Data format error
+    SUB_ERR_PARSE_DATA                                        0x3005(12293)                    Data parsing error
+    SUB_ERR_SPP_WRITE_DATA_FAIL                               0x3006(12294)                    SPP failed to send data.
+    SUB_ERR_SEND_TIMEOUT                                      0x3007(12295)                    Data transmission timeout
+    SUB_ERR_RESPONSE_BAD_STATUS                               0x3008(12296)                    The device failed to respond. :ref:`response_status` 
+    SUB_ERR_NOT_ALLOW_CONNECT                                 0x3009(12297)                    Connection not allowed
+    SUB_ERR_DEVICE_PAIRING                                    0x300A(12298)                    Pairing in progress
+    SUB_ERR_EDR_CONNECTING                                    0x300B(12299)                    Classic Bluetooth connection in progress
+    SUB_ERR_SPP_CONNECTING                                    0x300C(12300)                    SPP connection in progress
+    SUB_ERR_BLE_CONNECTING                                    0x300D(12301)                    Ble connection in progress
+    SUB_ERR_DEVICE_CONNECTING                                 0x300E(12302)                    Device connection in progress
+    SUB_ERR_RESPONSE_BAD_RESULT                               0x300F(12303)                   | Reason for failure to reply.
+                                                                                              | For specific reasons, refer to "BaseError#getReason()"
+    SUB_ERR_OPERATION_TIMEOUT                                 0x3010(12304)                    Operation timeout
+    SUB_ERR_OPERATION_IN_PROGRESS                             0x3011(12305)                    Operation in progress
+    SUB_ERR_STORAGE_OFFLINE                                   0x3012(12306)                    Memory offline
+    SUB_ERR_CRC_CHECK                                         0x3013(12307)                    CRC check failed
+    SUB_ERR_MISSING_DATA                                      0x3014(12308)                    Lost data
+    SUB_ERR_DATA_OVER_LIMIT                                   0x3015(12309)                    Data exceeds limit
+    SUB_ERR_INSUFFICIENT_SPACE                                0x3016(12310)                    Insufficient space
+    SUB_ERR_RENAME_FILE                                       0x3017(12311)                    Rename failed
+    SUB_ERR_WRITE_DATA                                        0x3018(12312)                    Data write failed
+    SUB_ERR_OPERATION_CANCEL                                  0x3019(12313)                    The operation was cancelled.
+   =============================================== ========================================= ====================================================================================
+
+5.4 ERR_OTA(4 -- OTA Error)
+=========================================================================
+
+   =============================================== ========================================= ==================================================================================================================================================================================== 
+                Error Definition                                Error Code                                                  Error Description
+   =============================================== ========================================= ====================================================================================================================================================================================
+    SUB_ERR_OTA_FAILED                                        0x4001(16385)                    | OTA failure
+                                                                                               | For specific error codes, please refer to `杰理OTA在线文档的错误码 <https://doc.zh-jieli.com/Apps/Android/ota/zh-cn/master/development/interface_desc.html#id6>`_
+   =============================================== ========================================= ====================================================================================================================================================================================
+
+5.5 ERR_OTHER(5 -- Other Error)
+=========================================================================
+
+   =============================================== ========================================= ==================================================================================== 
+                Error Definition                                Error Code                                                  Error Description
+   =============================================== ========================================= ====================================================================================
+    SUB_ERR_AUTH_DEVICE                                       0x5001(20481)                     Authentication device failed
+    SUB_ERR_IO_EXCEPTION                                      0x5002(20482)                     IO exception
+    SUB_ERR_START_AUTH_DEVICE                                 0x5003(20483)                     Failed to start authenticating device
+   =============================================== ========================================= ==================================================================================== 
+
+5.6 ERR_FILE_OP(6 -- File Operation Error)
+=========================================================================
+
+   =============================================== ========================================= ==================================================================================== 
+                Error Definition                                Error Code                                                  Error Description
+   =============================================== ========================================= ====================================================================================
+    SUB_ERR_FILE_LOAD_COMPLETE                                0x6000(24576)                     File data loading complete
+    SUB_ERR_FOLDER_TOO_DEEP                                   0x6001(24577)                     Folder hierarchy is too deep
+    SUB_ERR_NOT_FOUND_DATA                                    0x6002(24578)                     No cache found
+    SUB_ERR_FILE_STORAGE_NOT_MATCH                            0x6003(24579)                     File and storage mismatch
+   =============================================== ========================================= ==================================================================================== 
+
+
+5.7 ERR_AURACAST_BROADCAST(7 -- Auracast Broadcast Error)
+=========================================================================
+
+ =============================================== ========================================= ====================================================================================
+                Error Definition                                Error Code                                                  Error Description
+ =============================================== ========================================= ====================================================================================
+   SUB_ERR_BROADCAST_NAME                                     0x7000(28672)                     Incorrect broadcast name
+   SUB_ERR_BROADCAST_ADDRESS                                  0x7001(28673)                     Incorrect broadcast address
+   SUB_ERR_BROADCAST_ID                                       0x7002(28674)                     Incorrect broadcast ID
+   SUB_ERR_BAD_CODE                                           0x7003(28675)                     Broadcast key error
+   SUB_ERR_SYNC_FAILED                                        0x7004(28676)                     Periodic broadcast synchronization failure
+   SUB_ERR_SYNC_TIMEOUT                                       0x7005(28677)                     Periodic broadcast synchronization timeout
+   SUB_ERR_PA_NOT_SYNC                                        0x7006(28678)                     Periodic broadcasts are out of sync/lost
+ =============================================== ========================================= ====================================================================================

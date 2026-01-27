@@ -1,0 +1,335 @@
+.. _charging_case_op_api:
+
+Color Screen Case Function Interface
+***********************************************
+
+.. code-block:: java
+
+    public interface IChargingCaseOp {
+
+        /**
+         * Whether initialization is successful
+         *
+         * @param device Operation device
+         * @return Result
+         */
+        boolean isInit(BluetoothDevice device);
+
+        /**
+         * Get color screen case info
+         *
+         * @param device Operation device
+         * @return Cached color screen case info
+         */
+        ChargingCaseInfo getChargingCaseInfo(BluetoothDevice device);
+
+        /**
+         * Add color screen case event listener
+         *
+         * @param listener Color screen case event listener
+         */
+        void addOnChargingCaseListener(OnChargingCaseListener listener);
+
+        /**
+         * Remove color screen case event listener
+         *
+         * @param listener Color screen case event listener
+         */
+        void removeOnChargingCaseListener(OnChargingCaseListener listener);
+
+        /**
+         * Get screen brightness
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void getBrightness(BluetoothDevice device, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Set screen brightness
+         *
+         * @param device     Operation device
+         * @param brightness Screen brightness
+         * @param callback   Operation callback
+         */
+        void setBrightness(BluetoothDevice device, int brightness, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get flashlight state
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void getFlashlightState(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Flashlight switch
+         *
+         * @param device   Operation device
+         * @param isOn     Whether to turn on
+         * @param callback Operation callback
+         */
+        void setFlashlightState(BluetoothDevice device, boolean isOn, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get bound device state
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void getBoundDeviceState(BluetoothDevice device, OnRcspActionCallback<BoundDeviceState> callback);
+
+        /**
+         * Browse screensaver files
+         *
+         * @param device Operation device
+         * @param devHandle Storage handle
+         * @param callback Operation callback
+         */
+        void browseScreenSavers(BluetoothDevice device, int devHandle, OnRcspActionCallback<List<RegFile>> callback);
+
+        /**
+         * Get current screensaver info
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void getCurrentScreenSaver(BluetoothDevice device, OnRcspActionCallback<ResourceInfo> callback);
+
+        /**
+         * Set current screensaver
+         *
+         * @param device    Operation device
+         * @param devHandle Storage handle
+         * @param filePath  File path
+         * @param callback  Operation callback
+         */
+        void setCurrentScreenSaver(BluetoothDevice device, int devHandle, @NonNull String filePath, OnRcspActionCallback<Boolean> callback);
+
+       /**
+        * Get current boot animation info
+        *
+        * @param device   Operation device
+        * @param callback Operation callback
+        */
+        void getCurrentBootAnim(BluetoothDevice device, OnRcspActionCallback<ResourceInfo> callback);
+
+        /**
+         * Set current boot animation
+         *
+         * @param device    Operation device
+         * @param devHandle Storage handle
+         * @param filePath  File path
+         * @param callback  Operation callback
+         */
+        void setCurrentBootAnim(BluetoothDevice device, int devHandle, @NonNull String filePath, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Read device screen info
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void readScreenInfo(BluetoothDevice device, OnRcspActionCallback<ScreenInfo> callback);
+
+        /**
+         * Sync weather info
+         *
+         * @param device   Operation device
+         * @param weather  Weather info
+         * @param callback Operation callback
+         */
+        void syncWeatherInfo(BluetoothDevice device, Weather weather, OnRcspActionCallback<Boolean> callback);
+
+       /**
+        * Push message
+        *
+        * @param device   Operation object
+        * @param message  Message
+        * @param callback Operation callback
+        */
+        void pushMessageInfo(BluetoothDevice device, MessageInfo message, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Remove message
+         *
+         * @param device   Operation object
+         * @param message  Message<p>
+         *                 (Only need to fill [package name] and [timestamp])
+         *                 </p>
+         * @param callback Operation callback
+         */
+        void removeMessageInfo(BluetoothDevice device, MessageInfo message, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Read SDK info
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void readSDKMessage(BluetoothDevice device, OnRcspActionCallback<SDKMessage> callback);
+
+        /**
+         * Get online storage list
+         *
+         * @param device Operation device
+         * @return List\<SDCardBean\> Online storage list
+         */
+        List<SDCardBean> getOnlineStorages(BluetoothDevice device);
+
+        /**
+         * Browse wallpaper files
+         *
+         * @param device   Operation device
+         * @param devHandle Storage handle
+         * @param callback Operation callback
+         */
+        void browseWallPapers(BluetoothDevice device, int devHandle, OnRcspActionCallback<List<RegFile>> callback);
+
+        /**
+         * Get current wallpaper info
+         *
+         * @param device   Operation device
+         * @param callback Operation callback
+         */
+        void getCurrentWallPaper(BluetoothDevice device, OnRcspActionCallback<ResourceInfo> callback);
+
+        /**
+         * Set current wallpaper
+         *
+         * @param device    Operation device
+         * @param devHandle Storage handle
+         * @param filePath  File path
+         * @param callback  Operation callback
+         */
+        void setCurrentWallPaper(BluetoothDevice device, int devHandle, @NonNull String filePath, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Delete resources
+         *
+         * @param device   Operation device
+         * @param infoList List of resources to delete
+         * @param callback Delete result callback
+         */
+        void deleteResources(BluetoothDevice device, @NonNull List<ResourceInfo> infoList, DeleteCallback callback); 
+    }
+
+.. note:: 
+    1. :ref:`charging_case_info` 
+    2. :ref:`screen_info` 
+    3. :ref:`sdk_msg` 
+    4. :ref:`weather` 
+    5. :ref:`message_info` 
+    6. :ref:`resource_info` 
+
+
+
+
+.. _charging_case_listener:
+
+Color Screen Case Event Listener
+====================================================
+
+.. code-block:: java
+
+    public interface OnChargingCaseListener {
+
+        /**
+         * Callback color screen case initialization state
+         *
+         * @param device Operation device
+         * @param state  Device state
+         */
+        void onInit(BluetoothDevice device, int state);
+
+        /**
+         * Callback color screen case info change
+         *
+         * @param device Operation device
+         * @param func   Function code
+         * @param info   Color screen case info
+         */
+        void onChargingCaseInfoChange(BluetoothDevice device, @ChargingCaseInfo.Function int func, ChargingCaseInfo info);
+
+        /**
+         * Callback color screen case event
+         *
+         * @param device   Operation device
+         * @param function Color screen case event
+         */
+        void onChargingCaseEvent(BluetoothDevice device, SettingFunction function);
+    }
+
+.. note:: 
+    1. :ref:`charging_case_info`
+    2. :ref:`setting_function`
+
+
+.. _setting_function:
+
+Setting Function
+-------------------------------------------------------------------
+
+.. code-block:: java
+
+    public class SettingFunction extends SettingData {
+
+        /**
+         * Screen brightness
+         */
+        public static final int FUNC_BRIGHTNESS = 0x01;
+        /**
+         * Flashlight
+         */
+        public static final int FUNC_FLASHLIGHT = 0x02;
+        /**
+         * Bound device state
+         */
+        public static final int FUNC_BOUND_DEVICE_STATE = 0x03;
+        /**
+         * Resources used by current function
+         */
+        public static final int FUNC_USING_RESOURCE = 0x04;
+        /**
+         * Device screen info
+         */
+        public static final int FUNC_SCREEN_INFO = 0x07;
+        /**
+         * Device SDK info
+         */
+        public static final int FUNC_SDK_MESSAGE = 0x08;
+
+
+        /**
+         * Read operation
+         */
+        public static final int OP_READ = 0x00;
+        /**
+         * Set operation
+         */
+        public static final int OP_SET = 0x01;
+        /**
+         * Notify operation
+         */
+        public static final int OP_NOTIFY = 0x02;
+
+        /**
+         * Function
+         */
+        private int function;
+        /**
+         * Function version number
+         */
+        private int funcVersion;
+        /**
+         * Operation code
+         */
+        private int op;
+        /**
+         * Valid data
+         */
+        private byte[] payload;
+    }
+
+
+

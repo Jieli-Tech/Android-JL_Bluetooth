@@ -1,0 +1,745 @@
+.. _fm_ctrl_func:
+
+FM Control Function
+********************************************
+
+.. important:: 
+    1. Except :ref:`get_fm_tx_info` and :ref:`set_fm_tx_freq` , other interfaces require device to be in 【FM Mode】 to take effect, 
+    2. Determine if device supports 【FM Mode】
+    
+    .. code-block:: java
+      
+        public boolean isSupportFMMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.isFmEnable();
+        }
+   
+
+    3. Determine if device is in 【FM Mode】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInFMMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_FM;
+        }
+
+    4. :ref:`get_device_mode` 
+
+
+Get FM Status Information
+========================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``         -- FM function
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FM_STATU``  -- Play status
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getFmStatueCmd = CommandBuilder.buildGetFmStatueCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute get FM status information function and wait for result callback
+    controller.getFmInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    }); 
+
+
+.. note::
+   1. :ref:`fm_status_info` 
+
+
+
+.. _fm_status_info: 
+
+FmStatusInfo
+------------------------------
+
+FM status information
+
+.. code-block:: java
+
+    public class FmStatusInfo {
+        private boolean isPlay; //Whether playing
+        private int channel;    //Frequency point
+        private float freq;     //Frequency
+        private int mode;       //Mode
+    }
+
+
+Search Forward Channel
+=================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- Channel search
+| **value :**  way(1Byte), 0x01                              -- Search forward
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmForwardSearchChannelsCmd = CommandBuilder.buildFmScanCmd((byte) 0x01);
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //Callback discovered FM channel list here
+        }
+    });
+    //Execute search forward FM channel function and wait for result callback
+    controller.fmForwardSearchChannels(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmChannelsChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. important:: 
+    1. ``Not recommended``
+    2. :ref:`channel_info` 
+
+
+Search Backward Channel
+===========================================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- Channel search
+| **value :**  way(1Byte), 0x02                              -- Search backward
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmBackwardSearchChannelsCmd = CommandBuilder.buildFmScanCmd((byte) 0x02);
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //Callback discovered FM channel list here
+        }
+    });
+    //Execute search backward FM channel function and wait for result callback
+    controller.fmBackwardSearchChannels(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmChannelsChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. important:: 
+    1. ``Not recommended``
+    2. :ref:`channel_info` 
+
+
+.. _channel_info:
+
+ChannelInfo
+--------------------------------
+
+Channel information
+
+.. code-block:: java
+
+    public class ChannelInfo {
+        /**
+         * Serial number
+         */
+        private int index;
+        /**
+         * Frequency point
+         */
+        private float freq;
+    }
+
+
+Search FM Channel
+===================================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- Channel search
+| **value :**  way(1Byte), 0x00                              -- Full segment search
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmScanCmd = CommandBuilder.buildFmScanCmd((byte) 0x00);
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //Callback discovered FM channel list here
+        }
+    });
+    //Execute search FM channel function and wait for result callback
+    controller.fmSearchAllChannels(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmChannelsChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. important:: 
+     1. ``Recommended``
+     2. :ref:`channel_info`
+
+
+Stop Search Channel
+=========================================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``    -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_FREQ_SCAN``   -- Channel search
+| **value :**  way(1Byte), 0x03                              -- Stop search
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmstopScanCmd = CommandBuilder.buildFmScanCmd((byte) 0x03);
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute stop search FM channel function and wait for result callback
+    controller.fmStopSearch(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+FM Play or Pause
+===========================================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_PLAY_OR_PAUSE``   -- Play or pause
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmPlayOrPauseCmd = CommandBuilder.buildFmPlayOrPauseCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute FM play or pause function and wait for result callback
+    controller.fmPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`fm_status_info` 
+
+
+
+
+Play Previous Channel
+===========================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_PREV_CHANNEL``    -- Play previous channel
+| **value :**  NULL
+
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmPrevChannelCmd = CommandBuilder.buildFmPrevChannelCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute play previous channel function and wait for result callback
+    controller.fmPlayPrevChannel(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+Play Next Channel
+============================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_NEXT_CHANNEL``    -- Play next channel
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmNextChannelCmd = CommandBuilder.buildFmNextChannelCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute play next channel function and wait for result callback
+    controller.fmPlayNextChannel(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+Play Previous Frequency Point
+============================================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_PREV_FREQ``       -- Play previous frequency point
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmPrevFreqCmd = CommandBuilder.buildFmPrevFreqCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute play previous frequency point function and wait for result callback
+    controller.fmPlayPrevFrequency(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+Play Next Frequency Point
+==============================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_NEXT_FREQ``       -- Play next frequency point
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase fmNextFreqCmd = CommandBuilder.buildFmNextFreqCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute play next frequency point function and wait for result callback
+    controller.fmPlayNextFrequency(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+Play Specified Frequency Point
+================================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_FM``        -- FM function
+| **type :**  ``AttrAndFunCode.FUNCTION_FM_CMD_SELECT_FREQL``    -- Play specified frequency point
+| **value :**  freqency(2Bytes), float to integer, multiply by 10
+
+Command construction
+
+.. code-block:: java
+
+    float frequency = 87.5f;
+    CommandBase fmSelectFreqCmd = CommandBuilder.buildFmSelectFreqCmd(frequency);
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way 
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information here
+        }
+    });
+    //Execute play specified frequency point function and wait for result callback
+    controller.fmPlaySelectedFrequency(controller.getUsingDevice(), freq, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFmStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   1. :ref:`fm_status_info`
+
+
+.. _get_fm_tx_info:
+
+Get Transmit Frequency Point
+===============================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FM_TX``  -- Transmit frequency point
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getFrequencyTxInfoCmd = CommandBuilder.buildGetFrequencyTxInfoCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFrequencyTx(BluetoothDevice device, float frequency) {
+            //Callback transmit frequency point here
+        }
+    });
+    //Execute get transmit frequency point function and wait for result callback
+    controller.getFmFrequency(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFrequencyTx
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. _set_fm_tx_freq:
+
+Set Transmit Frequency Point
+===========================================================
+      
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``    -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_FM_TX``             -- Transmit frequency point
+| **value :**  freqency(2Bytes), float to integer, multiply by 10  
+
+Command construction
+
+.. code-block:: java
+
+    float frequency = 87.5f;
+    CommandBase setFrequencyTxInfoCmd = CommandBuilder.buildSetFrequencyTxInfoCmd(frequency);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onFrequencyTx(BluetoothDevice device, float frequency) {
+            //Callback transmit frequency point here
+        }
+    });
+    //Execute set specified transmit frequency point and wait for result callback
+    controller.setFmFrequency(controller.getUsingDevice(), frequency, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFrequencyTx
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+

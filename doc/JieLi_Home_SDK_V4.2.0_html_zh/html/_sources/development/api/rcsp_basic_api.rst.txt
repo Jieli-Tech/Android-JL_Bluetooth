@@ -1,0 +1,726 @@
+
+.. _rcsp_basic_api: 
+
+RCSP基础接口
+***********************
+
+.. code-block:: java
+
+    public interface IRcspOp {
+
+
+        /**
+         * 注册Rcsp事件回调
+         *
+         * @param callback RCSP事件回调
+         */
+        void registerOnRcspCallback(OnRcspCallback callback);
+
+        /**
+         * 注销RCSP事件回调
+         *
+         * @param callback RCSP事件回调
+         */
+        void unregisterOnRcspCallback(OnRcspCallback callback);
+
+        /**
+         * 注册RCSP事件监听器
+         *
+         * @param listener RCSP事件监听器
+         */
+        void registerOnRcspEventListener(OnRcspEventListener listener);
+
+        /**
+         * 注销RCSP事件监听器
+         *
+         * @param listener RCSP事件监听器
+         */
+        void unregisterOnRcspEventListener(OnRcspEventListener listener);
+
+        /**
+         * RCSP协议是否初始化
+         * <p>
+         *     默认是当前使用的设备
+         * </p>
+         * @return boolean 结果
+         */
+        boolean isRcspInit();
+    
+        /**
+         * RCSP协议是否初始化
+         *
+         * @param device 蓝牙设备
+         * @return boolean 结果
+         */
+        boolean isRcspInit(BluetoothDevice device);
+
+        /**
+         * 获取蓝牙库配置
+         *
+         * @return 蓝牙库配置
+         */
+        BluetoothOption getBluetoothOption();
+
+        /**
+         * 获取设备信息
+         *
+         * @return {@link DeviceInfo} 设备信息
+         */
+        DeviceInfo getDeviceInfo();
+
+        /**
+         * 获取设备信息
+         *
+         * @param device 蓝牙设备
+         * @return {@link DeviceInfo} 设备信息
+         */
+        DeviceInfo getDeviceInfo(BluetoothDevice device);
+
+        /**
+         * 获取设备配置信息
+         *
+         * @param device 蓝牙设备
+         * @return DeviceConfiguration 设备配置信息
+         */
+        DeviceConfiguration getDeviceConfiguration(BluetoothDevice device);
+
+        /**
+         * 配置蓝牙库参数
+         *
+         * @param option 参数配置
+         */
+        void configure(BluetoothOption option);
+
+        /**
+         * 发送RCSP命令
+         *
+         * @param device    蓝牙设备对象
+         * @param cmd       RCSP命令
+         * @param timeoutMs 超时时间。单位是毫秒
+         * @param callback  发送回调
+         */
+        void sendCommandAsync(BluetoothDevice device, CommandBase cmd, int timeoutMs, RcspCommandCallback callback);
+
+        /**
+         * 发送RCSP命令
+         *
+         * <p>
+         * 等效于{@link #sendCommandAsync(BluetoothDevice, CommandBase, int, RcspCommandCallback)},<br/>
+         * 为了保证接口一致
+         * </p>
+         *
+         * @param device    蓝牙设备对象
+         * @param cmd       RCSP命令
+         * @param timeoutMs 超时时间。单位是毫秒
+         * @param callback  发送回调
+         */
+        void sendRcspCommand(BluetoothDevice device, CommandBase cmd, int timeoutMs, RcspCommandCallback callback);
+
+        /**
+         * 发送RCSP命令
+         *
+         * @param device   蓝牙设备对象
+         * @param cmd      RCSP命令
+         * @param callback 发送回调
+         */
+        void sendRcspCommand(BluetoothDevice device, CommandBase cmd, RcspCommandCallback callback);
+
+        /**
+         * 发送RCSP回复命令
+         *
+         * @param device      蓝牙设备对象
+         * @param responseCmd RCSP回复命令
+         * @param callback    发送回调
+         */
+        void sendCommandResponse(BluetoothDevice device, CommandBase responseCmd, RcspCommandCallback callback);
+
+        /**
+         * 发送RCSP回复命令
+         * <p>
+         * 等效于{@link #sendCommandResponse(BluetoothDevice, CommandBase, RcspCommandCallback)},<br/>
+         * 为了保证接口一致
+         * </p>
+         *
+         * @param device 蓝牙设备对象
+         * @param responseCmd RCSP回复命令
+         */
+        void sendRcspResponse(BluetoothDevice device, CommandBase responseCmd);
+
+        /**
+         * 切换已连接设备为正在使用设备
+         * <p>
+         * 可以通过{@link OnRcspCallback#onSwitchConnectedDevice(BluetoothDevice)} 获取切换情况
+         * </p>
+         *
+         * @param device 已连接设备
+         */
+        void switchConnectedDevice(BluetoothDevice device);
+
+        /**
+         * 释放资源
+         */
+        void release();
+
+    }
+
+
+.. note:: 
+    1. :ref:`rcsp_callback` 
+    2. :ref:`rcsp_event_callback` 
+    3. :ref:`bluetooth_option` 
+    4. :ref:`rcsp_cmd_cb` 
+
+
+
+.. _rcsp_callback:
+
+OnRcspCallback
+=========================================
+
+RCSP状态回调
+
+.. code-block:: java
+
+    public abstract class OnRcspCallback {
+
+        /**
+         * Rcsp协议初始化回调
+         *
+         * @param device 已连接设备
+         * @param code   初始化结果
+         *               <p>
+         *               结果如下:<br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 正常状态 <br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_START_AUTH_DEVICE} --- 开始设备认证失败<br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_AUTH_DEVICE} --- 设备认证失败<br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_DEVICE_IN_OTA} --- 强制升级状态 <br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REMOTE_DEVICE_DISCONNECT} --- 设备断开 <br/>
+         *               其他错误码
+         *               </p>
+         */
+        public void onRcspInit(BluetoothDevice device, int code) {
+
+        }
+
+        /**
+         * 设备发送的rcsp命令回调
+         *
+         * @param device  已连接设备
+         * @param command RCSP命令
+         */
+        public void onRcspCommand(BluetoothDevice device, CommandBase command) {
+
+        }
+
+        /**
+         * 设备发送的数据命令回调
+         *
+         * @param device  已连接设备
+         * @param dataCmd 数据命令
+         */
+        public void onRcspDataCmd(BluetoothDevice device, CommandBase dataCmd) {
+
+        }
+
+        /**
+         * RCSP错误事件回调
+         *
+         * @param device 设备对象
+         * @param error  错误信息
+         */
+        public void onRcspError(BluetoothDevice device, BaseError error) {
+
+        }
+
+        /**
+         * 设备连接状态
+         *
+         * @param device 蓝牙设备
+         * @param status 连接状态
+         */
+        public void onConnectStateChange(BluetoothDevice device, int status) {
+
+        }
+
+        /**
+         * 切换已连接且正在使用的设备的回调
+         *
+         * @param device 已连接设备
+         */
+        public void onSwitchConnectedDevice(BluetoothDevice device) {
+
+        }
+
+    }
+
+
+
+.. _rcsp_event_callback: 
+
+RCSP事件监听器
+============================================
+
+.. code-block:: java
+
+    public abstract class OnRcspEventListener {
+
+        /**
+         * 设备模式改变回调
+         *
+         * @param device 蓝牙设备
+         * @param mode   设备当前模式
+         */
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+
+        }
+
+        /**
+         * 设备系统音量改变回调
+         *
+         * @param device 蓝牙设备
+         * @param volume 设备系统音量
+         */
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+
+        }   
+
+        /**
+         * 设备EQ信息改变回调
+         *
+         * @param device 蓝牙设备
+         * @param eqInfo EQ信息
+         */
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+
+        }
+
+        /**
+         * 设备外接存储器改变回调
+         *
+         * @param device      蓝牙设备
+         * @param storageInfo 设备信息
+         */
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+
+        }
+
+        /**
+         * 设备支持文件格式回调
+         *
+         * @param device     蓝牙设备
+         * @param fileFormat 设备支持文件格式
+         */
+        public void onFileFormatChange(BluetoothDevice device, String fileFormat) {
+
+        }
+
+        /**
+         * 音乐歌曲改变回调
+         *
+         * @param device   蓝牙设备
+         * @param nameInfo 音乐信息
+         */
+        public void onMusicNameChange(BluetoothDevice device, MusicNameInfo nameInfo) {
+
+        }
+
+        /**
+         * 音乐播放状态回调
+         *
+         * @param device     蓝牙设备
+         * @param statusInfo 音乐状态
+         */
+        public void onMusicStatusChange(BluetoothDevice device, MusicStatusInfo statusInfo) {
+
+        }
+
+        /**
+         * 播放模式改变回调
+         *
+         * @param device       蓝牙设备
+         * @param playModeInfo 播放模式信息
+         */
+        public void onPlayModeChange(BluetoothDevice device, PlayModeInfo playModeInfo) {
+
+        }
+
+        /**
+         * 设备电量改变回调
+         *
+         * @param device      蓝牙设备
+         * @param batteryInfo 电量信息
+         */
+        public void onBatteryChange(BluetoothDevice device, BatteryInfo batteryInfo) {
+
+        }
+
+        /**
+         * 外接设备的状态回调
+         *
+         * @param device 蓝牙设备
+         * @param isPlay 是否播放
+         */
+        public void onAuxStatusChange(BluetoothDevice device, boolean isPlay) {
+
+        }
+
+        /**
+         * FM频道改变回调
+         *
+         * @param device   蓝牙设备
+         * @param channels 频道信息列表
+         */
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+
+        }
+
+        /**
+         * FM状态信息改变回调
+         *
+         * @param device       蓝牙设备
+         * @param fmStatusInfo FM状态信息
+         */
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+
+        }
+
+        /**
+         * 闹钟列表更新回调
+         *
+         * @param device        蓝牙设备
+         * @param alarmListInfo 闹钟列表
+         */
+        public void onAlarmListChange(BluetoothDevice device, AlarmListInfo alarmListInfo) {
+
+        }
+
+        /**
+         * 默认闹钟铃声列表
+         *
+         * @param device 蓝牙设备
+         * @param bells  默认闹钟铃声列表
+         */
+        public void onAlarmDefaultBellListChange(BluetoothDevice device, List<DefaultAlarmBell> bells) {
+
+        }
+
+        /**
+         * 闹钟提醒回调
+         *
+         * @param device    蓝牙设备
+         * @param alarmBean 闹钟信息
+         */
+        public void onAlarmNotify(BluetoothDevice device, AlarmBean alarmBean) {
+
+        }
+
+        /**
+         * 闹钟停止回调
+         *
+         * @param device    蓝牙设备
+         * @param alarmBean 闹钟信息
+         */
+        public void onAlarmStop(BluetoothDevice device, AlarmBean alarmBean) {
+
+        }
+
+        /**
+         * 频道发射回调
+         *
+         * @param device    蓝牙设备
+         * @param frequency 频点
+         */
+        public void onFrequencyTx(BluetoothDevice device, float frequency) {
+
+        }
+
+        /**
+         * 外设模式改变回调
+         *
+         * @param device 蓝牙设备
+         * @param mode   外设模式
+         */
+        public void onPeripheralsModeChange(BluetoothDevice device, int mode) {
+
+        }
+
+        /**
+         * 外设连接状态改变回调
+         *
+         * @param device  蓝牙设备
+         * @param connect 是否连接
+         * @param mac     设备mac地址
+         */
+        public void onPeripheralsConnectStatusChange(BluetoothDevice device, boolean connect, String mac) {
+
+        }
+
+        /**
+         * ID3歌曲info回调
+         *
+         * @param device       蓝牙设备
+         * @param id3MusicInfo id3歌曲信息
+         */
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+
+        }
+
+        /**
+         * 高低音变化回调
+         * 
+         * @param device 蓝牙设备
+         * @param high   高音
+         * @param bass   低音
+         */
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+
+        }
+
+        /**
+         * Eq预设值变化
+         *
+         * @param device       蓝牙设备
+         * @param eqPresetInfo 预设值
+         */
+        public void onEqPresetChange(BluetoothDevice device, EqPresetInfo eqPresetInfo) {
+
+        }
+
+        /**
+         * 通话状态回调
+         *
+         * @param device 蓝牙设备
+         * @param status 通话状态
+         */
+        public void onPhoneCallStatusChange(BluetoothDevice device, int status) {
+
+        }
+
+        /**
+         * 拓展功能回调
+         *
+         * @param device 蓝牙设备
+         * @param type   拓展功能
+         * @param data   拓展有效数据
+         */
+        public void onExpandFunction(BluetoothDevice device, int type, byte[] data) {
+
+        }
+    
+        /**
+         * 混响参数回调
+         *
+         * @param device 蓝牙设备
+         * @param param  混响参数
+         */
+        public void onReverberation(BluetoothDevice device, ReverberationParam param) {
+
+        }
+
+        /**
+         * 动态限幅参数回调
+         *
+         * @param device 蓝牙设备
+         * @param param  动态限幅参数
+         */
+        public void onDynamicLimiter(BluetoothDevice device, DynamicLimiterParam param) {
+
+        }
+
+        /**
+         * 灯光控制回调
+         *
+         * @param device           蓝牙设备
+         * @param lightControlInfo 灯光控制信息
+         */
+        public void onLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo) {
+
+        }
+
+        /**
+         * 声卡EQ信息回调
+         *
+         * @param device 蓝牙设备
+         * @param eqInfo EQ信息
+         */
+        public void onSoundCardEqChange(BluetoothDevice device, EqInfo eqInfo) {
+
+        }
+
+
+        /**
+         * 声卡状态回调
+         *
+         * @param device 蓝牙设备
+         * @param mask   掩码
+         * @param values 数据
+         */
+        public void onSoundCardStatusChange(BluetoothDevice device, long mask, byte[] values) {
+
+        }
+
+        /**
+         * 当前噪声处理模式信息
+         *
+         * @param device    设备对象
+         * @param voiceMode 噪声处理模式
+         */
+        public void onCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode) {
+
+        }
+
+        /**
+         * 设备所有噪声处理模式信息
+         *
+         * @param device     设备对象
+         * @param voiceModes 噪声处理模式信息列表
+         */
+        public void onVoiceModeList(BluetoothDevice device, List<VoiceMode> voiceModes) {
+
+        }
+
+        /**
+         * 辅听验配信息回调
+         *
+         * @param device            设备对象
+         * @param hearingAssistInfo 辅听验配信息
+         */
+        public void onHearingAssistInfo(BluetoothDevice device, HearingAssistInfo hearingAssistInfo) {
+
+        }
+
+        /**
+         * 辅听声道状态回调
+         *
+         * @param device                设备对象
+         * @param hearingChannelsStatus 辅听声道状态
+         */
+        public void onHearingChannelsStatus(BluetoothDevice device, HearingChannelsStatus hearingChannelsStatus) {
+
+        }
+
+        /**
+         * 声学功能回调
+         *
+         * @param device    设备对象
+         * @param voiceFunc 声学功能数据
+         */
+        public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+
+        }
+
+        /**
+         * 设备双连状态回调
+         *
+         * @param device 设备对象
+         * @param state  设备双连状态信息
+         */
+        public void onDoubleConnectionChange(BluetoothDevice device, DoubleConnectionState state) {
+
+        }
+
+        /**
+         * 设备已连接的手机蓝牙信息回调
+         *
+         * @param device 设备对象
+         * @param info   设备已连接的手机蓝牙信息
+         */
+        public void onConnectedBtInfo(BluetoothDevice device, ConnectedBtInfo info) {
+
+        }
+
+    }
+
+
+.. note:: 
+    1. :ref:`volume_info` 
+    2. :ref:`eq_info` 
+    3. :ref:`deviect_storage_info` 
+    4. :ref:`music_name_info` 
+    5. :ref:`music_status_info` 
+    6. :ref:`music_mode_info` 
+    7. :ref:`channel_info` 
+    8. :ref:`fm_status_info` 
+    9. :ref:`alarm_list_info`  
+    10. :ref:`default_alarm_bell`
+    11. :ref:`alarm_bean` 
+    12. :ref:`id3_info`
+    13. :ref:`eq_perset_info` 
+    14. :ref:`reverberation_param` 
+    15. :ref:`dynamic_limiter_param` 
+    16. :ref:`light_ctrl_info` 
+    17. :ref:`voice_mode` 
+    18. :ref:`voice_func` 
+    19. :ref:`double_connection_state` 
+    20. :ref:`connected_bt_info` 
+
+
+.. _deviect_storage_info:
+
+DevStorageInfo
+-------------------------------------
+
+设备外接存储信息
+
+.. code-block:: java
+
+    public class DevStorageInfo {
+        /**
+         * 存储器信息
+         */
+        private static final int TYPE_STORAGE_INFO = 1;
+        /**
+         * 存储器复用
+         */
+        private static final int TYPE_REUSE_STORAGE = 2;
+
+        /**
+         * 存储器状态
+         */
+        @NonNull
+        private final List<SDCardBean> storageStates;
+        /**
+         * 是否复用
+         */
+        private boolean isDeviceReuse;
+        /**
+         * 版本号
+         */
+        private int version;
+    }
+
+
+.. _voice_func:
+
+VoiceFunc
+-----------------------------------
+
+声音功能
+
+.. code-block:: java
+
+    public abstract class VoiceFunc {
+        public static final int FUNC_ADAPTIVE = 1;             //ANC自适应功能
+        public static final int FUNC_SMART_NO_PICK = 2;        //智能免摘功能
+        public static final int FUNC_SCENE_DENOISING = 3;      //场景降噪功能
+        public static final int FUNC_WIND_NOISE_DETECTION = 4; //风噪检测功能
+        public static final int FUNC_VOCAL_BOOSTER = 5;        //人声增强功能
+
+        private final int type;   //数据类型
+        private int version;      //版本号
+    }
+
+
+
+对应声学功能
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+=================================== =================================== =================================== ================================================================
+           引用常量                                  类型                              说明                                          数据模型
+=================================== =================================== =================================== ================================================================
+  FUNC_ADAPTIVE                                      1                       ANC自适应功能                       :ref:`adaptive_data` 
+  FUNC_SMART_NO_PICK                                 2                       智能免摘功能                        :ref:`smart_no_pick` 
+  FUNC_SCENE_DENOISING                               3                       场景降噪功能                        :ref:`scence_denoising` 
+  FUNC_WIND_NOISE_DETECTION                          4                       风噪检测功能                        :ref:`wind_noise_detection` 
+  FUNC_VOCAL_BOOSTER                                 5                       人声增强功能                        :ref:`vocal_booster` 
+=================================== =================================== =================================== ================================================================

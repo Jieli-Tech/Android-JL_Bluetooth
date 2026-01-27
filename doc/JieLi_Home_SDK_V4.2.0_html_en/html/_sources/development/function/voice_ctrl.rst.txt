@@ -1,0 +1,231 @@
+.. _voice_ctrl_func:
+
+Volume Control Function
+**********************************************
+
+
+Get Current Device Volume
+==============================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attribute
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_VOLUME``  -- Identify system volume
+
+Command construction
+
+.. code-block:: java
+
+    //Construct get current device volume
+    CommandBase getVolumeCmd = CommandBuilder.buildGetVolumeCmd();
+
+
+Code example reference :ref:`get_sys_info` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+            //Device volume info will be callback here
+        }
+    });
+    //Execute get current volume function and wait for result callback
+    controller.getCurrentVolume(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be in BTRcspEventCallback#onVolumeChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+.. note::
+   1. Volume info, :ref:`volume_info` 
+
+
+
+
+.. _volume_info:
+
+VolumeInfo
+-----------------------------------
+
+
+Volume info
+
+.. code-block:: java
+
+    public class VolumeInfo {
+        private int maxVol;  //Maximum volume
+        private int volume; //Current volume
+        private boolean supportVolumeSync=false; //Whether volume sync is supported
+    }
+
+
+Adjust Device Volume
+====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attribute
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_VOLUME``          -- Identify system volume
+| **value :** volume (1Byte) -- Volume
+
+Command construction
+
+.. code-block:: java
+
+    //Construct set current device volume
+    int volume = 16; //Volume level, maximum volume level can be obtained in device info
+    CommandBase setVolumeCmd = CommandBuilder.buildSetVolumeCmd(volume);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+            //Device volume info will be callback here
+        }
+    });
+    VolumeInfo volume = null; //Volume info, cannot be null
+    //Execute adjust volume function and wait for result callback
+    controller.adjustVolume(controller.getUsingDevice(), volume, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be in BTRcspEventCallback#onVolumeChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+.. note::
+   1. Volume info, :ref:`volume_info` 
+
+
+Get High and Low Tone Info
+========================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- Public attribute
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_HIGH_AND_BASS`` -- Identify high and low tone function
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getHighAndBassCmd = CommandBuilder.buildGetHighAndBassCmd();
+
+
+Code example reference :ref:`get_sys_info` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+            //High and low tone info will be callback here
+        }
+    });
+    //Execute get high and low tone info function and wait for result callback
+    controller.getHighAndBassValue(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be in BTRcspEventCallback#onHighAndBassChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+Set High and Low Tone
+===========================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attribute
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_HIGH_AND_BASS``   -- Identify high and low tone function
+| **value :** bass (4Bytes)  + high(4Bytes) / Low tone value + High tone value
+
+Command construction
+
+.. code-block:: java
+
+    int high = 16; //High tone value
+    int bass = 16; //Low tone value
+    CommandBase setHighAndBassCmd = CommandBuilder.buildSetHighAndBassCmd(high, bass);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+            //High and low tone info will be callback here
+        }
+    });
+    int high = 16; //High tone value
+    int bass = 16; //Low tone value
+    //Execute set high and low tone function and wait for result callback
+    controller.setHighAndBassValue(controller.getUsingDevice(), high, bass, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be in BTRcspEventCallback#onHighAndBassChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - Error info
+        }
+    });
+
+
+

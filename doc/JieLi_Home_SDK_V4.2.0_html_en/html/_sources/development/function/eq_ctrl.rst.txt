@@ -1,0 +1,406 @@
+.. _eq_ctrl_func:
+
+Equalizer Control Function
+***********************************************
+
+
+Get Equalizer Parameters
+===============================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``              -- Public attributes
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_EQ_PRESET_VALUE or 0x01 << AttrAndFunCode.SYS_INFO_ATTR_EQ`` -- EQ preset values and EQ information
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getEqInfoCmd = CommandBuilder.buildGetEqPresetAndEqValueCmd();
+
+
+Code example reference :ref:`get_sys_info`  
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onEqPresetChange(BluetoothDevice device, EqPresetInfo eqPresetInfo) {
+            //This will callback equalizer preset values
+        }
+
+        @Override
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //This will callback equalizer effect information
+        }
+    });
+    //Execute get equalizer information function and wait for result callback
+    controller.getEqInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onEqPresetChange、BTRcspEventCallback#onEqChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note:: 
+    1. :ref:`eq_perset_info` 
+
+
+.. note::
+   1. :ref:`eq_mode_list` 
+
+.. _eq_perset_info:
+
+EqPresetInfo
+-------------------------------------------
+
+EQ preset information
+
+.. code-block:: java
+
+    public class EqPresetInfo {
+        private int number;
+
+        private List<EqInfo> eqInfos;
+        private int[] freqs;
+    }
+
+
+
+
+
+Configure Equalizer Parameters
+=======================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_EQ``              -- Identify equalizer parameters
+| **value :**  Parameters
+
+=================== ======================================================= ==================================================================================
+  Whether dynamic      Parameter format                                          Notes
+=================== ======================================================= ==================================================================================
+    false            eqMode(1Byte) + eqValue(10 bytes)                       eqMode highest bit is 0, indicates default parameters
+    true             eqMode(1Byte) + length(1Byte) + eqValue(n Bytes)        eqMode highest bit is 1, indicates dynamic adjustment, ``recommended``
+=================== ======================================================= ==================================================================================
+
+Command construction
+
+.. code-block:: java
+
+    boolean isDynamic = true; //Whether supports dynamic change
+    int eqMode = 6;  //EQ mode -- Custom
+    byte[] gains = new byte[10]; //EQ gain array - determined by dynamic segments
+    CommandBase setEqInfoCmd = CommandBuilder.buildSetEqValueCmd(isDynamic, (byte) eqMode, gains)();
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //This will callback equalizer effect information
+        }
+    });
+    EqInfo eqInfo = null; //EQ information, cannot be null
+    //Execute configure equalizer effect function and wait for result callback
+    controller.configEqInfo(controller.getUsingDevice(), eqInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`eq_info` 
+
+
+
+
+.. _eq_info: 
+
+EqInfo
+-----------------------------
+
+
+Equalizer information
+
+.. code-block:: java
+
+    public class EqInfo {
+
+        /**
+         * EQ mode
+         */
+        private int mode;
+        /**
+         * Gain value array
+         */
+        private byte[] value = new byte[10];
+        /**
+         * Preset value array
+         */
+        private int[] freqs = BluetoothConstant.DEFAULT_EQ_FREQS;
+        /**
+         * Whether dynamic EQ
+         */
+        private boolean dynamic;
+        /**
+         * Preset value array length
+         */
+        private int count = 10;
+    }
+
+
+
+.. _eq_mode_list:
+
+EQ Mode Comparison Table
+-----------------------------------
+
+
+========================== ======================================================= 
+          Value                         Mode Name                                    
+========================== ======================================================= 
+  0                          Standard Music Mode
+  1                          Rock Music Mode
+  2                          Popular Music Mode
+  3                          Classical Music Mode
+  4                          Jazz Music Mode
+  5                          Country Music Mode
+  6                          Custom Music Mode
+========================== ======================================================= 
+
+
+
+Get Extended Parameters
+====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``              -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FIXED_LEN_DATA_FUN`` -- Extended parameters
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getFixedLenDataCmd = CommandBuilder.buildGetFixedLenDataCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onExpandFunction(BluetoothDevice device, int type, byte[] data) {
+            //This will callback additional function information
+        }
+    });
+    //Execute get additional function information function and wait for result callback
+    controller.getExpandDataInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onExpandFunction
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Set Extended Parameters
+===================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_FIXED_LEN_DATA_FUN``    -- Identify extended parameters
+| **value :**  mask(4Bytes) + data(n Bytes)
+
+Command construction
+
+.. code-block:: java
+
+    int mask = 0x03; //Extended mask  - Bit0 -- Reverberation   Bit1 -- Dynamic Limiter
+    byte[] data = new byte[0]; //Parameters, format： LTV format, composed of multiple LTV data
+    CommandBase setFixedLenDataCmd = CommandBuilder.buildSetFixedLenDataCmd(mask, data);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //mask - Function mask
+    //data - Parameter data
+    //Execute set additional function information function and wait for result callback
+    controller.setExpandDataInfo(controller.getUsingDevice(), mask, data, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. warning:: 
+    | 1. Data consists of multiple :ref:`ltv_format` data 
+    | 2. mask is 32Bit value, reverberation function is Bit0, dynamic limiter function is Bit1
+    | 3. Need to determine if device supports this function
+
+
+Set Reverberation
+==================================
+
+**Only RCSPController supports interface method**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Reverberation parameters, cannot be null
+    ReverberationParam param = null; 
+    //Execute set reverberation function and wait for result callback
+    controller.setReverberationParameter(controller.getUsingDevice(), param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. warning::
+    Need to determine if device supports this function (confirm through get extended parameters, whether corresponding parameters are returned)
+
+
+.. note::
+   1. :ref:`reverberation_param` 
+
+
+
+
+.. _reverberation_param:
+
+ReverberationParam
+--------------------------------------
+
+Reverberation parameters
+
+.. code-block:: java
+
+    public class ReverberationParam {
+        private boolean isOn;      //Switch
+        private int depthValue;    //Depth value
+        private int strengthValue; //Strength value
+    }
+
+
+Set Dynamic Limiter
+======================================
+
+**Only RCSPController supports interface method**
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Dynamic limiter parameters, cannot be null
+    DynamicLimiterParam param = null;
+    //Execute set dynamic limiter function and wait for result callback
+    controller.setDynamicLimiterParameter(controller.getUsingDevice(), param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. warning::
+    Need to determine if device supports this function (confirm through get extended parameters, whether corresponding parameters are returned)
+
+.. note::
+   1. :ref:`dynamic_limiter_param` 
+
+
+
+
+.. _dynamic_limiter_param: 
+
+DynamicLimiterParam
+---------------------------------------
+
+
+Dynamic limiter parameters
+
+.. code-block:: java
+
+    public class DynamicLimiterParam {
+        private int value; //Value
+    }
+
+
+

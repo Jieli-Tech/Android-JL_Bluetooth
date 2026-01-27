@@ -1,0 +1,601 @@
+.. _sound_card_func:
+
+Sound Card Function
+***********************************************
+
+.. important::
+    Sound card function needs to negotiate function index with firmware engineer
+
+
+Get Sound Card Function Status
+=====================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``       -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_SOUND_CARD``  -- Sound card function
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getSoundCardStatusInfoCmd = CommandBuilder.buildGetSoundCardStatusInfo();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onSoundCardStatusChange(BluetoothDevice device, long mask, byte[] values) {
+            //Callback sound card status here
+        }
+    });
+    //Execute get sound card status information function and wait for result callback
+    controller.getSoundCardStatusInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be in BTRcspEventCallback#onSoundCardStatusChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Get Sound Card Effect Parameters
+=========================================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``       -- Public attributes
+| **mask :**     -- Sound card effect
+    * ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_SOUND_CARD_EQ_FREQ``
+    * ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_SOUND_CARD_EQ_GAIN``
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getSoundCardEqInfoCmd = CommandBuilder.buildGetSoundCardEqInfo();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onSoundCardEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //Callback sound card effect information here
+        }
+    });
+    //Execute get sound card effect information function and wait for result callback
+    controller.getSoundCardEqInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be in BTRcspEventCallback#onSoundCardEqChange callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`eq_info` 
+
+
+
+
+Set Sound Card Function
+==================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``   -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_SOUND_CARD``       -- Sound card function
+| **value :**  index(1Byte)+value(2Bytes)
+
+
+
+Command construction
+
+.. code-block:: java
+
+    int index = 0;  //Function index
+    int value = 2;  //Function value
+    CommandBase setSoundCardInfoCmd = CommandBuilder.buildSetSoundCardInfo((byte)index, value);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way 
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //index --- Index
+    int index = 0;
+    //value --- Value
+    byte[] value = new byte[0];
+    //Set sound card function and wait for result callback
+    controller.setSoundCardFunction(controller.getUsingDevice(), index, value, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Set Sound Card Effect
+===================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``         -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_SOUND_CARD_EQ_GAIN``     -- Sound card effect
+| **value :**  len(1Byte)+payload(n Bytes)
+
+Command construction
+
+.. code-block:: java
+
+    byte[] data = new byte[2];
+    data[0] = 2;  //len
+    data[1] = 1;  //payload
+    CommandBase setSoundCardEqValueCmd = CommandBuilder.buildSetSoundCardEqValue(data);
+
+
+Code example reference :ref:`set_sys_info`
+
+2. RCSPController Way 
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute set sound card effect function and wait for result callback
+    controller.setSoundCardEqInfo(controller.getUsingDevice(), value, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Configuration Document
+==================================
+
+**config.json**  
+
+.. code-block:: json
+
+    {
+        "hasEq": "true",
+        "function": [
+        {
+            "id": 0,
+            "title": {
+            "zh": "Voice Change",
+            "en": "Voice"
+            },
+            "type": "select",
+            "icon_url": "icon_voice_nol.png",
+            "column": 3,
+            "paging": false,
+            "list": [
+            {
+                "title": {
+                "zh": "Normal",
+                "en": "Normal"
+                },
+                "index": 0
+            },
+            {
+                "title": {
+                "zh": "Male Voice",
+                "en": "Boy"
+                },
+                "index": 1
+            },
+            {
+                "title": {
+                "zh": "Female Voice",
+                "en": "Girl"
+                },
+                "index": 2
+            },
+            {
+                "title": {
+                "zh": "Child Voice",
+                "en": "Children"
+                },
+                "index": 3
+            },
+            {
+                "title": {
+                "zh": "Magic Voice",
+                "en": "Magic"
+                },
+                "index": 4
+            },
+            {
+                "title": {
+                "zh": "Electronic Music",
+                "en": "EM"
+                },
+                "group": true,
+                "list": [
+                {
+                    "title": {
+                    "zh": "A Major",
+                    "en": "A major"
+                    },
+                    "index": 5
+                },
+                {
+                    "title": {
+                    "zh": "L A Major",
+                    "en": "L A major"
+                    },
+                    "index": 6
+                },
+                {
+                    "title": {
+                    "zh": "B Major",
+                    "en": "B major"
+                    },
+                    "index": 7
+                },
+                {
+                    "title": {
+                    "zh": "C Major",
+                    "en": "C major"
+                    },
+                "index": 8
+                },
+                {
+                    "title": {
+                    "zh": "L C Major",
+                    "en": "L C major"
+                    },
+                "index": 9
+                },
+                {
+                    "title": {
+                    "zh": "D Major",
+                    "en": "D major"
+                    },
+                    "index": 10
+                },
+                {
+                    "title": {
+                    "zh": "L D Major",
+                    "en": "L D major"
+                    },
+                    "index": 11
+                },
+                {
+                    "title": {
+                    "zh": "E Major",
+                    "en": "E major"
+                    },
+                    "index": 12
+                },
+                {
+                    "title": {
+                    "zh": "F Major",
+                    "en": "F major"
+                    },
+                    "index": 13
+                },
+                {
+                    "title": {
+                    "zh": "L F Major",
+                    "en": "L F major"
+                    },
+                    "index": 14
+                },
+                {
+                    "title": {
+                    "zh": "G Major",
+                    "en": "G major"
+                    },
+                    "index": 15
+                },
+                {
+                    "title": {
+                    "zh": "L G Major",
+                    "en": "L G major"
+                    },
+                    "index": 16
+                }
+              ]
+            }
+          ]
+        },
+        {
+            "title": {
+            "zh": "Others",
+            "en": "Other"
+            },
+            "id": 3,
+            "icon_url": "icon_others_nol.png",
+            "type": "select",
+            "column": 3,
+            "paging": false,
+            "list": [
+            {
+                "title": {
+                "zh": "Popping",
+                "en": "Popping"
+                },
+                "index": 36
+            },
+            {
+                "title": {
+                "zh": "Shout",
+                "en": "Shout"
+                },
+                "index": 37
+            },
+            {
+                "title": {
+                "zh": "Dodge",
+                "en": "Dodge"
+                },
+                "index": 38
+            }
+          ]
+        },
+        {
+            "title": {
+            "zh": "Atmosphere",
+            "en": "AtmosPhere"
+            },
+            "id": "1",
+            "icon_url": "icon_effect_nol.png",
+            "type": "img_select",
+            "column": 4,
+            "paging": true,
+            "row": 2,
+            "list": [
+            {
+                "title": {
+                "zh": "Cheers",
+                "en": "Cheers"
+                },
+                "index": 17,
+                "icon_url": "img_cheer.png"
+            },
+            {
+                "title": {
+                "zh": "Awkward",
+                "en": "Awkward"
+                },
+                "index": 18,
+                "icon_url": "img_awkward.png"
+            },
+            {
+                "title": {
+                "zh": "Gunfire",
+                "en": "Gunfire"
+                },
+                "index": 19,
+                "icon_url": "img_gun.png"
+            },
+            {
+                "title": {
+                "zh": "Despise",
+                "en": "Despise"
+                },
+                "index": 20,
+                "icon_url": "img_despise.png"
+            },
+            {
+                "title": {
+                "zh": "Stage",
+                "en": "Stage"
+                },
+                "index": 21,
+                "icon_url": "img_stage.png"
+            },
+            {
+                "title": {
+                "zh": "Kiss",
+                "en": "Kiss"
+                },
+                "index": 22,
+                "icon_url": "img_kiss.png"
+            },
+            {
+                "title": {
+                "zh": "Laugh",
+                "en": "Laugh"
+                },
+                "index": 23,
+                "icon_url": "img_laugh.png"
+            },
+            {
+                "title": {
+                "zh": "Applause",
+                "en": "Applause"
+                },
+                "index": 24,
+                "icon_url": "img_applause.png"
+            },
+            {
+                "title": {
+                "zh": "Attention",
+                "en": "Attention"
+                },
+                "index": 25,
+                "icon_url": "img_follow.png"
+            },
+            {
+                "title": {
+                "zh": "Mua",
+                "en": "Mua"
+                },
+                "index": 26,
+                "icon_url": "img_memeda.png"
+            },
+            {
+                "title": {
+                 "zh": "Zheilala",
+                "en": "Song01"
+                },
+                "index": 27,
+                "icon_url": "img_song_01.png"
+            },
+            {
+                "title": {
+                "zh": "Fei Cheng Wu Rao",
+                "en": "Song02"
+                },
+                "index": 28,
+                "icon_url": "img_song_02.png"
+            }
+          ]
+        },
+        {
+            "title": {
+            "zh": "Mic Args",
+            "en": "Mic Args"
+            },
+            "id": 2,
+            "icon_url": "icon_settle_nol.png",
+            "type": "slider",
+            "list": [
+             {
+                "title": {
+                "zh": "Mic Volume",
+                "en": "Mic Vol"
+                },
+                "index": 29,
+                "max": 30,
+                "enable": true
+            },
+            {
+                "title": {
+                "zh": "Record Volume",
+                "en": "Record Vol"
+                },
+                "index": 30,
+                "enable": true,
+                "max": 30
+            },
+            {
+                "title": {
+                "zh": "Reverberation",
+                "en": "Reverberation"
+                },
+                "index": 31,
+                "enable": true,
+                "max": 30
+            },
+            {
+                "title": {
+                "zh": "High",
+                "en": "High"
+                },
+                "index": 32,
+                "enable": true,
+                "max": 10
+            },
+            {
+                "title": {
+                "zh": "Bass",
+                "en": "Bass"
+                },
+                "index": 33,
+                "enable": true,
+                "max": 10
+            },
+            {
+                "title": {
+                "zh": "Accompaniment Volume",
+                "en": "Accomp Vol"
+                },
+                "index": 34,
+                "enable": true,
+                "max": 30
+            },
+            {
+                "title": {
+                "zh": "Monitor Volume",
+                "en": "Monitor Vol"
+                },
+                "index": 35,
+                "enable": true,
+                "max": 30
+            }
+          ]
+        }
+      ]
+    }
+
+
+**Field Description**
+
+===================== ===========================================================
+  Field                 Description
+===================== ===========================================================
+ id                    Distinguish category
+ title                 Title
+ icon_url              Project icon link
+ type                 | Sub-item control type:
+                      | Currently supported:
+                      | img_select(can set image),select,slider
+ column               | Control column count,
+                      | Invalid when type==slider
+ row                  | Control row count,
+                      | Need to combine with column and paging==true to be effective
+ paging               | Control unique identification code, globally unique,
+                      | When group is true, index is invalid
+ max                  | Maximum value,
+                      | Valid when type==slider
+ group                | Whether group type,
+                      | true then no index field, valid when type is select
+ enable               | Valid for slider type,
+                      | true:app can adjust, false:app cannot adjust
+===================== ===========================================================
+
+
+

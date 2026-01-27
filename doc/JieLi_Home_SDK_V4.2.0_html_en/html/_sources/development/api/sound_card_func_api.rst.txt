@@ -1,0 +1,47 @@
+.. _sound_card_op: 
+
+Sound Card Function Interface
+****************************************************
+
+.. code-block:: java
+
+    public interface ISoundCardOp {
+
+        /**
+         * Get sound card status
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getSoundCardStatusInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get sound card info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getSoundCardEqInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set sound card info
+         *
+         * @param device   Operation device
+         * @param value    Value
+         * @param callback Result callback
+         */
+        void setSoundCardEqInfo(BluetoothDevice device, byte[] value, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set sound card function
+         *
+         * @param device   Operation device
+         * @param index    Function index
+         * @param value    Function value
+         * @param callback Result callback
+         */
+        void setSoundCardFunction(BluetoothDevice device, byte index, int value, OnRcspActionCallback<Boolean> callback);
+    }
+
+
+

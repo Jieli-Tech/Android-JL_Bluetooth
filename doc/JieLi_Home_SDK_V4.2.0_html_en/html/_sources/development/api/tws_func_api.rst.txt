@@ -1,0 +1,354 @@
+.. _tws_op: 
+
+TWS Function Interface
+**************************************
+
+.. code-block:: java
+
+    public interface ITwsOp {
+        /**
+         * Add TWS event listener
+         *
+         * @param listener TWS event listener
+         */
+        void addOnTwsEventListener(OnTwsEventListener listener);
+
+        /**
+         * Remove TWS event listener
+         *
+         * @param listener TWS event listener
+         */
+        void removeOnTwsEventListener(OnTwsEventListener listener);
+
+        /**
+         * Get cached ADV info
+         *
+         * @param device Bluetooth device
+         * @return ADV info
+         */
+        ADVInfoResponse getADVInfo(BluetoothDevice device);
+
+        /**
+         * Control device info broadcast
+         *
+         * @param device   Bluetooth device
+         * @param enable   Switch
+         * @param callback Result callback
+         */
+        void controlAdvBroadcast(BluetoothDevice device, boolean enable, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get device settings info
+         *
+         * @param device   Bluetooth device
+         * @param mask     Mask
+         * @param callback Result callback
+         */
+        void getDeviceSettingsInfo(BluetoothDevice device, int mask, OnRcspActionCallback<ADVInfoResponse> callback);
+
+        /**
+         * Modify device settings info
+         *
+         * @param device   Bluetooth device
+         * @param type     Function
+         * @param data     Parameters
+         * @param callback Result callback
+         */
+        void modifyDeviceSettingsInfo(BluetoothDevice device, int type, byte[] data, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Get all noise processing mode info
+         *
+         * @param device   Bluetooth device
+         * @param callback Result callback
+         */
+        void getAllVoiceModes(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get current noise processing mode info
+         *
+         * @param device   Bluetooth device
+         * @param callback Result callback
+         */
+        void getCurrentVoiceMode(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set current noise processing mode
+         *
+         * @param device    Bluetooth device
+         * @param voiceMode Noise processing mode
+         * @param callback  Result callback
+         */
+        void setCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Configure device name
+         *
+         * @param device    Bluetooth device
+         * @param name      Device name
+         * @param callback  Result callback
+         */
+        void configDeviceName(BluetoothDevice device, String name, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Configure button function settings
+         *
+         * @param device    Bluetooth device
+         * @param list      Button function list
+         * @param callback  Result callback
+         */
+        void configKeySettings(BluetoothDevice device, List<ADVInfoResponse.KeySettings> list, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Configure LED effect settings
+         *
+         * @param device    Bluetooth device
+         * @param list      LED effect settings
+         * @param callback  Result callback
+         */
+        void configLedSettings(BluetoothDevice device, List<ADVInfoResponse.LedSettings> list, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Update connected device time
+         *
+         * @param device    Bluetooth device
+         * @param timeSec   Connected device time (unit is seconds)
+         * @param callback  Result callback
+         */
+        void updateConnectedTime(BluetoothDevice device, int timeSec, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Update value of specified function
+         *
+         * @param device    Bluetooth device
+         * @param type      Function flag
+         * @param value     Function new value
+         * @param callback  Result callback
+         */
+        void updateFunctionValue(BluetoothDevice device, int type, byte value, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Whether adaptive ANC algorithm is supported
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isSupportAdaptiveANC(BluetoothDevice device);
+
+        /**
+         * Get adaptive ANC data
+         *
+         * @param device   Bluetooth device
+         * @param callback Result callback
+         *                 <p>Result is returned via {@link OnRcspEventListener#onVoiceFunctionChange(BluetoothDevice, VoiceFunc)} callback</p>
+         */
+        void getAdaptiveANCData(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set adaptive ANC data
+         *
+         * @param device   Bluetooth device
+         * @param data     Data
+         * @param callback Operation callback
+         */
+        void setAdaptiveANCData(BluetoothDevice device, AdaptiveData data, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Start adaptive ANC algorithm detection
+         *
+         * @param device   Bluetooth device
+         * @param listener Adaptive ANC detection listener
+         */
+        void startAdaptiveANC(BluetoothDevice device, OnAdaptiveANCListener listener);
+
+        /**
+         * Whether smart no-pick function is supported
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isSupportSmartNoPick(BluetoothDevice device);
+
+        /**
+         * Get smart no-pick info
+         *
+         * @param device   Bluetooth device
+         * @param callback Operation result callback
+         *                 <p>Result is returned via {@link OnRcspEventListener#onVoiceFunctionChange(BluetoothDevice, VoiceFunc)} callback</p>
+         */
+        void getSmartNoPick(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set smart no-pick parameters
+         *
+         * @param device      Bluetooth device
+         * @param smartNoPick Parameters
+         * @param callback    Operation result callback
+         */
+        void setSmartNoPickParam(BluetoothDevice device, SmartNoPick smartNoPick, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Whether scene denoising function is supported
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isSupportSceneDenoising(BluetoothDevice device);
+
+        /**
+         * Get scene denoising parameters
+         *
+         * @param device   Bluetooth device
+         * @param callback Operation result callback
+         */
+        void getSceneDenoising(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set scene denoising parameters
+         *
+         * @param device         Bluetooth device
+         * @param sceneDenoising Parameters
+         * @param callback       Operation result callback
+         */
+        void setSceneDenoising(BluetoothDevice device, SceneDenoising sceneDenoising, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Whether wind noise detection function is supported
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isSupportWindNoiseDetection(BluetoothDevice device);
+
+        /**
+         * Get wind noise detection parameters
+         *
+         * @param device   Bluetooth device
+         * @param callback Operation result callback
+         */
+        void getWindNoiseDetection(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set wind noise detection parameters
+         *
+         * @param device    Bluetooth device
+         * @param detection Parameters
+         * @param callback  Operation result callback
+         */
+        void setWindNoiseDetection(BluetoothDevice device, WindNoiseDetection detection, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Whether vocal booster function is supported
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isSupportVocalBooster(BluetoothDevice device);
+
+        /**
+         * Get vocal booster parameters
+         *
+         * @param device   Bluetooth device
+         * @param callback Operation result callback
+         */
+        void getVocalBooster(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set vocal booster parameters
+         *
+         * @param device       Bluetooth device
+         * @param vocalBooster Parameters
+         * @param callback     Operation result callback
+         */
+        void setVocalBooster(BluetoothDevice device, VocalBooster vocalBooster, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Whether device dual connection function is supported
+         *
+         * @param device Bluetooth device
+         * @return Result
+         */
+        boolean isSupportDoubleConnection(BluetoothDevice device);
+
+        /**
+         * Query device dual connection status
+         *
+         * @param device   Bluetooth device
+         * @param callback Result callback
+         */
+        void queryDoubleConnectionState(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set device dual connection status
+         *
+         * @param device   Bluetooth device
+         * @param state    Device dual connection status
+         * @param callback Result callback
+         */
+        void setDoubleConnectionState(BluetoothDevice device, DoubleConnectionState state, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Query device connected phone
+         *
+         * @param device      Bluetooth device
+         * @param deviceBtInfo Phone Bluetooth info
+         * @param callback    Result callback
+         */
+        void queryConnectedPhoneBtInfo(BluetoothDevice device, DeviceBtInfo deviceBtInfo, OnRcspActionCallback<ConnectedBtInfo> callback);
+    }
+
+
+
+.. _tws_event_listener: 
+
+TWS Event Listener
+===========================================
+
+.. code-block:: java
+
+    public abstract class OnTwsEventListener {
+
+        /**
+         * Device broadcast info callback
+         *
+         * @param device    Bluetooth device
+         * @param broadcast Broadcast info
+         */
+        public void onDeviceBroadcast(BluetoothDevice device, DevBroadcastMsg broadcast) {
+
+        }
+
+        /**
+         * Device settings info callback
+         *
+         * @param device   Bluetooth device
+         * @param mask     Mask
+         * @param dataInfo Settings info
+         */
+        public void onDeviceSettingsInfo(BluetoothDevice device, int mask, ADVInfoResponse dataInfo) {
+
+        }
+
+        /**
+         * TWS status callback
+         *
+         * @param device         Bluetooth device
+         * @param isTwsConnected Whether TWS connected
+         */
+        public void onTwsStatusChange(BluetoothDevice device, boolean isTwsConnected) {
+
+        }
+
+        /**
+         * Device request operation callback
+         *
+         * @param device Bluetooth device
+         * @param op     Request operation
+         */
+        public void onDeviceRequestOp(BluetoothDevice device, int op) {
+
+        }
+    }
+
+
+

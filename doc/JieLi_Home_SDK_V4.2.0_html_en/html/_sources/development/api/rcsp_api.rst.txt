@@ -1,0 +1,27 @@
+
+.. _rcsp_func_api:
+
+2. RCSP Functional API
+******************************************
+
+.. toctree::
+    :maxdepth: 2
+    :numbered: 
+
+    rcsp_basic_api
+    basic_func_api
+    voice_ctrl_api
+    device_music_ctrl_api
+    eq_ctrl_api
+    rtc_ctrl_api
+    line_in_ctrl_api
+    fm_ctrl_api
+    light_ctrl_api
+    tws_func_api
+    sound_card_func_api
+    search_device_api
+    record_func_api
+    file_op_api
+    spdif_op_api
+    charging_case_func_api
+    translation_func_api

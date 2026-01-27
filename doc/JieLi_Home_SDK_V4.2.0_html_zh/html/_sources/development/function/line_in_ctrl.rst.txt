@@ -1,0 +1,131 @@
+
+.. _line_in_ctrl_func:
+
+外接设备控制功能
+************************
+
+
+.. important:: 
+    1. 接口需要设备处于【外接设备模式】才能生效
+    2. 判断设备是否支持【外接设备模式】
+    
+    .. code-block:: java
+      
+        public boolean isSupportAuxMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.isAuxEnable();
+        }
+   
+
+    3. 判断设备是否处于【外接设备模式】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInAuxMode() {
+            //获取RCSPController对象
+            RCSPController controller = RCSPController.getInstance();
+            //获取当前操作设备
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //设备未初始化
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_AUX;
+        }
+
+    4.  :ref:`get_device_mode` 
+   
+
+
+
+
+获取外接设备播放状态
+===========================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_AUX``   -- AUX功能
+| **mask :**   ``0x01``                                      -- 播放状态
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getAuxPlayStatueCmd = CommandBuilder.buildGetAuxPlayStatueCmd();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式 
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onAuxStatusChange(BluetoothDevice device, boolean isPlay) {
+            //此处回调外接设备播放状态
+        }
+    });
+    //执行获取外接设备播放状态功能并等待结果回调
+    controller.getAuxStatusInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onAuxStatusChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+外接设备播放或暂停
+=========================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_AUX``        -- AUX功能
+| **type :**  ``AttrAndFunCode.FUNCTION_AUX_CMD_PAUSE_OR_PLAY``   -- 播放或暂停
+| **value :**  NULL
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase auxPlayOrPauseCmd = CommandBuilder.buildAuxPlayOrPauseCmd();
+
+
+代码示例参考 :ref:`set_function`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行外接设备播放或暂停功能并等待结果回调
+    controller.auxPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });

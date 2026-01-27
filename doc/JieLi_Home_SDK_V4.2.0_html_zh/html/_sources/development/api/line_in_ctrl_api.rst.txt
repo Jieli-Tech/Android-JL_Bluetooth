@@ -1,0 +1,31 @@
+.. _aux_op: 
+
+外接设备功能接口
+***********************************
+
+.. code-block:: java 
+
+    public interface IAuxOp {
+
+        /**
+         * 获取外接设备状态
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getAuxStatusInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 播放或暂停
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void auxPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+    }
+
+
+
+.. note:: 
+    1. :ref:`rcsp_op_cb` 

@@ -1,0 +1,226 @@
+.. _custom_cmd_func:
+
+Custom Commands
+*****************************************
+
+
+.. _send_custom_cmd:
+
+Send Custom Command
+=========================================
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    //Step0: Get JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Construct custom command 
+    byte[] data = new byte[20]; //Custom data
+    //Create custom command (default creates custom command that requires reply)
+    CommandBase customCmd = CommandBuilder.buildCustomCmd(data);
+    //Create custom command that does not require reply
+    //        customCmd = new CustomCmd(CommandBase.FLAG_HAVE_PARAMETER_NO_RESPONSE, new CustomParam(data));
+    //Step2: Execute operation command and wait for result callback
+    manager.sendRcspCommand(manager.getConnectedDevice(), customCmd, new RcspCommandCallback() {
+        //Callback reply command
+        //Note: For no-reply command, reply command itself
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //Device status abnormal, perform exception handling
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Success callback
+            //Step4: Get corresponding command data
+            CustomCmd customCmd = (CustomCmd) cmd;
+            boolean isNeedResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                        || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+                if (!isNeedResponse) return; //No reply data
+            //Step5: Get reply data
+            CustomResponse response = customCmd.getResponse();
+            if (null == response) { return;}
+            byte[] data = response.getData(); //Custom reply data
+            //Process device reply data
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Create custom command (default creates custom command that requires reply)
+    CommandBase customCmd = CommandBuilder.buildCustomCmd(data);
+    //Create custom command that does not require reply
+    //        customCmd = new CustomCmd(CommandBase.FLAG_HAVE_PARAMETER_NO_RESPONSE, new CustomParam(data));
+    //Send custom command and wait for result callback
+    controller.sendRcspCommand(controller.getUsingDevice(), customCmd, new RcspCommandCallback() {
+        //Callback reply command
+        //Note: For no-reply command, reply command itself
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //Firmware replies failure status
+                BaseError error = new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device response an bad status : " + cmd.getStatus());
+                error.setOpCode(Command.CMD_EXTRA_CUSTOM);
+                onErrCode(device, error);
+                return;
+            }
+            //Send success callback
+            CustomCmd customCmd = (CustomCmd) cmd;
+            CustomResponse response = customCmd.getResponse();
+            if (null == response) return;
+            byte[] data = response.getData(); //Custom reply data
+            //Process device reply data
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. important:: 
+    1. :ref:`custom_cmd_note` 
+
+      
+
+.. _receiver_custom_cmd:
+
+Receive Custom Command
+============================================
+   
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    //Get RCSPController object
+    JL_BluetoothManager jlManager = JL_BluetoothManager.getInstance(context);
+    //Register Bluetooth RCSP event listener
+    jlManager.addEventListener(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceCommand(BluetoothDevice device, CommandBase cmd) {
+            //This will callback commands sent by device
+            if (cmd.getId() == Command.CMD_EXTRA_CUSTOM) { //Only handle custom command data
+                CustomCmd customCmd = (CustomCmd) cmd;
+                CustomParam param = customCmd.getParam();
+                boolean isNeedResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE 
+                        || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+                if (null == param) {
+                    if (isNeedResponse) { //Requires reply
+                        byte[] responseData = new byte[0]; //Can set reply data
+                        customCmd.setParam(new CustomParam(responseData));
+                        customCmd.setStatus(StateCode.STATUS_SUCCESS);
+                        jlManager.sendRcspResponse(device, customCmd); //Send command reply
+                    }
+                    return;
+                }
+                byte[] data = param.getData(); //Custom data
+                //parseCustomData(data); //Parse reply data yourself
+                if (isNeedResponse) { //Requires reply
+                    byte[] responseData = new byte[0]; //Can set reply data
+                    customCmd.setParam(new CustomParam(responseData));
+                    customCmd.setStatus(StateCode.STATUS_SUCCESS);
+                    jlManager.sendRcspResponse(device, customCmd); //Send command reply
+                }
+            }
+        }
+    });
+
+
+Code example reference :ref:`receive_cmd_handle`
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceCommand(BluetoothDevice device, CommandBase cmd) {
+            //This will callback commands sent by device
+            if (cmd.getId() == Command.CMD_EXTRA_CUSTOM) { //Only handle custom command data
+                CustomCmd customCmd = (CustomCmd) cmd;
+                CustomParam param = customCmd.getParam();
+                 boolean isNeedResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE 
+                 || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+                if(null == param){
+                    if(isNeedResponse){ //Requires reply
+                        byte[] responseData = new byte[0]; //Can set reply data
+                        customCmd.setParam(new CustomParam(responseData));
+                        customCmd.setStatus(StateCode.STATUS_SUCCESS);
+                        controller.sendRcspResponse(device, customCmd); //Send command reply
+                    }
+                    return;
+                }
+                byte[] data = param.getData(); //Custom data
+                //parseCustomData(data); //Parse reply data yourself
+                if(isNeedResponse){ //Requires reply
+                    byte[] responseData = new byte[0]; //Can set reply data
+                    customCmd.setParam(new CustomParam(responseData));
+                    customCmd.setStatus(StateCode.STATUS_SUCCESS);
+                    controller.sendRcspResponse(device, customCmd); //Send command reply
+                }
+            }
+        }
+    });
+
+.. important:: 
+    1. :ref:`custom_cmd_note` 
+
+
+
+
+.. _custom_cmd_note:
+
+Notes
+============================================
+
+.. important:: 
+    1. :ref:`send_custom_cmd` needs to comply with **RCSP protocol** maximum value rules, custom data length cannot exceed (maximum - 20)
+
+        .. code-block:: java
+      
+            //Get current operating device
+            BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+            //Get SDK side maximum send value (i.e. device side maximum receive value)
+            int max = DeviceStatusManager.getInstance().getMaxReceiveMtu(device);
+            //Calculate custom data maximum length
+            int size = max - 20;
+
+    2. Both :ref:`send_custom_cmd` and :ref:`receiver_custom_cmd` need to follow **RCSP protocol** command mechanism
+       
+       * Commands with **reply flag** need to perform ``reply command`` operation.
+       * If command with **reply flag** does not get reply, sender will perform **timeout retry mechanism**
+       * **Retry** exceeds ``certain number of times``, consider **command send failure**
+  
+    3. Determine if command needs ``reply``
+    
+        .. code-block:: java
+
+            boolean isNeedResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+
+
+

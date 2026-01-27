@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--    公用颜色-->
+    <color name="color_main">@color/blue_4A68CC</color>
+    <color name="color_gradients_bg1_start">@color/blue_66A5E5</color>
+    <color name="color_gradients_bg1_end">@color/blue_4F72E9</color>
+    <color name="color_eq_wave_top">@color/blue_5169D0</color>
+    <color name="color_eq_wave_start">@color/blue_4A68CC</color>
+    <color name="color_eq_wave_end">@color/blue_translate_7f657FEE</color>
+    <color name="color_rotating_view_start">@color/blue_5169D0</color>
+    <color name="color_rotating_view_end">@color/blue_7ECFF8</color>
+    <!--  PiLink color  -->
+    <color name="blue_66A5E5">#66A5E5</color>
+    <color name="blue_4F72E9">#4F72E9</color>
+    <color name="blue_4A68CC">#4A68CC</color>
+    <color name="blue_5169D0">#5169D0</color>
+    <color name="blue_7ECFF8">#7ECFF8</color>
+    <color name="blue_3C5DCB">#3C5DCB</color>
+    <color name="blue_60A7F0">#60A7F0</color>
+    <color name="blue_translate_7f657FEE">#7f657FEE</color>
+</resources>

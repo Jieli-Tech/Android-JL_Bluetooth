@@ -1,0 +1,1073 @@
+
+.. _charging_case_func:
+
+彩屏充电仓功能
+********************************
+
+监听彩屏充电仓事件
+==================================
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 增加彩屏充电仓事件监听
+    final OnChargingCaseListener listener = new OnChargingCaseListener() {
+
+        @Override
+        public void onInit(BluetoothDevice device, int state) {
+            //回调初始化状态
+            //0 --- 成功
+            //其他数值为错误码， 参考【错误码】章节
+        }
+
+        @Override
+        public void onChargingCaseInfoChange(BluetoothDevice device, @ChargingCaseInfo.Function int func, ChargingCaseInfo info) {
+            //回调彩屏仓功能变化
+            switch (func) {
+                case ChargingCaseInfo.FUNC_BRIGHTNESS: //屏幕亮度
+                        info.getBrightness(); 
+                        break;
+                    case ChargingCaseInfo.FUNC_FLASHLIGHT: //闪光灯开关
+                        info.isFlashlightOn();
+                        break;
+                    case ChargingCaseInfo.FUNC_SCREEN_SAVERS: //屏幕资源列表
+                        info.getScreenSavers();
+                        break;
+                    case ChargingCaseInfo.FUNC_CURRENT_SCREEN_SAVER: //当前屏保资源
+                        info.getCurrentScreenSaver();
+                        break;
+                    case ChargingCaseInfo.FUNC_CURRENT_BOOT_ANIM: //当前开机动画
+                        info.getCurrentBootAnim();
+                        break;
+                    case ChargingCaseInfo.FUNC_WALLPAPERS: //墙纸资源列表
+                        info.getWallpapers();
+                        break;
+                    case ChargingCaseInfo.FUNC_CURRENT_WALLPAPER: //当前墙纸资源
+                        info.getCurrentWallpaper();
+                        break;
+                }
+            }
+
+            @Override
+            public void onChargingCaseEvent(BluetoothDevice device, SettingFunction function) {
+                //回调彩屏仓功能事件，也会已通过 onChargingCaseInfoChange 接口回调， 可以不处理
+            }
+        };
+        chargingCaseOp.addOnChargingCaseListener(listener);
+        //Step3. 当不需要监听时，记得释监听器
+        //chargingCaseOp.removeListener(listener);
+
+
+.. important::
+   1. 初始化【ChargingCaseOpImpl】对象，会触发初始化流程;
+   2. 若初始化失败，则根据【错误码】进行排查; :ref:`err_code` 
+   3. 若初始化成功，【ChargingCaseOpImpl】对象拥有基础信息对象【ChargingCaseInfo】；
+   4. 用户可以在【ChargingCaseInfo】中查询到【屏幕信息】和【SDK信息】;
+   5. :ref:`charging_case_info` 
+   6. :ref:`screen_info` 
+   7. :ref:`sdk_msg` 
+
+
+获取彩屏仓信息
+--------------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 获取彩屏仓缓存信息
+    chargingCaseOp.getChargingCaseInfo(RCSPController.getInstance().getUsingDevice());
+
+
+.. note::
+   1. :ref:`charging_case_info` 
+   2. 彩屏仓初始化成功后，才能获取到缓存值。彩屏仓初始化中或者初始化失败，获取的值为空。
+
+
+
+
+.. _charging_case_info:
+
+ChargingCaseInfo
+--------------------------------------
+
+彩屏仓信息
+
+.. code-block:: java
+
+    public class ChargingCaseInfo implements Parcelable {
+        /**
+         * 屏幕保护程序
+         */
+        public static final int TYPE_SCREEN_SAVER = FunctionResource.FUNC_SCREEN_SAVERS;
+        /**
+         * 开机动画
+         */
+        public static final int TYPE_BOOT_ANIM = FunctionResource.FUNC_BOOT_ANIM;
+        /**
+         * 墙纸
+         */
+        public static final int TYPE_WALLPAPER = FunctionResource.FUNC_WALL_PAPER;
+
+
+        /**
+         * 屏幕亮度功能
+         */
+        public static final int FUNC_BRIGHTNESS = 1;
+        /**
+         * 闪灯功能
+         */
+        public static final int FUNC_FLASHLIGHT = 2;
+        /**
+         * 当前屏幕资源功能
+         */
+        public static final int FUNC_CURRENT_SCREEN_SAVER = 3;
+        /**
+         * 当前开机动画资源功能
+         */
+        public static final int FUNC_CURRENT_BOOT_ANIM = 4;
+        /**
+         * 墙纸列表功能
+         */
+        public static final int FUNC_WALLPAPERS = 5;
+        /**
+         * 当前墙纸资源功能
+         */
+        public static final int FUNC_CURRENT_WALLPAPER = 6;
+        /**
+         * 屏保列表功能
+         */
+        public static final int FUNC_SCREEN_SAVERS = 7;
+
+    
+        /**
+         * 默认屏幕宽度
+         */
+        public static final int SCREEN_WIDTH = 320;
+        /**
+         * 默认屏幕高度
+         */
+        public static final int SCREEN_HEIGHT = 172;
+
+    
+        /**
+         * 设备地址
+         * <p>
+         * 唯一标识
+         * </p>
+         */
+        private final String address;
+        /**
+         * 屏幕亮度
+         */
+        private int brightness;
+        /**
+         * 手电筒状态
+         */
+        private boolean isFlashlightOn;
+        /**
+         * 屏幕信息
+         */
+        private ScreenInfo screenInfo;
+        /**
+         * SDK信息
+         */
+        private SDKMessage sdkMessage;
+        /**
+         * 当前屏幕保护程序信息
+         */
+        private ResourceInfo currentScreenSaver;
+        /**
+         * 当前开机动画信息
+         */
+        private ResourceInfo currentBootAnim;
+        /**
+         * 当前壁纸信息
+         */
+        private ResourceInfo currentWallpaper;
+        /**
+         * 已存在的墙纸
+         */
+        @NonNull
+        private final List<ResourceInfo> wallpapers;
+        /**
+         * 已存在的墙纸
+         */
+        @NonNull
+        private final List<ResourceInfo> screenSavers;
+    }
+
+
+.. note::
+   1. :ref:`screen_info` 
+   2. :ref:`sdk_msg` 
+   3. :ref:`resource_info`
+
+
+
+获取设备屏幕信息
+=======================================
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取设备屏幕信息的接口
+    chargingCaseOp.readScreenInfo(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ScreenInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ScreenInfo message) {
+            //回调操作成功 和 结果
+            //message -- 屏幕信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+
+.. note::
+   1. :ref:`screen_info` 
+   2. 彩屏仓初始化流程，会主动同步【屏幕信息】。用户可以查询 :ref:`charging_case_info` 信息来获取到【屏幕信息】。
+
+
+
+
+.. _screen_info: 
+
+ScreenInfo
+--------------------------------------
+
+屏幕信息
+
+.. code-block:: java
+
+   public class ScreenInfo extends SettingFunction {
+        /**
+         * 圆形
+         */
+        public static final int SHAPE_CIRCULAR = 1;
+        /**
+         * 矩形
+         */
+        public static final int SHAPE_RECTANGLE = 2;
+        /**
+         * 圆角矩形
+         */
+        public static final int SHAPE_ROUNDED_RECTANGLE = 3;
+
+        /**
+         * 形状
+         */
+        private int shape;
+        /**
+         * 边角半径
+         */
+        private int radius;
+        /**
+         * 背景颜色(ARGB)
+         */
+        private int color;
+        /**
+         * 屏幕宽度
+         */
+        private int width;
+        /**
+         * 屏幕高度
+         */
+        private int height;
+   }
+
+
+获取SDK信息
+====================================
+
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取设备屏幕信息的接口
+    chargingCaseOp.readSDKMessage(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<SDKMessage>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, SDKMessage message) {
+            //回调操作成功 和 结果
+            //message -- SDK信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+            //error.getSubCode() --- 错误码
+            //error.getMessage() --- 错误描述
+        }
+    });
+
+.. note::
+   1. :ref:`sdk_msg` 
+   2. 彩屏仓初始化流程，会主动同步【SDK信息】。用户可以查询 :ref:`charging_case_info` 信息来获取到【SDK信息】。
+
+
+
+
+.. _sdk_msg:
+
+SDKMessage
+-------------------------------------
+
+SDK信息
+
+.. code-block:: java
+
+   public class SDKMessage extends SettingFunction {
+
+        /* ----------------------------------------
+         * 项目代码
+         * ----------------------------------------- */
+        /**
+         * 充电仓
+         */
+        public static final int PROJECT_CHARGING_CASE = 0x0001;
+
+        /* ----------------------------------------
+         * 产品代码
+         * ----------------------------------------- */
+        /**
+         * 彩屏仓
+         */
+        public static final int PRODUCT_COLOR_SCREEN = 0x0001;
+
+        /* ----------------------------------------
+         * 芯片代码
+         * ----------------------------------------- */
+        /**
+         * 701N芯片
+         */
+        public static final int CHIP_701N = 0x0001;
+        /**
+         * 707N芯片
+         */
+        public static final int CHIP_707N = 0X0002;
+
+
+        /**
+         * 项目
+         */
+        private int project;
+        /**
+         * 产品
+         */
+        private int product;
+        /**
+         * 芯片
+         */
+        private int chip;
+        /**
+         * 配置信息
+         */
+        private SDKConfigure configure;
+    }
+
+
+.. note::
+   1. :ref:`sdk_cfg` 
+
+
+
+
+.. _sdk_cfg:
+
+SDKConfigure
+------------------------------------
+
+SDK功能配置
+
+.. code-block:: java
+
+    public class SDKConfigure implements Parcelable {
+
+        /**
+         * 是否支持GIF
+         */
+        private boolean isSupportGif;
+    }
+
+.. _brightness_ctrl:
+
+屏幕亮度控制
+=============================
+
+获取屏幕亮度
+-----------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取屏幕亮度的接口
+    chargingCaseOp.getBrightness(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //回调操作成功 和 结果
+            //message -- 亮度, 范围:0 - 100%
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+设置屏幕亮度
+----------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用设置屏幕亮度的接口
+    //brightness -- 亮度, 范围:0 - 100%
+    chargingCaseOp.setBrightness(RCSPController.getInstance().getUsingDevice(), brightness, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+
+
+
+闪光灯控制
+==============================
+
+获取闪光灯状态
+------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取闪光灯状态的接口
+    chargingCaseOp.getFlashlightState(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+设置闪光灯状态
+-------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用设置闪光灯的接口
+    //isOn -- 开关
+    chargingCaseOp.setFlashlightState(RCSPController.getInstance().getUsingDevice(), isOn, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+            //message -- 开关状态
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+.. _screen_saver_ctrl:
+
+屏幕保护程序控制功能
+================================
+
+浏览屏幕保护程序资源
+--------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 选择需要浏览的存储器
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //获取在线存储器列表
+    if (onlineStorages.isEmpty()) return; //没有存储器。操作失败
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //优先查找Flash 和 Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. 调用浏览屏幕保护程序的接口
+    //获取存储器句柄
+    int devHandler = target.getDevHandler();
+    chargingCaseOp.browseScreenSavers(device, devHandler, new OnRcspActionCallback<List<RegFile>>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, List<RegFile> message) {
+            //回调操作成功
+            //message --- 资源列表
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+            //error.getSubCode() --- 错误码
+            //error.getMessage() --- 错误描述
+        }
+    });
+
+
+.. note::
+   1. :ref:`resource_file` 
+   2. 彩屏仓初始化的时候，会自动同步一次资源列表。后续出现【创建屏保资源】或者【删除屏保资源】的操作，可以手动同步。
+
+
+
+
+获取当前屏幕保护程序信息
+----------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取当前屏幕保护程序信息的接口
+    chargingCaseOp.getCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ResourceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ResourceInfo message) {
+            //回调操作成功 和 结果
+            //message -- 资源信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+.. note::
+   
+   1. 结果为 :ref:`resource_info` 
+
+
+设置当前屏幕保护程序
+--------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 选择需要浏览的存储器
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //获取在线存储器列表
+    if (onlineStorages.isEmpty()) return; //没有存储器。操作失败
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //优先查找Flash 和 Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+         }
+     }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. 调用设置当前屏幕保护程序的接口
+    int devHandle = target.getDevHandler(); //存储器句柄
+    String filePath = "设备存在的屏保路径";
+    chargingCaseOp.setCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), devHandle, filePath, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`sd_card_bean` 
+
+
+
+.. _resource_info: 
+
+ResourceInfo
+---------------------------------
+
+资源信息
+
+.. code-block:: java
+
+    public class ResourceInfo implements Parcelable {
+         
+        /**
+         * 屏幕保护程序名称前缀
+         */
+        public static final String SCREEN_NAME_PREFIX = "VIE";
+        /**
+         * 自定义屏幕保护程序名称
+         */
+        public static final String CUSTOM_SCREEN_NAME = "VIE_CST";
+        /**
+         * 开机动画名称前缀
+         */
+        public static final String ANIM_NAME_PREFIX = "ANI";
+        /**
+         * 壁纸名称前缀
+         */
+        public static final String WALLPAPER_NAME_PREFIX = "csbg";
+        /**
+         * 自定义壁纸名称
+         */
+        public static final String CUSTOM_WALLPAPER_NAME = "csbg_x";
+
+        /**
+         * 存储器句柄
+         */
+        private int devHandle;
+        /**
+         * 簇号
+         */
+        private int cluster;
+        /**
+         * crc校验码
+         */
+        private short crc;
+        /**
+         * 文件路径
+         */
+        private String filePath;
+    }
+
+
+开机动画
+================================
+
+获取开机动画信息
+-------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取当前开机动画信息的接口
+    chargingCaseOp.getCurrentBootAnim(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ResourceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ResourceInfo message) {
+            //回调操作成功 和 结果
+            //message -- 资源信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+.. note::
+   
+   1. 结果为 :ref:`resource_info` 
+
+
+
+
+设置当前开机动画
+--------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 选择需要浏览的存储器
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //获取在线存储器列表
+    if (onlineStorages.isEmpty()) return; //没有存储器。操作失败
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //优先查找Flash 和 Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. 调用设置当前开机动画的接口
+    int devHandle = target.getDevHandler(); //存储器句柄
+    String filePath = "设备存在的开机动画路径";
+    chargingCaseOp.setCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), devHandle, filePath, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`sd_card_bean` 
+
+
+.. _sync_weather:
+
+同步天气信息
+===================================
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用设置当前屏幕保护程序信息的接口
+    //weather -- 天气信息
+    Weather weather = new Weather(new byte[0]);
+    chargingCaseOp.syncWeatherInfo(RCSPController.getInstance().getUsingDevice(), weather, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`weather` 
+
+
+
+
+.. _weather:
+
+Weather
+------------------------------------
+
+天气信息
+
+.. code-block:: java
+
+    public class Weather extends BaseInfo {
+
+        /**
+         * 省份
+         */
+        private String province;
+        /**
+         * 城市
+         */
+        private String city;
+        /**
+         * 天气
+         * <p>
+         * 参考{@link com.jieli.bluetooth.constant.WeatherCode}
+         * </p>
+         */
+        private int weather;
+        /**
+         * 温度
+         */
+        private int temperature;
+        /**
+         * 湿度。单位: %
+         */
+        private int humidity;
+        /**
+         * 风向
+         * <p>
+         * 参考 {@link com.jieli.bluetooth.constant.DirectionCode}
+         * </p>
+         */
+        private int windDirection;
+        /**
+         * 风力
+         */
+        private int windPower;
+        /**
+         * 更新时间
+         */
+        private long time;
+    }
+
+.. _sync_msg:
+
+消息推送
+=====================================
+
+
+推送消息
+------------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用推送消息接口
+    //messageInfo -- 消息信息
+    MessageInfo messageInfo = new MessageInfo();
+    chargingCaseOp.pushMessageInfo(RCSPController.getInstance().getUsingDevice(), messageInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`message_info` 
+
+
+
+
+删除消息
+------------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用删除消息接口
+    //messageInfo -- 消息信息
+    //删除消息时，主要是看【包名】 + 【时间戳】
+    MessageInfo messageInfo = new MessageInfo();
+    chargingCaseOp.removeMessageInfo(RCSPController.getInstance().getUsingDevice(), messageInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+.. note::
+   1. :ref:`message_info` 
+   2. 删除消息，只需要携带【包名】和【时间戳】。设备端会根据这两个字段删除对应的消息。
+
+
+
+
+.. _message_info:
+
+MessageInfo
+--------------------------------------
+
+消息信息
+
+.. code-block:: java
+
+    public class MessageInfo implements IDataOp {
+
+        /**
+         * 默认图标
+         */
+        public static final int FLAG_DEFAULT = 0;
+        /**
+         * 短信图标
+         */
+        public static final int FLAG_SMS = 1;
+        /**
+         * 微信图标
+         */
+        public static final int FLAG_WECHAT = 2;
+        /**
+         * QQ图标
+         */
+        public static final int FLAG_QQ = 3;
+        /**
+         * 钉钉图标
+         */
+        public static final int FLAG_DING_TALK = 4;
+
+
+        /**
+         * 应用包名
+         */
+        private String appPackageName;
+        /**
+         * 应用图标
+         */
+        private int flag;
+        /**
+         * 标题
+         */
+        private String title;
+        /**
+         * 内容
+         */
+        private String content;
+        /**
+         * 时间戳
+         */
+        private long timestamp;
+    }
+
+
+墙纸控制功能
+=================================
+
+浏览墙纸资源
+----------------------------------
+     
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 选择需要浏览的存储器
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //获取在线存储器列表
+    if (onlineStorages.isEmpty()) return; //没有存储器。操作失败
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //优先查找Flash 和 Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. 调用浏览墙纸资源的接口
+    //获取存储器句柄
+    int devHandler = target.getDevHandler();
+    chargingCaseOp.browseWallPapers(device, devHandler, new OnRcspActionCallback<List<RegFile>>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, List<RegFile> message) {
+            //回调操作成功
+            //message --- 资源列表
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+            //error.getSubCode() --- 错误码
+            //error.getMessage() --- 错误描述
+        }
+    });
+
+.. note::
+   1. :ref:`resource_file` 
+   2. 彩屏仓初始化的时候，会自动同步一次资源列表。后续出现【创建墙纸资源】或者【删除墙纸资源】的操作，可以手动同步。
+
+
+获取当前墙纸信息
+------------------------------------
+
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用获取当前屏幕保护程序信息的接口
+    chargingCaseOp.getCurrentWallPaper(RCSPController.getInstance().getUsingDevice(), new OnRcspActionCallback<ResourceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, ResourceInfo message) {
+            //回调操作成功 和 结果
+            //message -- 资源信息
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`resource_info` 
+
+
+设置当前墙纸
+--------------------------------------
+
+.. code-block:: java
+
+    //Step1. 创建彩屏充电仓实现类
+    ChargingCaseOpImpl chargingCaseOp = ChargingCaseOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 选择需要浏览的存储器
+    final BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    List<SDCardBean> onlineStorages = chargingCaseOp.getOnlineStorages(device); //获取在线存储器列表
+    if (onlineStorages.isEmpty()) return; //没有存储器。操作失败
+    SDCardBean target = null;
+    for (SDCardBean storage : onlineStorages) {
+        //优先查找Flash 和 Flash2
+        if (storage.getIndex() == SDCardBean.INDEX_FLASH || storage.getIndex() == SDCardBean.INDEX_FLASH2) {
+            target = storage;
+            break;
+        }
+    }
+    if (target == null) {
+        target = onlineStorages.get(0);
+    }
+    //Step3. 调用设置当前屏幕保护程序的接口
+    //获取存储器句柄
+    int devHandler = target.getDevHandler();
+    String filePath = "设备存在的屏保路径";
+    chargingCaseOp.setCurrentScreenSaver(RCSPController.getInstance().getUsingDevice(), devHandler, filePath, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`resource_info` 
+
+
+传输资源流程图
+=======================================
+
+.. figure:: ../../_static/transfer_resource_flow.png
+   :scale: 100%
+   :align: center
+
+
+.. important::
+   1. 资源传输成功后，需要根据资源功能进行设置激活才会生效。比如：设置当前屏幕保护程序
+   2. 必须保证资源的完整性
+

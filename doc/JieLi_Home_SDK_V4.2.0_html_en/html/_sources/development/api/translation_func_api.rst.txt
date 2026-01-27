@@ -1,0 +1,333 @@
+.. _translation_op_api: 
+
+Translation Function Interface
+************************************************
+
+.. code-block:: java
+
+   public interface ITranslationOp {
+
+        /**
+         * Whether initialization is successful
+         *
+         * @return boolean Result
+         */
+        boolean isInit();
+
+        /**
+         * Whether 【translation】 function is supported
+         *
+         * @return boolean Result
+         */
+        boolean isSupportTranslation();
+
+        /**
+         * Whether 【A2DP broadcast】 function is used
+         *
+         * @return boolean Result
+         */
+        boolean isUseA2DPPlay();
+
+        /**
+         * Whether 【call translation + stereo】 function is supported
+         *
+         * @return boolean Result
+         */
+        boolean isSupportCallTranslationWithStereo();
+        
+        /**
+         * Whether in working mode
+         *
+         * @return boolean Result
+         */
+        boolean isWorking();
+
+        /**
+         * Get operation device object
+         *
+         * @return BluetoothDevice Operation device object
+         */
+        BluetoothDevice getDevice();
+
+        /**
+         * Cached mode info
+         *
+         * @return TranslationMode Translation mode info
+         */
+        TranslationMode getTranslationMode();
+
+        /**
+         * Add translation function callback
+         *
+         * @param callback TranslationCallback Translation function callback
+         */
+        void addTranslationCallback(TranslationCallback callback);
+
+        /**
+         * Remove translation function callback
+         *
+         * @param callback TranslationCallback Translation function callback
+         */
+        void removeTranslationCallback(TranslationCallback callback);
+
+        /**
+         * Request translation mode info
+         *
+         * @param callback OnRcspActionCallback<TranslationMode> Result callback
+         */
+        void requestTranslationMode(OnRcspActionCallback<TranslationMode> callback);
+
+        /**
+         * Enter translation mode
+         *
+         * @param mode     TranslationMode Translation mode info
+         * @param callback TranslationCallback Translation function callback
+         */
+        void enterMode(@NonNull TranslationMode mode, @NonNull TranslationCallback callback);
+
+        /**
+         * Exit translation mode
+         *
+         * @param callback OnRcspActionCallback<Integer> Result callback
+         */
+        void exitMode(OnRcspActionCallback<Integer> callback);
+
+        /**
+         * Write audio data
+         *
+         * @param audioData AudioData Audio data
+         * @param callback OnRcspActionCallback<Boolean> Result callback
+         */
+        void writeAudioData(AudioData audioData, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Release resources
+         */
+        void destroy();
+    }
+
+
+.. note::
+   1. :ref:`translation_mode` 
+   2. :ref:`translation_cb` 
+   3. :ref:`audio_data` 
+
+
+
+
+.. _translation_cb:
+
+TranslationCallback
+====================================================
+
+.. code-block:: java
+
+    public interface TranslationCallback {
+
+        /**
+         * Callback mode change info
+         *
+         * @param device BluetoothDevice Operation device
+         * @param mode   TranslationMode Translation mode info
+         */
+        void onModeChange(@NonNull BluetoothDevice device, @NonNull TranslationMode mode);
+
+        /**
+         * Callback received audio data
+         *
+         * @param device    BluetoothDevice Operation device
+         * @param audioData AudioData Audio data
+         */
+        void onReceiveAudioData(@NonNull BluetoothDevice device, @NonNull AudioData audioData);
+
+        /**
+         * Callback translation error
+         *
+         * @param device  BluetoothDevice Operation device
+         * @param code    int Error code
+         * @param message String Error description
+         */
+        void onError(BluetoothDevice device, int code, String message);
+    }
+
+
+.. note::
+   1. :ref:`translation_mode`  
+   2. :ref:`audio_data` 
+
+
+
+
+.. _ai_translation_api:
+
+IAITranslationApi
+================================================
+
+.. code-block:: java
+
+    public interface IAITranslationApi {
+
+        /**
+         * Whether translation is in progress
+         *
+         * @return boolean Result
+         */
+        boolean isWorking();
+
+        /**
+         * Start translation
+         *
+         * @param mode     TranslationMode Translation mode info
+         * @param callback AITranslationCallback Cloud translation event callback
+         */
+        void startTranslating(@NonNull TranslationMode mode, @NonNull AITranslationCallback callback);
+
+        /**
+         * End translation
+         */
+        void stopTranslating();
+
+        /**
+         * Write audio data
+         *
+         * @param audioData AudioData Audio data
+         */
+        void writeAudio(@NonNull AudioData audioData);
+
+    }
+
+.. note::
+   1. :ref:`translation_mode`  
+   2. :ref:`ai_translation_cb` 
+   3. :ref:`audio_data`  
+
+
+
+
+.. _ai_translation_cb:
+
+AITranslationCallback
+============================================
+
+.. code-block:: java
+
+    public interface AITranslationCallback {
+
+        /**
+         * Callback translation start
+         */
+        void onStart();
+
+        /**
+         * Callback translation result
+         * <p>
+         * Can callback multiple times
+         * </p>
+         *
+         * @param result TranslateResult Translation result
+         */
+        void onTranslateResult(@NonNull TranslationResult result);
+
+        /**
+         * Callback translation failure
+         *
+         * @param id      long Translation task ID
+         * @param code    int Error code
+         * @param message String Error description
+         */
+        void onTranslateError(long id, int code, String message);
+
+        /**
+         * Callback translation end
+         *
+         * @param reason  int End reason code
+         * @param message String Description
+         */
+        void onStop(int reason, String message);
+    }
+
+.. note::
+   1. :ref:`translation_result` 
+
+
+
+
+.. _translation_result:
+
+TranslationResult
+========================================
+
+Translation result
+
+.. code-block:: java
+
+    public class TranslationResult implements Parcelable {
+        /**
+         * Translation task number
+         */
+        private long id = 0L;
+        /**
+         * Speech recognition text
+         */
+        @NonNull
+        private String nlpText = "";
+        /**
+         * Original language
+         * <p>
+         * Follows ISO-6393 standard, lowercase letters, 3 bytes<br/>
+         * Default is <b>zho</b>, Chinese
+         * </p>
+         */
+        @NonNull
+        private String srcLanguage = "zho";
+        /**
+         * Target language
+         * <p>
+         * Follows ISO-6393 standard, lowercase letters, 3 bytes<br/>
+         * Default is <b>eng</b>, English
+         * </p>
+         */
+        @NonNull
+        private String destLanguage = "eng";
+        /**
+         * Translation text
+         */
+        @NonNull
+        private String translationText = "";
+        /**
+         * Number of channels in synthesized audio
+         * <p>
+         * Default is mono
+         * </p>
+         */
+        private int channel = 1;
+        /**
+         * Sampling rate of synthesized audio
+         * <p>
+         * Unit: Hz<br/>
+         * Default is 16KHz
+         * </p>
+         */
+        private int sampleRate = 16000;
+        /**
+         * Encoding format
+         * <p>
+         * Default is PCM_16Bit format
+         * </p>
+         */
+        private int format = 2;
+        /**
+         * Encoded data of translation synthesized audio
+         * <p>
+         * Note: Need to convert to corresponding encoded data
+         * </p>
+         */
+        private AudioData translationTTSData;
+    }
+
+
+.. note::
+   1. :ref:`audio_data`
+
+
+

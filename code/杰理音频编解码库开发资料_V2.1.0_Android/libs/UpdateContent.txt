@@ -1,0 +1,9 @@
+jl_audio_decode_V2.1.0_20012-release
+
+更新内容：
+1. 支持16Kb页面
+
+jl_audio_decode_V2.1.0_20010-release
+
+更新内容：
+1. 增加标准OPUS格式和杰理OPUS格式的兼容

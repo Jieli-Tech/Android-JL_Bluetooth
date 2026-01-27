@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>24. Auracast Assistant &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="25. Directory Browsing" href="file_browse_func.html" />
+    <link rel="prev" title="23. Translation Function" href="translation_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 Functional Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">24. Auracast Assistant</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialization">24.1. Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#destroy-object">24.2. Destroy Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#auracast-receiver-function">24.3. Auracast Receiver Function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 Functional Modules</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">24. </span>Auracast Assistant</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="auracast-assistant">
+<span id="auracast-assistant-func"></span><h1><span class="section-number">24. </span>Auracast Assistant<a class="headerlink" href="#auracast-assistant" title="Link to this heading"></a></h1>
+<p>Function implementation class name: <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code></p>
+<section id="initialization">
+<h2><span class="section-number">24.1. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h2>
+<p>Initialize AuracastAssistant object</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Get RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get current operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Context</span>
+<span class="w">    </span><span class="n">Context</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MainApplication</span><span class="p">.</span><span class="na">getApplication</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Initialize AuracastAssistant object</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastAssistant</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getRcspOp</span><span class="p">(),</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Whether device supports Auracast function</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">isSupportAuracast</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Users can bind <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> by <strong>specifying operation device object</strong></p></li>
+<li><p>If user passes <code class="docutils literal notranslate"><span class="pre">device</span></code> field as <code class="docutils literal notranslate"><span class="pre">null</span></code>, SDK will default to using <code class="docutils literal notranslate"><span class="pre">RcspOpImpl#getConnectedDevice()</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">AuracastAssistant#getDevice()</span></code> is <code class="docutils literal notranslate"><span class="pre">null</span></code>, function cannot be used normally</p></li>
+<li><p>If device does not support <strong>Auracast</strong> function, <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> functions cannot be used</p></li>
+</ol>
+</div>
+</section>
+<section id="destroy-object">
+<h2><span class="section-number">24.2. </span>Destroy Object<a class="headerlink" href="#destroy-object" title="Link to this heading"></a></h2>
+<p>Destroy AuracastAssistant object, release resources</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Destroy object</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>After <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> object is destroyed, set object to <code class="docutils literal notranslate"><span class="pre">null</span></code> to avoid business processes still calling its function interfaces after destruction</p></li>
+<li><p>When <strong>device disconnects</strong>, <code class="docutils literal notranslate"><span class="pre">AuracastAssistant</span></code> needs to be destroyed</p></li>
+</ol>
+</div>
+</section>
+<section id="auracast-receiver-function">
+<span id="auracast-receiver-func"></span><h2><span class="section-number">24.3. </span>Auracast Receiver Function<a class="headerlink" href="#auracast-receiver-function" title="Link to this heading"></a></h2>
+<p>Receiver function: Search Auracast broadcast, listen to Auracast broadcast, remove Auracast broadcast, etc.</p>
+<section id="function-flow-chart">
+<h3><span class="section-number">24.3.1. </span>Function Flow Chart<a class="headerlink" href="#function-flow-chart" title="Link to this heading"></a></h3>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/auracast_receiver_flow.png"><img alt="auracast_receiver_flow" src="../../_images/auracast_receiver_flow.png" style="width: 1361.3999999999999px; height: 1330.2px;" />
+</a>
+</figure>
+</section>
+<section id="whether-private-auracast-receiver-function-is-supported">
+<h3><span class="section-number">24.3.2. </span>Whether Private Auracast Receiver Function is Supported<a class="headerlink" href="#whether-private-auracast-receiver-function-is-supported" title="Link to this heading"></a></h3>
+<p>Implemented through RCSP protocol, belongs to non-standard Auracast protocol</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSupportAuracastReceiver</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">isSupportAuracastReceiver</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="request-information-of-listening-broadcast-source">
+<h3><span class="section-number">24.3.3. </span>Request Information of Listening Broadcast Source<a class="headerlink" href="#request-information-of-listening-broadcast-source" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getListeningSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">requestListeningSource</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">AuracastBroadcast</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation success</span>
+<span class="w">            </span><span class="c1">//message --- Auracast broadcast information being operated. null indicates does not exist</span>
+<span class="w">            </span><span class="c1">//Broadcast status will be callback through AuracastReceiverCallback#onBroadcastState</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation failure</span>
+<span class="w">            </span><span class="c1">//error --- error information</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>This function may return <code class="docutils literal notranslate"><span class="pre">synchronizing</span></code> or <code class="docutils literal notranslate"><span class="pre">listening</span></code> broadcast information. Users need to determine based on <code class="docutils literal notranslate"><span class="pre">synchronization</span> <span class="pre">status</span></code>.</p></li>
+<li><p>This function is mainly used for listening status synchronization after initialization</p></li>
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+<section id="auracastbroadcast">
+<span id="auracast-broadcast"></span><h4><span class="section-number">24.3.3.1. </span>AuracastBroadcast<a class="headerlink" href="#auracastbroadcast" title="Link to this heading"></a></h4>
+<p>Auracast broadcast information</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuracastBroadcast</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast name</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">broadcastName</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast source ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">broadcastID</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether encrypted</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isEncrypted</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast synchronization status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@SyncState</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">syncState</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Error code</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">errorCode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast key</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">broadcastCode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="query-search-broadcast-status">
+<h3><span class="section-number">24.3.4. </span>Query Search Broadcast Status<a class="headerlink" href="#query-search-broadcast-status" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkScanAuracastStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="c1">//Execute query search broadcast status</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">checkScanStatus</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation success</span>
+<span class="w">            </span><span class="c1">// message --- search status</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation failure</span>
+<span class="w">            </span><span class="c1">//error --- error information</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>This function is mainly used for search broadcast status synchronization after initialization</p></li>
+</ol>
+</div>
+</section>
+<section id="whether-auracast-broadcast-is-being-scanned">
+<h3><span class="section-number">24.3.5. </span>Whether Auracast Broadcast is Being Scanned<a class="headerlink" href="#whether-auracast-broadcast-is-being-scanned" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isScanningAuracastBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">isScanning</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="start-searching-auracast-broadcast">
+<h3><span class="section-number">24.3.6. </span>Start Searching Auracast Broadcast<a class="headerlink" href="#start-searching-auracast-broadcast" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startScanAuracastBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isScanningAuracastBroadcast</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Currently searching</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchStarted</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for search start</span>
+<span class="w">            </span><span class="c1">//reason --- reason</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_SDK       --- SDK triggered</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_DEVICE    --- Device triggered</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchStopped</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for search end</span>
+<span class="w">            </span><span class="c1">//reason --- reason</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_SDK       --- SDK triggered</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_DEVICE    --- Device triggered</span>
+
+<span class="w">            </span><span class="c1">//Get all discovered broadcasts</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AuracastBroadcast</span><span class="o">&gt;</span><span class="w"> </span><span class="n">broadcasts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">getDiscoveredBroadcast</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">//Remove receiver event listener</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBroadcastFound</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for discovered Auracast broadcast information</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Register receiver event listener</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Search configuration information</span>
+<span class="w">    </span><span class="c1">//timeout -- timeout, unit is milliseconds, default is 48 seconds</span>
+<span class="w">    </span><span class="c1">//isFilterBroadcast -- whether to filter duplicate broadcast information, default is true</span>
+<span class="w">    </span><span class="n">ScanOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ScanOption</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Execute search Auracast broadcast</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">startScan</span><span class="p">(</span><span class="n">option</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation success</span>
+<span class="w">            </span><span class="c1">// message --- operation result</span>
+<span class="w">            </span><span class="c1">// - ScanResponse.RESULT_SUCCESS --- operation success/not in search state</span>
+<span class="w">            </span><span class="c1">// - ScanResponse.RESULT_SCANNING --- currently searching, do not repeat operation</span>
+<span class="w">            </span><span class="c1">// - ScanResponse#RESULT_LISTENING_BROADCAST_BAN_SCAN --- scanning not allowed during listening broadcast process</span>
+<span class="w">            </span><span class="c1">// - ScanResponse#RESULT_DEVICE_BUSY --- device busy</span>
+<span class="w">            </span><span class="c1">//Search status and search device results will be returned in AuracastReceiverCallback#onSearchStarted,</span>
+<span class="w">            </span><span class="c1">// AuracastReceiverCallback#onBroadcastFound and AuracastReceiverCallback#onSearchStopped</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation failure</span>
+<span class="w">            </span><span class="c1">//error --- error information</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="stop-searching-auracast-broadcast">
+<h3><span class="section-number">24.3.7. </span>Stop Searching Auracast Broadcast<a class="headerlink" href="#stop-searching-auracast-broadcast" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stopScanAuracastBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isScanningAuracastBroadcast</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Not in search state</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchStopped</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reason</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for search end</span>
+<span class="w">            </span><span class="c1">//reason --- reason</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_SDK       --- SDK triggered</span>
+<span class="w">            </span><span class="c1">//  - Constants.REASON_BY_DEVICE    --- Device triggered</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Register receiver event listener</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute stop search Auracast broadcast</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">stopScan</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation success</span>
+<span class="w">            </span><span class="c1">//Search status will be returned in AuracastReceiverCallback#onSearchStopped</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation failure</span>
+<span class="w">            </span><span class="c1">//error --- error information</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="get-currently-listening-broadcast-information">
+<h3><span class="section-number">24.3.8. </span>Get Currently Listening Broadcast Information<a class="headerlink" href="#get-currently-listening-broadcast-information" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="nf">getListeningBroadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get currently listening broadcast information</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">getListeningBroadcast</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="add-auracast-broadcast-audio-source">
+<h3><span class="section-number">24.3.9. </span>Add Auracast Broadcast Audio Source<a class="headerlink" href="#add-auracast-broadcast-audio-source" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="n">stopScanAuracastBroadcast</span><span class="p">();</span><span class="w"> </span><span class="c1">//Recommend stopping broadcast search first</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">addBroadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="p">();</span><span class="w"> </span><span class="c1">//Selected broadcast information</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">addBroadcast</span><span class="p">.</span><span class="na">isEncrypted</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//If broadcast is encrypted, need to add broadcast key</span>
+<span class="w">        </span><span class="n">addBroadcast</span><span class="p">.</span><span class="na">setBroadcastCode</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">16</span><span class="o">]</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBroadcastState</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for broadcast status change</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">addBroadcast</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">broadcast</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">broadcast</span><span class="p">.</span><span class="na">getSyncState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATE_SYNCING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Register receiver event listener</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute add audio function</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addSource</span><span class="p">(</span><span class="n">addBroadcast</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation success</span>
+<span class="w">            </span><span class="c1">//Audio broadcast synchronization status will be callback in AuracastReceiverCallback#onBroadcastState</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation failure</span>
+<span class="w">            </span><span class="c1">//error --- error information</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Before adding Auracast broadcast audio source, recommend stopping broadcast search function</p></li>
+<li><p>If Auracast broadcast is encrypted broadcast, need to configure <code class="docutils literal notranslate"><span class="pre">broadcast</span> <span class="pre">key</span></code> field, length must not exceed <strong>16 bytes</strong>, excess part will be truncated by SDK</p></li>
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="remove-auracast-broadcast-audio-source">
+<h3><span class="section-number">24.3.10. </span>Remove Auracast Broadcast Audio Source<a class="headerlink" href="#remove-auracast-broadcast-audio-source" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeSource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getListeningBroadcast</span><span class="p">();</span><span class="w"> </span><span class="c1">//Get currently listening broadcast information</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Not in listening music state</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBroadcastState</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for broadcast status change</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">broadcast</span><span class="p">.</span><span class="na">getSyncState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATE_SYNCING</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Register receiver event listener</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Execute remove audio function</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeSource</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation success</span>
+<span class="w">            </span><span class="c1">//Audio broadcast synchronization status will be callback in AuracastReceiverCallback#onBroadcastState</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for operation failure</span>
+<span class="w">            </span><span class="c1">//error --- error information</span>
+<span class="w">            </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Before removing Auracast broadcast audio source, ensure device is currently in listening Auracast broadcast state, otherwise function is invalid</p></li>
+<li><p><a class="reference internal" href="#auracast-broadcast"><span class="std std-ref">AuracastBroadcast</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="get-all-auracast-broadcast-history-records-for-specified-device">
+<h3><span class="section-number">24.3.11. </span>Get All Auracast Broadcast History Records for Specified Device<a class="headerlink" href="#get-all-auracast-broadcast-history-records-for-specified-device" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getAuracastRecords</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get current operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get Auracast broadcast history records</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AuracastRecord</span><span class="o">&gt;</span><span class="w"> </span><span class="n">records</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">getAuracastRecords</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+<li><p>Successfully added broadcasts will be recorded by SDK</p></li>
+</ol>
+</div>
+<section id="auracastrecord">
+<span id="auracast-record"></span><h4><span class="section-number">24.3.11.1. </span>AuracastRecord<a class="headerlink" href="#auracastrecord" title="Link to this heading"></a></h4>
+<p>Auracast broadcast record</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuracastRecord</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mac</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Broadcast information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">broadcastJson</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Update timestamp</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">updateTime</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="delete-all-auracast-broadcast-records-for-specified-device">
+<h3><span class="section-number">24.3.12. </span>Delete All Auracast Broadcast Records for Specified Device<a class="headerlink" href="#delete-all-auracast-broadcast-records-for-specified-device" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeAuracastRecords</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get current operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Remove all Auracast broadcast records corresponding to device</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastRecords</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="monitor-history-record-changes">
+<h3><span class="section-number">24.3.13. </span>Monitor History Record Changes<a class="headerlink" href="#monitor-history-record-changes" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">observerRecordChange</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isSupportAuracastReceiver</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//Does not support Auracast receiver function</span>
+<span class="w">    </span><span class="kd">final</span><span class="w">  </span><span class="n">AuracastReceiverCallback</span><span class="w"> </span><span class="n">receiverCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AuracastReceiverCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRecordChange</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">AuracastRecord</span><span class="w"> </span><span class="n">record</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Callback for record change</span>
+<span class="w">            </span><span class="c1">//op --- operation code</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_ADD --- add operation</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_MODIFY --- modify operation</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_DELETE --- delete operation</span>
+<span class="w">            </span><span class="c1">//   - AuracastRecordHelper.OP_CLEAR --- clear operation</span>
+<span class="w">            </span><span class="c1">//record --- history record</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="c1">//Register receiver event listener</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">addAuracastReceiverCallback</span><span class="p">(</span><span class="n">receiverCallback</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//When no longer need monitoring, remember to remove listener</span>
+<span class="w">    </span><span class="c1">//        auracastAssistant.removeAuracastRecords(receiverCallback);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="find-record-information-for-specified-broadcast">
+<h3><span class="section-number">24.3.14. </span>Find Record Information for Specified Broadcast<a class="headerlink" href="#find-record-information-for-specified-broadcast" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">findAuracastRecord</span><span class="p">(</span><span class="n">AuracastBroadcast</span><span class="w"> </span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Get RCSPController object</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//Get current operating device</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">usingDevice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">usingDevice</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Find corresponding Auracast broadcast history record</span>
+<span class="w">    </span><span class="n">AuracastRecord</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">findAuracastRecord</span><span class="p">(</span><span class="n">usingDevice</span><span class="p">.</span><span class="na">getAddress</span><span class="p">(),</span><span class="w"> </span><span class="n">broadcast</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="delete-specified-broadcast-record">
+<h3><span class="section-number">24.3.15. </span>Delete Specified Broadcast Record<a class="headerlink" href="#delete-specified-broadcast-record" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeAuracastRecord</span><span class="p">(</span><span class="n">AuracastRecord</span><span class="w"> </span><span class="n">record</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">auracastAssistant</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Remove corresponding Auracast broadcast history record</span>
+<span class="w">    </span><span class="n">auracastAssistant</span><span class="p">.</span><span class="na">removeAuracastRecord</span><span class="p">(</span><span class="n">record</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#auracast-record"><span class="std std-ref">AuracastRecord</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="translation_func.html" class="btn btn-neutral float-left" title="23. Translation Function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="file_browse_func.html" class="btn btn-neutral float-right" title="25. Directory Browsing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

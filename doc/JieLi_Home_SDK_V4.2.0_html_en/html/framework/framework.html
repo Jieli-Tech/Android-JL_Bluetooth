@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK Description &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SDK Development Kit Introduction" href="../resource/sdk_structure.html" />
+    <link rel="prev" title="Welcome to the JieLi Home SDK development documentation(Android)" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-introduction">1. SDK Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-framework">1. SDK Framework</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDK Description</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk-description">
+<h1>SDK Description<a class="headerlink" href="#sdk-description" title="Link to this heading"></a></h1>
+<section id="sdk-introduction">
+<h2>1. SDK Introduction<a class="headerlink" href="#sdk-introduction" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">The JieLi Home SDK is implemented based on the JieLi RCSP protocol and primarily supports speaker and headphone SDKs, as well as live streaming sound cards and other related products.</div>
+<div class="line">The SDK provides a rich set of functional interfaces:</div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Music Control Function  — Mobile music playback control, device music playback control, ID3 music information display, etc.</p></li>
+<li><p>Device Settings Function  — Volume settings, status check, device restart, etc.</p></li>
+<li><p>File Browsing Function  — Browse files on storage devices such as USB drives and SD cards, play music files, delete files, etc.</p></li>
+<li><p>Alarm Clock Management Function  — Adding, deleting, modifying, and querying alarms; setting alarm ringtones, etc.</p></li>
+<li><p>FM Control Function  — FM radio function, FM transmitter function, etc.</p></li>
+<li><p>Lighting Control Function  — Control the light’s blinking, frequency, color (RGB), mode, etc., to achieve cool effects.</p></li>
+<li><p>Equalizer Adjustment Function  — Equalizer sound effects adjustment, easily create superior sound quality.</p></li>
+<li><p>Sound Effect Adjustment Function  — Reverb, treble and bass settings, etc.</p></li>
+<li><p>Button Settings Function  — Headphone button function settings to enrich headphone functionality.</p></li>
+<li><p>Find Device Function  — Find device or find phone</p></li>
+<li><p>ANC Settings Function  — Noise processing mode settings, supporting normal mode, active noise cancellation mode, transparency mode, etc.</p></li>
+<li><p>Custom Command  — Supports customer expansion functions</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="sdk-framework">
+<span id="framework"></span><h2>1. SDK Framework<a class="headerlink" href="#sdk-framework" title="Link to this heading"></a></h2>
+<figure class="align-center" id="id1">
+<div class="graphviz"><object data="../_images/graphviz-21370ff6e696cea65bc59d0c23f1a9660374242c.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph framework {
+    rankdir=BT;
+    compound=true;
+
+    subgraph cluster_bt{
+        label=&quot;Bluetooth Proxy Layer&quot;;
+        bgcolor=&quot;darkslategray2&quot;;
+        width=10;
+
+        subgraph cluster_io {
+            label=&quot;Bluetooth IO&quot;;
+            style=&quot;dashed&quot;;
+            width=10;
+
+            bt_recv [label=&quot;Receive Data&quot;, shape=&quot;record&quot;, width=5];
+            bt_send [label=&quot;Send Data&quot;, shape=&quot;record&quot;, width=5];
+        }
+
+        subgraph cluster_bt_fun{
+            label=&quot;Functional Encapsulation&quot;;
+            style=&quot;dashed&quot;;
+            width=10;
+
+            bt_0 [label=&quot;Device Management&quot;, shape=&quot;record&quot;, width=3];
+            bt_1 [label=&quot;Pop-up fast connection&quot;, shape=&quot;record&quot;, width=3];
+            bt_2 [label=&quot;Historical Record&quot;, shape=&quot;record&quot;, width=3];
+        }
+
+        bt_0 -&gt; bt_recv [dir=&quot;both&quot;, style=&quot;invis&quot;, ltail=&quot;cluster_bt_fun&quot;, lhead=&quot;cluster_io&quot;];
+    }
+
+    subgraph cluster_rcsp{
+        label=&quot;RCSP Protocol Layer&quot;;
+        bgcolor=&quot;lightgreen&quot;;
+        rankdir=BT;
+        width=10;
+
+        subgraph cluster_rcsp_proxy {
+            label=&quot;Proxy Layer&quot;;
+            style=&quot;dashed&quot;;
+            width=10
+
+            rcsp_0 [label=&quot;Analyze Data&quot;, shape=&quot;record&quot;, width=3];
+            rcsp_1 [label=&quot;Assembly Data&quot;, shape=&quot;record&quot;, width=3];
+        }
+
+        rcsp_2 [label=&quot;Data Processing Layer&quot;, shape=&quot;record&quot;, width=10];
+        rcsp_1 -&gt; rcsp_2 [dir=&quot;both&quot;, ltail=&quot;cluster_rcsp_proxy&quot;];
+    }
+
+    subgraph cluster_func{
+        label=&quot;Functional Implementation Layer&quot;;
+        bgcolor=&quot;lightyellow&quot;;
+        width=10;
+
+        fun_0 [label=&quot;Music Control&quot;, shape=&quot;record&quot;, width=1];
+        fun_1 [label=&quot;FM Control&quot;, shape=&quot;record&quot;, width=1];
+        fun_2 [label=&quot;Lighting Control&quot;, shape=&quot;record&quot;, width=1];
+        fun_3 [label=&quot;Button Settings&quot;, shape=&quot;record&quot;, width=1];
+        fun_4 [label=&quot;Alarm Clock Management&quot;, shape=&quot;record&quot;, width=1];
+        fun_5 [label=&quot;Search Device&quot;, shape=&quot;record&quot;, width=1];
+        fun_6 [label=&quot;AUX Control&quot;, shape=&quot;record&quot;, width=1];
+        fun_7 [label=&quot;EQ Adjustment&quot;, shape=&quot;record&quot;, width=1];
+        fun_8 [label=&quot;Sound Effect Adjustment&quot;, shape=&quot;record&quot;, width=1];
+        fun_9 [label=&quot;Sound Card Function&quot;, shape=&quot;record&quot;, width=1];
+    }
+
+    bt_recv -&gt; rcsp_0 [dir=&quot;both&quot;, ltail=&quot;cluster_io&quot;, lhead=&quot;cluster_rcsp_proxy&quot;];
+    rcsp_2 -&gt; fun_4 [label=&quot;Dependency Implementation&quot;, ltail=&quot;cluster_rcsp&quot;, lhead=&quot;cluster_func&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-text">JieLi’s Home SDK Framework</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="line-block">
+<div class="line">1. The <code class="docutils literal notranslate"><span class="pre">RCSP</span> <span class="pre">Protocol</span> <span class="pre">Layer</span></code> depends on the <code class="docutils literal notranslate"><span class="pre">RCSP</span> <span class="pre">Protocol</span></code>, <code class="docutils literal notranslate"><span class="pre">RCSP</span> <span class="pre">Protocol</span></code> relies on the <code class="docutils literal notranslate"><span class="pre">Bluetooth</span> <span class="pre">Proxy</span> <span class="pre">Layer</span></code> for implementation.</div>
+<div class="line">2. The SDK implements the <code class="docutils literal notranslate"><span class="pre">Bluetooth</span> <span class="pre">Proxy</span> <span class="pre">Layer</span></code> functionality by default, and also supports external implementations by clients.</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the JieLi Home SDK development documentation(Android)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../resource/sdk_structure.html" class="btn btn-neutral float-right" title="SDK Development Kit Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

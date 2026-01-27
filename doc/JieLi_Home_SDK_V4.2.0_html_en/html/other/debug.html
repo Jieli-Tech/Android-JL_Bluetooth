@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debugging Instructions &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Frequently Asked Questions" href="question_answer.html" />
+    <link rel="prev" title="5. Error Code" href="../development/constant/error_code.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Debugging Instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#print-file-output">1. Print File Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#log-file">2. Log File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exception-handling-steps">3. Exception handling steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Debugging Instructions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debugging-instructions">
+<span id="devlopment-debug"></span><h1>Debugging Instructions<a class="headerlink" href="#debugging-instructions" title="Link to this heading"></a></h1>
+<section id="print-file-output">
+<h2>1. Print File Output<a class="headerlink" href="#print-file-output" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//log configuration</span>
+<span class="c1">//prefix     --- Print prefix identifier for quick printing location</span>
+<span class="n">JL_Log</span><span class="p">.</span><span class="na">setTagPrefix</span><span class="p">(</span><span class="s">&quot;home&quot;</span><span class="p">);</span>
+<span class="c1">//log file configuration</span>
+<span class="c1">//context    --- context, getApplicationContext() is recommended.</span>
+<span class="c1">//log        --- Whether to print output. It is recommended to enable this during development and disable it during deployment.</span>
+<span class="c1">//isSaveFile --- Whether to save log files. It&#39;s recommended to enable this during development and disable it during deployment.</span>
+<span class="n">JL_Log</span><span class="p">.</span><span class="na">configureLog</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">BuildConfig</span><span class="p">.</span><span class="na">DEBUG</span><span class="p">,</span><span class="w"> </span><span class="n">BuildConfig</span><span class="p">.</span><span class="na">DEBUG</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">1. It is recommended to set print output in the <strong>Application</strong> class.</div>
+<div class="line">2. The <code class="docutils literal notranslate"><span class="pre">debug`</span></code> version enables printing by default, while the <code class="docutils literal notranslate"><span class="pre">release`</span></code> version disables printing by default.</div>
+<div class="line">3. Customers can configure whether to enable debug mode in the demo project settings.</div>
+</div>
+</div>
+<p>When using multiple JieLi libraries simultaneously, you can configure them as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Enable printing for the JieLi OTA library?</span>
+<span class="n">com</span><span class="p">.</span><span class="na">jieli</span><span class="p">.</span><span class="na">jl_bt_ota</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">JL_Log</span><span class="p">.</span><span class="na">setLog</span><span class="p">(</span><span class="n">JL_Log</span><span class="p">.</span><span class="na">isLog</span><span class="p">());</span>
+<span class="k">if</span><span class="p">(</span><span class="n">JL_Log</span><span class="p">.</span><span class="na">isLog</span><span class="p">()){</span><span class="c1">//If enabled, the JieLi OTA library&#39;s output will be written to the Jerry Home output file.</span>
+<span class="w">    </span><span class="n">com</span><span class="p">.</span><span class="na">jieli</span><span class="p">.</span><span class="na">jl_bt_ota</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">JL_Log</span><span class="p">.</span><span class="na">setLogOutput</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">jieli</span><span class="p">.</span><span class="na">jl_bt_ota</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">JL_Log</span><span class="p">.</span><span class="na">ILogOutput</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">output</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">logcat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//This callback displays the print information from the JieLi OTA library.</span>
+<span class="w">            </span><span class="n">JL_Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;ota&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">logcat</span><span class="p">);</span><span class="w"> </span><span class="c1">//Add to the output file of JieLi Home Library</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="log-file">
+<h2>2. Log File<a class="headerlink" href="#log-file" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Log File Format</p>
+<p>Log File Name Format: log_app_[timestamp].txt</p>
+</li>
+</ol>
+<ul class="simple">
+<li><p>timestamp: Timestamp</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>For<span class="w"> </span>example:<span class="w"> </span>log_app_20220330093020.432.txt<span class="w"> </span><span class="o">==</span>&gt;<span class="w"> </span>JieLi<span class="w"> </span>Home<span class="w"> </span>SDK<span class="w"> </span>print<span class="w"> </span>file,<span class="w"> </span>creation<span class="w"> </span>time:<span class="w"> </span><span class="m">2022</span>/03/30<span class="w"> </span><span class="m">09</span>:30:20
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p>File Storage Path</p>
+<blockquote>
+<div><p>Location: <code class="docutils literal notranslate"><span class="pre">Phone</span> <span class="pre">Root</span> <span class="pre">Directory/Android/data/[Package</span> <span class="pre">Name]/files/logcat/</span></code></p>
+</div></blockquote>
+</li>
+</ol>
+<ul class="simple">
+<li><p>Package Name: Application package name, for example: com.jieli.btsmart</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>For<span class="w"> </span>example:<span class="w"> </span>Android/data/com.jieli.btsmart/files/logcat/
+</pre></div>
+</div>
+</section>
+<section id="exception-handling-steps">
+<h2>3. Exception handling steps<a class="headerlink" href="#exception-handling-steps" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="line-block">
+<div class="line">Prerequisite: Exit the app if an abnormal situation occurs.</div>
+<div class="line">1. <strong>Briefly describe the problem (required)</strong></div>
+<div class="line">2. <strong>Provide the log file with the closest timestamp (required)</strong></div>
+<div class="line">3. Provide screenshots or videos of the phenomenon.</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../development/constant/error_code.html" class="btn btn-neutral float-left" title="5. Error Code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="question_answer.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

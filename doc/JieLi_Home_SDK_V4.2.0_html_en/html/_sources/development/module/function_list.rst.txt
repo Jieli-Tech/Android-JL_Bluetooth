@@ -1,0 +1,33 @@
+
+3 Functional Modules
+*************************************************
+
+.. toctree::
+    :maxdepth: 2
+    :numbered: 
+
+    ../function/terminology_note
+    ../function/basic_func
+    ../function/voice_ctrl
+    ../function/device_music_ctrl
+    ../function/eq_ctrl
+    ../function/rtc_ctrl
+    ../function/line_in_ctrl
+    ../function/fm_ctrl
+    ../function/light_ctrl
+    ../function/local_music_ctrl
+    ../function/tws_func
+    ../function/anc_ctrl
+    ../function/sound_card_func
+    ../function/search_device_func
+    ../function/custom_cmd_func
+    ../function/dual_connection_func
+    ../function/record_func
+    ../function/spdif_func
+    ../function/big_file_transfer_func
+    ../function/charging_case_func
+    ../function/bmp_convert_func
+    ../function/gif_convert_func
+    ../function/translation_func
+    ../function/auracast_assistant_func
+    ../function/file_browse_func

@@ -1,0 +1,199 @@
+
+.. _terminology:
+
+术语
+**************************
+
+
+.. _ltv_format:
+
+LTV格式
+=============================
+
+
+LTV 格式 = Length(1Byte) + Type(1Byte) + Value(n Bytes)
+
+=========== =============== ============
+ Length       Type           Value
+=========== =============== ============
+  1 Byte      1 Byte          n Bytes 
+ 长度         类型            内容 
+  N           1               N - 1
+=========== =============== ============
+
+**字段解析** 
+
+* Length : 数据长度。从 ``Type`` ~ ``Value`` 的长度，即(n + 1)
+* Type : 功能属性。
+* Value : 数据内容。有效数据长度为 (Length - 1)
+
+.. _attr_bean:
+
+属性模型
+==========================
+
+对应类名: **AttrBean** 
+
+================ ================== ===================================
+  长度(Bytes)      名称                 备注
+================ ================== ===================================
+  1                size              属性长度(不包含当前Byte的长度)
+  1                attr type         属性类型(:ref:`attr_fun_code`)
+  size - 1         data              属性内容
+================ ================== ===================================
+
+
+命令处理示例
+===============================
+
+.. _common_cmd_handle:
+
+通用命令处理示例
+--------------------------------           
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构造功能命令 - 比如, 获取设备信息
+    //mask = 0xffffffff;  -- 获取所有属性
+    CommandBase getDeviceInfoCmd = CommandBuilder.buildGetDeviceInfoCmd(mask);
+    //Step2: 执行操作命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), getDeviceInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+            //Step4: 判断是否有回复数据
+            //注意 - 如果是没有回复数据的命令，回复数据为null
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            if (isHasResponse) {
+                //Step5: 获取对应的命令数据
+                GetTargetInfoCmd command = (GetTargetInfoCmd) cmd;
+                //Step6: 获取回复数据
+                TargetInfoResponse response = command.getResponse();
+                if (null == response) { //回复数据为空，证明设备回复的数据有问题，进行异常处理
+                    onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Response data is error."));
+                    return;
+                }
+                //处理设备回复数据
+            }
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. _receive_cmd_handle: 
+
+接收命令处理示例
+--------------------------------      
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 添加蓝牙RCSP事件回调器
+    manager.addEventListener(new BTRcspEventCallback() {
+        //回调设备发送的命令
+        @Override
+        public void onDeviceCommand(BluetoothDevice device, CommandBase cmd) {
+            super.onDeviceCommand(device, cmd);
+            //Step2: 处理命令
+            if (cmd.getId() != Command.CMD_ADV_DEV_REQUEST_OPERATION) {
+                //过滤命令
+                return;
+            }
+            //Step3: 判断是否需要回复命令
+            //需要回复的命令，处理完后需要回复结果
+            //不需要回复的命令，处理完就完成了
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            //只处理目标命令 - 请求操作
+            RequestAdvOpCmd requestAdvOpCmd = (RequestAdvOpCmd) cmd;
+            //Step4: 获取参数
+            RequestAdvOpParam param = requestAdvOpCmd.getParam();
+            if (null == param) return; //异常处理
+            //Step5: 处理数据
+            switch (param.getOp()) {
+                case Constants.ADV_REQUEST_OP_UPDATE_CONFIGURE: //更新配置
+                    break;
+                case Constants.ADV_REQUEST_OP_SYNC_TIME: //同步时间
+                    break;
+            }
+            //Step6. 回复结果
+            if (isHasResponse) {
+                //组装结果
+                requestAdvOpCmd.setStatus(StateCode.STATUS_SUCCESS);
+                //组装参数
+                requestAdvOpCmd.setParam(null);
+                //发送回复命令
+                manager.sendCommandResponse(device, requestAdvOpCmd);
+            }
+        }
+    });
+
+.. _data_cmd_handle: 
+
+发送数据包处理示例
+--------------------------------            
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: 构造功能命令 - 比如, 构建命令包
+    DataParam param = new DataParam(data);   //设置数据
+    param.setXmOpCode(responseOpId);         //设置响应命令号
+    CommandBase dataCmd = new DataCmd(param);
+    //默认数据包没有回复, 如果需要数据包有回复
+    //       dataCmd = new DataHasResponseCmd(param);
+    //Step2: 执行操作命令并等待结果回调
+    manager.sendCommandAsync(manager.getConnectedDevice(), dataCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //回调回复命令
+        //注意: 无回复命时，回复命令本身
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+            //Step4: 判断是否有回复数据
+            //注意 - 如果是没有回复数据的命令，回复数据为null
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            if (isHasResponse) {
+                //Step5: 获取对应的命令数据
+                DataHasResponseCmd dataCmd = (DataHasResponseCmd) cmd;
+                //Step6: 获取回复数据
+                CommonResponse response = dataCmd.getResponse();
+                if (null == response) { //回复数据为空，证明设备回复的数据有问题，进行异常处理
+                    onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Response data is error."));
+                    return;
+                }
+                //处理设备回复数据
+                int responseOpID = dataCmd.getParam().getXmOpCode();
+                byte[] data = response.getRawData();
+                //parseData(data);
+            }
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });

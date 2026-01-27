@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. 功能码 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. 错误码" href="error_code.html" />
+    <link rel="prev" title="3. 状态码" href="state_code.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 接口说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/bt_api.html"><span class="sectnum">1 </span>蓝牙处理接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/rcsp_api.html">2. RCSP功能接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state_code.html">3. 状态码</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. 功能码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#func-mode">4.1 功能模式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-mode-sub-func-list">4.1.1 公共模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bt-mode-sub-func-list">4.1.2 蓝牙模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#device-music-mode-sub-func-list">4.1.3 音乐模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rtc-mode-sub-func-list">4.1.4 时钟模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aux-mode-sub-func-list">4.1.5 外接设备模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fm">4.1.6 FM接收模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spdif">4.1.7 SPDIF模式功能子集</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pc">4.1.8 PC从机模式功能子集</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.2 功能操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#public-mode-op-table">4.2.1 公共模式的操作对照表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bt-mode-op-table">4.2.2 蓝牙模式的操作对照表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#device-music-mode-op-table">4.2.3 音乐模式的操作对照表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aux-mode-op-table">4.2.4 外接设备模式的操作对照表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fm-mode-op-table">4.2.5 FM模式的操作对照表</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tws">4.3 TWS设备功能对照表</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="error_code.html">5. 错误码</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 接口说明</a></li>
+      <li class="breadcrumb-item active">4. 功能码</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="attr-fun-code">
+<span id="id1"></span><h1>4. 功能码<a class="headerlink" href="#attr-fun-code" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>对应的类名: <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.java</span></code></p></li>
+<li><p>属性引用: <strong>AttrAndFunCode#</strong> <code class="docutils literal notranslate"><span class="pre">xxx</span></code></p></li>
+</ul>
+<section id="func-mode">
+<span id="id2"></span><h2>4.1 功能模式<a class="headerlink" href="#func-mode" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>功能子集</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_PUBLIC</p></td>
+<td><p>255(0xFF)</p></td>
+<td><p>公共模式。(不作为单独模式，子功能在所有模式下均能生效)</p></td>
+<td><p><a class="reference internal" href="#public-mode-sub-func-list"><span class="std std-ref">4.1.1 公共模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_BT</p></td>
+<td><p>0</p></td>
+<td><p>蓝牙模式。(基础模式)</p></td>
+<td><p><a class="reference internal" href="#bt-mode-sub-func-list"><span class="std std-ref">4.1.2 蓝牙模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_MUSIC</p></td>
+<td><p>1</p></td>
+<td><div class="line-block">
+<div class="line">音乐模式</div>
+<div class="line">(支持设备音乐的操作，比如：音乐文件浏览，音乐文件播放等)</div>
+</div>
+</td>
+<td><p><a class="reference internal" href="#device-music-mode-sub-func-list"><span class="std std-ref">4.1.3 音乐模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_RTC</p></td>
+<td><p>2</p></td>
+<td><div class="line-block">
+<div class="line">时钟模式。(并入【蓝牙模式】，不再作为单独模式)</div>
+<div class="line">(支持时钟的操作，比如：时间同步，闹钟操作，秒表等)</div>
+</div>
+</td>
+<td><p><a class="reference internal" href="#rtc-mode-sub-func-list"><span class="std std-ref">4.1.4 时钟模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_AUX</p></td>
+<td><p>3</p></td>
+<td><div class="line-block">
+<div class="line">外接设备模式</div>
+<div class="line">(支持外接设备的操作，比如：音乐暂停和播放等)</div>
+</div>
+</td>
+<td><p><a class="reference internal" href="#aux-mode-sub-func-list"><span class="std std-ref">4.1.5 外接设备模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_FM</p></td>
+<td><p>4</p></td>
+<td><div class="line-block">
+<div class="line">FM接收模式</div>
+<div class="line">(支持FM接收的操作，比如：搜索电台，播放电台等)</div>
+</div>
+</td>
+<td><p><a class="reference internal" href="#fm-mode-sub-func-list"><span class="std std-ref">4.1.6 FM接收模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_LIGHT</p></td>
+<td><p>5</p></td>
+<td><div class="line-block">
+<div class="line">灯光模式</div>
+<div class="line">(支持灯光设置的操作，比如：灯光颜色，闪烁效果等)</div>
+</div>
+</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_FMTX</p></td>
+<td><p>6</p></td>
+<td><div class="line-block">
+<div class="line">FM发射模式。(并入【公共模式】，不再作为单独模式)</div>
+<div class="line">(支持FM发射的操作，比如：设置频点等)</div>
+</div>
+</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_EQ</p></td>
+<td><p>7</p></td>
+<td><p>EQ模式(并入【公共模式】，不再作为单独模式)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_SPDIF</p></td>
+<td><p>8</p></td>
+<td><p>数字音频模式</p></td>
+<td><p><a class="reference internal" href="#spdif-mode-sub-func-list"><span class="std std-ref">4.1.7 SPDIF模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_PC_SLAVE</p></td>
+<td><p>9</p></td>
+<td><p>PC从机模式</p></td>
+<td><p><a class="reference internal" href="#pc-slave-mode-sub-func-list"><span class="std std-ref">4.1.8 PC从机模式功能子集</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_LOW_POWER</p></td>
+<td><p>22(0x16)</p></td>
+<td><p>低功耗模式</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="public-mode-sub-func-list">
+<span id="id3"></span><h3>4.1.1 公共模式功能子集<a class="headerlink" href="#public-mode-sub-func-list" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_BATTERY</p></td>
+<td><p>0</p></td>
+<td><p>电量</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_VOLUME</p></td>
+<td><p>1</p></td>
+<td><p>音量</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_MUSIC_DEV_STATUS</p></td>
+<td><p>2</p></td>
+<td><p>存储设备状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_ERR</p></td>
+<td><p>3</p></td>
+<td><p>错误信息</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_EQ</p></td>
+<td><p>4</p></td>
+<td><p>均衡器信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_FILE_TYPE</p></td>
+<td><p>5</p></td>
+<td><p>设备支持播放文件类型</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_CUR_MODE_TYPE</p></td>
+<td><p>6</p></td>
+<td><p>当前模式信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_LIGHT</p></td>
+<td><p>7</p></td>
+<td><p>灯光信息</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_FM_TX</p></td>
+<td><p>8</p></td>
+<td><p>FM发射信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_EMITTER_MODE</p></td>
+<td><p>9</p></td>
+<td><p>外设模式</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_EMITTER_CONNECT_STATUS</p></td>
+<td><p>10(0x0A)</p></td>
+<td><p>外设连接状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_HIGH_AND_BASS</p></td>
+<td><p>11(0x0B)</p></td>
+<td><p>高低音设置</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_EQ_PRESET_VALUE</p></td>
+<td><p>12(0x0C)</p></td>
+<td><p>均衡器预设信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_CURRENT_NOISE_MODE</p></td>
+<td><p>13(0x0D)</p></td>
+<td><p>当前降噪算法信息</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_ALL_NOISE_MODE</p></td>
+<td><p>14(0x0E)</p></td>
+<td><p>所有降噪算法信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_PHONE_STATUS</p></td>
+<td><p>15(0x0F)</p></td>
+<td><p>通话状态</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_FIXED_LEN_DATA_FUN</p></td>
+<td><p>16(0x10)</p></td>
+<td><p>拓展功能</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_SOUND_CARD_EQ_FREQ</p></td>
+<td><p>17(0x11)</p></td>
+<td><p>声卡均衡器频率信息</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_SOUND_CARD_EQ_GAIN</p></td>
+<td><p>18(0x12)</p></td>
+<td><p>声卡均衡器增益信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_SOUND_CARD</p></td>
+<td><p>19(0x13)</p></td>
+<td><p>声卡功能</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_HEARING_ASSIST</p></td>
+<td><p>20(0x14)</p></td>
+<td><p>辅听验配</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_ADAPTIVE_ANC</p></td>
+<td><p>21(0x15)</p></td>
+<td><p>自适应ANC</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_SMART_NO_PICK</p></td>
+<td><p>22(0x16)</p></td>
+<td><p>智能免摘</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_SCENE_DENOISE</p></td>
+<td><p>23(0x17)</p></td>
+<td><p>场景降噪</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_WIND_NOISE_DETECTION</p></td>
+<td><p>24(0x18)</p></td>
+<td><p>风噪检测</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_VOCAL_BOOSTER</p></td>
+<td><p>25(0x19)</p></td>
+<td><p>人声增强</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_AI</p></td>
+<td><p>26(0x1A)</p></td>
+<td><p>AI功能</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_DOUBLE_CONNECT</p></td>
+<td><p>27(0x1B)</p></td>
+<td><p>设备双连</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bt-mode-sub-func-list">
+<span id="id4"></span><h3>4.1.2 蓝牙模式功能子集<a class="headerlink" href="#bt-mode-sub-func-list" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_ID3_TITLE</p></td>
+<td><p>0</p></td>
+<td><p>ID3信息的歌曲名</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_ID3_ARTIST</p></td>
+<td><p>1</p></td>
+<td><p>ID3信息的作者名</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_ID3_ALBUM</p></td>
+<td><p>2</p></td>
+<td><p>ID3信息的专辑名</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_ID3_NUMBER</p></td>
+<td><p>3</p></td>
+<td><p>ID3信息的序号</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_ID3_TOTAL</p></td>
+<td><p>4</p></td>
+<td><p>ID3信息的歌单总数量</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_ID3_GENRE</p></td>
+<td><p>5</p></td>
+<td><p>ID3信息的类型</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_ID3_TOTAL_TIME</p></td>
+<td><p>6</p></td>
+<td><p>ID3信息的歌曲总时长</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_ID3_PLAY_STATUS</p></td>
+<td><p>7</p></td>
+<td><p>ID3信息的播放状态</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_ID3_CURRENT_TIME</p></td>
+<td><p>8</p></td>
+<td><p>ID3信息的当前时间</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="device-music-mode-sub-func-list">
+<span id="id5"></span><h3>4.1.3 音乐模式功能子集<a class="headerlink" href="#device-music-mode-sub-func-list" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_MUSIC_STATUS_INFO</p></td>
+<td><p>0</p></td>
+<td><p>音乐播放状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_MUSIC_FILE_NAME_INFO</p></td>
+<td><p>1</p></td>
+<td><p>播放文件名称</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_MUSIC_PLAY_MODE</p></td>
+<td><p>2</p></td>
+<td><p>播放模式</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rtc-mode-sub-func-list">
+<span id="id6"></span><h3>4.1.4 时钟模式功能子集<a class="headerlink" href="#rtc-mode-sub-func-list" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_RTC_TIME</p></td>
+<td><p>0</p></td>
+<td><p>时间同步</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_RTC_ALARM</p></td>
+<td><p>1</p></td>
+<td><p>闹钟信息</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_RTC_CURRENT_ALARM_INDEX</p></td>
+<td><p>2</p></td>
+<td><p>当前闹钟序号</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_RTC_STOP_ALARM</p></td>
+<td><p>3</p></td>
+<td><p>停止闹钟</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_RTC_ALARM_VER</p></td>
+<td><p>4</p></td>
+<td><p>闹钟结构版本</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_RTC_ALARM_DEFAULT_BELL_LIST</p></td>
+<td><p>5</p></td>
+<td><p>默认铃声列表</p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_RTC_ALARM_AUDITION</p></td>
+<td><p>6</p></td>
+<td><p>闹钟铃声试听</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_RTC_ALARM_EXPAND_FLAG</p></td>
+<td><p>7</p></td>
+<td><p>闹钟拓展字段支持标识</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aux-mode-sub-func-list">
+<span id="id7"></span><h3>4.1.5 外接设备模式功能子集<a class="headerlink" href="#aux-mode-sub-func-list" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_AUX_STATU</p></td>
+<td><p>0</p></td>
+<td><p>音乐播放状态</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fm">
+<span id="fm-mode-sub-func-list"></span><h3>4.1.6 FM接收模式功能子集<a class="headerlink" href="#fm" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_FM_STATU</p></td>
+<td><p>0</p></td>
+<td><p>频点播放状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_FM_FRE_INFO</p></td>
+<td><p>1</p></td>
+<td><p>频道信息</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spdif">
+<span id="spdif-mode-sub-func-list"></span><h3>4.1.7 SPDIF模式功能子集<a class="headerlink" href="#spdif" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_SPDIF_STATUS</p></td>
+<td><p>0</p></td>
+<td><p>状态属性</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_SPDIF_AUDIO_SOURCE</p></td>
+<td><p>1</p></td>
+<td><p>音源属性</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pc">
+<span id="pc-slave-mode-sub-func-list"></span><h3>4.1.8 PC从机模式功能子集<a class="headerlink" href="#pc" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_ATTR_PC_SLAVE_STATUS</p></td>
+<td><p>0</p></td>
+<td><p>状态属性</p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_ATTR_PC_SLAVE_PLAY_PREV_OR_NEXT</p></td>
+<td><p>1</p></td>
+<td><p>切换上下曲</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id8">
+<h2>4.2 功能操作<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>功能子集</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_PUBLIC</p></td>
+<td><p>255(0xFF)</p></td>
+<td><p>公共模式</p></td>
+<td><p><a class="reference internal" href="#public-mode-op-table"><span class="std std-ref">4.2.1 公共模式的操作对照表</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_BT</p></td>
+<td><p>0</p></td>
+<td><p>蓝牙模式</p></td>
+<td><p><a class="reference internal" href="#bt-mode-op-table"><span class="std std-ref">4.2.2 蓝牙模式的操作对照表</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_MUSIC</p></td>
+<td><p>1</p></td>
+<td><p>音乐模式</p></td>
+<td><p><a class="reference internal" href="#device-music-mode-op-table"><span class="std std-ref">4.2.3 音乐模式的操作对照表</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>SYS_INFO_FUNCTION_AUX</p></td>
+<td><p>3</p></td>
+<td><p>外接设备模式</p></td>
+<td><p><a class="reference internal" href="#aux-mode-op-table"><span class="std std-ref">4.2.4 外接设备模式的操作对照表</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>SYS_INFO_FUNCTION_FM</p></td>
+<td><p>4</p></td>
+<td><p>FM接收模式</p></td>
+<td><p><a class="reference internal" href="#fm-mode-op-table"><span class="std std-ref">4.2.5 FM模式的操作对照表</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<section id="public-mode-op-table">
+<span id="id9"></span><h3>4.2.1 公共模式的操作对照表<a class="headerlink" href="#public-mode-op-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_BT_MODE</p></td>
+<td><p>0</p></td>
+<td><p>切到蓝牙模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_MUSIC_MODE</p></td>
+<td><p>1</p></td>
+<td><p>切到音乐模式</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_RTC_MODE</p></td>
+<td><p>2</p></td>
+<td><p>切到时钟模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_LINE_IN_MODE</p></td>
+<td><p>3</p></td>
+<td><p>切到外接设备模式</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_FM_MODE</p></td>
+<td><p>4</p></td>
+<td><p>切到FM模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_SPDIF_MODE</p></td>
+<td><p>5</p></td>
+<td><p>切到SPDIF模式</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_PUBLIC_CMD_SWITCH_PC_SLAVE_MODE</p></td>
+<td><p>6</p></td>
+<td><p>切到PC从机模式</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bt-mode-op-table">
+<span id="id10"></span><h3>4.2.2 蓝牙模式的操作对照表<a class="headerlink" href="#bt-mode-op-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNCTION_BT_CMD_ID3_PLAY_OR_PAUSE</p></td>
+<td><p>1</p></td>
+<td><p>暂停/播放</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_BT_CMD_ID3_PLAY_PREV</p></td>
+<td><p>2</p></td>
+<td><p>上一曲</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_BT_CMD_ID3_PLAY_NEXT</p></td>
+<td><p>3</p></td>
+<td><p>下一曲</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_BT_CMD_ID3_DATA_PUSH_SWITCH</p></td>
+<td><p>4</p></td>
+<td><p>数据推送开关</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="device-music-mode-op-table">
+<span id="id11"></span><h3>4.2.3 音乐模式的操作对照表<a class="headerlink" href="#device-music-mode-op-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNCTION_MUSIC_CMD_PLAY_OR_PAUSE</p></td>
+<td><p>1</p></td>
+<td><p>暂停/播放</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_MUSIC_CMD_PLAY_PREV</p></td>
+<td><p>2</p></td>
+<td><p>上一曲</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_MUSIC_CMD_PLAY_NEXT</p></td>
+<td><p>3</p></td>
+<td><p>下一曲</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_MUSIC_CMD_NEXT_PLAYMODE</p></td>
+<td><p>4</p></td>
+<td><p>下一个播放模式</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_MUSIC_CMD_NEXT_EQ_MODE</p></td>
+<td><p>5</p></td>
+<td><p>下一个EQ模式</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_MUSIC_CMD_RETREAT_QUICKLY</p></td>
+<td><p>6</p></td>
+<td><p>快退</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_MUSIC_CMD_FAST_FORWARD</p></td>
+<td><p>7</p></td>
+<td><p>快进</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aux-mode-op-table">
+<span id="id12"></span><h3>4.2.4 外接设备模式的操作对照表<a class="headerlink" href="#aux-mode-op-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNCTION_AUX_CMD_PAUSE_OR_PLAY</p></td>
+<td><p>1</p></td>
+<td><p>暂停/播放</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fm-mode-op-table">
+<span id="id13"></span><h3>4.2.5 FM模式的操作对照表<a class="headerlink" href="#fm-mode-op-table" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNCTION_FM_CMD_PLAY_OR_PAUSE</p></td>
+<td><p>1</p></td>
+<td><p>暂停/播放</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_FM_CMD_PREV_FREQ</p></td>
+<td><p>2</p></td>
+<td><p>上一个频点</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_FM_CMD_NEXT_FREQ</p></td>
+<td><p>3</p></td>
+<td><p>下一个频点</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_FM_CMD_PREV_CHANNEL</p></td>
+<td><p>4</p></td>
+<td><p>上一个频道</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_FM_CMD_NEXT_CHANNEL</p></td>
+<td><p>5</p></td>
+<td><p>下一个频道</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_FM_CMD_FREQ_SCAN</p></td>
+<td><p>6</p></td>
+<td><div class="line-block">
+<div class="line">频道扫描</div>
+<div class="line">(参数: 0 : 全段扫描, 1 : 向前扫描, 2 : 向后扫描, 3 : 停止扫描)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_FM_CMD_SELECT_CHANNEL</p></td>
+<td><p>7</p></td>
+<td><p>选择频道</p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNCTION_FM_CMD_DEL_CHANNEL</p></td>
+<td><p>8</p></td>
+<td><p>删除频道</p></td>
+</tr>
+<tr class="row-even"><td><p>FUNCTION_FM_CMD_SELECT_FREQL</p></td>
+<td><p>9</p></td>
+<td><p>选择频点</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="tws">
+<span id="tws-device-func-table"></span><h2>4.3 TWS设备功能对照表<a class="headerlink" href="#tws" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>引用声明</p></th>
+<th class="head"><p>码值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADV_TYPE_BATTERY_QUANTITY</p></td>
+<td><p>0</p></td>
+<td><p>电量</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADV_TYPE_DEVICE_NAME</p></td>
+<td><p>1</p></td>
+<td><p>设备名称</p></td>
+</tr>
+<tr class="row-even"><td><p>ADV_TYPE_KEY_SETTINGS</p></td>
+<td><p>2</p></td>
+<td><p>按键设置</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADV_TYPE_LED_SETTINGS</p></td>
+<td><p>3</p></td>
+<td><p>灯光设置</p></td>
+</tr>
+<tr class="row-even"><td><p>ADV_TYPE_MIC_CHANNEL_SETTINGS</p></td>
+<td><p>4</p></td>
+<td><p>麦通道设置</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADV_TYPE_WORK_MODE</p></td>
+<td><p>5</p></td>
+<td><p>工作模式</p></td>
+</tr>
+<tr class="row-even"><td><p>ADV_TYPE_PRODUCT_MESSAGE</p></td>
+<td><p>6</p></td>
+<td><p>产品信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADV_TYPE_CONNECTED_TIME</p></td>
+<td><p>7</p></td>
+<td><p>连接时间</p></td>
+</tr>
+<tr class="row-even"><td><p>ADV_TYPE_IN_EAR_CHECK</p></td>
+<td><p>8</p></td>
+<td><p>入耳检测</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADV_TYPE_LANGUAGE</p></td>
+<td><p>9</p></td>
+<td><p>语言类型</p></td>
+</tr>
+<tr class="row-even"><td><p>ADV_TYPE_ANC_MODE_LIST</p></td>
+<td><p>10</p></td>
+<td><p>ANC模式列表</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ANC切换模式功能ID</strong>: 固定是 <code class="docutils literal notranslate"><span class="pre">KEY_FUNC_ID_SWITCH_ANC_MODE(255(0xFF))</span></code></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="state_code.html" class="btn btn-neutral float-left" title="3. 状态码" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="error_code.html" class="btn btn-neutral float-right" title="5. 错误码" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

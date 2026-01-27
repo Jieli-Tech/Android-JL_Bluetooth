@@ -1,0 +1,53 @@
+.. JieLi Home SDK development documentation(Android) documentation master file, created by
+   sphinx-quickstart on Thu Mar 31 14:51:01 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. figure:: _static/JL_LOGO.png
+    :align: right
+    :figclass: align-right
+    :width: 70%
+
+===============================================================================================
+Welcome to the JieLi Home SDK development documentation(Android)
+===============================================================================================
+
+**Version: V4.2.0**
+
+.. note:: 
+   This open-source project documentation is officially released by JieLi. It includes a series of documents such as ``Development Framework`` , ``Project Introduction`` , 
+   ``Development Instructions`` and ``Other`` to help developers quickly and smoothly use the JieLi Home SDK to develop speaker or headphone SDK solutions.
+
+
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Development Framework
+
+   framework/framework
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Project Introduction
+
+   resource/sdk_structure
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Development Instructions
+
+   development/import
+   development/development_desc
+   development/interface_desc
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Other
+
+   other/debug
+   other/question_answer
+   other/publish_record
+   other/feedback
+

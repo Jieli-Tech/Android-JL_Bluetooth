@@ -1,0 +1,353 @@
+
+.. _tws_op: 
+
+TWS功能接口
+********************
+
+.. code-block:: java
+
+    public interface ITwsOp {
+        /**
+         * 添加TWS事件监听器
+         *
+         * @param listener TWS事件监听器
+         */
+        void addOnTwsEventListener(OnTwsEventListener listener);
+
+        /**
+         * 移除TWS事件监听器
+         *
+         * @param listener TWS事件监听器
+         */
+        void removeOnTwsEventListener(OnTwsEventListener listener);
+
+        /**
+         * 获取缓存的ADV信息
+         *
+         * @param device 蓝牙设备
+         * @return ADV信息
+         */
+        ADVInfoResponse getADVInfo(BluetoothDevice device);
+
+        /**
+         * 控制设备信息广播
+         *
+         * @param device   蓝牙设备
+         * @param enable   开关
+         * @param callback 结果回调
+         */
+        void controlAdvBroadcast(BluetoothDevice device, boolean enable, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取设备的设置信息
+         *
+         * @param device   蓝牙设备
+         * @param mask     掩码
+         * @param callback 结果回调
+         */
+        void getDeviceSettingsInfo(BluetoothDevice device, int mask, OnRcspActionCallback<ADVInfoResponse> callback);
+
+        /**
+         * 修改设备的设置信息
+         *
+         * @param device   蓝牙设备
+         * @param type     功能
+         * @param data     参数
+         * @param callback 结果回调
+         */
+        void modifyDeviceSettingsInfo(BluetoothDevice device, int type, byte[] data, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 获取所有噪声处理模式信息
+         *
+         * @param device   蓝牙设备
+         * @param callback 结果回调
+         */
+        void getAllVoiceModes(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取当前噪声处理模式信息
+         *
+         * @param device   蓝牙设备
+         * @param callback 结果回调
+         */
+        void getCurrentVoiceMode(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置当前噪声处理模式
+         *
+         * @param device    蓝牙设备
+         * @param voiceMode 噪声处理模式
+         * @param callback  结果回调
+         */
+        void setCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 配置设备名称
+         *
+         * @param device    蓝牙设备
+         * @param name      设备名称
+         * @param callback  结果回调
+         */
+        void configDeviceName(BluetoothDevice device, String name, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 配置按键功能设置
+         *
+         * @param device    蓝牙设备
+         * @param list      按键功能列表
+         * @param callback  结果回调
+         */
+        void configKeySettings(BluetoothDevice device, List<ADVInfoResponse.KeySettings> list, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 配置灯光效果设置
+         *
+         * @param device    蓝牙设备
+         * @param list      灯光效果设置
+         * @param callback  结果回调
+         */
+        void configLedSettings(BluetoothDevice device, List<ADVInfoResponse.LedSettings> list, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 更新接入设备时间
+         *
+         * @param device    蓝牙设备
+         * @param timeSec   接入设备时间(单位是秒)
+         * @param callback  结果回调
+         */
+        void updateConnectedTime(BluetoothDevice device, int timeSec, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 更新指定功能的值
+         *
+         * @param device    蓝牙设备
+         * @param type      功能标志
+         * @param value     功能新值
+         * @param callback  结果回调
+         */
+        void updateFunctionValue(BluetoothDevice device, int type, byte value, OnRcspActionCallback<Integer> callback);
+
+        /**
+         * 是否支持自适应ANC算法
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isSupportAdaptiveANC(BluetoothDevice device);
+
+        /**
+         * 获取自适应ANC数据
+         *
+         * @param device   蓝牙设备
+         * @param callback 结果回调
+         *                 <p>结果通过{@link OnRcspEventListener#onVoiceFunctionChange(BluetoothDevice, VoiceFunc)} 回调</p>
+         */
+        void getAdaptiveANCData(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置自适应ANC数据
+         *
+         * @param device   蓝牙设备
+         * @param data     数据
+         * @param callback 操作回调
+         */
+        void setAdaptiveANCData(BluetoothDevice device, AdaptiveData data, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 开始自适应ANC算法检测
+         *
+         * @param device   蓝牙设备
+         * @param listener 自适应ANC检测监听器
+         */
+        void startAdaptiveANC(BluetoothDevice device, OnAdaptiveANCListener listener);
+
+        /**
+         * 是否支持智能免摘功能
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isSupportSmartNoPick(BluetoothDevice device);
+
+        /**
+         * 获取智能免摘信息
+         *
+         * @param device   蓝牙设备
+         * @param callback 操作结果回调
+         *                 <p>结果通过{@link OnRcspEventListener#onVoiceFunctionChange(BluetoothDevice, VoiceFunc)} 回调</p>
+         */
+        void getSmartNoPick(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置智能免摘参数
+         *
+         * @param device      蓝牙设备
+         * @param smartNoPick 参数
+         * @param callback    操作结果回调
+         */
+        void setSmartNoPickParam(BluetoothDevice device, SmartNoPick smartNoPick, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 是否支持场景降噪功能
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isSupportSceneDenoising(BluetoothDevice device);
+
+        /**
+         * 获取场景降噪参数
+         *
+         * @param device   蓝牙设备
+         * @param callback 操作结果回调
+         */
+        void getSceneDenoising(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置场景降噪参数
+         *
+         * @param device         蓝牙设备
+         * @param sceneDenoising 参数
+         * @param callback       操作结果回调
+         */
+        void setSceneDenoising(BluetoothDevice device, SceneDenoising sceneDenoising, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 是否支持风噪检测功能
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isSupportWindNoiseDetection(BluetoothDevice device);
+
+        /**
+         * 获取风噪检测参数
+         *
+         * @param device   蓝牙设备
+         * @param callback 操作结果回调
+         */
+        void getWindNoiseDetection(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置风噪检测参数
+         *
+         * @param device    蓝牙设备
+         * @param detection 参数
+         * @param callback  操作结果回调
+         */
+        void setWindNoiseDetection(BluetoothDevice device, WindNoiseDetection detection, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 是否支持人声增强功能
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isSupportVocalBooster(BluetoothDevice device);
+
+        /**
+         * 获取人声增强参数
+         *
+         * @param device   蓝牙设备
+         * @param callback 操作结果回调
+         */
+        void getVocalBooster(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置人声增强参数
+         *
+         * @param device       蓝牙设备
+         * @param vocalBooster 参数
+         * @param callback     操作结果回调
+         */
+        void setVocalBooster(BluetoothDevice device, VocalBooster vocalBooster, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 是否支持设备双连功能
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isSupportDoubleConnection(BluetoothDevice device);
+
+        /**
+         * 查询设备双连的状态
+         *
+         * @param device   蓝牙设备
+         * @param callback 结果回调
+         */
+        void queryDoubleConnectionState(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置设备双连的状态
+         *
+         * @param device   蓝牙设备
+         * @param state    设备双连的状态
+         * @param callback 结果回调
+         */
+        void setDoubleConnectionState(BluetoothDevice device, DoubleConnectionState state, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 查询设备已连接手机
+         *
+         * @param device      蓝牙设备
+         * @param deviceBtInfo 手机蓝牙信息
+         * @param callback    结果回调
+         */
+        void queryConnectedPhoneBtInfo(BluetoothDevice device, DeviceBtInfo deviceBtInfo, OnRcspActionCallback<ConnectedBtInfo> callback);
+    }
+
+
+
+.. _tws_event_listener: 
+
+TWS事件监听器
+===========================================
+
+.. code-block:: java
+
+    public abstract class OnTwsEventListener {
+
+        /**
+         * 设备广播信息回调
+         *
+         * @param device    蓝牙设备
+         * @param broadcast 广播信息
+         */
+        public void onDeviceBroadcast(BluetoothDevice device, DevBroadcastMsg broadcast) {
+
+        }
+
+        /**
+         * 设备设置信息回调
+         *
+         * @param device   蓝牙设备
+         * @param mask     掩码
+         * @param dataInfo 设置信息
+         */
+        public void onDeviceSettingsInfo(BluetoothDevice device, int mask, ADVInfoResponse dataInfo) {
+
+        }
+
+        /**
+         * TWS状态回调
+         *
+         * @param device         蓝牙设备
+         * @param isTwsConnected 是否TWS连接
+         */
+        public void onTwsStatusChange(BluetoothDevice device, boolean isTwsConnected) {
+
+        }
+
+        /**
+         * 设备请求操作回调
+         *
+         * @param device 蓝牙设备
+         * @param op     请求操作
+         */
+        public void onDeviceRequestOp(BluetoothDevice device, int op) {
+
+        }
+    }
+

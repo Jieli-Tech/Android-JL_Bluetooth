@@ -1,0 +1,1179 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20. 彩屏充电仓功能 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="21. 图像转换" href="bmp_convert_func.html" />
+    <link rel="prev" title="19. 大文件传输功能" href="big_file_transfer_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 功能模块</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. 基础功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. 设备音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">20. 彩屏充电仓功能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">20.1. 监听彩屏充电仓事件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">20.2. 获取设备屏幕信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sdk">20.3. 获取SDK信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#brightness-ctrl">20.4. 屏幕亮度控制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">20.5. 闪光灯控制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#screen-saver-ctrl">20.6. 屏幕保护程序控制功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">20.7. 开机动画</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sync-weather">20.8. 同步天气信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sync-msg">20.9. 消息推送</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">20.10. 墙纸控制功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">20.11. 传输资源流程图</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. 图像转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. 翻译功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast助手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 功能模块</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">20. </span>彩屏充电仓功能</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="charging-case-func">
+<span id="id1"></span><h1><span class="section-number">20. </span>彩屏充电仓功能<a class="headerlink" href="#charging-case-func" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2><span class="section-number">20.1. </span>监听彩屏充电仓事件<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 增加彩屏充电仓事件监听</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">OnChargingCaseListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnChargingCaseListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调初始化状态</span>
+<span class="w">        </span><span class="c1">//0 --- 成功</span>
+<span class="w">        </span><span class="c1">//其他数值为错误码， 参考【错误码】章节</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onChargingCaseInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@ChargingCaseInfo.Function</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调彩屏仓功能变化</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_BRIGHTNESS</span><span class="p">:</span><span class="w"> </span><span class="c1">//屏幕亮度</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">getBrightness</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_FLASHLIGHT</span><span class="p">:</span><span class="w"> </span><span class="c1">//闪光灯开关</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">isFlashlightOn</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_SCREEN_SAVERS</span><span class="p">:</span><span class="w"> </span><span class="c1">//屏幕资源列表</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">getScreenSavers</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_CURRENT_SCREEN_SAVER</span><span class="p">:</span><span class="w"> </span><span class="c1">//当前屏保资源</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">getCurrentScreenSaver</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_CURRENT_BOOT_ANIM</span><span class="p">:</span><span class="w"> </span><span class="c1">//当前开机动画</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">getCurrentBootAnim</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_WALLPAPERS</span><span class="p">:</span><span class="w"> </span><span class="c1">//墙纸资源列表</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">getWallpapers</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">ChargingCaseInfo</span><span class="p">.</span><span class="na">FUNC_CURRENT_WALLPAPER</span><span class="p">:</span><span class="w"> </span><span class="c1">//当前墙纸资源</span>
+<span class="w">                    </span><span class="n">info</span><span class="p">.</span><span class="na">getCurrentWallpaper</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nd">@Override</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onChargingCaseEvent</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">SettingFunction</span><span class="w"> </span><span class="n">function</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//回调彩屏仓功能事件，也会已通过 onChargingCaseInfoChange 接口回调， 可以不处理</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">addOnChargingCaseListener</span><span class="p">(</span><span class="n">listener</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//Step3. 当不需要监听时，记得释监听器</span>
+<span class="w">    </span><span class="c1">//chargingCaseOp.removeListener(listener);</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>初始化【ChargingCaseOpImpl】对象，会触发初始化流程;</p></li>
+<li><p>若初始化失败，则根据【错误码】进行排查; <a class="reference internal" href="../constant/error_code.html#err-code"><span class="std std-ref">5. 错误码</span></a></p></li>
+<li><p>若初始化成功，【ChargingCaseOpImpl】对象拥有基础信息对象【ChargingCaseInfo】；</p></li>
+<li><p>用户可以在【ChargingCaseInfo】中查询到【屏幕信息】和【SDK信息】;</p></li>
+<li><p><a class="reference internal" href="#charging-case-info"><span class="std std-ref">ChargingCaseInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#screen-info"><span class="std std-ref">ScreenInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#sdk-msg"><span class="std std-ref">SDKMessage</span></a></p></li>
+</ol>
+</div>
+<section id="id3">
+<h3><span class="section-number">20.1.1. </span>获取彩屏仓信息<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 获取彩屏仓缓存信息</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getChargingCaseInfo</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">());</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#charging-case-info"><span class="std std-ref">ChargingCaseInfo</span></a></p></li>
+<li><p>彩屏仓初始化成功后，才能获取到缓存值。彩屏仓初始化中或者初始化失败，获取的值为空。</p></li>
+</ol>
+</div>
+</section>
+<section id="chargingcaseinfo">
+<span id="charging-case-info"></span><h3><span class="section-number">20.1.2. </span>ChargingCaseInfo<a class="headerlink" href="#chargingcaseinfo" title="Link to this heading"></a></h3>
+<p>彩屏仓信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ChargingCaseInfo</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 屏幕保护程序</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_SCREEN_SAVER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FunctionResource</span><span class="p">.</span><span class="na">FUNC_SCREEN_SAVERS</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开机动画</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_BOOT_ANIM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FunctionResource</span><span class="p">.</span><span class="na">FUNC_BOOT_ANIM</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 墙纸</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_WALLPAPER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FunctionResource</span><span class="p">.</span><span class="na">FUNC_WALL_PAPER</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 屏幕亮度功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_BRIGHTNESS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 闪灯功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_FLASHLIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前屏幕资源功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_CURRENT_SCREEN_SAVER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前开机动画资源功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_CURRENT_BOOT_ANIM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 墙纸列表功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_WALLPAPERS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前墙纸资源功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_CURRENT_WALLPAPER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 屏保列表功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SCREEN_SAVERS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 默认屏幕宽度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SCREEN_WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">320</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 默认屏幕高度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SCREEN_HEIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">172</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备地址</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 唯一标识</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 屏幕亮度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">brightness</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 手电筒状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isFlashlightOn</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 屏幕信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ScreenInfo</span><span class="w"> </span><span class="n">screenInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * SDK信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SDKMessage</span><span class="w"> </span><span class="n">sdkMessage</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前屏幕保护程序信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ResourceInfo</span><span class="w"> </span><span class="n">currentScreenSaver</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前开机动画信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ResourceInfo</span><span class="w"> </span><span class="n">currentBootAnim</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前壁纸信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ResourceInfo</span><span class="w"> </span><span class="n">currentWallpaper</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 已存在的墙纸</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wallpapers</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 已存在的墙纸</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">screenSavers</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#screen-info"><span class="std std-ref">ScreenInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#sdk-msg"><span class="std std-ref">SDKMessage</span></a></p></li>
+<li><p><a class="reference internal" href="#resource-info"><span class="std std-ref">ResourceInfo</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">20.2. </span>获取设备屏幕信息<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取设备屏幕信息的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">readScreenInfo</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ScreenInfo</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ScreenInfo</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- 屏幕信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#screen-info"><span class="std std-ref">ScreenInfo</span></a></p></li>
+<li><p>彩屏仓初始化流程，会主动同步【屏幕信息】。用户可以查询 <a class="reference internal" href="#charging-case-info"><span class="std std-ref">ChargingCaseInfo</span></a> 信息来获取到【屏幕信息】。</p></li>
+</ol>
+</div>
+<section id="screeninfo">
+<span id="screen-info"></span><h3><span class="section-number">20.2.1. </span>ScreenInfo<a class="headerlink" href="#screeninfo" title="Link to this heading"></a></h3>
+<p>屏幕信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ScreenInfo</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SettingFunction</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 圆形</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SHAPE_CIRCULAR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 矩形</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SHAPE_RECTANGLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 圆角矩形</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">SHAPE_ROUNDED_RECTANGLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 形状</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shape</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 边角半径</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">radius</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 背景颜色(ARGB)</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 屏幕宽度</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 屏幕高度</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sdk">
+<h2><span class="section-number">20.3. </span>获取SDK信息<a class="headerlink" href="#sdk" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取设备屏幕信息的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">readSDKMessage</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">SDKMessage</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">SDKMessage</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- SDK信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">        </span><span class="c1">//error.getSubCode() --- 错误码</span>
+<span class="w">        </span><span class="c1">//error.getMessage() --- 错误描述</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#sdk-msg"><span class="std std-ref">SDKMessage</span></a></p></li>
+<li><p>彩屏仓初始化流程，会主动同步【SDK信息】。用户可以查询 <a class="reference internal" href="#charging-case-info"><span class="std std-ref">ChargingCaseInfo</span></a> 信息来获取到【SDK信息】。</p></li>
+</ol>
+</div>
+<section id="sdkmessage">
+<span id="sdk-msg"></span><h3><span class="section-number">20.3.1. </span>SDKMessage<a class="headerlink" href="#sdkmessage" title="Link to this heading"></a></h3>
+<p>SDK信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SDKMessage</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SettingFunction</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="cm">/* ----------------------------------------</span>
+<span class="cm">      * 项目代码</span>
+<span class="cm">      * ----------------------------------------- */</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 充电仓</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PROJECT_CHARGING_CASE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0001</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/* ----------------------------------------</span>
+<span class="cm">      * 产品代码</span>
+<span class="cm">      * ----------------------------------------- */</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 彩屏仓</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PRODUCT_COLOR_SCREEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0001</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/* ----------------------------------------</span>
+<span class="cm">      * 芯片代码</span>
+<span class="cm">      * ----------------------------------------- */</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 701N芯片</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CHIP_701N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0001</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 707N芯片</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">CHIP_707N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0X0002</span><span class="p">;</span>
+
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 项目</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">project</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 产品</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">product</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 芯片</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">chip</span><span class="p">;</span>
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * 配置信息</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="n">SDKConfigure</span><span class="w"> </span><span class="n">configure</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#sdk-cfg"><span class="std std-ref">SDKConfigure</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="sdkconfigure">
+<span id="sdk-cfg"></span><h3><span class="section-number">20.3.2. </span>SDKConfigure<a class="headerlink" href="#sdkconfigure" title="Link to this heading"></a></h3>
+<p>SDK功能配置</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SDKConfigure</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持GIF</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportGif</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="brightness-ctrl">
+<span id="id5"></span><h2><span class="section-number">20.4. </span>屏幕亮度控制<a class="headerlink" href="#brightness-ctrl" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3><span class="section-number">20.4.1. </span>获取屏幕亮度<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取屏幕亮度的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getBrightness</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- 亮度, 范围:0 - 100%</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">20.4.2. </span>设置屏幕亮度<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用设置屏幕亮度的接口</span>
+<span class="c1">//brightness -- 亮度, 范围:0 - 100%</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">setBrightness</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">brightness</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2><span class="section-number">20.5. </span>闪光灯控制<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3><span class="section-number">20.5.1. </span>获取闪光灯状态<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取闪光灯状态的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getFlashlightState</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">20.5.2. </span>设置闪光灯状态<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用设置闪光灯的接口</span>
+<span class="c1">//isOn -- 开关</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">setFlashlightState</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">isOn</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- 开关状态</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="screen-saver-ctrl">
+<span id="id11"></span><h2><span class="section-number">20.6. </span>屏幕保护程序控制功能<a class="headerlink" href="#screen-saver-ctrl" title="Link to this heading"></a></h2>
+<section id="id12">
+<h3><span class="section-number">20.6.1. </span>浏览屏幕保护程序资源<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 选择需要浏览的存储器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">onlineStorages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getOnlineStorages</span><span class="p">(</span><span class="n">device</span><span class="p">);</span><span class="w"> </span><span class="c1">//获取在线存储器列表</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//没有存储器。操作失败</span>
+<span class="n">SDCardBean</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SDCardBean</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//优先查找Flash 和 Flash2</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Step3. 调用浏览屏幕保护程序的接口</span>
+<span class="c1">//获取存储器句柄</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">devHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getDevHandler</span><span class="p">();</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">browseScreenSavers</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">devHandler</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">RegFile</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RegFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功</span>
+<span class="w">        </span><span class="c1">//message --- 资源列表</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">        </span><span class="c1">//error.getSubCode() --- 错误码</span>
+<span class="w">        </span><span class="c1">//error.getMessage() --- 错误描述</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="file_browse_func.html#resource-file"><span class="std std-ref">RegFile</span></a></p></li>
+<li><p>彩屏仓初始化的时候，会自动同步一次资源列表。后续出现【创建屏保资源】或者【删除屏保资源】的操作，可以手动同步。</p></li>
+</ol>
+</div>
+</section>
+<section id="id13">
+<h3><span class="section-number">20.6.2. </span>获取当前屏幕保护程序信息<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取当前屏幕保护程序信息的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getCurrentScreenSaver</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ResourceInfo</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- 资源信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>结果为 <a class="reference internal" href="#resource-info"><span class="std std-ref">ResourceInfo</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id14">
+<h3><span class="section-number">20.6.3. </span>设置当前屏幕保护程序<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 选择需要浏览的存储器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">onlineStorages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getOnlineStorages</span><span class="p">(</span><span class="n">device</span><span class="p">);</span><span class="w"> </span><span class="c1">//获取在线存储器列表</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//没有存储器。操作失败</span>
+<span class="n">SDCardBean</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SDCardBean</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//优先查找Flash 和 Flash2</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Step3. 调用设置当前屏幕保护程序的接口</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getDevHandler</span><span class="p">();</span><span class="w"> </span><span class="c1">//存储器句柄</span>
+<span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;设备存在的屏保路径&quot;</span><span class="p">;</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">setCurrentScreenSaver</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="file_browse_func.html#sd-card-bean"><span class="std std-ref">SDCardBean</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="resourceinfo">
+<span id="resource-info"></span><h3><span class="section-number">20.6.4. </span>ResourceInfo<a class="headerlink" href="#resourceinfo" title="Link to this heading"></a></h3>
+<p>资源信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResourceInfo</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 屏幕保护程序名称前缀</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">SCREEN_NAME_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;VIE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 自定义屏幕保护程序名称</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CUSTOM_SCREEN_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;VIE_CST&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 开机动画名称前缀</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ANIM_NAME_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ANI&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 壁纸名称前缀</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">WALLPAPER_NAME_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;csbg&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 自定义壁纸名称</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CUSTOM_WALLPAPER_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;csbg_x&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 存储器句柄</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 簇号</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cluster</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * crc校验码</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="n">crc</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 文件路径</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id15">
+<h2><span class="section-number">20.7. </span>开机动画<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<section id="id16">
+<h3><span class="section-number">20.7.1. </span>获取开机动画信息<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取当前开机动画信息的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getCurrentBootAnim</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ResourceInfo</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- 资源信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>结果为 <a class="reference internal" href="#resource-info"><span class="std std-ref">ResourceInfo</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id17">
+<h3><span class="section-number">20.7.2. </span>设置当前开机动画<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 选择需要浏览的存储器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">onlineStorages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getOnlineStorages</span><span class="p">(</span><span class="n">device</span><span class="p">);</span><span class="w"> </span><span class="c1">//获取在线存储器列表</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//没有存储器。操作失败</span>
+<span class="n">SDCardBean</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SDCardBean</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//优先查找Flash 和 Flash2</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Step3. 调用设置当前开机动画的接口</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">devHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getDevHandler</span><span class="p">();</span><span class="w"> </span><span class="c1">//存储器句柄</span>
+<span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;设备存在的开机动画路径&quot;</span><span class="p">;</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">setCurrentScreenSaver</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">devHandle</span><span class="p">,</span><span class="w"> </span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="file_browse_func.html#sd-card-bean"><span class="std std-ref">SDCardBean</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="sync-weather">
+<span id="id18"></span><h2><span class="section-number">20.8. </span>同步天气信息<a class="headerlink" href="#sync-weather" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用设置当前屏幕保护程序信息的接口</span>
+<span class="c1">//weather -- 天气信息</span>
+<span class="n">Weather</span><span class="w"> </span><span class="n">weather</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Weather</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">syncWeatherInfo</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">weather</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#weather"><span class="std std-ref">Weather</span></a></p></li>
+</ol>
+</div>
+<section id="weather">
+<span id="id19"></span><h3><span class="section-number">20.8.1. </span>Weather<a class="headerlink" href="#weather" title="Link to this heading"></a></h3>
+<p>天气信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Weather</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 省份</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">province</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 城市</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 天气</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 参考{@link com.jieli.bluetooth.constant.WeatherCode}</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">weather</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 温度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">temperature</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 湿度。单位: %</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">humidity</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 风向</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 参考 {@link com.jieli.bluetooth.constant.DirectionCode}</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">windDirection</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 风力</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">windPower</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 更新时间</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sync-msg">
+<span id="id20"></span><h2><span class="section-number">20.9. </span>消息推送<a class="headerlink" href="#sync-msg" title="Link to this heading"></a></h2>
+<section id="id21">
+<h3><span class="section-number">20.9.1. </span>推送消息<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用推送消息接口</span>
+<span class="c1">//messageInfo -- 消息信息</span>
+<span class="n">MessageInfo</span><span class="w"> </span><span class="n">messageInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MessageInfo</span><span class="p">();</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">pushMessageInfo</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">messageInfo</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#message-info"><span class="std std-ref">MessageInfo</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id22">
+<h3><span class="section-number">20.9.2. </span>删除消息<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用删除消息接口</span>
+<span class="c1">//messageInfo -- 消息信息</span>
+<span class="c1">//删除消息时，主要是看【包名】 + 【时间戳】</span>
+<span class="n">MessageInfo</span><span class="w"> </span><span class="n">messageInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MessageInfo</span><span class="p">();</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">removeMessageInfo</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">messageInfo</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#message-info"><span class="std std-ref">MessageInfo</span></a></p></li>
+<li><p>删除消息，只需要携带【包名】和【时间戳】。设备端会根据这两个字段删除对应的消息。</p></li>
+</ol>
+</div>
+</section>
+<section id="messageinfo">
+<span id="message-info"></span><h3><span class="section-number">20.9.3. </span>MessageInfo<a class="headerlink" href="#messageinfo" title="Link to this heading"></a></h3>
+<p>消息信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MessageInfo</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IDataOp</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 默认图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_DEFAULT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 短信图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_SMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 微信图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_WECHAT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * QQ图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_QQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 钉钉图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FLAG_DING_TALK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 应用包名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">appPackageName</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 应用图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 标题</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 内容</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">content</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 时间戳</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timestamp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id23">
+<h2><span class="section-number">20.10. </span>墙纸控制功能<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<section id="id24">
+<h3><span class="section-number">20.10.1. </span>浏览墙纸资源<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 选择需要浏览的存储器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">onlineStorages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getOnlineStorages</span><span class="p">(</span><span class="n">device</span><span class="p">);</span><span class="w"> </span><span class="c1">//获取在线存储器列表</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//没有存储器。操作失败</span>
+<span class="n">SDCardBean</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SDCardBean</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//优先查找Flash 和 Flash2</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Step3. 调用浏览墙纸资源的接口</span>
+<span class="c1">//获取存储器句柄</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">devHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getDevHandler</span><span class="p">();</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">browseWallPapers</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">devHandler</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">RegFile</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">RegFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功</span>
+<span class="w">        </span><span class="c1">//message --- 资源列表</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">        </span><span class="c1">//error.getSubCode() --- 错误码</span>
+<span class="w">        </span><span class="c1">//error.getMessage() --- 错误描述</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="file_browse_func.html#resource-file"><span class="std std-ref">RegFile</span></a></p></li>
+<li><p>彩屏仓初始化的时候，会自动同步一次资源列表。后续出现【创建墙纸资源】或者【删除墙纸资源】的操作，可以手动同步。</p></li>
+</ol>
+</div>
+</section>
+<section id="id25">
+<h3><span class="section-number">20.10.2. </span>获取当前墙纸信息<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 调用获取当前屏幕保护程序信息的接口</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getCurrentWallPaper</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">ResourceInfo</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ResourceInfo</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">        </span><span class="c1">//message -- 资源信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#resource-info"><span class="std std-ref">ResourceInfo</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id26">
+<h3><span class="section-number">20.10.3. </span>设置当前墙纸<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step1. 创建彩屏充电仓实现类</span>
+<span class="n">ChargingCaseOpImpl</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChargingCaseOpImpl</span><span class="p">.</span><span class="na">instance</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getRcspOp</span><span class="p">());</span>
+<span class="c1">//Step2. 选择需要浏览的存储器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">();</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">onlineStorages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">getOnlineStorages</span><span class="p">(</span><span class="n">device</span><span class="p">);</span><span class="w"> </span><span class="c1">//获取在线存储器列表</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//没有存储器。操作失败</span>
+<span class="n">SDCardBean</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SDCardBean</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//优先查找Flash 和 Flash2</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">storage</span><span class="p">.</span><span class="na">getIndex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SDCardBean</span><span class="p">.</span><span class="na">INDEX_FLASH2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">storage</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onlineStorages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Step3. 调用设置当前屏幕保护程序的接口</span>
+<span class="c1">//获取存储器句柄</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">devHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="na">getDevHandler</span><span class="p">();</span>
+<span class="n">String</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;设备存在的屏保路径&quot;</span><span class="p">;</span>
+<span class="n">chargingCaseOp</span><span class="p">.</span><span class="na">setCurrentScreenSaver</span><span class="p">(</span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">devHandler</span><span class="p">,</span><span class="w"> </span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作成功 和 结果</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调操作失败 和 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#resource-info"><span class="std std-ref">ResourceInfo</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="id27">
+<h2><span class="section-number">20.11. </span>传输资源流程图<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/transfer_resource_flow.png"><img alt="../../_images/transfer_resource_flow.png" src="../../_images/transfer_resource_flow.png" style="width: 607.0px; height: 823.0px;" />
+</a>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>资源传输成功后，需要根据资源功能进行设置激活才会生效。比如：设置当前屏幕保护程序</p></li>
+<li><p>必须保证资源的完整性</p></li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="big_file_transfer_func.html" class="btn btn-neutral float-left" title="19. 大文件传输功能" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bmp_convert_func.html" class="btn btn-neutral float-right" title="21. 图像转换" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+.. _big_file_transfer:
+
+Big File Transfer Function
+---------------------------------
+
+Create Big File
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Used to create large files, such as: music files, watch face files, images, etc.
+
+.. code-block:: java
+
+    //Step1. Create file operation implementation class
+    FileOpImpl fileOp = FileOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to create big file
+    //file --- file
+    final List<SDCardBean> onlineStorages = fileOp.getOnlineStorage();
+    SDCardBean storage = null;
+    if (null != onlineStorages) {
+        for (SDCardBean sdCardBean : onlineStorages) {
+            // Select the appropriate online handle object according to functional requirements.
+            // Here is a demonstration of transferring color screen warehouse screen saver, so choose online Flash storage medium
+            if (sdCardBean.isFlash() && sdCardBean.isOnline()) {
+                storage = sdCardBean;
+                break;
+            }
+        }
+    }
+    if (null == file || null == storage) return;
+    CreateFileParam param = new CreateFileParam(RCSPController.getInstance().getUsingDevice(), file, storage);
+    fileOp.createBigFile(param, new OnTaskStateListener() {
+        @Override
+        public void onStart() {
+            //Callback when big file transfer starts
+        }
+
+        @Override
+        public void onProgress(int progress) {
+            //Callback for big file transfer progress
+        }
+
+        @Override
+        public void onStop() {
+            //Callback when big file transfer ends
+        }
+
+        @Override
+        public void onCancel(int reason) {
+            //Callback when big file transfer is cancelled
+        }
+
+        @Override
+        public void onError(int code, String message) {
+            //Callback for big file transfer exception
+            //code --- error code
+            //message --- error description
+        }
+    });
+
+
+.. note::
+   
+   1. Big file transfer cannot be performed simultaneously with other time-consuming tasks, such as: file browsing, incoming calls, etc.
+   2. The file for big file transfer must exist and be readable
+   3. Storage information, :ref:`sd_card_bean` 
+   4. Create file parameter, :ref:`create_file_param` 
+
+
+.. _create_file_param:
+
+CreateFileParam
+""""""""""""""""""""""""""""""""""""""
+
+.. code-block:: java
+
+    public class CreateFileParam {
+        /**
+         * Input file
+         */
+        @NonNull
+        private final File file;
+        /**
+         * Output storage
+         */
+        @NonNull
+        private final SDCardBean storage;
+        /**
+         * Output path
+         */
+        @NonNull
+        private final String output;
+        /**
+         * Maximum rename count
+         */
+        private int maxRenameNum = 30;
+        /**
+         * Whether to use other encoding methods
+         *
+         * <p>
+         * Default false, encoding methods are as follows:<br/>
+         * - Short file name: GBK {@link Charset#forName(String)}<br/>
+         * - Long file name: Add "\\U" + Unicode encoded data + terminator, {@link Charset#forName(String)}
+         * If true, then {@link #encodeType} property takes effect
+         * </p>
+         */
+        private boolean isOtherEncode = false; //whether to use other encoding methods
+
+        /**
+         * Encoding method
+         *
+         * <strong>1. Note that {@link  #isOtherEncode} must be true for this field to take effect</strong>
+         */
+        private String encodeType = StandardCharsets.UTF_16LE.name(); //default encoding method
+    }
+   
+
+Cancel Big File Transfer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Used to cancel ongoing big file transfer
+
+.. code-block:: java
+
+    //Step1. Create file operation implementation class
+    FileOpImpl fileOp = FileOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. Call the interface to cancel big file transfer
+    //Only succeeds when big file transfer is in progress, you can use fileOp.isFileOperating(); to check if file operation is ongoing
+    fileOp.cancelBigFileTransfer(RCSPController.getInstance().getUsingDevice(), 0, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback for operation success and result
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback for operation failure and error information
+        }
+    });
+
+
+

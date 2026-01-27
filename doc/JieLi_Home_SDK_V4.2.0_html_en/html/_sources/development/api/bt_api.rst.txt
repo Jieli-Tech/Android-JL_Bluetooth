@@ -1,0 +1,1286 @@
+.. sectnum::
+    :start: 1
+    :depth: 5
+
+.. _bt_manager_api:
+
+Bluetooth Processing Interface
+*****************************************************
+
+The following interface can be used through ``JL_BluetoothManager``.
+
+=================================== ============================================================ ============================================ ==================================================================================================
+  Method Name                                   Parameter                                           Result                                                                Description
+=================================== ============================================================ ============================================ ==================================================================================================
+ addEventListener                    :ref:`bt_event_listener`                                       boolean: result                               Add Bluetooth event listener; ``BTEventCallback`` is recommended.
+ removeEventListener                 :ref:`bt_event_listener`                                       boolean: result                               Remove Bluetooth event listener
+ configure                           BluetoothOption: :ref:`bluetooth_option`                       void                                          Configure Bluetooth library parameters
+ isBluetoothEnabled                  NULL                                                           boolean: result                               Is Bluetooth enabled. Recommend using the method of ``BluetoothUteil``
+ openOrCloseBluetooth                isEnable: Whether to enable                                    boolean: result                               Turn on or off Bluetooth. Recommend using the method of ``BluetoothUteil``
+| 
+ scan                                timeout: Scan timeout (in milliseconds)                        int: Result code                              Scanning BLE devices
+ scan                               | type: Scan type                                               int: Result code                              Scan Bluetooth devices
+                                    |  * BluetoothConstant#SCAN_TYPE_BLE
+                                    |  * BluetoothConstant#SCAN_TYPE_CLASSIC
+                                    | timeout: Scan timeout (in milliseconds)
+ stopScan                            NULL                                                           int: Result code                              Stop Bluetooth scanning
+ getFoundedBluetoothDevices          NULL                                                         | ArrayList\<BluetoothDevice\>:                 Get a list of discovered Bluetooth devices.
+                                                                                                  | List of discovered Bluetooth devices 
+| 
+ isConnectedByProfile                device: Classic Bluetooth device                               boolean: result                                Connect to classic Bluetooth service?
+ startConnectByBreProfiles           device: Classic Bluetooth device                               void                                         | Connect to the specified classic Bluetooth device; 
+                                                                                                                                                 | the connection status is in the :ref:`bt_event_listener` callback.
+ disconnectByProfiles                device: Classic Bluetooth device                               boolean: result                                Disconnect the specified classic Bluetooth
+ unpair                              device: Classic Bluetooth device                               int: Result code                             | Unpair from Classic Bluetooth. 
+                                                                                                                                                 | Pairing status is in the :ref:`bt_event_listener` callback.
+ synchronizationBtDeviceStatus       NULL                                                           void                                           Synchronize system Bluetooth status
+| 
+ getConnectedDevice                  NULL                                                           BluetoothDevice: using device                  Get connected and in use devices
+ connect                             device: Bluetooth device                                       void                                           Connect Bluetooth device
+ connect                             | device: Bluetooth device                                     void                                           Connect Bluetooth device using the specified communication method.
+                                     | int: Connect Way
+                                     |  * BluetoothConstant.PROTOCOL_TYPE_BLE
+                                     |  * BluetoothConstant.PROTOCOL_TYPE_SPP
+                                     |  * BluetoothConstant.PROTOCOL_TYPE_GATT_OVER_BR_EDR
+ disconnect                          NULL                                                           void                                           Disconnect from the connected Bluetooth device in use.
+ disconnect                          device: Bluetooth device                                       void                                           Disconnect the specified Bluetooth device
+ fastConnect                         NULL                                                           boolean: result                                Quick reconnection
+| 
+ getMappedDeviceAddress              address: Bluetooth device address                              String: Mapping device address                 Get the mapping address of the specified address  
+ getHistoryBluetoothDeviceList       NULL                                                         | List\<HistoryBluetoothDevice\>:                Get connection history list
+                                                                                                  | Connection history list
+ removeHistoryDevice                | :ref:`history_device` : Connecting History                    void                                           Delete specified connection history
+                                    | IActionCallback: Operation result callback
+ reconnectHistoryBluetoothDevice    | :ref:`history_device` : Connecting History                    void                                           Reconnect to the specified connection history
+                                    | timeout : Connection timeout, in milliseconds
+                                    | IActionCallback: Operation result callback
+ clearHistoryDeviceRecord            NULL                                                           void                                           Clear connection history cache
+| 
+ sendCommandAsync                   | device: Connected device                                      void                                           Send RCSP command
+                                    | CommandBase: RCSP Command
+                                    | timeout: Command timeout (in milliseconds)
+                                    | :ref:`rcsp_cmd_cb` 
+ sendData                           | device: Connected device                                      void                                           Send data command
+                                    | CommandBase: Responsive command
+                                    | data: Data to be sent
+ sendCommandResponse                | device: Connected device                                      void                                           Send reply command
+                                    | CommandBase : Reply command
+| 
+ getConnectedDeviceList              NULL                                                         | List\<BluetoothDevice\>:                       Get list of connected devices
+                                                                                                  | List of connected devices
+ isConnectedBtDevice                 device: Bluetooth device                                       boolean: result                                Is the device connected?
+ isUseBtDevice                       device: Bluetooth device                                       boolean: result                                Is the device in use?
+ switchConnectedDevice               device: Connected device                                       void                                           Switch to the device you are using
+ destroy                             NULL                                                           void                                           Release resources
+=================================== ============================================================ ============================================ ==================================================================================================
+
+
+.. _rcsp_cmd_cb: 
+
+Command reply callback
+================================================================
+
+.. code-block:: java
+
+    public interface RcspCommandCallback {
+
+        /**
+         * Callback reply command
+         *
+         * @param device Connected device
+         * @param cmd  Reply command
+         */
+        void onCommandResponse(BluetoothDevice device, CommandBase cmd);
+
+        /**
+         * Callback error event
+         *
+         * @param device Connected device
+         * @param error  error message
+         */
+        void onErrCode(BluetoothDevice device, BaseError error);
+    }
+
+
+
+.. _bt_op_api:
+
+Bluetooth Operation Interface
+========================================================
+
+.. code-block:: java
+
+    public interface IBluetoothOperation {
+
+        /*-------------------------------- BluetoothAdapter Op ------------------------*/
+
+        /**
+         * Checks whether the Bluetooth module is enabled.
+         *
+         * @return boolean Result. Returns true if Bluetooth is enabled; false otherwise.
+         */
+        boolean isBluetoothEnabled();
+
+        /**
+         * Enables the Bluetooth module.
+         *
+         * <p>Requires dynamic user permission.</p>
+         *
+         * @return boolean Operation result
+         */
+        boolean enableBluetooth();
+
+        /**
+         * Disables the Bluetooth module.
+         *
+         * @return boolean Operation result
+         */
+        boolean disableBluetooth();
+
+        /**
+         * Registers a Bluetooth callback listener.
+         *
+         * @param bluetoothCallback Bluetooth callback listener. It is recommended to use {@link BluetoothCallbackImpl}.
+         * @return boolean Operation result
+         */
+        boolean registerBluetoothCallback(IBluetoothCallback bluetoothCallback);
+
+        /**
+         * Unregisters a Bluetooth callback listener.
+         *
+         * @param bluetoothCallback Bluetooth callback listener. It is recommended to use {@link BluetoothCallbackImpl}.
+         * @return boolean Operation result
+         */
+        boolean unregisterBluetoothCallback(IBluetoothCallback bluetoothCallback);
+
+        /**
+         * Returns the currently connected Bluetooth device object.
+         *
+         * <p>In BLE mode, returns the BLE device object.<br/>
+         * In SPP mode, note that the connection may be established via BLE first and then converted to an SPP connection,
+         * so it may first return the BLE object, followed by the SPP (classic Bluetooth) object.</p>
+         *
+         * @return The communication channel object. Returns null if no communication channel is established.
+         */
+        BluetoothDevice getConnectedDevice();
+
+        /**
+         * Sets the currently connected and active Bluetooth device.
+         *
+         * @param device Bluetooth device
+         */
+        void setConnectedDevice(BluetoothDevice device);
+
+        /**
+         * Gets the currently used BluetoothGatt object.
+         *
+         * @return BluetoothGatt The currently used BluetoothGatt object
+         */
+        BluetoothGatt getConnectedBluetoothGatt();
+
+        /**
+         * Gets the BluetoothGatt object for a specified device.
+         *
+         * @param device BLE device
+         * @return BluetoothGatt The connected BluetoothGatt object
+         */
+        BluetoothGatt getDeviceGatt(BluetoothDevice device);
+
+        /**
+         * Gets the list of connected devices.
+         *
+         * @return List<BluetoothDevice> List of connected devices
+         */
+        List<BluetoothDevice> getConnectedDeviceList();
+
+        /**
+         * Checks whether a device is connected.
+         *
+         * @param device Bluetooth device
+         * @return boolean Result
+         */
+        boolean isConnectedDevice(BluetoothDevice device);
+
+        /**
+         * Sets Bluetooth configuration options.
+         *
+         * @param bluetoothOption Bluetooth configuration options
+         */
+        void setBluetoothOption(BluetoothOption bluetoothOption);
+
+        /**
+         * Gets Bluetooth configuration options.
+         *
+         * @return BluetoothOption Bluetooth configuration options
+         */
+        BluetoothOption getBluetoothOption();
+
+        /**
+         * Gets a remote Bluetooth device object.
+         *
+         * @param address Bluetooth device address
+         * @return BluetoothDevice Bluetooth device object. Returns the device object if it exists; otherwise, returns null.
+         */
+        BluetoothDevice getRemoteDevice(String address);
+
+        /**
+         * Gets the cached classic Bluetooth device object.
+         *
+         * @param device Bluetooth device
+         * @return BluetoothDevice Cached classic Bluetooth device object
+         */
+        BluetoothDevice getCacheEdrDevice(BluetoothDevice device);
+
+        /*-----------------------------------scan device op--------------------------*/
+
+        /**
+         * Checks whether device scanning is in progress.
+         *
+         * @return boolean Result
+         */
+        boolean isScanning();
+
+        /**
+         * Gets the list of discovered Bluetooth devices.
+         *
+         * <p>The list only includes devices of the scanned type. Scanning operations clear the cached list.</p>
+         *
+         * @return ArrayList<BluetoothDevice> List of discovered Bluetooth devices
+         */
+        ArrayList<BluetoothDevice> getDiscoveredBluetoothDevices();
+
+        /**
+         * Gets the current scan type.
+         *
+         * @return int Scan type
+         * <p>
+         * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_BLE} --- BLE devices <br/>
+         * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_CLASSIC} --- Classic Bluetooth devices
+         * </p>
+         */
+        int getScanType();
+
+        /**
+         * Starts scanning for Bluetooth devices.
+         *
+         * <p>This method scans all Bluetooth devices, but the SDK only reports classic Bluetooth devices via callbacks.</p>
+         * <p>If no device is found before the timeout, a scan timeout error is reported via {@link IBluetoothCallback#onError(BaseError)}.</p>
+         *
+         * @param timeout Timeout value (in milliseconds)
+         * @return int Operation result code
+         * <p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed<br/>
+         * <br/>
+         * If successful, scan status will be reported via {@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)}.<br/>
+         * Discovered devices will be reported via {@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)}.<br/>
+         * Pop-up products will trigger {@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)}.
+         * </p>
+         */
+        int startDeviceScan(long timeout);
+
+        /**
+         * Stops scanning for Bluetooth devices.
+         *
+         * @return int Operation result code
+         * <p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed
+         * </p>
+         */
+        int stopDeviceScan();
+
+        /**
+         * Starts scanning for BLE devices.
+         *
+         * <p>If no device is found before the timeout, a scan timeout error is reported via {@link IBluetoothCallback#onError(BaseError)}.</p>
+         *
+         * @param timeout Timeout value (in milliseconds)
+         * @return int Operation result code
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed<br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed <br/>
+         * <br/>
+         * If successful, scan status will be reported via {@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)}.<br/>
+         * Discovered devices will be reported via {@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)}.<br/>
+         * Pop-up products will trigger {@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)}.
+         * </p>
+         */
+        int startBLEScan(long timeout);
+
+        /**
+         * Stops scanning for BLE devices.
+         *
+         * @return int Operation result code
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed
+         * </p>
+         */
+        int stopBLEScan();
+
+        /*-----------------------------------pair op--------------------------*/
+
+        /**
+         * Checks whether a specific device is currently pairing.
+         *
+         * @param device Bluetooth device
+         * @return boolean Result
+         */
+        boolean isPairing(BluetoothDevice device);
+
+        /**
+         * Checks whether a specific device is already paired.
+         *
+         * @param device Bluetooth device
+         * @return boolean Result
+         */
+        boolean isPaired(BluetoothDevice device);
+
+        /**
+         * Gets the list of paired devices.
+         *
+         * @return List<BluetoothDevice> List of paired devices
+         */
+        List<BluetoothDevice> getPairedDevices();
+
+        /**
+         * Starts the pairing process for a specified device.
+         *
+         * @param device Bluetooth device
+         * @return int Result code
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- Success <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed<br/>
+         * If successful, status will be reported via {@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}.
+         * </p>
+         */
+        int pair(BluetoothDevice device);
+
+        /**
+         * Starts the pairing process for a specified device.
+         *
+         * @param device  Bluetooth device
+         * @param pairWay Pairing method, valid range: [0, 2]
+         * @return int Result code
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- Success <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed<br/>
+         * If successful, status will be reported via {@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}.
+         * </p>
+         */
+        int pair(BluetoothDevice device, @IntRange(from = 0, to = 2) int pairWay);
+
+        /**
+         * Cancels pairing with a Bluetooth device.
+         *
+         * @param device Bluetooth device
+         * @return int Operation code
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- Success <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed<br/>
+         * If successful, status will be reported via {@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}.
+         * </p>
+         */
+        int unPair(BluetoothDevice device);
+
+        /**
+         * Attempts to start the pairing process for a specified device.
+         *
+         * <p>Performs pairing in a queued manner to avoid excessive operations that could destabilize the Bluetooth system. This method is recommended for pairing.</p>
+         *
+         * @param device Bluetooth device
+         * @return boolean Operation result
+         */
+        boolean tryToPair(BluetoothDevice device);
+
+        /**
+         * Attempts to start the pairing process for a specified device.
+         *
+         * <p>Performs pairing in a queued manner to avoid excessive operations that could destabilize the Bluetooth system. This method is recommended for pairing.</p>
+         *
+         * @param device  Bluetooth device
+         * @param pairWay Pairing method, valid range: [0, 2]
+         * @return boolean Operation result
+         */
+        boolean tryToPair(BluetoothDevice device, @IntRange(from = 0, to = 2) int pairWay);
+
+        /**
+         * Attempts to start the unpairing process for a specified device.
+         *
+         * <p>Performs unpairing in a queued manner to avoid excessive operations that could destabilize the Bluetooth system. This method is recommended for unpairing.</p>
+         *
+         * @param device Bluetooth device
+         * @return boolean Operation result
+         */
+        boolean tryToUnPair(BluetoothDevice device);
+
+        /*-----------------------------------br/edr op--------------------------*/
+
+        /**
+         * Checks whether a Bluetooth device supports the HFP profile.
+         *
+         * @param device Classic Bluetooth device
+         * @return boolean Result
+         */
+        boolean deviceHasHfp(BluetoothDevice device);
+
+        /**
+         * Checks whether a Bluetooth device supports the A2DP profile.
+         *
+         * @param device Classic Bluetooth device
+         * @return boolean Result
+         */
+        boolean deviceHasA2dp(BluetoothDevice device);
+
+        /**
+         * Checks whether an HFP connection has been established with a Bluetooth device.
+         *
+         * @param device Classic Bluetooth device
+         * @return int Connection status<p>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting
+         * </p>
+         */
+        int isConnectedByHfp(BluetoothDevice device);
+
+        /**
+         * Checks whether an A2DP connection has been established with a Bluetooth device.
+         *
+         * @param device Classic Bluetooth device
+         * @return int Connection status<p>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting
+         * </p>
+         */
+        int isConnectedByA2dp(BluetoothDevice device);
+
+        /**
+         * Checks whether a classic Bluetooth profile (A2DP or HFP) connection has been established with a device.
+         *
+         * @param device Classic Bluetooth device
+         * @return int Connection status<p>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting
+         * </p>
+         */
+        int isConnectedByProfile(BluetoothDevice device);
+
+        /**
+         * Checks whether a classic Bluetooth connection is in progress.
+         *
+         * @return boolean Result
+         */
+        boolean isBrEdrConnecting();
+
+        /**
+         * Gets the classic Bluetooth device currently being connected.
+         *
+         * @return BluetoothDevice Classic Bluetooth device
+         */
+        BluetoothDevice getConnectingBrEdrDevice();
+
+        /**
+         * Connects via classic Bluetooth profiles.
+         *
+         * @param device Classic Bluetooth device
+         * @return boolean Operation result <p>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onBrEdrConnection(BluetoothDevice, int)}.
+         * </p>
+         */
+        boolean connectByProfiles(BluetoothDevice device);
+
+        /**
+         * Disconnects a classic Bluetooth connection.
+         *
+         * @param device Classic Bluetooth device
+         * @return boolean Result
+         */
+        boolean disconnectByProfiles(BluetoothDevice device);
+
+        /**
+         * Sets the specified connected device as the active audio output device.
+         *
+         * @param device Specified connected device
+         * @return boolean Result
+         */
+        boolean setActivityBluetoothDevice(BluetoothDevice device);
+
+        /**
+         * Gets the current active audio output Bluetooth device.
+         *
+         * @return BluetoothDevice Current active audio output Bluetooth device
+         */
+        BluetoothDevice getActivityBluetoothDevice();
+
+        /**
+         * Gets the list of connected SPP devices.
+         *
+         * @return List<BluetoothDevice> List of connected SPP devices
+         */
+        List<BluetoothDevice> getConnectedSppList();
+
+        /**
+         * Checks whether a device is connected via SPP.
+         *
+         * @param device Bluetooth device
+         * @return boolean Result
+         */
+        boolean isConnectedSppDevice(BluetoothDevice device);
+
+        /**
+         * Connects an SPP channel.
+         *
+         * @param device Classic Bluetooth device
+         * @return int Operation result
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- Success <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed<br/>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)}.
+         * </p>
+         */
+        int connectSPPDevice(BluetoothDevice device);
+
+        /**
+         * Disconnects an SPP channel.
+         *
+         * @param device Classic Bluetooth device
+         * @return boolean Operation result
+         * <p>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)}.
+         * </p>
+         */
+        boolean disconnectSPPDevice(BluetoothDevice device);
+
+        /**
+         * Sends a data packet via the SPP channel.
+         *
+         * @param device Classic Bluetooth device
+         * @param data   Data packet
+         * @return boolean Operation result
+         */
+        boolean writeDataToSppDevice(BluetoothDevice device, byte[] data);
+
+        /**
+         * Gets the list of connected classic Bluetooth devices.
+         *
+         * @return List<BluetoothDevice> List of connected classic Bluetooth devices
+         */
+        List<BluetoothDevice> getDevicesConnectedByProfile();
+
+        /*----------------------------------ble op----------------------------*/
+
+        /**
+         * Gets the list of paired BLE devices.
+         *
+         * @return List<BluetoothDevice> List of paired BLE devices, or null if none exist
+         */
+        List<BluetoothDevice> getPairedBLEDevices();
+
+        /**
+         * Gets the negotiated MTU of a connected BLE device.
+         *
+         * @param device Connected BLE device
+         * @return int Negotiated BLE MTU
+         */
+        int getBleMtu(BluetoothDevice device);
+
+        /**
+         * Checks whether a device is a connected BLE device.
+         *
+         * @param device BLE device
+         * @return boolean Result
+         */
+        boolean isConnectedBLEDevice(BluetoothDevice device);
+
+        /**
+         * Requests to adjust the BLE MTU.
+         *
+         * @param device Bluetooth device
+         * @param mtu    Requested MTU value
+         * @return boolean Operation result
+         */
+        boolean requestBleMtu(BluetoothDevice device, int mtu);
+
+        /**
+         * Enables or disables BLE characteristic notifications.
+         *
+         * @param gatt              Bluetooth GATT object
+         * @param bleCharacteristic BLE characteristic
+         * @return boolean Operation result
+         */
+        boolean enableBLEDeviceNotification(BluetoothGatt gatt, BleCharacteristic bleCharacteristic);
+
+        /**
+         * Connects to a specified BLE device.
+         *
+         * @param device Bluetooth device
+         * @return int Operation code<p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed<br/>
+         * <br/>
+         * If successful, connection status will be reported via {@link OnBtBleListener#onBleConnection(BluetoothDevice, int)}.
+         * </p>
+         */
+        int connectBLEDevice(BluetoothDevice device);
+
+        /**
+         * Connects to a specified BLE device.
+         *
+         * @param device Bluetooth device
+         * @param param  Connection parameters
+         * @return int Operation code<p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed<br/>
+         * <p>
+         * If successful, connection status will be reported via {@link OnBtBleListener#onBleConnection(BluetoothDevice, int)}.
+         * </p>
+         */
+        int connectBLEDevice(BluetoothDevice device, @NonNull BleConnectParam param);
+
+        /**
+         * Disconnects a BLE device.
+         *
+         * @param device BLE device
+         * @return boolean Operation result<p>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onBleConnection(BluetoothDevice, int)}.
+         * </p>
+         */
+        boolean disconnectBLEDevice(BluetoothDevice device);
+
+        /**
+         * Sends a data packet via BLE write service.
+         *
+         * @param device             BLE device
+         * @param serviceUUID        Service UUID
+         * @param characteristicUUID Characteristic UUID
+         * @param writeData          Data packet
+         * @return boolean Send result
+         */
+        boolean writeDataToBLEDevice(BluetoothDevice device, UUID serviceUUID, UUID characteristicUUID, byte[] writeData);
+
+        /*---------------------------------- special op ----------------------------*/
+
+        /**
+         * Synchronizes connection history records.
+         */
+        void syncHistoryBtDeviceRecord();
+
+        /**
+         * Gets the device currently being connected.
+         *
+         * @return BluetoothDevice Device currently being connected
+         */
+        BluetoothDevice getConnectingDevice();
+
+        /**
+         * Connects a Bluetooth device.
+         *
+         * <p>Connects based on device type: BLE devices use BLE connection; classic Bluetooth devices use classic Bluetooth connection.</p>
+         *
+         * @param device Bluetooth device
+         * @return int Result code<p>
+         * {@link ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting<br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed<br/>
+         * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP connecting<br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- Device connecting <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- Device already connected<br/>
+         * <br/>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onConnection(BluetoothDevice, int)}.
+         * </p>
+         */
+        int connectBtDevice(BluetoothDevice device);
+
+        /**
+         * Connects a Bluetooth device.
+         *
+         * <p>Connects based on device type: BLE devices use BLE connection; classic Bluetooth devices use classic Bluetooth connection.</p>
+         *
+         * @param device     Bluetooth device
+         * @param connectWay Connection method
+         *                   <p>
+         *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE mode <br/>
+         *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP mode<br/>
+         *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- GATT over BR/EDR mode
+         *                   </p>
+         * @return int Result code<p>
+         * {@link ErrorCode#ERR_NONE} --- Success<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed <br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting<br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed<br/>
+         * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP connecting<br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- Device connecting <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- Device already connected<br/>
+         * <br/>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onConnection(BluetoothDevice, int)}.
+         * </p>
+         */
+        int connectBtDevice(BluetoothDevice device, int connectWay);
+
+        /**
+         * Disconnects a Bluetooth device.
+         *
+         * <p>Connection status will be reported via {@link IBluetoothCallback#onConnection(BluetoothDevice, int)}.</p>
+         *
+         * @param device Bluetooth device
+         */
+        void disconnectBtDevice(BluetoothDevice device);
+
+        /**
+         * Connects a classic Bluetooth device.
+         *
+         * @param breDevice Bluetooth device
+         * @return int Result code <p>
+         * {@link ErrorCode#ERR_NONE} --- Success <br/>
+         * {@link ErrorCode#SUB_ERR_PARAMETER} --- Invalid parameter <br/>
+         * {@link ErrorCode#SUB_ERR_EDR_CONNECTING} --- Classic Bluetooth connecting <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed<br/>
+         * <br/>
+         * If successful, connection status will be reported via {@link IBluetoothCallback#onBtDeviceConnectStatus(BluetoothDevice, int)}.
+         * </p>
+         */
+        int startConnectByBreProfiles(BluetoothDevice breDevice);
+
+        /**
+         * Checks whether a device connection is in progress.
+         *
+         * @return boolean Result
+         */
+        boolean isConnecting();
+
+        /**
+         * Checks whether a Bluetooth device has passed certification.
+         *
+         * @param device Bluetooth device
+         * @return boolean Result
+         */
+        boolean checkDeviceIsCertify(BluetoothDevice device);
+
+        /**
+         * Fast reconnect.
+         *
+         * <p>Connection results are reported via {@link IBluetoothCallback}. You must register the callback using {@link #registerBluetoothCallback(IBluetoothCallback)}.</p>
+         *
+         * @return false if no cached BLE address exists and reconnection is not possible; true if reconnection has started.
+         */
+        boolean fastConnect();
+
+        /**
+         * Checks whether a BLE device is connected.
+         *
+         * <p>Synchronizes the system's BLE connection list to verify whether the connected BLE device is recognized by this solution.</p>
+         */
+        void checkBleIsConnected();
+
+        /**
+         * Synchronizes Bluetooth device status.
+         *
+         * <p>Verifies whether Bluetooth devices are properly connected.</p>
+         */
+        void synchronizationBtDeviceStatus(); // Synchronize Bluetooth device status
+
+        /**
+         * Queries connection history records.
+         *
+         * @param address Device address
+         * @return HistoryBluetoothDevice Connection history record
+         */
+        HistoryBluetoothDevice findHistoryBluetoothDevice(String address);
+
+        /**
+         * Deletes a historical device record.
+         *
+         * <p>Synchronously removes pairing for both BLE and classic Bluetooth and clears mapping relationships.</p>
+         *
+         * @param historyBtDevice Historical device record
+         * @param callback        Operation callback
+         */
+        void removeHistoryDevice(HistoryBluetoothDevice historyBtDevice, IActionCallback<HistoryBluetoothDevice> callback);
+
+        /**
+         * Checks whether a reconnection is in progress.
+         *
+         * @return boolean Result
+         */
+        boolean isReconnecting();
+
+        /**
+         * Reconnects to a historical device record.
+         *
+         * @param historyBtDevice Historical device record
+         * @param timeoutMs       Timeout (in milliseconds)
+         * @param listener        Reconnection listener
+         */
+        void reconnectHistoryBluetoothDevice(HistoryBluetoothDevice historyBtDevice, long timeoutMs, OnReconnectHistoryRecordListener listener);
+
+        /**
+         * Stops reconnecting to a device.
+         * @return boolean Operation result
+         */
+        boolean stopReconnect();
+
+        /**
+         * Releases resources.
+         */
+        void destroy();
+    }
+
+
+.. note:: 
+    1. :ref:`bt_callback` 
+    2. :ref:`ble_connect_param` 
+    3. :ref:`ble_chanacteristic`
+    4. :ref:`history_device` 
+
+
+
+
+.. _ble_connect_param:
+
+BleConnectParam
+-------------------------------------------------
+
+BLE Connection Parameters
+
+.. code-block:: java
+
+    public class BleConnectParam extends ConnectParam {
+
+        /**
+         * Whether reconnection is required
+         * <p>
+         * Note: Reconnection mechanism upon abnormal disconnection
+         * </p>
+         */
+        private boolean reconnect = true;
+
+        /**
+         * Whether to force using BLE
+         */
+        private boolean isMandatoryUseBLE = false;
+
+        /**
+         * BLE transmission MTU
+         * <p>
+         * Note: To maintain compatibility with Android 4.0 phones, the default MTU is 23; usable data length: 20;<br/>
+         * With improvements in mobile phone systems, the maximum MTU for current phones is 512. It is recommended to increase the MTU to 512.
+         * </p>
+         */
+        private int mtu = BluetoothConstant.BLE_MTU_MIN;  // Adjust Bluetooth MTU
+
+        /**
+         * List of BLE communication UUIDs
+         * <p>
+         * {@link BluetoothConstant#KEY_BLE_SERVICE_UUID} Service UUID <br/>
+         * {@link BluetoothConstant#KEY_BLE_WRITE_CHARACTERISTIC_UUID} Write characteristic UUID <br/>
+         * {@link BluetoothConstant#KEY_BLE_NOTIFICATION_CHARACTERISTIC_UUID} Notification characteristic UUID <br/>
+         * </p>
+         */
+        private final List<BleCharacteristic> bleCharacteristics;
+
+        /**
+         * Whether to use BLE pairing method
+         */
+        private boolean isUseBleBondWay = false;
+        /**
+         * Whether to auto-connect BLE
+         */
+        @Deprecated
+        private boolean isAutoConnectBle = false;
+        /**
+         * Preferred Phy
+         */
+        @PhyMask
+        private int preferredPhy = BluetoothConstant.PHY_LE_1M_MASK;
+        /**
+         * Preferred transmission method for GATT connection to dual-mode devices
+         */
+        @BleTransport
+        private int transport = BluetoothConstant.TRANSPORT_LE;
+
+        /**
+         * Reconnection delay time
+         */
+        private long reconnectDelay;
+
+        /**
+         * Reconnection attempt limit
+         */
+        private int retryLimit = 1;
+    }
+
+.. note:: 
+    1. :ref:`ble_chanacteristic` 
+
+
+.. _ble_chanacteristic:
+
+BleCharacteristic
+-------------------------------------------------
+
+.. code-block:: java
+
+    public class BleCharacteristic {
+
+        /**
+         * Service UUID
+         */
+        @NonNull
+        private final UUID serviceUUID;
+        /**
+         * Characteristic UUID
+         */
+        @NonNull
+        private final UUID characteristicUUID;
+        /**
+         * Required characteristic property
+         */
+        private final int requiredProperty;
+        /**
+         * Whether it is a primary attribute
+         */
+        private final boolean isPrimary;
+    }
+
+
+
+.. _bt_event_listener:
+
+Bluetooth Event Listener
+=================================================
+
+.. code-block:: java 
+
+    public interface IBluetoothEventListener {
+
+        /**
+         * Bluetooth adapter status callback
+         *
+         * @param bEnabled Whether Bluetooth is turned on
+         * @param bHasBle  Whether BLE is supported
+         */
+        void onAdapterStatus(boolean bEnabled, boolean bHasBle);   
+
+        /**
+         * Device discovery status callback
+         *
+         * @param bBle   Whether discovering BLE devices
+         * @param bStart Whether scanning has started
+         */
+        void onDiscoveryStatus(boolean bBle, boolean bStart);      
+
+        /**
+         * Device discovery callback
+         *
+         * @param device Bluetooth device
+         */
+        @Deprecated
+        void onDiscovery(BluetoothDevice device);   
+
+        /**
+         * Device discovery callback
+         *
+         * @param device         Bluetooth device
+         * @param bleScanMessage Advertising information
+         */
+        void onDiscovery(BluetoothDevice device, BleScanMessage bleScanMessage);  
+
+        /**
+         * Product popup window callback
+         *
+         * @param device         Bluetooth device
+         * @param bleScanMessage Advertising information
+         */
+        void onShowDialog(BluetoothDevice device, BleScanMessage bleScanMessage); 
+
+        /**
+         * Bluetooth device pairing status callback
+         *
+         * @param device Bluetooth device
+         * @param status Pairing status
+         *               <p>Reference values:<br>
+         *               {@link BluetoothDevice#BOND_NONE} or
+         *               {@link BluetoothDevice#BOND_BONDING} or
+         *               {@link BluetoothDevice#BOND_BONDED}
+         *               </p>
+         */
+        void onBondStatus(BluetoothDevice device, int status);      
+
+        /**
+         * Bluetooth device connection status callback
+         *
+         * @param device Bluetooth device
+         * @param status Connection status
+         *               <p>Reference values:<br>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}
+         *               </p>
+         */
+        void onConnection(BluetoothDevice device, int status);      
+
+       /**
+        * Callback for switching to a connected and currently used device
+        *
+        * @param device Connected device
+        */
+        void onSwitchConnectedDevice(BluetoothDevice device);
+
+        /**
+         * A2DP service status callback
+         *
+         * @param device Bluetooth device
+         * @param status Connection status
+         *               <p>Reference values:<br>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}
+         *               </p>
+         */
+        void onA2dpStatus(BluetoothDevice device, int status);      
+
+        /**
+         * HFP service status callback
+         *
+         * @param device Bluetooth device
+         * @param status Connection status
+         *               <p>Reference values:<br>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}
+         *               </p>
+         */
+        void onHfpStatus(BluetoothDevice device, int status);      
+
+        /**
+         * SPP connection status callback
+         *
+         * @param device Bluetooth device
+         * @param status Connection status
+         *               <p>Reference values:<br>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}
+         *               </p>
+         */
+        void onSppStatus(BluetoothDevice device, int status);      
+
+        /**
+         * Receive RCSP command data from the device
+         *
+         * @param device Bluetooth device
+         * @param cmd    RCSP command data
+         */
+        void onDeviceCommand(BluetoothDevice device, CommandBase cmd);              
+
+        /**
+         * Receive data packet from the device
+         *
+         * @param device Bluetooth device
+         * @param data   Data packet
+         */
+        void onDeviceData(BluetoothDevice device, byte[] data);                             
+
+        /**
+         * Receive voice data from the device
+         *
+         * @param device Bluetooth device
+         * @param data   Voice data
+         */
+        @Deprecated
+        void onDeviceVoiceData(BluetoothDevice device, byte[] data);                       
+
+        /**
+         * Receive voice data packet from the device
+         *
+         * @param device Bluetooth device
+         * @param data   Voice information
+         */
+        void onDeviceVoiceData(BluetoothDevice device, VoiceData data);
+
+        /**
+         * Device VAD end callback
+         *
+         * @param device Bluetooth device
+         */
+        void onDeviceVadEnd(BluetoothDevice device);                                   
+
+        /**
+         * Receive RCSP response data from the device
+         *
+         * @param device   Bluetooth device
+         * @param response RCSP command response data
+         */
+        void onDeviceResponse(BluetoothDevice device, CommandBase response);
+
+        /**
+         * Error event callback
+         *
+         * @param error Error information
+         */
+        void onError(BaseError error);  //Error event callback
+
+    }
+
+.. note:: 
+    1. Recommended to use ``BTEventCallback`` implementation
+
+
+
+.. _bt_callback:
+
+IBluetoothCallback
+=========================================================
+
+Bluetooth Callback
+
+.. code-block:: java
+
+    public interface IBluetoothCallback extends IBluetoothEventListener {
+
+        /**
+         * Device UUID acquisition callback
+         *
+         * @param device Paired device
+         * @param uuids  Device UUID array
+         */
+        void onDeviceUuidsDiscovery(BluetoothDevice device, ParcelUuid[] uuids);
+
+        /**
+         * Data reception callback via SPP channel
+         *
+         * @param device Bluetooth device
+         * @param data   Data sent by the device
+         */
+        void onSppDataNotification(BluetoothDevice device, byte[] data);
+
+        /**
+         * BLE find device service callback
+         *
+         * @param device   BLE device
+         * @param status   Search result, success is 0 ({@link BluetoothGatt#GATT_SUCCESS}), otherwise other values
+         * @param services Found services
+         */
+        void onBleServiceDiscovery(BluetoothDevice device, int status, List<BluetoothGattService> services);
+
+        /**
+         * BLE device connection status callback
+         *
+         * @param device BLE device
+         * @param status Connection status<p>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} --- Connection disconnected <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} --- Connection successful <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} --- Connection failed <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} --- Connecting <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED} --- Connected
+         *               </p>
+         */
+        void onBleConnection(BluetoothDevice device, int status);
+
+        /**
+         * BLE data buffer send data setting callback
+         *
+         * @param device BLE device
+         * @param block  Buffer size
+         * @param status Result code. 0 - Success, others - Failure
+         */
+        void onBleDataBlockChanged(BluetoothDevice device, int block, int status);
+
+        /**
+         * BLE characteristic Notification status callback
+         *
+         * @param device             BLE device
+         * @param serviceUuid        Main service UUID
+         * @param characteristicUuid Characteristic UUID
+         * @param bEnabled           Enable result
+         */
+        void onBleNotificationStatus(BluetoothDevice device, UUID serviceUuid, UUID characteristicUuid, boolean bEnabled);
+
+        /**
+         * Receive data sent by BLE device callback
+         *
+         * @param device BLE device
+         * @param data   Received data
+         */
+        void onBleDataNotification(BluetoothDevice device, UUID serviceUuid, UUID characteristicsUuid, byte[] data);
+
+        /**
+         * Send data to BLE device result callback
+         *
+         * @param device              BLE device
+         * @param serviceUuid         Main service UUID
+         * @param characteristicsUuid Characteristic UUID
+         * @param data                Sent data
+         * @param status              Send result 0 - Success, others - Failure
+         */
+        void onBleWriteStatus(BluetoothDevice device, UUID serviceUuid, final UUID characteristicsUuid, byte[] data, int status);
+
+        /**
+         * System callback for Bluetooth device connection status
+         *
+         * @param device Bluetooth device
+         * @param status Connection status<p>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting
+         *               </p>
+         */
+        void onBtDeviceConnectStatus(BluetoothDevice device, int status);
+
+        /**
+         * System callback for Bluetooth connection configuration
+         *
+         * @param gatt     Bluetooth Gatt object
+         * @param interval Transmission interval
+         * @param latency  Latency
+         * @param timeout  Timeout (unit: milliseconds)
+         * @param status   Status code
+         *                 <p>0 indicates success, others indicate an error</p>
+         */
+        void onConnectionUpdated(BluetoothGatt gatt, int interval, int latency, int timeout, int status);
+
+        /**
+         * Callback for Classic Bluetooth connection status
+         *
+         * @param device Classic Bluetooth device object
+         * @param status Connection status<p>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting
+         *               </p>
+         */
+        void onBrEdrConnection(BluetoothDevice device, int status);
+    }
+
+
+.. note:: 
+    1. :ref:`bt_event_listener` 

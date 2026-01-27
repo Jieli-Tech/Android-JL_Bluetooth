@@ -1,0 +1,21 @@
+Open Source Community
+*******************************************
+
+
+1. International users can access `GitHub <https://github.com/Jieli-Tech/Android-JL_Bluetooth>`_
+
+   1. Users can ask questions in the `issues <https://github.com/Jieli-Tech/Android-JL_Bluetooth/issues>`_ section, and our developers will provide timely responses. 
+   2. Users can also join our open-source group (DingTalk: search group number "31691148") to find the corresponding person in charge for consultation.
+   
+2. Domestic users can access `Gitee <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth>`_
+
+   1. Users can ask questions in the `gitee-issues <https://gitee.com/Jieli-Tech/Android-JL_Bluetooth/issues>`_ section, and our developers will provide a timely response.
+   2. Users can also join our open-source group (DingTalk: search group number "31691148") to find the corresponding person in charge for consultation.
+
+3. Users can follow our official account.
+
+   1. GitHub Account: `ZhuHai Jieli Technology Co.,Ltd <https://github.com/Jieli-Tech>`_
+   2. Gitee Account: `珠海杰理科技 <https://gitee.com/Jieli-Tech>`_
+
+
+

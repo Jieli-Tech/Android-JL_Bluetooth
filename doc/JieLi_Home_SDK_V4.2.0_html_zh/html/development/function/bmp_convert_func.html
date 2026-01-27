@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>21. 图像转换 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="22. GIF转换" href="gif_convert_func.html" />
+    <link rel="prev" title="20. 彩屏充电仓功能" href="charging_case_func.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 功能模块</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func.html">2. 基础功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. 设备音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. 彩屏充电仓功能</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">21. 图像转换</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#convertresult">21.1. ConvertResult</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#onconvertlistener">21.2. OnConvertListener</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">21.3. 算法说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">21.4. 算法的选择规则</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. 翻译功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast助手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 功能模块</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">21. </span>图像转换</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bmp-convert">
+<span id="id1"></span><h1><span class="section-number">21. </span>图像转换<a class="headerlink" href="#bmp-convert" title="Link to this heading"></a></h1>
+<p>普通PNG图片(RGB, ARGB)转换成杰理编码文件</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">inPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;输入文件路径(例如：/in.png, /in.jpg)&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">outPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;输出文件路径(例如:out.res, out)&quot;</span><span class="p">;</span>
+<span class="c1">//1.初始化图片转换对象</span>
+<span class="n">BmpConvert</span><span class="w"> </span><span class="n">bmpConvert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BmpConvert</span><span class="p">();</span>
+<span class="c1">//2.开始图像转换</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BmpConvert</span><span class="p">.</span><span class="na">TYPE_701N_RGB</span><span class="p">;</span><span class="w">         </span><span class="c1">//701N图像转换算法 - RGB</span>
+<span class="c1">//flag = BmpConvert.TYPE_695N_RBG;           //695N图像转换算法 - RGB</span>
+<span class="c1">//V1.1.0+ 支持</span>
+<span class="c1">//flag = BmpConvert.TYPE_701N_ARGB;          //701N图像转换算法 - ARGB</span>
+<span class="c1">//V1.2.0+ 支持</span>
+<span class="c1">//flag = BmpConvert.TYPE_701N_RGB_NO_PACK;   //701N图像转换算法 - RGB &amp; 不打包封装</span>
+<span class="c1">//flag = BmpConvert.TYPE_701N_ARGB_NO_PACK;  //701N图像转换算法 - ARGB &amp; 不打包封装</span>
+<span class="c1">//V1.4.0+ 支持</span>
+<span class="c1">//flag = BmpConvert.TYPE_707N_RGB;           //707N图像转换算法 - RGB</span>
+<span class="c1">//flag = BmpConvert.TYPE_707N_ARGB;          //707N图像转换算法 - ARGB</span>
+<span class="c1">//flag = BmpConvert.TYPE_707N_RGB_NO_PACK;   //707N图像转换算法 - RGB &amp; 不打包封装</span>
+<span class="c1">//flag = BmpConvert.TYPE_707N_ARGB_NO_PACK;  //707N图像转换算法 - ARGB &amp; 不打包封装</span>
+<span class="c1">//V1.6.0+支持</span>
+<span class="c1">//lag = BmpConvert.TYPE_701N_JPEG;           //701N图像转换算法 - JPEG</span>
+<span class="c1">//V1.6.0+ 支持</span>
+<span class="c1">//指定输出编码格式， 默认值: ConvertParam.FORMAT_ARGB_8565</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConvertParam</span><span class="p">.</span><span class="na">FORMAT_AUTO</span><span class="p">;</span><span class="w">  </span><span class="c1">//自动选取压缩后最小的格式，ARGB8565或者ARGB8888</span>
+<span class="c1">//        format = ConvertParam.FORMAT_ARGB_8565; //指定输出ARGB8565格式。 若算法是RGB算法，会变成指定输出RGB565格式</span>
+<span class="c1">//        format = ConvertParam.FORMAT_ARGB_8888; //指定输出ARGB8888格式。 若算法是RGB算法，会变成指定输出RGB888格式</span>
+<span class="c1">//构造转换参数</span>
+<span class="n">ConvertParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConvertParam</span><span class="p">().</span><span class="na">setFormat</span><span class="p">(</span><span class="n">format</span><span class="p">);</span>
+<span class="c1">//执行图像转码功能</span>
+<span class="n">bmpConvert</span><span class="p">.</span><span class="na">bitmapConvert</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="w"> </span><span class="n">inPath</span><span class="p">,</span><span class="w"> </span><span class="n">outPath</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnConvertListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调转换开始</span>
+<span class="w">    </span><span class="c1">//path: 输入文件路径</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//回调转换结束</span>
+<span class="w">    </span><span class="c1">//result： 转换结果</span>
+<span class="w">    </span><span class="c1">//output： 输出文件路径</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStop</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//3.不需要使用图片转换功能时，需要释放图片转换对象</span>
+<span class="w">        </span><span class="c1">//bmpConvert.release();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">//回调转换结束</span>
+<span class="w">    </span><span class="c1">//result： 转换结果</span>
+<span class="w">    </span><span class="c1">//output： 输出文件路径</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStop</span><span class="p">(</span><span class="n">ConvertResult</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">outFilePath</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//result.isConvertSuccess(); //转码成功</span>
+<span class="w">        </span><span class="c1">//result.getAlgorithm();     //转换算法</span>
+<span class="w">        </span><span class="c1">//result.getBufSize();       //转换数据大小</span>
+<span class="w">        </span><span class="c1">//result.getPixelFormat();   //转换图像格式</span>
+<span class="w">        </span><span class="c1">//result.getCompressMode();  //压缩模式</span>
+
+<span class="w">        </span><span class="c1">//3.不需要使用图片转换功能时，需要释放图片转换对象</span>
+<span class="w">        </span><span class="c1">//bmpConvert.release();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>图像转换功能需要导入库：<code class="docutils literal notranslate"><span class="pre">BmpConvert_Vxxx-release.aar</span></code></p></li>
+<li><p>输入图像的尺寸不能超过设备的屏幕尺寸</p></li>
+<li><p>输入图像的大小尽量小点</p></li>
+<li><p>根据固件SDK选择合适的算法</p></li>
+<li><p><a class="reference internal" href="#convert-result"><span class="std std-ref">ConvertResult</span></a></p></li>
+<li><p><a class="reference internal" href="#on-convert-listener"><span class="std std-ref">OnConvertListener</span></a></p></li>
+</ol>
+</div>
+<section id="convertresult">
+<span id="convert-result"></span><h2><span class="section-number">21.1. </span>ConvertResult<a class="headerlink" href="#convertresult" title="Link to this heading"></a></h2>
+<p>图像转换结果</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConvertResult</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 结果码</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 说明:&lt;br/&gt;</span>
+<span class="cm">     * 1. 小于等于0, 视为转码失败，负数为错误码&lt;br/&gt;</span>
+<span class="cm">     * 2. 大于0，意味着转码成功</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 算法类型</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">algorithm</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 数据大小</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bufSize</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 图像格式</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 说明: 从707N算法后，增加该字段，用于【不打包算法】的处理</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pixelFormat</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 压缩模式</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 说明: 从707N算法后，增加该字段，用于【不打包算法】的处理</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">compressMode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="onconvertlistener">
+<span id="on-convert-listener"></span><h2><span class="section-number">21.2. </span>OnConvertListener<a class="headerlink" href="#onconvertlistener" title="Link to this heading"></a></h2>
+<p>转换监听器</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OnConvertListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回调转换开始</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param inFilePath String 文件路径</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStart</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">inFilePath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回调转换结束</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param isOk        boolean 转换结果</span>
+<span class="cm">     * @param outFilePath String 输出路径</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStop</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">isOk</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">outFilePath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 回调转换结束</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param result      ConvertResult 转换结果</span>
+<span class="cm">     * @param outFilePath String 输出文件路径</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onStop</span><span class="p">(</span><span class="n">ConvertResult</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">outFilePath</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">21.3. </span>算法说明<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>芯片系列</p></th>
+<th class="head"><p>旧算法名称</p></th>
+<th class="head"><p>新算法名称</p></th>
+<th class="head"><p>算法说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AC695N</p></td>
+<td><p>TYPE_BR_23</p></td>
+<td><p>TYPE_695N_RBG</p></td>
+<td><p>AC695N-WATCH-SDK 图像转换算法 - RGB</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>JL701N</p></td>
+<td><p>TYPE_BR_28</p></td>
+<td><p>TYPE_701N_RGB</p></td>
+<td><p>JL701N-WATCH-SDK 图像转换算法 - RGB</p></td>
+</tr>
+<tr class="row-even"><td><p>TYPE_BR_28_ALPHA</p></td>
+<td><p>TYPE_701N_ARGB</p></td>
+<td><p>JL701N-WATCH-SDK 图像转换算法 - ARGB</p></td>
+</tr>
+<tr class="row-odd"><td><p>TYPE_BR_28_RAW</p></td>
+<td><p>TYPE_701N_RGB_NO_PACK</p></td>
+<td><p>JL701N-WATCH-SDK 图像转换算法 - RGB &amp; 不打包封装</p></td>
+</tr>
+<tr class="row-even"><td><p>TYPE_BR_28_ALPHA_RAW</p></td>
+<td><p>TYPE_701N_ARGB_NO_PACK</p></td>
+<td><p>JL701N-WATCH-SDK 图像转换算法 - ARGB &amp; 不打包封装</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><p>AC707N</p></td>
+<td></td>
+<td><p>TYPE_707N_RGB</p></td>
+<td><p>AC707N-WATCH-SDK 图像转换算法 - RGB</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>TYPE_707N_ARGB</p></td>
+<td><p>AC707N-WATCH-SDK 图像转换算法 - ARGB</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>TYPE_707N_RGB_NO_PACK</p></td>
+<td><p>AC707N-WATCH-SDK 图像转换算法 - RGB &amp; 不打包封装</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>TYPE_707N_ARGB_NO_PACK</p></td>
+<td><p>AC707N-WATCH-SDK 图像转换算法 - ARGB &amp; 不打包封装</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h2><span class="section-number">21.4. </span>算法的选择规则<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>优先根据【芯片类型】选择</p></li>
+<li><p>其次根据【是否打包】选择</p></li>
+<li><p>最后根据【资源格式】选择</p></li>
+</ol>
+<div class="line-block">
+<div class="line">比如： JL701N系列芯片，彩屏仓SDK，推送 a.png图片， 打包格式</div>
+<div class="line"><br /></div>
+<div class="line">1. JL701N系列芯片</div>
+<div class="line">可以筛选出： <code class="docutils literal notranslate"><span class="pre">TYPE_701N_RGB</span></code>, <code class="docutils literal notranslate"><span class="pre">TYPE_701N_ARGB</span></code>, <code class="docutils literal notranslate"><span class="pre">TYPE_701N_RGB_NO_PACK</span></code>, <code class="docutils literal notranslate"><span class="pre">TYPE_701N_ARGB_NO_PACK</span></code></div>
+<div class="line">2. 打包格式</div>
+<div class="line">可以筛选出: <code class="docutils literal notranslate"><span class="pre">TYPE_701N_RGB</span></code>, <code class="docutils literal notranslate"><span class="pre">TYPE_701N_ARGB</span></code></div>
+<div class="line">3. a.png图片</div>
+<div class="line">因为PNG图片带alpha值，所以选择 <code class="docutils literal notranslate"><span class="pre">TYPE_701N_ARGB</span></code></div>
+<div class="line">当然，如果想资源小一点，可以选择 <code class="docutils literal notranslate"><span class="pre">TYPE_701N_RGB</span></code></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="charging_case_func.html" class="btn btn-neutral float-left" title="20. 彩屏充电仓功能" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gif_convert_func.html" class="btn btn-neutral float-right" title="22. GIF转换" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

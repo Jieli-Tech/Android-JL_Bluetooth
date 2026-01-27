@@ -1,0 +1,212 @@
+
+.. _search_device_func:
+
+查找设备功能
+*****************
+
+查找设备
+======================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    int type = 1;         //查找类型 ： 0 --- 查找手机  1 --- 查找设备
+    int op = 1;           //铃声操作 ： 0 --- 关闭铃声  1 --- 播放铃声
+    int timeoutSec = 60;  //超时时间 ： 0 --- 不限制时间 
+    int playWay = 0;      //播放方式： 0 -- 全部播放 1 -- 左侧播放 2 -- 右侧播放
+    int player = 0;       //播放源: 0 -- App端播放 1 -- 设备端播放
+    CommandBase searchDevCmd = CommandBuilder.buildSearchDevCmd(op, timeoutSec, playWay, player);
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //way : 0 -- all  1 -- left  2 -- right
+    //执行搜索设备功能并等待结果回调
+    controller.searchDev(controller.getUsingDevice(), Constants.RING_OP_OPEN, 60, way, Constants.RING_PLAYER_APP, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+停止查找设备
+================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    int type = 1;         //查找类型 ： 0 --- 查找手机  1 --- 查找设备
+    int op = 0;           //铃声操作 ： 0 --- 关闭铃声  1 --- 播放铃声
+    int timeoutSec = 0;   //超时时间 ： 0 --- 不限制时间 
+    int playWay = 0;      //播放方式： 0 -- 全部播放 1 -- 左侧播放 2 -- 右侧播放
+    int player = 0;       //播放源: 0 -- App端播放 1 -- 设备端播放
+    CommandBase stopSearchDevCmd = CommandBuilder.buildSearchDevCmd(op, timeoutSec, playWay, player);
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式 
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行停止搜索设备功能并等待结果回调
+    controller.stopSearchDevice(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+查找手机
+===============================
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    SearchDevCmd searchDevCmd = (SearchDevCmd) command;
+    SearchDevParam param = searchDevCmd.getParam();
+    param.getType();         //查找类型 ： 0 --- 查找手机  1 --- 查找设备
+    param.getOp();           //铃声操作 ： 0 --- 关闭铃声  1 --- 播放铃声
+    param.getTimeoutSec();   //超时时间 ： 0 --- 不限制时间 
+    param.getWay();          //播放方式： 0 -- 全部播放 1 -- 左侧播放 2 -- 右侧播放
+    param.getPlayer();       //播放源: 0 -- App端播放 1 -- 设备端播放
+
+
+代码示例参考 :ref:`receive_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onSearchDevice(BluetoothDevice device, SearchDevParam searchDevParam) {
+            if (searchDevParam.getOp() == Constants.RING_OP_OPEN) { //open ring
+                int timeout = searchDevParam.getTimeoutSec();//timeout, unit : second
+                int player = searchDevParam.getPlayer(); //player (0 --- app play ring  1 --- device play ring)
+            } else {
+                //close ring
+            }
+        }
+    });
+
+.. _sync_search_state:
+
+同步查找设备状态
+==================================
+
+1. JL_BluetoothManager方式
+
+.. code-block:: java
+
+    //Step0: 获取JL_BluetoothManager对象
+    final JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //获取已连接和正在使用的设备
+    final BluetoothDevice device = manager.getConnectedDevice();
+    //Step1: 构建命令 --- 查询查找设备状态
+    CommandBase searchDevStatus = CommandBuilder.buildSearchDevStatusCmd();
+    //Step2: 执行查询查找设备状态功能并等待结果回调
+    manager.sendRcspCommand(device, searchDevStatus, new RcspCommandCallback() {
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: 检查设备状态
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //设备状态异常，进行异常处理
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //成功回调
+            SearchDevCmd searchDevCmd = (SearchDevCmd) cmd;
+            SearchDevStatusResponse response = (SearchDevStatusResponse) searchDevCmd.getResponse();
+            //response -- 查询设备状态
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    final RCSPController controller = RCSPController.getInstance();
+    //获取已连接和正在使用的设备
+    final BluetoothDevice device = controller.getUsingDevice();
+    //执行同步查找设备状态功能并等待回调
+    controller.syncSearchDeviceStatus(device, new OnRcspActionCallback<SearchDevStatusResponse>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, SearchDevStatusResponse message) {
+            //成功回调
+            //message -- 查询设备状态
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`search_device_status` 
+
+
+
+
+.. _search_device_status: 
+
+SearchDevStatusResponse
+-------------------------------------
+
+查找设备状态
+
+.. code-block:: java
+
+    public class SearchDevStatusResponse {
+        private int op;       //操作
+        private int timeout;  //超时
+        private int way;      //方式
+        private int player;   //播放来源
+    }
+

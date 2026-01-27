@@ -1,0 +1,97 @@
+.. _rtc_op: 
+
+时钟功能接口
+**********************************
+
+.. code-block:: java
+
+    public interface IRTCOp {
+
+        /**
+         * 同步时间
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void syncTime(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 读取闹钟列表
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void readAlarmList(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 读取闹钟铃声列表
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void readAlarmDefaultBellList(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 删除闹钟
+         *
+         * @param device   操作设备
+         * @param alarm 闹钟属性
+         * @param callback 结果回调
+         */
+        void deleteAlarm(BluetoothDevice device, AlarmBean alarm, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 添加或者修改闹钟
+         *
+         * @param device   操作设备
+         * @param alarm 闹钟属性
+         * @param callback 结果回调
+         */
+        void addOrModifyAlarm(BluetoothDevice device, AlarmBean alarm, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 停止闹钟铃声
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void stopAlarmBell(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 读取闹钟铃声参数
+         *
+         * @param device   操作设备
+         * @param mask     闹钟索引掩码
+         *                 <p>mask = 0xff, 请求所有的闹钟铃声参数<br/>
+         *                 mask的bit位，对应闹钟的index</p>
+         * @param callback 结果回调
+         */
+        void readAlarmBellArgs(BluetoothDevice device, byte mask, OnRcspActionCallback<List<AlarmExpandCmd.BellArg>> callback);
+
+        /**
+         * 设置指定闹钟铃声参数
+         *
+         * @param device   操作设备
+         * @param arg      闹钟铃声参数
+         * @param callback 结果回调
+         */
+        void setAlarmBellArg(BluetoothDevice device, AlarmExpandCmd.BellArg arg, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 试听闹钟铃声
+         *
+         * @param device   操作设备
+         * @param param    试听参数
+         * @param callback 结果回调
+         */
+        void auditionAlarmBell(BluetoothDevice device, AuditionParam param, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 停止试听闹钟铃声
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void stopPlayAlarmBell(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+    }
+

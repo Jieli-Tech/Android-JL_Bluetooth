@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2 蓝牙代理模块 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3 功能模块" href="function_list.html" />
+    <link rel="prev" title="1 使用流程" href="use_flow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><span class="sectnum">2 </span>蓝牙代理模块</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scan-device"><span class="sectnum">2.1 </span>扫描蓝牙设备</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><span class="sectnum">2.1.1 </span>开始扫描设备</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><span class="sectnum">2.1.2 </span>停止扫描设备</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#connect-device"><span class="sectnum">2.2 </span>连接设备</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><span class="sectnum">2.2.1 </span>连接设备的通讯方式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ble"><span class="sectnum">2.2.2 </span>连接设备的BLE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spp"><span class="sectnum">2.2.3 </span>连接设备的SPP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7"><span class="sectnum">2.2.4 </span>连接设备的经典蓝牙服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gatt-over-br-edr"><span class="sectnum">2.2.5 </span>连接设备的Gatt Over BR/EDR</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id8"><span class="sectnum">2.3 </span>数据读写</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9"><span class="sectnum">2.3.1 </span>接收数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10"><span class="sectnum">2.3.2 </span>发送数据</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13"><span class="sectnum">2.4 </span>历史记录管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14"><span class="sectnum">2.4.1 </span>获取历史记录列表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15"><span class="sectnum">2.4.2 </span>回连历史记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16"><span class="sectnum">2.4.3 </span>删除历史记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17"><span class="sectnum">2.4.4 </span>清除所有历史记录</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="function_list.html">3 功能模块</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+      <li class="breadcrumb-item active"><span class="sectnum">2 </span>蓝牙代理模块</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="sectnum">2 </span>蓝牙代理模块<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">1. 此模块只使用于 <code class="docutils literal notranslate"><span class="pre">内置蓝牙代理实现</span></code></div>
+<div class="line">2. <code class="docutils literal notranslate"><span class="pre">JL_BluetoothManager</span></code> 是蓝牙接口管理, <a class="reference internal" href="../api/bt_api.html#bt-manager-api"><span class="std std-ref">1   蓝牙处理接口</span></a></div>
+<div class="line">3. <code class="docutils literal notranslate"><span class="pre">BluetoothOperationImpl</span></code> 是蓝牙功能具体实现, <a class="reference internal" href="../api/bt_api.html#bt-op-api"><span class="std std-ref">1.2   蓝牙操作接口</span></a></div>
+</div>
+</div>
+<section id="scan-device">
+<span id="id2"></span><h2><span class="sectnum">2.1 </span>扫描蓝牙设备<a class="headerlink" href="#scan-device" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3><span class="sectnum">2.1.1 </span>开始扫描设备<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//蓝牙事件监听器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscoveryStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bBle</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bStart</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调发现设备状态</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调发现的设备</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件监听器</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">scanType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">SCAN_TYPE_BLE</span><span class="p">;</span><span class="w"> </span><span class="c1">//扫描设备类型 --- BLE设备</span>
+<span class="c1">// BluetoothConstant.SCAN_TYPE_CLASSIC --- 经典蓝牙设备</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="c1">//搜索超时 --- 30秒</span>
+<span class="c1">//执行扫描设备</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">scan</span><span class="p">(</span><span class="n">scanType</span><span class="p">,</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span>
+<span class="c1">//注销蓝牙事件监听器</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>扫描蓝牙设备，需要确保 <code class="docutils literal notranslate"><span class="pre">蓝牙</span></code> 已开启</p></li>
+<li><p>扫描蓝牙设备，需要确保 <code class="docutils literal notranslate"><span class="pre">权限</span></code></p>
+<ol class="arabic simple">
+<li><p>Android 6.0+, <code class="docutils literal notranslate"><span class="pre">蓝牙权限</span></code> 和 <code class="docutils literal notranslate"><span class="pre">位置权限</span></code></p></li>
+<li><p>Android 12.0+, <code class="docutils literal notranslate"><span class="pre">蓝牙搜索权限</span></code></p></li>
+</ol>
+</li>
+<li><p>扫描蓝牙设备，需要确保 <code class="docutils literal notranslate"><span class="pre">位置服务</span></code> 已启用</p></li>
+<li><p>扫描蓝牙设备配置，参考 <a class="reference internal" href="../import.html#bluetooth-option"><span class="std std-ref">1.2.1   BluetoothOption</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="id4">
+<h3><span class="sectnum">2.1.2 </span>停止扫描设备<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//执行停止扫描设备</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">stopScan</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="connect-device">
+<span id="id5"></span><h2><span class="sectnum">2.2 </span>连接设备<a class="headerlink" href="#connect-device" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>连接设备操作，需要确保 <code class="docutils literal notranslate"><span class="pre">蓝牙</span></code> 已打开</p></li>
+<li><p>连接设备操作，需要确保 <code class="docutils literal notranslate"><span class="pre">权限</span></code> 已授予</p>
+<ul class="simple">
+<li><p>Android 6.0+, 需要 <code class="docutils literal notranslate"><span class="pre">蓝牙权限</span></code> 和 <code class="docutils literal notranslate"><span class="pre">位置权限</span></code></p></li>
+<li><p>Android 12.0+, 需要 <code class="docutils literal notranslate"><span class="pre">蓝牙连接权限</span></code></p></li>
+</ul>
+</li>
+<li><p>连接设备操作，不允许并发执行，必须线性进行。</p></li>
+<li><p>连接设备操作，是指连接通讯协议(BLE/SPP), 不包括经典蓝牙服务。</p></li>
+</ol>
+</div>
+<section id="id6">
+<h3><span class="sectnum">2.2.1 </span>连接设备的通讯方式<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">().</span><span class="na">isConnecting</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//正在连接设备</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//蓝牙事件监听器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调蓝牙连接状态</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件监听器</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//执行连接设备</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//执行断开设备</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//注销蓝牙事件监听器</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="ble">
+<h3><span class="sectnum">2.2.2 </span>连接设备的BLE<a class="headerlink" href="#ble" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>新版本</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">().</span><span class="na">isConnecting</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//正在连接设备</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//蓝牙事件监听器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调蓝牙连接状态</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件监听器</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//执行连接设备的BLE</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PROTOCOL_TYPE_BLE</span><span class="p">);</span>
+<span class="c1">//执行断开BLE</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//注销蓝牙事件监听器</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SDK_V4.0.0以后支持</p>
+</div>
+<ul class="simple">
+<li><p><strong>旧版本</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//获取蓝牙功能实现对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="c1">//蓝牙事件回调</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调BLE设备连接成功</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件回调</span>
+<span class="n">btOp</span><span class="p">.</span><span class="na">registerBluetoothCallback</span><span class="p">(</span><span class="n">bluetoothCallback</span><span class="p">);</span>
+<span class="c1">//执行连接BLE操作</span>
+<span class="c1">//result --- 操作结果</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">connectBLEDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//执行断开BLE</span>
+<span class="c1">//        btOp.disconnectBLEDevice(device);</span>
+<span class="c1">//注销蓝牙事件回调</span>
+<span class="c1">//        btOp.unregisterBluetoothCallback(bluetoothCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="spp">
+<h3><span class="sectnum">2.2.3 </span>连接设备的SPP<a class="headerlink" href="#spp" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>新版本</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//蓝牙事件监听器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调蓝牙连接状态</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件监听器</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//执行连接设备的SPP</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PROTOCOL_TYPE_SPP</span><span class="p">);</span>
+<span class="c1">//执行断开SPP</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//注销蓝牙事件监听器</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SDK_V4.0.0以后支持</p>
+</div>
+<ul class="simple">
+<li><p><strong>旧版本</strong></p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//获取蓝牙功能实现对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="c1">//蓝牙事件回调</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调SPP设备连接成功</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件回调</span>
+<span class="n">btOp</span><span class="p">.</span><span class="na">registerBluetoothCallback</span><span class="p">(</span><span class="n">bluetoothCallback</span><span class="p">);</span>
+<span class="c1">//执行连接SPP操作</span>
+<span class="c1">//result --- 操作结果</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">connectSPPDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//执行断开SPP</span>
+<span class="c1">//        btOp.disconnectSPPDevice(device);</span>
+<span class="c1">//注销蓝牙事件回调</span>
+<span class="c1">//        btOp.unregisterBluetoothCallback(bluetoothCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3><span class="sectnum">2.2.4 </span>连接设备的经典蓝牙服务<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//蓝牙事件监听器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onA2dpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调A2DP连接状态</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHfpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调HFP连接状态</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件监听器</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//执行连接经典蓝牙设备</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">startConnectByBreProfiles</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//执行断开经典蓝牙</span>
+<span class="c1">//        btManager.disconnectByProfiles(device);</span>
+<span class="c1">//注销蓝牙事件监听器</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+</section>
+<section id="gatt-over-br-edr">
+<span id="connect-gatt-over-edr"></span><h3><span class="sectnum">2.2.5 </span>连接设备的Gatt Over BR/EDR<a class="headerlink" href="#gatt-over-br-edr" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">().</span><span class="na">isConnecting</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//正在连接设备</span>
+<span class="c1">//经典蓝牙地址</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//蓝牙事件监听器</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="w"> </span><span class="n">btEventCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BTEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调蓝牙连接状态</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件监听器</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="n">btEventCallback</span><span class="p">);</span>
+<span class="c1">//执行连接设备的Gatt Over BR/EDR</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PROTOCOL_TYPE_GATT_OVER_BR_EDR</span><span class="p">);</span>
+<span class="c1">//执行断开设备的连接</span>
+<span class="c1">//        btManager.disconnect(device);</span>
+<span class="c1">//注销蓝牙事件监听器</span>
+<span class="c1">//        btManager.removeEventListener(btEventCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>V4.2.0+ 版本才支持</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2><span class="sectnum">2.3 </span>数据读写<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3><span class="sectnum">2.3.1 </span>接收数据<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//获取蓝牙功能实现对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="c1">//蓝牙事件回调</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BluetoothCallbackImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicsUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调接收到的BLE数据</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调接收到的SPP数据</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">//注册蓝牙事件回调</span>
+<span class="n">btOp</span><span class="p">.</span><span class="na">registerBluetoothCallback</span><span class="p">(</span><span class="n">bluetoothCallback</span><span class="p">);</span>
+<span class="c1">//注销蓝牙事件回调</span>
+<span class="c1">//        btOp.unregisterBluetoothCallback(bluetoothCallback);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Gatt</span> <span class="pre">Over</span> <span class="pre">BR/EDR</span></code> 接收数据与 <code class="docutils literal notranslate"><span class="pre">BLE</span></code> 接收数据操作相同</p></li>
+</ol>
+</div>
+</section>
+<section id="id10">
+<h3><span class="sectnum">2.3.2 </span>发送数据<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//data  --- 发送数据</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="c1">//执行发数操作</span>
+<span class="c1">//ret --- 操作结果</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">sendDataToDevice</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<section id="id11">
+<h4><span class="sectnum">2.3.2.1 </span>通过BLE发送数据<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//获取蓝牙功能实现对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//data  --- 发送数据</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="c1">//执行发数操作</span>
+<span class="c1">//ret --- 操作结果</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">writeDataToBLEDevice</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;服务UUID&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;写特征UUID&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Gatt</span> <span class="pre">Over</span> <span class="pre">BR/EDR</span></code> 发送数据与 <code class="docutils literal notranslate"><span class="pre">BLE</span></code> 发送数据操作相同，输入设备地址不同，分别为 <code class="docutils literal notranslate"><span class="pre">经典蓝牙地址</span></code> 和 <code class="docutils literal notranslate"><span class="pre">BLE地址</span></code></p></li>
+</ol>
+</div>
+</section>
+<section id="id12">
+<h4><span class="sectnum">2.3.2.2 </span>通过SPP发送数据<a class="headerlink" href="#id12" title="Link to this heading"></a></h4>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//获取蓝牙功能实现对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">IBluetoothOperation</span><span class="w"> </span><span class="n">btOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getBluetoothOperation</span><span class="p">();</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;目标设备地址&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="c1">//data  --- 发送数据</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="c1">//执行发数操作</span>
+<span class="c1">//ret --- 操作结果</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btOp</span><span class="p">.</span><span class="na">writeDataToSppDevice</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;通讯SPP的UUID&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="id13">
+<h2><span class="sectnum">2.4 </span>历史记录管理<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<section id="id14">
+<h3><span class="sectnum">2.4.1 </span>获取历史记录列表<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//获取历史记录列表</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">historyDevices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getHistoryBluetoothDeviceList</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h3><span class="sectnum">2.4.2 </span>回连历史记录<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">//历史记录， 不能为空</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">45</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="c1">//回连超时</span>
+<span class="c1">//执行回连历史记录操作</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">reconnectHistoryBluetoothDevice</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnReconnectHistoryRecordListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调回连历史记录成功</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFailed</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调回连历史记录失败</span>
+<span class="w">        </span><span class="c1">//history --- 历史记录</span>
+<span class="w">        </span><span class="c1">//error   --- 错误信息</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>历史记录, <a class="reference internal" href="#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a></p>
+</div>
+<section id="historybluetoothdevice">
+<span id="history-device"></span><h4><span class="sectnum">2.4.2.1 </span>HistoryBluetoothDevice<a class="headerlink" href="#historybluetoothdevice" title="Link to this heading"></a></h4>
+<p>历史记录</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HistoryBluetoothDevice</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 蓝牙设备名称</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 通讯方式类型</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE方式&lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP方式&lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- Gatt Over BR/EDR方式</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@ConnectWay</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 映射地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mappedAddress</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 升级地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">otaAddress</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 芯片类型</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">chipType</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备类型</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">deviceType</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 广播包协议的版本号</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">advVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 厂商ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 客户ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 产品ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持LE Audio</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportLeAudio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//left device gps(默认是左侧设备，也默认左侧设备是主机)</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 左耳纬度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftDevLatitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 左耳经度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">leftDevLongitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 左耳GPS更新时间</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">leftDevUpdateTime</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//right device gps</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 右耳纬度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightDevLatitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 右耳经度</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">rightDevLongitude</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 右耳GPS更新时间</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">rightDevUpdateTime</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id16">
+<h3><span class="sectnum">2.4.3 </span>删除历史记录<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">history</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">//历史记录， 不能为空</span>
+<span class="c1">//执行删除历史记录操作</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">removeHistoryDevice</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IActionCallback</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调删除历史记录成功</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调删除历史记录失败</span>
+<span class="w">        </span><span class="c1">//error   --- 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>历史记录, <a class="reference internal" href="#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a></p>
+</div>
+</section>
+<section id="id17">
+<h3><span class="sectnum">2.4.4 </span>清除所有历史记录<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取蓝牙操作对象</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">btManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBluetoothManager</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">btManager</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//自定义蓝牙实现，btManager为空</span>
+<span class="c1">//执行清除所有历史记录操作</span>
+<span class="n">btManager</span><span class="p">.</span><span class="na">clearHistoryDeviceRecord</span><span class="p">();</span>
+<span class="c1">//注意，清除完成后，需要重新更新历史记录列表</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">historyDevices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">btManager</span><span class="p">.</span><span class="na">getHistoryBluetoothDeviceList</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="use_flow.html" class="btn btn-neutral float-left" title="1 使用流程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="function_list.html" class="btn btn-neutral float-right" title="3 功能模块" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

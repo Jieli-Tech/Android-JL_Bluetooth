@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1 Usage Process &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2 Bluetooth Proxy Module" href="bt_proxy.html" />
+    <link rel="prev" title="2 Development Notes" href="../development_desc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_list.html">3 Functional Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+      <li class="breadcrumb-item active">1 Usage Process</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage-process">
+<span id="use-sdk-flow"></span><h1>1 Usage Process<a class="headerlink" href="#usage-process" title="Link to this heading"></a></h1>
+<figure class="align-center" id="id1">
+<div class="graphviz"><object data="../../_images/graphviz-f2e0e9f186f561ab035fc938a322221f0d950351.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph flow {
+
+    start -&gt; init_1 [lhead=&quot;cluster_init&quot;];
+    init_2 -&gt; cluster_connect [ltail=&quot;cluster_init&quot;];
+    cluster_connect -&gt; connect_ok;
+    connect_ok -&gt; cluster_connect [label=&quot;NO&quot;];
+    connect_ok -&gt; cluster_operation [label=&quot;YES&quot;];
+    cluster_operation -&gt; reseale -&gt; end;
+
+    start [label=&quot;Start&quot;, shape=&quot;Mdiamond&quot;];
+    subgraph cluster_init {
+        label=&quot;Initialization Process&quot;;
+        init_1 -&gt; init_2;
+
+        init_1 [label=&quot;Initialize JL_BluetoothManagerr&quot;, shape=&quot;record&quot;];
+        init_2 [label=&quot;Configure JL_BluetoothManager parameters&quot;, shape=&quot;record&quot;];
+    }
+    subgraph cluster_connect {
+        label=&quot;Connecting devices process&quot;;
+        begin -&gt; listen -&gt; scan -&gt; foudn_ok;
+        foudn_ok -&gt; scan [label=&quot;NO&quot;];
+        foudn_ok -&gt; connect [label=&quot;YES&quot;];
+        connect -&gt; output -&gt; finish;
+
+        begin [label=&quot;start&quot;, shape=&quot;Mdiamond&quot;];
+        listen [label=&quot;Add Bluetooth event listener&quot;, shape=&quot;record&quot;];
+        scan [label=&quot;Scanning BLE devices&quot;, shape=&quot;record&quot;]
+        foudn_ok [label=&quot;Has the target device been detected?&quot;, shape=&quot;diamond&quot;];
+        connect [label=&quot;Connect to target device&quot;, shape=&quot;record&quot;];
+        output [label=&quot;Output the results and remove the Bluetooth event listener.&quot;, shape=&quot;record&quot;];
+        finish [label=&quot;End&quot;, shape=&quot;Msquare&quot;];
+    }
+
+    subgraph cluster_operation {
+        label=&quot;API usage process&quot;;
+
+        op_0 -&gt; op_1 -&gt; op_2 -&gt; op_3 -&gt; op_4;
+
+        op_0 [label=&quot;Get the JL_BluetoothManager object&quot;, shape=&quot;record&quot;];
+        op_1 [label=&quot;Add Bluetooth RCSP event listener&quot;, shape=&quot;record&quot;];
+        op_2 [label=&quot;Call the interface to implement the function&quot;, shape=&quot;record&quot;];
+        op_3 [label=&quot;Wait for the result callback and process it.&quot;, shape=&quot;record&quot;];
+        op_4 [label=&quot;Remove Bluetooth RCSP event listener&quot;, shape=&quot;record&quot;];
+    }
+
+    connect_ok [label=&quot;Was the connection successful?&quot;, shape=&quot;diamond&quot;];
+    reseale [label=&quot;Destroy the JL_BluetoothManager object&quot;, shape=&quot;record&quot;];
+    end [label=&quot;End&quot;, shape=&quot;Msquare&quot;];
+}</p></object></div>
+<figcaption>
+<p><span class="caption-text">JieLi Home SDK Usage Process</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../development_desc.html" class="btn btn-neutral float-left" title="2 Development Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bt_proxy.html" class="btn btn-neutral float-right" title="2 Bluetooth Proxy Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

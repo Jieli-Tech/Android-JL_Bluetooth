@@ -1,0 +1,56 @@
+.. _volume_op: 
+
+Volume Control Interface
+************************************
+
+.. code-block:: java
+
+    public interface IVolumeOp {
+
+        /**
+         * Get device maximum volume
+         *
+         * @param device Bluetooth device
+         * @return Maximum volume
+         */
+        int getMaxVolume(BluetoothDevice device);
+
+        /**
+         * Get current device volume
+         *
+         * @param device   Bluetooth device
+         * @param callback Result callback
+         */
+        void getCurrentVolume(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Adjust device volume
+         *
+         * @param device   Bluetooth device
+         * @param volume   Volume value
+         * @param callback Result callback
+         */
+        void adjustVolume(BluetoothDevice device, int volume, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get high and low tone values
+         *
+         * @param device   Bluetooth device
+         * @param callback Result callback
+         */
+        void getHighAndBassValue(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set high and low tone values
+         *
+         * @param device   Bluetooth device
+         * @param high     High tone
+         * @param bass     Low tone
+         * @param callback Result callback
+         */
+        void setHighAndBassValue(BluetoothDevice device, int high, int bass, OnRcspActionCallback<Boolean> callback);
+
+    }
+
+
+

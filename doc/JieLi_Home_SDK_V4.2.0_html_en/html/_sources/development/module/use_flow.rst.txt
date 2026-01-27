@@ -1,0 +1,59 @@
+
+.. _use_sdk_flow: 
+
+1 Usage Process
+***************************************************************
+
+.. graphviz::
+    :caption: JieLi Home SDK Usage Process
+    :align: center
+
+    digraph flow {
+        
+        start -> init_1 [lhead="cluster_init"];
+        init_2 -> cluster_connect [ltail="cluster_init"];
+        cluster_connect -> connect_ok;
+        connect_ok -> cluster_connect [label="NO"];
+        connect_ok -> cluster_operation [label="YES"];
+        cluster_operation -> reseale -> end;
+
+        start [label="Start", shape="Mdiamond"];
+        subgraph cluster_init {
+            label="Initialization Process";
+            init_1 -> init_2;
+
+            init_1 [label="Initialize JL_BluetoothManagerr", shape="record"];
+            init_2 [label="Configure JL_BluetoothManager parameters", shape="record"];
+        }
+        subgraph cluster_connect {
+            label="Connecting devices process";
+            begin -> listen -> scan -> foudn_ok;
+            foudn_ok -> scan [label="NO"];
+            foudn_ok -> connect [label="YES"];
+            connect -> output -> finish;
+
+            begin [label="start", shape="Mdiamond"];
+            listen [label="Add Bluetooth event listener", shape="record"];
+            scan [label="Scanning BLE devices", shape="record"]
+            foudn_ok [label="Has the target device been detected?", shape="diamond"];
+            connect [label="Connect to target device", shape="record"];
+            output [label="Output the results and remove the Bluetooth event listener.", shape="record"];
+            finish [label="End", shape="Msquare"];
+        }
+
+        subgraph cluster_operation {
+            label="API usage process";
+            
+            op_0 -> op_1 -> op_2 -> op_3 -> op_4;
+
+            op_0 [label="Get the JL_BluetoothManager object", shape="record"];
+            op_1 [label="Add Bluetooth RCSP event listener", shape="record"];
+            op_2 [label="Call the interface to implement the function", shape="record"];
+            op_3 [label="Wait for the result callback and process it.", shape="record"];
+            op_4 [label="Remove Bluetooth RCSP event listener", shape="record"];
+        }
+
+        connect_ok [label="Was the connection successful?", shape="diamond"];
+        reseale [label="Destroy the JL_BluetoothManager object", shape="record"];
+        end [label="End", shape="Msquare"];
+    }

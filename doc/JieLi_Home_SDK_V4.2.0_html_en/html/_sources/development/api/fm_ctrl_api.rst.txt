@@ -1,0 +1,126 @@
+.. _fm_op: 
+
+FM Function Interface
+*******************************
+
+.. code-block:: java
+
+    public interface IFmOp {
+
+        /**
+         * Get transmission frequency
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getFmFrequency(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Set transmission frequency
+         *
+         * @param device    Operation device
+         * @param frequency Frequency
+         * @param callback  Result callback
+         */
+        void setFmFrequency(BluetoothDevice device, float frequency, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get FM info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getFmInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get FM channel info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getFmChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Forward search channels
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmForwardSearchChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Backward search channels
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmBackwardSearchChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Search all channels
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmSearchAllChannels(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Stop channel search
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmStopSearch(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play specified frequency
+         *
+         * @param device    Operation device
+         * @param frequency Specified frequency
+         * @param callback  Result callback
+         */
+        void fmPlaySelectedFrequency(BluetoothDevice device, float frequency, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play or pause key
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play previous channel
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmPlayPrevChannel(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play next channel
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmPlayNextChannel(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play previous frequency
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmPlayPrevFrequency(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play next frequency
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void fmPlayNextFrequency(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+    }
+
+
+

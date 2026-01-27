@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequently Asked Questions &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release Record" href="publish_record.html" />
+    <link rel="prev" title="Debugging Instructions" href="debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#question-format">1. Question Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1. Frequently Asked Questions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bluetooth-connection-problem">2.1 Bluetooth Connection Problem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-set-up-a-non-filtering-device">2.1.1 How to set up a non-filtering device?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-modify-filter-device-rules">2.1.2 How to modify filter device rules?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-can-i-connect-only-to-ble-and-not-to-classic-bluetooth">2.1.3 How can I connect only to BLE and not to Classic Bluetooth?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-does-my-phone-s-bluetooth-interface-show-that-it-s-connected-but-the-sdk-returns-that-the-device-is-not-connected">2.1.4 Why does my phone’s Bluetooth interface show that it’s connected, but the SDK returns that the device is not connected?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-modify-the-communication-uuid">2.1.5 How to modify the communication UUID?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-communicate-using-other-uuids">2.1.6 How to communicate using other UUIDs?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-i-configure-a-device-to-support-one-click-connection">2.1.7 How do I configure a device to support one-click connection?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#file-operation-problem">2.2 File Operation Problem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-i-set-the-number-of-messages-requested-per-page">2.2.1 How do I set the number of messages requested per page?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Frequently Asked Questions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Link to this heading"></a></h1>
+<p>Record frequently asked questions from customers, summarize and organize them, and create Q&amp;A records to facilitate quick retrieval of answers for customers.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Customers can first search for <code class="docutils literal notranslate"><span class="pre">existing</span> <span class="pre">questions</span></code> to see if they match their problem; if so, congratulations, you’ve found the answer.</p></li>
+<li><p>If this is a new question, please follow these steps to ask, and we will answer it as soon as possible.</p>
+<ul class="simple">
+<li><p>Describe the problem and the test environment. Please refer to <a class="reference internal" href="#question-format"><span class="std std-ref">1. Question Format</span></a></p></li>
+<li><p>Provide print logs. Please refer to <a class="reference internal" href="debug.html#devlopment-debug"><span class="std std-ref">Debugging Instructions</span></a></p></li>
+<li><p>It would be best to provide screenshots or videos of the phenomenon.</p></li>
+</ul>
+</li>
+</ol>
+</div></blockquote>
+<section id="question-format">
+<span id="id1"></span><h2>1. Question Format<a class="headerlink" href="#question-format" title="Link to this heading"></a></h2>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: XXXXXX
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Recurrence Probability: Must appear, 1/20, n / m
+Can the public version demo be reproduced? YES，NO
+Time period of problem occurrence: yyyy/MM/dd hh:mm - yyyy/MM/dd hh:mm Such as: 2022/05/28 17:00 - 2022/05/28 17:02
+Remark: xxxx
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before development, please read <a class="reference external" href="https://doc.zh-jieli.com/Apps/Android/jielihome/zh-cn/master/index.html">杰理之家SDK开发文档(Android)</a></p>
+</div>
+</section>
+<section id="id2">
+<h2>1. Frequently Asked Questions<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="bluetooth-connection-problem">
+<span id="bt-questions"></span><h3>2.1 Bluetooth Connection Problem<a class="headerlink" href="#bluetooth-connection-problem" title="Link to this heading"></a></h3>
+<section id="how-to-set-up-a-non-filtering-device">
+<span id="question-2-1-1"></span><h4>2.1.1 How to set up a non-filtering device?<a class="headerlink" href="#how-to-set-up-a-non-filtering-device" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: ow to set up a non-filtering device?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+The code settings are as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothOption</span><span class="p">.</span><span class="na">createDefaultOption</span><span class="p">();</span>
+<span class="n">option</span><span class="p">.</span><span class="na">setBleScanStrategy</span><span class="p">(</span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">NONE_FILTER</span><span class="p">);</span><span class="w"> </span><span class="c1">//Set no filtering rules</span>
+<span class="c1">//        option.setSkipNoNameDev(false); //Skip unnamed devices?</span>
+<span class="c1">//Configure SDK parameters</span>
+<span class="c1">//        Context context = null;</span>
+<span class="c1">//        RCSPController.init(context, option);</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Please refer to <a class="reference internal" href="../development/module/bt_proxy.html#scan-device"><span class="std std-ref">2.1   Scan Bluetooth devices</span></a></p>
+</section>
+<section id="how-to-modify-filter-device-rules">
+<span id="question-2-1-2"></span><h4>2.1.2 How to modify filter device rules?<a class="headerlink" href="#how-to-modify-filter-device-rules" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: How to modify filter device rules?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+The code settings are as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothOption</span><span class="p">.</span><span class="na">createDefaultOption</span><span class="p">()</span>
+<span class="w">      </span><span class="p">.</span><span class="na">setBleScanStrategy</span><span class="p">(</span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">NONE_FILTER</span><span class="p">)</span><span class="w"> </span><span class="c1">//Set no filtering rules</span>
+<span class="w">      </span><span class="p">.</span><span class="na">setSkipNoNameDev</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"> </span><span class="c1">//Skip unnamed devices?</span>
+<span class="w">     </span><span class="c1">//Configure SDK parameters</span>
+<span class="c1">//        Context context = null;</span>
+<span class="c1">//        RCSPController.init(context, option);</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+
+<span class="c1">//Add event listener</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nd">@Override</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscoveryStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bBle</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bStart</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">//Callback search status</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">bStart</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">removeBTRcspEventCallback</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="nd">@Override</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="w">      </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">rawData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">.</span><span class="na">getRawData</span><span class="p">();</span><span class="w"> </span><span class="c1">//Broadcast data</span>
+<span class="w">      </span><span class="c1">//TODO: Implement your own filtering rules</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//Perform a scan of the BLE device</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">startBleScan</span><span class="p">(</span><span class="mi">30</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Please refer to <a class="reference internal" href="../development/module/bt_proxy.html#scan-device"><span class="std std-ref">2.1   Scan Bluetooth devices</span></a></p>
+</section>
+<section id="how-can-i-connect-only-to-ble-and-not-to-classic-bluetooth">
+<span id="question-2-1-3"></span><h4>2.1.3 How can I connect only to BLE and not to Classic Bluetooth?<a class="headerlink" href="#how-can-i-connect-only-to-ble-and-not-to-classic-bluetooth" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: How can I connect only to BLE and not to Classic Bluetooth?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+The code settings are as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothOption</span><span class="p">.</span><span class="na">createDefaultOption</span><span class="p">();</span>
+<span class="n">option</span><span class="p">.</span><span class="na">setEnterLowPowerMode</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">//Set no filtering rules</span>
+<span class="w">      </span><span class="p">.</span><span class="na">setMandatoryUseBLE</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">//Configure forced connection to BLE</span>
+<span class="c1">//Configure SDK parameters</span>
+<span class="c1">//        Context context = null;</span>
+<span class="c1">//        RCSPController.init(context, option);</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Please refer to <a class="reference internal" href="../development/module/bt_proxy.html#connect-device"><span class="std std-ref">2.2   Connecting devices</span></a></p>
+</section>
+<section id="why-does-my-phone-s-bluetooth-interface-show-that-it-s-connected-but-the-sdk-returns-that-the-device-is-not-connected">
+<span id="question-2-1-4"></span><h4>2.1.4 Why does my phone’s Bluetooth interface show that it’s connected, but the SDK returns that the device is not connected?<a class="headerlink" href="#why-does-my-phone-s-bluetooth-interface-show-that-it-s-connected-but-the-sdk-returns-that-the-device-is-not-connected" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: Why does my phone&#39;s Bluetooth interface show that it&#39;s connected, but the SDK returns that the device is not connected?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Answer:</strong></div>
+<div class="line">The SDK determines device connectivity based on whether the communication service is connected. This communication service specifically refers to BLE and SPP, excluding classic Bluetooth service. Since the phone’s system Bluetooth interface connects to classic Bluetooth service, the SDK will not return a connection confirmation.</div>
+<div class="line"><br /></div>
+<div class="line">To determine the classic Bluetooth status of a device, use the following code:</div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothUtil</span><span class="p">.</span><span class="na">getRemoteDevice</span><span class="p">(</span><span class="s">&quot;classic Bluetooth address of the device&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">getBtOperation</span><span class="p">().</span><span class="na">isConnectedByProfile</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="c1">//state has the following values:</span>
+<span class="c1">//        BluetoothProfile.STATE_DISCONNECTED  --- Disconnected</span>
+<span class="c1">//        BluetoothProfile.STATE_CONNECTING    --- Connecting</span>
+<span class="c1">//        BluetoothProfile.STATE_CONNECTED     --- Connected</span>
+<span class="c1">//        BluetoothProfile.STATE_DISCONNECTING --- Disconnecting</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-modify-the-communication-uuid">
+<span id="question-2-1-5"></span><h4>2.1.5 How to modify the communication UUID?<a class="headerlink" href="#how-to-modify-the-communication-uuid" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: How to modify the communication UUID?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+The code settings are as follows:</p>
+<ul class="simple">
+<li><p>Modify the communication UUID for BLE connection</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothOption</span><span class="p">.</span><span class="na">createDefaultOption</span><span class="p">();</span>
+<span class="n">option</span><span class="p">.</span><span class="na">setBleUUID</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;Your service UUID&quot;</span><span class="p">),</span>
+<span class="w">      </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;Your write characteristic UUID&quot;</span><span class="p">),</span>
+<span class="w">      </span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;Your notification characteristic UUID&quot;</span><span class="p">));</span>
+<span class="c1">//Configure SDK parameters</span>
+<span class="c1">//        Context context = null;</span>
+<span class="c1">//        RCSPController.init(context, option);</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Modify the communication UUID for connecting to SPP</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothOption</span><span class="p">.</span><span class="na">createDefaultOption</span><span class="p">();</span>
+<span class="n">option</span><span class="p">.</span><span class="na">setSppUUID</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">fromString</span><span class="p">(</span><span class="s">&quot;Your custom SPP UUID&quot;</span><span class="p">));</span>
+<span class="c1">//Configure SDK parameters</span>
+<span class="c1">//        Context context = null;</span>
+<span class="c1">//        RCSPController.init(context, option);</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-communicate-using-other-uuids">
+<span id="question-2-1-6"></span><h4>2.1.6 How to communicate using other UUIDs?<a class="headerlink" href="#how-to-communicate-using-other-uuids" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: How to communicate using other UUIDs?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+Refer to the sample code in the test package of the example project. Location: <code class="docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span> <span class="pre">project/btsmart/test/java/com/jieli/btsmart/demo/bluetooth/CustomUuidDemo.java</span></code></p>
+</section>
+<section id="how-do-i-configure-a-device-to-support-one-click-connection">
+<span id="question-2-1-7"></span><h4>2.1.7 How do I configure a device to support one-click connection?<a class="headerlink" href="#how-do-i-configure-a-device-to-support-one-click-connection" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: How do I configure a device to support one-click connection?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+The code settings are as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothOption</span><span class="p">.</span><span class="na">createDefaultOption</span><span class="p">();</span>
+<span class="n">option</span><span class="p">.</span><span class="na">setSupportCTKD</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">//Configure settings to support one-click connection.</span>
+<span class="c1">//Configure SDK parameters</span>
+<span class="c1">//        Context context = null;</span>
+<span class="c1">//        RCSPController.init(context, option);</span>
+<span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">configure</span><span class="p">(</span><span class="n">option</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-operation-problem">
+<span id="file-operation-questions"></span><h3>2.2 File Operation Problem<a class="headerlink" href="#file-operation-problem" title="Link to this heading"></a></h3>
+<section id="how-do-i-set-the-number-of-messages-requested-per-page">
+<span id="question-2-2-1"></span><h4>2.2.1 How do I set the number of messages requested per page?<a class="headerlink" href="#how-do-i-set-the-number-of-messages-requested-per-page" title="Link to this heading"></a></h4>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Problem Description: How do I set the number of messages requested per page?
+Test Environment: Firmware: AC693N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or AC696N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx or JL700N<span class="nb">_</span>soundbox<span class="nb">_</span>SDK<span class="nb">_</span>Vxxx
+SDK Version: jl<span class="nb">_</span>bluetooth<span class="nb">_</span>rcsp<span class="nb">_</span>Vxxx
+Reproduction Steps: 1. xxxx 2. xxxx 3.xxxx
+Reproduction Steps: NULL
+Recurrence Probability: Must appear
+Can the public version demo be reproduced? YES
+Time period of problem occurrence: NULL
+</pre></div>
+</div>
+<p><strong>Answer:</strong>
+The code settings are as follows:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">pageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"> </span><span class="c1">//The recommended number of items per page is no more than 30.</span>
+<span class="c1">//The settings need to be applied before browsing the file for them to take effect.</span>
+<span class="n">FileBrowseManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">setPageSize</span><span class="p">(</span><span class="n">pageSize</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="debug.html" class="btn btn-neutral float-left" title="Debugging Instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="publish_record.html" class="btn btn-neutral float-right" title="Release Record" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

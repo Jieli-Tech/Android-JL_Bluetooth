@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_EBEBEB"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_switch_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/text_transparent"
+        android:drawablePadding="4dp"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/gray_4D000000"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        android:text="@string/language"
+        app:drawableTopCompat="@drawable/ic_switch_language_gray"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_stop_translation"
+        app:layout_constraintEnd_toStartOf="@+id/btn_stop_translation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_stop_translation"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_stop_translation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/color_transparent"
+        android:src="@drawable/ic_stop_translation_red"
+        app:layout_constraintTop_toBottomOf="@+id/view_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_switch_keyboard_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/text_transparent"
+        android:drawableTop="@drawable/ic_keyboard_black"
+        android:drawablePadding="4dp"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/black_E6000000"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        android:text="@string/keyboard"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_stop_translation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_stop_translation"
+        app:layout_constraintTop_toTopOf="@+id/btn_stop_translation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,404 @@
+
+.. _eq_ctrl_func:
+
+均衡器调试功能
+********************
+
+
+获取均衡器参数
+=========================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``              -- 公共属性
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_EQ_PRESET_VALUE or 0x01 << AttrAndFunCode.SYS_INFO_ATTR_EQ`` -- EQ预设值和EQ信息
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getEqInfoCmd = CommandBuilder.buildGetEqPresetAndEqValueCmd();
+
+
+代码示例参考 :ref:`get_sys_info`  
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onEqPresetChange(BluetoothDevice device, EqPresetInfo eqPresetInfo) {
+            //此处将会回调均衡器预设值
+        }
+
+        @Override
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //此处将会回调均衡器效果信息
+        }
+    });
+    //执行获取均衡器信息功能并等待结果回调
+    controller.getEqInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onEqPresetChange、BTRcspEventCallback#onEqChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note:: 
+    1. :ref:`eq_perset_info` 
+
+
+.. note::
+   1. :ref:`eq_mode_list` 
+
+.. _eq_perset_info:
+
+EqPresetInfo
+-------------------------------------------
+
+EQ预设信息
+
+.. code-block:: java
+
+    public class EqPresetInfo {
+        private int number;
+
+        private List<EqInfo> eqInfos;
+        private int[] freqs;
+    }
+
+
+
+
+
+配置均衡器参数
+===============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``  -- 公共属性
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_EQ``              -- 标识均衡器参数
+| **value :**  参数
+
+=================== ======================================================= =========================================
+  是否动态调整           参数格式                                               备注
+=================== ======================================================= =========================================
+    false            eqMode(1Byte) + eqValue(10 bytes)                       eqMode最高bit为0, 表示默认参数
+    true             eqMode(1Byte) + length(1Byte) + eqValue(n Bytes)        eqMode最高bit为1, 表示动态调整, ``推荐``
+=================== ======================================================= =========================================
+
+命令构造
+
+.. code-block:: java
+
+    boolean isDynamic = true; //是否支持动态变化
+    int eqMode = 6;  //EQ模式 -- 自定义
+    byte[] gains = new byte[10]; //EQ增益数组 - 根据动态段数决定
+    CommandBase setEqInfoCmd = CommandBuilder.buildSetEqValueCmd(isDynamic, (byte) eqMode, gains)();
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //此处将会回调均衡器效果信息
+        }
+    });
+    EqInfo eqInfo = null; //EQ信息，不能为空
+    //执行配置均衡器效果功能并等待结果回调
+    controller.configEqInfo(controller.getUsingDevice(), eqInfo, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   1. :ref:`eq_info` 
+
+
+
+
+.. _eq_info: 
+
+EqInfo
+-----------------------------
+
+
+均衡器信息
+
+.. code-block:: java
+
+    public class EqInfo {
+
+        /**
+         * EQ模式
+         */
+        private int mode;
+        /**
+         * 增益值数组
+         */
+        private byte[] value = new byte[10];
+        /**
+         * 预设值数组
+         */
+        private int[] freqs = BluetoothConstant.DEFAULT_EQ_FREQS;
+        /**
+         * 是否动态EQ
+         */
+        private boolean dynamic;
+        /**
+         * 预设值数组长度
+         */
+        private int count = 10;
+    }
+
+
+
+.. _eq_mode_list:
+
+EQ模式对照表
+-----------------------------------
+
+
+========================== ======================================================= 
+          数值                         模式名称                                    
+========================== ======================================================= 
+  0                          标准音乐模式(Standard Music Mode)
+  1                          摇滚音乐模式(Rock Music Mode)
+  2                          流行音乐模式(Popular Music Mode)
+  3                          古典音乐模式(Classical Music Mode)
+  4                          爵士音乐模式(Jazz Music Mode)
+  5                          乡村音乐模式(Country Music Mode)
+  6                          自定义音乐模式(Custom Music Mode)
+========================== ======================================================= 
+
+
+
+获取拓展参数
+====================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``              -- 公共属性
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FIXED_LEN_DATA_FUN`` -- 拓展参数
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getFixedLenDataCmd = CommandBuilder.buildGetFixedLenDataCmd();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //添加蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onExpandFunction(BluetoothDevice device, int type, byte[] data) {
+            //此处将会回调额外功能信息
+        }
+    });
+    //执行获取额外功能信息功能并等待结果回调
+    controller.getExpandDataInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会在BTRcspEventCallback#onExpandFunction回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+设置拓展参数
+===================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- 公共属性
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_FIXED_LEN_DATA_FUN``    -- 标识拓展参数
+| **value :**  mask(4Bytes) + data(n Bytes)
+
+命令构造
+
+.. code-block:: java
+
+    int mask = 0x03; //拓展掩码  - Bit0 --混响   Bit1 -- 动态限幅
+    byte[] data = new byte[0]; //参数, 格式： LTV格式, 由多个LTV数据组成
+    CommandBase setFixedLenDataCmd = CommandBuilder.buildSetFixedLenDataCmd(mask, data);
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //mask - 功能掩码
+    //data - 参数数据
+    //执行设置额外功能信息功能并等待结果回调
+    controller.setExpandDataInfo(controller.getUsingDevice(), mask, data, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. warning:: 
+    | 1. 数据由多个 :ref:`ltv_format` 数据组成 
+    | 2. mask为32Bit的值, 混响功能是Bit0, 动态限幅功能是Bit1
+    | 3. 需要判断设备是否支持该功能
+
+
+设置混响
+==================================
+
+**仅RCSPController支持接口方式**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //混响参数，不能为空
+    ReverberationParam param = null; 
+    //执行设置混响功能并等待结果回调
+    controller.setReverberationParameter(controller.getUsingDevice(), param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. warning::
+    需要判断设备是否支持该功能(通过获取拓展参数, 是否有对应参数返回来确认)
+
+
+.. note::
+   1. :ref:`reverberation_param` 
+
+
+
+
+.. _reverberation_param:
+
+ReverberationParam
+--------------------------------------
+
+混响参数
+
+.. code-block:: java
+
+    public class ReverberationParam {
+        private boolean isOn;      //开关
+        private int depthValue;    //深度值
+        private int strengthValue; //强度值
+    }
+
+
+设置动态限幅
+======================================
+
+**仅RCSPController支持接口方式**
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //动态限幅参数，不能为空
+    DynamicLimiterParam param = null;
+    //执行设置动态限幅功能并等待结果回调
+    controller.setDynamicLimiterParameter(controller.getUsingDevice(), param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. warning::
+    需要判断设备是否支持该功能(通过获取拓展参数, 是否有对应参数返回来确认)
+
+.. note::
+   1. :ref:`dynamic_limiter_param` 
+
+
+
+
+.. _dynamic_limiter_param: 
+
+DynamicLimiterParam
+---------------------------------------
+
+
+动态限幅参数
+
+.. code-block:: java
+
+    public class DynamicLimiterParam {
+        private int value; //数值
+    }

@@ -1,0 +1,494 @@
+.. _device_music_ctrl_func:
+
+Device Music Control Function
+*************************************************
+
+.. important:: 
+    1. Interface requires device to be in 【Music Mode】 to take effect
+    2. Determine if device supports 【Music Mode】
+    
+    .. code-block:: java
+      
+        public boolean isSupportDeviceMusicMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operating device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.isDevMusicEnable();
+        }
+   
+
+    3. Determine if device is in 【Music Mode】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInDeviceMusicMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operating device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC;
+        }
+
+    4.  :ref:`get_device_mode` 
+   
+
+
+
+Get Device Music Information
+==================================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``         -- Device music mode
+| **mask :**   -- Identify function code
+
+=============== ================================ 
+  Mask bit          Description
+=============== ================================
+ Bit0            Music playback status
+ Bit1            Music name information
+ Bit2             EQ information
+ Bit3            File type
+ Bit4            Playback mode
+=============== ================================
+
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getMusicInfoCmd = CommandBuilder.buildGetMusicSysInfoCmd(0x07);
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onMusicNameChange(BluetoothDevice device, MusicNameInfo nameInfo) {
+            //This will callback music name information
+        }
+
+        @Override
+        public void onMusicStatusChange(BluetoothDevice device, MusicStatusInfo statusInfo) {
+            //This will callback music playback status
+        }
+
+        @Override
+        public void onPlayModeChange(BluetoothDevice device, PlayModeInfo playModeInfo) {
+            //This will callback playback mode information
+        }
+    });
+    //Execute get device music information function and wait for result callback
+    controller.getDeviceMusicInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onMusicNameChange、
+            // BTRcspEventCallback#onMusicStatusChange、BTRcspEventCallback#onPlayModeChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`music_name_info` 
+   2. :ref:`music_status_info` 
+   3. :ref:`music_mode_info` 
+
+
+
+.. _music_name_info:
+
+MusicNameInfo
+-------------------------------------
+
+Music name information
+
+.. code-block:: java
+
+    public class MusicNameInfo {
+        private int cluster;  //Cluster number -- used to locate file path
+        private String name;  //Music name
+    }
+
+
+.. _music_status_info:
+
+MusicStatusInfo
+----------------------------------------
+
+
+Music status information
+
+.. code-block:: java
+
+    public class MusicStatusInfo {
+        private boolean isPlay;  //Whether playing
+        private int currentTime; //Current playback time (unit: milliseconds)
+        private int totalTime; //Total time (unit: milliseconds)
+        private int currentDev; //Device handle
+    }
+
+
+.. _music_mode_info:
+
+PlayModeInfo
+----------------------------------------------
+
+Playback mode information
+
+.. code-block:: java
+
+   public class PlayModeInfo {
+        private int playMode; //Playback mode
+   }
+
+
+.. note::
+   1. :ref:`play_mode_tab` 
+
+
+
+.. _play_mode_tab:
+
+Playback Mode Comparison Table
+----------------------------------------------------
+
+============================= =============================================
+           Value                             Mode Name                              
+============================= ============================================= 
+ 0                              Invalid mode
+ 1                              All loop
+ 2                              Device loop
+ 3                              Single track loop
+ 4                              Random playback
+ 5                              Folder loop
+============================= ============================================= 
+
+
+Get Device Music Playback Status
+======================================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``              -- Device music mode
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_STATUS_INFO`` -- Identify music playback status
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getMusicPlaybackStatusCmd = CommandBuilder.buildGetMusicStatusInfoCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onMusicStatusChange(BluetoothDevice device, MusicStatusInfo statusInfo) {
+            //This will callback music playback status
+        }
+    });
+    //Execute get device music playback status function and wait for result callback
+    controller.getDeviceMusicStatusInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onMusicStatusChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+.. note::
+   Music playback status, :ref:`music_status_info` 
+
+
+
+Get Supported Playback Formats
+====================================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``     -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_FILE_TYPE`` -- Identify supported file formats
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getBrowseFileTypeCmd = CommandBuilder.buildGetBrowseFileTypeCmd();
+
+
+Code example reference :ref:`get_sys_info`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onFileFormatChange(BluetoothDevice device, String fileFormat) {
+            //This will callback supported playback file format
+        }
+    });
+    //Execute get supported playback format function and wait for result callback
+    controller.getPlayFileFormat(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onFileFormatChange
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Music Play or Pause
+====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``        -- Music mode
+| **flag :**  ``AttrAndFunCode.FUNCTION_MUSIC_CMD_PLAY_OR_PAUSE``
+| **extend :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase musicPlayOrPauseCmd = CommandBuilder.buildPlayOrPauseCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute music play or pause function and wait for result callback
+    controller.musicPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Play Previous Track
+=====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``        -- Music mode
+| **flag :**  ``AttrAndFunCode.FUNCTION_MUSIC_CMD_PLAY_PREV``
+| **extend :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase musicPlayPrevCmd = CommandBuilder.buildPlayPrevCmd();
+
+
+Code example reference :ref:`set_function` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute play previous track function and wait for result callback
+    controller.musicPlayPrev(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Play Next Track
+======================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``        -- Music mode
+| **flag :**  ``AttrAndFunCode.FUNCTION_MUSIC_CMD_PLAY_NEXT``
+| **extend :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase musicPlayNextCmd = CommandBuilder.buildPlayNextCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute play next track function and wait for result callback
+    controller.musicPlayNext(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Switch to Next Playback Mode
+====================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``        -- Music mode
+| **flag :**  ``AttrAndFunCode.FUNCTION_MUSIC_CMD_NEXT_PLAYMODE``
+| **extend :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase musicNextPlaymodeCmd = CommandBuilder.buildNextPlaymodeCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute switch to next playback mode function and wait for result callback
+    controller.musicSwitchNextPlayMode(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Jump to Specified Time
+====================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC``        -- Music mode
+| **flag :**  ``AttrAndFunCode.FUNCTION_MUSIC_CMD_FAST_FORWARD`` or ``FUNCTION_MUSIC_CMD_RETREAT_QUICKLY``
+| **extend :**  Specified time (2 Bytes)
+
+Command construction
+
+.. code-block:: java
+
+    int orientation = Constants.SEEK_ORIENTATION_BACK;//Jump direction
+    short time = 1234; //Jump timestamp
+    CommandBase command = orientation == Constants.SEEK_ORIENTATION_BACK ? 
+       CommandBuilder.buildFastForwardCmd(time) : CommandBuilder.buildRetreatQuicklyCmd(time); 
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    int orientation = Constants.SEEK_ORIENTATION_FORWARD;
+    //orientation ： Constants.SEEK_ORIENTATION_FORWARD - forward，Constants.SEEK_ORIENTATION_BACK - backward
+    short time = 3000; 
+    //time ： timestamp
+    //Execute jump to specified timestamp function and wait for result callback
+    controller.musicSeekToProgress(controller.getUsingDevice(), orientation, time, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+

@@ -1,0 +1,1655 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. 基础功能 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. 音量控制功能" href="voice_ctrl.html" />
+    <link rel="prev" title="1. 术语" href="terminology_note.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK开发包介绍</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 开发说明</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../module/use_flow.html">1 使用流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module/bt_proxy.html"><span class="sectnum">2 </span>蓝牙代理模块</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../module/function_list.html">3 功能模块</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="terminology_note.html">1. 术语</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2. 基础功能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-device-info">2.1. 请求设备信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-sys-info">2.2. 查询设备系统信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-sys-info">2.3. 设置设备系统属性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notify-sys-info">2.4. 监听设备系统属性变化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-function">2.5. 设置功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-device-mode">2.6. 查询当前设备模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">2.7. 切换设备模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">2.8. 查询存储设备信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">2.9. 重启设备</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl.html">3. 音量控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl.html">4. 设备音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl.html">5. 均衡器调试功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl.html">6. 时钟功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl.html">7. 外接设备控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl.html">8. FM控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl.html">9. 灯光控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_music_ctrl.html">10. 本地音乐控制功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func.html">11. TWS功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="anc_ctrl.html">12. ANC设置功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func.html">13. 声卡功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_func.html">14. 查找设备功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_cmd_func.html">15. 自定义命令</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dual_connection_func.html">16. 设备双连功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func.html">17. 录音功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_func.html">18. SPDIF功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="big_file_transfer_func.html">19. 大文件传输功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func.html">20. 彩屏充电仓功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bmp_convert_func.html">21. 图像转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif_convert_func.html">22. GIF转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func.html">23. 翻译功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auracast_assistant_func.html">24. Auracast助手</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_browse_func.html">25. 目录浏览</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 开发说明</a></li>
+          <li class="breadcrumb-item"><a href="../module/function_list.html">3 功能模块</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>基础功能</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-func">
+<span id="id1"></span><h1><span class="section-number">2. </span>基础功能<a class="headerlink" href="#basic-func" title="Link to this heading"></a></h1>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>功能描述</p></th>
+<th class="head"><p>命令原型</p></th>
+<th class="head"><p>命令模型</p></th>
+<th class="head"><p>命令参数</p></th>
+<th class="head"><p>命令回复</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>获取设备信息</p></td>
+<td><p>Command.CMD_GET_TARGET_INFO</p></td>
+<td><p>GetTargetInfoCmd</p></td>
+<td><p><a class="reference internal" href="#target-info-param"><span class="std std-ref">GetTargetInfoParam</span></a></p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="#target-info"><span class="std std-ref">TargetInfoResponse</span></a> or</div>
+<div class="line"><a class="reference internal" href="#device-info"><span class="std std-ref">DeviceInfo</span></a></div>
+</div>
+</td>
+<td><p>参考 <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">通用命令处理示例</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>查询设备系统信息</p></td>
+<td><p>Command.CMD_GET_SYS_INFO</p></td>
+<td><p>GetSysInfoCmd</p></td>
+<td><p><a class="reference internal" href="#get-sys-param"><span class="std std-ref">GetSysInfoParam</span></a></p></td>
+<td><p><a class="reference internal" href="#sys-info"><span class="std std-ref">SysInfoResponse</span></a></p></td>
+<td><p>参考 <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">通用命令处理示例</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>设置设备系统属性</p></td>
+<td><p>Command.CMD_SET_SYS_INFO</p></td>
+<td><p>SetSysInfoCmd</p></td>
+<td><p><a class="reference internal" href="#set-sys-param"><span class="std std-ref">SetSysInfoParam</span></a></p></td>
+<td><p>CommonResponse</p></td>
+<td><p>参考 <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">通用命令处理示例</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>监听设备系统属性变化</p></td>
+<td><p>Command.CMD_SYS_INFO_AUTO_UPDATE</p></td>
+<td><p>UpdateSysInfoCmd</p></td>
+<td><p><a class="reference internal" href="#sys-info"><span class="std std-ref">SysInfoResponse</span></a></p></td>
+<td><p>NULL</p></td>
+<td><p>参考 <a class="reference internal" href="terminology_note.html#receive-cmd-handle"><span class="std std-ref">接收命令处理示例</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>设置功能</p></td>
+<td><p>Command.CMD_FUNCTION</p></td>
+<td><p>FunctionCmd</p></td>
+<td><p><a class="reference internal" href="#function-param"><span class="std std-ref">FunctionParam</span></a></p></td>
+<td><p>CommonResponse</p></td>
+<td><p>参考 <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">通用命令处理示例</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>重启设备</p></td>
+<td><p>Command.CMD_REBOOT_DEVICE</p></td>
+<td><p>RebootDeviceCmd</p></td>
+<td><p>RebootDeviceParam</p></td>
+<td><p>RebootDeviceResponse</p></td>
+<td><p>参考 <a class="reference internal" href="terminology_note.html#common-cmd-handle"><span class="std std-ref">通用命令处理示例</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="line-block">
+<div class="line">1. 表格中的数据模型都可以通过SDK查看</div>
+<div class="line">2. 本文档只展示部分重要数据模型</div>
+</div>
+</div>
+<section id="get-device-info">
+<span id="id2"></span><h2><span class="section-number">2.1. </span>请求设备信息<a class="headerlink" href="#get-device-info" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: 获取JL_BluetoothManager对象</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: 构造功能命令 - 比如, 获取设备信息</span>
+<span class="c1">//mask = 0xffffffff;  -- 获取所有属性</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getDeviceInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetDeviceInfoCmd</span><span class="p">(</span><span class="n">mask</span><span class="p">);</span>
+<span class="c1">//Step2: 执行操作命令并等待结果回调</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">getDeviceInfoCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调回复命令</span>
+<span class="w">    </span><span class="c1">//注意: 无回复命时，回复命令本身</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: 检查设备状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//设备状态异常，进行异常处理</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//Step4: 判断是否有回复数据</span>
+<span class="w">        </span><span class="c1">//注意 - 如果是没有回复数据的命令，回复数据为null</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isHasResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isHasResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Step5: 获取对应的命令数据</span>
+<span class="w">            </span><span class="n">GetTargetInfoCmd</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GetTargetInfoCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">//Step6: 获取回复数据</span>
+<span class="w">            </span><span class="n">TargetInfoResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">command</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//回复数据为空，证明设备回复的数据有问题，进行异常处理</span>
+<span class="w">                </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_DATA_FORMAT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Response data is error.&quot;</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">//处理设备回复数据</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//执行请求设备功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">requestDeviceInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="mh">0xffffffff</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">DeviceInfo</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//message - 设备信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//第二种方式，获取缓存的设备信息</span>
+<span class="n">DeviceInfo</span><span class="w"> </span><span class="n">deviceInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">controller</span><span class="p">.</span><span class="na">getDeviceInfo</span><span class="p">();</span>
+</pre></div>
+</div>
+<section id="gettargetinfoparam">
+<span id="target-info-param"></span><h3><span class="section-number">2.1.1. </span>GetTargetInfoParam<a class="headerlink" href="#gettargetinfoparam" title="Link to this heading"></a></h3>
+<p>获取设备信息参数</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GetTargetInfoParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">;</span><span class="c1">//配置信息查询掩码</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">platform</span><span class="p">;</span><span class="c1">//手机平台 0 : android 1: iOS  2 : web app</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>mask需要参考 <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. 功能码</span></a></p>
+</div>
+</section>
+<section id="deviceinfo">
+<span id="device-info"></span><h3><span class="section-number">2.1.2. </span>DeviceInfo<a class="headerlink" href="#deviceinfo" title="Link to this heading"></a></h3>
+<p>设备信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DeviceInfo</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">TargetInfoResponse</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 闹钟信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="c1">//闹钟信息</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//闹钟响铃信息</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alarmDefaultBells</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//闹钟数据结构版本</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alarmVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//闹钟拓展字段支持标识</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">alarmExpandFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 音乐播放信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="c1">//音乐名称</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">musicNameInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//音乐状态</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">musicStatusInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//音乐播放模式信息</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//Aux播放状态</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isAuxPlay</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//可以播放的格式</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">playFileFormat</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//当前播放的文件簇号</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cluster</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//当前播放文件的设备序号</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">currentDevIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 均衡器信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 设备存储器信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">devStorageInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 灯光控制信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LightControlInfo</span><span class="w"> </span><span class="n">lightControlInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 声卡信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">soundCardEqInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * FM/FM_TX信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChannelInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">channelInfos</span><span class="p">;</span><span class="w"> </span><span class="c1">//频道列表</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">FmStatusInfo</span><span class="w"> </span><span class="n">fmStatusInfo</span><span class="p">;</span><span class="w"> </span><span class="c1">//频道状态</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">frequency</span><span class="p">;</span><span class="w"> </span><span class="c1">//发射频点</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * ID3信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ID3MusicInfo</span><span class="w"> </span><span class="n">iD3MusicInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 噪声处理(ANC)信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">currentVoiceMode</span><span class="p">;</span><span class="w"> </span><span class="c1">//当前噪声处理模式信息</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModeList</span><span class="p">;</span><span class="w"> </span><span class="c1">//所有噪声处理模式信息</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AdaptiveData</span><span class="w"> </span><span class="n">adaptiveData</span><span class="p">;</span><span class="w">     </span><span class="c1">//自适应ANC数据</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SmartNoPick</span><span class="w"> </span><span class="n">smartNoPick</span><span class="p">;</span><span class="w">       </span><span class="c1">//智能免摘信息</span>
+<span class="w">    </span><span class="cm">/*降噪模式开启有效*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SceneDenoising</span><span class="w"> </span><span class="n">sceneDenoising</span><span class="p">;</span><span class="w"> </span><span class="c1">//场景降噪</span>
+<span class="w">    </span><span class="cm">/*降噪模式开启有效*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">WindNoiseDetection</span><span class="w"> </span><span class="n">windNoiseDetection</span><span class="p">;</span><span class="w"> </span><span class="c1">//风噪检测</span>
+<span class="w">    </span><span class="cm">/*通透模式开启有效*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">VocalBooster</span><span class="w"> </span><span class="n">vocalBooster</span><span class="p">;</span><span class="w">   </span><span class="c1">//人声增强模式</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 通话信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">phoneStatus</span><span class="p">;</span><span class="w"> </span><span class="c1">//通话状态</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 拓展功能信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ExpandFunction</span><span class="w"> </span><span class="n">expandFunction</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * 设备双连信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DoubleConnectionState</span><span class="w"> </span><span class="n">doubleConnectionState</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ConnectedBtInfo</span><span class="w"> </span><span class="n">connectedBtInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * SPDIF功能信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SPDIFPlayStatusInfo</span><span class="w"> </span><span class="n">spdifPlayStatusInfo</span><span class="p">;</span><span class="c1">//播放状态</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SPDIFAudioSourceInfo</span><span class="w"> </span><span class="n">spdifAudioSourceInfo</span><span class="p">;</span><span class="c1">//音源</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * PC从机功能信息</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PCSlavePlayStatusInfo</span><span class="w"> </span><span class="n">pcSlavePlayStatusInfo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * AI翻译功能</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 翻译模式信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TranslationMode</span><span class="w"> </span><span class="n">translationMode</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*=============================================*</span>
+<span class="cm">     * Auracast功能</span>
+<span class="cm">     *=============================================*/</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备状态数据</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DeviceStateData</span><span class="w"> </span><span class="n">deviceStateData</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Auracast发射端配置</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TransmitterSettings</span><span class="w"> </span><span class="n">transmitterSettings</span><span class="p">;</span>
+
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="targetinforesponse">
+<span id="target-info"></span><h3><span class="section-number">2.1.3. </span>TargetInfoResponse<a class="headerlink" href="#targetinforesponse" title="Link to this heading"></a></h3>
+<p>目标设备信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TargetInfoResponse</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CommonResponse</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 协议版本号</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProtocolVersion</span><span class="w"> </span><span class="n">protocolVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 系统信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SystemInfo</span><span class="w"> </span><span class="n">systemInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 经典蓝牙相关信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClassicBtInfo</span><span class="w"> </span><span class="n">classicBtInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * AI平台信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AIPlatform</span><span class="w"> </span><span class="n">aiPlatform</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 功能配置信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FunctionConfiguration</span><span class="w"> </span><span class="n">functionConfiguration</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 固件版本信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * SDK类型</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sdkType</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * UBoot版本信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">uBootVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 升级配置</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OTASettings</span><span class="w"> </span><span class="n">otaSettings</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 升级状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OTAState</span><span class="w"> </span><span class="n">otaState</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 产品信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProductInfo</span><span class="w"> </span><span class="n">productInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//用于服务器校验产品信息</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 认证秘钥</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">authKey</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 项目标识码</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">projectCode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 协议MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ProtocolMTU</span><span class="w"> </span><span class="n">protocolMtu</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否允许连接</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">allowConnectFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BleInfo</span><span class="w"> </span><span class="n">bleInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发射器信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TransmitterInfo</span><span class="w"> </span><span class="n">transmitterInfo</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 拓展功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SysExpandFunc</span><span class="w"> </span><span class="n">sysExpandFunc</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 文件操作配置</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileOpConfiguration</span><span class="w"> </span><span class="n">fileOpConfiguration</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 自定义版本信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">customVersionMsg</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#protocol-version"><span class="std std-ref">ProtocolVersion</span></a></p></li>
+<li><p><a class="reference internal" href="#system-info"><span class="std std-ref">SystemInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#classic-bt-info"><span class="std std-ref">ClassicBtInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#ai-platform"><span class="std std-ref">AIPlatform</span></a></p></li>
+<li><p><a class="reference internal" href="#function-cfg"><span class="std std-ref">FunctionConfiguration</span></a></p></li>
+<li><p><a class="reference internal" href="#version-msg"><span class="std std-ref">Version</span></a></p></li>
+<li><p><a class="reference internal" href="#ota-settings"><span class="std std-ref">OTASettings</span></a></p></li>
+<li><p><a class="reference internal" href="#ota-state"><span class="std std-ref">OTAState</span></a></p></li>
+<li><p><a class="reference internal" href="#product-info"><span class="std std-ref">ProductInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#protocol-mtu"><span class="std std-ref">ProtocolMTU</span></a></p></li>
+<li><p><a class="reference internal" href="#ble-info"><span class="std std-ref">BleInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#transmitter-info"><span class="std std-ref">TransmitterInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#sys-expand-func"><span class="std std-ref">SysExpandFunc</span></a></p></li>
+<li><p><a class="reference internal" href="#file-op-cfg"><span class="std std-ref">FileOpConfiguration</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="protocolversion">
+<span id="protocol-version"></span><h3><span class="section-number">2.1.4. </span>ProtocolVersion<a class="headerlink" href="#protocolversion" title="Link to this heading"></a></h3>
+<p>协议版本信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtocolVersion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 版本号</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">versionCode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 版本名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">versionName</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="systeminfo">
+<span id="system-info"></span><h3><span class="section-number">2.1.5. </span>SystemInfo<a class="headerlink" href="#systeminfo" title="Link to this heading"></a></h3>
+<p>系统信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SystemInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备电量</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">quantity</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备音量</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">volume</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 最大音量</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxVol</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持音量同步</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportVolumeSync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 升级最小电量限制值(1 ~ 100)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">lowPowerLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="classicbtinfo">
+<span id="classic-bt-info"></span><h3><span class="section-number">2.1.6. </span>ClassicBtInfo<a class="headerlink" href="#classicbtinfo" title="Link to this heading"></a></h3>
+<p>经典蓝牙信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassicBtInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 经典蓝牙地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">edrAddr</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 经典蓝牙支持的协议</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">edrProfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 经典蓝牙的连接状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">edrStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="aiplatform">
+<span id="ai-platform"></span><h3><span class="section-number">2.1.7. </span>AIPlatform<a class="headerlink" href="#aiplatform" title="Link to this heading"></a></h3>
+<p>AI平台信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AIPlatform</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 平台类型</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">platform</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 认证码</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">license</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="functionconfiguration">
+<span id="function-cfg"></span><h3><span class="section-number">2.1.8. </span>FunctionConfiguration<a class="headerlink" href="#functionconfiguration" title="Link to this heading"></a></h3>
+<p>功能配置信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FunctionConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 功能支持掩码</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">functionMask</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 当前模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">curFunction</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持usb、sd、linein不在线时显示功能图标</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportOfflineShow</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持usb</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportUsb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持sd0</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSd0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持sd1</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSd1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否隐藏网络电台</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">hideNetRadio</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="version">
+<span id="version-msg"></span><h3><span class="section-number">2.1.9. </span>Version<a class="headerlink" href="#version" title="Link to this heading"></a></h3>
+<p>版本信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Version</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备版本名称</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">versionName</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 设备版本信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">versionCode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="otasettings">
+<span id="ota-settings"></span><h3><span class="section-number">2.1.10. </span>OTASettings<a class="headerlink" href="#otasettings" title="Link to this heading"></a></h3>
+<p>OTA设置</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OTASettings</span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持双备份升级</span>
+<span class="cm">     * &lt;p&gt;单备份[false]，需要断开回连过程；</span>
+<span class="cm">     * &lt;br/&gt;双备份[true]，不需要断开回连过程&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportDoubleBackup</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否需要下载boot loader</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isNeedBootLoader</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 单备份OTA连接方式</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 0 -- 不使能&lt;br/&gt;</span>
+<span class="cm">     * 1 -- BLE &lt;br/&gt;</span>
+<span class="cm">     * 2 -- SP</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">singleBackupOtaWay</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持复用空间特殊升级流程</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportReuseSpaceOTA</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="otastate">
+<span id="ota-state"></span><h3><span class="section-number">2.1.11. </span>OTAState<a class="headerlink" href="#otastate" title="Link to this heading"></a></h3>
+<p>OTA状态</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OTAState</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 强制升级标志</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mandatoryUpgradeFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 请求升级标志</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 取值范围: &lt;br/&gt;</span>
+<span class="cm">     * 0 : 正常升级&lt;br/&gt;</span>
+<span class="cm">     * 1 : 强制升级</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">requestOtaFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 拓展模式</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * 取值范围:&lt;br/&gt;</span>
+<span class="cm">     * 0 : 无效模式 &lt;br/&gt;</span>
+<span class="cm">     * 1 : 更新资源模式 &lt;br/&gt;</span>
+<span class="cm">     * 2 : 复用空间特殊升级模式-仅更新资源 &lt;br/&gt;</span>
+<span class="cm">     * 3 : 复用空间特殊升级模式-仅升级固件程序</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">expandMode</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="productinfo">
+<span id="product-info"></span><h3><span class="section-number">2.1.12. </span>ProductInfo<a class="headerlink" href="#productinfo" title="Link to this heading"></a></h3>
+<p>产品信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 厂商ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 产品ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pid</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 客户ID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="protocolmtu">
+<span id="protocol-mtu"></span><h3><span class="section-number">2.1.13. </span>ProtocolMTU<a class="headerlink" href="#protocolmtu" title="Link to this heading"></a></h3>
+<p>协议MTU</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProtocolMTU</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 发数MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sendMtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">DEFAULT_PROTOCOL_MTU</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 收数MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">receiveMtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Constants</span><span class="p">.</span><span class="na">DEFAULT_PROTOCOL_MTU</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bleinfo">
+<span id="ble-info"></span><h3><span class="section-number">2.1.14. </span>BleInfo<a class="headerlink" href="#bleinfo" title="Link to this heading"></a></h3>
+<p>BLE信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BleInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE地址</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">bleAddr</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否仅仅连接ble设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bleOnly</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否BLE转SPP方式(连接BLE才打开EDR,才能连接SPP)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isBLEToSppWay</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持LE Audio功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportLeAudio</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * LE Audio是否已连接</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isLeAudioConnected</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="transmitterinfo">
+<span id="transmitter-info"></span><h3><span class="section-number">2.1.15. </span>TransmitterInfo<a class="headerlink" href="#transmitterinfo" title="Link to this heading"></a></h3>
+<p>发射端信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TransmitterInfo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持外设模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">emitterSupport</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 0x00:普通模式  0x01:外设模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">emitterStatus</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sysexpandfunc">
+<span id="sys-expand-func"></span><h3><span class="section-number">2.1.16. </span>SysExpandFunc<a class="headerlink" href="#sysexpandfunc" title="Link to this heading"></a></h3>
+<p>系统拓展功能</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SysExpandFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持MD5读取</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportMD5</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否游戏模式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isGameMode</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持查找设备</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSupportSearchDevice</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持声卡功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSoundCard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 禁止app调节设备eq</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">banEq</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持外挂Flash传输功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportExternalFlashTransfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持主动降噪功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportAnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持读取固件异常信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportReadErrorMSg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否⽀持辅听设置功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportHearingAssist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持自适应ANC算法</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportAdaptiveANC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持获取设备配置信息</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportDevConfigure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持智能免摘功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSmartNoPick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持场景降噪功能</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSceneDenoising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持风噪检测</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportWindNoiseDetection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持人声增强</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportVocalBooster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持设备双连</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportDoubleConnection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="fileopconfiguration">
+<span id="file-op-cfg"></span><h3><span class="section-number">2.1.17. </span>FileOpConfiguration<a class="headerlink" href="#fileopconfiguration" title="Link to this heading"></a></h3>
+<p>文件操作配置</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileOpConfiguration</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 大文件传输是否支持分包crc16校验</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportPackageCrc16</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 以新的文件名方式读取固件文件(支持多设备)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportFileByNameWithDev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否支持小文件传输方式</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">supportSmallFileTransfer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="get-sys-info">
+<span id="id3"></span><h2><span class="section-number">2.2. </span>查询设备系统信息<a class="headerlink" href="#get-sys-info" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: 获取JL_BluetoothManager对象</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: 构造查询设备系统信息命令</span>
+<span class="c1">//功能码</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//公共属性</span>
+<span class="c1">//查询当前设备模式和设备存储信息</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_CUR_MODE_TYPE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_MUSIC_DEV_STATUS</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getSysInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetSysInfoCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">);</span>
+<span class="c1">//Step2: 执行操作命令并等待结果回调</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">getSysInfoCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调回复命令</span>
+<span class="w">    </span><span class="c1">//注意: 无回复命时，回复命令本身</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: 检查设备状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//设备状态异常，进行异常处理</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//Step4: 判断是否有回复数据</span>
+<span class="w">        </span><span class="c1">//注意 - 如果是没有回复数据的命令，回复数据为null</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isHasResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_HAVE_PARAMETER_AND_RESPONSE</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CommandBase</span><span class="p">.</span><span class="na">FLAG_NO_PARAMETER_AND_RESPONSE</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isHasResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//Step5: 获取对应的命令数据</span>
+<span class="w">            </span><span class="n">GetSysInfoCmd</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">GetSysInfoCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">//Step6: 获取回复数据</span>
+<span class="w">            </span><span class="n">SysInfoResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">command</span><span class="p">.</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//回复数据为空，证明设备回复的数据有问题，进行异常处理</span>
+<span class="w">                </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_DATA_FORMAT</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Response data is error.&quot;</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">//处理设备回复数据</span>
+<span class="w">            </span><span class="c1">//response.getFunction(); //功能码</span>
+<span class="w">            </span><span class="c1">//response.getAttrs();    //功能属性</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将会回调设备存储信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//此处将会回调设备模式</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//公共属性</span>
+<span class="c1">//查询当前设备模式和设备存储信息</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_CUR_MODE_TYPE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_MUSIC_DEV_STATUS</span><span class="p">;</span>
+<span class="c1">//执行查询设备系统信息并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getDevSysInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onDeviceModeChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">1. function 需要参考 <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. 功能码</span></a></div>
+<div class="line">2. mask 需要参考 <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. 功能码</span></a></div>
+<div class="line">3. 不允许mask为全F</div>
+</div>
+</div>
+<section id="getsysinfoparam">
+<span id="get-sys-param"></span><h3><span class="section-number">2.2.1. </span>GetSysInfoParam<a class="headerlink" href="#getsysinfoparam" title="Link to this heading"></a></h3>
+<p>获取系统信息参数</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GetSysInfoParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能码</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能掩码</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="set-sys-info">
+<span id="id4"></span><h2><span class="section-number">2.3. </span>设置设备系统属性<a class="headerlink" href="#set-sys-info" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: 获取JL_BluetoothManager对象</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: 构造设置设备系统属性命令</span>
+<span class="c1">//功能码</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//公共属性</span>
+<span class="c1">//数据列表</span>
+<span class="n">AttrBean</span><span class="w"> </span><span class="n">attrBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AttrBean</span><span class="p">();</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_VOLUME</span><span class="p">);</span><span class="w">  </span><span class="c1">//系统音量</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setAttrData</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="p">{(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="mh">0x0E</span><span class="p">});</span><span class="w"> </span><span class="c1">//14等级</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">data</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">attrBean</span><span class="p">);</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setSysInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSetSysInfoCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+<span class="c1">//Step2: 执行操作命令并等待结果回调</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">setSysInfoCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调回复命令</span>
+<span class="w">    </span><span class="c1">//注意: 无回复命时，回复命令本身</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: 检查设备状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//设备状态异常，进行异常处理</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//等待系统调整成功后，通过更新设备系统信息命令通知</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//公共属性</span>
+<span class="c1">//设置设备音量 - 14</span>
+<span class="n">AttrBean</span><span class="w"> </span><span class="n">attrBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AttrBean</span><span class="p">();</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_VOLUME</span><span class="p">);</span>
+<span class="n">attrBean</span><span class="p">.</span><span class="na">setAttrData</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="p">{(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="mh">0x0E</span><span class="p">});</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">data</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">attrBean</span><span class="p">);</span>
+<span class="c1">//执行设置设备系统属性并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">setDevSysInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">1. data是由多个 <a class="reference internal" href="terminology_note.html#ltv-format"><span class="std std-ref">LTV格式</span></a> 组成的</div>
+<div class="line">2. 请通过 <code class="docutils literal notranslate"><span class="pre">CommandBuilder</span></code> 构建设置设备系统属性命令</div>
+</div>
+</div>
+<section id="setsysinfoparam">
+<span id="set-sys-param"></span><h3><span class="section-number">2.3.1. </span>SetSysInfoParam<a class="headerlink" href="#setsysinfoparam" title="Link to this heading"></a></h3>
+<p>设置系统信息参数</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SetSysInfoParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能码</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">attrBeanList</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能属性</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="notify-sys-info">
+<span id="id5"></span><h2><span class="section-number">2.4. </span>监听设备系统属性变化<a class="headerlink" href="#notify-sys-info" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: 获取JL_BluetoothManager对象</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: 添加蓝牙RCSP事件回调器</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">addEventListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调设备发送的命令</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">onDeviceCommand</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">cmd</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//Step2: 处理命令</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getId</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Command</span><span class="p">.</span><span class="na">CMD_SYS_INFO_AUTO_UPDATE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//过滤命令</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//只处理目标命令 - 通知设备系统信息</span>
+<span class="w">        </span><span class="n">UpdateSysInfoCmd</span><span class="w"> </span><span class="n">updateSysInfoCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">UpdateSysInfoCmd</span><span class="p">)</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">//Step4: 获取参数</span>
+<span class="w">        </span><span class="n">UpdateSysInfoParam</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updateSysInfoCmd</span><span class="p">.</span><span class="na">getParam</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//异常处理</span>
+<span class="w">        </span><span class="c1">//Step5: 处理数据</span>
+<span class="c1">//        param.getFunction();  //功能码</span>
+<span class="c1">//        param.getParamData(); //功能属性</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="line-block">
+<div class="line">1. 结果解析与 <a class="reference internal" href="#get-sys-info"><span class="std std-ref">查询设备系统信息</span></a> 回复结果解析一致</div>
+<div class="line">2. 解析结果流程, 请参考demo</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调设备模式</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVolumeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VolumeInfo</span><span class="w"> </span><span class="n">volume</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调设备音量信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调均衡器调节参数</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调设备存储信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFileFormatChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileFormat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调支持的播放格式</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicNameChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">nameInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调音乐名信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">statusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调音乐状态信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPlayModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调播放模式信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAuxStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPlay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调外接设备播放状态</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmChannelsChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChannelInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">channels</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调FM频道列表信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">FmStatusInfo</span><span class="w"> </span><span class="n">fmStatusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调FM状态信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调闹钟列表信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmDefaultBellListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调闹钟默认铃声列表</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmNotify</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调闹钟提醒</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmStop</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调闹钟停止</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onID3MusicInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ID3MusicInfo</span><span class="w"> </span><span class="n">id3MusicInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调ID3音乐信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHighAndBassChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">high</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调高低音信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqPresetChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调均衡器预设值信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPhoneCallStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调电话状态</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onExpandFunction</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调拓展功能信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLightControlInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">LightControlInfo</span><span class="w"> </span><span class="n">lightControlInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调灯光控制信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调声卡信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调声卡的状态信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCurrentVoiceMode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调当前噪声处理模式信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceModeList</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调噪声处理列表信息</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSearchDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">SearchDevParam</span><span class="w"> </span><span class="n">searchDevParam</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调查找设备参数</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReverberation</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ReverberationParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调混响参数</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDynamicLimiter</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DynamicLimiterParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调动态限幅参数</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="sysinforesponse">
+<span id="sys-info"></span><h3><span class="section-number">2.4.1. </span>SysInfoResponse<a class="headerlink" href="#sysinforesponse" title="Link to this heading"></a></h3>
+<p>系统信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SysInfoResponse</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CommonResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能码</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">AttrBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">attrs</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能属性</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="terminology_note.html#attr-bean"><span class="std std-ref">属性模型</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="set-function">
+<span id="id6"></span><h2><span class="section-number">2.5. </span>设置功能<a class="headerlink" href="#set-function" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: 获取JL_BluetoothManager对象</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: 构造设置功能命令</span>
+<span class="c1">//功能码</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//公共属性</span>
+<span class="c1">//标识</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// 拓展参数</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">extend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildFunctionCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">flag</span><span class="p">,</span><span class="w"> </span><span class="n">extend</span><span class="p">);</span>
+<span class="c1">//Step2: 执行操作命令并等待结果回调</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调回复命令</span>
+<span class="w">    </span><span class="c1">//注意: 无回复命时，回复命令本身</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: 检查设备状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//设备状态异常，进行异常处理</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//Step1: 构造设置功能命令</span>
+<span class="c1">//功能码</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">;</span><span class="w"> </span><span class="c1">//公共属性</span>
+<span class="c1">//标识</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// 拓展参数</span>
+<span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">extend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildFunctionCmd</span><span class="p">((</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="n">flag</span><span class="p">,</span><span class="w"> </span><span class="n">extend</span><span class="p">);</span>
+<span class="c1">//Step2: 执行操作命令并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">sendRcspCommand</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">setFunctionCmd</span><span class="p">,</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">DEFAULT_SEND_CMD_TIMEOUT</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//回调回复命令</span>
+<span class="w">    </span><span class="c1">//注意: 无回复命时，回复命令本身</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: 检查设备状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//设备状态异常，进行异常处理</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="functionparam">
+<span id="function-param"></span><h3><span class="section-number">2.5.1. </span>FunctionParam<a class="headerlink" href="#functionparam" title="Link to this heading"></a></h3>
+<p>功能参数</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FunctionParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BaseParameter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">function</span><span class="p">;</span><span class="w"> </span><span class="c1">//功能号</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="n">cmd</span><span class="p">;</span><span class="w"> </span><span class="c1">//attr type</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">extend</span><span class="p">;</span><span class="w"> </span><span class="c1">//payload</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="get-device-mode">
+<span id="id7"></span><h2><span class="section-number">2.6. </span>查询当前设备模式<a class="headerlink" href="#get-device-mode" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>        – 公共属性</div>
+<div class="line"><strong>mask :</strong>  <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE</span></code> – 标识当前设备模式信息</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//构造获取当前设备模式</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getCurrentModeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetSysInfoCmd</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">,</span>
+<span class="w">               </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_CUR_MODE_TYPE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="#get-sys-info"><span class="std std-ref">查询设备系统信息</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调设备模式</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//执行获取设备模式信息并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getCurrentDevModeInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onDeviceModeChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">2.7. </span>切换设备模式<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>        – 公共属性</div>
+<div class="line"><strong>flag :</strong>  设备模式, 参考 <a class="reference internal" href="../constant/func_code.html#attr-fun-code"><span class="std std-ref">4. 功能码</span></a></div>
+<div class="line"><strong>extend :</strong>  NULL</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">byte</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_BT</span><span class="p">;</span><span class="w">   </span><span class="c1">//-- 蓝牙模式</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC -- 设备音乐模式</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_RTC   -- 时钟模式(闹钟，秒表)</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_AUX   -- 外部输入控制模式</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_FM    -- FM控制模式</span>
+<span class="c1">//            AttrAndFunCode.SYS_INFO_FUNCTION_LIGHT -- 灯光模式</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">switchDevModeCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildSwitchModeCmd</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="#set-function"><span class="std std-ref">设置功能</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//注册蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调设备模式</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_BT :  0 //Bluetooth mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_MUSIC : 1 //Music mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_RTC : 2   //clock mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_AUX : 3   //Linein mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_FM  : 4   //FM mode</span>
+<span class="c1">//byte SYS_INFO_FUNCTION_LIGHT : 5 //Light mode</span>
+<span class="c1">//执行切换设备模式功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">switchDeviceMode</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">mode</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onDeviceModeChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h2><span class="section-number">2.8. </span>查询存储设备信息<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="line-block">
+<div class="line"><strong>function :</strong>  <code class="docutils literal notranslate"><span class="pre">AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC</span></code>           – 公共属性</div>
+<div class="line"><strong>mask :</strong>  <code class="docutils literal notranslate"><span class="pre">0x01</span> <span class="pre">&lt;&lt;</span> <span class="pre">AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS</span></code> – 标识存储设备信息(U盘, sd卡, flash等)</div>
+</div>
+<p>命令构造</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//构造查询存储设备信息</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">getMusicDevStatusCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildGetSysInfoCmd</span><span class="p">(</span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_FUNCTION_PUBLIC</span><span class="p">,</span>
+<span class="w">              </span><span class="mh">0x01</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">AttrAndFunCode</span><span class="p">.</span><span class="na">SYS_INFO_ATTR_MUSIC_DEV_STATUS</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>代码示例参考 <a class="reference internal" href="#get-sys-info"><span class="std std-ref">查询设备系统信息</span></a></p>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//添加蓝牙RCSP事件监听器</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">addBTRcspEventCallback</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BTRcspEventCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//回调设备存储信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//执行获取设备存储信息并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">getDevStorageInfo</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">        </span><span class="c1">//结果将会在BTRcspEventCallback#onDevStorageInfoChange回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<section id="devstorageinfo">
+<span id="device-storage-info"></span><h3><span class="section-number">2.8.1. </span>DevStorageInfo<a class="headerlink" href="#devstorageinfo" title="Link to this heading"></a></h3>
+<p>设备存储器信息</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DevStorageInfo</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Parcelable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 存储器状态</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">storageStates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 是否复用</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDeviceReuse</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>存储器状态, <a class="reference internal" href="file_browse_func.html#sd-card-bean"><span class="std std-ref">SDCardBean</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">2.9. </span>重启设备<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>JL_BluetoothManager方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//Step0: 获取JL_BluetoothManager对象</span>
+<span class="n">JL_BluetoothManager</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JL_BluetoothManager</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+<span class="c1">//Step1: 构建重启命令</span>
+<span class="n">CommandBase</span><span class="w"> </span><span class="n">rebootCmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommandBuilder</span><span class="p">.</span><span class="na">buildRebootCmd</span><span class="p">();</span>
+<span class="c1">//Step2: 发送重启命令并等待结果回调</span>
+<span class="n">manager</span><span class="p">.</span><span class="na">sendCommandAsync</span><span class="p">(</span><span class="n">manager</span><span class="p">.</span><span class="na">getConnectedDevice</span><span class="p">(),</span><span class="w"> </span><span class="n">rebootCmd</span><span class="p">,</span><span class="w"> </span><span class="n">manager</span><span class="p">.</span><span class="na">getBluetoothOption</span><span class="p">().</span><span class="na">getTimeoutMs</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Step3: 检查设备状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">StateCode</span><span class="p">.</span><span class="na">STATUS_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//设备状态异常，进行异常处理</span>
+<span class="w">            </span><span class="n">onErrCode</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BaseError</span><span class="p">(</span><span class="n">ErrorCode</span><span class="p">.</span><span class="na">SUB_ERR_RESPONSE_BAD_STATUS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Device reply an bad status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cmd</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()));</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>RCSPController方式</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//获取RCSPController对象</span>
+<span class="n">RCSPController</span><span class="w"> </span><span class="n">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RCSPController</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="c1">//执行重启设备功能并等待结果回调</span>
+<span class="n">controller</span><span class="p">.</span><span class="na">rebootDevice</span><span class="p">(</span><span class="n">controller</span><span class="p">.</span><span class="na">getUsingDevice</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnRcspActionCallback</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSuccess</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功回调</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//失败回调</span>
+<span class="w">        </span><span class="c1">//error - 错误信息</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="terminology_note.html" class="btn btn-neutral float-left" title="1. 术语" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="voice_ctrl.html" class="btn btn-neutral float-right" title="3. 音量控制功能" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

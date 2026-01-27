@@ -1,0 +1,1150 @@
+
+.. _anc_ctrl_func:
+
+ANC Settings Function
+*****************************************************
+
+.. _anc_mode_setting_func:
+
+ANC Mode Setting Function
+======================================================
+
+
+Flow Chart
+------------------------------------------------------
+
+
+.. figure:: ../../_static/ANC_setting_flow.png
+    :align: center
+
+
+Get all noise processing information
+-------------------------------------------------------
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``           -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_ALL_NOISE_MODE``  -- All noise processing information
+
+Command Construction
+
+.. code-block:: java
+
+    CommandBase getAllVoiceModesCmd = CommandBuilder.buildGetAllVoiceModes();
+
+
+Code example reference :ref:`get_sys_info`
+Response results reference :ref:`voice_mode` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onVoiceModeList(BluetoothDevice device, List<VoiceMode> voiceModes) {
+            //Callback noise processing information list
+        }
+    });
+    //Execute the function to retrieve all noise processing information and wait for the result callback.
+    controller.getAllVoiceModes(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+            //The data will be displayed in the BTRcspEventCallback#onVoiceModeList callback.
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. note::
+   Voice Mode，:ref:`voice_mode` 
+
+
+
+
+.. _voice_mode:
+
+VoiceMode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Noise processing mode
+
+.. code-block:: java
+
+    public class VoiceMode implements Parcelable {
+        private int mode = -1;     //ANC mode
+        private int leftMax;       //Left channel maximum value
+        private int leftCurVal;    //Left channel current value
+        private int rightMax;      //Right channel maximum value
+        private int rightCurVal;   //Right channel current value
+
+        //Standard mode
+        public final static int VOICE_MODE_CLOSE = 0;
+        //Noise Cancellation Mode
+        public final static int VOICE_MODE_DENOISE = 1;
+        //Transparency mode
+        public final static int VOICE_MODE_TRANSPARENT = 2;
+
+    }
+
+
+
+Get the current noise processing mode
+---------------------------------------------------------------------
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``               -- Public attributes
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_CURRENT_NOISE_MODE``  -- Current noise processing mode
+
+Command Construction
+
+.. code-block:: java
+
+    CommandBase getCurrentVoiceModeCmd = CommandBuilder.buildGetCurrentVoiceMode();
+
+
+Code example reference :ref:`get_sys_info`
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode) {
+            //Callback to current noise processing mode information
+        }
+    });
+    //Execute the function to obtain the current noise processing mode information and wait for the result callback.
+    controller.getCurrentVoiceMode(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+            //The data will be displayed in the BTRcspEventCallback#onVoonCurrentVoiceModeiceModeList callback.
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. note::
+   Voice Mode, :ref:`voice_mode` 
+
+
+Set the current noise processing mode
+-----------------------------------------------------------------
+
+
+1. JL_BluetoothManager Way
+ 
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``      -- Public attributes
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_CURRENT_NOISE_MODE``  -- Current noise processing mode
+| **value :**  VoiceMode(n Bytes)                                  -- Voice Mode  
+
+Command Construction
+
+.. code-block:: java
+
+    VoiceMode voiceMode; 
+    CommandBase setCurrentVoiceModeCmd = CommandBuilder.buildSetCurrentVoiceMode(voiceMode);
+
+
+Code example reference :ref:`set_sys_info`
+
+1. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    VoiceMode voiceMode; //voiceMode - Noise processing mode
+    //Execute the function to set the current noise processing mode and wait for the result callback.
+    controller.setCurrentVoiceMode(controller.getUsingDevice(), voiceMode, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. note::
+   Voice Mode, :ref:`voice_mode`  
+
+
+Set the order of switching noise processing modes
+-----------------------------------------------------------------------------
+
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Noise mode switching must be at least 2.
+    if (modes == null || modes.length < 2) return;
+    //Set the mode switching order
+    int value = 0x00;
+    for (int mode : modes) {
+        byte bit = (byte) (mode & 0xff);
+        value = value | (0x01 << bit);
+    }
+    int function = AttrAndFunCode.ADV_TYPE_ANC_MODE_LIST; //ANC noise processing function code
+    byte[] data = CHexConver.intToBigBytes(value);        //Functional data
+
+Code example reference :ref:`set_dev_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Noise mode switching must be at least 2.
+    if (modes == null || modes.length < 2) return;
+    //Set the mode switching order
+    int value = 0x00;
+    for (int mode : modes) {
+        byte bit = (byte) (mode & 0xff);
+        value = value | (0x01 << bit);
+    }
+    //Execute the function to set the mode switching order and wait for the result callback.
+    controller.modifyDeviceSettingsInfo(controller.getUsingDevice(), AttrAndFunCode.ADV_TYPE_ANC_MODE_LIST, CHexConver.intToBigBytes(value), new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Callback operation successful
+            //After success, you can get the results.
+            controller.getDeviceSettingsInfo(device, 0x01 << AttrAndFunCode.ADV_TYPE_ANC_MODE_LIST, new OnRcspActionCallback<ADVInfoResponse>() {
+                @Override
+                public void onSuccess(BluetoothDevice device, ADVInfoResponse message) {
+    //              message.getModes();//Noise mode switching sequence
+                }
+
+                @Override
+                public void onError(BluetoothDevice device, BaseError error) {
+                    //Callback operation failed
+                    //error - error information
+                }
+            });
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`adv_info` 
+
+
+
+
+Button settings for switching noise processing modes
+------------------------------------------------------------------------------
+   
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    List<ADVInfoResponse.KeySettings> list = new ArrayList<>(); //Obtain device setting information
+    list.get(0).setFunction(AttrAndFunCode.KEY_FUNC_ID_SWITCH_ANC_MODE); //anc
+    int function = AttrAndFunCode.ADV_TYPE_KEY_SETTINGS; //Keypad setting function code
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    for (ADVInfoResponse.KeySettings settings : list) {
+        try {
+            outputStream.write(settings.toData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    byte[] data = outputStream.toByteArray();     //Functional data
+
+Code example reference :ref:`set_dev_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    List<ADVInfoResponse.KeySettings> list = new ArrayList<>(); //Obtain device setting information
+    list.get(0).setFunction(AttrAndFunCode.KEY_FUNC_ID_SWITCH_ANC_MODE); //anc
+    //Set the button function to switch ANC settings and wait for the result callback.
+    controller.configKeySettings(controller.getUsingDevice(), list, new OnRcspActionCallback<Integer>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Integer message) {
+            //Callback operation successful
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+.. important::
+    The button function ID for switching noise processing modes is fixed at **255**
+
+
+
+
+Adaptive ANC Algorithm
+===============================================================
+
+
+Does the function support this feature?
+---------------------------------------------------------------
+
+.. code-block:: java
+
+    public boolean isSupportAdaptiveANC() {
+        //Get the RCSPController object
+        RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return false;
+        //Determine if the device supports the adaptive ANC algorithm
+        return controller.isSupportAdaptiveANC(usingDevice);
+    }
+
+
+Obtain Adaptive ANC Information
+-----------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getAdaptiveANCData() {
+        if (!isSupportAdaptiveANC()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        boolean isForceRead = true; //Is it mandatory to read
+        //Retrieve cached adaptive ANC status information
+        AdaptiveData adaptiveData = deviceInfo.getAdaptiveData();
+        if (!isForceRead && null != adaptiveData) return; //Already cached information
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof AdaptiveData) {
+                    //Callback Adaptive ANC Data
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to obtain adaptive ANC data
+        controller.getAdaptiveANCData(usingDevice, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`adaptive_data` 
+
+
+
+.. _adaptive_data:
+
+AdaptiveData
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adaptive ANC data
+
+.. code-block:: java
+
+    public class AdaptiveData extends VoiceFunc {
+        /**
+         * No detection status
+         */
+        public static final int STATE_NO_CHECK = 0;
+        /**
+         * Start testing
+         */
+        public static final int STATE_START_CHECK = 1;
+
+
+        private boolean isOn;  //switch
+        private int state;     //state
+        private int code;      //result code
+    }
+
+
+
+Set adaptive ANC parameters
+-----------------------------------------------------------------
+
+.. code-block:: java
+
+    public void setAdaptiveANCData() {
+        if (!isSupportAdaptiveANC()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        //Retrieve cached adaptive ANC status information
+        AdaptiveData adaptiveData = deviceInfo.getAdaptiveData();
+        if (null == adaptiveData) { //You can obtain it through the RCSPController#getAdaptiveANCData interface.
+            adaptiveData = new AdaptiveData();
+        }
+        //Reverse switch state
+        adaptiveData.setOn(!adaptiveData.isOn());
+        //Execute the interface to set adaptive ANC parameters
+        controller.setAdaptiveANCData(usingDevice, adaptiveData, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`adaptive_data` 
+
+
+Start Adaptive ANC Detection Process
+---------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void startAdaptiveANCCheck() {
+        if (!isSupportAdaptiveANC()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //Execute the interface to start the adaptive ANC algorithm detection process
+        controller.startAdaptiveANC(usingDevice, new OnAdaptiveANCListener() {
+            @Override
+            public void onStart() {
+                //Callback detection process begins
+            }
+
+            @Override
+            public void onFinish(int code) {
+                //Callback detection process ends
+                //code --- result code
+            }
+        });
+    }
+
+
+Implementation flowchart
+------------------------------------------------------------
+
+.. figure:: ../../_static/adaptive_anc_flow.png
+    :align: center
+
+   
+
+
+
+Smart No-Picking
+=============================================================
+
+
+Does the function support this feature?
+-------------------------------------------------------------
+
+.. code-block:: java
+
+    public boolean isSupportSmartNoPick() {
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return false;
+        return controller.isSupportSmartNoPick(usingDevice);
+    }
+
+
+Get Smart No-Picking Information
+---------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getSmartNoPick() {
+        if(!isSupportSmartNoPick()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        boolean isForceRead = true; //Is it mandatory to read
+        SmartNoPick smartNoPick = deviceInfo.getSmartNoPick();
+        if (!isForceRead && smartNoPick != null) return; //Already cached information
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof SmartNoPick) {
+                    //Callback to intelligent no-removal information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to obtain intelligent no-picking information
+        controller.getSmartNoPick(usingDevice, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`smart_no_pick` 
+
+
+
+.. _smart_no_pick:
+
+SmartNoPick
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Smart no-picking information
+
+.. code-block:: java
+
+    public class SmartNoPick extends VoiceFunc {
+        /**
+         * High sensitivity
+         */
+        public static final int SENSITIVITY_HIGH = 0;
+        /**
+         * low sensitivity
+         */
+        public static final int SENSITIVITY_LOW = 1;
+
+        /**
+         * No automatic shutdown time
+         */
+        public static final int CLOSE_TIME_NONE = 0;
+        /**
+         * short time(5s)
+         */
+        public static final int CLOSE_TIME_SHORT = 1;
+        /**
+         * Standard Time(15s)
+         */
+        public static final int CLOSE_TIME_STANDARD = 2;
+        /**
+         * Long time(30s)
+         */
+        public static final int CLOSE_TIME_LONG = 3;
+
+
+        private int op;           //operate
+        private boolean isOn;     //switch
+        private int sensitivity;  //sensitivity
+        private int closeTime;    //Automatic shutdown time
+    }
+
+
+
+
+Set intelligent no-picking parameters
+-------------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    public void setSmartNoPickParam() {
+        if(!isSupportSmartNoPick()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        //Retrieve cached smart no-picking information
+        SmartNoPick smartNoPick = deviceInfo.getSmartNoPick();
+        if (null == smartNoPick) { //You can obtain it through the RCSPController#getSmartNoPick interface.
+            smartNoPick = new SmartNoPick();
+        }
+        //Reverse switch state
+        //More attributes can be found in the documentation.
+        smartNoPick.setOn(!smartNoPick.isOn());
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof SmartNoPick) {
+                    //Callback to intelligent no-removal information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to set intelligent no-picking parameters
+        controller.setSmartNoPickParam(usingDevice, smartNoPick, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`smart_no_pick` 
+
+
+Scene noise reduction
+===========================================================
+
+
+Does the function support this feature?
+-----------------------------------------------------------
+
+.. code-block:: java
+
+    public boolean isSupportSceneDenoising(){
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return false;
+        return controller.isSupportSceneDenoising(usingDevice);
+    }
+
+
+
+Obtain scene noise reduction information
+-------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getSceneDenoising(){
+        if(!isSupportSceneDenoising()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        boolean isForceRead = true; //Is it mandatory to read
+        SceneDenoising sceneDenoising = deviceInfo.getSceneDenoising();
+        if (!isForceRead && sceneDenoising != null) return; //Already cached information
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof SceneDenoising) {
+                    //Callback scene noise reduction information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to obtain scene noise reduction information
+        controller.getSceneDenoising(usingDevice, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`scence_denoising` 
+
+
+
+.. _scence_denoising:
+
+SceneDenoising
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Scene noise reduction information
+
+.. code-block:: java
+
+    public class SceneDenoising extends VoiceFunc {
+        /**
+         * intelligent
+         */
+        public static final int MODE_SMART = 0;
+        /**
+         * Mild
+         */
+        public static final int MODE_MILD = 1;
+        /**
+         * balanced
+         */
+        public static final int MODE_BALANCE = 2;
+        /**
+         * depth
+         */
+        public static final int MODE_DEPTH = 3;
+
+        private int mode;     //mode ID
+    }
+
+
+
+Set scene noise reduction parameters
+--------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    public void setSceneDenoising() {
+        if(!isSupportSceneDenoising()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        //Retrieve cached scene noise reduction information
+        SceneDenoising sceneDenoising = deviceInfo.getSceneDenoising();
+        if (null == sceneDenoising) { //You can obtain it through the RCSPController#getSceneDenoising interface.
+            sceneDenoising = new SceneDenoising();
+        }
+        //Set Smart Mode
+        sceneDenoising.setMode(SceneDenoising.MODE_SMART);
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof SceneDenoising) {
+                    //Callback scene noise reduction information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to set scene noise reduction parameters
+        controller.setSceneDenoising(usingDevice, sceneDenoising, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`scence_denoising` 
+
+
+Precautions
+--------------------------------------------------------
+
+
+1. This feature is only available in **ANC mode**.
+
+
+
+Wind noise monitoring
+========================================================
+
+
+Does the function support this feature?
+--------------------------------------------------------
+
+.. code-block:: java
+
+    public boolean isSupportWindNoiseDetection(){
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return false;
+        return controller.isSupportWindNoiseDetection(usingDevice);
+    }
+
+
+Obtain wind noise monitoring information
+---------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getWindNoiseDetection(){
+        if(!isSupportWindNoiseDetection()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        boolean isForceRead = true; //Is it mandatory to read
+        WindNoiseDetection windNoiseDetection = deviceInfo.getWindNoiseDetection();
+        if (!isForceRead && windNoiseDetection != null) return; //Already cached information
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof WindNoiseDetection) {
+                    //Callback Wind noise monitoring information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to obtain wind noise monitoring information
+        controller.getWindNoiseDetection(usingDevice, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`wind_noise_detection` 
+
+
+
+.. _wind_noise_detection:
+
+WindNoiseDetection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wind noise monitoring information
+
+.. code-block:: java
+
+    public class WindNoiseDetection extends VoiceFunc {
+        
+        private boolean isOn;  //switch
+    }
+
+
+
+Set wind noise monitoring parameters
+-----------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void setWindNoiseDetection() {
+        if(!isSupportWindNoiseDetection()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        //Retrieve cached wind noise monitoring information
+        WindNoiseDetection windNoiseDetection = deviceInfo.getWindNoiseDetection();
+        if (null == windNoiseDetection) { //You can obtain it through the RCSPController#getWindNoiseDetection interface.
+            windNoiseDetection = new WindNoiseDetection();
+        }
+        //Reverse switch state
+        windNoiseDetection.setOn(!windNoiseDetection.isOn());
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof WindNoiseDetection) {
+                    //Callback Wind noise monitoring information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to set wind noise monitoring parameters
+        controller.setWindNoiseDetection(usingDevice, windNoiseDetection, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`wind_noise_detection` 
+
+
+Precautions
+--------------------------------------------------------
+
+
+1. This feature is only available in **ANC mode**.
+
+
+Voice Enhancement
+========================================================
+
+
+Does the function support this feature?
+--------------------------------------------------------
+
+
+.. code-block:: java
+
+    public boolean isSupportVocalBooster(){
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return false;
+        return controller.isSupportVocalBooster(usingDevice);
+    }
+
+
+
+Acquire voice enhancement information
+----------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getVocalBooster(){
+        if(!isSupportVocalBooster()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        boolean isForceRead = true; //Is it mandatory to read
+        VocalBooster vocalBooster = deviceInfo.getVocalBooster();
+        if (!isForceRead && vocalBooster != null) return; //Already cached information
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof VocalBooster) {
+                    //Callback voice enhancement information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to obtain voice enhancement information
+        controller.getVocalBooster(usingDevice, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`vocal_booster` 
+
+
+
+.. _vocal_booster:
+
+VocalBooster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Voice enhancement information
+
+.. code-block:: java
+    
+    public class VocalBooster extends VoiceFunc {
+        
+        private boolean isOn;   //switch
+    }
+
+
+
+
+Set vocal enhancement parameters
+---------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void setVocalBooster() {
+        if(!isSupportVocalBooster()) return;
+        //Get the RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get the currently operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+        if (null == deviceInfo) return; //Device not initialized
+        //Retrieve cached voice enhancement information
+        VocalBooster vocalBooster = deviceInfo.getVocalBooster();
+        if (null == vocalBooster) { //You can obtain it through the RCSPController#getVocalBooster interface.
+            vocalBooster = new VocalBooster();
+        }
+        //Reverse switch state
+        vocalBooster.setOn(!vocalBooster.isOn());
+        final BTRcspEventCallback eventCallback = new BTRcspEventCallback() {
+            @Override
+            public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+                if (null == device || null == voiceFunc) return;
+                if (voiceFunc instanceof VocalBooster) {
+                    //Callback voice enhancement information
+                    //Remove RCSP event listener
+                    controller.removeBTRcspEventCallback(this);
+                }
+            }
+        };
+        //Add RCSP event listener
+        controller.addBTRcspEventCallback(eventCallback);
+        //Execute the interface to set voice enhancement parameters
+        controller.setVocalBooster(usingDevice, vocalBooster, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback operation successful
+                //The result will be displayed in the BTRcspEventCallback#onVoiceFunctionChange callback.
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback operation failed
+                //Remove RCSP event listener
+                controller.removeBTRcspEventCallback(eventCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. :ref:`vocal_booster` 
+
+
+Precautions
+-----------------------------
+
+
+1. This feature is only available in **Transparency mode**.
+
+

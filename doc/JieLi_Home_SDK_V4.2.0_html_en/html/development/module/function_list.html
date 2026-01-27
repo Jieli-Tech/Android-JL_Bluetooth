@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3 Functional Modules &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. Terminology" href="../function/terminology_note.html" />
+    <link rel="prev" title="2 Bluetooth Proxy Module" href="bt_proxy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../development_desc.html">2 Development Notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="use_flow.html">1 Usage Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bt_proxy.html"><span class="sectnum">2 </span>Bluetooth Proxy Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3 Functional Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../function/terminology_note.html">1. Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/basic_func.html">2. Basic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/voice_ctrl.html">3. Volume Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/device_music_ctrl.html">4. Device Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/eq_ctrl.html">5. Equalizer Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/rtc_ctrl.html">6. Clock Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/line_in_ctrl.html">7. External Device Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/fm_ctrl.html">8. FM Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/light_ctrl.html">9. Light Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/local_music_ctrl.html">10. Local Music Control Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/tws_func.html">11. TWS Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/anc_ctrl.html">12. ANC Settings Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/sound_card_func.html">13. Sound Card Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/search_device_func.html">14. Device Search Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/custom_cmd_func.html">15. Custom Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/dual_connection_func.html">16. Device Dual Connection Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/record_func.html">17. Recording Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/spdif_func.html">18. SPDIF Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/big_file_transfer_func.html">19. Big File Transfer Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/charging_case_func.html">20. Color Screen Charging Case Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/bmp_convert_func.html">21. Image Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/gif_convert_func.html">22. GIF Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/translation_func.html">23. Translation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/auracast_assistant_func.html">24. Auracast Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../function/file_browse_func.html">25. Directory Browsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../development_desc.html">2 Development Notes</a></li>
+      <li class="breadcrumb-item active">3 Functional Modules</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="functional-modules">
+<h1>3 Functional Modules<a class="headerlink" href="#functional-modules" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../function/terminology_note.html">1. Terminology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/terminology_note.html#ltv-format">1.1. LTV Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/terminology_note.html#attribute-model">1.2. Attribute Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/terminology_note.html#command-processing-examples">1.3. Command Processing Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/basic_func.html">2. Basic Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#request-device-information">2.1. Request device information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#query-device-system-information">2.2. Query device system information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#configure-device-system-properties">2.3. Configure device system properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#monitoring-device-system-attribute-changes">2.4. Monitoring device system attribute changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#settings-function">2.5. Settings Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#query-current-device-mode">2.6. Query current device mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#switch-device-mode">2.7. Switch device mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#query-storage-device-information">2.8. Query storage device information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/basic_func.html#reboot-device">2.9. Reboot Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/voice_ctrl.html">3. Volume Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#get-current-device-volume">3.1. Get Current Device Volume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#adjust-device-volume">3.2. Adjust Device Volume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#get-high-and-low-tone-info">3.3. Get High and Low Tone Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/voice_ctrl.html#set-high-and-low-tone">3.4. Set High and Low Tone</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/device_music_ctrl.html">4. Device Music Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#get-device-music-information">4.1. Get Device Music Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#get-device-music-playback-status">4.2. Get Device Music Playback Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#get-supported-playback-formats">4.3. Get Supported Playback Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#music-play-or-pause">4.4. Music Play or Pause</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#play-previous-track">4.5. Play Previous Track</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#play-next-track">4.6. Play Next Track</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#switch-to-next-playback-mode">4.7. Switch to Next Playback Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/device_music_ctrl.html#jump-to-specified-time">4.8. Jump to Specified Time</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/eq_ctrl.html">5. Equalizer Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#get-equalizer-parameters">5.1. Get Equalizer Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#configure-equalizer-parameters">5.2. Configure Equalizer Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#get-extended-parameters">5.3. Get Extended Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#set-extended-parameters">5.4. Set Extended Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#set-reverberation">5.5. Set Reverberation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/eq_ctrl.html#set-dynamic-limiter">5.6. Set Dynamic Limiter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/rtc_ctrl.html">6. Clock Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#synchronize-time">6.1. Synchronize Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#read-alarm-list">6.2. Read Alarm List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#add-or-modify-alarm">6.3. Add or Modify Alarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#delete-alarm">6.4. Delete Alarm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#read-alarm-default-bell-list">6.5. Read Alarm Default Bell List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#read-specified-alarm-bell-parameters">6.6. Read Specified Alarm Bell Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#set-specified-alarm-bell-parameters">6.7. Set Specified Alarm Bell Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#preview-alarm-bell">6.8. Preview Alarm Bell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/rtc_ctrl.html#stop-previewing-alarm-bell">6.9. Stop Previewing Alarm Bell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/line_in_ctrl.html">7. External Device Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/line_in_ctrl.html#get-external-device-play-status">7.1. Get External Device Play Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/line_in_ctrl.html#external-device-play-or-pause">7.2. External Device Play or Pause</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/fm_ctrl.html">8. FM Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#get-fm-status-information">8.1. Get FM Status Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#search-forward-channel">8.2. Search Forward Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#search-backward-channel">8.3. Search Backward Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#search-fm-channel">8.4. Search FM Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#stop-search-channel">8.5. Stop Search Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#fm-play-or-pause">8.6. FM Play or Pause</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#play-previous-channel">8.7. Play Previous Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#play-next-channel">8.8. Play Next Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#play-previous-frequency-point">8.9. Play Previous Frequency Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#play-next-frequency-point">8.10. Play Next Frequency Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#play-specified-frequency-point">8.11. Play Specified Frequency Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#get-transmit-frequency-point">8.12. Get Transmit Frequency Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/fm_ctrl.html#set-transmit-frequency-point">8.13. Set Transmit Frequency Point</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/light_ctrl.html">9. Light Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/light_ctrl.html#get-light-control-information">9.1. Get Light Control Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/light_ctrl.html#set-light-control">9.2. Set Light Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/light_ctrl.html#light-control-information">9.3. Light Control Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/local_music_ctrl.html">10. Local Music Control Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#control-id3-information-stream-push">10.1. Control ID3 Information Stream Push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#get-all-id3-information">10.2. Get All ID3 Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id3-music-play-or-pause">10.3. ID3 Music Play or Pause</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id3-music-play-previous">10.4. ID3 Music Play Previous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/local_music_ctrl.html#id3-music-play-next">10.5. ID3 Music Play Next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/tws_func.html">11. TWS Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#get-device-settings-info">11.1. Get Device Settings Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#device-broadcast-stream-control">11.2. Device Broadcast Stream Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#set-device-function">11.3. Set Device Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#listen-to-device-broadcast-info">11.4. Listen to Device Broadcast Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#listen-to-device-request">11.5. Listen to Device Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#update-access-time">11.6. Update Access Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#set-device-name">11.7. Set Device Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#set-button-function">11.8. Set Button Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#set-flash-light-effect">11.9. Set Flash Light Effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#update-specified-function">11.10. Update Specified Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#distinguish-neckband-headphones">11.11. Distinguish Neckband Headphones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/tws_func.html#hearing-aid-headphones-fitting-function">11.12. Hearing Aid Headphones Fitting Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/anc_ctrl.html">12. ANC Settings Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#anc-mode-setting-function">12.1. ANC Mode Setting Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#adaptive-anc-algorithm">12.2. Adaptive ANC Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#smart-no-picking">12.3. Smart No-Picking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#scene-noise-reduction">12.4. Scene noise reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#wind-noise-monitoring">12.5. Wind noise monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/anc_ctrl.html#voice-enhancement">12.6. Voice Enhancement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/sound_card_func.html">13. Sound Card Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#get-sound-card-function-status">13.1. Get Sound Card Function Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#get-sound-card-effect-parameters">13.2. Get Sound Card Effect Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#set-sound-card-function">13.3. Set Sound Card Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#set-sound-card-effect">13.4. Set Sound Card Effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/sound_card_func.html#configuration-document">13.5. Configuration Document</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/search_device_func.html">14. Device Search Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#find-device">14.1. Find Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#stop-finding-device">14.2. Stop Finding Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#find-phone">14.3. Find Phone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/search_device_func.html#synchronize-search-device-status">14.4. Synchronize Search Device Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/custom_cmd_func.html">15. Custom Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/custom_cmd_func.html#send-custom-command">15.1. Send Custom Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/custom_cmd_func.html#receive-custom-command">15.2. Receive Custom Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/custom_cmd_func.html#notes">15.3. Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/dual_connection_func.html">16. Device Dual Connection Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#query-whether-device-dual-connection-function-is-supported">16.1. Query Whether Device Dual Connection Function is Supported</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#get-device-dual-connection-status">16.2. Get Device Dual Connection Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#set-device-dual-connection-switch">16.3. Set Device Dual Connection Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/dual_connection_func.html#get-device-information-of-connected-devices">16.4. Get Device Information of Connected Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/record_func.html">17. Recording Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#initialize-and-listen-to-recording-events">17.1. Initialize and Listen to Recording Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#start-recording">17.2. Start Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#stop-recording">17.3. Stop Recording</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/record_func.html#release-resources">17.4. Release Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/spdif_func.html">18. SPDIF Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#get-cached-spdif-status-information-play-status-audio-source">18.1. Get cached SPDIF status information (play status + audio source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#listen-to-spdif-status-information-play-status-audio-source">18.2. Listen to SPDIF status information (play status + audio source)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#real-time-get-spdif-status-information-play-status-audio-source">18.3. Real-time get SPDIF status information (play status + audio source).</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#set-play-status">18.4. Set play status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/spdif_func.html#set-audio-source">18.5. Set audio source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/big_file_transfer_func.html">19. Big File Transfer Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/big_file_transfer_func.html#create-big-file">19.1. Create Big File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/big_file_transfer_func.html#cancel-big-file-transfer">19.2. Cancel Big File Transfer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/charging_case_func.html">20. Color Screen Charging Case Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#monitor-color-screen-charging-case-events">20.1. Monitor Color Screen Charging Case Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#get-device-screen-information">20.2. Get Device Screen Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#get-sdk-information">20.3. Get SDK Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#screen-brightness-control">20.4. Screen Brightness Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#flashlight-control">20.5. Flashlight Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#screen-saver-control-function">20.6. Screen Saver Control Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#boot-animation">20.7. Boot Animation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#sync-weather-information">20.8. Sync Weather Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#message-push">20.9. Message Push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#wallpaper-control-function">20.10. Wallpaper Control Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/charging_case_func.html#resource-transfer-flow-chart">20.11. Resource Transfer Flow Chart</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/bmp_convert_func.html">21. Image Conversion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#convertresult">21.1. ConvertResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#onconvertlistener">21.2. OnConvertListener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#algorithm-description">21.3. Algorithm Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/bmp_convert_func.html#algorithm-selection-rules">21.4. Algorithm Selection Rules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/gif_convert_func.html">22. GIF Conversion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/gif_convert_func.html#gifbin">22.1. GifBin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/gif_convert_func.html#resultcallback">22.2. ResultCallback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/gif_convert_func.html#error-code">22.3. Error Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/translation_func.html">23. Translation Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#initialize-translation-function">23.1. Initialize Translation Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#is-a2dp-play-priority">23.2. Is A2DP Play Priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#enter-mode">23.3. Enter Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#exit-mode">23.4. Exit Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#destroy-object">23.5. Destroy Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/translation_func.html#interface-call-flow-chart">23.6. Interface Call Flow Chart</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/auracast_assistant_func.html">24. Auracast Assistant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/auracast_assistant_func.html#initialization">24.1. Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/auracast_assistant_func.html#destroy-object">24.2. Destroy Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/auracast_assistant_func.html#auracast-receiver-function">24.3. Auracast Receiver Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../function/file_browse_func.html">25. Directory Browsing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#data-description">25.1. Data Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#id2">25.2. Directory Browsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#file-deletion">25.3. File Deletion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#formatting">25.4. Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function/file_browse_func.html#notes">25.5. Notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bt_proxy.html" class="btn btn-neutral float-left" title="2 Bluetooth Proxy Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../function/terminology_note.html" class="btn btn-neutral float-right" title="1. Terminology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1624 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1 Bluetooth Processing Interface &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. RCSP Functional API" href="rcsp_api.html" />
+    <link rel="prev" title="3 Interface Description" href="../interface_desc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><span class="sectnum">1 </span>Bluetooth Processing Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command-reply-callback"><span class="sectnum">1.1 </span>Command reply callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bluetooth-operation-interface"><span class="sectnum">1.2 </span>Bluetooth Operation Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bleconnectparam"><span class="sectnum">1.2.1 </span>BleConnectParam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blecharacteristic"><span class="sectnum">1.2.2 </span>BleCharacteristic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bluetooth-event-listener"><span class="sectnum">1.3 </span>Bluetooth Event Listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ibluetoothcallback"><span class="sectnum">1.4 </span>IBluetoothCallback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rcsp_api.html">2. RCSP Functional API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. State Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. Function Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. Error Code</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 Interface Description</a></li>
+      <li class="breadcrumb-item active"><span class="sectnum">1 </span>Bluetooth Processing Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bluetooth-processing-interface">
+<span id="bt-manager-api"></span><h1><span class="sectnum">1 </span>Bluetooth Processing Interface<a class="headerlink" href="#bluetooth-processing-interface" title="Link to this heading"></a></h1>
+<p>The following interface can be used through <code class="docutils literal notranslate"><span class="pre">JL_BluetoothManager</span></code>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method Name</p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>Result</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>addEventListener</p></td>
+<td><p><a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   Bluetooth Event Listener</span></a></p></td>
+<td><p>boolean: result</p></td>
+<td><p>Add Bluetooth event listener; <code class="docutils literal notranslate"><span class="pre">BTEventCallback</span></code> is recommended.</p></td>
+</tr>
+<tr class="row-odd"><td><p>removeEventListener</p></td>
+<td><p><a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   Bluetooth Event Listener</span></a></p></td>
+<td><p>boolean: result</p></td>
+<td><p>Remove Bluetooth event listener</p></td>
+</tr>
+<tr class="row-even"><td><p>configure</p></td>
+<td><p>BluetoothOption: <a class="reference internal" href="../import.html#bluetooth-option"><span class="std std-ref">1.2.1   BluetoothOption</span></a></p></td>
+<td><p>void</p></td>
+<td><p>Configure Bluetooth library parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p>isBluetoothEnabled</p></td>
+<td><p>NULL</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Is Bluetooth enabled. Recommend using the method of <code class="docutils literal notranslate"><span class="pre">BluetoothUteil</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>openOrCloseBluetooth</p></td>
+<td><p>isEnable: Whether to enable</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Turn on or off Bluetooth. Recommend using the method of <code class="docutils literal notranslate"><span class="pre">BluetoothUteil</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>scan</p></td>
+<td><p>timeout: Scan timeout (in milliseconds)</p></td>
+<td><p>int: Result code</p></td>
+<td><p>Scanning BLE devices</p></td>
+</tr>
+<tr class="row-odd"><td><p>scan</p></td>
+<td><div class="line-block">
+<div class="line">type: Scan type</div>
+<div class="line-block">
+<div class="line">* BluetoothConstant#SCAN_TYPE_BLE</div>
+<div class="line">* BluetoothConstant#SCAN_TYPE_CLASSIC</div>
+</div>
+<div class="line">timeout: Scan timeout (in milliseconds)</div>
+</div>
+</td>
+<td><p>int: Result code</p></td>
+<td><p>Scan Bluetooth devices</p></td>
+</tr>
+<tr class="row-even"><td><p>stopScan</p></td>
+<td><p>NULL</p></td>
+<td><p>int: Result code</p></td>
+<td><p>Stop Bluetooth scanning</p></td>
+</tr>
+<tr class="row-odd"><td><p>getFoundedBluetoothDevices</p></td>
+<td><p>NULL</p></td>
+<td><div class="line-block">
+<div class="line">ArrayList&lt;BluetoothDevice&gt;:</div>
+<div class="line">List of discovered Bluetooth devices</div>
+</div>
+</td>
+<td><p>Get a list of discovered Bluetooth devices.</p></td>
+</tr>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>isConnectedByProfile</p></td>
+<td><p>device: Classic Bluetooth device</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Connect to classic Bluetooth service?</p></td>
+</tr>
+<tr class="row-even"><td><p>startConnectByBreProfiles</p></td>
+<td><p>device: Classic Bluetooth device</p></td>
+<td><p>void</p></td>
+<td><div class="line-block">
+<div class="line">Connect to the specified classic Bluetooth device;</div>
+<div class="line">the connection status is in the <a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   Bluetooth Event Listener</span></a> callback.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>disconnectByProfiles</p></td>
+<td><p>device: Classic Bluetooth device</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Disconnect the specified classic Bluetooth</p></td>
+</tr>
+<tr class="row-even"><td><p>unpair</p></td>
+<td><p>device: Classic Bluetooth device</p></td>
+<td><p>int: Result code</p></td>
+<td><div class="line-block">
+<div class="line">Unpair from Classic Bluetooth.</div>
+<div class="line">Pairing status is in the <a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   Bluetooth Event Listener</span></a> callback.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>synchronizationBtDeviceStatus</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>Synchronize system Bluetooth status</p></td>
+</tr>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>getConnectedDevice</p></td>
+<td><p>NULL</p></td>
+<td><p>BluetoothDevice: using device</p></td>
+<td><p>Get connected and in use devices</p></td>
+</tr>
+<tr class="row-even"><td><p>connect</p></td>
+<td><p>device: Bluetooth device</p></td>
+<td><p>void</p></td>
+<td><p>Connect Bluetooth device</p></td>
+</tr>
+<tr class="row-odd"><td><p>connect</p></td>
+<td><div class="line-block">
+<div class="line">device: Bluetooth device</div>
+<div class="line">int: Connect Way</div>
+<div class="line-block">
+<div class="line">* BluetoothConstant.PROTOCOL_TYPE_BLE</div>
+<div class="line">* BluetoothConstant.PROTOCOL_TYPE_SPP</div>
+<div class="line">* BluetoothConstant.PROTOCOL_TYPE_GATT_OVER_BR_EDR</div>
+</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>Connect Bluetooth device using the specified communication method.</p></td>
+</tr>
+<tr class="row-even"><td><p>disconnect</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>Disconnect from the connected Bluetooth device in use.</p></td>
+</tr>
+<tr class="row-odd"><td><p>disconnect</p></td>
+<td><p>device: Bluetooth device</p></td>
+<td><p>void</p></td>
+<td><p>Disconnect the specified Bluetooth device</p></td>
+</tr>
+<tr class="row-even"><td><p>fastConnect</p></td>
+<td><p>NULL</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Quick reconnection</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>getMappedDeviceAddress</p></td>
+<td><p>address: Bluetooth device address</p></td>
+<td><p>String: Mapping device address</p></td>
+<td><p>Get the mapping address of the specified address</p></td>
+</tr>
+<tr class="row-odd"><td><p>getHistoryBluetoothDeviceList</p></td>
+<td><p>NULL</p></td>
+<td><div class="line-block">
+<div class="line">List&lt;HistoryBluetoothDevice&gt;:</div>
+<div class="line">Connection history list</div>
+</div>
+</td>
+<td><p>Get connection history list</p></td>
+</tr>
+<tr class="row-even"><td><p>removeHistoryDevice</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../module/bt_proxy.html#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a> : Connecting History</div>
+<div class="line">IActionCallback: Operation result callback</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>Delete specified connection history</p></td>
+</tr>
+<tr class="row-odd"><td><p>reconnectHistoryBluetoothDevice</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../module/bt_proxy.html#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a> : Connecting History</div>
+<div class="line">timeout : Connection timeout, in milliseconds</div>
+<div class="line">IActionCallback: Operation result callback</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>Reconnect to the specified connection history</p></td>
+</tr>
+<tr class="row-even"><td><p>clearHistoryDeviceRecord</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>Clear connection history cache</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sendCommandAsync</p></td>
+<td><div class="line-block">
+<div class="line">device: Connected device</div>
+<div class="line">CommandBase: RCSP Command</div>
+<div class="line">timeout: Command timeout (in milliseconds)</div>
+<div class="line"><a class="reference internal" href="#rcsp-cmd-cb"><span class="std std-ref">1.1   Command reply callback</span></a></div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>Send RCSP command</p></td>
+</tr>
+<tr class="row-odd"><td><p>sendData</p></td>
+<td><div class="line-block">
+<div class="line">device: Connected device</div>
+<div class="line">CommandBase: Responsive command</div>
+<div class="line">data: Data to be sent</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>Send data command</p></td>
+</tr>
+<tr class="row-even"><td><p>sendCommandResponse</p></td>
+<td><div class="line-block">
+<div class="line">device: Connected device</div>
+<div class="line">CommandBase : Reply command</div>
+</div>
+</td>
+<td><p>void</p></td>
+<td><p>Send reply command</p></td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>getConnectedDeviceList</p></td>
+<td><p>NULL</p></td>
+<td><div class="line-block">
+<div class="line">List&lt;BluetoothDevice&gt;:</div>
+<div class="line">List of connected devices</div>
+</div>
+</td>
+<td><p>Get list of connected devices</p></td>
+</tr>
+<tr class="row-odd"><td><p>isConnectedBtDevice</p></td>
+<td><p>device: Bluetooth device</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Is the device connected?</p></td>
+</tr>
+<tr class="row-even"><td><p>isUseBtDevice</p></td>
+<td><p>device: Bluetooth device</p></td>
+<td><p>boolean: result</p></td>
+<td><p>Is the device in use?</p></td>
+</tr>
+<tr class="row-odd"><td><p>switchConnectedDevice</p></td>
+<td><p>device: Connected device</p></td>
+<td><p>void</p></td>
+<td><p>Switch to the device you are using</p></td>
+</tr>
+<tr class="row-even"><td><p>destroy</p></td>
+<td><p>NULL</p></td>
+<td><p>void</p></td>
+<td><p>Release resources</p></td>
+</tr>
+</tbody>
+</table>
+<section id="command-reply-callback">
+<span id="rcsp-cmd-cb"></span><h2><span class="sectnum">1.1 </span>Command reply callback<a class="headerlink" href="#command-reply-callback" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">RcspCommandCallback</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback reply command</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Connected device</span>
+<span class="cm">     * @param cmd  Reply command</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback error event</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Connected device</span>
+<span class="cm">     * @param error  error message</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onErrCode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bluetooth-operation-interface">
+<span id="bt-op-api"></span><h2><span class="sectnum">1.2 </span>Bluetooth Operation Interface<a class="headerlink" href="#bluetooth-operation-interface" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBluetoothOperation</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/*-------------------------------- BluetoothAdapter Op ------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether the Bluetooth module is enabled.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Result. Returns true if Bluetooth is enabled; false otherwise.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isBluetoothEnabled</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Enables the Bluetooth module.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Requires dynamic user permission.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">enableBluetooth</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Disables the Bluetooth module.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disableBluetooth</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Registers a Bluetooth callback listener.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bluetoothCallback Bluetooth callback listener. It is recommended to use {@link BluetoothCallbackImpl}.</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">registerBluetoothCallback</span><span class="p">(</span><span class="n">IBluetoothCallback</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Unregisters a Bluetooth callback listener.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bluetoothCallback Bluetooth callback listener. It is recommended to use {@link BluetoothCallbackImpl}.</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">unregisterBluetoothCallback</span><span class="p">(</span><span class="n">IBluetoothCallback</span><span class="w"> </span><span class="n">bluetoothCallback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Returns the currently connected Bluetooth device object.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;In BLE mode, returns the BLE device object.&lt;br/&gt;</span>
+<span class="cm">     * In SPP mode, note that the connection may be established via BLE first and then converted to an SPP connection,</span>
+<span class="cm">     * so it may first return the BLE object, followed by the SPP (classic Bluetooth) object.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return The communication channel object. Returns null if no communication channel is established.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getConnectedDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sets the currently connected and active Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the currently used BluetoothGatt object.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothGatt The currently used BluetoothGatt object</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="nf">getConnectedBluetoothGatt</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the BluetoothGatt object for a specified device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE device</span>
+<span class="cm">     * @return BluetoothGatt The connected BluetoothGatt object</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="nf">getDeviceGatt</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the list of connected devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; List of connected devices</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getConnectedDeviceList</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a device is connected.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sets Bluetooth configuration options.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bluetoothOption Bluetooth configuration options</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setBluetoothOption</span><span class="p">(</span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">bluetoothOption</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets Bluetooth configuration options.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothOption Bluetooth configuration options</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothOption</span><span class="w"> </span><span class="nf">getBluetoothOption</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets a remote Bluetooth device object.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param address Bluetooth device address</span>
+<span class="cm">     * @return BluetoothDevice Bluetooth device object. Returns the device object if it exists; otherwise, returns null.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getRemoteDevice</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the cached classic Bluetooth device object.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return BluetoothDevice Cached classic Bluetooth device object</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getCacheEdrDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*-----------------------------------scan device op--------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether device scanning is in progress.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isScanning</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the list of discovered Bluetooth devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;The list only includes devices of the scanned type. Scanning operations clear the cached list.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return ArrayList&lt;BluetoothDevice&gt; List of discovered Bluetooth devices</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDiscoveredBluetoothDevices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the current scan type.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return int Scan type</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_BLE} --- BLE devices &lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_CLASSIC} --- Classic Bluetooth devices</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getScanType</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Starts scanning for Bluetooth devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;This method scans all Bluetooth devices, but the SDK only reports classic Bluetooth devices via callbacks.&lt;/p&gt;</span>
+<span class="cm">     * &lt;p&gt;If no device is found before the timeout, a scan timeout error is reported via {@link IBluetoothCallback#onError(BaseError)}.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param timeout Timeout value (in milliseconds)</span>
+<span class="cm">     * @return int Operation result code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * If successful, scan status will be reported via {@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)}.&lt;br/&gt;</span>
+<span class="cm">     * Discovered devices will be reported via {@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)}.&lt;br/&gt;</span>
+<span class="cm">     * Pop-up products will trigger {@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">startDeviceScan</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Stops scanning for Bluetooth devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return int Operation result code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">stopDeviceScan</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Starts scanning for BLE devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;If no device is found before the timeout, a scan timeout error is reported via {@link IBluetoothCallback#onError(BaseError)}.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param timeout Timeout value (in milliseconds)</span>
+<span class="cm">     * @return int Operation result code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed &lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * If successful, scan status will be reported via {@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)}.&lt;br/&gt;</span>
+<span class="cm">     * Discovered devices will be reported via {@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)}.&lt;br/&gt;</span>
+<span class="cm">     * Pop-up products will trigger {@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">startBLEScan</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Stops scanning for BLE devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return int Operation result code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">stopBLEScan</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/*-----------------------------------pair op--------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a specific device is currently pairing.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isPairing</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a specific device is already paired.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isPaired</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the list of paired devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; List of paired devices</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getPairedDevices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Starts the pairing process for a specified device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return int Result code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed&lt;br/&gt;</span>
+<span class="cm">     * If successful, status will be reported via {@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">pair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Starts the pairing process for a specified device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  Bluetooth device</span>
+<span class="cm">     * @param pairWay Pairing method, valid range: [0, 2]</span>
+<span class="cm">     * @return int Result code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed&lt;br/&gt;</span>
+<span class="cm">     * If successful, status will be reported via {@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">pair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@IntRange</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pairWay</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Cancels pairing with a Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return int Operation code</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed&lt;br/&gt;</span>
+<span class="cm">     * If successful, status will be reported via {@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">unPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Attempts to start the pairing process for a specified device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Performs pairing in a queued manner to avoid excessive operations that could destabilize the Bluetooth system. This method is recommended for pairing.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryToPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Attempts to start the pairing process for a specified device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Performs pairing in a queued manner to avoid excessive operations that could destabilize the Bluetooth system. This method is recommended for pairing.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  Bluetooth device</span>
+<span class="cm">     * @param pairWay Pairing method, valid range: [0, 2]</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryToPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@IntRange</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pairWay</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Attempts to start the unpairing process for a specified device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Performs unpairing in a queued manner to avoid excessive operations that could destabilize the Bluetooth system. This method is recommended for unpairing.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">tryToUnPair</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*-----------------------------------br/edr op--------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a Bluetooth device supports the HFP profile.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">deviceHasHfp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a Bluetooth device supports the A2DP profile.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">deviceHasA2dp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether an HFP connection has been established with a Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return int Connection status&lt;p&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">isConnectedByHfp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether an A2DP connection has been established with a Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return int Connection status&lt;p&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">isConnectedByA2dp</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a classic Bluetooth profile (A2DP or HFP) connection has been established with a device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return int Connection status&lt;p&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected &lt;br/&gt;</span>
+<span class="cm">     * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">isConnectedByProfile</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a classic Bluetooth connection is in progress.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isBrEdrConnecting</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the classic Bluetooth device currently being connected.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothDevice Classic Bluetooth device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getConnectingBrEdrDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects via classic Bluetooth profiles.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return boolean Operation result &lt;p&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onBrEdrConnection(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">connectByProfiles</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Disconnects a classic Bluetooth connection.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disconnectByProfiles</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sets the specified connected device as the active audio output device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Specified connected device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">setActivityBluetoothDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the current active audio output Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothDevice Current active audio output Bluetooth device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getActivityBluetoothDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the list of connected SPP devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; List of connected SPP devices</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getConnectedSppList</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a device is connected via SPP.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnectedSppDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects an SPP channel.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return int Operation result</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed&lt;br/&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectSPPDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Disconnects an SPP channel.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disconnectSPPDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sends a data packet via the SPP channel.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device</span>
+<span class="cm">     * @param data   Data packet</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">writeDataToSppDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the list of connected classic Bluetooth devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; List of connected classic Bluetooth devices</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDevicesConnectedByProfile</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/*----------------------------------ble op----------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the list of paired BLE devices.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return List&lt;BluetoothDevice&gt; List of paired BLE devices, or null if none exist</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getPairedBLEDevices</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the negotiated MTU of a connected BLE device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Connected BLE device</span>
+<span class="cm">     * @return int Negotiated BLE MTU</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getBleMtu</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a device is a connected BLE device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnectedBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Requests to adjust the BLE MTU.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param mtu    Requested MTU value</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">requestBleMtu</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mtu</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Enables or disables BLE characteristic notifications.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param gatt              Bluetooth GATT object</span>
+<span class="cm">     * @param bleCharacteristic BLE characteristic</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">enableBLEDeviceNotification</span><span class="p">(</span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="n">gatt</span><span class="p">,</span><span class="w"> </span><span class="n">BleCharacteristic</span><span class="w"> </span><span class="n">bleCharacteristic</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects to a specified BLE device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return int Operation code&lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link OnBtBleListener#onBleConnection(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects to a specified BLE device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param param  Connection parameters</span>
+<span class="cm">     * @return int Operation code&lt;p&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting&lt;br/&gt;</span>
+<span class="cm">     * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed&lt;br/&gt;</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link OnBtBleListener#onBleConnection(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">BleConnectParam</span><span class="w"> </span><span class="n">param</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Disconnects a BLE device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE device</span>
+<span class="cm">     * @return boolean Operation result&lt;p&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onBleConnection(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">disconnectBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sends a data packet via BLE write service.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device             BLE device</span>
+<span class="cm">     * @param serviceUUID        Service UUID</span>
+<span class="cm">     * @param characteristicUUID Characteristic UUID</span>
+<span class="cm">     * @param writeData          Data packet</span>
+<span class="cm">     * @return boolean Send result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">writeDataToBLEDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUUID</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicUUID</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">writeData</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/*---------------------------------- special op ----------------------------*/</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Synchronizes connection history records.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">syncHistoryBtDeviceRecord</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Gets the device currently being connected.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return BluetoothDevice Device currently being connected</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="nf">getConnectingDevice</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects a Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Connects based on device type: BLE devices use BLE connection; classic Bluetooth devices use classic Bluetooth connection.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return int Result code&lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP connecting&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- Device connecting &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- Device already connected&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onConnection(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBtDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects a Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Connects based on device type: BLE devices use BLE connection; classic Bluetooth devices use classic Bluetooth connection.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     Bluetooth device</span>
+<span class="cm">     * @param connectWay Connection method</span>
+<span class="cm">     *                   &lt;p&gt;</span>
+<span class="cm">     *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE mode &lt;br/&gt;</span>
+<span class="cm">     *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP mode&lt;br/&gt;</span>
+<span class="cm">     *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- GATT over BR/EDR mode</span>
+<span class="cm">     *                   &lt;/p&gt;</span>
+<span class="cm">     * @return int Result code&lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_OP_FAILED} --- Operation failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE connecting&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE connection failed&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP connecting&lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- Device connecting &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- Device already connected&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onConnection(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">connectBtDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">connectWay</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Disconnects a Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Connection status will be reported via {@link IBluetoothCallback#onConnection(BluetoothDevice, int)}.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">disconnectBtDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Connects a classic Bluetooth device.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param breDevice Bluetooth device</span>
+<span class="cm">     * @return int Result code &lt;p&gt;</span>
+<span class="cm">     * {@link ErrorCode#ERR_NONE} --- Success &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_PARAMETER} --- Invalid parameter &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_EDR_CONNECTING} --- Classic Bluetooth connecting &lt;br/&gt;</span>
+<span class="cm">     * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- Reflection interface call failed&lt;br/&gt;</span>
+<span class="cm">     * &lt;br/&gt;</span>
+<span class="cm">     * If successful, connection status will be reported via {@link IBluetoothCallback#onBtDeviceConnectStatus(BluetoothDevice, int)}.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">startConnectByBreProfiles</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">breDevice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a device connection is in progress.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isConnecting</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a Bluetooth device has passed certification.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">checkDeviceIsCertify</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Fast reconnect.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Connection results are reported via {@link IBluetoothCallback}. You must register the callback using {@link #registerBluetoothCallback(IBluetoothCallback)}.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return false if no cached BLE address exists and reconnection is not possible; true if reconnection has started.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">fastConnect</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a BLE device is connected.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Synchronizes the system&#39;s BLE connection list to verify whether the connected BLE device is recognized by this solution.&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkBleIsConnected</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Synchronizes Bluetooth device status.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Verifies whether Bluetooth devices are properly connected.&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">synchronizationBtDeviceStatus</span><span class="p">();</span><span class="w"> </span><span class="c1">// Synchronize Bluetooth device status</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Queries connection history records.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param address Device address</span>
+<span class="cm">     * @return HistoryBluetoothDevice Connection history record</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="nf">findHistoryBluetoothDevice</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Deletes a historical device record.</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;Synchronously removes pairing for both BLE and classic Bluetooth and clears mapping relationships.&lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param historyBtDevice Historical device record</span>
+<span class="cm">     * @param callback        Operation callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeHistoryDevice</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">historyBtDevice</span><span class="p">,</span><span class="w"> </span><span class="n">IActionCallback</span><span class="o">&lt;</span><span class="n">HistoryBluetoothDevice</span><span class="o">&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Checks whether a reconnection is in progress.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isReconnecting</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Reconnects to a historical device record.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param historyBtDevice Historical device record</span>
+<span class="cm">     * @param timeoutMs       Timeout (in milliseconds)</span>
+<span class="cm">     * @param listener        Reconnection listener</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">reconnectHistoryBluetoothDevice</span><span class="p">(</span><span class="n">HistoryBluetoothDevice</span><span class="w"> </span><span class="n">historyBtDevice</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">,</span><span class="w"> </span><span class="n">OnReconnectHistoryRecordListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Stops reconnecting to a device.</span>
+<span class="cm">     * @return boolean Operation result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">stopReconnect</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Releases resources.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#bt-callback"><span class="std std-ref">1.4   IBluetoothCallback</span></a></p></li>
+<li><p><a class="reference internal" href="#ble-connect-param"><span class="std std-ref">1.2.1   BleConnectParam</span></a></p></li>
+<li><p><a class="reference internal" href="#ble-chanacteristic"><span class="std std-ref">1.2.2   BleCharacteristic</span></a></p></li>
+<li><p><a class="reference internal" href="../module/bt_proxy.html#history-device"><span class="std std-ref">2.4.2.1   HistoryBluetoothDevice</span></a></p></li>
+</ol>
+</div>
+<section id="bleconnectparam">
+<span id="ble-connect-param"></span><h3><span class="sectnum">1.2.1 </span>BleConnectParam<a class="headerlink" href="#bleconnectparam" title="Link to this heading"></a></h3>
+<p>BLE Connection Parameters</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BleConnectParam</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ConnectParam</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether reconnection is required</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Note: Reconnection mechanism upon abnormal disconnection</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">reconnect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to force using BLE</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isMandatoryUseBLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE transmission MTU</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Note: To maintain compatibility with Android 4.0 phones, the default MTU is 23; usable data length: 20;&lt;br/&gt;</span>
+<span class="cm">     * With improvements in mobile phone systems, the maximum MTU for current phones is 512. It is recommended to increase the MTU to 512.</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mtu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">BLE_MTU_MIN</span><span class="p">;</span><span class="w">  </span><span class="c1">// Adjust Bluetooth MTU</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * List of BLE communication UUIDs</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#KEY_BLE_SERVICE_UUID} Service UUID &lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#KEY_BLE_WRITE_CHARACTERISTIC_UUID} Write characteristic UUID &lt;br/&gt;</span>
+<span class="cm">     * {@link BluetoothConstant#KEY_BLE_NOTIFICATION_CHARACTERISTIC_UUID} Notification characteristic UUID &lt;br/&gt;</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BleCharacteristic</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bleCharacteristics</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to use BLE pairing method</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isUseBleBondWay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether to auto-connect BLE</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isAutoConnectBle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Preferred Phy</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PhyMask</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">preferredPhy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">PHY_LE_1M_MASK</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Preferred transmission method for GATT connection to dual-mode devices</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@BleTransport</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">transport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BluetoothConstant</span><span class="p">.</span><span class="na">TRANSPORT_LE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Reconnection delay time</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">reconnectDelay</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Reconnection attempt limit</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">retryLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#ble-chanacteristic"><span class="std std-ref">1.2.2   BleCharacteristic</span></a></p></li>
+</ol>
+</div>
+</section>
+<section id="blecharacteristic">
+<span id="ble-chanacteristic"></span><h3><span class="sectnum">1.2.2 </span>BleCharacteristic<a class="headerlink" href="#blecharacteristic" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BleCharacteristic</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Service UUID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUUID</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Characteristic UUID</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicUUID</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Required characteristic property</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">requiredProperty</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether it is a primary attribute</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPrimary</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="bluetooth-event-listener">
+<span id="bt-event-listener"></span><h2><span class="sectnum">1.3 </span>Bluetooth Event Listener<a class="headerlink" href="#bluetooth-event-listener" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBluetoothEventListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Bluetooth adapter status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bEnabled Whether Bluetooth is turned on</span>
+<span class="cm">     * @param bHasBle  Whether BLE is supported</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAdapterStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bEnabled</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bHasBle</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device discovery status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param bBle   Whether discovering BLE devices</span>
+<span class="cm">     * @param bStart Whether scanning has started</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscoveryStatus</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">bBle</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bStart</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device discovery callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device discovery callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device         Bluetooth device</span>
+<span class="cm">     * @param bleScanMessage Advertising information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Product popup window callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device         Bluetooth device</span>
+<span class="cm">     * @param bleScanMessage Advertising information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onShowDialog</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BleScanMessage</span><span class="w"> </span><span class="n">bleScanMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Bluetooth device pairing status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Pairing status</span>
+<span class="cm">     *               &lt;p&gt;Reference values:&lt;br&gt;</span>
+<span class="cm">     *               {@link BluetoothDevice#BOND_NONE} or</span>
+<span class="cm">     *               {@link BluetoothDevice#BOND_BONDING} or</span>
+<span class="cm">     *               {@link BluetoothDevice#BOND_BONDED}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBondStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Bluetooth device connection status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Connection status</span>
+<span class="cm">     *               &lt;p&gt;Reference values:&lt;br&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">   </span><span class="cm">/**</span>
+<span class="cm">    * Callback for switching to a connected and currently used device</span>
+<span class="cm">    *</span>
+<span class="cm">    * @param device Connected device</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSwitchConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * A2DP service status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Connection status</span>
+<span class="cm">     *               &lt;p&gt;Reference values:&lt;br&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onA2dpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * HFP service status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Connection status</span>
+<span class="cm">     *               &lt;p&gt;Reference values:&lt;br&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHfpStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * SPP connection status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Connection status</span>
+<span class="cm">     *               &lt;p&gt;Reference values:&lt;br&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive RCSP command data from the device</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param cmd    RCSP command data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive data packet from the device</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param data   Data packet</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceData</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive voice data from the device</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param data   Voice data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Deprecated</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceVoiceData</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive voice data packet from the device</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param data   Voice information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceVoiceData</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceData</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device VAD end callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceVadEnd</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive RCSP response data from the device</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Bluetooth device</span>
+<span class="cm">     * @param response RCSP command response data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Error event callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param error Error information</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onError</span><span class="p">(</span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">);</span><span class="w">  </span><span class="c1">//Error event callback</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>Recommended to use <code class="docutils literal notranslate"><span class="pre">BTEventCallback</span></code> implementation</p></li>
+</ol>
+</div>
+</section>
+<section id="ibluetoothcallback">
+<span id="bt-callback"></span><h2><span class="sectnum">1.4 </span>IBluetoothCallback<a class="headerlink" href="#ibluetoothcallback" title="Link to this heading"></a></h2>
+<p>Bluetooth Callback</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IBluetoothCallback</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">IBluetoothEventListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device UUID acquisition callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Paired device</span>
+<span class="cm">     * @param uuids  Device UUID array</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceUuidsDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ParcelUuid</span><span class="o">[]</span><span class="w"> </span><span class="n">uuids</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Data reception callback via SPP channel</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param data   Data sent by the device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSppDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE find device service callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   BLE device</span>
+<span class="cm">     * @param status   Search result, success is 0 ({@link BluetoothGatt#GATT_SUCCESS}), otherwise other values</span>
+<span class="cm">     * @param services Found services</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleServiceDiscovery</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BluetoothGattService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">services</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE device connection status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE device</span>
+<span class="cm">     * @param status Connection status&lt;p&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} --- Connection disconnected &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} --- Connection successful &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} --- Connection failed &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} --- Connecting &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED} --- Connected</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE data buffer send data setting callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE device</span>
+<span class="cm">     * @param block  Buffer size</span>
+<span class="cm">     * @param status Result code. 0 - Success, others - Failure</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleDataBlockChanged</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * BLE characteristic Notification status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device             BLE device</span>
+<span class="cm">     * @param serviceUuid        Main service UUID</span>
+<span class="cm">     * @param characteristicUuid Characteristic UUID</span>
+<span class="cm">     * @param bEnabled           Enable result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleNotificationStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bEnabled</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Receive data sent by BLE device callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device BLE device</span>
+<span class="cm">     * @param data   Received data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleDataNotification</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicsUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send data to BLE device result callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device              BLE device</span>
+<span class="cm">     * @param serviceUuid         Main service UUID</span>
+<span class="cm">     * @param characteristicsUuid Characteristic UUID</span>
+<span class="cm">     * @param data                Sent data</span>
+<span class="cm">     * @param status              Send result 0 - Success, others - Failure</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBleWriteStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">serviceUuid</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="n">characteristicsUuid</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * System callback for Bluetooth device connection status</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Connection status&lt;p&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBtDeviceConnectStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * System callback for Bluetooth connection configuration</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param gatt     Bluetooth Gatt object</span>
+<span class="cm">     * @param interval Transmission interval</span>
+<span class="cm">     * @param latency  Latency</span>
+<span class="cm">     * @param timeout  Timeout (unit: milliseconds)</span>
+<span class="cm">     * @param status   Status code</span>
+<span class="cm">     *                 &lt;p&gt;0 indicates success, others indicate an error&lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectionUpdated</span><span class="p">(</span><span class="n">BluetoothGatt</span><span class="w"> </span><span class="n">gatt</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">interval</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">latency</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Callback for Classic Bluetooth connection status</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Classic Bluetooth device object</span>
+<span class="cm">     * @param status Connection status&lt;p&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- Disconnected &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- Connecting &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- Connected &lt;br/&gt;</span>
+<span class="cm">     *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- Disconnecting</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBrEdrConnection</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#bt-event-listener"><span class="std std-ref">1.3   Bluetooth Event Listener</span></a></p></li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../interface_desc.html" class="btn btn-neutral float-left" title="3 Interface Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rcsp_api.html" class="btn btn-neutral float-right" title="2. RCSP Functional API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

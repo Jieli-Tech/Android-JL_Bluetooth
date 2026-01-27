@@ -1,0 +1,109 @@
+SDK说明
+********************************************            
+
+1. SDK简介
+==================================             
+
+|   杰理之家SDK基于杰理RCSP协议实现, 主要支持音箱SDK和耳机SDK, 也支持直播声卡等系列产品。SDK提供了丰富的功能接口:
+
+       * 音乐控制功能  --- 手机音乐播放控制、设备音乐播放控制、ID3音乐信息显示  
+       * 设备设置功能  --- 音量设置、状态查询、重启设备等
+       * 文件浏览功能  --- 查看SD卡、U盘等音乐文件列表
+       * 闹钟管理功能  --- 闹钟的增删改查, 闹钟铃声设置
+       * FM控制功能    --- FM收音功能、FM发射功能
+       * 灯光控制功能  --- 灯光闪烁, 频率, 颜色(RGB), 模式等控制, 实现酷炫效果
+       * EQ调节功能    --- 均衡器音效调节, 轻易打造卓越音质
+       * 音效调节功能  --- 混响、高低音设置
+       * 按键设置功能  --- 耳机按键功能设置, 丰富耳机功能
+       * 查找设备功能  --- 查找设备或查找手机
+       * ANC设置功能   --- 噪声处理模式设置, 支持正常模式、主动降噪模式、通透模式等
+       * 自定义命令    --- 支持客户拓展功能
+
+
+.. _framework:
+
+2. SDK架构
+==============================         
+
+.. graphviz::
+    :caption: 杰理之家SDK架构
+    :align: center
+
+    digraph framework {
+        rankdir=BT;
+        compound=true;
+
+        subgraph cluster_bt{
+            label="蓝牙代理层";
+            bgcolor="darkslategray2";
+            width=10;
+
+            subgraph cluster_io {
+                label="蓝牙IO";
+                style="dashed";
+                width=10;
+
+                bt_recv [label="接收数据", shape="record", width=5];
+                bt_send [label="发送数据", shape="record", width=5];
+            }
+            
+            subgraph cluster_bt_fun{
+                label="功能封装";
+                style="dashed";
+                width=10;
+
+                bt_0 [label="设备管理", shape="record", width=3]; 
+                bt_1 [label="弹窗快连", shape="record", width=3]; 
+                bt_2 [label="历史记录", shape="record", width=3];
+            }
+
+            bt_0 -> bt_recv [dir="both", style="invis", ltail="cluster_bt_fun", lhead="cluster_io"];
+        }
+
+        subgraph cluster_rcsp{
+            label="RCSP协议层";
+            bgcolor="lightgreen";
+            rankdir=BT;
+            width=10;
+
+            subgraph cluster_rcsp_proxy {
+                label="代理层";
+                style="dashed";
+                width=10
+
+                rcsp_0 [label="解析数据", shape="record", width=3];
+                rcsp_1 [label="组装数据", shape="record", width=3]; 
+            }
+
+            rcsp_2 [label="处理数据层", shape="record", width=10];
+            rcsp_1 -> rcsp_2 [dir="both", ltail="cluster_rcsp_proxy"];
+        }
+
+        subgraph cluster_func{
+            label="功能实现层";
+            bgcolor="lightyellow";
+            width=10;
+            
+            fun_0 [label="音乐控制", shape="record", width=1];
+            fun_1 [label="FM控制", shape="record", width=1];
+            fun_2 [label="灯光控制", shape="record", width=1];
+            fun_3 [label="按键设置", shape="record", width=1];
+            fun_4 [label="闹钟管理", shape="record", width=1];
+            fun_5 [label="查找设备", shape="record", width=1];
+            fun_6 [label="AUX控制", shape="record", width=1];
+            fun_7 [label="EQ调节", shape="record", width=1];
+            fun_8 [label="音效调节", shape="record", width=1];
+            fun_9 [label="声卡功能", shape="record", width=1];
+        }
+
+        bt_recv -> rcsp_0 [dir="both", ltail="cluster_io", lhead="cluster_rcsp_proxy"];
+        rcsp_2 -> fun_4 [label="依赖实现", ltail="cluster_rcsp", lhead="cluster_func"];
+    }
+
+
+.. important::
+    | 1. ``RCSP处理层`` 依赖 ``RCSP协议`` 实现, ``RCSP协议`` 依赖 ``蓝牙代理层`` 实现 
+    | 2. SDK默认实现了 ``蓝牙代理层`` 的功能，也支持客户外部实现。 
+
+    
+

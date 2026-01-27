@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_c242400_white_shape">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/about_call_translation"
+        android:textColor="@color/black_E6000000"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        android:textColor="@color/black_80000000"
+        android:text="@string/call_translation_introduction"
+        android:lineSpacingExtra="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_call_translation_people"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_translated_voice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-20dp"
+        android:layout_marginStart="4dp"
+        android:padding="6dp"
+        android:text="@string/translated_voice"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue_448eff"
+        android:drawablePadding="4dp"
+        android:background="@drawable/bg_c14_blue_shape"
+        app:layout_constraintWidth_default="wrap"
+        app:drawableStartCompat="@drawable/ic_translation_assistant_blue"
+        app:layout_constraintTop_toTopOf="@+id/iv_image"
+        app:layout_constraintEnd_toStartOf="@+id/iv_image"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_image"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_translation_assistant"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/translation_assistant"
+        android:textSize="@dimen/text_12sp"
+        android:textColor="@color/black_CC000000"
+        app:layout_constraintWidth_default="wrap"
+        app:layout_constraintTop_toBottomOf="@+id/tv_translated_voice"
+        app:layout_constraintStart_toStartOf="@+id/tv_translated_voice"
+        app:layout_constraintEnd_toEndOf="@+id/tv_translated_voice"/>
+
+    <TextView
+        android:id="@+id/tv_original_sound"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-20dp"
+        android:layout_marginEnd="4dp"
+        android:padding="6dp"
+        android:text="@string/original_sound"
+        android:textSize="@dimen/text_13sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange_F89514"
+        android:drawablePadding="4dp"
+        android:background="@drawable/bg_c14_orange_shape"
+        app:layout_constraintWidth_default="wrap"
+        app:drawableStartCompat="@drawable/ic_translation_src_voice_orange"
+        app:layout_constraintTop_toTopOf="@+id/iv_image"
+        app:layout_constraintStart_toEndOf="@+id/iv_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_image"/>
+
+    <TextView
+        android:id="@+id/tv_talk_voice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/other_person_voice"
+        android:textSize="@dimen/text_12sp"
+        android:textColor="@color/black_CC000000"
+        app:layout_constraintWidth_default="wrap"
+        app:layout_constraintTop_toBottomOf="@+id/tv_original_sound"
+        app:layout_constraintStart_toStartOf="@+id/tv_original_sound"
+        app:layout_constraintEnd_toEndOf="@+id/tv_original_sound" />
+
+    <TextView
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:gravity="center"
+        android:text="@string/i_know_it_2"
+        android:textColor="@color/black_E6000000"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_15sp"
+        android:background="@drawable/bg_btn_c8_white_gray_selector"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

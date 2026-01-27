@@ -1,0 +1,568 @@
+.. _auracast_assistant_func:
+
+Auracast Assistant
+********************************************************
+
+Function implementation class name: ``AuracastAssistant``
+
+
+Initialization
+========================================================
+
+Initialize AuracastAssistant object
+
+.. code-block:: java
+
+    public void init() {
+        //Get RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get current operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //Context
+        Context context = MainApplication.getApplication();
+        //Initialize AuracastAssistant object
+        auracastAssistant = new AuracastAssistant(context, controller.getRcspOp(), usingDevice);
+        //Whether device supports Auracast function
+        auracastAssistant.isSupportAuracast();
+    }
+
+
+
+.. note:: 
+    1. Users can bind ``AuracastAssistant`` by **specifying operation device object**
+    2. If user passes ``device`` field as ``null``, SDK will default to using ``RcspOpImpl#getConnectedDevice()``
+    3. If ``AuracastAssistant#getDevice()`` is ``null``, function cannot be used normally
+    4. If device does not support **Auracast** function, ``AuracastAssistant`` functions cannot be used
+
+
+
+Destroy Object
+===================================================
+
+Destroy AuracastAssistant object, release resources
+
+.. code-block:: java
+
+    public void destroy() {
+        if(null == auracastAssistant) return;
+        //Destroy object
+        auracastAssistant.destroy();
+    }
+
+
+.. important:: 
+    1. After ``AuracastAssistant`` object is destroyed, set object to ``null`` to avoid business processes still calling its function interfaces after destruction
+    2. When **device disconnects**, ``AuracastAssistant`` needs to be destroyed
+
+
+
+
+.. _auracast_receiver_func:
+
+Auracast Receiver Function
+==================================================
+
+Receiver function: Search Auracast broadcast, listen to Auracast broadcast, remove Auracast broadcast, etc.
+
+
+Function Flow Chart
+--------------------------------------------------
+
+.. figure:: ../../_static/auracast_receiver_flow.png
+   :alt: auracast_receiver_flow
+   :align: center
+   :scale: 60%
+
+   
+
+
+Whether Private Auracast Receiver Function is Supported
+----------------------------------------------------------------------------
+
+Implemented through RCSP protocol, belongs to non-standard Auracast protocol
+
+.. code-block:: java
+
+    public boolean isSupportAuracastReceiver() {
+        return null != auracastAssistant && auracastAssistant.isSupportAuracastReceiver();
+    }
+
+
+Request Information of Listening Broadcast Source
+---------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getListeningSource() {
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        auracastAssistant.requestListeningSource(new OnRcspActionCallback<AuracastBroadcast>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, AuracastBroadcast message) {
+                //Callback for operation success
+                //message --- Auracast broadcast information being operated. null indicates does not exist
+                //Broadcast status will be callback through AuracastReceiverCallback#onBroadcastState
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback for operation failure
+                //error --- error information
+            }
+        });
+    }
+
+
+.. note:: 
+    1. This function may return ``synchronizing`` or ``listening`` broadcast information. Users need to determine based on ``synchronization status``.
+    2. This function is mainly used for listening status synchronization after initialization
+    3. :ref:`auracast_broadcast` 
+
+
+
+.. _auracast_broadcast:
+
+AuracastBroadcast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auracast broadcast information
+
+.. code-block:: java
+
+    public class AuracastBroadcast {
+
+        /**
+         * Broadcast name
+         */
+        private String broadcastName;
+        /**
+         * Broadcast source ID
+         */
+        private int broadcastID;
+        /**
+         * Whether encrypted
+         */
+        private boolean isEncrypted;
+        /**
+         * Broadcast address
+         */
+        private String address;
+        /**
+         * Broadcast synchronization status
+         */
+        @SyncState
+        private int syncState;
+        /**
+         * Error code
+         */
+        private int errorCode;
+        /**
+         * Broadcast key
+         */
+        private String broadcastCode;
+    }
+
+
+Query Search Broadcast Status
+----------------------------------------------------------
+
+.. code-block:: java
+
+    public void checkScanAuracastStatus() {
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        //Execute query search broadcast status
+        auracastAssistant.checkScanStatus(new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback for operation success
+                // message --- search status
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback for operation failure
+                //error --- error information
+            }
+        });
+    }
+
+
+.. note:: 
+    1. This function is mainly used for search broadcast status synchronization after initialization
+
+
+
+
+Whether Auracast Broadcast is Being Scanned
+-------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    public boolean isScanningAuracastBroadcast() {
+        return null != auracastAssistant && auracastAssistant.isScanning();
+    }
+
+
+
+Start Searching Auracast Broadcast
+------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void startScanAuracastBroadcast() {
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        if (isScanningAuracastBroadcast()) return; //Currently searching
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onSearchStarted(int reason) {
+                //Callback for search start
+                //reason --- reason
+                //  - Constants.REASON_BY_SDK       --- SDK triggered
+                //  - Constants.REASON_BY_DEVICE    --- Device triggered
+            }
+
+            @Override
+            public void onSearchStopped(int reason) {
+                //Callback for search end
+                //reason --- reason
+                //  - Constants.REASON_BY_SDK       --- SDK triggered
+                //  - Constants.REASON_BY_DEVICE    --- Device triggered
+
+                //Get all discovered broadcasts
+                List<AuracastBroadcast> broadcasts = auracastAssistant.getDiscoveredBroadcast();
+                //Remove receiver event listener
+                auracastAssistant.removeAuracastReceiverCallback(this);
+            }
+
+            @Override
+            public void onBroadcastFound(@NonNull AuracastBroadcast broadcast) {
+                //Callback for discovered Auracast broadcast information
+            }
+        };
+        //Register receiver event listener
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //Search configuration information
+        //timeout -- timeout, unit is milliseconds, default is 48 seconds
+        //isFilterBroadcast -- whether to filter duplicate broadcast information, default is true
+        ScanOption option = new ScanOption();
+        //Execute search Auracast broadcast
+        auracastAssistant.startScan(option, new OnRcspActionCallback<Integer>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Integer message) {
+                //Callback for operation success
+                // message --- operation result
+                // - ScanResponse.RESULT_SUCCESS --- operation success/not in search state
+                // - ScanResponse.RESULT_SCANNING --- currently searching, do not repeat operation
+                // - ScanResponse#RESULT_LISTENING_BROADCAST_BAN_SCAN --- scanning not allowed during listening broadcast process
+                // - ScanResponse#RESULT_DEVICE_BUSY --- device busy
+                //Search status and search device results will be returned in AuracastReceiverCallback#onSearchStarted,
+                // AuracastReceiverCallback#onBroadcastFound and AuracastReceiverCallback#onSearchStopped
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback for operation failure
+                //error --- error information
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+
+.. note:: 
+    1. :ref:`auracast_broadcast` 
+
+
+
+Stop Searching Auracast Broadcast
+-------------------------------------------------------------
+
+
+.. code-block:: java
+
+    public void stopScanAuracastBroadcast() {
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        if (!isScanningAuracastBroadcast()) return; //Not in search state
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onSearchStopped(int reason) {
+                //Callback for search end
+                //reason --- reason
+                //  - Constants.REASON_BY_SDK       --- SDK triggered
+                //  - Constants.REASON_BY_DEVICE    --- Device triggered
+                auracastAssistant.removeAuracastReceiverCallback(this);
+            }
+        };
+        //Register receiver event listener
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //Execute stop search Auracast broadcast
+        auracastAssistant.stopScan(new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback for operation success
+                //Search status will be returned in AuracastReceiverCallback#onSearchStopped
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback for operation failure
+                //error --- error information
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+Get Currently Listening Broadcast Information
+----------------------------------------------------------------------
+
+.. code-block:: java
+
+    public AuracastBroadcast getListeningBroadcast() {
+        if (null == auracastAssistant) return null;
+        //Get currently listening broadcast information
+        return auracastAssistant.getListeningBroadcast();
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_broadcast` 
+
+
+
+Add Auracast Broadcast Audio Source
+---------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    public void addSource() {
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        stopScanAuracastBroadcast(); //Recommend stopping broadcast search first
+        final AuracastBroadcast addBroadcast = new AuracastBroadcast(); //Selected broadcast information
+        if (addBroadcast.isEncrypted()) { //If broadcast is encrypted, need to add broadcast key
+            addBroadcast.setBroadcastCode(new byte[16]);
+        }
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onBroadcastState(@NonNull BluetoothDevice device, @NonNull AuracastBroadcast broadcast) {
+                //Callback for broadcast status change
+                if (addBroadcast.equals(broadcast)) {
+                    if (broadcast.getSyncState() != StateCode.STATE_SYNCING) {
+                        auracastAssistant.removeAuracastReceiverCallback(this);
+                    }
+                }
+            }
+        };
+        //Register receiver event listener
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //Execute add audio function
+        auracastAssistant.addSource(addBroadcast, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback for operation success
+                //Audio broadcast synchronization status will be callback in AuracastReceiverCallback#onBroadcastState
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback for operation failure
+                //error --- error information
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. Before adding Auracast broadcast audio source, recommend stopping broadcast search function
+    2. If Auracast broadcast is encrypted broadcast, need to configure ``broadcast key`` field, length must not exceed **16 bytes**, excess part will be truncated by SDK
+    3. :ref:`auracast_broadcast` 
+
+
+
+Remove Auracast Broadcast Audio Source
+---------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void removeSource() {
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        final AuracastBroadcast broadcast = getListeningBroadcast(); //Get currently listening broadcast information
+        if (null == broadcast) return; //Not in listening music state
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onBroadcastState(@NonNull BluetoothDevice device, @NonNull AuracastBroadcast broadcast) {
+                //Callback for broadcast status change
+                if (broadcast.getSyncState() != StateCode.STATE_SYNCING) {
+                    auracastAssistant.removeAuracastReceiverCallback(this);
+                }
+            }
+        };
+        //Register receiver event listener
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //Execute remove audio function
+        auracastAssistant.removeSource(new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //Callback for operation success
+                //Audio broadcast synchronization status will be callback in AuracastReceiverCallback#onBroadcastState
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //Callback for operation failure
+                //error --- error information
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. Before removing Auracast broadcast audio source, ensure device is currently in listening Auracast broadcast state, otherwise function is invalid
+    2. :ref:`auracast_broadcast` 
+
+
+
+
+Get All Auracast Broadcast History Records for Specified Device
+-----------------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void getAuracastRecords() {
+        if (null == auracastAssistant) return;
+        //Get RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get current operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //Get Auracast broadcast history records
+        List<AuracastRecord> records = auracastAssistant.getAuracastRecords(usingDevice.getAddress());
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+    2. Successfully added broadcasts will be recorded by SDK
+
+
+
+.. _auracast_record:
+
+AuracastRecord
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auracast broadcast record
+
+.. code-block:: java
+
+    public class AuracastRecord {
+
+        /**
+         * Device address
+         */
+        @NonNull
+        private final String mac;
+        /**
+         * Broadcast information
+         */
+        @NonNull
+        private String broadcastJson;
+        /**
+         * Update timestamp
+         */
+        private long updateTime;
+    }
+
+
+Delete All Auracast Broadcast Records for Specified Device
+------------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void removeAuracastRecords() {
+        if (null == auracastAssistant) return;
+        //Get RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get current operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //Remove all Auracast broadcast records corresponding to device
+        auracastAssistant.removeAuracastRecords(usingDevice.getAddress());
+    }
+
+
+
+Monitor History Record Changes
+-----------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void observerRecordChange(){
+        if (!isSupportAuracastReceiver()) return; //Does not support Auracast receiver function
+        final  AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onRecordChange(int op, AuracastRecord record) {
+                //Callback for record change
+                //op --- operation code
+                //   - AuracastRecordHelper.OP_ADD --- add operation
+                //   - AuracastRecordHelper.OP_MODIFY --- modify operation
+                //   - AuracastRecordHelper.OP_DELETE --- delete operation
+                //   - AuracastRecordHelper.OP_CLEAR --- clear operation
+                //record --- history record
+            }
+        };
+        //Register receiver event listener
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //When no longer need monitoring, remember to remove listener
+        //        auracastAssistant.removeAuracastRecords(receiverCallback);
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+
+
+
+Find Record Information for Specified Broadcast
+--------------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    public void findAuracastRecord(AuracastBroadcast broadcast) {
+        if (null == auracastAssistant) return;
+        //Get RCSPController object
+        final RCSPController controller = RCSPController.getInstance();
+        //Get current operating device
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //Find corresponding Auracast broadcast history record
+        AuracastRecord record = auracastAssistant.findAuracastRecord(usingDevice.getAddress(), broadcast);
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+
+
+
+Delete Specified Broadcast Record
+--------------------------------------------------------------------------------
+
+.. code-block:: java
+
+    public void removeAuracastRecord(AuracastRecord record) {
+        if (null == auracastAssistant) return;
+        //Remove corresponding Auracast broadcast history record
+        auracastAssistant.removeAuracastRecord(record);
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record`
+

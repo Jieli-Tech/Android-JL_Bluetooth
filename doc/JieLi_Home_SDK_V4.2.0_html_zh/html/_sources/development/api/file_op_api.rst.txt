@@ -1,0 +1,95 @@
+
+.. _file_op_api:
+
+文件操作
+*******************************************
+
+.. code-block:: java
+
+   public interface IFileOp {
+
+        /**
+         * 正在文件操作
+         *
+         * @param device 蓝牙设备
+         * @return 结果
+         */
+        boolean isFileOperating(BluetoothDevice device);
+
+        /**
+         * 获取在线存储器信息
+         *
+         * @return 在线存储器信息
+         */
+        List<SDCardBean> getOnlineStorage();
+
+        /**
+         * 获取当前读取的文件夹
+         *
+         * @param storage 存储器信息
+         * @return 当前读取的文件夹
+         */
+        Folder getCurrentFolder(@NonNull SDCardBean storage);
+
+        /**
+         * 浏览文件夹
+         *
+         * @param device   设备对象
+         * @param folder   文件夹
+         * @param offset   开始偏移
+         * @param readNum  读取数量
+         * @param callback 结果回调
+         */
+        void listFiles(@NonNull BluetoothDevice device, @NonNull Folder folder, int offset, @IntRange(from = 1, to = 30) int readNum, OnFlowStateCallback<List<FileStruct>> callback);
+
+        /**
+         * 播放设备音乐文件
+         *
+         * @param device   设备对象
+         * @param file     音乐文件
+         * @param callback 结果回调
+         */
+        void playMusic(@NonNull BluetoothDevice device, @NonNull RegFile file, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 创建文件
+         *
+         * @param param    创建文件参数
+         * @param listener 状态监听器
+         */
+        void createBigFile(@NonNull CreateFileParam param, OnTaskStateListener listener);
+
+        /**
+         * 读取文件
+         *
+         * @param param    读取文件参数
+         * @param listener 状态监听器
+         */
+        void readBigFile(@NonNull ReadFileParam param, OnTaskStateListener listener);
+
+        /**
+         * 取消数据传输
+         *
+         * @param device   设备对象
+         * @param reason   取消原因
+         * @param callback 结果回调
+         */
+        void cancelBigFileTransfer(@NonNull BluetoothDevice device, int reason, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 删除文件
+         *
+         * @param param    删除文件参数
+         * @param callback 操作结果
+         */
+        void deleteFile(@NonNull DeleteFileParam param, DeleteCallback callback);
+
+        /**
+         * 格式化存储器
+         *
+         * @param sdCardBean 存储器信息
+         * @param callback   操作结果
+         */
+        void formatStorage(@NonNull SDCardBean sdCardBean, OnFlowStateCallback<Integer> callback);
+
+    }

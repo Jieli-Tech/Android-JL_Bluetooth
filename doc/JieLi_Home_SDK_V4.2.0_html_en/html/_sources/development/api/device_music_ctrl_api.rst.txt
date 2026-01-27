@@ -1,0 +1,127 @@
+.. _music_control: 
+
+Device Music Control Interface
+***************************************************
+
+.. code-block:: java
+
+    public interface IMusicOp {
+
+        /**
+         * Get device music info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getDeviceMusicInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get device music status info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getDeviceMusicStatusInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get device music supported file formats
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getPlayFileFormat(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Device music play or pause
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void musicPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play previous track
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void musicPlayPrev(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play next track
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void musicPlayNext(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Switch to next play mode
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void musicSwitchNextPlayMode(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Progress bar control
+         *
+         * @param device      Operation device
+         * @param orientation Direction (0 -- fast forward  1 -- fast rewind)
+         * @param time        Step
+         * @param callback    Result callback
+         */
+        void musicSeekToProgress(BluetoothDevice device, int orientation, short time, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Get complete ID3 info
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getID3MusicInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Enable ID3 info notification
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void openID3MusicNotification(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Disable ID3 info notification
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void closeID3MusicNotification(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * ID3 play or pause
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void iD3MusicPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * ID3 play previous track
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void iD3MusicPlayPrev(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * ID3 play next track
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void iD3MusicPlayNext(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+    }
+
+
+

@@ -1,0 +1,105 @@
+
+.. _state_code: 
+
+3. State Code
+***********************************************
+
+* Corresponding class name: ``StateCode.java``
+* Property reference: **StateCode#** ``xxx``
+
+
+.. _connection_code:
+
+3.1 Connection Status
+==============================================
+
+================================================= ====================================== ==================================================================================
+            Citation Declaration                               Value                                                         Explanation
+================================================= ====================================== ==================================================================================
+  CONNECTION_DISCONNECT                                          0                            Device not connected
+  CONNECTION_OK                                                  1                            Device connection successful / Device connected
+  CONNECTION_FAILED                                              2                            Device connection failed
+  CONNECTION_CONNECTING                                          3                            Connecting
+  CONNECTION_CONNECTED                                           4                         | Device connected
+                                                                                           | ``Deprecated``
+================================================= ====================================== ==================================================================================
+
+
+.. _response_status:
+
+3.2 Reply Status
+=========================================================
+
+================================================= ====================================== ==================================================================================
+                Citation Declaration                               Value                                                         Explanation
+================================================= ====================================== ==================================================================================
+  STATUS_SUCCESS                                               0                            Operation successful
+  STATUS_FAIL                                                  1                            Operation failed
+  STATUS_UNKOWN_CMD                                            2                            Unknown command number
+  STATUS_BUSY                                                  3                            Device busy
+  STATUS_NO_RESOURCE                                           4                            Insufficient resources
+  STATUS_CRC_ERROR                                             5                            CRC check failed
+  STATUS_ALL_DATA_CRC_ERROR                                    6                            All data CRC checks failed.
+  STATUS_PARAMETER_ERROR                                       7                            Parameter error
+  STATUS_RESPONSE_DATA_OVER_LIMIT                              8                            The reply data length exceeds the limit (send MTU).
+================================================= ====================================== ==================================================================================
+
+3.3 Classic Bluetooth status
+=========================================================
+
+================================================= ====================================== ==================================================================================
+                Citation Declaration                               Value                                                         Explanation
+================================================= ====================================== ==================================================================================
+  TWS_HEADSET_STATUS_DIMISS                                       0                            Do not display pop-up window
+  TWS_HEADSET_STATUS_DISCONNECTED                                 1                            Classic Bluetooth not connected
+  TWS_HEADSET_STATUS_CONNECTED                                    2                            Classic Bluetooth is connected.
+  TWS_HEADSET_STATUS_CONNECTING                                   3                            Classic Bluetooth is connecting.
+  TWS_HEADSET_STATUS_NO_ALLOWED_CONNECTION                        4                            Bluetooth connection not allowed
+  TWS_HEADSET_STATUS_NOT_SUPPORTED_BR_EDR                         15(0x0F)                     Classic Bluetooth is not supported.
+================================================= ====================================== ==================================================================================
+
+
+3.4 Translation function result code
+==========================================================
+
+================================================= ====================================== ==================================================================================
+               Citation Declaration                               Value                                                         Explanation
+================================================= ====================================== ==================================================================================
+  RESULT_SUCCESS                                                  0                           Operation successful 
+  RESULT_IN_PROGRESS                                              1                           In mode
+  RESULT_INVALID_PARAM                                            2                           Invalid parameters
+  RESULT_DEVICE_IN_CALL                                           3                           The device is in call mode
+  RESULT_DEVICE_IN_AUDIO_PLAYING                                  4                           The device is in audio playback mode.
+  RESULT_DEVICE_IS_BUSY                                           5                           The device is busy.
+  RESULT_FAILED                                                   6                           Operation failed
+================================================= ====================================== ==================================================================================
+
+
+3.5 Auracast broadcast synchronization status
+==========================================================
+
+================================================= ====================================== ==================================================================================
+               Citation Declaration                               Value                                                         Explanation
+================================================= ====================================== ==================================================================================
+  STATE_UNKNOWN                                                  -1                           Unknown synchronization status 
+  STATE_IDLE                                                      0                           Idle state
+  STATE_SYNCING                                                   1                           streaming
+  STATE_SYNC_OK                                                   2                           Synchronization successful
+================================================= ====================================== ==================================================================================
+
+
+3.6 Auracast broadcast synchronization error code
+===========================================================
+
+================================================= ====================================== ==================================================================================
+              Citation Declaration                               Value                                                         Explanation
+================================================= ====================================== ==================================================================================
+  SYNC_ERR_NONE                                                  0                            No synchronization error
+  SYNC_ERR_BROADCAST_NAME                                        1                            Broadcast name error
+  SYNC_ERR_BROADCAST_ADDRESS                                     2                            Broadcast address error
+  SYNC_ERR_BROADCAST_ID                                          3                            Broadcast ID error
+  SYNC_ERR_BROADCAST_CODE                                        4                            Broadcast key error
+  SYNC_ERR_FAILED                                                5                            Broadcast synchronization failed
+  SYNC_ERR_TIMEOUT                                               6                            Broadcast synchronization timeout
+  SYNC_ERR_LOST                                                  7                            Broadcast synchronization lost
+================================================= ====================================== ==================================================================================

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
+    tools:context=".ui.translate.record.RecordTranslationFragment">
+
+    <include
+        android:id="@+id/view_tool_bar"
+        layout="@layout/view_translation_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_pp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/text_transparent"
+            android:src="@drawable/ic_pause_purple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/btn_stop_translation"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:background="@color/text_transparent"
+            android:src="@drawable/ic_stop_translation"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_pp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toEndOf="@+id/btn_pp"
+            app:layout_constraintTop_toTopOf="@+id/btn_pp"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_EBEBEB"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_switch_language"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:background="@color/text_transparent"
+            android:drawablePadding="4dp"
+            android:textColor="@color/gray_4D000000"
+            android:textSize="@dimen/text_13sp"
+            android:textStyle="bold"
+            android:text="@string/language"
+            app:drawableTopCompat="@drawable/ic_switch_language_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_pp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_pp"
+            app:layout_constraintHorizontal_bias="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_pp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/sv_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/cl_bottom_bar"
+        app:layout_constraintTop_toBottomOf="@+id/view_tool_bar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <com.jieli.btsmart.ui.widget.visualizer.record.RecorderVisualizeView
+                android:id="@+id/view_play_wave"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@drawable/bg_c4_gray_shape"
+                android:padding="4dp"
+                app:visualize_color="@color/orange_F38450"
+                app:visualize_ratio="2"
+                app:visualize_item_margin="2dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/ll_translation_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/bg_c4_gray_shape"
+                app:layout_constraintTop_toBottomOf="@+id/view_play_wave"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+
+                <TextView
+                    android:id="@+id/tv_src_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_14sp"
+                    android:textColor="@color/black_E6000000"
+                    android:textStyle="bold"
+                    tools:text="我有一个梦想，有一天这个国家会站立起来，真正实现其信条的真谛：“我们认为这些真理是不言而喻的——人人生而平等。”"/>
+
+                <TextView
+                    android:id="@+id/tv_dest_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="@dimen/text_13sp"
+                    android:textColor="@color/black_80000000"
+                    android:textStyle="bold"
+                    tools:text="I have a dream that one day this nation will rise up and live out the true meaning of its creed: ''We hold these truths to be self —— evident: that all men are created equal."/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

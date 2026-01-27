@@ -1,0 +1,71 @@
+
+.. _spdif_function:
+
+SPDIF功能
+********************************************
+
+控制设备端SPDIF功能：播放状态以及音源切换，如 HDMI /光纤/同轴等切换。
+
+获取缓存的SPDIF状态信息(播放状态+音源)
+=========================================================================
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    DeviceInfo deviceInfo = mRCSPController.getDeviceInfo();
+    SPDIFPlayStatusInfo spdifPlayStatusInfo = deviceInfo.getSPDIFPlayStatusInfo();//播放状态
+    SPDIFAudioSourceInfo spdifAudioSourceInfo = deviceInfo.getSPDIFAudioSourceInfo();//音源
+
+
+监听SPDIF状态信息(播放状态+音源)
+==========================================================================
+
+.. code-block:: java
+
+    private final BTRcspEventCallback callback = new BTRcspEventCallback() {
+        @Override
+        public void onSPDIFPlayStatusChange(BluetoothDevice device, SPDIFPlayStatusInfo spdifPlayStatusInfo) {//播放状态
+        }
+
+        @Override
+        public void onSPDIFAudioSourceInfoChange(BluetoothDevice device, SPDIFAudioSourceInfo spdifAudioSourceInfo) {//音源
+        }
+    };
+    RCSPController mRCSPController = RCSPController.getInstance();
+    mRCSPController.addBTRcspEventCallback(callback);
+
+
+实时获取SPDIF状态信息(播放状态+音源)
+=================================================================
+
+状态信息结果通过监听SPDIF状态信息回调。
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    mRCSPController.getSPDIFInfo(mRCSPController.getUsingDevice(), null);
+
+
+设置播放状态
+============================================
+ 
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    SPDIFPlayStatusInfo spdifPlayStatusInfo = new SPDIFPlayStatusInfo();
+    spdifPlayStatusInfo.setPlayStatus( SPDIFPlayStatusInfo.PLAY_STATUS_PLAY);//设置播放状态 -- 播放
+    mRCSPController.setSPDIFPlayStatusInfo(getConnectedDevice(), spdifPlayStatusInfo, null);
+
+
+设置音源
+============================================
+
+
+.. code-block:: java
+
+    RCSPController mRCSPController = RCSPController.getInstance();
+    SPDIFAudioSourceInfo spdifAudioSourceInfo = new SPDIFAudioSourceInfo();
+    spdifAudioSourceInfo.setAudioSource(SPDIFAudioSourceInfo.AUDIO_SOURCE_HDMI);//设置音源 -- HDMI
+    mRCSPController.setSPDIFSPDIFAudioSourceInfo(getConnectedDevice(), spdifAudioSourceInfo, null);
+

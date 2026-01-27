@@ -1,0 +1,139 @@
+.. _big_file_transfer:
+
+大文件传输功能
+---------------------------------
+
+创建大文件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+用于创建大文件，比如：音乐文件，表盘文件，图片等
+
+.. code-block:: java
+
+    //Step1. 创建文件操作实现类
+    FileOpImpl fileOp = FileOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用创建大文件的接口
+    //file --- 文件
+    final List<SDCardBean> onlineStorages = fileOp.getOnlineStorage();
+    SDCardBean storage = null;
+    if (null != onlineStorages) {
+        for (SDCardBean sdCardBean : onlineStorages) {
+            // 根据功能需求选择在线的合适的句柄对象即可。
+            // 这里是演示传输彩屏仓屏幕保护程序，因此，选择在线的Flash存储介质
+            if (sdCardBean.isFlash() && sdCardBean.isOnline()) {
+                storage = sdCardBean;
+                break;
+            }
+        }
+    }
+    if (null == file || null == storage) return;
+    CreateFileParam param = new CreateFileParam(RCSPController.getInstance().getUsingDevice(), file, storage);
+    fileOp.createBigFile(param, new OnTaskStateListener() {
+        @Override
+        public void onStart() {
+            //回调大文件传输开始
+        }
+
+        @Override
+        public void onProgress(int progress) {
+            //回调大文件传输进度
+        }
+
+        @Override
+        public void onStop() {
+            //回调大文件传输结束
+        }
+
+        @Override
+        public void onCancel(int reason) {
+            //回调大文件传输被中止
+        }
+
+        @Override
+        public void onError(int code, String message) {
+            //回调大文件传输异常
+            //code --- 错误码
+            //message --- 错误描述
+        }
+    });
+
+
+.. note::
+   
+   1. 大文件传输不能和其他耗时任务同时进行，比如：文件浏览，来电等
+   2. 大文件传输的文件必须保证存在，并可读取
+   3. 存储器信息, :ref:`sd_card_bean` 
+   4. 创建文件参数， :ref:`create_file_param` 
+
+
+.. _create_file_param:
+
+CreateFileParam
+""""""""""""""""""""""""""""""""""""""
+
+.. code-block:: java
+
+    public class CreateFileParam {
+        /**
+         * 输入文件
+         */
+        @NonNull
+        private final File file;
+        /**
+         * 输出存储器
+         */
+        @NonNull
+        private final SDCardBean storage;
+        /**
+         * 输出路径
+         */
+        @NonNull
+        private final String output;
+        /**
+         * 最大重命名次数
+         */
+        private int maxRenameNum = 30;
+        /**
+         * 是否使用其他编码方式
+         *
+         * <p>
+         * 默认false，编码方式如下:<br/>
+         * - 短文件名:  GBK {@link Charset#forName(String)}<br/>
+         * - 长文件名: 增加"\\U" + Unicode编码数据 + 结束符, {@link Charset#forName(String)}
+         * 若为true, 则{@link #encodeType} 属性生效
+         * </p>
+         */
+        private boolean isOtherEncode = false; //是否使用其他编码方式
+
+        /**
+         * 编码方式
+         *
+         * <strong>1. 注意需要{@link  #isOtherEncode} 为 true, 字段才生效</strong>
+         */
+        private String encodeType = StandardCharsets.UTF_16LE.name(); //默认编码方式
+    }
+   
+
+
+取消大文件传输
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+用于取消正在进行的大文件传输
+
+.. code-block:: java
+
+    //Step1. 创建文件操作实现类
+    FileOpImpl fileOp = FileOpImpl.instance(RCSPController.getInstance().getRcspOp());
+    //Step2. 调用取消大文件传输的接口
+    //只有在大文件传输中才会成功，可以用 fileOp.isFileOperating(); 来判断是否在文件操作
+    fileOp.cancelBigFileTransfer(RCSPController.getInstance().getUsingDevice(), 0, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功 和 结果
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败 和 错误信息
+        }
+    });

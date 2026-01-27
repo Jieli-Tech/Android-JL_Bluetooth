@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. RCSP Basic Interface &mdash; JieLi Home SDK Development Documentation(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. Basic Function Interface" href="basic_func_api.html" />
+    <link rel="prev" title="2. RCSP Functional API" href="rcsp_api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Development Framework</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../framework/framework.html">SDK Description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../resource/sdk_structure.html">SDK Development Kit Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development Instructions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../import.html"><span class="sectnum">1 </span>Access Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development_desc.html">2 Development Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../interface_desc.html">3 Interface Description</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bt_api.html"><span class="sectnum">1 </span>Bluetooth Processing Interface</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="rcsp_api.html">2. RCSP Functional API</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1. RCSP Basic Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#onrcspcallback">1.1. OnRcspCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rcsp-event-listener">1.2. RCSP Event Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="basic_func_api.html">2. Basic Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="voice_ctrl_api.html">3. Volume Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device_music_ctrl_api.html">4. Device Music Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eq_ctrl_api.html">5. Equalizer Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtc_ctrl_api.html">6. Clock Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="line_in_ctrl_api.html">7. External Device Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fm_ctrl_api.html">8. FM Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="light_ctrl_api.html">9. Light Control Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tws_func_api.html">10. TWS Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sound_card_func_api.html">11. Sound Card Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="search_device_api.html">12. RCSP Controller Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="record_func_api.html">13. Recording Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="file_op_api.html">14. File Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spdif_op_api.html">15. SPDIF Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="charging_case_func_api.html">16. Color Screen Case Function Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="translation_func_api.html">17. Translation Function Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/state_code.html">3. State Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/func_code.html">4. Function Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../constant/error_code.html">5. Error Code</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../other/debug.html">Debugging Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/question_answer.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/publish_record.html">Release Record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/feedback.html">Open Source Community</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">JieLi Home SDK Development Documentation(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../interface_desc.html">3 Interface Description</a></li>
+          <li class="breadcrumb-item"><a href="rcsp_api.html">2. RCSP Functional API</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>RCSP Basic Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rcsp-basic-interface">
+<span id="rcsp-basic-api"></span><h1><span class="section-number">1. </span>RCSP Basic Interface<a class="headerlink" href="#rcsp-basic-interface" title="Link to this heading"></a></h1>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IRcspOp</span><span class="w"> </span><span class="p">{</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Register Rcsp event callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param callback RCSP event callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerOnRcspCallback</span><span class="p">(</span><span class="n">OnRcspCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Unregister RCSP event callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param callback RCSP event callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">unregisterOnRcspCallback</span><span class="p">(</span><span class="n">OnRcspCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Register RCSP event listener</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param listener RCSP event listener</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerOnRcspEventListener</span><span class="p">(</span><span class="n">OnRcspEventListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Unregister RCSP event listener</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param listener RCSP event listener</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">unregisterOnRcspEventListener</span><span class="p">(</span><span class="n">OnRcspEventListener</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether RCSP protocol is initialized</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     *     Default is current using device</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRcspInit</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether RCSP protocol is initialized</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return boolean Result</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRcspInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get Bluetooth library configuration</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return Bluetooth library configuration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">BluetoothOption</span><span class="w"> </span><span class="nf">getBluetoothOption</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get device info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return {@link DeviceInfo} Device info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="nf">getDeviceInfo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get device info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return {@link DeviceInfo} Device info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">DeviceInfo</span><span class="w"> </span><span class="nf">getDeviceInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Get device configuration info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @return DeviceConfiguration Device configuration info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">DeviceConfiguration</span><span class="w"> </span><span class="nf">getDeviceConfiguration</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Configure Bluetooth library parameters</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param option Parameter configuration</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">BluetoothOption</span><span class="w"> </span><span class="n">option</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send RCSP command</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Bluetooth device object</span>
+<span class="cm">     * @param cmd       RCSP command</span>
+<span class="cm">     * @param timeoutMs Timeout. Unit is milliseconds</span>
+<span class="cm">     * @param callback  Send callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendCommandAsync</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send RCSP command</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Equivalent to {@link #sendCommandAsync(BluetoothDevice, CommandBase, int, RcspCommandCallback)},&lt;br/&gt;</span>
+<span class="cm">     * To ensure interface consistency</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Bluetooth device object</span>
+<span class="cm">     * @param cmd       RCSP command</span>
+<span class="cm">     * @param timeoutMs Timeout. Unit is milliseconds</span>
+<span class="cm">     * @param callback  Send callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRcspCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send RCSP command</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Bluetooth device object</span>
+<span class="cm">     * @param cmd      RCSP command</span>
+<span class="cm">     * @param callback Send callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRcspCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send RCSP response command</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device      Bluetooth device object</span>
+<span class="cm">     * @param responseCmd RCSP response command</span>
+<span class="cm">     * @param callback    Send callback</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendCommandResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">responseCmd</span><span class="p">,</span><span class="w"> </span><span class="n">RcspCommandCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Send RCSP response command</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Equivalent to {@link #sendCommandResponse(BluetoothDevice, CommandBase, RcspCommandCallback)},&lt;br/&gt;</span>
+<span class="cm">     * To ensure interface consistency</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device object</span>
+<span class="cm">     * @param responseCmd RCSP response command</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRcspResponse</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">responseCmd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Switch connected device to currently using device</span>
+<span class="cm">     * &lt;p&gt;</span>
+<span class="cm">     * Can get switching status via {@link OnRcspCallback#onSwitchConnectedDevice(BluetoothDevice)}</span>
+<span class="cm">     * &lt;/p&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Connected device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">switchConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Release resources</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">release</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#rcsp-callback"><span class="std std-ref">OnRcspCallback</span></a></p></li>
+<li><p><a class="reference internal" href="#rcsp-event-callback"><span class="std std-ref">RCSP Event Listener</span></a></p></li>
+<li><p><a class="reference internal" href="../import.html#bluetooth-option"><span class="std std-ref">1.2.1   BluetoothOption</span></a></p></li>
+<li><p><a class="reference internal" href="bt_api.html#rcsp-cmd-cb"><span class="std std-ref">1.1   Command reply callback</span></a></p></li>
+</ol>
+</div>
+<section id="onrcspcallback">
+<span id="rcsp-callback"></span><h2><span class="section-number">1.1. </span>OnRcspCallback<a class="headerlink" href="#onrcspcallback" title="Link to this heading"></a></h2>
+<p>RCSP status callback</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OnRcspCallback</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Rcsp protocol initialization callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Connected device</span>
+<span class="cm">     * @param code   Initialization result</span>
+<span class="cm">     *               &lt;p&gt;</span>
+<span class="cm">     *               Results as follows:&lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Normal status &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_START_AUTH_DEVICE} --- Start device authentication failed&lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_AUTH_DEVICE} --- Device authentication failed&lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_DEVICE_IN_OTA} --- Forced upgrade status &lt;br/&gt;</span>
+<span class="cm">     *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REMOTE_DEVICE_DISCONNECT} --- Device disconnected &lt;br/&gt;</span>
+<span class="cm">     *               Other error codes</span>
+<span class="cm">     *               &lt;/p&gt;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspInit</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device sent rcsp command callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  Connected device</span>
+<span class="cm">     * @param command RCSP command</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspCommand</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device sent data command callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  Connected device</span>
+<span class="cm">     * @param dataCmd Data command</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspDataCmd</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">CommandBase</span><span class="w"> </span><span class="n">dataCmd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * RCSP error event callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Device object</span>
+<span class="cm">     * @param error  Error info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onRcspError</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BaseError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device connection status</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Connection status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectStateChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Switch connected and currently used device callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Connected device</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSwitchConnectedDevice</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="rcsp-event-listener">
+<span id="rcsp-event-callback"></span><h2><span class="section-number">1.2. </span>RCSP Event Listener<a class="headerlink" href="#rcsp-event-listener" title="Link to this heading"></a></h2>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OnRcspEventListener</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device mode change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param mode   Device current mode</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDeviceModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device system volume change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param volume Device system volume</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVolumeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VolumeInfo</span><span class="w"> </span><span class="n">volume</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device EQ info change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param eqInfo EQ info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device external storage change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device      Bluetooth device</span>
+<span class="cm">     * @param storageInfo Device info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDevStorageInfoChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DevStorageInfo</span><span class="w"> </span><span class="n">storageInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device supported file format callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     Bluetooth device</span>
+<span class="cm">     * @param fileFormat Device supported file format</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFileFormatChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fileFormat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Music song change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Bluetooth device</span>
+<span class="cm">     * @param nameInfo Music info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicNameChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicNameInfo</span><span class="w"> </span><span class="n">nameInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Music play status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     Bluetooth device</span>
+<span class="cm">     * @param statusInfo Music status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMusicStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">MusicStatusInfo</span><span class="w"> </span><span class="n">statusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Play mode change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       Bluetooth device</span>
+<span class="cm">     * @param playModeInfo Play mode info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPlayModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">PlayModeInfo</span><span class="w"> </span><span class="n">playModeInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device battery change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device      Bluetooth device</span>
+<span class="cm">     * @param batteryInfo Battery info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onBatteryChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">BatteryInfo</span><span class="w"> </span><span class="n">batteryInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * External device status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param isPlay Whether playing</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAuxStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isPlay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * FM channel change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device   Bluetooth device</span>
+<span class="cm">     * @param channels Channel info list</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmChannelsChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ChannelInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">channels</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * FM status info change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       Bluetooth device</span>
+<span class="cm">     * @param fmStatusInfo FM status info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFmStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">FmStatusInfo</span><span class="w"> </span><span class="n">fmStatusInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Alarm list update callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device        Bluetooth device</span>
+<span class="cm">     * @param alarmListInfo Alarm list</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmListInfo</span><span class="w"> </span><span class="n">alarmListInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Default alarm bell list</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param bells  Default alarm bell list</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmDefaultBellListChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DefaultAlarmBell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bells</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Alarm notification callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Bluetooth device</span>
+<span class="cm">     * @param alarmBean Alarm info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmNotify</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Alarm stop callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Bluetooth device</span>
+<span class="cm">     * @param alarmBean Alarm info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onAlarmStop</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">AlarmBean</span><span class="w"> </span><span class="n">alarmBean</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Channel transmission callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Bluetooth device</span>
+<span class="cm">     * @param frequency Frequency</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onFrequencyTx</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">frequency</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Peripherals mode change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param mode   Peripherals mode</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPeripheralsModeChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Peripherals connection status change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device  Bluetooth device</span>
+<span class="cm">     * @param connect Whether connected</span>
+<span class="cm">     * @param mac     Device mac address</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPeripheralsConnectStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">connect</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mac</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ID3 song info callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       Bluetooth device</span>
+<span class="cm">     * @param id3MusicInfo id3 song info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onID3MusicInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ID3MusicInfo</span><span class="w"> </span><span class="n">id3MusicInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * High and low tone change callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param high   High tone</span>
+<span class="cm">     * @param bass   Low tone</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHighAndBassChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">high</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Eq preset value change</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device       Bluetooth device</span>
+<span class="cm">     * @param eqPresetInfo Preset value</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onEqPresetChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqPresetInfo</span><span class="w"> </span><span class="n">eqPresetInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Call status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param status Call status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPhoneCallStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Expand function callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param type   Expand function</span>
+<span class="cm">     * @param data   Expand valid data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onExpandFunction</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Reverb parameter callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param param  Reverb parameter</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onReverberation</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ReverberationParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Dynamic limiter parameter callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param param  Dynamic limiter parameter</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDynamicLimiter</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DynamicLimiterParam</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Light control callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device           Bluetooth device</span>
+<span class="cm">     * @param lightControlInfo Light control info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onLightControlInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">LightControlInfo</span><span class="w"> </span><span class="n">lightControlInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sound card EQ info callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param eqInfo EQ info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardEqChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">EqInfo</span><span class="w"> </span><span class="n">eqInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Sound card status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Bluetooth device</span>
+<span class="cm">     * @param mask   Mask</span>
+<span class="cm">     * @param values Data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onSoundCardStatusChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Current noise processing mode info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Device object</span>
+<span class="cm">     * @param voiceMode Noise processing mode</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCurrentVoiceMode</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceMode</span><span class="w"> </span><span class="n">voiceMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device all noise processing mode info</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device     Device object</span>
+<span class="cm">     * @param voiceModes Noise processing mode info list</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceModeList</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">VoiceMode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">voiceModes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Hearing assistance fitting info callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device            Device object</span>
+<span class="cm">     * @param hearingAssistInfo Hearing assistance fitting info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHearingAssistInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">HearingAssistInfo</span><span class="w"> </span><span class="n">hearingAssistInfo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Hearing channel status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device                Device object</span>
+<span class="cm">     * @param hearingChannelsStatus Hearing channel status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onHearingChannelsStatus</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">HearingChannelsStatus</span><span class="w"> </span><span class="n">hearingChannelsStatus</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Acoustic function callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device    Device object</span>
+<span class="cm">     * @param voiceFunc Acoustic function data</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onVoiceFunctionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">VoiceFunc</span><span class="w"> </span><span class="n">voiceFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device dual connection status callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Device object</span>
+<span class="cm">     * @param state  Device dual connection status info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDoubleConnectionChange</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">DoubleConnectionState</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Device connected phone Bluetooth info callback</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param device Device object</span>
+<span class="cm">     * @param info   Device connected phone Bluetooth info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onConnectedBtInfo</span><span class="p">(</span><span class="n">BluetoothDevice</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">ConnectedBtInfo</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../function/voice_ctrl.html#volume-info"><span class="std std-ref">VolumeInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#eq-info"><span class="std std-ref">EqInfo</span></a></p></li>
+<li><p><a class="reference internal" href="#deviect-storage-info"><span class="std std-ref">DevStorageInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/device_music_ctrl.html#music-name-info"><span class="std std-ref">MusicNameInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/device_music_ctrl.html#music-status-info"><span class="std std-ref">MusicStatusInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/device_music_ctrl.html#music-mode-info"><span class="std std-ref">PlayModeInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/fm_ctrl.html#channel-info"><span class="std std-ref">ChannelInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/fm_ctrl.html#fm-status-info"><span class="std std-ref">FmStatusInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/rtc_ctrl.html#alarm-list-info"><span class="std std-ref">AlarmListInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/rtc_ctrl.html#default-alarm-bell"><span class="std std-ref">DefaultAlarmBell</span></a></p></li>
+<li><p><a class="reference internal" href="../function/rtc_ctrl.html#alarm-bean"><span class="std std-ref">AlarmBean</span></a></p></li>
+<li><p><a class="reference internal" href="../function/local_music_ctrl.html#id3-info"><span class="std std-ref">ID3 Music Information</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#eq-perset-info"><span class="std std-ref">EqPresetInfo</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#reverberation-param"><span class="std std-ref">ReverberationParam</span></a></p></li>
+<li><p><a class="reference internal" href="../function/eq_ctrl.html#dynamic-limiter-param"><span class="std std-ref">DynamicLimiterParam</span></a></p></li>
+<li><p><a class="reference internal" href="../function/light_ctrl.html#light-ctrl-info"><span class="std std-ref">Light Control Information</span></a></p></li>
+<li><p><a class="reference internal" href="../function/anc_ctrl.html#voice-mode"><span class="std std-ref">VoiceMode</span></a></p></li>
+<li><p><a class="reference internal" href="#voice-func"><span class="std std-ref">VoiceFunc</span></a></p></li>
+<li><p><a class="reference internal" href="../function/dual_connection_func.html#double-connection-state"><span class="std std-ref">DoubleConnectionState</span></a></p></li>
+<li><p><a class="reference internal" href="../function/dual_connection_func.html#connected-bt-info"><span class="std std-ref">ConnectedBtInfo</span></a></p></li>
+</ol>
+</div>
+<section id="devstorageinfo">
+<span id="deviect-storage-info"></span><h3><span class="section-number">1.2.1. </span>DevStorageInfo<a class="headerlink" href="#devstorageinfo" title="Link to this heading"></a></h3>
+<p>Device external storage info</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DevStorageInfo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Storage info</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_STORAGE_INFO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Storage reuse</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TYPE_REUSE_STORAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Storage status</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SDCardBean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">storageStates</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether reuse</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDeviceReuse</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Version number</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="voicefunc">
+<span id="voice-func"></span><h3><span class="section-number">1.2.2. </span>VoiceFunc<a class="headerlink" href="#voicefunc" title="Link to this heading"></a></h3>
+<p>Voice function</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VoiceFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_ADAPTIVE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">             </span><span class="c1">//ANC adaptive function</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SMART_NO_PICK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">        </span><span class="c1">//Smart no-pick function</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_SCENE_DENOISING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">      </span><span class="c1">//Scene denoising function</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_WIND_NOISE_DETECTION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">//Wind noise detection function</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FUNC_VOCAL_BOOSTER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">        </span><span class="c1">//Vocal booster function</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w">   </span><span class="c1">//Data type</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w">      </span><span class="c1">//Version number</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="corresponding-acoustic-functions">
+<h4><span class="section-number">1.2.2.1. </span>Corresponding acoustic functions<a class="headerlink" href="#corresponding-acoustic-functions" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Reference constant</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Data model</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FUNC_ADAPTIVE</p></td>
+<td><p>1</p></td>
+<td><p>ANC adaptive function</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#adaptive-data"><span class="std std-ref">AdaptiveData</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNC_SMART_NO_PICK</p></td>
+<td><p>2</p></td>
+<td><p>Smart no-pick function</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#smart-no-pick"><span class="std std-ref">SmartNoPick</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>FUNC_SCENE_DENOISING</p></td>
+<td><p>3</p></td>
+<td><p>Scene denoising function</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#scence-denoising"><span class="std std-ref">SceneDenoising</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>FUNC_WIND_NOISE_DETECTION</p></td>
+<td><p>4</p></td>
+<td><p>Wind noise detection function</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#wind-noise-detection"><span class="std std-ref">WindNoiseDetection</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>FUNC_VOCAL_BOOSTER</p></td>
+<td><p>5</p></td>
+<td><p>Vocal booster function</p></td>
+<td><p><a class="reference internal" href="../function/anc_ctrl.html#vocal-booster"><span class="std std-ref">VocalBooster</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rcsp_api.html" class="btn btn-neutral float-left" title="2. RCSP Functional API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basic_func_api.html" class="btn btn-neutral float-right" title="2. Basic Function Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Zhuhai JieLi Technology Co., Ltd..
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

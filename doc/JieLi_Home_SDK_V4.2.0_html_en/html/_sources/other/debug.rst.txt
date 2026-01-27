@@ -1,0 +1,76 @@
+.. _devlopment_debug: 
+
+Debugging Instructions
+*****************************************
+
+1. Print File Output
+=========================================
+
+.. code-block:: java
+
+    //log configuration
+    //prefix     --- Print prefix identifier for quick printing location
+    JL_Log.setTagPrefix("home");
+    //log file configuration
+    //context    --- context, getApplicationContext() is recommended.
+    //log        --- Whether to print output. It is recommended to enable this during development and disable it during deployment.
+    //isSaveFile --- Whether to save log files. It's recommended to enable this during development and disable it during deployment.
+    JL_Log.configureLog(context, BuildConfig.DEBUG, BuildConfig.DEBUG);
+    
+
+.. note:: 
+    | 1. It is recommended to set print output in the **Application** class.
+    | 2. The ``debug``` version enables printing by default, while the ``release``` version disables printing by default.
+    | 3. Customers can configure whether to enable debug mode in the demo project settings.
+
+When using multiple JieLi libraries simultaneously, you can configure them as follows:
+
+.. code-block:: java
+
+    //Enable printing for the JieLi OTA library?
+    com.jieli.jl_bt_ota.util.JL_Log.setLog(JL_Log.isLog());
+    if(JL_Log.isLog()){//If enabled, the JieLi OTA library's output will be written to the Jerry Home output file.
+        com.jieli.jl_bt_ota.util.JL_Log.setLogOutput(new com.jieli.jl_bt_ota.util.JL_Log.ILogOutput() {
+            @Override
+            public void output(String logcat) {
+                //This callback displays the print information from the JieLi OTA library.
+                JL_Log.i("ota", logcat); //Add to the output file of JieLi Home Library
+            }
+         });
+    }
+
+
+2. Log File
+============================================
+
+1. Log File Format
+
+   Log File Name Format: log_app_[timestamp].txt
+
+* timestamp: Timestamp
+
+
+.. code-block:: sh
+
+    For example: log_app_20220330093020.432.txt ==> JieLi Home SDK print file, creation time: 2022/03/30 09:30:20
+
+
+2. File Storage Path
+
+    Location: ``Phone Root Directory/Android/data/[Package Name]/files/logcat/``
+
+* Package Name: Application package name, for example: com.jieli.btsmart
+
+.. code-block:: sh
+
+    For example: Android/data/com.jieli.btsmart/files/logcat/
+
+
+3. Exception handling steps
+=======================================================
+
+.. important::
+    | Prerequisite: Exit the app if an abnormal situation occurs.
+    | 1. **Briefly describe the problem (required)**
+    | 2. **Provide the log file with the closest timestamp (required)**
+    | 3. Provide screenshots or videos of the phenomenon.

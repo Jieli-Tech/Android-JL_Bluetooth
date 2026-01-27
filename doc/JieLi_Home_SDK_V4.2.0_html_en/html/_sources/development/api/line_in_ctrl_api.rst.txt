@@ -1,0 +1,34 @@
+.. _aux_op: 
+
+External Device Function Interface
+***********************************
+
+.. code-block:: java 
+
+    public interface IAuxOp {
+
+        /**
+         * Get external device status
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void getAuxStatusInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Play or pause
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void auxPlayOrPause(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+    }
+
+
+
+.. note:: 
+    1. :ref:`rcsp_op_cb`
+
+
+

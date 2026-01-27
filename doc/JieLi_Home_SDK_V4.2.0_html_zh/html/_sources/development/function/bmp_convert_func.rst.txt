@@ -1,0 +1,209 @@
+
+.. _bmp_convert:
+
+图像转换
+**********************************
+
+普通PNG图片(RGB, ARGB)转换成杰理编码文件
+
+.. code-block:: java
+
+    String inPath = "输入文件路径(例如：/in.png, /in.jpg)";
+    String outPath = "输出文件路径(例如:out.res, out)";
+    //1.初始化图片转换对象
+    BmpConvert bmpConvert = new BmpConvert();
+    //2.开始图像转换
+    int flag = BmpConvert.TYPE_701N_RGB;         //701N图像转换算法 - RGB
+    //flag = BmpConvert.TYPE_695N_RBG;           //695N图像转换算法 - RGB
+    //V1.1.0+ 支持
+    //flag = BmpConvert.TYPE_701N_ARGB;          //701N图像转换算法 - ARGB
+    //V1.2.0+ 支持
+    //flag = BmpConvert.TYPE_701N_RGB_NO_PACK;   //701N图像转换算法 - RGB & 不打包封装
+    //flag = BmpConvert.TYPE_701N_ARGB_NO_PACK;  //701N图像转换算法 - ARGB & 不打包封装
+    //V1.4.0+ 支持
+    //flag = BmpConvert.TYPE_707N_RGB;           //707N图像转换算法 - RGB
+    //flag = BmpConvert.TYPE_707N_ARGB;          //707N图像转换算法 - ARGB
+    //flag = BmpConvert.TYPE_707N_RGB_NO_PACK;   //707N图像转换算法 - RGB & 不打包封装
+    //flag = BmpConvert.TYPE_707N_ARGB_NO_PACK;  //707N图像转换算法 - ARGB & 不打包封装
+    //V1.6.0+支持
+    //lag = BmpConvert.TYPE_701N_JPEG;           //701N图像转换算法 - JPEG
+    //V1.6.0+ 支持
+    //指定输出编码格式， 默认值: ConvertParam.FORMAT_ARGB_8565
+    int format = ConvertParam.FORMAT_AUTO;  //自动选取压缩后最小的格式，ARGB8565或者ARGB8888
+    //        format = ConvertParam.FORMAT_ARGB_8565; //指定输出ARGB8565格式。 若算法是RGB算法，会变成指定输出RGB565格式
+    //        format = ConvertParam.FORMAT_ARGB_8888; //指定输出ARGB8888格式。 若算法是RGB算法，会变成指定输出RGB888格式
+    //构造转换参数
+    ConvertParam param = new ConvertParam().setFormat(format);
+    //执行图像转码功能
+    bmpConvert.bitmapConvert(flag, inPath, outPath, param, new OnConvertListener() {
+        //回调转换开始
+        //path: 输入文件路径
+        @Override
+        public void onStart(String path) {
+
+        }
+
+        //回调转换结束
+        //result： 转换结果
+        //output： 输出文件路径
+        @Deprecated
+        @Override
+        public void onStop(boolean result, String output) {
+            //3.不需要使用图片转换功能时，需要释放图片转换对象
+            //bmpConvert.release();
+        }
+
+        //回调转换结束
+        //result： 转换结果
+        //output： 输出文件路径
+        @Override
+        public void onStop(ConvertResult result, String outFilePath) {
+            //result.isConvertSuccess(); //转码成功
+            //result.getAlgorithm();     //转换算法
+            //result.getBufSize();       //转换数据大小
+            //result.getPixelFormat();   //转换图像格式
+            //result.getCompressMode();  //压缩模式
+
+            //3.不需要使用图片转换功能时，需要释放图片转换对象
+            //bmpConvert.release();
+        }
+    });
+
+.. important::
+    1. 图像转换功能需要导入库：``BmpConvert_Vxxx-release.aar``
+    2. 输入图像的尺寸不能超过设备的屏幕尺寸
+    3. 输入图像的大小尽量小点
+    4. 根据固件SDK选择合适的算法
+    5. :ref:`convert_result` 
+    6. :ref:`on_convert_listener` 
+
+
+
+.. _convert_result:
+
+ConvertResult
+=====================================
+
+图像转换结果
+
+.. code-block:: java
+
+    public class ConvertResult implements Parcelable {
+        /**
+         * 结果码
+         * <p>
+         * 说明:<br/>
+         * 1. 小于等于0, 视为转码失败，负数为错误码<br/>
+         * 2. 大于0，意味着转码成功
+         * </p>
+         */
+        private int result;
+        /**
+         * 算法类型
+         */
+        private int algorithm;
+        /**
+         * 数据大小
+         */
+        private int bufSize;
+        /**
+         * 图像格式
+         * <p>
+         * 说明: 从707N算法后，增加该字段，用于【不打包算法】的处理
+         * </p>
+         */
+        private int pixelFormat;
+        /**
+         * 压缩模式
+         * <p>
+         * 说明: 从707N算法后，增加该字段，用于【不打包算法】的处理
+         * </p>
+         */
+        private int compressMode;
+    }
+   
+
+.. _on_convert_listener:
+
+OnConvertListener
+======================================
+
+转换监听器
+
+
+.. code-block:: java
+
+    public interface OnConvertListener {
+
+        /**
+         * 回调转换开始
+         *
+         * @param inFilePath String 文件路径
+         */
+        void onStart(String inFilePath);
+
+        /**
+         * 回调转换结束
+         *
+         * @param isOk        boolean 转换结果
+         * @param outFilePath String 输出路径
+         */
+        @Deprecated
+        void onStop(boolean isOk, String outFilePath);
+
+        /**
+         * 回调转换结束
+         *
+         * @param result      ConvertResult 转换结果
+         * @param outFilePath String 输出文件路径
+         */
+        void onStop(ConvertResult result, String outFilePath);
+    }
+
+
+
+算法说明
+========================================
+
+
++----------+------------------------+--------------------------+------------------------------------------------------+
+| 芯片系列 | 旧算法名称             | 新算法名称               |  算法说明                                            |
++==========+========================+==========================+======================================================+
+| AC695N   | TYPE_BR_23             | TYPE_695N_RBG            | AC695N-WATCH-SDK 图像转换算法 - RGB                  |
++----------+------------------------+--------------------------+------------------------------------------------------+
+| JL701N   | TYPE_BR_28             | TYPE_701N_RGB            | JL701N-WATCH-SDK 图像转换算法 - RGB                  |
++          +------------------------+--------------------------+------------------------------------------------------+
+|          | TYPE_BR_28_ALPHA       | TYPE_701N_ARGB           | JL701N-WATCH-SDK 图像转换算法 - ARGB                 |
++          +------------------------+--------------------------+------------------------------------------------------+ 
+|          | TYPE_BR_28_RAW         | TYPE_701N_RGB_NO_PACK    | JL701N-WATCH-SDK 图像转换算法 - RGB & 不打包封装     |
++          +------------------------+--------------------------+------------------------------------------------------+
+|          | TYPE_BR_28_ALPHA_RAW   | TYPE_701N_ARGB_NO_PACK   | JL701N-WATCH-SDK 图像转换算法 - ARGB & 不打包封装    |
++----------+------------------------+--------------------------+------------------------------------------------------+
+| AC707N   |                        | TYPE_707N_RGB            |  AC707N-WATCH-SDK 图像转换算法 - RGB                 |
+|          +------------------------+--------------------------+------------------------------------------------------+
+|          |                        | TYPE_707N_ARGB           |  AC707N-WATCH-SDK 图像转换算法 - ARGB                |
+|          +------------------------+--------------------------+------------------------------------------------------+
+|          |                        | TYPE_707N_RGB_NO_PACK    |  AC707N-WATCH-SDK 图像转换算法 - RGB & 不打包封装    |
+|          +------------------------+--------------------------+------------------------------------------------------+
+|          |                        | TYPE_707N_ARGB_NO_PACK   |  AC707N-WATCH-SDK 图像转换算法 - ARGB & 不打包封装   |
++----------+------------------------+--------------------------+------------------------------------------------------+
+
+
+算法的选择规则
+==================================
+    
+
+1. 优先根据【芯片类型】选择
+2. 其次根据【是否打包】选择
+3. 最后根据【资源格式】选择
+
+
+| 比如： JL701N系列芯片，彩屏仓SDK，推送 a.png图片， 打包格式
+| 
+| 1. JL701N系列芯片 
+| 可以筛选出： ``TYPE_701N_RGB``, ``TYPE_701N_ARGB``, ``TYPE_701N_RGB_NO_PACK``, ``TYPE_701N_ARGB_NO_PACK``
+| 2. 打包格式
+| 可以筛选出: ``TYPE_701N_RGB``, ``TYPE_701N_ARGB``
+| 3. a.png图片
+| 因为PNG图片带alpha值，所以选择 ``TYPE_701N_ARGB``
+| 当然，如果想资源小一点，可以选择 ``TYPE_701N_RGB``

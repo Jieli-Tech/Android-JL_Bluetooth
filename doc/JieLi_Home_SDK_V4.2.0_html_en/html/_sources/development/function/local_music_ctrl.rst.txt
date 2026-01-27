@@ -1,0 +1,306 @@
+.. _local_music_ctrl_func:
+
+Local Music Control Function
+*******************************************
+
+
+Formerly: **ID3 Information Control Function**. Used to control third-party music player on phone.
+
+
+.. important:: 
+    1. Interface requires device to be in 【Bluetooth Mode】 to take effect
+    2. Determine if device supports 【Bluetooth Mode】
+    
+    .. code-block:: java
+      
+        public boolean isSupportBtMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.isBtEnable();
+        }
+   
+
+    3. Determine if device is in 【Bluetooth Mode】
+   
+    .. code-block:: java
+
+        public boolean isDeviceInBtMode() {
+            //Get RCSPController object
+            RCSPController controller = RCSPController.getInstance();
+            //Get current operation device
+            BluetoothDevice usingDevice = controller.getUsingDevice();
+            if (null == usingDevice) return false;
+            DeviceInfo deviceInfo = controller.getDeviceInfo(usingDevice);
+            if (null == deviceInfo) return false; //Device not initialized
+            return deviceInfo.getCurFunction() == AttrAndFunCode.SYS_INFO_FUNCTION_BT;
+        }
+
+    4. :ref:`get_device_mode` 
+   
+
+
+
+
+Control ID3 Information Stream Push
+=========================================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    boolean isOpenStream = false;
+    CommandBase command;
+    if(isOpenStream){ //Open ID3 information stream push
+        command = CommandBuilder.buildSetDeviceNotifyADVInfoCmd(1);
+    }else{ //Close ID3 information stream push
+        command = CommandBuilder.buildStopDeviceNotifyADVInfoCmd();
+    }
+
+
+Code example reference :ref:`common_cmd_handle`
+
+.. note:: 
+    1. After ID3 information stream push is enabled, if device receives ID3 music information, it will callback in :ref:`bt_event_listener` #onDeviceCommand method 
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+            //Callback ID3 music information here
+        }
+    });
+    //enable - true : Enable, false : Disable
+    //Execute control ID3 information stream push function and wait for result callback
+    controller.controlAdvBroadcast(controller.getUsingDevice(), enable, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //enable = true, Enable ID3 information stream push, ID3 information will be callback in BTRcspEventCallback#onID3MusicInfo
+            //enable = false, Disable ID3 information stream push
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+
+Get All ID3 Information
+===================================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase getID3MusicInfoCmd = CommandBuilder.buildGetBtSysInfoCmd(0x1ff);
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+            //Callback ID3 music information here
+        }
+    });
+    //Execute get all ID3 information function and wait for result callback
+    controller.getID3MusicInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+            //Result will be callback in BTRcspEventCallback#onID3MusicInfo
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`id3_info` 
+
+
+
+
+.. _id3_info:
+
+ID3 Music Information
+---------------------------------------------
+
+
+.. code-block:: java
+
+    public class ID3MusicInfo implements Parcelable {
+        //    Song name
+        private String title;
+        //    Composer
+        private String artist;
+        //    Album
+        private String album;
+        //    Number
+        private int number = -1;
+        //    Playlist total length
+        private int total;
+        //    Total time
+        private int totalTime;
+        //    Genre
+        private String genre;
+        //    Current time
+        private int currentTime = -1;
+        //    Play status
+        private boolean playStatus;
+    }
+
+
+
+ID3 Music Play or Pause
+=============================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_BT``             -- Bluetooth function
+| **type :**  ``AttrAndFunCode.FUNCTION_BT_CMD_ID3_PLAY_OR_PAUSE``    -- ID3 music play or pause
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase ID3PlayOrPauseCmd = CommandBuilder.buildID3PlayOrPauseCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute ID3 music play or pause function and wait for result callback
+    controller.iD3MusicPlayOrPause(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+ID3 Music Play Previous
+==============================================
+
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_BT``         -- Bluetooth function
+| **type :**  ``AttrAndFunCode.FUNCTION_BT_CMD_ID3_PLAY_PREV``    -- ID3 music play previous
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase ID3PlayPrevCmd = CommandBuilder.buildID3PlayPrevCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute ID3 music play previous function and wait for result callback
+    controller.iD3MusicPlayPrev(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+ID3 Music Play Next
+===============================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_BT``         -- Bluetooth function
+| **type :**  ``AttrAndFunCode.FUNCTION_BT_CMD_ID3_PLAY_NEXT``    -- ID3 music play next
+| **value :**  NULL
+
+Command construction
+
+.. code-block:: java
+
+    CommandBase ID3PlayNextCmd = CommandBuilder.buildID3PlayNextCmd();
+
+
+Code example reference :ref:`set_function`
+
+2. RCSPController Way 
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute ID3 music play next function and wait for result callback
+    controller.iD3MusicPlayNext(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+

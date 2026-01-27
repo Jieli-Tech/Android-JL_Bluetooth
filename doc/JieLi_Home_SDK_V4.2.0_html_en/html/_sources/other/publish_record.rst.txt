@@ -1,0 +1,226 @@
+Release Record
+**********************************
+
+.. important::
+    Please confirm the changes based on the SDK version.
+
+
+=============== ================== =============================================== =================================
+    Version           Date                         Description                                Modified
+=============== ================== =============================================== =================================
+  V4.2.0            2026/01/21       :ref:`version_4_2_0`  Release Record              ZhuoCheng Zhong
+  V4.1.0            2025/07/18       :ref:`version_4_1_0`  Release Record              ZhuoCheng Zhong
+  V4.0.0            2025/04/08       :ref:`version_4_0_0`  Release Record              HuanMing Zhang  
+  V3.2.0            2023/11/23       :ref:`version_3_2_0`  Release Record              ZhuoCheng Zhong
+  V3.0.8            2022/08/12       :ref:`version_3_0_8`  Release Record              HuanMing Zhang 
+  V3.0.7            2022/07/20       :ref:`version_3_0_7`  Release Record              HuanMing Zhang 
+  V2.9.1            2021/08/25       :ref:`version_2_9_1`  Release Record              ZhuoCheng Zhong
+  V2.9.0            2021/08/11       :ref:`version_2_9_0`  Release Record              ZhuoCheng Zhong
+=============== ================== =============================================== =================================
+
+
+1. Level Description
+================================
+
+- Category A: Problem fix; the customer must fix it.
+- Category B: Performance optimization; customers can choose to fix it.
+- Category C: Added functionality; customers can choose to fix it.
+
+
+
+2. Release Record
+================================
+
+.. _version_4_2_0:
+
+JieLi Home SDK_Android_V4.2.0
+------------------------------------------------------------------
+
+| **Version Level:** ``C`` 
+| **Release Date: 2026/01/21**
+| **SDK Version: V4.2.0**
+| **Release Notice** 
+|   1. New Features
+|   1.1 Added LE Audio and RCSP coexistence functionality(refer to ``PiHome\src\main\java\com\jieli\btsmart\tool\bluetooth\rcsp\BTRcspHelper#connectDeviceByMessage``)
+|   1.2 Added AI translation function :ref:`translation_func` 
+|   1.3 Added Auracast Broadcast function :ref:`auracast_assistant_func` 
+|   1.4 Added support for Gatt Over BR/EDR connection methods :ref:`connect_gatt_over_edr` 
+|   2. Optimized Features
+|   2.1 Added compatibility handling for **Android 15** (16KB page feature support)
+|   3. Bug Fixes
+|   3.1 Modified local resources in the color screen storage
+| **Applicable chip range: AC707N、JL701N、AC697N、AC696N、AC695N, etc**
+| **Corresponding firmware SDK version:** Please use the latest firmware SDK  
+
+========================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+========================================== ================================== ========================================================
+  AC701N                                      3.3.3                               Translation Headphone SDK
+  AC707N、AC697N、AC696N、AC695N, etc          ALL                                 SDK that supports RCSP functionality
+========================================== ================================== ========================================================
+
+
+.. _version_4_1_0:
+
+JieLi Home SDK_Android_V4.1.0
+------------------------------------------------------------------
+
+| **Version Level:** ``C`` 
+| **Release Date: 2025/07/18**
+| **SDK Version: V4.1.0**
+| **Release Notice** 
+|   1. Add support for color screen storage function :ref:`charging_case_func` 
+|   1.1 Add screen brightness control :ref:`brightness_ctrl` 
+|   1.2 Add screen saver control :ref:`screen_saver_ctrl` 
+|   1.3 Add weather synchronization :ref:`sync_weather` 
+|   1.4 Add synchronization messages :ref:`sync_msg` 
+| **Applicable chip range: AC707N、JL701N、AC697N、AC696N、AC695N, etc**
+| **Corresponding firmware SDK version:** Please use the latest firmware SDK   
+
+==================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+==================================== ================================== ========================================================
+  JL701N                              v1.0.0_patch_06                     Color Screen Storage SDK
+  AC707N                              v1.0.0_patch_04                     Color Screen Storage SDK
+  AC697N、AC696N、AC695N, etc          ALL                                 SDK that supports RCSP functionality
+==================================== ================================== ========================================================
+
+
+
+.. _version_4_0_0:
+
+JieLi Home SDK_Android_V4.0.0
+------------------------------------------------------------------
+
+| **Version Level:** ``C`` 
+| **Release Date: 2025/04/08**
+| **SDK Version: V4.0.0**
+| **Release Notice** 
+|   1. Optimize SDK log output
+|   2. Separate Bluetooth implementation and RCSP implementation
+|   3. Optimize directory browsing function
+| **Applicable chip range: JL701N、AC697N、AC696N、AC695N, etc**
+| **Corresponding firmware SDK versio:** Please use the latest firmware SDK     
+
+==================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+==================================== ================================== ========================================================
+ | AC707N、AC701N、AC697N、              ALL                                 SDK that supports RCSP functionality
+ | AC696N、AC695N, etc
+==================================== ================================== ========================================================
+
+
+.. _version_3_2_0:
+
+JieLi Home SDK_Android_V3.2.0
+--------------------------------------------------------------------
+
+| **Version Level:** ``C`` 
+| **Release Date: 2023/11/23**
+| **SDK Version: V3.2.0**
+| **Release Notice** 
+|   1. Added TWS earphone dual-device functionality and interface(:ref:`sync_search_state` & :ref:`dual_connection`  )
+|   2. Fix known issues
+| **Applicable chip range: AC701N-SDK**
+| **Corresponding firmware SDK versio:** Please use the latest firmware SDK       
+
+==================== ==================================== ========================================================
+   Chip                            Version                                      Remark
+==================== ==================================== ========================================================
+ AC701N               v1.0.0_patch_06                       Supports one-to-two
+ AC701N               Compatible with other versions        SDK that supports RCSP functionality
+==================== ==================================== ========================================================
+
+
+.. _version_3_0_8:
+
+JieLi Home SDK_Android_V3.0.8
+--------------------------------------------------------------------
+
+| **Version Level:** ``C`` 
+| **Release Date: 2022/08/12**
+| **SDK Version: V3.0.8**
+| **Release Notice** 
+|   1. Added headphone fitting function
+| **Applicable chip range: AC700N-SDK**
+| **Corresponding firmware SDK versio:** Please use the latest firmware SDK       
+
+==================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+==================================== ================================== ========================================================
+  AC700N                                v1.3.3
+ | AC707N、AC701N、AC697N、              ALL                                 SDK that supports RCSP functionality
+ | AC696N、AC695N, etc
+==================================== ================================== ========================================================
+
+
+.. _version_3_0_7:
+
+JieLi Home SDK_Android_V3.0.7
+---------------------------------------------------------------------
+
+| **Version Level:** ``C`` 
+| **Release Date: 2022/07/20**
+| **SDK Version: V3.0.7**
+| **Release Notice** 
+|   1. Add TWS earphone type differentiation neckband earphones
+| **Applicable chip range: AC700N-SDK**
+| **Corresponding firmware SDK versio:**  Please use the latest firmware SDK      
+
+==================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+==================================== ================================== ========================================================
+  AC700N                                v1.3.2
+ | AC707N、AC701N、AC697N、              ALL                                 SDK that supports RCSP functionality
+ | AC696N、AC695N, etc
+==================================== ================================== ========================================================
+
+
+.. _version_2_9_1:
+
+JieLi Home SDK_Android_V2.9.1
+---------------------------------------------------------------------
+
+| **Version Level:** ``A`` 
+| **Release Date: 2021/08/25**
+| **SDK Version: V2.9.1**
+| **Release Notice** 
+|   1. Fix phone compatibility issues:
+|     The old SDK caused a serialization error and crashes when running on Xiaomi Mi 11 phones. A patch has been released to fix this issue.
+| **Applicable chip range: AC697N、AC696N、AC695N、AC692N, etc**
+| **Corresponding firmware SDK versio: Please use the latest firmware SDK**  
+
+
+==================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+==================================== ================================== ========================================================
+ | AC707N、AC701N、AC697N、              ALL                                 SDK that supports RCSP functionality
+ | AC696N、AC695N, etc
+==================================== ================================== ========================================================
+
+
+.. _version_2_9_0:
+
+JieLi Home SDK_Android_V2.9.0
+----------------------------------------------------------------------
+
+| **Version Level:** ``A`` 
+| **Release Date: 2021/08/11**
+| **SDK Version: V2.9.0**
+| **Release Notice** 
+|   1. Add a snooze mode to the speaker SDK's alarm clock: 
+|     Added parameter settings to the existing ringtone settings: Currently supports: alarm count, ringtone duration, alarm interval.
+|   2. Added active noise cancellation (ANC) settings to the headphone SDK:
+|     The firmware can be customized to support active noise cancellation settings for the headphones. Currently supported modes include: Noise Cancellation, Transparency, and Normal.
+|   3. Fix Android 11 compatibility issues:
+|     Android 11 does not support some interfaces, causing older SDKs to sometimes crash. The new SDK fixes this issue.
+| **Applicable chip range: AC697N、AC696N、AC695N、AC692N, etc**
+| **Corresponding firmware SDK versio: Please use the latest firmware SDK**  
+
+
+==================================== ================================== ========================================================
+   Chip                                           Version                                      Remark
+==================================== ================================== ========================================================
+ | AC707N、AC701N、AC697N、              ALL                                 SDK that supports RCSP functionality
+ | AC696N、AC695N, etc
+==================================== ================================== ========================================================

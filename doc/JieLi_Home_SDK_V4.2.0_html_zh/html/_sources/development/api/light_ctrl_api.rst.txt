@@ -1,0 +1,26 @@
+.. _light_op: 
+
+灯光控制接口
+***************************
+
+.. code-block:: java
+
+    public interface ILightOp {
+
+        /**
+         * 获取灯光控制信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getLightControlInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置灯光控制信息
+         *
+         * @param device           操作设备
+         * @param lightControlInfo 灯光控制信息
+         * @param callback         结果回调
+         */
+        void setLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo, OnRcspActionCallback<Boolean> callback);
+    }

@@ -1,0 +1,575 @@
+.. _auracast_assistant_func:
+
+Auracast助手
+*********************
+
+功能实现类名: ``AuracastAssistant``
+
+
+初始化
+=====================================
+
+初始化AuracastAssistant对象
+
+.. code-block:: java
+
+    public void init() {
+        //获取RCSPController对象
+        final RCSPController controller = RCSPController.getInstance();
+        //获取当前操作设备
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //上下文
+        Context context = MainApplication.getApplication();
+        //初始化AuracastAssistant对象
+        auracastAssistant = new AuracastAssistant(context, controller.getRcspOp(), usingDevice);
+        //设备是否支持Auracast功能
+        auracastAssistant.isSupportAuracast();
+    }
+
+
+
+.. note:: 
+    1. 用户可以通过 **指定操作设备对象** 来绑定 ``AuracastAssistant``
+    2. 用户传入 ``device`` 字段为 ``null``, SDK 会默认用 ``RcspOpImpl#getConnectedDevice()`` 替代
+    3. 如果 ``AuracastAssistant#getDevice()`` 为 ``null``， 功能无法正常使用
+    4. 如果设备不支持 **Auracast** 功能，无法使用 ``AuracastAssistant`` 的功能
+
+
+
+销毁对象
+========================================
+
+销毁AuracastAssistant对象，释放资源
+
+.. code-block:: java
+
+    public void destroy() {
+        if(null == auracastAssistant) return;
+        //销毁对象
+        auracastAssistant.destroy();
+    }
+
+
+.. important:: 
+    1. ``AuracastAssistant`` 对象销毁后，需要把对象置为 ``null``，避免销毁对象后，业务流程还在调用其功能接口
+    2. **设备断开** ， 需要把 ``AuracastAssistant`` 销毁
+
+
+
+
+.. _auracast_receiver_func:
+
+Auracast接收端功能
+=======================================
+
+接收端功能: 搜索Auracast广播、收听Auracast广播 、移除Auracast广播等
+
+
+功能流程图
+------------------------------------------
+
+.. figure:: ../../_static/auracast_receiver_flow.png
+   :alt: auracast_receiver_flow
+   :align: center
+
+   
+
+
+是否支持私有Auracast接收端功能
+------------------------------------------
+
+通过RCSP协议实现，属于非标准的Auracast协议
+
+.. code-block:: java
+
+    public boolean isSupportAuracastReceiver() {
+        return null != auracastAssistant && auracastAssistant.isSupportAuracastReceiver();
+    }
+
+
+请求收听中的广播源信息
+------------------------------------------
+
+.. code-block:: java
+
+    public void getListeningSource() {
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        auracastAssistant.requestListeningSource(new OnRcspActionCallback<AuracastBroadcast>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, AuracastBroadcast message) {
+                //回调操作成功
+                //message --- 正在操作的Auracast广播信息。 null表示不存在
+                //广播状态会通过 AuracastReceiverCallback#onBroadcastState 回调
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //回调操作失败
+                //error --- 错误信息
+            }
+        });
+    }
+
+
+.. note:: 
+    1. 该功能可能会返回 ``正在同步中`` 或者 ``正在收听`` 的广播信息。用户需要根据 ``同步状态`` 判断。
+    2. 该功能主要用于初始化后的收听状态同步
+    3. :ref:`auracast_broadcast` 
+
+
+
+.. _auracast_broadcast:
+
+AuracastBroadcast
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auracast广播信息
+
+.. code-block:: java
+
+    public class AuracastBroadcast {
+
+        /**
+         * 广播名称
+         */
+        private String broadcastName;
+        /**
+         * 广播源ID
+         */
+        private int broadcastID;
+        /**
+         * 是否加密
+         */
+        private boolean isEncrypted;
+        /**
+         * 广播地址
+         */
+        private String address;
+        /**
+         * 广播同步状态
+         */
+        @SyncState
+        private int syncState;
+        /**
+         * 错误码
+         */
+        private int errorCode;
+        /**
+         * 广播密钥
+         */
+        private String broadcastCode;
+    }
+
+
+查询搜索广播状态
+-------------------------------------------
+
+.. code-block:: java
+
+    public void checkScanAuracastStatus() {
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        //执行查询搜索广播状态
+        auracastAssistant.checkScanStatus(new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //回调操作成功
+                // message --- 搜索状态
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //回调操作失败
+                //error --- 错误信息
+            }
+        });
+    }
+
+
+.. note:: 
+    1. 该功能主要用于初始化后的搜索广播状态同步
+
+
+
+
+是否正在扫描Auracast广播
+--------------------------------------------
+
+
+.. code-block:: java
+
+    public boolean isScanningAuracastBroadcast() {
+        return null != auracastAssistant && auracastAssistant.isScanning();
+    }
+
+
+
+开始搜索Auracast广播
+--------------------------------------------
+
+.. code-block:: java
+
+    public void startScanAuracastBroadcast() {
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        if (isScanningAuracastBroadcast()) return; //正在搜索
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onSearchStarted(int reason) {
+                //回调搜索开始
+                //reason --- 原因
+                //  - Constants.REASON_BY_SDK       --- SDK触发
+                //  - Constants.REASON_BY_DEVICE    --- 设备触发
+            }
+
+            @Override
+            public void onSearchStopped(int reason) {
+                //回调搜索结束
+                //reason --- 原因
+                //  - Constants.REASON_BY_SDK       --- SDK触发
+                //  - Constants.REASON_BY_DEVICE    --- 设备触发
+
+                //获取所有搜索到的广播
+                List<AuracastBroadcast> broadcasts = auracastAssistant.getDiscoveredBroadcast();
+                //移除接收器事件监听
+                auracastAssistant.removeAuracastReceiverCallback(this);
+            }
+
+            @Override
+            public void onBroadcastFound(@NonNull AuracastBroadcast broadcast) {
+                //回调搜索到的Auaracast广播信息
+            }
+        };
+        //注册接收端事件监听器
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //搜索配置信息
+        //timeout -- 超时时间, 单位是毫秒，默认是 48秒
+        //isFilterBroadcast -- 是否过滤重复广播信息，默认是 true
+        ScanOption option = new ScanOption();
+        //执行搜索Auracast广播
+        auracastAssistant.startScan(option, new OnRcspActionCallback<Integer>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Integer message) {
+                //回调操作成功
+                // message --- 操作结果
+                // - ScanResponse.RESULT_SUCCESS --- 操作成功/不在搜索状态
+                // - ScanResponse.RESULT_SCANNING --- 正在搜索，请勿重复操作
+                // - ScanResponse#RESULT_LISTENING_BROADCAST_BAN_SCAN --- 收听广播过程不允许扫描
+                // - ScanResponse#RESULT_DEVICE_BUSY --- 设备繁忙
+                //搜索状态和搜索设备结果将在 AuracastReceiverCallback#onSearchStarted,
+                // AuracastReceiverCallback#onBroadcastFound 和 AuracastReceiverCallback#onSearchStopped 返回
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //回调操作失败
+                //error --- 错误信息
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+
+.. note:: 
+    1. :ref:`auracast_broadcast` 
+
+
+
+停止搜索Auracast广播
+---------------------------------------------
+
+
+.. code-block:: java
+
+    public void stopScanAuracastBroadcast() {
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        if (!isScanningAuracastBroadcast()) return; //不在搜索状态
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onSearchStopped(int reason) {
+                //回调搜索结束
+                //reason --- 原因
+                //  - Constants.REASON_BY_SDK       --- SDK触发
+                //  - Constants.REASON_BY_DEVICE    --- 设备触发
+                auracastAssistant.removeAuracastReceiverCallback(this);
+            }
+        };
+        //注册接收端事件监听器
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //执行停止搜索Auracast广播
+        auracastAssistant.stopScan(new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //回调操作成功
+                //搜索状态将在 AuracastReceiverCallback#onSearchStopped 返回
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //回调操作失败
+                //error --- 错误信息
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+获取正在收听的广播信息
+----------------------------------------
+
+.. code-block:: java
+
+    public AuracastBroadcast getListeningBroadcast() {
+        if (null == auracastAssistant) return null;
+        //获取正在收听的广播信息
+        return auracastAssistant.getListeningBroadcast();
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_broadcast` 
+
+
+
+添加Auracast广播音源
+---------------------------------------
+
+
+.. code-block:: java
+
+    public void addSource() {
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        stopScanAuracastBroadcast(); //建议先关闭搜索广播
+        final AuracastBroadcast addBroadcast = new AuracastBroadcast(); //选择的广播信息
+        if (addBroadcast.isEncrypted()) { //如果广播是解密的, 需要增加广播密钥
+            addBroadcast.setBroadcastCode(new byte[16]);
+        }
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onBroadcastState(@NonNull BluetoothDevice device, @NonNull AuracastBroadcast broadcast) {
+                //回调广播状态变化
+                if (addBroadcast.equals(broadcast)) {
+                    if (broadcast.getSyncState() != StateCode.STATE_SYNCING) {
+                        auracastAssistant.removeAuracastReceiverCallback(this);
+                    }
+                }
+            }
+        };
+        //注册接收端事件监听器
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //执行添加音频的功能
+        auracastAssistant.addSource(addBroadcast, new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //回调操作成功
+                //音频广播同步状态，将在 AuracastReceiverCallback#onBroadcastState 回调
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //回调操作失败
+                //error --- 错误信息
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. 添加Auracast广播音源之前，建议停止搜索广播功能
+    2. 若Auracast广播是加密广播，需要配置 ``广播密钥`` 字段， 长度不得大于 **16个字节**， 超过部分会被SDK裁掉
+    3. :ref:`auracast_broadcast` 
+
+
+
+移除Auracast广播音源
+---------------------------------------
+
+.. code-block:: java
+
+    public void removeSource() {
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        final AuracastBroadcast broadcast = getListeningBroadcast(); //获取正在收听的广播信息
+        if (null == broadcast) return; //不在收听音乐状态
+        final AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onBroadcastState(@NonNull BluetoothDevice device, @NonNull AuracastBroadcast broadcast) {
+                //回调广播状态变化
+                if (broadcast.getSyncState() != StateCode.STATE_SYNCING) {
+                    auracastAssistant.removeAuracastReceiverCallback(this);
+                }
+            }
+        };
+        //注册接收端事件监听器
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //执行移除音频的功能
+        auracastAssistant.removeSource(new OnRcspActionCallback<Boolean>() {
+            @Override
+            public void onSuccess(BluetoothDevice device, Boolean message) {
+                //回调操作成功
+                //音频广播同步状态，将在 AuracastReceiverCallback#onBroadcastState 回调
+            }
+
+            @Override
+            public void onError(BluetoothDevice device, BaseError error) {
+                //回调操作失败
+                //error --- 错误信息
+                auracastAssistant.removeAuracastReceiverCallback(receiverCallback);
+            }
+        });
+    }
+
+
+.. note:: 
+    1. 移除Auracast广播音源之前，保证设备当前处于收听Auracast广播状态，否则功能无效
+    2. :ref:`auracast_broadcast` 
+
+
+
+
+获取指定设备的所有Auracast广播历史记录
+-------------------------------------------------
+
+.. code-block:: java
+
+    public void getAuracastRecords() {
+        if (null == auracastAssistant) return;
+        //获取RCSPController对象
+        final RCSPController controller = RCSPController.getInstance();
+        //获取当前操作设备
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //获取Auracast广播历史记录
+        List<AuracastRecord> records = auracastAssistant.getAuracastRecords(usingDevice.getAddress());
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+    2. 添加成功的广播会被SDK记录
+
+
+
+.. _auracast_record:
+
+AuracastRecord
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auracast广播记录
+
+.. code-block:: java
+
+    public class AuracastRecord {
+
+        /**
+         * 设备地址
+         */
+        @NonNull
+        private final String mac;
+        /**
+         * 广播信息
+         */
+        @NonNull
+        private String broadcastJson;
+        /**
+         * 更新时间戳
+         */
+        private long updateTime;
+    }
+
+
+删除指定设备的所有Auracast广播记录
+---------------------------------------------------
+
+.. code-block:: java
+
+    public void removeAuracastRecords() {
+        if (null == auracastAssistant) return;
+        //获取RCSPController对象
+        final RCSPController controller = RCSPController.getInstance();
+        //获取当前操作设备
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //移除设备对应的所有Auracast广播记录
+        auracastAssistant.removeAuracastRecords(usingDevice.getAddress());
+    }
+
+
+
+监听历史记录变化
+-------------------------------------------
+
+.. code-block:: java
+
+    public void observerRecordChange(){
+        if (!isSupportAuracastReceiver()) return; //不支持Auracast接收端功能
+        final  AuracastReceiverCallback receiverCallback = new AuracastReceiverCallback() {
+            @Override
+            public void onRecordChange(int op, AuracastRecord record) {
+                //回调记录改变
+                //op --- 操作码
+                //   - AuracastRecordHelper.OP_ADD --- 添加操作
+                //   - AuracastRecordHelper.OP_MODIFY --- 修改操作
+                //   - AuracastRecordHelper.OP_DELETE --- 删除操作
+                //   - AuracastRecordHelper.OP_CLEAR --- 清除操作
+                //record --- 历史记录
+            }
+        };
+        //注册接收端事件监听器
+        auracastAssistant.addAuracastReceiverCallback(receiverCallback);
+        //不再需要监听时，记得移除监听器
+        //        auracastAssistant.removeAuracastRecords(receiverCallback);
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+
+
+
+查找指定广播的记录信息
+---------------------------------------------
+
+
+.. code-block:: java
+
+    public void findAuracastRecord(AuracastBroadcast broadcast) {
+        if (null == auracastAssistant) return;
+        //获取RCSPController对象
+        final RCSPController controller = RCSPController.getInstance();
+        //获取当前操作设备
+        BluetoothDevice usingDevice = controller.getUsingDevice();
+        if (null == usingDevice) return;
+        //查找对应的Auracast广播历史记录
+        AuracastRecord record = auracastAssistant.findAuracastRecord(usingDevice.getAddress(), broadcast);
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+
+
+
+删除指定的广播记录
+-------------------------------------
+
+.. code-block:: java
+
+    public void removeAuracastRecord(AuracastRecord record) {
+        if (null == auracastAssistant) return;
+        //移除对应的Auracast广播历史记录
+        auracastAssistant.removeAuracastRecord(record);
+    }
+
+
+.. note:: 
+    1. :ref:`auracast_record` 
+
+
+
+
+
+
+
+
+

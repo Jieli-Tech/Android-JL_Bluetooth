@@ -1,0 +1,50 @@
+
+.. _record_op_api:
+
+录音操作
+******************************
+
+.. code-block:: java
+
+    public interface IRecordOp {
+
+        /**
+         * 添加录音状态回调
+         *
+         * @param callback OnRecordStateCallback 录音状态回调
+         */
+        void addOnRecordStateCallback(OnRecordStateCallback callback);
+
+        /**
+         * 移除录音状态回调
+         *
+         * @param callback OnRecordStateCallback 录音状态回调
+         */
+        void removeOnRecordStateCallback(OnRecordStateCallback callback);
+
+        /**
+         * 是否正在录音
+         *
+         * @param device BluetoothDevice 操作设备
+         * @return boolean 结果
+         */
+        boolean isRecording(BluetoothDevice device);
+
+        /**
+         * 开始录音
+         *
+         * @param device   BluetoothDevice 操作设备
+         * @param param    RecordParam 录音参数
+         * @param callback OnRcspActionCallback<Boolean> 结果回调
+         */
+        void startRecord(BluetoothDevice device, RecordParam param, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 结束录音
+         *
+         * @param device   操作设备
+         * @param reason   结束原因
+         * @param callback 结果回调
+         */
+        void stopRecord(BluetoothDevice device, int reason, OnRcspActionCallback<Boolean> callback);
+    }

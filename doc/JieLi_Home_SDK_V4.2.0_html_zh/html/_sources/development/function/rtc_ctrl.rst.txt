@@ -1,0 +1,550 @@
+
+.. _rtc_ctrl_func:
+
+时钟功能
+**************************
+
+
+同步时间
+============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``           -- 时钟功能
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_TIME``              -- 标识更新时间
+| **value :**  timestamp: year(2Bytes) + month(1Byte) + day(1Byte) + hour(1Byte) + minute(1Byte) + second(1Byte)
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase syncTimeCmd = CommandBuilder.buildSyncTimeCmd(Calendar.getInstance());
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //执行同步时间功能并等待结果回调
+    controller.syncTime(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+读取闹钟列表
+===========================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``  -- 时钟功能
+| **mask :**   -- 时钟参数
+|   
+|    * AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM              -- 闹钟列表
+|    * AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_EXPAND_FLAG  -- 闹钟拓展参数
+|    * AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_VER          -- 闹钟版本
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase getAlarmListCmd = CommandBuilder.buildGetAlarmCmd();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onAlarmListChange(BluetoothDevice device, AlarmListInfo alarmListInfo) {
+            //此处将会回调闹钟列表信息
+        }
+    });
+    //执行获取闹钟列表功能并等待结果回调
+    controller.readAlarmList(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会BTRcspEventCallback#onAlarmListChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. 闹钟列表信息, :ref:`alarm_list_info` 
+
+
+
+
+.. _alarm_list_info:
+
+AlarmListInfo 
+---------------------------------
+
+闹钟列表信息
+
+.. code-block:: java
+
+    public class AlarmListInfo {
+
+        private int version; //版本号
+        private List<AlarmBean> alarmBeans; //闹钟列表
+
+   }
+
+.. _alarm_bean:
+
+AlarmBean
+-----------------------------------
+
+闹钟信息
+
+.. code-block:: java
+
+    public class AlarmBean {
+        //索引
+        private byte index;
+        //名称
+        private String name;
+        //小时
+        private byte hour;
+        //分钟
+        private byte min;
+        //类型
+        private byte repeatMode;
+        //拓展字段
+        private String reserved;
+        //是否开启
+        private boolean open;
+        //铃声类型
+        private byte bellType;//0: 默认类型  1：设备文件类型
+        //铃声簇号
+        private int bellCluster; //当bellType=0时，这里是铃声序号 当bellType=1时 这里是文件簇号
+        //铃声名称
+        private String bellName; //当bellType=1时有效
+        //铃声所在设备序号
+        private byte devIndex;//当bellType=1时有效
+
+        private int version;
+    }
+
+
+
+添加或者修改闹钟
+=====================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``     -- 时钟功能
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM``       -- 标识闹钟操作
+| **value :**  op(1Byte)+len(1Byte)+payload(n Bytes)
+
+命令构造
+
+.. code-block:: java
+
+    AlarmBean alarm; //闹钟属性，创建或者读取闹钟列表获取
+    CommandBase addAlarmCmd = CommandBuilder.buildSetAlarmCmd(AlarmBean.toAttrbean(alarm, false));
+
+
+代码示例参考 :ref:`set_sys_info`
+
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    AlarmBean alarm; //闹钟属性，创建或者读取闹钟列表获取
+    //执行添加或修改闹钟功能并等待结果回调
+    controller.addOrModifyAlarm(controller.getUsingDevice(), alarm, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. 闹钟对象 :ref:`alarm_bean` 
+
+
+
+
+删除闹钟
+====================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``        -- 时钟功能
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM``          -- 标识闹钟操作
+| **value :**  op(1Byte)+len(1Byte)+payload(n Bytes)
+
+命令构造
+
+.. code-block:: java
+
+    AlarmBean alarm; //闹钟属性, 通过读取闹钟列表获取
+    CommandBase deleteAlarmCmd = CommandBuilder.buildSetAlarmCmd(AlarmBean.toAttrbean(alarm, true));
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    AlarmBean alarm ; //闹钟属性, 通过读取闹钟列表获取
+    //执行删除闹钟功能并等待结果回调
+    controller.deleteAlarm(controller.getUsingDevice(), alarm, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. 闹钟信息 :ref:`alarm_bean` 
+
+
+读取闹钟默认铃声列表
+=====================================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``                          -- 时钟功能
+| **mask :**   ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_DEFAULT_BELL_LIST`` -- 时钟参数
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase readAlarmDefaultBellListCmd = CommandBuilder.buildGetDefaultBellList();
+
+
+代码示例参考 :ref:`get_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //注册蓝牙RCSP事件监听器
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onAlarmDefaultBellListChange(BluetoothDevice device, List<DefaultAlarmBell> bells) {
+            //此处将会回调默认闹钟铃声列表信息
+        }
+    });
+    //执行获取默认闹钟铃声列表功能并等待结果回调
+    controller.readAlarmDefaultBellList(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+            //结果将会BTRcspEventCallback#onAlarmDefaultBellListChange回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+.. note::
+   1. 默认闹钟铃声， :ref:`default_alarm_bell` 
+
+
+
+.. _default_alarm_bell:
+
+DefaultAlarmBell
+---------------------------------------
+
+默认闹钟铃声
+
+.. code-block:: java
+
+    public class DefaultAlarmBell {
+        private String name; //名称
+        private int index; //索引
+        private boolean selected; //是否选择
+    }
+
+
+读取指定闹钟铃声参数
+=========================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    byte mask = 0; //闹钟序号
+    CommandBase readAlarmBellArgs = CommandBuilder.buildReadBellArgsCmd(mask);
+
+
+代码示例参考 :ref:`common_cmd_handle`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //alarmIndex - 闹钟序号
+    //执行获取指定闹钟的铃声参数功能并等待结果回调
+    controller.readAlarmBellArgs(controller.getUsingDevice(), alarmIndex, new OnRcspActionCallback<List<AlarmExpandCmd.BellArg>>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, List<AlarmExpandCmd.BellArg> message) {
+            //成功回调
+            //message - 铃声参数
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. _bell_arg:
+
+BellArg
+-----------------------------------
+
+铃声参数
+
+.. code-block:: java
+
+    public static class BellArg {
+        /**
+         * 闹钟索引
+         */
+        private int index;
+        /**
+         * 是否允许设置循环次数
+         */
+        private boolean isCanSetCount;
+        /**
+         * 循环次数
+         */
+        private int count;
+        /**
+         * 是否允许设置重复间隔
+         */
+        private boolean isCanSetInterval;
+        /**
+         * 重复间隔
+         */
+        private int interval;
+        /**
+         * 是否允许设置响铃时长
+         */
+        private boolean isCanSetDuration;
+        /**
+         * 响铃时长
+         */
+        private int duration;
+    }
+
+
+设置指定闹钟铃声参数
+=================================
+
+
+1. JL_BluetoothManager方式
+
+命令构造
+
+.. code-block:: java
+
+    AlarmExpandCmd.BellArg arg; //闹钟铃声参数
+    CommandBase setAlarmBellArgCmd = CommandBuilder.buildSetBellArgsCmd(arg);
+
+
+代码示例参考 :ref:`common_cmd_handle` 
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    //alarmBellArg - 通过读取闹钟铃声参数获得
+     AlarmExpandCmd.BellArg alarmBellArg; //闹钟铃声参数
+    //执行设置指定闹钟的铃声参数功能并等待结果回调
+    controller.setAlarmBellArg(controller.getUsingDevice(), alarmBellArg, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    });
+
+
+.. note::
+   闹钟铃声参数， :ref:`bell_arg` 
+
+
+
+
+试听闹钟铃声
+=============================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``         -- 时钟功能
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_AUDITION``  -- 标识试听闹钟铃声
+| **value :**  op(1Byte)+type(1Byte)+dev(1Byte)+cluster(4Bytes)  
+
+命令构造
+
+.. code-block:: java
+
+    int type = 0;    //播放类型
+    int dev = 0;     //存在设备标识
+    int cluster = 0; //簇号
+    CommandBase auditionAlarmBellCmd = CommandBuilder.buildAuditionAlarmBellCmd(type, dev, cluster);
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+    AuditionParam param = null; //试听参数
+    //执行试听闹钟铃声功能并等待结果回调
+    controller.auditionAlarmBell(controller.getUsingDevice(), param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    }); 
+
+
+.. _audition_param:
+
+AuditionParam
+-------------------------------
+
+试听铃声参数
+
+.. code-block:: java
+
+    public class AuditionParam implements Parcelable {
+        private byte op; //操作码， 0 : 停止   1 : 响铃
+        private byte type; //铃声类型， 0 : 默认   1 : 文件
+        private byte dev;  //存储器索引
+        private int cluster; //文件簇号
+        private String name; //铃声名称
+    }
+
+
+.. note::
+   试听铃声参数， :ref:`audition_param` 
+
+
+
+
+停止试听闹钟铃声
+===========================
+
+
+1. JL_BluetoothManager方式
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_RTC``         -- 时钟功能
+| **type :**  ``AttrAndFunCode.SYS_INFO_ATTR_RTC_ALARM_AUDITION``  -- 标识试听闹钟铃声
+| **value :**  op(1Byte), op = 0x00  
+
+命令构造
+
+.. code-block:: java
+
+    CommandBase stopAuditionAlarmBellCmd = CommandBuilder.buildStopAuditionAlarmBellCmd();
+
+
+代码示例参考 :ref:`set_sys_info`
+
+2. RCSPController方式
+
+.. code-block:: java
+
+    //获取RCSPController对象
+    RCSPController controller = RCSPController.getInstance();
+        //执行停止试听闹钟铃声功能并等待结果回调
+    controller.stopAlarmBell(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //成功回调
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //失败回调
+            //error - 错误信息
+        }
+    }); 
+

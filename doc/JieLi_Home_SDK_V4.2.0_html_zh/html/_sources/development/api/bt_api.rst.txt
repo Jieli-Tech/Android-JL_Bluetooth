@@ -1,0 +1,1285 @@
+.. sectnum::
+    :start: 1
+    :depth: 5
+
+.. _bt_manager_api:
+
+蓝牙处理接口
+*********************
+
+可以通过 ``JL_BluetoothManager`` 使用下面接口
+
+=================================== ============================================================== ============================================ ===================================================================
+  方法名                               参数                                                                             结果                                         描述
+=================================== ============================================================== ============================================ ===================================================================
+ addEventListener                      :ref:`bt_event_listener`                                        boolean: 结果                                添加蓝牙事件监听器, 推荐使用 ``BTEventCallback``
+ removeEventListener                   :ref:`bt_event_listener`                                        boolean: 结果                                移除蓝牙事件监听器
+ configure                             BluetoothOption:  蓝牙参数                                       void                                        配置蓝牙库参数
+ isBluetoothEnabled                    NULL                                                            boolean: 结果                                蓝牙是否开启, 推荐使用 ``BluetoothUtil`` 的方法
+ openOrCloseBluetooth                  isEnable: 是否使能                                               boolean: 结果                                打开或关闭蓝牙, 推荐使用 ``BluetoothUtil`` 的方法
+| 
+ scan                                  timeout: 扫描超时时间(单位: 毫秒)                                 int: 结果码                                  扫描BLE设备
+ scan                                | type: 扫描类型                                                   int: 结果码                                  扫描蓝牙设备
+                                     |  * BluetoothConstant#SCAN_TYPE_BLE
+                                     |  * BluetoothConstant#SCAN_TYPE_CLASSIC
+                                     | timeout: 扫描超时时间(单位: 毫秒)
+ stopScan                              NULL                                                            int ：结果码                                  停止蓝牙扫描
+ getFoundedBluetoothDevices            NULL                                                          | ArrayList\<BluetoothDevice\>:                获得已发现的蓝牙设备列表
+                                                                                                     | 已发现的蓝牙设备列表 
+| 
+ isConnectedByProfile                  device: 经典蓝牙设备                                             boolean: 结果                                是否连接经典蓝牙服务
+ startConnectByBreProfiles             device: 经典蓝牙设备                                             void                                         连接指定的经典蓝牙, 连接状态在 :ref:`bt_event_listener` 回调
+ disconnectByProfiles                  device: 经典蓝牙设备                                             boolean: 操作结果                             断开指定的经典蓝牙
+ unpair                                device: 经典蓝牙设备                                             int ：结果码                                  解除经典蓝牙的配对, 配对状态在 :ref:`bt_event_listener` 回调
+ synchronizationBtDeviceStatus         NULL                                                            void                                         同步系统蓝牙状态
+| 
+ getConnectedDevice                    NULL                                                            BluetoothDevice: 正在使用的设备               获取已连接且正在使用的设备
+ connect                               device: 蓝牙设备                                                 void                                         连接蓝牙设备
+ connect                             | device: 蓝牙设备                                                 void                                         使用指定通讯方式连接设备
+                                     | int: 连接方式
+                                     |  * BluetoothConstant.PROTOCOL_TYPE_BLE
+                                     |  * BluetoothConstant.PROTOCOL_TYPE_SPP
+                                     |  * BluetoothConstant.PROTOCOL_TYPE_GATT_OVER_BR_EDR
+ disconnect                            NULL                                                            void                                          断开已连接的正在使用的蓝牙设备
+ disconnect                            device: 蓝牙设备                                                 void                                          断开指定的蓝牙设备
+ fastConnect                           NULL                                                            boolean: 操作结果                              快速回连
+| 
+ getMappedDeviceAddress                address: 蓝牙设备地址                                            String: 映射设备地址                            获取指定地址的映射地址  
+ getHistoryBluetoothDeviceList         NULL                                                          | List\<HistoryBluetoothDevice\>:               获得连接历史列表
+                                                                                                     | 连接历史列表
+ removeHistoryDevice                | :ref:`history_device` : 连接历史                                  void                                          删除指定的连接历史
+                                    | IActionCallback: 操作结果回调
+ reconnectHistoryBluetoothDevice    | :ref:`history_device` :  连接历史                                 void                                          回连指定的连接历史
+                                    | timeout : 回连超时，单位是毫秒
+                                    | IActionCallback: 操作结果回调
+ clearHistoryDeviceRecord             NULL                                                             void                                          清除连接历史缓存
+| 
+ sendCommandAsync                   | device: 已连接的设备                                              void                                          发送RCSP命令
+                                    | CommandBase: Rcsp命令
+                                    | timeout: 发送命令超时时间 (单位: 毫秒)
+                                    | :ref:`rcsp_cmd_cb` 
+ sendData                           | device: 已连接的设备                                              void                                          发送数据命令
+                                    | CommandBase: 被响应命令
+                                    | data: 需要发送的数据
+ sendCommandResponse                | device: 已连接的设备                                              void                                          发送回复命令
+                                    | CommandBase : 回复命令
+| 
+ getConnectedDeviceList               NULL                                                           | List\<BluetoothDevice\>:                      获取已连接设备列表
+                                                                                                     | 已连接设备列表
+ isConnectedBtDevice                 device: 蓝牙设备                                                   boolean: 结果                                 设备是否已连接
+ isUseBtDevice                       device: 蓝牙设备                                                   boolean: 结果                                 设备是否正在使用
+ switchConnectedDevice               device: 已连接的设备                                               void                                          切换正在使用的设备
+ destroy                             NULL                                                              void                                          释放资源
+=================================== ============================================================== ============================================ ===================================================================
+
+
+.. _rcsp_cmd_cb: 
+
+命令回复回调
+=========================================
+
+.. code-block:: java
+
+    public interface RcspCommandCallback {
+
+        /**
+         * 回调回复命令
+         *
+         * @param device 已连接设备
+         * @param cmd  回复命令
+         */
+        void onCommandResponse(BluetoothDevice device, CommandBase cmd);
+
+        /**
+         * 回调错误事件
+         *
+         * @param device 已连接设备
+         * @param error  错误信息
+         */
+        void onErrCode(BluetoothDevice device, BaseError error);
+    }
+
+
+
+.. _bt_op_api:
+
+蓝牙操作接口
+========================================================
+
+.. code-block:: java
+
+    public interface IBluetoothOperation {
+
+        /*-------------------------------- BluetoothAdapter Op ------------------------*/
+
+        /**
+         * 蓝牙模块是否使能
+         *
+         * @return boolean 结果。若为true，蓝牙模块打开; 若为false，蓝牙模块关闭
+         */
+        boolean isBluetoothEnabled();
+
+        /**
+         * 打开蓝牙模块
+         *
+         * <p>需要用户动态授权</p>
+         *
+         * @return boolean 操作结果
+         */
+        boolean enableBluetooth();
+
+        /**
+         * 关闭蓝牙模块
+         *
+         * @return boolean 操作结果
+         */
+        boolean disableBluetooth();
+
+        /**
+         * 注册蓝牙回调监听器
+         *
+         * @param bluetoothCallback 蓝牙回调监听器。建议使用{@link BluetoothCallbackImpl}
+         * @return boolean 操作结果
+         */
+        boolean registerBluetoothCallback(IBluetoothCallback bluetoothCallback);
+
+        /**
+         * 注销蓝牙回调监听器
+         *
+         * @param bluetoothCallback 蓝牙回调监听器。建议使用{@link BluetoothCallbackImpl}
+         * @return boolean 操作结果
+         */
+        boolean unregisterBluetoothCallback(IBluetoothCallback bluetoothCallback);
+
+        /**
+         * 已连接蓝牙设备对象
+         *
+         * <p>在BLE方式时，返回BLE设备对象。<br/>
+         * 在SPP方式时，需要注意，会通过BLE连接转换成Spp连接，
+         * 所以会先返回BLE的对象，再返回Spp的对象（经典蓝牙的对象）</p>
+         *
+         * @return 返回通讯通道的对象, 若通讯通道为建立, 返回null。
+         */
+        BluetoothDevice getConnectedDevice();
+
+        /**
+         * 设置已连接且正在使用的蓝牙设备
+         *
+         * @param device 蓝牙设备
+         */
+        void setConnectedDevice(BluetoothDevice device);
+
+        /**
+         * 获取正在使用的BluetoothGatt对象
+         *
+         * @return BluetoothGatt 正在使用的BluetoothGatt对象
+         */
+        BluetoothGatt getConnectedBluetoothGatt();
+
+        /**
+         * 获得指定设备的BluetoothGatt对象
+         *
+         * @param device BLE设备
+         * @return BluetoothGatt 已连接的BluetoothGatt对象
+         */
+        BluetoothGatt getDeviceGatt(BluetoothDevice device);
+
+        /**
+         * 获取已连接设备列表
+         *
+         * @return List<BluetoothDevice> 已连接设备列表
+         */
+        List<BluetoothDevice> getConnectedDeviceList();
+
+        /**
+         * 判断设备是否已连接
+         *
+         * @param device 蓝牙设备
+         * @return boolean 结果
+         */
+        boolean isConnectedDevice(BluetoothDevice device);
+
+        /**
+         * 设置蓝牙配置信息
+         *
+         * @param bluetoothOption 蓝牙配置信息
+         */
+        void setBluetoothOption(BluetoothOption bluetoothOption);
+
+        /**
+         * 获取蓝牙配置信息
+         *
+         * @return BluetoothOption 蓝牙配置信息
+         */
+        BluetoothOption getBluetoothOption();
+
+        /**
+         * 获取远端蓝牙设备对象
+         *
+         * @param address 蓝牙设备地址
+         * @return BluetoothDevice 蓝牙设备对象。若蓝牙设备存在，返回设备对象；反之，返回 null.
+         */
+        BluetoothDevice getRemoteDevice(String address);
+
+        /**
+         * 获取缓存的经典蓝牙对象
+         *
+         * @param device 蓝牙设备
+         * @return BluetoothDevice 缓存的经典蓝牙对象
+         */
+        BluetoothDevice getCacheEdrDevice(BluetoothDevice device);
+
+        /*-----------------------------------scan device op--------------------------*/
+
+
+        /**
+         * 是否正在扫描设备
+         *
+         * @return boolean 结果
+         */
+        boolean isScanning();
+
+        /**
+         * 获取发现蓝牙设备列表
+         *
+         * <p>列表，只会返回要扫描的类型; scan的操作会清空缓存列表;</p>
+         *
+         * @return ArrayList<BluetoothDevice> 发现蓝牙设备列表
+         */
+        ArrayList<BluetoothDevice> getDiscoveredBluetoothDevices();
+
+        /**
+         * 当前扫描类型
+         *
+         * @return int 扫描类型
+         * <p>
+         * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_BLE} --- BLE设备 <br/>
+         * {@link com.jieli.bluetooth.constant.BluetoothConstant#SCAN_TYPE_CLASSIC} --- 经典蓝牙设备
+         * </p>
+         */
+        int getScanType();
+
+        /**
+         * 开始蓝牙设备扫描
+         *
+         * <p>该方法会扫描所有蓝牙设备,SDK只回调经典蓝牙设备</p>
+         * <p>达到超时值且没扫描到蓝牙设备，会通过{@link IBluetoothCallback#onError(BaseError)}返回扫描超时错误</p>
+         *
+         * @param timeout 超时值
+         * @return int 操作结果码
+         * <p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败<br/>
+         * <br/>
+         * 若操作成功，搜索状态将在{@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)}回调<br/>
+         * 搜索到的设备也将在{@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)}回调<br/>
+         * 弹窗产品将在{@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)}回调
+         * </p>
+         */
+        int startDeviceScan(long timeout);
+
+        /**
+         * 停止蓝牙设备扫描
+         *
+         * @return int 操作结果码
+         * <p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败
+         * </p>
+         */
+        int stopDeviceScan();
+
+        /**
+         * 开始BLE设备扫描
+         *
+         * <p>达到超时值且没扫描到蓝牙设备，会通过{@link IBluetoothCallback#onError(BaseError)}返回扫描超时错误</p>
+         *
+         * @param timeout 超时时间。单位是毫秒
+         * @return int 操作结果码
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败<br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败 <br/>
+         * <br/>
+         * 若操作成功，搜索状态将在{@link IBluetoothCallback#onDiscoveryStatus(boolean, boolean)} 回调<br/>
+         * 搜索到的设备也将在{@link IBluetoothCallback#onDiscovery(BluetoothDevice, BleScanMessage)} 回调<br/>
+         * 弹窗产品将在{@link IBluetoothCallback#onShowDialog(BluetoothDevice, BleScanMessage)} 回调
+         * </p>
+         */
+        int startBLEScan(long timeout);
+
+        /**
+         * 停止BLE设备扫描
+         *
+         * @return int 操作结果码
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败
+         * </p>
+         */
+        int stopBLEScan();
+
+        /*-----------------------------------pair op--------------------------*/
+
+        /**
+         * 指定设备是否正在配对
+         *
+         * @param device 蓝牙设备
+         * @return boolean 结果
+         */
+        boolean isPairing(BluetoothDevice device);
+
+        /**
+         * 指定设备是否已配对
+         *
+         * @param device 蓝牙设备
+         * @return boolean 结果
+         */
+        boolean isPaired(BluetoothDevice device);
+
+        /**
+         * 获取已配对的设备列表
+         *
+         * @return List<BluetoothDevice> 已配对的设备列表
+         */
+        List<BluetoothDevice> getPairedDevices();
+
+        /**
+         * 开始指定设备的配对流程
+         *
+         * @param device 蓝牙设备
+         * @return int 结果码
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功 <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用发射接口失败<br/>
+         * 若操作成功，状态将在{@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}回调
+         * </p>
+         */
+        int pair(BluetoothDevice device);
+
+        /**
+         * 开始指定设备的配对流程
+         *
+         * @param device  蓝牙设备
+         * @param pairWay 配对方式，取值范围:[0, 2]
+         * @return int 结果码
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功 <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用发射接口失败<br/>
+         * 若操作成功，状态将在{@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}回调
+         * </p>
+         */
+        int pair(BluetoothDevice device, @IntRange(from = 0, to = 2) int pairWay);
+
+        /**
+         * 取消与蓝牙设备的配对
+         *
+         * @param device 蓝牙设备
+         * @return int 操作码
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功 <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败<br/>
+         * 若操作成功，状态将在{@link OnBtDevicePairListener#onBtDeviceBond(BluetoothDevice, int)}回调
+         * </p>
+         */
+        int unPair(BluetoothDevice device);
+
+        /**
+         * 尝试开始指定设备的配对流程
+         *
+         * <p>队列式执行配对过程,避免过度操作导致蓝牙系统异常。推荐使用该方法进行配对</p>
+         *
+         * @param device 蓝牙设备
+         * @return boolean 操作结果
+         */
+        boolean tryToPair(BluetoothDevice device);
+
+        /**
+         * 尝试开始指定设备的配对流程
+         *
+         * <p>队列式执行配对过程,避免过度操作导致蓝牙系统异常。推荐使用该方法进行配对</p>
+         *
+         * @param device  蓝牙设备
+         * @param pairWay 配对方式，取值范围:[0, 2]
+         * @return boolean 操作结果
+         */
+        boolean tryToPair(BluetoothDevice device, @IntRange(from = 0, to = 2) int pairWay);
+
+        /**
+         * 尝试开始指定设备的解除配对流程
+         *
+         * <p>队列式执行配对过程,避免过度操作导致蓝牙系统异常。推荐使用该方法进行配对</p>
+         *
+         * @param device 蓝牙设备
+         * @return boolean 操作结果
+         */
+        boolean tryToUnPair(BluetoothDevice device);
+
+        /*-----------------------------------br/edr op--------------------------*/
+
+        /**
+         * 蓝牙设备是否包含hfp服务
+         *
+         * @param device 经典蓝牙设备
+         * @return boolean 结果
+         */
+        boolean deviceHasHfp(BluetoothDevice device);
+
+        /**
+         * 蓝牙设备是否包含a2dp服务
+         *
+         * @param device 经典蓝牙设备
+         * @return boolean 结果
+         */
+        boolean deviceHasA2dp(BluetoothDevice device);
+
+        /**
+         * 蓝牙设备是否已建立hfp服务
+         *
+         * @param device 经典蓝牙设备
+         * @return int 设备连接状态<p>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 未连接 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中
+         * </p>
+         */
+        int isConnectedByHfp(BluetoothDevice device);
+
+        /**
+         * 蓝牙设备是否已建立a2dp服务
+         *
+         * @param device 经典蓝牙设备
+         * @return int 设备连接状态<p>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 未连接 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中
+         * </p>
+         */
+        int isConnectedByA2dp(BluetoothDevice device);
+
+        /**
+         * 蓝牙设备是否已建立经典蓝牙服务(a2dp、hfp)
+         *
+         * @param device 经典蓝牙设备
+         * @return int 设备连接状态<p>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 未连接 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 <br/>
+         * {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中
+         * </p>
+         */
+        int isConnectedByProfile(BluetoothDevice device);
+
+        /**
+         * 判断经典蓝牙是否连接中
+         *
+         * @return boolean 结果
+         */
+        boolean isBrEdrConnecting();
+
+        /**
+         * 获取连接中的经典蓝牙设备
+         *
+         * @return BluetoothDevice 经典蓝牙设备
+         */
+        BluetoothDevice getConnectingBrEdrDevice();
+
+        /**
+         * 连接经典蓝牙
+         *
+         * @param device 经典蓝牙设备
+         * @return boolean 操作结果 <p>
+         * 若操作成功，连接状态将在{@link IBluetoothCallback#onBrEdrConnection(BluetoothDevice, int)} 回调
+         * </p>
+         */
+        boolean connectByProfiles(BluetoothDevice device);
+
+        /**
+         * 断开经典蓝牙
+         *
+         * @param device 经典蓝牙设备
+         * @return boolean 结果
+         */
+        boolean disconnectByProfiles(BluetoothDevice device);
+
+        /**
+         * 设置指定的设备为音频输出设备
+         *
+         * @param device 指定的已连接设备
+         * @return boolean 结果
+         */
+        boolean setActivityBluetoothDevice(BluetoothDevice device);
+
+        /**
+         * 获取当前音频输出设备对象
+         *
+         * @return BluetoothDevice 当前音频输出设备对象
+         */
+        BluetoothDevice getActivityBluetoothDevice();
+
+        /**
+         * 获取已连接SPP列表
+         *
+         * @return List<BluetoothDevice> 已连接SPP列表
+         */
+        List<BluetoothDevice> getConnectedSppList();
+
+        /**
+         * 判断设备是否已连接SPP
+         *
+         * @param device 蓝牙设备
+         * @return boolean 结果
+         */
+        boolean isConnectedSppDevice(BluetoothDevice device);
+
+        /**
+         * 连接Spp通道
+         *
+         * @param device 经典蓝牙设备
+         * @return int 操作结果
+         * <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功 <br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败<br/>
+         * 若操作成功，连接状态将在{@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)} 回调。
+         * </p>
+         */
+        int connectSPPDevice(BluetoothDevice device);
+
+        /**
+         * 断开Spp通道
+         *
+         * @param device 经典蓝牙设备
+         * @return boolean 操作结果
+         * <p>
+         * 调用成功，连接状态将在{@link IBluetoothCallback#onSppStatus(BluetoothDevice, int)}回调
+         * </p>
+         */
+        boolean disconnectSPPDevice(BluetoothDevice device);
+
+        /**
+         * 通过Spp通道发送数据包
+         *
+         * @param device 经典蓝牙设备
+         * @param data   数据包
+         * @return boolean 操作结果
+         */
+        boolean writeDataToSppDevice(BluetoothDevice device, byte[] data);
+
+        /**
+         * 获取已连接经典蓝牙设备列表
+         *
+         * @return List<BluetoothDevice> 已连接经典蓝牙设备列表
+         */
+        List<BluetoothDevice> getDevicesConnectedByProfile();
+
+        /*----------------------------------ble op----------------------------*/
+
+        /**
+         * 获取已配对的BLE设备列表
+         *
+         * @return List<BluetoothDevice> 已配对的BLE设备列表，若没有，则为null
+         */
+        List<BluetoothDevice> getPairedBLEDevices();
+
+        /**
+         * 获取已连接BLE设备的MTU
+         *
+         * @param device 已连接BLE设备
+         * @return int 协商后的BLE MTU
+         */
+        int getBleMtu(BluetoothDevice device);
+
+        /**
+         * 判断是否为已连接的BLE设备
+         *
+         * @param device BLE设备
+         * @return boolean 结果
+         */
+        boolean isConnectedBLEDevice(BluetoothDevice device);
+
+        /**
+         * 请求调节BLE的MTU
+         *
+         * @param device 蓝牙设备
+         * @param mtu    请求调节的MTU
+         * @return boolean 操作结果
+         */
+        boolean requestBleMtu(BluetoothDevice device, int mtu);
+
+        /**
+         * 开关BLE特征值属性
+         *
+         * @param gatt              蓝牙设备
+         * @param bleCharacteristic BLE特征值
+         * @return boolean 操作结果
+         */
+        boolean enableBLEDeviceNotification(BluetoothGatt gatt, BleCharacteristic bleCharacteristic);
+
+        /**
+         * 连接指定设备的BLE
+         *
+         * @param device 蓝牙设备
+         * @return int 操作码<p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败<br/>
+         * <br/>
+         * 若操作成功，连接状态将在 {@link OnBtBleListener#onBleConnection(BluetoothDevice, int)} 回调
+         * </p>
+         */
+        int connectBLEDevice(BluetoothDevice device);
+
+        /**
+         * 连接指定设备的BLE
+         *
+         * @param device 蓝牙设备
+         * @param param  连接参数
+         * @return int 操作码<p>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中<br/>
+         * {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败<br/>
+         * <p>
+         * 若操作成功，连接状态将会在{@link OnBtBleListener#onBleConnection(BluetoothDevice, int)}回调
+         * </p>
+         */
+        int connectBLEDevice(BluetoothDevice device, @NonNull BleConnectParam param);
+
+        /**
+         * 断开BLE设备
+         *
+         * @param device BLE设备
+         * @return boolean 操作结果<p>
+         * 若操作成功，连接状态将在 {@link IBluetoothCallback#onBleConnection(BluetoothDevice, int)} 回调
+         * </p>
+         */
+        boolean disconnectBLEDevice(BluetoothDevice device);
+
+        /**
+         * 通过BLE写服务发送数据包
+         *
+         * @param device             BLE设备
+         * @param serviceUUID        服务UUID
+         * @param characteristicUUID 属性UUID
+         * @param writeData          数据包
+         * @return boolean 发送结果
+         */
+        boolean writeDataToBLEDevice(BluetoothDevice device, UUID serviceUUID, UUID characteristicUUID, byte[] writeData);
+
+        /*---------------------------------- special op ----------------------------*/
+
+        /**
+         * 同步连接历史记录
+         */
+        void syncHistoryBtDeviceRecord();
+
+        /**
+         * 获取当前连接中设备对象
+         *
+         * @return BluetoothDevice 连接中设备对象
+         */
+        BluetoothDevice getConnectingDevice();
+
+        /**
+         * 连接蓝牙设备
+         *
+         * <p>根据蓝牙设备类型进行连接，BLE设备进行BLE连接，经典蓝牙设备进行经典蓝牙连接</p>
+         *
+         * @param device 蓝牙设备
+         * @return int 结果码<p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中<br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败<br/>
+         * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP连接中<br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败 <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- 设备连接中 <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- 设备已连接<br/>
+         * <br/>
+         * 若操作成功，连接状态将在 {@link IBluetoothCallback#onConnection(BluetoothDevice, int)} 回调
+         * </p>
+         */
+        int connectBtDevice(BluetoothDevice device);
+
+        /**
+         * 连接蓝牙设备
+         *
+         * <p>根据蓝牙设备类型进行连接，BLE设备进行BLE连接，经典蓝牙设备进行经典蓝牙连接</p>
+         *
+         * @param device     蓝牙设备
+         * @param connectWay 连接方式
+         *                   <p>
+         *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE方式 <br/>
+         *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP方式<br/>
+         *                   {@link com.jieli.bluetooth.constant.BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- Gatt Over BR/EDR方式
+         *                   </p>
+         * @return int 结果码<p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功<br/>
+         * {@link ErrorCode#SUB_ERR_OP_FAILED} --- 操作失败 <br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECTING} --- BLE连接中<br/>
+         * {@link ErrorCode#SUB_ERR_BLE_CONNECT_FAILED} --- BLE连接失败<br/>
+         * {@link ErrorCode#SUB_ERR_SPP_CONNECTING} --- SPP连接中<br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用反射接口失败 <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_CONNECTING}  --- 设备连接中 <br/>
+         * {@link ErrorCode#SUB_ERR_DEVICE_IS_CONNECTED} --- 设备已连接<br/>
+         * <br/>
+         * 若操作成功，连接状态将在 {@link IBluetoothCallback#onConnection(BluetoothDevice, int)} 回调
+         * </p>
+         */
+        int connectBtDevice(BluetoothDevice device, int connectWay);
+
+        /**
+         * 断开蓝牙设备
+         *
+         * <p>连接状态将在 {@link IBluetoothCallback#onConnection(BluetoothDevice, int)} 回调</p>
+         *
+         * @param device 蓝牙设备
+         */
+        void disconnectBtDevice(BluetoothDevice device);
+
+        /**
+         * 连接经典蓝牙设备
+         *
+         * @param breDevice 蓝牙设备
+         * @return int 结果码 <p>
+         * {@link ErrorCode#ERR_NONE} --- 操作成功 <br/>
+         * {@link ErrorCode#SUB_ERR_PARAMETER} --- 参数错误 <br/>
+         * {@link ErrorCode#SUB_ERR_EDR_CONNECTING} --- 正在连接经典蓝牙 <br/>
+         * {@link ErrorCode#SUB_ERR_REFLECT_WAY} --- 调用发射接口失败<br/>
+         * <br/>
+         * 若操作成功，连接状态将在 {@link IBluetoothCallback#onBtDeviceConnectStatus(BluetoothDevice, int)} 回调
+         * </p>
+         */
+        int startConnectByBreProfiles(BluetoothDevice breDevice);
+
+        /**
+         * 是否正在连接设备
+         *
+         * @return boolean 结果
+         */
+        boolean isConnecting();
+
+        /**
+         * 检查蓝牙设备是否已过认证
+         *
+         * @param device 蓝牙设备
+         * @return boolean 结果
+         */
+        boolean checkDeviceIsCertify(BluetoothDevice device);
+
+        /**
+         * 快速连接
+         *
+         * <p>连接结果通过{@link IBluetoothCallback} 回调。需要通过 {@link #registerBluetoothCallback(IBluetoothCallback)} 注册回调。</p>
+         *
+         * @return 若false, 表示没有缓存BLE地址，无法回连。若true，说明开始回连过程
+         */
+        boolean fastConnect();
+
+        /**
+         * 检查BLE设备是否连接
+         *
+         * <p>通过同步系统BLE设备连接列表，尝试确认连接BLE是否为本方案认可的设备</p>
+         */
+        void checkBleIsConnected();
+
+        /**
+         * 同步蓝牙设备状态
+         *
+         * <p>确认蓝牙设备是否正常连接</p>
+         */
+        void synchronizationBtDeviceStatus(); //同步蓝牙设备状态
+
+        /**
+         * 查询连接历史记录
+         *
+         * @param address 设备地址
+         * @return HistoryBluetoothDevice 连接历史记录
+         */
+        HistoryBluetoothDevice findHistoryBluetoothDevice(String address);
+
+        /**
+         * 删除历史记录设备
+         *
+         * <p>同步清除BLE和经典蓝牙的配对，清除映射关系</p>
+         *
+         * @param historyBtDevice 历史记录设备
+         * @param callback        操作回调
+         */
+        void removeHistoryDevice(HistoryBluetoothDevice historyBtDevice, IActionCallback<HistoryBluetoothDevice> callback);
+
+        /**
+         * 是否正在回连
+         *
+         * @return boolean 结果
+         */
+        boolean isReconnecting();
+
+        /**
+         * 回连历史记录
+         *
+         * @param historyBtDevice 历史记录设备
+         * @param timeoutMs       超时时间
+         * @param listener        回连监听器
+         */
+        void reconnectHistoryBluetoothDevice(HistoryBluetoothDevice historyBtDevice, long timeoutMs, OnReconnectHistoryRecordListener listener);
+
+        /**
+         * 停止回连设备
+         * @return  boolean 操作结果
+         */
+        boolean stopReconnect();
+
+        /**
+         * 释放资源
+         */
+        void destroy();
+    }
+
+
+.. note:: 
+    1. :ref:`bt_callback` 
+    2. :ref:`ble_connect_param` 
+    3. :ref:`ble_chanacteristic`
+    4. :ref:`history_device` 
+
+
+
+
+.. _ble_connect_param:
+
+BleConnectParam
+-------------------------------------------------
+
+BLE连接参数
+
+.. code-block:: java
+
+    public class BleConnectParam extends ConnectParam {
+
+        /**
+         * 是否需要重连
+         * <p>
+         * 说明:异常断开重连机制
+         * </p>
+         */
+        private boolean reconnect = true;
+
+        /**
+         * 是否强制使用BLE
+         */
+        private boolean isMandatoryUseBLE = false;
+
+        /**
+         * BLE传输MTU
+         * <p>
+         * 说明:Android为了兼容4.0的手机，默认的MTU是23；可用数据长度:20；<br/>
+         * 随着手机系统的提升，现在的手机的MTU最大为512。建议提升MTU到512。
+         * </p>
+         */
+        private int mtu = BluetoothConstant.BLE_MTU_MIN;  //调节蓝牙MTU
+
+        /**
+         * BLE 通讯UUID列表
+         * <p>
+         * {@link BluetoothConstant#KEY_BLE_SERVICE_UUID}  服务UUID <br/>
+         * {@link BluetoothConstant#KEY_BLE_WRITE_CHARACTERISTIC_UUID} 写特征UUID <br/>
+         * {@link BluetoothConstant#KEY_BLE_NOTIFICATION_CHARACTERISTIC_UUID} 通知特征UUID <br/>
+         * </p>
+         */
+        private final List<BleCharacteristic> bleCharacteristics;
+
+        /**
+         * 是否使用BLE配对方式
+         */
+        private boolean isUseBleBondWay = false;
+        /**
+         * 是否自动连接BLE
+         */
+        @Deprecated
+        private boolean isAutoConnectBle = false;
+        /**
+         * 首选Phy
+         */
+        @PhyMask
+        private int preferredPhy = BluetoothConstant.PHY_LE_1M_MASK;
+        /**
+         * GATT连接到双模设备优先传输方式
+         */
+        @BleTransport
+        private int transport = BluetoothConstant.TRANSPORT_LE;
+
+        /**
+         * 重连延时时间
+         */
+        private long reconnectDelay;
+
+        /**
+         * 重连次数限制
+         */
+        private int retryLimit = 1;
+    }
+
+.. note:: 
+    1. :ref:`ble_chanacteristic` 
+
+
+.. _ble_chanacteristic:
+
+BleCharacteristic
+-------------------------------------------------
+
+.. code-block:: java
+
+    public class BleCharacteristic {
+
+        /**
+         * 服务UUID
+         */
+        @NonNull
+        private final UUID serviceUUID;
+        /**
+         * 特征值UUID
+         */
+        @NonNull
+        private final UUID characteristicUUID;
+        /**
+         * 请求特征值
+         */
+        private final int requiredProperty;
+        /**
+         * 是否主要属性
+         */
+        private final boolean isPrimary;
+    }
+
+
+
+.. _bt_event_listener:
+
+蓝牙事件监听器
+=================================================
+
+.. code-block:: java 
+
+    public interface IBluetoothEventListener {
+
+        /**
+         * 蓝牙适配器状态回调
+         *
+         * @param bEnabled 蓝牙是否打开
+         * @param bHasBle  是否支持BLE
+         */
+        void onAdapterStatus(boolean bEnabled, boolean bHasBle);   
+
+        /**
+         * 发现设备状态回调
+         *
+         * @param bBle   是否BLE设备发现
+         * @param bStart 是否搜索开始
+         */
+        void onDiscoveryStatus(boolean bBle, boolean bStart);      
+
+        /**
+         * 发现设备回调
+         *
+         * @param device 蓝牙设备
+         */
+        @Deprecated
+        void onDiscovery(BluetoothDevice device);   
+
+        /**
+         * 发现设备回调
+         *
+         * @param device         蓝牙设备
+         * @param bleScanMessage 广播信息
+         */
+        void onDiscovery(BluetoothDevice device, BleScanMessage bleScanMessage);  
+
+        /**
+         * 产品弹窗回调
+         *
+         * @param device         蓝牙设备
+         * @param bleScanMessage 广播信息
+         */
+        void onShowDialog(BluetoothDevice device, BleScanMessage bleScanMessage); 
+
+        /**
+         * 蓝牙设备配对状态回调
+         *
+         * @param device 蓝牙设备
+         * @param status 配对状态
+         *               <p>参考值如下<br>
+         *               {@link BluetoothDevice#BOND_NONE} or
+         *               {@link BluetoothDevice#BOND_BONDING} or
+         *               {@link BluetoothDevice#BOND_BONDED}
+         *               </p>
+         */
+        void onBondStatus(BluetoothDevice device, int status);      
+
+        /**
+         * 蓝牙设备连接状态回调
+         *
+         * @param device 蓝牙设备
+         * @param status 连接状态
+         *               <p>参考值如下<br>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}
+         *               </p>
+         */
+        void onConnection(BluetoothDevice device, int status);      
+
+       /**
+        * 切换已连接且正在使用的设备的回调
+        *
+        * @param device 已连接设备
+        */
+        void onSwitchConnectedDevice(BluetoothDevice device);
+
+        /**
+         * A2DP服务状态回调
+         *
+         * @param device 蓝牙设备
+         * @param status 连接状态
+         *               <p>参考值如下<br>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}
+         *               </p>
+         */
+        void onA2dpStatus(BluetoothDevice device, int status);      
+
+        /**
+         * HFP服务状态回调
+         *
+         * @param device 蓝牙设备
+         * @param status 连接状态
+         *               <p>参考值如下<br>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} or
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING}
+         *               </p>
+         */
+        void onHfpStatus(BluetoothDevice device, int status);      
+
+        /**
+         * SPP连接状态回调
+         *
+         * @param device 蓝牙设备
+         * @param status 连接状态
+         *               <p>参考值如下<br>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} or
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED}
+         *               </p>
+         */
+        void onSppStatus(BluetoothDevice device, int status);      
+
+        /**
+         * 接收到设备的RCSP命令数据
+         *
+         * @param device 蓝牙设备
+         * @param cmd    RCSP命令数据
+         */
+        void onDeviceCommand(BluetoothDevice device, CommandBase cmd);              
+
+        /**
+         * 接收到设备的数据包
+         *
+         * @param device 蓝牙设备
+         * @param data   数据包
+         */
+        void onDeviceData(BluetoothDevice device, byte[] data);                             
+
+        /**
+         * 接收到设备的语音数据
+         *
+         * @param device 蓝牙设备
+         * @param data   语音数据
+         */
+        @Deprecated
+        void onDeviceVoiceData(BluetoothDevice device, byte[] data);                       
+
+        /**
+         * 接收到设备的语音数据包
+         *
+         * @param device 蓝牙设备
+         * @param data 语音信息
+         */
+        void onDeviceVoiceData(BluetoothDevice device, VoiceData data);
+
+        /**
+         * 设备VAD结束的回调
+         *
+         * @param device 蓝牙设备
+         */
+        void onDeviceVadEnd(BluetoothDevice device);                                   
+
+        /**
+         * 接收到设备的RCSP回复数据
+         *
+         * @param device   蓝牙设备
+         * @param response  RCSP命令回复数据
+         */
+        void onDeviceResponse(BluetoothDevice device, CommandBase response);
+
+        /**
+         * 错误事件回调
+         *
+         * @param error 错误信息
+         */
+        void onError(BaseError error);  //错误事件回调
+
+    }
+
+.. note:: 
+    1. 推荐使用 ``BTEventCallback`` 实现
+
+
+
+.. _bt_callback:
+
+IBluetoothCallback
+=========================================================
+
+蓝牙回调
+
+.. code-block:: java
+
+    public interface IBluetoothCallback extends IBluetoothEventListener {
+
+        /**
+         * 设备UUID获取回调
+         *
+         * @param device 配对的设备
+         * @param uuids  设备uuid数组
+         */
+        void onDeviceUuidsDiscovery(BluetoothDevice device, ParcelUuid[] uuids);
+
+        /**
+         * 通过SPP通道接收到数据回调
+         *
+         * @param device 蓝牙设备
+         * @param data   设备发送的数据
+         */
+        void onSppDataNotification(BluetoothDevice device, byte[] data);
+
+        /**
+         * BLE查找设备服务回调
+         *
+         * @param device   BLE设备
+         * @param status   查找结果，成功为0({@link BluetoothGatt#GATT_SUCCESS}），否则为其他值
+         * @param services 查找到的服务
+         */
+        void onBleServiceDiscovery(BluetoothDevice device, int status, List<BluetoothGattService> services);
+
+        /**
+         * BLE设备连接状态回调
+         *
+         * @param device BLE设备
+         * @param status 连接状态<p>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_DISCONNECT} --- 连接断开 <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_OK} --- 连接成功 <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_FAILED} --- 连接失败 <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTING} --- 正在连接 <br/>
+         *               {@link com.jieli.bluetooth.constant.StateCode#CONNECTION_CONNECTED} --- 已连接
+         *               </p>
+         */
+        void onBleConnection(BluetoothDevice device, int status);
+
+        /**
+         * BLE数据缓冲区送数据设置回调
+         *
+         * @param device BLE设备
+         * @param block  缓冲区大小
+         * @param status 结果码。 0 - 成功, 其他失败
+         */
+        void onBleDataBlockChanged(BluetoothDevice device, int block, int status);
+
+        /**
+         * BLE特征Notification状态回调
+         *
+         * @param device             BLE设备
+         * @param serviceUuid        主服务UUID
+         * @param characteristicUuid 特征值UUID
+         * @param bEnabled           使能结果
+         */
+        void onBleNotificationStatus(BluetoothDevice device, UUID serviceUuid, UUID characteristicUuid, boolean bEnabled);
+
+        /**
+         * 接收BLE设备发送数据回调
+         *
+         * @param device BLE设备
+         * @param data   接收的数据
+         */
+        void onBleDataNotification(BluetoothDevice device, UUID serviceUuid, UUID characteristicsUuid, byte[] data);
+
+        /**
+         * 发送数据到BLE设备结果回调
+         *
+         * @param device              BLE设备
+         * @param serviceUuid         主服务UUID
+         * @param characteristicsUuid 特征值UUID
+         * @param data                发送的数据
+         * @param status              发送结果    0 - 成功, 其他失败
+         */
+        void onBleWriteStatus(BluetoothDevice device, UUID serviceUuid, final UUID characteristicsUuid, byte[] data, int status);
+
+        /**
+         * 系统回调蓝牙设备连接状态
+         *
+         * @param device 蓝牙设备
+         * @param status 连接状态<p>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 已断开 <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中
+         *               </p>
+         */
+        void onBtDeviceConnectStatus(BluetoothDevice device, int status);
+
+        /**
+         * 系统回调蓝牙连接配置
+         *
+         * @param gatt     蓝牙Gatt对象
+         * @param interval 发送间隔
+         * @param latency  延时
+         * @param timeout  超时时间(单位为毫秒)
+         * @param status   状态码
+         *                 <p>0 为成功，其他为异常</p>
+         */
+        void onConnectionUpdated(BluetoothGatt gatt, int interval, int latency, int timeout, int status);
+
+        /**
+         * 回调经典蓝牙连接状态
+         *
+         * @param device 经典蓝牙设备对象
+         * @param status 连接状态<p>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTED} --- 已断开 <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTING} --- 连接中 <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_CONNECTED} --- 已连接 <br/>
+         *               {@link android.bluetooth.BluetoothProfile#STATE_DISCONNECTING} --- 断开中
+         *               </p>
+         */
+        void onBrEdrConnection(BluetoothDevice device, int status);
+    }
+
+
+.. note:: 
+    1. :ref:`bt_event_listener` 

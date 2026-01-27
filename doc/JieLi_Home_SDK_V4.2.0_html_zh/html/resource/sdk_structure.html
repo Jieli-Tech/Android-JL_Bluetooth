@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDK开发包介绍 &mdash; 杰理之家SDK开发文档(Android) 4.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="https://doc.zh-jieli.com/Apps/static/css/custom.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d0ae6d56"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="https://doc.zh-jieli.com/Apps/static/js/custom.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1 接入流程" href="../development/import.html" />
+    <link rel="prev" title="SDK说明" href="../framework/framework.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">开发框架</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../framework/framework.html">SDK说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">工程介绍</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SDK开发包介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.1 开发资料文件结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.2 示例工程结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.3 功能实现参考</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">开发说明</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/import.html"><span class="sectnum">1 </span>接入流程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/development_desc.html">2 开发说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/interface_desc.html">3 接口说明</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">其他</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../other/debug.html">调试说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/question_answer.html">常见问题答疑</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/publish_record.html">发布记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/feedback.html">开源社区</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">杰理之家SDK开发文档(Android)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SDK开发包介绍</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sdk">
+<h1>SDK开发包介绍<a class="headerlink" href="#sdk" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>1.1 开发资料文件结构<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>apk<span class="w">  </span>---<span class="w">  </span>测试APK文件夹
+<span class="w"> </span>├──<span class="w"> </span>测试APK
+code<span class="w"> </span>---<span class="w">  </span>参考源码工程文件夹
+<span class="w"> </span>├──<span class="w"> </span>参考Demo源码工程
+doc<span class="w"> </span>---<span class="w">  </span>开发文档文件夹
+<span class="w"> </span>├──<span class="w"> </span>杰理OTA外接库<span class="o">(</span>Android<span class="o">)</span>在线开发文档<span class="w">     </span>---<span class="w"> </span>讲解OTA库的开发使用
+<span class="w"> </span>├──<span class="w"> </span>杰理之家SDK<span class="o">(</span>Android<span class="o">)</span>在线开发文档<span class="w">       </span>---<span class="w"> </span>讲解杰理之家SDK开发使用
+libs<span class="w"> </span>---<span class="w"> </span>核心库文件夹
+<span class="w"> </span>├──<span class="w"> </span>jl_bt_ota_V1.10.0_10932-release<span class="w">            </span>---<span class="w"> </span>杰理OTA相关
+<span class="w"> </span>├──<span class="w"> </span>jl_bluetooth_rcsp_V4.2.0_40220-release<span class="w">     </span>---<span class="w"> </span>杰理之家SDK相关
+<span class="w"> </span>├──<span class="w"> </span>jl_audio_V1.2.0-release<span class="w">                    </span>---<span class="w"> </span>音频播放器相关
+<span class="w"> </span>├──<span class="w"> </span>jl_eq_V1.0.0-release<span class="w">                       </span>---<span class="w"> </span>均衡器算法相关
+<span class="w"> </span>├──<span class="w"> </span>jl_http_V1.0.5-release<span class="w">                     </span>---<span class="w"> </span>服务器相关
+<span class="w"> </span>├──<span class="w"> </span>jl-component-lib_V1.2.3-debug<span class="w">              </span>---<span class="w"> </span>工具类相关
+<span class="w"> </span>└──<span class="w"> </span>jldecryption_v0.4-release<span class="w">                  </span>---<span class="w"> </span>加密解密相关
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>1.2 示例工程结构<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>com
+└──<span class="w"> </span>jieli
+<span class="w">      </span>└──<span class="w"> </span>btsmart<span class="w">     </span>---<span class="w"> </span>包名
+<span class="w">            </span>├──<span class="w"> </span>constant<span class="w">        </span>---<span class="w"> </span>常量定义
+<span class="w">            </span>├──<span class="w"> </span>data<span class="w">            </span>---<span class="w"> </span>数据层
+<span class="w">                  </span>├──<span class="w"> </span>adapter<span class="w">       </span>---<span class="w"> </span>适配器
+<span class="w">                  </span>├──<span class="w"> </span>listeners<span class="w">     </span>---<span class="w"> </span>监听器
+<span class="w">                  </span>└──<span class="w"> </span>model<span class="w">         </span>---<span class="w"> </span>数据模型
+<span class="w">            </span>├──<span class="w"> </span>tool<span class="w">            </span>---<span class="w"> </span>工具层
+<span class="w">                  </span>├──<span class="w"> </span>bluetooth<span class="w">        </span>---<span class="w"> </span>蓝牙管理
+<span class="w">                  </span>├──<span class="w"> </span>configure<span class="w">        </span>---<span class="w"> </span>配置缓存
+<span class="w">                  </span>├──<span class="w"> </span>image<span class="w">            </span>---<span class="w"> </span>图片处理
+<span class="w">                  </span>├──<span class="w"> </span>location<span class="w">         </span>---<span class="w"> </span>定位服务
+<span class="w">                  </span>├──<span class="w"> </span>network<span class="w">          </span>---<span class="w"> </span>网络监测
+<span class="w">                  </span>├──<span class="w"> </span>permission<span class="w">       </span>---<span class="w"> </span>权限管理
+<span class="w">                  </span>├──<span class="w"> </span>playercontroller<span class="w"> </span>---<span class="w"> </span>播放器控制类
+<span class="w">                  </span>├──<span class="w"> </span>product<span class="w">          </span>---<span class="w"> </span>产品信息管理
+<span class="w">                  </span>├──<span class="w"> </span>room<span class="w">             </span>---<span class="w"> </span>数据库处理
+<span class="w">                  </span>└──<span class="w"> </span>upgrade<span class="w">          </span>---<span class="w"> </span>OTA升级管理
+<span class="w">            </span>├──<span class="w">  </span>ui<span class="w">              </span>---<span class="w"> </span>UI层
+<span class="w">                  </span>├──<span class="w"> </span>alarm<span class="w">            </span>---<span class="w"> </span>闹钟功能
+<span class="w">                  </span>├──<span class="w"> </span>base<span class="w">             </span>---<span class="w"> </span>基类定义
+<span class="w">                  </span>├──<span class="w"> </span>device<span class="w">           </span>---<span class="w"> </span>设备管理功能
+<span class="w">                  </span>├──<span class="w"> </span>eq<span class="w">               </span>---<span class="w"> </span>均衡器调节功能
+<span class="w">                  </span>├──<span class="w"> </span>home<span class="w">             </span>---<span class="w"> </span>主界面
+<span class="w">                  </span>├──<span class="w"> </span>launcher<span class="w">         </span>---<span class="w"> </span>运行界面
+<span class="w">                  </span>├──<span class="w"> </span>light<span class="w">            </span>---<span class="w"> </span>灯光控制
+<span class="w">                  </span>├──<span class="w"> </span>multimedia<span class="w">       </span>---<span class="w"> </span>多媒体界面
+<span class="w">                  </span>├──<span class="w"> </span>music<span class="w">            </span>---<span class="w"> </span>音乐控制功能
+<span class="w">                        </span>├──<span class="w"> </span>device<span class="w">        </span>---<span class="w"> </span>设备音乐控制
+<span class="w">                        </span>├──<span class="w"> </span><span class="nb">local</span><span class="w">         </span>---<span class="w"> </span>本地音乐控制
+<span class="w">                        </span>└──<span class="w"> </span>net_radio<span class="w">     </span>---<span class="w"> </span>网络电台控制
+<span class="w">                  </span>├──<span class="w"> </span>ota<span class="w">              </span>---<span class="w"> </span>OTA升级功能
+<span class="w">                  </span>├──<span class="w"> </span>qrcode<span class="w">           </span>---<span class="w"> </span>扫描二维码功能
+<span class="w">                  </span>├──<span class="w"> </span>search<span class="w">           </span>---<span class="w"> </span>查找设备功能
+<span class="w">                  </span>├──<span class="w"> </span>settings<span class="w">         </span>---<span class="w"> </span>按键设置功能
+<span class="w">                  </span>├──<span class="w"> </span>soundcard<span class="w">        </span>---<span class="w"> </span>声卡控制功能
+<span class="w">                  </span>├──<span class="w"> </span>widget<span class="w">           </span>---<span class="w"> </span>自定义控件
+<span class="w">                  </span>└──<span class="w"> </span>Activitys<span class="w">    </span>---<span class="w"> </span>界面
+<span class="w">            </span>├──<span class="w"> </span>util<span class="w">               </span>---<span class="w"> </span>工具层
+<span class="w">            </span>├──<span class="w"> </span>viewmodel<span class="w">          </span>---<span class="w"> </span>界面逻辑实现
+<span class="w">            </span>└──<span class="w"> </span>MainApplication<span class="w">    </span>---<span class="w"> </span>应用层
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>1.3 功能实现参考<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>蓝牙连接实现, 可以参考 <code class="docutils literal notranslate"><span class="pre">com.jieli.btsmart.tool.bluetooth.rcsp.BTRcspHelper.java</span></code></p></li>
+<li><p>OTA功能实现, 可以参考 <code class="docutils literal notranslate"><span class="pre">com.jieli.btsmart.tool.upgrade.OTAManager.java</span></code></p></li>
+</ol>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../framework/framework.html" class="btn btn-neutral float-left" title="SDK说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../development/import.html" class="btn btn-neutral float-right" title="1 接入流程" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, 珠海市杰理科技股份有限公司.
+      <span class="lastupdated">Last updated on Jan 22, 2026.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

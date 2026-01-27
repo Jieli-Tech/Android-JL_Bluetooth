@@ -1,0 +1,607 @@
+.. sectnum::
+    :start: 2
+    :depth: 5
+
+Bluetooth Proxy Module
+*******************************************************
+
+
+.. note::
+   | 1. This module is only used for ``built-in Bluetooth proxy implementation``. 
+   | 2. ``JL_BluetoothManager`` is for Bluetooth interface management. :ref:`bt_manager_api` 
+   | 3. ``BluetoothOperationImpl`` is the specific implementation of the Bluetooth function. :ref:`bt_op_api` 
+
+
+.. _scan_device:
+
+Scan Bluetooth devices
+=======================================================
+
+Start scanning device
+-------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Bluetooth event listener
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onDiscoveryStatus(boolean bBle, boolean bStart) {
+            //Callback to detect device status
+        }
+
+        @Override
+        public void onDiscovery(BluetoothDevice device, BleScanMessage bleScanMessage) {
+            //Callback to discovered Devices
+        }
+    };
+    //Add Bluetooth event listener
+    btManager.addEventListener(btEventCallback);
+    int scanType = BluetoothConstant.SCAN_TYPE_BLE; //Scanning device type --- BLE device
+    // BluetoothConstant.SCAN_TYPE_CLASSIC --- Classic Bluetooth devices
+    int timeout = 30 * 1000; //Search timed out --- 30 seconds
+    //Perform scanning device
+    btManager.scan(scanType, timeout);
+    //Remove Bluetooth event listener
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. important::
+   1. To scan for Bluetooth devices, you need to ensure that ``Bluetooth`` is enabled.
+   2. Scanning Bluetooth devices requires ensuring ``permissions``. 
+
+      #. Android 6.0+, ``Bluetooth permissions`` and ``location permissions``
+      #. Android 12.0+, ``Bluetooth search permission`` 
+   3. Scanning for Bluetooth devices requires ensuring that ``location services`` are enabled.
+   4. Scan Bluetooth device configuration, refer to :ref:`bluetooth_option` 
+
+
+
+
+Stop scanning devices
+-------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Execute stop scanning device
+    btManager.stopScan();
+
+
+.. _connect_device:
+
+Connecting devices
+=====================================================================
+
+
+.. important::
+   1. To connect the device, please ensure that ``Bluetooth`` is enabled.
+   2. Connecting to the device requires ensuring that ``permissions`` have been granted.
+
+      * Android 6.0+, ``Bluetooth permissions`` and ``location permissions``
+      * Android 12.0+, ``Bluetooth connection permission``
+   3. Connecting to devices requires that operations be performed linearly, not concurrently.
+   4. Connecting devices refers to connecting communication protocols (BLE/SPP), excluding classic Bluetooth services.
+   
+
+
+Communication methods for connecting devices
+----------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    if (btManager.getBluetoothOperation().isConnecting()) return; //Connecting device
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Bluetooth event listener
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //Callback Bluetooth connection status
+        }
+    };
+    //Add Bluetooth event listener
+    btManager.addEventListener(btEventCallback);
+    //Execution connection device
+    btManager.connect(device);
+    //Execute disconnect device
+    //        btManager.disconnect(device);
+    //Remove Bluetooth event listener
+    //        btManager.removeEventListener(btEventCallback);
+
+
+
+BLE connection device
+-----------------------------------------------------------------------------
+
+
+* **4.0.0+Version**
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    if (btManager.getBluetoothOperation().isConnecting()) return; //Connecting device
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Bluetooth event listener
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //Callback Bluetooth connection status
+        }
+    };
+    //Add Bluetooth event listener
+    btManager.addEventListener(btEventCallback);
+    //Execution connection device
+    btManager.connect(device, BluetoothConstant.PROTOCOL_TYPE_BLE);
+    //Execute disconnect device
+    //        btManager.disconnect(device);
+    //Remove Bluetooth event listener
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. note::
+   SDK_V4.0.0 and later support
+
+
+* **Old version**
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Get Bluetooth function implementation object
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    //Bluetooth event callback
+    final BluetoothCallbackImpl bluetoothCallback = new BluetoothCallbackImpl() {
+        @Override
+        public void onBleConnection(BluetoothDevice device, int status) {
+            //Callback to BLE device connection status
+        }
+    };
+    //Register Bluetooth event callback
+    btOp.registerBluetoothCallback(bluetoothCallback);
+    //Perform a BLE connection operation
+    //result --- Operation results
+    int result = btOp.connectBLEDevice(device);
+    //Execute BLE disconnection
+    //        btOp.disconnectBLEDevice(device);
+    //Cancel Bluetooth event callbackk
+    //        btOp.unregisterBluetoothCallback(bluetoothCallback);
+
+
+
+
+Connect device SPP
+-------------------------------------------------------------
+
+
+* **4.0.0+Version**
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Bluetooth event callback
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //Callback Bluetooth connection status
+        }
+    };
+    //Add Bluetooth event listener
+    btManager.addEventListener(btEventCallback);
+    //Execute SPP to connect devices
+    btManager.connect(device, BluetoothConstant.PROTOCOL_TYPE_SPP);
+    //Execute disconnect device
+    //        btManager.disconnect(device);
+    //Remove Bluetooth event listener
+    //        btManager.removeEventListener(btEventCallback);
+
+.. note::
+   SDK_V4.0.0 and later support
+
+
+* **Old version**
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Get Bluetooth function implementation object
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    //Bluetooth event callback
+    final BluetoothCallbackImpl bluetoothCallback = new BluetoothCallbackImpl() {
+        @Override
+        public void onSppStatus(BluetoothDevice device, int status) {
+            //Callback to SPP device connection status
+        }
+    };
+    //Register Bluetooth event callback
+    btOp.registerBluetoothCallback(bluetoothCallback);
+    //Execute SPP to connect devices
+    //result --- Operation results
+    int result = btOp.connectSPPDevice(device);
+    //Execute disconnect device
+    //        btOp.disconnectSPPDevice(device);
+    //Cancel Bluetooth event callback
+    //        btOp.unregisterBluetoothCallback(bluetoothCallback);
+
+
+
+
+Classic Bluetooth service for connecting devices
+-------------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Bluetooth event callback
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onA2dpStatus(BluetoothDevice device, int status) {
+            //Callback A2DP connection status
+        }
+
+        @Override
+        public void onHfpStatus(BluetoothDevice device, int status) {
+            //Callback HFP connection status
+        }
+    };
+    //Add Bluetooth event listener
+    btManager.addEventListener(btEventCallback);
+    //Perform connection to classic Bluetooth devices
+    btManager.startConnectByBreProfiles(device);
+    //Perform disconnection of classic Bluetooth
+    //        btManager.disconnectByProfiles(device);
+    //Remove Bluetooth event listener
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. _connect_gatt_over_edr:
+
+Gatt Over BR/EDR for Connecting Devices
+----------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    if (btManager.getBluetoothOperation().isConnecting()) return; //Connecting device
+    //Classic Bluetooth address
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //Bluetooth event listener
+    final BTEventCallback btEventCallback = new BTEventCallback() {
+        @Override
+        public void onConnection(BluetoothDevice device, int status) {
+            //Callback Bluetooth connection status
+        }
+    };
+    //Add Bluetooth event listener
+    btManager.addEventListener(btEventCallback);
+    //Execution connection device
+    btManager.connect(device, BluetoothConstant.PROTOCOL_TYPE_GATT_OVER_BR_EDR);
+    //Execute disconnect device
+    //        btManager.disconnect(device);
+    //Remove Bluetooth event listener
+    //        btManager.removeEventListener(btEventCallback);
+
+
+.. note:: 
+    1. SDK_V4.2.0 and later support
+
+
+
+Data Read and Write
+==========================================================================
+
+Receive Data
+--------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Get Bluetooth function implementation object
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    //Bluetooth event callback
+    final BluetoothCallbackImpl bluetoothCallback = new BluetoothCallbackImpl() {
+        @Override
+        public void onBleDataNotification(BluetoothDevice device, UUID serviceUuid, UUID characteristicsUuid, byte[] data) {
+            //BLE data received via callback
+        }
+
+        @Override
+        public void onSppDataNotification(BluetoothDevice device, byte[] data) {
+            //SPP data received via callback
+        }
+    };
+    //Register Bluetooth event callback
+    btOp.registerBluetoothCallback(bluetoothCallback);
+    //Cancel Bluetooth event callback
+    //        btOp.unregisterBluetoothCallback(bluetoothCallback);
+
+
+.. note:: 
+    1. The ``Gatt Over BR/EDR`` data reception operation is the same as the ``BLE`` data reception operation.
+
+
+Send Data
+------------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //data  --- Data sent
+    byte[] data = new byte[0];
+    //Execute data sending operation
+    //ret --- Operation results
+    boolean ret = btManager.sendDataToDevice(device, data);
+
+
+Sending data via BLE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Get Bluetooth function implementation object
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //data  --- Data sent
+    byte[] data = new byte[0];
+    //Execute data sending operation
+    //ret --- Operation results
+    boolean ret = btOp.writeDataToBLEDevice(device, UUID.fromString("Service UUID"), UUID.fromString("Write characteristics UUID"), data);
+
+
+.. note:: 
+    1. The ``Gatt Over BR/EDR`` data transmission operation is the same as the ``BLE`` data transmission operation, but the input device address is different, namely the ``Classic Bluetooth Address`` and the ``BLE Address`` respectively.
+
+
+Send data via SPP
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Get Bluetooth function implementation object
+    final IBluetoothOperation btOp = btManager.getBluetoothOperation();
+    final BluetoothDevice device = BluetoothUtil.getRemoteDevice("Target device address");
+    if (null == device) return;
+    //data  --- Data sent
+    byte[] data = new byte[0];
+    //Execute data sending operation
+    //ret --- Operation results
+    boolean ret = btOp.writeDataToSppDevice(device, UUID.fromString("SPP communication UUID"), data);
+
+
+
+
+Historical Record Management
+==================================================================================
+
+Get history list
+----------------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Get history list
+    final List<HistoryBluetoothDevice> historyDevices = btManager.getHistoryBluetoothDeviceList();
+
+
+
+Back to History
+------------------------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    HistoryBluetoothDevice history = null; //History records cannot be empty.
+    int timeout = 45 * 1000; //Connection timeout
+    //Execute back connection history operation
+    btManager.reconnectHistoryBluetoothDevice(history, timeout, new OnReconnectHistoryRecordListener() {
+        @Override
+        public void onSuccess(HistoryBluetoothDevice history) {
+            //Callback to historical records successful
+        }
+
+        @Override
+        public void onFailed(HistoryBluetoothDevice history, BaseError error) {
+            //Callback to connect to history failed
+            //history --- Historical record
+            //error   --- error message
+         }
+    });
+
+.. note::
+   Historical record, :ref:`history_device` 
+
+.. _history_device:
+
+HistoryBluetoothDevice
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Historical Record
+
+.. code-block:: java
+
+    public class HistoryBluetoothDevice implements Parcelable {
+        /**
+         * Bluetooth device name
+         */
+        private String name;
+        /**
+         * Communication method type
+         * <p>
+         * {@link BluetoothConstant#PROTOCOL_TYPE_BLE} --- BLE method<br/>
+         * {@link BluetoothConstant#PROTOCOL_TYPE_SPP} --- SPP method<br/>
+         * {@link BluetoothConstant#PROTOCOL_TYPE_GATT_OVER_BR_EDR} -- Gatt Over BR/EDR method
+         * </p>
+         */
+        @ConnectWay
+        private int type;
+        /**
+         * Device address
+         */
+        @NonNull
+        private String address;
+        /**
+         * Mapped address
+         */
+        private String mappedAddress;
+        /**
+         * Upgrade address
+         */
+        private String otaAddress;
+
+        /**
+         * Chip type
+         */
+        private int chipType;
+        /**
+         * Device Type
+         */
+        private int deviceType;
+        /**
+         * Broadcast packet protocol version number
+         */
+        private int advVersion;
+        /**
+         * Manufacturer ID
+         */
+        private int vid;
+        /**
+         * Customer ID
+         */
+        private int uid;
+        /**
+         * Product ID
+         */
+        private int pid;
+        /**
+         * Does it support LE Audio?
+         */
+        private boolean isSupportLeAudio;
+
+        //left device gps(The default device is the left-hand device, which is also the default host device.)
+        /**
+         * Left ear latitude
+         */
+        private double leftDevLatitude;
+        /**
+         * Left ear longitude
+         */
+        private double leftDevLongitude;
+        /**
+         * Left ear GPS update time
+         */
+        private long leftDevUpdateTime;
+
+        //right device gps
+        /**
+         * Right ear latitude
+         */
+        private double rightDevLatitude;
+        /**
+         * Right ear longitude
+         */
+        private double rightDevLongitude;
+        /**
+         * Right ear GPS update time
+         */
+        private long rightDevUpdateTime;
+    }
+
+
+Delete History
+---------------------------------------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    HistoryBluetoothDevice history = null; //History records cannot be empty.
+    //Perform the operation to delete history
+    btManager.removeHistoryDevice(history, new IActionCallback<HistoryBluetoothDevice>() {
+        @Override
+        public void onSuccess(HistoryBluetoothDevice message) {
+            //Callback successfully deleted history
+        }
+
+        @Override
+        public void onError(BaseError error) {
+            //Callback to delete history failed
+            //error   --- error message
+        }
+    });
+
+.. note::
+   Historical record, :ref:`history_device` 
+
+
+
+Clear All History
+----------------------------------------
+
+
+.. code-block:: java
+
+    //Get Bluetooth operation object
+    final JL_BluetoothManager btManager = RCSPController.getInstance().getBluetoothManager();
+    if (null == btManager) return; //Custom Bluetooth implementation, btManager is empty.
+    //Perform the operation to clear all history.
+    btManager.clearHistoryDeviceRecord();
+    //Note that you need to update the history list after clearing.
+    final List<HistoryBluetoothDevice> historyDevices = btManager.getHistoryBluetoothDeviceList();
+   

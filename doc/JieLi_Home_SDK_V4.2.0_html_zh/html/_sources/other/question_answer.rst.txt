@@ -1,0 +1,296 @@
+常见问题答疑
+***************************           
+
+记录客户比较经常遇到的问题，通过归纳和梳理，进行答疑记录，方便客户快速检索问题解答。
+
+  1. 客户可以先检索 ``已有的问题`` 是否符合你遇到的问题；如果有，恭喜你，找到答案了。
+  2. 如果是新的问题，请按照以下步骤进行提问，我们将尽快解答。
+
+     * 描述问题的情况以及测试环境， 请参考 :ref:`question_format` 
+     * 提供打印日志，输出方式请参考 :ref:`devlopment_debug` 
+     * 最好可以提供现象截图或视频
+
+
+.. _question_format:
+
+1. 提问格式
+===================================
+
+.. code-block:: tex
+
+   问题描述: XXXXXX
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 1. xxxx 2. xxxx 3.xxxx
+   复现概率: 必现, 1/20, n / m 
+   公版Demo是否复现: 是，否
+   问题出现时间段: yyyy/MM/dd hh:mm - yyyy/MM/dd hh:mm 例如: 2022/05/28 17:00 - 2022/05/28 17:02
+   备注: xxxx
+
+.. important::
+   开发前，请阅读 `杰理之家SDK开发文档(Android) <https://doc.zh-jieli.com/Apps/Android/jielihome/zh-cn/master/index.html>`_ 
+
+
+
+2. 常见问题
+===================================
+
+2.1 蓝牙连接问题
+-----------------------------------       
+
+2.1.1 如何设置不过滤设备? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^            
+
+.. code-block:: tex
+
+   问题描述: 如何设置不过滤设备?
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+
+
+**解答:** 
+代码设置如下
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setBleScanStrategy(BluetoothConstant.NONE_FILTER); //设置无过滤规则
+   //        option.setSkipNoNameDev(false); //是否跳过无名称的设备
+   //配置SDK参数
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+参考 :ref:`scan_device` 
+
+
+2.1.2 如何修改过滤设备规则?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        
+
+.. code-block:: tex
+
+   问题描述: 如何修改过滤设备规则?
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+**解答:** 
+代码设置如下
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption()
+         .setBleScanStrategy(BluetoothConstant.NONE_FILTER) //设置无过滤规则
+         .setSkipNoNameDev(false); //是否跳过无名称的设备
+        //配置SDK参数
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+   //添加事件监听
+   RCSPController.getInstance().addBTRcspEventCallback(new BTRcspEventCallback() {
+      @Override
+      public void onDiscoveryStatus(boolean bBle, boolean bStart) {
+         //回调搜索状态
+         if (!bStart) {
+            RCSPController.getInstance().removeBTRcspEventCallback(this);
+         }
+      }
+
+      @Override
+      public void onDiscovery(BluetoothDevice device, BleScanMessage bleScanMessage) {
+         if (null == bleScanMessage) return;
+         final byte[] rawData = bleScanMessage.getRawData(); //广播数据
+         //TODO: 自行实现过滤规则
+      }
+   });
+   //执行扫描BLE设备
+   RCSPController.getInstance().startBleScan(30 * 1000);
+
+参考 :ref:`scan_device` 
+
+2.1.3 如何只连接BLE，不连接经典蓝牙?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        
+
+.. code-block:: tex
+
+   问题描述: 如何只连接BLE，不连接经典蓝牙?
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+
+**解答:** 
+代码设置如下
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setEnterLowPowerMode(true) //设置无过滤规则
+         .setMandatoryUseBLE(true); //设置无过滤规则
+   //配置SDK参数
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+参考 :ref:`connect_device` 
+
+
+2.1.4 为什么手机蓝牙界面显示已连接，SDK返回设备未连接? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      
+
+.. code-block:: tex
+
+   问题描述: 为什么手机蓝牙界面显示已连接，SDK返回设备未连接?
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+
+| **解答:** 
+| 因为SDK判断设备是否连接的依据是通讯服务是否连接。通讯服务特指BLE和SPP，不包含经典蓝牙服务。而手机系统蓝牙界面连接的是经典蓝牙服务，所以SDK不会返回对应设备已连接。
+|
+| 如果想判断设备的经典蓝牙状态， 代码如下:
+
+.. code-block:: java
+
+   BluetoothDevice device = BluetoothUtil.getRemoteDevice("设备的经典蓝牙地址");
+   if(null == device) return;
+   int state = RCSPController.getInstance().getBtOperation().isConnectedByProfile(device);
+   //state有如下值:
+   //        BluetoothProfile.STATE_DISCONNECTED  --- 未连接
+   //        BluetoothProfile.STATE_CONNECTING    --- 连接中
+   //        BluetoothProfile.STATE_CONNECTED     --- 已连接
+   //        BluetoothProfile.STATE_DISCONNECTING --- 正在断开
+
+
+2.1.5 如何修改通讯UUID?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^          
+
+.. code-block:: tex
+
+   问题描述: 如何修改通讯UUID?
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+
+**解答:** 
+代码设置如下:
+
+* 修改连接BLE的通讯UUID
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setBleUUID(UUID.fromString("你的服务UUID"),
+         UUID.fromString("你的写特征UUID"),
+         UUID.fromString("你的通知特征UUID"));
+   //配置SDK参数
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+* 修改连接SPP的通讯UUID
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setSppUUID(UUID.fromString("你的自定义SPP UUID"));
+   //配置SDK参数
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+2.1.6 如何使用其他UUID通讯? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^       
+
+.. code-block:: tex
+
+   问题描述: 如何使用其他UUID通讯? 
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+
+**解答:** 
+参考示例工程中的test包的示例代码。位置: ``源码工程/btsmart/test/java/com/jieli/btsmart/demo/bluetooth/CustomUuidDemo.java``
+
+
+
+2.1.7 如何配置支持一键连接的设备? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: tex
+
+   问题描述: 如何配置支持一键连接的设备? 
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+
+**解答:** 
+代码设置如下:
+
+.. code-block:: java
+
+   BluetoothOption option = BluetoothOption.createDefaultOption();
+   option.setSupportCTKD(true); //设置支持一键连接功能
+   //配置SDK参数
+   //        Context context = null;
+   //        RCSPController.init(context, option);
+   RCSPController.getInstance().configure(option);
+
+
+
+2.2 文件操作问题
+---------------------------------------         
+
+2.2.1 如何设置每页请求信息数量？
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   
+
+.. code-block:: tex
+
+   问题描述: 如何设置每页请求信息数量？
+   测试环境: 固件: AC693N_soundbox_SDK_Vxxx 或 AC696N_soundbox_SDK_Vxxx 或 JL700N_soundbox_SDK_Vxxx
+   SDK版本: jl_bluetooth_rcsp_Vxxx
+   复现步骤: 无
+   复现概率: 必现
+   公版Demo是否复现: 是
+   问题出现时间段: 无
+
+**解答:** 
+代码设置如下
+
+.. code-block:: java
+
+   int pageSize = 30; //每页请求条目数量， 建议每页数量不超过30
+   //需要在文件浏览前设置才会生效
+   FileBrowseManager.getInstance().setPageSize(pageSize);

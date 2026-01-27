@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffff"
+    tools:context=".ui.translate.face_to_face.FaceToFaceTranslationFragment">
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_EBEBEB"
+        app:layout_constraintBottom_toTopOf="@+id/cl_bottom_bar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include
+            android:id="@+id/view_record"
+            layout="@layout/view_long_press_record"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="26dp"
+            android:background="@drawable/bg_c8_purple_to_gray_selector"
+            android:stateListAnimator="@null"
+            android:textColor="@color/purple_7657EC"
+            android:textSize="@dimen/text_13sp"
+            android:textStyle="bold"
+            android:text="@string/hold_to_speak"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_device_record_ctrl"
+            app:layout_constraintStart_toEndOf="@+id/btn_switch_language"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_switch_language"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:background="@color/text_transparent"
+            android:drawablePadding="4dp"
+            android:textColor="@color/gray_4D000000"
+            android:textSize="@dimen/text_13sp"
+            android:textStyle="bold"
+            android:text="@string/language"
+            app:drawableTopCompat="@drawable/ic_switch_language_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/view_record"
+            app:layout_constraintEnd_toStartOf="@+id/view_record"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_record"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_device_record_ctrl"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/view_record"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_record"
+            app:layout_constraintTop_toTopOf="@+id/view_record">
+
+            <ImageView
+                android:id="@+id/iv_device_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_headset_record_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_device_record"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_device_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:textColor="@color/black_E6000000"
+                android:textSize="@dimen/text_13sp"
+                android:textStyle="bold"
+                android:text="@string/control_headset"
+                app:layout_constraintTop_toBottomOf="@+id/iv_device_record"
+                app:layout_constraintStart_toStartOf="@+id/iv_device_record"
+                app:layout_constraintEnd_toEndOf="@+id/iv_device_record"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_translation_record"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/view_line"
+        app:layout_constraintTop_toBottomOf="@+id/view_tool_bar"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_translation_record" />
+
+    <include
+        android:id="@+id/view_tool_bar"
+        layout="@layout/view_translation_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

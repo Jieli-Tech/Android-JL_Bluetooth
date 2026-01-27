@@ -1,0 +1,213 @@
+.. _search_device_func:
+
+Device Search Function
+**************************************
+
+Find Device
+======================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    int type = 1;         //Search type: 0 --- Find phone  1 --- Find device
+    int op = 1;           //Ring operation: 0 --- Close ring  1 --- Play ring
+    int timeoutSec = 60;  //Timeout: 0 --- No time limit 
+    int playWay = 0;      //Play way: 0 -- Play all 1 -- Play left 2 -- Play right
+    int player = 0;       //Play source: 0 -- App side play 1 -- Device side play
+    CommandBase searchDevCmd = CommandBuilder.buildSearchDevCmd(op, timeoutSec, playWay, player);
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //way : 0 -- all  1 -- left  2 -- right
+    //Execute search device function and wait for result callback
+    controller.searchDev(controller.getUsingDevice(), Constants.RING_OP_OPEN, 60, way, Constants.RING_PLAYER_APP, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Stop Finding Device
+================================
+
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    int type = 1;         //Search type: 0 --- Find phone  1 --- Find device
+    int op = 0;           //Ring operation: 0 --- Close ring  1 --- Play ring
+    int timeoutSec = 0;   //Timeout: 0 --- No time limit 
+    int playWay = 0;      //Play way: 0 -- Play all 1 -- Play left 2 -- Play right
+    int player = 0;       //Play source: 0 -- App side play 1 -- Device side play
+    CommandBase stopSearchDevCmd = CommandBuilder.buildSearchDevCmd(op, timeoutSec, playWay, player);
+
+
+Code example reference :ref:`common_cmd_handle`
+
+2. RCSPController Way 
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute stop search device function and wait for result callback
+    controller.stopSearchDevice(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Success callback
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+Find Phone
+======================================================
+
+1. JL_BluetoothManager Way
+
+Command construction
+
+.. code-block:: java
+
+    SearchDevCmd searchDevCmd = (SearchDevCmd) command;
+    SearchDevParam param = searchDevCmd.getParam();
+    param.getType();         //Search type: 0 --- Find phone  1 --- Find device
+    param.getOp();           //Ring operation: 0 --- Close ring  1 --- Play ring
+    param.getTimeoutSec();   //Timeout: 0 --- No time limit 
+    param.getWay();          //Play way: 0 -- Play all 1 -- Play left 2 -- Play right
+    param.getPlayer();       //Play source: 0 -- App side play 1 -- Device side play
+
+
+Code example reference :ref:`receive_cmd_handle`
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Register Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onSearchDevice(BluetoothDevice device, SearchDevParam searchDevParam) {
+            if (searchDevParam.getOp() == Constants.RING_OP_OPEN) { //open ring
+                int timeout = searchDevParam.getTimeoutSec();//timeout, unit : second
+                int player = searchDevParam.getPlayer(); //player (0 --- app play ring  1 --- device play ring)
+            } else {
+                //close ring
+            }
+        }
+    });
+
+.. _sync_search_state:
+
+Synchronize Search Device Status
+======================================================
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get JL_BluetoothManager object
+    final JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Get connected and currently used device
+    final BluetoothDevice device = manager.getConnectedDevice();
+    //Step1: Build command --- Query search device status
+    CommandBase searchDevStatus = CommandBuilder.buildSearchDevStatusCmd();
+    //Step2: Execute query search device status function and wait for result callback
+    manager.sendRcspCommand(device, searchDevStatus, new RcspCommandCallback() {
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //Device status abnormal, perform exception handling
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Success callback
+            SearchDevCmd searchDevCmd = (SearchDevCmd) cmd;
+            SearchDevStatusResponse response = (SearchDevStatusResponse) searchDevCmd.getResponse();
+            //response -- Query device status
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get RCSPController object
+    final RCSPController controller = RCSPController.getInstance();
+    //Get connected and currently used device
+    final BluetoothDevice device = controller.getUsingDevice();
+    //Execute synchronize search device status function and wait for callback
+    controller.syncSearchDeviceStatus(device, new OnRcspActionCallback<SearchDevStatusResponse>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, SearchDevStatusResponse message) {
+            //Success callback
+            //message -- Query device status
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Failure callback
+            //error - error information
+        }
+    });
+
+
+.. note::
+   1. :ref:`search_device_status` 
+
+
+
+
+.. _search_device_status: 
+
+SearchDevStatusResponse
+-------------------------------------------------------
+
+Search device status
+
+.. code-block:: java
+
+    public class SearchDevStatusResponse {
+        private int op;       //Operation
+        private int timeout;  //Timeout
+        private int way;      //Way
+        private int player;   //Play source
+    }
+
+
+

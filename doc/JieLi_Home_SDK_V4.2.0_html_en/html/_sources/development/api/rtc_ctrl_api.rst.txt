@@ -1,0 +1,99 @@
+.. _rtc_op: 
+
+Clock Function Interface
+**********************************
+
+.. code-block:: java
+
+    public interface IRTCOp {
+
+        /**
+         * Sync time
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void syncTime(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Read alarm list
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void readAlarmList(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Read alarm bell list
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void readAlarmDefaultBellList(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Delete alarm
+         *
+         * @param device   Operation device
+         * @param alarm Alarm properties
+         * @param callback Result callback
+         */
+        void deleteAlarm(BluetoothDevice device, AlarmBean alarm, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Add or modify alarm
+         *
+         * @param device   Operation device
+         * @param alarm Alarm properties
+         * @param callback Result callback
+         */
+        void addOrModifyAlarm(BluetoothDevice device, AlarmBean alarm, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Stop alarm bell
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void stopAlarmBell(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Read alarm bell parameters
+         *
+         * @param device   Operation device
+         * @param mask     Alarm index mask
+         *                 <p>mask = 0xff, request all alarm bell parameters<br/>
+         *                 mask's bit position corresponds to alarm's index</p>
+         * @param callback Result callback
+         */
+        void readAlarmBellArgs(BluetoothDevice device, byte mask, OnRcspActionCallback<List<AlarmExpandCmd.BellArg>> callback);
+
+        /**
+         * Set specified alarm bell parameters
+         *
+         * @param device   Operation device
+         * @param arg      Alarm bell parameters
+         * @param callback Result callback
+         */
+        void setAlarmBellArg(BluetoothDevice device, AlarmExpandCmd.BellArg arg, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Audition alarm bell
+         *
+         * @param device   Operation device
+         * @param param    Audition parameters
+         * @param callback Result callback
+         */
+        void auditionAlarmBell(BluetoothDevice device, AuditionParam param, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * Stop audition alarm bell
+         *
+         * @param device   Operation device
+         * @param callback Result callback
+         */
+        void stopPlayAlarmBell(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+    }
+
+
+

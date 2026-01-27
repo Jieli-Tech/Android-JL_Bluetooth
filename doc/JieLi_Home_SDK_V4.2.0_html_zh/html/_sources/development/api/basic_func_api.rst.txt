@@ -1,0 +1,161 @@
+.. _rcsp_base: 
+
+基础功能接口
+***********************
+
+.. code-block:: java
+
+    public interface IBaseOp {
+
+        /**
+         * 获取设备信息
+         *
+         * @param device   操作设备
+         * @param mask     掩码
+         * @param callback 结果回调
+         */
+        void requestDeviceInfo(BluetoothDevice device, int mask, OnRcspActionCallback<DeviceInfo> callback);
+
+
+        /**
+         * 获取设备系统属性
+         *
+         * @param device   操作设备
+         * @param function 功能号
+         * @param mask     掩码
+         * @param callback 结果回调
+         */
+        void getDevSysInfo(BluetoothDevice device, int function, int mask, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置设备系统属性
+         *
+         * @param device   操作设备
+         * @param function 功能号
+         * @param list     属性列表
+         * @param callback 结果回调
+         */
+        void setDevSysInfo(BluetoothDevice device, int function, List<AttrBean> list, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取当前设备模式信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getCurrentDevModeInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取设备存储器信息
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void getDevStorageInfo(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 切换设备模式
+         *
+         * @param device   操作设备
+         * @param mode     模式
+         * @param callback 结果回调
+         */
+        void switchDeviceMode(BluetoothDevice device, int mode, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 重启设备
+         *
+         * @param device   操作设备
+         * @param callback 结果回调
+         */
+        void rebootDevice(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 读取设备配置信息
+         *
+         * @param device   操作设备
+         * @param callback 结果胡迪
+         */
+        void readDeviceConfiguration(BluetoothDevice device, OnRcspActionCallback<DeviceConfiguration> callback);
+
+        /**
+         * 销毁控制类，释放资源
+         */
+        void destroy();
+    }
+
+
+.. note:: 
+    1. :ref:`rcsp_op_cb` 
+    2. :ref:`device_info` 
+    3. :ref:`attr_bean` 
+    4. :ref:`device_cfg` 
+
+
+
+.. _rcsp_op_cb: 
+
+操作结果回调
+======================================
+
+.. code-block:: java
+
+    public interface OnRcspActionCallback<T> {
+
+        /**
+         * 成功回调
+         * @param message 信息
+         */
+        void onSuccess(BluetoothDevice device, T message);
+
+        /**
+         * 失败回调
+         * @param error 错误信息
+         */
+        void onError(BluetoothDevice device, BaseError error);
+    }
+
+
+
+.. _device_cfg:
+
+DeviceConfiguration
+===========================================
+
+设备配置信息
+
+
+.. code-block:: java
+
+    public class DeviceConfiguration {
+
+         /**
+          * 手表配置信息
+          */
+        public static final int FLAG_WATCH = 0;
+        /**
+         * TWS耳机配置信息
+         */
+        public static final int FLAG_TWS_HEADSET = 1;
+        /**
+         * 音箱
+         */
+        public static final int FLAG_SOUND_BOX = 2;
+        /**
+         * Dongle设备
+         */
+        public static final int FLAG_DONGLE = 3;
+
+        /**
+         * 产品标识
+         */
+        private int type;
+        /**
+         * 版本号
+         */
+        private int version;
+        /**
+         * 配置数据
+         */
+        private byte[] data;
+    }

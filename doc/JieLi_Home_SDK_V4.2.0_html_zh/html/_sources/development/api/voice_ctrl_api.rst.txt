@@ -1,0 +1,53 @@
+.. _volume_op: 
+
+音量控制接口
+************************************
+
+.. code-block:: java
+
+    public interface IVolumeOp {
+
+        /**
+         * 获取设备最高音量
+         *
+         * @param device 蓝牙设备
+         * @return 最高音量
+         */
+        int getMaxVolume(BluetoothDevice device);
+
+        /**
+         * 获取当前设备音量
+         *
+         * @param device   蓝牙设备
+         * @param callback 结果回调
+         */
+        void getCurrentVolume(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 调节设备音量
+         *
+         * @param device   蓝牙设备
+         * @param volume   音量值
+         * @param callback 结果回调
+         */
+        void adjustVolume(BluetoothDevice device, int volume, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 获取高低音的值
+         *
+         * @param device   蓝牙设备
+         * @param callback 结果回调
+         */
+        void getHighAndBassValue(BluetoothDevice device, OnRcspActionCallback<Boolean> callback);
+
+        /**
+         * 设置高低音的值
+         *
+         * @param device   蓝牙设备
+         * @param high     高音
+         * @param bass     低音
+         * @param callback 结果回调
+         */
+        void setHighAndBassValue(BluetoothDevice device, int high, int bass, OnRcspActionCallback<Boolean> callback);
+
+    }

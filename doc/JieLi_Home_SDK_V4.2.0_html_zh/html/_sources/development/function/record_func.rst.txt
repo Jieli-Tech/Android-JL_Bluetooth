@@ -1,0 +1,181 @@
+
+.. _record_func:
+
+录音功能
+**********************
+
+初始化和监听录音事件
+==============================
+
+
+.. code-block:: java
+
+    //获取录音功能操作对象
+    mRecordOp = RecordOpImpl.getInstance(RCSPController.getInstance().getRcspOp());
+    //录音事件回调
+    final OnRecordStateCallback recordStateCallback = (device, state) -> {
+        switch (state.getState()) {
+            case RecordState.RECORD_STATE_IDLE:  //空闲或者结束
+                int reason = state.getReason();  //结束原因
+                if (reason == RecordState.REASON_NORMAL) { //录音完成
+                    byte[] voiceData = state.getVoiceData(); //录音全部数据
+                } else { //录音失败，错误码
+
+                }
+                break;
+            case RecordState.RECORD_STATE_START: //开始录音， 设备端主动开始录音，这里会回调
+                RecordParam param = state.getRecordParam(); //录音参数
+                //param.getVoiceType(); //数据格式
+                //param.getSampleRate(); //采样率
+                //param.getVadWay();   //断句方
+                break;
+            case RecordState.RECORD_STATE_WORKING: //正在录音
+                RecordParam recordParam = state.getRecordParam(); //录音参数
+                byte[] data = state.getVoiceDataBlock(); //录音数据
+                break;
+        }
+    };
+    //注册录音事件回调
+    mRecordOp.addOnRecordStateCallback(recordStateCallback);
+
+    //退出界面，或者不需要监听回调，记得移除回调。
+    //mRecordOp.removeOnRecordStateCallback(recordStateCallback);
+
+.. note::
+   1. 录音状态, :ref:`record_state` 
+   2. 设备主动请求开始录音时，SDK会回调对应状态，用户需要做好状态处理
+   3. 注册和移除回调，关联使用。重复注册，会造成事件重复回调。
+
+
+
+.. _record_state:
+
+RecordState 
+----------------------------------------
+
+录音状态
+
+.. code-block:: java
+
+   public class RecordState {
+        /**
+         * 录音状态 -- 空闲状态
+         */
+        public static final int RECORD_STATE_IDLE = 0;
+        /**
+         * 录音状态 -- 开始状态
+         */
+        public static final int RECORD_STATE_START = 1;
+        /**
+         * 录音状态 -- 工作状态
+         */
+        public static final int RECORD_STATE_WORKING = 2;
+
+        /**
+         * 正常结束
+         */
+        public static final int REASON_NORMAL = 0;
+        /**
+         * 主动结束
+         */
+        public static final int REASON_STOP = 1;
+
+        /**
+         * 状态
+         */
+        private int state = RECORD_STATE_IDLE;
+        /**
+         * 录音参数
+         */
+        private RecordParam recordParam;
+        /**
+         * 音频内容块
+         */
+        private byte[] voiceDataBlock;
+        /**
+         * 结束原因
+         */
+        private int reason = REASON_NORMAL;
+        /**
+         * 音频内容
+         */
+        private byte[] voiceData;
+        /**
+         * 错误描述
+         */
+        private String message;
+    }
+
+
+开始录音
+==================================
+
+用户主动开始录音
+
+.. code-block:: java
+
+    if (null == mRecordOp) {
+        System.out.println("还没有初始化！！！");
+        return;
+    }
+    BluetoothDevice device = RCSPController.getInstance().getUsingDevice();
+    if(mRecordOp.isRecording(device)){
+        System.out.println("正在录音中");
+        return;
+    }
+    //录音参数
+    //voiceType --- 数据格式
+    //sampleRate --- 采样率
+    //vadWay --- 断句方
+    RecordParam param = new RecordParam(RecordParam.VOICE_TYPE_OPUS, RecordParam.SAMPLE_RATE_16K, RecordParam.VAD_WAY_DEVICE);
+    //执行录音功能
+    mRecordOp.startRecord(device, param, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败
+            //error --- 错误信息
+        }
+    });
+
+
+停止录音
+=========================================
+
+用户主动停止录音
+
+.. code-block:: java
+
+    if (null == mRecordOp) {
+        System.out.println("还没有初始化！！！");
+        return;
+    }
+    mRecordOp.stopRecord(RCSPController.getInstance().getUsingDevice(), RecordState.REASON_NORMAL, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //回调操作成功
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //回调操作失败
+            //error --- 错误信息
+        }
+    });
+
+
+
+释放资源
+===============================
+
+不再使用时，需要释放对象
+
+.. code-block:: java
+
+    if(null == mRecordOp) return;
+    mRecordOp.destroy();
+    mRecordOp = null;

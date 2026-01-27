@@ -1,0 +1,728 @@
+.. _rcsp_basic_api: 
+
+RCSP Basic Interface
+**********************************************
+
+.. code-block:: java
+
+    public interface IRcspOp {
+
+
+        /**
+         * Register Rcsp event callback
+         *
+         * @param callback RCSP event callback
+         */
+        void registerOnRcspCallback(OnRcspCallback callback);
+
+        /**
+         * Unregister RCSP event callback
+         *
+         * @param callback RCSP event callback
+         */
+        void unregisterOnRcspCallback(OnRcspCallback callback);
+
+        /**
+         * Register RCSP event listener
+         *
+         * @param listener RCSP event listener
+         */
+        void registerOnRcspEventListener(OnRcspEventListener listener);
+
+        /**
+         * Unregister RCSP event listener
+         *
+         * @param listener RCSP event listener
+         */
+        void unregisterOnRcspEventListener(OnRcspEventListener listener);
+
+        /**
+         * Whether RCSP protocol is initialized
+         * <p>
+         *     Default is current using device
+         * </p>
+         * @return boolean Result
+         */
+        boolean isRcspInit();
+    
+        /**
+         * Whether RCSP protocol is initialized
+         *
+         * @param device Bluetooth device
+         * @return boolean Result
+         */
+        boolean isRcspInit(BluetoothDevice device);
+
+        /**
+         * Get Bluetooth library configuration
+         *
+         * @return Bluetooth library configuration
+         */
+        BluetoothOption getBluetoothOption();
+
+        /**
+         * Get device info
+         *
+         * @return {@link DeviceInfo} Device info
+         */
+        DeviceInfo getDeviceInfo();
+
+        /**
+         * Get device info
+         *
+         * @param device Bluetooth device
+         * @return {@link DeviceInfo} Device info
+         */
+        DeviceInfo getDeviceInfo(BluetoothDevice device);
+
+        /**
+         * Get device configuration info
+         *
+         * @param device Bluetooth device
+         * @return DeviceConfiguration Device configuration info
+         */
+        DeviceConfiguration getDeviceConfiguration(BluetoothDevice device);
+
+        /**
+         * Configure Bluetooth library parameters
+         *
+         * @param option Parameter configuration
+         */
+        void configure(BluetoothOption option);
+
+        /**
+         * Send RCSP command
+         *
+         * @param device    Bluetooth device object
+         * @param cmd       RCSP command
+         * @param timeoutMs Timeout. Unit is milliseconds
+         * @param callback  Send callback
+         */
+        void sendCommandAsync(BluetoothDevice device, CommandBase cmd, int timeoutMs, RcspCommandCallback callback);
+
+        /**
+         * Send RCSP command
+         *
+         * <p>
+         * Equivalent to {@link #sendCommandAsync(BluetoothDevice, CommandBase, int, RcspCommandCallback)},<br/>
+         * To ensure interface consistency
+         * </p>
+         *
+         * @param device    Bluetooth device object
+         * @param cmd       RCSP command
+         * @param timeoutMs Timeout. Unit is milliseconds
+         * @param callback  Send callback
+         */
+        void sendRcspCommand(BluetoothDevice device, CommandBase cmd, int timeoutMs, RcspCommandCallback callback);
+
+        /**
+         * Send RCSP command
+         *
+         * @param device   Bluetooth device object
+         * @param cmd      RCSP command
+         * @param callback Send callback
+         */
+        void sendRcspCommand(BluetoothDevice device, CommandBase cmd, RcspCommandCallback callback);
+
+        /**
+         * Send RCSP response command
+         *
+         * @param device      Bluetooth device object
+         * @param responseCmd RCSP response command
+         * @param callback    Send callback
+         */
+        void sendCommandResponse(BluetoothDevice device, CommandBase responseCmd, RcspCommandCallback callback);
+
+        /**
+         * Send RCSP response command
+         * <p>
+         * Equivalent to {@link #sendCommandResponse(BluetoothDevice, CommandBase, RcspCommandCallback)},<br/>
+         * To ensure interface consistency
+         * </p>
+         *
+         * @param device Bluetooth device object
+         * @param responseCmd RCSP response command
+         */
+        void sendRcspResponse(BluetoothDevice device, CommandBase responseCmd);
+
+        /**
+         * Switch connected device to currently using device
+         * <p>
+         * Can get switching status via {@link OnRcspCallback#onSwitchConnectedDevice(BluetoothDevice)}
+         * </p>
+         *
+         * @param device Connected device
+         */
+        void switchConnectedDevice(BluetoothDevice device);
+
+        /**
+         * Release resources
+         */
+        void release();
+
+    }
+
+
+.. note:: 
+    1. :ref:`rcsp_callback` 
+    2. :ref:`rcsp_event_callback` 
+    3. :ref:`bluetooth_option` 
+    4. :ref:`rcsp_cmd_cb` 
+
+
+
+.. _rcsp_callback:
+
+OnRcspCallback
+=========================================
+
+RCSP status callback
+
+.. code-block:: java
+
+    public abstract class OnRcspCallback {
+
+        /**
+         * Rcsp protocol initialization callback
+         *
+         * @param device Connected device
+         * @param code   Initialization result
+         *               <p>
+         *               Results as follows:<br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#ERR_NONE} --- Normal status <br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_START_AUTH_DEVICE} --- Start device authentication failed<br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_AUTH_DEVICE} --- Device authentication failed<br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_DEVICE_IN_OTA} --- Forced upgrade status <br/>
+         *               {@link com.jieli.bluetooth.constant.ErrorCode#SUB_ERR_REMOTE_DEVICE_DISCONNECT} --- Device disconnected <br/>
+         *               Other error codes
+         *               </p>
+         */
+        public void onRcspInit(BluetoothDevice device, int code) {
+
+        }
+
+        /**
+         * Device sent rcsp command callback
+         *
+         * @param device  Connected device
+         * @param command RCSP command
+         */
+        public void onRcspCommand(BluetoothDevice device, CommandBase command) {
+
+        }
+
+        /**
+         * Device sent data command callback
+         *
+         * @param device  Connected device
+         * @param dataCmd Data command
+         */
+        public void onRcspDataCmd(BluetoothDevice device, CommandBase dataCmd) {
+
+        }
+
+        /**
+         * RCSP error event callback
+         *
+         * @param device Device object
+         * @param error  Error info
+         */
+        public void onRcspError(BluetoothDevice device, BaseError error) {
+
+        }
+
+        /**
+         * Device connection status
+         *
+         * @param device Bluetooth device
+         * @param status Connection status
+         */
+        public void onConnectStateChange(BluetoothDevice device, int status) {
+
+        }
+
+        /**
+         * Switch connected and currently used device callback
+         *
+         * @param device Connected device
+         */
+        public void onSwitchConnectedDevice(BluetoothDevice device) {
+
+        }
+
+    }
+
+
+
+.. _rcsp_event_callback: 
+
+RCSP Event Listener
+============================================
+
+.. code-block:: java
+
+    public abstract class OnRcspEventListener {
+
+        /**
+         * Device mode change callback
+         *
+         * @param device Bluetooth device
+         * @param mode   Device current mode
+         */
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+
+        }
+
+        /**
+         * Device system volume change callback
+         *
+         * @param device Bluetooth device
+         * @param volume Device system volume
+         */
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+
+        }   
+
+        /**
+         * Device EQ info change callback
+         *
+         * @param device Bluetooth device
+         * @param eqInfo EQ info
+         */
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+
+        }
+
+        /**
+         * Device external storage change callback
+         *
+         * @param device      Bluetooth device
+         * @param storageInfo Device info
+         */
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+
+        }
+
+        /**
+         * Device supported file format callback
+         *
+         * @param device     Bluetooth device
+         * @param fileFormat Device supported file format
+         */
+        public void onFileFormatChange(BluetoothDevice device, String fileFormat) {
+
+        }
+
+        /**
+         * Music song change callback
+         *
+         * @param device   Bluetooth device
+         * @param nameInfo Music info
+         */
+        public void onMusicNameChange(BluetoothDevice device, MusicNameInfo nameInfo) {
+
+        }
+
+        /**
+         * Music play status callback
+         *
+         * @param device     Bluetooth device
+         * @param statusInfo Music status
+         */
+        public void onMusicStatusChange(BluetoothDevice device, MusicStatusInfo statusInfo) {
+
+        }
+
+        /**
+         * Play mode change callback
+         *
+         * @param device       Bluetooth device
+         * @param playModeInfo Play mode info
+         */
+        public void onPlayModeChange(BluetoothDevice device, PlayModeInfo playModeInfo) {
+
+        }
+
+        /**
+         * Device battery change callback
+         *
+         * @param device      Bluetooth device
+         * @param batteryInfo Battery info
+         */
+        public void onBatteryChange(BluetoothDevice device, BatteryInfo batteryInfo) {
+
+        }
+
+        /**
+         * External device status callback
+         *
+         * @param device Bluetooth device
+         * @param isPlay Whether playing
+         */
+        public void onAuxStatusChange(BluetoothDevice device, boolean isPlay) {
+
+        }
+
+        /**
+         * FM channel change callback
+         *
+         * @param device   Bluetooth device
+         * @param channels Channel info list
+         */
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+
+        }
+
+        /**
+         * FM status info change callback
+         *
+         * @param device       Bluetooth device
+         * @param fmStatusInfo FM status info
+         */
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+
+        }
+
+        /**
+         * Alarm list update callback
+         *
+         * @param device        Bluetooth device
+         * @param alarmListInfo Alarm list
+         */
+        public void onAlarmListChange(BluetoothDevice device, AlarmListInfo alarmListInfo) {
+
+        }
+
+        /**
+         * Default alarm bell list
+         *
+         * @param device Bluetooth device
+         * @param bells  Default alarm bell list
+         */
+        public void onAlarmDefaultBellListChange(BluetoothDevice device, List<DefaultAlarmBell> bells) {
+
+        }
+
+        /**
+         * Alarm notification callback
+         *
+         * @param device    Bluetooth device
+         * @param alarmBean Alarm info
+         */
+        public void onAlarmNotify(BluetoothDevice device, AlarmBean alarmBean) {
+
+        }
+
+        /**
+         * Alarm stop callback
+         *
+         * @param device    Bluetooth device
+         * @param alarmBean Alarm info
+         */
+        public void onAlarmStop(BluetoothDevice device, AlarmBean alarmBean) {
+
+        }
+
+        /**
+         * Channel transmission callback
+         *
+         * @param device    Bluetooth device
+         * @param frequency Frequency
+         */
+        public void onFrequencyTx(BluetoothDevice device, float frequency) {
+
+        }
+
+        /**
+         * Peripherals mode change callback
+         *
+         * @param device Bluetooth device
+         * @param mode   Peripherals mode
+         */
+        public void onPeripheralsModeChange(BluetoothDevice device, int mode) {
+
+        }
+
+        /**
+         * Peripherals connection status change callback
+         *
+         * @param device  Bluetooth device
+         * @param connect Whether connected
+         * @param mac     Device mac address
+         */
+        public void onPeripheralsConnectStatusChange(BluetoothDevice device, boolean connect, String mac) {
+
+        }
+
+        /**
+         * ID3 song info callback
+         *
+         * @param device       Bluetooth device
+         * @param id3MusicInfo id3 song info
+         */
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+
+        }
+
+        /**
+         * High and low tone change callback
+         * 
+         * @param device Bluetooth device
+         * @param high   High tone
+         * @param bass   Low tone
+         */
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+
+        }
+
+        /**
+         * Eq preset value change
+         *
+         * @param device       Bluetooth device
+         * @param eqPresetInfo Preset value
+         */
+        public void onEqPresetChange(BluetoothDevice device, EqPresetInfo eqPresetInfo) {
+
+        }
+
+        /**
+         * Call status callback
+         *
+         * @param device Bluetooth device
+         * @param status Call status
+         */
+        public void onPhoneCallStatusChange(BluetoothDevice device, int status) {
+
+        }
+
+        /**
+         * Expand function callback
+         *
+         * @param device Bluetooth device
+         * @param type   Expand function
+         * @param data   Expand valid data
+         */
+        public void onExpandFunction(BluetoothDevice device, int type, byte[] data) {
+
+        }
+    
+        /**
+         * Reverb parameter callback
+         *
+         * @param device Bluetooth device
+         * @param param  Reverb parameter
+         */
+        public void onReverberation(BluetoothDevice device, ReverberationParam param) {
+
+        }
+
+        /**
+         * Dynamic limiter parameter callback
+         *
+         * @param device Bluetooth device
+         * @param param  Dynamic limiter parameter
+         */
+        public void onDynamicLimiter(BluetoothDevice device, DynamicLimiterParam param) {
+
+        }
+
+        /**
+         * Light control callback
+         *
+         * @param device           Bluetooth device
+         * @param lightControlInfo Light control info
+         */
+        public void onLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo) {
+
+        }
+
+        /**
+         * Sound card EQ info callback
+         *
+         * @param device Bluetooth device
+         * @param eqInfo EQ info
+         */
+        public void onSoundCardEqChange(BluetoothDevice device, EqInfo eqInfo) {
+
+        }
+
+
+        /**
+         * Sound card status callback
+         *
+         * @param device Bluetooth device
+         * @param mask   Mask
+         * @param values Data
+         */
+        public void onSoundCardStatusChange(BluetoothDevice device, long mask, byte[] values) {
+
+        }
+
+        /**
+         * Current noise processing mode info
+         *
+         * @param device    Device object
+         * @param voiceMode Noise processing mode
+         */
+        public void onCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode) {
+
+        }
+
+        /**
+         * Device all noise processing mode info
+         *
+         * @param device     Device object
+         * @param voiceModes Noise processing mode info list
+         */
+        public void onVoiceModeList(BluetoothDevice device, List<VoiceMode> voiceModes) {
+
+        }
+
+        /**
+         * Hearing assistance fitting info callback
+         *
+         * @param device            Device object
+         * @param hearingAssistInfo Hearing assistance fitting info
+         */
+        public void onHearingAssistInfo(BluetoothDevice device, HearingAssistInfo hearingAssistInfo) {
+
+        }
+
+        /**
+         * Hearing channel status callback
+         *
+         * @param device                Device object
+         * @param hearingChannelsStatus Hearing channel status
+         */
+        public void onHearingChannelsStatus(BluetoothDevice device, HearingChannelsStatus hearingChannelsStatus) {
+
+        }
+
+        /**
+         * Acoustic function callback
+         *
+         * @param device    Device object
+         * @param voiceFunc Acoustic function data
+         */
+        public void onVoiceFunctionChange(BluetoothDevice device, VoiceFunc voiceFunc) {
+
+        }
+
+        /**
+         * Device dual connection status callback
+         *
+         * @param device Device object
+         * @param state  Device dual connection status info
+         */
+        public void onDoubleConnectionChange(BluetoothDevice device, DoubleConnectionState state) {
+
+        }
+
+        /**
+         * Device connected phone Bluetooth info callback
+         *
+         * @param device Device object
+         * @param info   Device connected phone Bluetooth info
+         */
+        public void onConnectedBtInfo(BluetoothDevice device, ConnectedBtInfo info) {
+
+        }
+
+    }
+
+
+.. note:: 
+    1. :ref:`volume_info` 
+    2. :ref:`eq_info` 
+    3. :ref:`deviect_storage_info` 
+    4. :ref:`music_name_info` 
+    5. :ref:`music_status_info` 
+    6. :ref:`music_mode_info` 
+    7. :ref:`channel_info` 
+    8. :ref:`fm_status_info` 
+    9. :ref:`alarm_list_info`  
+    10. :ref:`default_alarm_bell`
+    11. :ref:`alarm_bean` 
+    12. :ref:`id3_info`
+    13. :ref:`eq_perset_info` 
+    14. :ref:`reverberation_param` 
+    15. :ref:`dynamic_limiter_param` 
+    16. :ref:`light_ctrl_info` 
+    17. :ref:`voice_mode` 
+    18. :ref:`voice_func` 
+    19. :ref:`double_connection_state` 
+    20. :ref:`connected_bt_info` 
+
+
+.. _deviect_storage_info:
+
+DevStorageInfo
+-------------------------------------
+
+Device external storage info
+
+.. code-block:: java
+
+    public class DevStorageInfo {
+        /**
+         * Storage info
+         */
+        private static final int TYPE_STORAGE_INFO = 1;
+        /**
+         * Storage reuse
+         */
+        private static final int TYPE_REUSE_STORAGE = 2;
+
+        /**
+         * Storage status
+         */
+        @NonNull
+        private final List<SDCardBean> storageStates;
+        /**
+         * Whether reuse
+         */
+        private boolean isDeviceReuse;
+        /**
+         * Version number
+         */
+        private int version;
+    }
+
+
+.. _voice_func:
+
+VoiceFunc
+-----------------------------------
+
+Voice function
+
+.. code-block:: java
+
+    public abstract class VoiceFunc {
+        public static final int FUNC_ADAPTIVE = 1;             //ANC adaptive function
+        public static final int FUNC_SMART_NO_PICK = 2;        //Smart no-pick function
+        public static final int FUNC_SCENE_DENOISING = 3;      //Scene denoising function
+        public static final int FUNC_WIND_NOISE_DETECTION = 4; //Wind noise detection function
+        public static final int FUNC_VOCAL_BOOSTER = 5;        //Vocal booster function
+
+        private final int type;   //Data type
+        private int version;      //Version number
+    }
+
+
+
+Corresponding acoustic functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+=================================== =================================== =========================================== ================================================================
+     Reference constant                            Type                              Description                                          Data model
+=================================== =================================== =========================================== ================================================================
+  FUNC_ADAPTIVE                                      1                       ANC adaptive function                      :ref:`adaptive_data` 
+  FUNC_SMART_NO_PICK                                 2                       Smart no-pick function                     :ref:`smart_no_pick` 
+  FUNC_SCENE_DENOISING                               3                       Scene denoising function                   :ref:`scence_denoising` 
+  FUNC_WIND_NOISE_DETECTION                          4                       Wind noise detection function              :ref:`wind_noise_detection` 
+  FUNC_VOCAL_BOOSTER                                 5                       Vocal booster function                     :ref:`vocal_booster` 
+=================================== =================================== =========================================== ================================================================
+
+
+

@@ -1,0 +1,1588 @@
+
+.. _basic_func:
+
+Basic Function
+***************************************************
+
+==================================================== ======================================= ============================== =============================== =============================== =============================================
+              Function Description                                 Command Prototype                   Command Model               Command Parameters               Command reply                                Remark
+==================================================== ======================================= ============================== =============================== =============================== =============================================
+  Obtain device information                            Command.CMD_GET_TARGET_INFO             GetTargetInfoCmd                 :ref:`target_info_param`      | :ref:`target_info` or         refer to :ref:`common_cmd_handle` 
+                                                                                                                                                              | :ref:`device_info` 
+  Query device system information                      Command.CMD_GET_SYS_INFO                GetSysInfoCmd                    :ref:`get_sys_param`            :ref:`sys_info`               refer to :ref:`common_cmd_handle` 
+  Configure device system properties                   Command.CMD_SET_SYS_INFO                SetSysInfoCmd                    :ref:`set_sys_param`            CommonResponse                refer to :ref:`common_cmd_handle` 
+  Monitoring device system attribute changes           Command.CMD_SYS_INFO_AUTO_UPDATE        UpdateSysInfoCmd                 :ref:`sys_info`                 NULL                          refer to :ref:`receive_cmd_handle` 
+  Settings Function                                    Command.CMD_FUNCTION                    FunctionCmd                      :ref:`function_param`           CommonResponse                refer to :ref:`common_cmd_handle`
+  Reboot Device                                        Command.CMD_REBOOT_DEVICE               RebootDeviceCmd                  RebootDeviceParam               RebootDeviceResponse          refer to :ref:`common_cmd_handle`
+==================================================== ======================================= ============================== =============================== =============================== =============================================
+
+.. important::
+    | 1. The data models in the table can all be viewed through the SDK.
+    | 2. This document only shows some of the important data models.
+
+
+
+.. _get_device_info:
+
+Request device information
+====================================================
+
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get the JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Construct function commands - for example, get device information
+    //mask = 0xffffffff;  -- Get all attributes
+    CommandBase getDeviceInfoCmd = CommandBuilder.buildGetDeviceInfoCmd(mask);
+    //Step2: Execute the operation command and wait for the result callback.
+    manager.sendCommandAsync(manager.getConnectedDevice(), getDeviceInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //Callback reply command
+        //Note: When there is no reply command, the reply command itself
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //The response status is abnormal; exception handling is required.
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Callback operation successful
+            //Step4: Determine if there is any reply data
+            //Note - If the command does not provide a response, the response data will be null.
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            if (isHasResponse) {
+                //Step5: Retrieve the corresponding command data
+                GetTargetInfoCmd command = (GetTargetInfoCmd) cmd;
+                //Step6: Get reply data
+                TargetInfoResponse response = command.getResponse();
+                if (null == response) { //An empty response indicates a problem with the data returned by the device, requiring exception handling.
+                    onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Response data is error."));
+                    return;
+                }
+                //Processing equipment reply data
+            }
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    }); 
+
+
+2. RCSPController Way
+
+
+.. code-block:: java 
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Request device function and wait for result callback.
+    controller.requestDeviceInfo(controller.getUsingDevice(), 0xffffffff, new OnRcspActionCallback<DeviceInfo>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, DeviceInfo message) {
+            //Callback operation successful
+            //message - Device Information
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+    //The second method involves retrieving cached device information.
+    DeviceInfo deviceInfo = controller.getDeviceInfo();
+
+
+.. _target_info_param:
+
+GetTargetInfoParam
+------------------------------------------
+
+Obtain device information parameter
+
+.. code-block:: java
+
+    public class GetTargetInfoParam extends BaseParameter {
+        private int mask;     //Configuration information query mask
+        private byte platform;//mobile platform 0 : android 1: iOS  2 : web app
+    }
+
+
+.. note::
+    The mask needs to be referenced :ref:`attr_fun_code`
+
+
+.. _device_info: 
+
+DeviceInfo
+-------------------------------------------
+
+Device Information
+
+.. code-block:: java
+
+    public class DeviceInfo extends TargetInfoResponse {
+
+        /*=============================================*
+         * Alarm message
+         *=============================================*/
+        //Alarm message
+        private AlarmListInfo alarmListInfo;
+        //Alarm clock ringing message
+        private List<DefaultAlarmBell> alarmDefaultBells;
+        //Alarm clock data structure version
+        private int alarmVersion;
+        //Alarm clock extended fields support identifiers
+        private byte alarmExpandFlag = 0x00;
+
+        /*=============================================*
+         * Music playback information
+         *=============================================*/
+        //Music Title
+        private MusicNameInfo musicNameInfo;
+        //Music Status
+        private MusicStatusInfo musicStatusInfo;
+        //Music playback mode information
+        private PlayModeInfo playModeInfo;
+        //Aux playback status
+        private boolean isAuxPlay;
+        //Playable formats
+        private String playFileFormat;
+        //The cluster number of the file currently being played
+        private int cluster;
+        //The device serial number of the file currently being played.
+        private byte currentDevIndex;
+
+        /*=============================================*
+         * Equalizer Information
+         *=============================================*/
+        private EqPresetInfo eqPresetInfo;
+        private EqInfo eqInfo;
+
+        /*=============================================*
+         * Device memory information
+         *=============================================*/
+        private DevStorageInfo devStorageInfo;
+
+        /*=============================================*
+         * Lighting control information
+         *=============================================*/
+        private LightControlInfo lightControlInfo;
+
+        /*=============================================*
+         * Sound card information
+         *=============================================*/
+        private EqInfo soundCardEqInfo;
+
+        /*=============================================*
+         * FM/FM_TX Information
+         *=============================================*/
+        private List<ChannelInfo> channelInfos; //Channel List
+        private FmStatusInfo fmStatusInfo; //Channel Status
+        private float frequency; //Radio frequency point
+
+        /*=============================================*
+         * ID3 information
+         *=============================================*/
+        private ID3MusicInfo iD3MusicInfo;
+
+        /*=============================================*
+         * Noise processing (ANC) information
+         *=============================================*/
+        private VoiceMode currentVoiceMode;    //Current noise processing mode information
+        private List<VoiceMode> voiceModeList; //Information on all noise processing modes
+        private AdaptiveData adaptiveData;     //Adaptive ANC data
+        private SmartNoPick smartNoPick;       //Smart no-picking information
+        /*Noise cancellation mode is enabled.*/
+        private SceneDenoising sceneDenoising; //Scene noise reduction
+        /*Noise cancellation mode is enabled.*/
+        private WindNoiseDetection windNoiseDetection; //Wind noise detection
+        /*Transparency mode enabled*/
+        private VocalBooster vocalBooster;   //Voice enhancement mode
+
+        /*=============================================*
+         * Call information
+         *=============================================*/
+        private int phoneStatus; //Call status
+
+        /*=============================================*
+         * Extended Function Information
+         *=============================================*/
+        private ExpandFunction expandFunction;
+
+        /*=============================================*
+         * Device Dual Connection Information
+         *=============================================*/
+        private DoubleConnectionState doubleConnectionState;
+        private ConnectedBtInfo connectedBtInfo;
+
+        /*=============================================*
+         * SPDIF Function Information
+         *=============================================*/
+        private SPDIFPlayStatusInfo spdifPlayStatusInfo;//Playback status
+        private SPDIFAudioSourceInfo spdifAudioSourceInfo;//sound source
+   
+        /*=============================================*
+         * PC Slave Function Information
+         *=============================================*/
+        private PCSlavePlayStatusInfo pcSlavePlayStatusInfo;
+
+        /*=============================================*
+         * AI translation function
+         *=============================================*/
+        /**
+         * Translation mode information
+         */
+        private TranslationMode translationMode;
+
+        /*=============================================*
+         * Auracast function
+         *=============================================*/
+        /**
+         * Device status data
+         */
+        private DeviceStateData deviceStateData;
+        /**
+         * Auracast transmitter configuration
+         */
+        private TransmitterSettings transmitterSettings;
+    
+        ...
+    }
+
+
+.. _target_info:
+
+TargetInfoResponse
+--------------------------------------
+
+Target device information
+
+.. code-block:: java
+
+    public class TargetInfoResponse extends CommonResponse {
+
+        /**
+         * Protocol version Information
+         */
+        private final ProtocolVersion protocolVersion;
+        /**
+         * System Information
+         */
+        private final SystemInfo systemInfo;
+        /**
+         * Classic Bluetooth information
+         */
+        private final ClassicBtInfo classicBtInfo;
+        /**
+         * AI Platform Information
+         */
+        private final AIPlatform aiPlatform;
+        /**
+         * Functional configuration information
+         */
+        private final FunctionConfiguration functionConfiguration;
+        /**
+         * Firmware version information
+         */
+        private final Version version;
+        /**
+         * SDK type
+         */
+        private int sdkType;
+        /**
+         * UBoot version information
+         */
+        private final Version uBootVersion;
+        /**
+         * Upgrade configuration
+         */
+        private final OTASettings otaSettings;
+        /**
+         * Upgrade status
+         */
+        private final OTAState otaState;
+        /**
+         * Product Information
+         */
+        private final ProductInfo productInfo;
+        //Used for server verification of product information
+        /**
+         * Authentication Key
+         */
+        private String authKey;
+        /**
+         * Project Identifier Code
+         */
+        private String projectCode;
+        /**
+         * Protocol MTU
+         */
+        private final ProtocolMTU protocolMtu;
+        /**
+         * Allow connection?
+         */
+        private int allowConnectFlag;
+        /**
+         * Device Name
+         */
+        @Deprecated
+        private String name;
+        /**
+         * BLE Information
+         */
+        private final BleInfo bleInfo;
+        /**
+         * Transmitter Information
+         */
+        private final TransmitterInfo transmitterInfo;
+        /**
+         * Extended functions
+         */
+        private final SysExpandFunc sysExpandFunc;
+        /**
+         * File operation configuration
+         */
+        private final FileOpConfiguration fileOpConfiguration;
+
+        /**
+         * Custom version information
+         */
+        private String customVersionMsg;
+
+    }
+
+
+.. note::
+    1. :ref:`protocol_version` 
+    2. :ref:`system_info` 
+    3. :ref:`classic_bt_info` 
+    4. :ref:`ai_platform` 
+    5. :ref:`function_cfg` 
+    6. :ref:`version_msg`
+    7. :ref:`ota_settings`
+    8. :ref:`ota_state`
+    9. :ref:`product_info`
+    10. :ref:`protocol_mtu` 
+    11. :ref:`ble_info`
+    12. :ref:`transmitter_info`
+    13. :ref:`sys_expand_func`
+    14. :ref:`file_op_cfg`        
+
+
+
+.. _protocol_version: 
+
+ProtocolVersion
+----------------------------------------
+
+
+Protocol version information
+
+.. code-block:: java
+
+    public class ProtocolVersion {
+        /**
+         * Version Code
+         */
+        private int versionCode;
+        /**
+         * Version Name
+         */
+        private String versionName;
+    }
+
+
+.. _system_info:
+
+SystemInfo
+--------------------------------
+
+System Information
+
+.. code-block:: java
+
+    public class SystemInfo {
+
+        /**
+         * Device power
+         */
+        private int quantity;
+        /**
+         * Device volume
+         */
+        private int volume;
+        /**
+         * maximum volume
+         */
+        private int maxVol;
+        /**
+         * Does it support volume synchronization?
+         */
+        private boolean supportVolumeSync = false;
+        /**
+         * Upgrade minimum battery limit(1 ~ 100)
+         */
+        private int lowPowerLimit = 30;
+    }
+
+
+.. _classic_bt_info:
+
+ClassicBtInfo
+-------------------------------------
+
+
+Classic Bluetooth Information
+
+
+.. code-block:: java
+
+    public class ClassicBtInfo {
+
+        /**
+         * Classic Bluetooth address
+         */
+        private String edrAddr;
+        /**
+         * Classic Bluetooth supported protocols
+         */
+        private int edrProfile = 0;
+        /**
+         * Classic Bluetooth connection status
+         */
+        private int edrStatus = 0;
+    }
+
+
+.. _ai_platform:
+
+AIPlatform
+------------------------------------------
+
+
+AI Platform Information
+
+
+.. code-block:: java
+
+    public class AIPlatform {
+        /**
+         * Platform type
+         */
+        private int platform;
+        /**
+         * Authentication code
+         */
+        private String license;
+
+    }
+
+.. _function_cfg:
+
+FunctionConfiguration
+--------------------------------------------
+
+Functional configuration information
+
+
+.. code-block:: java
+
+    public class FunctionConfiguration {
+
+        /**
+         * Function support mask
+         */
+        private int functionMask;
+        /**
+         * Current mode
+         */
+        private int curFunction;
+        /**
+         * Does it support displaying function icons when USB, SD, or Linein are offline?
+         */
+        private boolean supportOfflineShow;
+        /**
+         * Does it support USB?
+         */
+        private boolean supportUsb = true;
+        /**
+         * Does it support sd0?
+         */
+        private boolean supportSd0 = true;
+        /**
+         * Does it support SD1?
+         */
+        private boolean supportSd1 = true;
+        /**
+         * Should internet radio be hidden?
+         */
+        private boolean hideNetRadio;
+    }
+
+
+.. _version_msg:
+
+Version
+------------------------------------
+
+Version information
+
+.. code-block:: java
+
+    public class Version {
+
+        /**
+         * Device version name
+         */
+        private String versionName;
+        /**
+         * Device version information
+         */
+        private int versionCode;
+    }
+
+
+.. _ota_settings:
+
+OTASettings
+---------------------------------------
+
+OTA settings
+
+
+.. code-block:: java
+
+    public class OTASettings{
+
+        /**
+         * Does it support dual backup upgrade?
+         * <p>Single backup [false], requires disconnection and reconnection process.
+         * <br/>Dual backup [true], no need for disconnection and reconnection process.</p>
+         */
+        private boolean isSupportDoubleBackup;
+        /**
+         * Do I need to download the boot loader?
+         */
+        private boolean isNeedBootLoader;
+        /**
+         * Single backup OTA connection method
+         * <p>
+         * 0 -- Disable<br/>
+         * 1 -- BLE <br/>
+         * 2 -- SPP
+         * </p>
+         */
+        private int singleBackupOtaWay;
+        /**
+         * Does it support a special upgrade process for reused space?
+         */
+        private boolean isSupportReuseSpaceOTA;
+    }
+
+
+.. _ota_state:
+
+OTAState
+---------------------------------------
+
+OTA status
+
+
+.. code-block:: java
+
+    public class OTAState {
+
+        /**
+         * Forced upgrade sign
+         */
+        private int mandatoryUpgradeFlag;
+        /**
+         * Upgrade request flag
+         * <p>
+         * Range of values: <br/>
+         * 0 : Normal upgrade<br/>
+         * 1 : Forced upgrade
+         * </p>
+         */
+        private int requestOtaFlag;
+        /**
+         * Extended Mode
+         * <p>
+         * Range of values:<br/>
+         * 0 : Invalid mode <br/>
+         * 1 : Update resource mode <br/>
+         * 2 : Reuse Space Special Upgrade Mode - Update Resources Only <br/>
+         * 3 : Reuse Space Special Upgrade Mode - Upgrade Firmware Only
+         * </p>
+         */
+        private int expandMode;
+    }
+
+
+.. _product_info:
+
+ProductInfo
+---------------------------------------
+
+Product Information
+
+.. code-block:: java
+
+    public class ProductInfo {
+        /**
+         * Manufacturer ID
+         */
+        private int vid;
+        /**
+         * Product ID
+         */
+        private int pid;
+        /**
+         * Customer ID
+         */
+        private int uid;
+    }
+
+
+.. _protocol_mtu:
+
+ProtocolMTU
+-------------------------------------
+
+Protocol MTU
+
+.. code-block:: java
+
+    public class ProtocolMTU {
+        /**
+         * Send Data MTU
+         */
+        private int sendMtu = Constants.DEFAULT_PROTOCOL_MTU;
+        /**
+         * Receive Data MTU
+         */
+        private int receiveMtu = Constants.DEFAULT_PROTOCOL_MTU;
+    }
+
+
+
+.. _ble_info:
+
+BleInfo
+-------------------------------------
+
+BLE Information
+
+
+.. code-block:: java
+    
+    public class BleInfo {
+        /**
+         * BLE address
+         */
+        private String bleAddr;
+        /**
+         * Is it only connected to BLE device?
+         */
+        private boolean bleOnly;
+        /**
+         * Is it BLE to SPP conversion mode (EDR must be enabled before connecting to SPP after connecting to BLE)?
+         */
+        private boolean isBLEToSppWay;
+        /**
+         * Does it support LE Audio?
+         */
+        private boolean isSupportLeAudio;
+        /**
+         * Is LE Audio connected?
+         */
+        private boolean isLeAudioConnected;
+    }
+
+
+.. _transmitter_info:
+
+TransmitterInfo
+---------------------------------------
+
+Transmitter information
+
+.. code-block:: java
+
+    public class TransmitterInfo {
+
+        /**
+         * Does it support peripheral mode?
+         */
+        private boolean emitterSupport;
+        /**
+         * 0x00:Normal mode  0x01:Peripheral mode
+         */
+        private int emitterStatus;
+
+    }
+
+.. _sys_expand_func:
+
+SysExpandFunc
+----------------------------------
+
+System expansion functions
+
+.. code-block:: java
+
+    public class SysExpandFunc {
+        /**
+         * Does it support MD5 reading?
+         */
+        private boolean isSupportMD5;
+        /**
+         * Is it game mode?
+         */
+        private boolean isGameMode;
+        /**
+         * Does it support device search?
+         */
+        private boolean isSupportSearchDevice;
+        /**
+         * Does it support sound card functionality?
+         */
+        private boolean supportSoundCard = false;
+        /**
+         * Disallow app to adjust device eq
+         */
+        private boolean banEq;
+        /**
+         * Does it support external Flash transfer function?
+         */
+        private boolean supportExternalFlashTransfer = false;
+        /**
+         * Does it support active noise cancellation?
+         */
+        private boolean supportAnc = false;
+        /**
+         * Does it support reading firmware error information?
+         */
+        private boolean supportReadErrorMSg;
+
+        /**
+         * Does it support hearing aid settings?
+         */
+        private boolean supportHearingAssist = false;
+        /**
+         * Does it support adaptive ANC algorithm?
+         */
+        private boolean supportAdaptiveANC = false;
+        /**
+         * Does it support obtaining device configuration information?
+         */
+        private boolean supportDevConfigure = false;
+        /**
+         * Does it support intelligent no-picking function?
+         */
+        private boolean supportSmartNoPick = false;
+        /**
+         * Does it support scene noise reduction?
+         */
+        private boolean supportSceneDenoising = false;
+        /**
+         * Does it support wind noise detection?
+         */
+        private boolean supportWindNoiseDetection = false;
+        /**
+         * Does it support voice enhancement?
+         */
+        private boolean supportVocalBooster = false;
+        /**
+         * Does it support dual device connection?
+         */
+        private boolean supportDoubleConnection = false;
+    }
+
+
+.. _file_op_cfg:
+
+FileOpConfiguration
+-------------------------------------------------
+
+File operation configuration
+
+
+.. code-block:: java
+
+    public class FileOpConfiguration {
+
+        /**
+         * Does large file transfer support packet splitting and CRC16 verification?
+         */
+        private boolean supportPackageCrc16 = false;
+        /**
+         * Read firmware files using the new filename format (supports multiple devices).
+         */
+        private boolean supportFileByNameWithDev = false;
+        /**
+         * Does it support small file transfer?
+         */
+        private boolean supportSmallFileTransfer = false;
+    }
+
+
+
+
+.. _get_sys_info: 
+
+Query device system information
+===================================================================
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get the JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Construct a command to query device system information
+    //Function code 
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //Public attribute
+    //Query current device mode and device storage information
+    int mask = 0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE | 0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS;
+    CommandBase getSysInfoCmd = CommandBuilder.buildGetSysInfoCmd((byte)function, mask);
+    //Step2: Execute the operation command and wait for the result callback.
+    manager.sendCommandAsync(manager.getConnectedDevice(), getSysInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //Callback reply command
+        //Note: When there is no reply command, the reply command itself.
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //The response status is abnormal; exception handling is required.
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Callback operation successful
+            //Step4: Determine if there is any reply data
+            //Note - If the command does not provide a response, the response data will be null.
+            boolean isHasResponse = cmd.getType() == CommandBase.FLAG_HAVE_PARAMETER_AND_RESPONSE
+                    || cmd.getType() == CommandBase.FLAG_NO_PARAMETER_AND_RESPONSE;
+            if (isHasResponse) {
+                //Step5: Retrieve the corresponding command data
+                GetSysInfoCmd command = (GetSysInfoCmd) cmd;
+                //Step6: Get reply data
+                SysInfoResponse response = command.getResponse();
+                if (null == response) { //An empty response indicates a problem with the data returned by the device, requiring exception handling.
+                    onErrCode(device, new BaseError(ErrorCode.SUB_ERR_DATA_FORMAT, "Response data is error."));
+                    return;
+                }
+                //Processing equipment reply data
+                //response.getFunction(); //function code
+                //response.getAttrs();    //Functional attribute
+            }
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+
+        @Override
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+            //Callback device storage information
+        }
+
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //Callback device mode
+        }
+    });
+    int func = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //Public attribute
+    //Query current device mode and device storage information
+    int mask = 0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE | 0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS;
+    //Execute a query for device system information and wait for the result callback.
+    controller.getDevSysInfo(controller.getUsingDevice(), func, mask, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+            //The result will be shown in the BTRcspEventCallback#onDeviceModeChange callback.
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. warning::
+    | 1. **function** needs to be referenced :ref:`attr_fun_code` 
+    | 2. mask needs to be referenced :ref:`attr_fun_code` 
+    | 3. Masks are not allowed to be all F.
+
+
+.. _get_sys_param: 
+
+GetSysInfoParam
+---------------------------------
+
+
+Obtain system information parameter
+
+.. code-block:: java
+
+    public class GetSysInfoParam extends BaseParameter {
+        private byte function; //Function code
+        private int mask; //Function mask
+    }
+
+
+.. _set_sys_info:
+
+Configure device system properties
+==============================================================
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get the JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Construct and set device system properties command
+    //Function code
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //Public attribute
+    //Data list
+    AttrBean attrBean = new AttrBean();
+    attrBean.setType(AttrAndFunCode.SYS_INFO_ATTR_VOLUME);  //System volume
+    attrBean.setAttrData(new byte[]{(byte) 0x0E}); //Level 14
+    List<AttrBean> data = new ArrayList<>();
+    data.add(attrBean);
+    CommandBase setSysInfoCmd = CommandBuilder.buildSetSysInfoCmd((byte) function, data);
+    //Step2: Execute the operation command and wait for the result callback.
+    manager.sendCommandAsync(manager.getConnectedDevice(), setSysInfoCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //Callback reply command
+        //Note: When there is no reply command, the reply command itself.
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+           //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //The response status is abnormal; exception handling is required.
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Callback operation successful
+            //After the system adjustment is successful, notify the user via the "Update Device System Information" command.
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+1. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    int fun = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //Public attribute
+    //Adjust device volume - 14
+    AttrBean attrBean = new AttrBean();
+    attrBean.setType(AttrAndFunCode.SYS_INFO_ATTR_VOLUME);
+    attrBean.setAttrData(new byte[]{(byte) 0x0E});
+    List<AttrBean> data = new ArrayList<>();
+    data.add(attrBean);
+    //Execute the device system properties settings and wait for the result callback.
+    controller.setDevSysInfo(controller.getUsingDevice(), fun, data, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. warning::
+    | 1. The data is composed of multiple :ref:`ltv_format`
+    | 2. Please use ``CommandBuilder`` to build the command to set device system properties. 
+
+
+.. _set_sys_param:
+
+SetSysInfoParam 
+---------------------------------------
+
+
+Configure system information parameters
+
+.. code-block:: java
+
+    public class SetSysInfoParam extends BaseParameter {
+
+        private byte function; //Function code
+        private List<AttrBean> attrBeanList; //Functional attributes
+    }
+
+
+.. _notify_sys_info:
+
+Monitoring device system attribute changes
+=======================================================================
+
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get the JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Add Bluetooth RCSP event callback
+    manager.addEventListener(new BTRcspEventCallback() {
+        //Callback device sent command
+        @Override
+        public void onDeviceCommand(BluetoothDevice device, CommandBase cmd) {
+            super.onDeviceCommand(device, cmd);
+            //Step2: Processing command
+            if (cmd.getId() != Command.CMD_SYS_INFO_AUTO_UPDATE) {
+                //Filtering command
+                return;
+            }
+            //Process only target commands - notify device system information
+            UpdateSysInfoCmd updateSysInfoCmd = (UpdateSysInfoCmd) cmd;
+            //Step4: Get parameters
+            UpdateSysInfoParam param = updateSysInfoCmd.getParam();
+            if (null == param) return; //Exception handling
+            //Step5: Processing data
+    //        param.getFunction();  //Function code
+    //        param.getParamData(); //Functional attribute
+        }
+    });
+
+.. note:: 
+    | 1. The result parsing is consistent with the response result parsing of :ref:`get_sys_info`.
+    | 2. For the parsing process, please refer to the demo.
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //Callback device mode
+        }
+
+        @Override
+        public void onVolumeChange(BluetoothDevice device, VolumeInfo volume) {
+            //Callback device volume information
+        }
+
+        @Override
+        public void onEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //Callback equalizer adjustment parameters
+        }
+
+        @Override
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+            //Callback device storage information
+        }
+
+        @Override
+        public void onFileFormatChange(BluetoothDevice device, String fileFormat) {
+            //Playback formats supported by callback
+        }
+
+        @Override
+        public void onMusicNameChange(BluetoothDevice device, MusicNameInfo nameInfo) {
+            //Callback music name information
+        }
+
+        @Override
+        public void onMusicStatusChange(BluetoothDevice device, MusicStatusInfo statusInfo) {
+            //Callback music status information
+        }
+
+        @Override
+        public void onPlayModeChange(BluetoothDevice device, PlayModeInfo playModeInfo) {
+            //Callback playback mode information
+        }
+
+        @Override
+        public void onAuxStatusChange(BluetoothDevice device, boolean isPlay) {
+            //Callback to external device playback status
+        }
+
+        @Override
+        public void onFmChannelsChange(BluetoothDevice device, List<ChannelInfo> channels) {
+            //Callback FM channel list information
+        }
+
+        @Override
+        public void onFmStatusChange(BluetoothDevice device, FmStatusInfo fmStatusInfo) {
+            //Callback FM status information
+        }
+
+        @Override
+        public void onAlarmListChange(BluetoothDevice device, AlarmListInfo alarmListInfo) {
+            //Callback alarm list information
+        }
+
+        @Override
+        public void onAlarmDefaultBellListChange(BluetoothDevice device, List<DefaultAlarmBell> bells) {
+            //Callback Alarm Default Ringtone List
+        }
+
+        @Override
+        public void onAlarmNotify(BluetoothDevice device, AlarmBean alarmBean) {
+            //Callback alarm reminder
+        }
+
+        @Override
+        public void onAlarmStop(BluetoothDevice device, AlarmBean alarmBean) {
+            //Callback alarm stopped
+        }
+
+        @Override
+        public void onID3MusicInfo(BluetoothDevice device, ID3MusicInfo id3MusicInfo) {
+            //Callback ID3 music information
+        }
+
+        @Override
+        public void onHighAndBassChange(BluetoothDevice device, int high, int bass) {
+            //Callback high and low frequency information
+        }
+
+        @Override
+        public void onEqPresetChange(BluetoothDevice device, EqPresetInfo eqPresetInfo) {
+            //Callback equalizer preset information
+        }
+
+        @Override
+        public void onPhoneCallStatusChange(BluetoothDevice device, int status) {
+            //Callback to phone status
+        }
+
+        @Override
+        public void onExpandFunction(BluetoothDevice device, int type, byte[] data) {
+            //Callback extension function information
+        }
+
+        @Override
+        public void onLightControlInfo(BluetoothDevice device, LightControlInfo lightControlInfo) {
+            //Callback lighting control information
+        }
+
+        @Override
+        public void onSoundCardEqChange(BluetoothDevice device, EqInfo eqInfo) {
+            //Callback sound card information
+        }
+
+        @Override
+        public void onSoundCardStatusChange(BluetoothDevice device, long mask, byte[] values) {
+            //Callback sound card status information
+        }
+
+        @Override
+        public void onCurrentVoiceMode(BluetoothDevice device, VoiceMode voiceMode) {
+            //Callback to current noise processing mode information
+        }
+
+        @Override
+        public void onVoiceModeList(BluetoothDevice device, List<VoiceMode> voiceModes) {
+            //Callback noise processing list information
+        }
+
+        @Override
+        public void onSearchDevice(BluetoothDevice device, SearchDevParam searchDevParam) {
+            //Callback to find device parameters
+        }
+            
+        @Override
+        public void onReverberation(BluetoothDevice device, ReverberationParam param) {
+            //Callback reverb parameters
+        }
+
+        @Override
+        public void onDynamicLimiter(BluetoothDevice device, DynamicLimiterParam param) {
+            //Callback dynamic limit parameter
+        }
+    });
+
+
+.. _sys_info: 
+
+SysInfoResponse
+-----------------------------------------
+
+
+System Information
+
+.. code-block:: java
+
+    public class SysInfoResponse extends CommonResponse {
+        private byte function; //Function code
+        private List<AttrBean> attrs; //Functional attributes
+    }
+
+
+
+.. note:: 
+    1. :ref:`attr_bean` 
+
+
+
+.. _set_function: 
+
+Settings Function
+===================================
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get the JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Construct settings function command
+    //Function code
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //Public attribute
+    //flag
+    int flag = 0;
+    // Extended parameters
+    byte[] extend = null;
+    CommandBase setFunctionCmd = CommandBuilder.buildFunctionCmd((byte) function, (byte) flag, extend);
+    //Step2: Execute the operation command and wait for the result callback.
+    manager.sendCommandAsync(manager.getConnectedDevice(), setFunctionCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        //Callback reply command
+        //Note: When there is no reply command, the reply command itself.
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //The response status is abnormal; exception handling is required.
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Callback operation successful
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Step1: Construct settings function command
+    //Function code
+    int function = AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC; //Public attribute
+    //flag
+    int flag = 0;
+    // Extended parameters
+    byte[] extend = null;
+    CommandBase setFunctionCmd = CommandBuilder.buildFunctionCmd((byte) function, (byte) flag, extend);
+    //Step2: Execute the operation command and wait for the result callback.
+    controller.sendRcspCommand(manager.getConnectedDevice(), setFunctionCmd, BluetoothConstant.DEFAULT_SEND_CMD_TIMEOUT, new RcspCommandCallback() {
+        //Callback reply command
+        //Note: When there is no reply command, the reply command itself.
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //The response status is abnormal; exception handling is required.
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Callback operation successful
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. _function_param:
+
+FunctionParam
+------------------------------------
+
+Functional parameter
+
+.. code-block:: java
+
+    public class FunctionParam extends BaseParameter {
+
+        private byte function; //function number
+        private byte cmd; //attr type
+        private byte[] extend; //payload
+    }
+
+
+.. _get_device_mode:
+
+Query current device mode
+============================================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- Public attribute
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE`` -- Identify current device mode information
+
+Command Construction
+
+.. code-block:: java
+
+    //Construct to obtain the current device mode
+    CommandBase getCurrentModeCmd = CommandBuilder.buildGetSysInfoCmd(AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC, 
+                   0x01 << AttrAndFunCode.SYS_INFO_ATTR_CUR_MODE_TYPE);
+
+
+Code example reference :ref:`get_sys_info` 
+
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //Callback device mode
+        }
+    });
+    //Execute the process to obtain device mode information and wait for the result callback.
+    controller.getCurrentDevModeInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+            //The result will be shown in the BTRcspEventCallback#onDeviceModeChange callback.
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    }); 
+
+
+Switch device mode
+=========================================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``        -- Public attribute
+| **flag :**  Device mode, see reference :ref:`attr_fun_code` 
+| **extend :**  NULL
+
+
+Command Construction
+
+.. code-block:: java
+
+    byte mode = AttrAndFunCode.SYS_INFO_FUNCTION_BT;   //-- Bluetooth mode
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_MUSIC -- Device Music Mode
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_RTC   -- Clock mode (alarm clock, stopwatch)
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_AUX   -- External input control mode
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_FM    -- FM control mode
+    //            AttrAndFunCode.SYS_INFO_FUNCTION_LIGHT -- Lighting modes
+    CommandBase switchDevModeCmd = CommandBuilder.buildSwitchModeCmd(mode);
+
+Code example reference :ref:`set_function` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDeviceModeChange(BluetoothDevice device, int mode) {
+            //Callback device mode
+        }
+    });
+    //byte SYS_INFO_FUNCTION_BT :  0 //Bluetooth mode
+    //byte SYS_INFO_FUNCTION_MUSIC : 1 //Music mode
+    //byte SYS_INFO_FUNCTION_RTC : 2   //clock mode
+    //byte SYS_INFO_FUNCTION_AUX : 3   //Linein mode
+    //byte SYS_INFO_FUNCTION_FM  : 4   //FM mode
+    //byte SYS_INFO_FUNCTION_LIGHT : 5 //Light mode
+    //Execute the device mode switching function and wait for the result callback.
+    controller.switchDeviceMode(controller.getUsingDevice(), mode, new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+            //The result will be shown in the BTRcspEventCallback#onDeviceModeChange callback.
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+Query storage device information
+===========================================================
+
+1. JL_BluetoothManager Way
+
+| **function :**  ``AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC``           -- Public attribute
+| **mask :**  ``0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS`` -- Identify storage device information (USB flash drive, SD card, flash memory, etc.)
+
+Command Construction
+
+.. code-block:: java
+
+    //Construct a query for storage device information
+    CommandBase getMusicDevStatusCmd = CommandBuilder.buildGetSysInfoCmd(AttrAndFunCode.SYS_INFO_FUNCTION_PUBLIC, 
+                  0x01 << AttrAndFunCode.SYS_INFO_ATTR_MUSIC_DEV_STATUS);
+
+
+Code example reference :ref:`get_sys_info` 
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Add Bluetooth RCSP event listener
+    controller.addBTRcspEventCallback(new BTRcspEventCallback() {
+        @Override
+        public void onDevStorageInfoChange(BluetoothDevice device, DevStorageInfo storageInfo) {
+            //Callback device storage information
+        }
+    });
+    //Execute the process to retrieve device storage information and wait for the result callback.
+    controller.getDevStorageInfo(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+            //The result will be shown in the BTRcspEventCallback#onDevStorageInfoChange callback.
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+
+.. _device_storage_info:
+
+DevStorageInfo
+---------------------------------------
+
+Device memory information
+
+.. code-block:: java
+
+    public class DevStorageInfo implements Parcelable {
+        /**
+         * Memory status
+         */
+        @NonNull
+        private List<> storageStates = new ArrayList<>();
+        /**
+         * Whether to reuse
+         */
+        private boolean isDeviceReuse;
+    }
+
+
+.. note::
+   1. Memory status, :ref:`sd_card_bean` 
+
+
+
+
+Reboot Device
+=================================
+
+1. JL_BluetoothManager Way
+
+.. code-block:: java
+
+    //Step0: Get the JL_BluetoothManager object
+    JL_BluetoothManager manager = JL_BluetoothManager.getInstance(context);
+    //Step1: Build restart command
+    CommandBase rebootCmd = CommandBuilder.buildRebootCmd();
+    //Step2: Send restart command and wait for result callback
+    manager.sendCommandAsync(manager.getConnectedDevice(), rebootCmd, manager.getBluetoothOption().getTimeoutMs(), new RcspCommandCallback() {
+        @Override
+        public void onCommandResponse(BluetoothDevice device, CommandBase cmd) {
+            //Step3: Check device status
+            if (cmd.getStatus() != StateCode.STATUS_SUCCESS) { //The response status is abnormal; exception handling is required.
+                onErrCode(device, new BaseError(ErrorCode.SUB_ERR_RESPONSE_BAD_STATUS, "Device reply an bad status: " + cmd.getStatus()));
+                return;
+            }
+            //Callback operation successful
+        }
+
+        @Override
+        public void onErrCode(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
+
+2. RCSPController Way
+
+.. code-block:: java
+
+    //Get the RCSPController object
+    RCSPController controller = RCSPController.getInstance();
+    //Execute the device restart function and wait for the result callback.
+    controller.rebootDevice(controller.getUsingDevice(), new OnRcspActionCallback<Boolean>() {
+        @Override
+        public void onSuccess(BluetoothDevice device, Boolean message) {
+            //Callback operation successful
+        }
+
+        @Override
+        public void onError(BluetoothDevice device, BaseError error) {
+            //Callback operation failed
+            //error - error information
+        }
+    });
