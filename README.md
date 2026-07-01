@@ -1,4 +1,4 @@
-﻿[tag download]:https://github.com/Jieli-Tech/Android-JL_Bluetooth/tags	"<br/>"
+﻿[tag download]:https://github.com/Jieli-Tech/Android-JL_Bluetooth/tags
 [tag_badgen]:https://img.shields.io/github/v/tag/Jieli-Tech/Android-JL_Bluetooth?style=plastic&logo=android&labelColor=ffffff&color=informational&label=Tag&logoColor=blue
 
 # Android-JL_Bluetooth  [![tag][tag_badgen]][tag download]
